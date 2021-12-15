@@ -1,0 +1,17 @@
+.full-width-table {
+  width: 100%;
+}
+
+.actions {
+  padding: 25px 0;
+  display: flex;
+  position: relative;
+  padding-top: 10px;
+  min-height: 40px;
+  justify-content: space-between;
+}
+
+.table-container {
+  overflow: auto;
+  position: relative;
+}

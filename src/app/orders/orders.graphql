@@ -1,0 +1,54 @@
+# query GetOrders(
+#   $limit: Int
+#   $offset: Int
+#   $condition: orders_bool_exp! = {}
+#   $orderBy: [orders_order_by!] = { created_at: desc }
+# ) {
+#   orders(
+#     where: $condition
+#     limit: $limit
+#     offset: $offset
+#     order_by: $orderBy
+#   ) {
+#     ...OrderFields
+#   }
+#   orders_aggregate(where: $condition) {
+#     aggregate {
+#       count
+#     }
+#   }
+# }
+
+# mutation CreateOrders($input: orders_insert_input!) {
+#   insert_orders_one(object: $input) {
+#     ...OrderFields
+#   }
+# }
+
+# mutation UpdateOrder($id: Int!, $set: orders_set_input) {
+#   update_orders_by_pk(pk_columns: { id: $id }, _set: $set) {
+#     ...OrderFields
+#   }
+# }
+
+# fragment OrderFields on orders {
+#   id
+#   created_at
+#   updated_at
+#   amount
+#   order_lines {
+#     id
+#     created_at
+#     amount
+#     quantity
+#     item {
+#       id
+#       created_at
+#       updated_at
+#       name
+#       price
+#       sale_price
+#       sku
+#     }
+#   }
+# }

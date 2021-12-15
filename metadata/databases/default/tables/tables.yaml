@@ -1,0 +1,4 @@
+- "!include public_addresses.yaml"
+- "!include public_roles.yaml"
+- "!include public_users.yaml"
+- "!include public_votings.yaml"

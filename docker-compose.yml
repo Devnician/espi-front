@@ -1,0 +1,42 @@
+version: "3.6"
+networks:
+  espi-app-net:
+    driver: "bridge"
+    ipam:
+      driver: default
+services:
+  postgres:
+    image: postgres:12
+    container_name: espi_postgress
+    networks:
+      - "espi-app-net"
+    # hide in prod
+    ports:
+      - "5432:5432"
+    restart: always
+    volumes:
+      - 'E:\espi\db_data:/var/lib/postgresql/data'
+    environment:
+      POSTGRES_PASSWORD: postgrespassword
+  graphql-engine:
+    container_name: espi_hasura
+    image: hasura/graphql-engine:v2.0.0-alpha.5
+    ports:
+      - "8080:8080"
+    networks:
+      - "espi-app-net"
+    depends_on:
+      - "postgres"
+    restart: always
+    environment:
+      HASURA_GRAPHQL_DATABASE_URL: postgres://postgres:postgrespassword@postgres:5432/postgres
+      ## enable the console served by server
+      HASURA_GRAPHQL_ENABLE_CONSOLE: "true" # set to "false" to disable console
+      ## enable debugging mode. It is recommended to disable this in production
+      HASURA_GRAPHQL_DEV_MODE: "true"
+      HASURA_GRAPHQL_ENABLED_LOG_TYPES: startup, http-log, webhook-log, websocket-log, query-log
+      HASURA_GRAPHQL_JWT_SECRET: '{"type":"HS256","key": "alabala125kilooasdalabala125kilooasdalabala125kilooasd"}'
+      ## uncomment next line to set an admin secret
+      HASURA_GRAPHQL_ADMIN_SECRET: myadminsecretkey
+volumes:
+  db_data:
