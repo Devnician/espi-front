@@ -7,14 +7,14 @@ import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatSortModule } from '@angular/material/sort';
 import { MatTableModule } from '@angular/material/table';
-import { OrdersRoutingModule } from './orders-routing.module';
-import { OrdersTableComponent } from './orders-table/orders-table.component';
+import { UsersRoutingModule } from './users-routing.module';
+import { UsersTableComponent } from './users-table/users-table.component';
 
 @NgModule({
-  declarations: [OrdersTableComponent],
+  declarations: [UsersTableComponent],
   imports: [
     CommonModule,
-    OrdersRoutingModule,
+    UsersRoutingModule,
     MatTableModule,
     MatPaginatorModule,
     MatSortModule,
@@ -48,4 +48,4 @@ import { OrdersTableComponent } from './orders-table/orders-table.component';
     // MatGridListModule,
   ],
 })
-export class OrdersModule {}
+export class UsersModule {}

@@ -1,0 +1,53 @@
+query GetUsers(
+  $limit: Int
+  $offset: Int
+  $condition: users_bool_exp! = {}
+  $orderBy: [users_order_by!] = { createdAt: desc }
+) {
+  users(where: $condition, limit: $limit, offset: $offset, order_by: $orderBy) {
+    ...UserFields
+  }
+
+  users_aggregate(where: $condition) {
+    aggregate {
+      count
+    }
+  }
+}
+
+mutation CreateUser($input: users_insert_input!) {
+  insert_users_one(object: $input) {
+    ...UserFields
+  }
+}
+
+mutation UpdateUser($id: Int!, $set: users_set_input!) {
+  update_users_by_pk(pk_columns: { id: $id }, _set: $set) {
+    ...UserFields
+  }
+}
+
+fragment UserFields on users {
+  id
+  createdAt
+  updatedAt
+  roleId
+  secondRoleId
+  name
+  surname
+  family
+  egn
+  email
+  pin
+  password
+  addressId
+  sectionId
+
+  address {
+    id
+    cityId
+    municipalityId
+    number
+    street
+  }
+}

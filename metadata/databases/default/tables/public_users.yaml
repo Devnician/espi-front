@@ -1,3 +1,7 @@
 table:
   name: users
   schema: public
+object_relationships:
+- name: address
+  using:
+    foreign_key_constraint_on: addressId

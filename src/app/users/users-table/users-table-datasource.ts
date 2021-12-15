@@ -4,12 +4,12 @@ import { MatSort } from '@angular/material/sort';
 import { QueryRef } from 'apollo-angular';
 import { BehaviorSubject, merge, Observable } from 'rxjs';
 import { map, startWith, switchMap, tap } from 'rxjs/operators';
-import { OrdersService } from 'src/app/orders/orders-service';
+import { UsersService } from 'src/app/users/users-service';
 import {
-  GetOrdersQuery,
-  Orders,
-  Orders_Order_By,
+  GetUsersQuery,
   Order_By,
+  Users,
+  Users_Order_By,
 } from 'src/generated/graphql';
 
 /**
@@ -17,19 +17,19 @@ import {
  * encapsulate all logic for fetching and manipulating the displayed data
  * (including sorting, pagination, and filtering).
  */
-export class OrdersTableDataSource extends DataSource<Orders> {
-  data$: Observable<GetOrdersQuery['orders']>;
+export class OrdersTableDataSource extends DataSource<Users> {
+  data$: Observable<GetUsersQuery['users']>;
   paginator: MatPaginator;
   counter: BehaviorSubject<number> = new BehaviorSubject(0);
   sort: MatSort;
-  queryRef: QueryRef<GetOrdersQuery>;
+  queryRef: QueryRef<GetUsersQuery>;
 
   loading: BehaviorSubject<any> = new BehaviorSubject(true);
   loading$ = this.loading.asObservable();
 
-  currentPageData: BehaviorSubject<Orders[]> = new BehaviorSubject([]);
+  currentPageData: BehaviorSubject<Users[]> = new BehaviorSubject([]);
 
-  constructor(private orderService: OrdersService) {
+  constructor(private usersService: UsersService) {
     super();
   }
 
@@ -43,14 +43,14 @@ export class OrdersTableDataSource extends DataSource<Orders> {
    * the returned stream emits new items.
    * @returns A stream of the items to be rendered.
    */
-  connect(): Observable<Orders[] | any> {
+  connect(): Observable<Users[] | any> {
     const limit: number = this.paginator.pageSize;
     const offset: number = this.paginator.pageIndex * this.paginator.pageSize;
-    const order_by: Orders_Order_By = { created_at: Order_By.Asc };
+    const order_by: Users_Order_By = { createdAt: Order_By.Asc };
 
     // Combine everything that affects the rendered data into one update
     // stream for the data-table to consume.
-    this.queryRef = this.orderService.getOrders(limit, offset, {}, order_by);
+    this.queryRef = this.usersService.getUsers(limit, offset, {}, order_by);
     // Combine everything that affects the rendered data into one update
     // stream for the data-table to consume.
     const dataMutations = [
@@ -93,9 +93,9 @@ export class OrdersTableDataSource extends DataSource<Orders> {
           // this.snackBar.open(error, 'OK', { duration: 2000 });
           throw Error(error);
         }
-        this.counter.next(data.orders_aggregate.aggregate.count);
-        this.currentPageData.next(data.orders as Orders[]);
-        return data.orders;
+        this.counter.next(data.users_aggregate.aggregate.count);
+        this.currentPageData.next(data.users as Users[]);
+        return data.users;
       })
     );
   }

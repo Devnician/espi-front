@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { SampleOutput } from 'src/generated/graphql';
 import { AuthService } from '../services/auth-service';
 
 @Component({
@@ -22,11 +21,11 @@ export class HomeComponent implements OnInit {
   }
 
   auth2(): void {
-    this.authService
-      .callExpressThroughHasuraActions('pepe', '1234')
-      .subscribe((response) => {
-        const sampleOutput: SampleOutput = response.data.testAction;
-        this.someObject = sampleOutput;
-      });
+    // this.authService
+    //   .callExpressThroughHasuraActions('pepe', '1234')
+    //   .subscribe((response) => {
+    //     const sampleOutput: SampleOutput = response.data.testAction;
+    //     this.someObject = sampleOutput;
+    //   });
   }
 }

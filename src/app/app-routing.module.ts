@@ -8,13 +8,13 @@ const routes: Routes = [
     component: HomeComponent,
   },
   {
-    path: 'orders',
+    path: 'users',
     loadChildren: () =>
-      import('src/app/orders/orders.module').then((m) => m.OrdersModule),
+      import('src/app/users/users.module').then((m) => m.UsersModule),
 
     data: {
-      title: 'Продажби',
-      breadcrumb: 'Продажби',
+      title: 'Потребители',
+      breadcrumb: 'потребители',
     },
   },
 ];

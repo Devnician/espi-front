@@ -12,7 +12,6 @@ export type Scalars = {
   Boolean: boolean;
   Int: number;
   Float: number;
-  numeric: any;
   timestamptz: any;
 };
 
@@ -29,16 +28,6 @@ export type Int_Comparison_Exp = {
   _lte?: Maybe<Scalars['Int']>;
   _neq?: Maybe<Scalars['Int']>;
   _nin?: Maybe<Array<Scalars['Int']>>;
-};
-
-export type SampleInput = {
-  password: Scalars['String'];
-  username: Scalars['String'];
-};
-
-export type SampleOutput = {
-  __typename?: 'SampleOutput';
-  accessToken: Scalars['String'];
 };
 
 /** Boolean expression to compare columns of type "String". All fields are combined with logical 'AND'. */
@@ -74,522 +63,466 @@ export type String_Comparison_Exp = {
   _similar?: Maybe<Scalars['String']>;
 };
 
-/** columns and relationships of "items" */
-export type Items = {
-  __typename?: 'items';
-  created_at: Scalars['timestamptz'];
+/** columns and relationships of "addresses" */
+export type Addresses = {
+  __typename?: 'addresses';
+  cityId: Scalars['Int'];
   id: Scalars['Int'];
-  name: Scalars['String'];
-  price: Scalars['numeric'];
-  quantity: Scalars['Int'];
-  sale_price: Scalars['numeric'];
-  sku: Scalars['String'];
-  updated_at: Scalars['timestamptz'];
+  municipalityId: Scalars['Int'];
+  number: Scalars['Int'];
+  street: Scalars['String'];
 };
 
-/** aggregated selection of "items" */
-export type Items_Aggregate = {
-  __typename?: 'items_aggregate';
-  aggregate?: Maybe<Items_Aggregate_Fields>;
-  nodes: Array<Items>;
+/** aggregated selection of "addresses" */
+export type Addresses_Aggregate = {
+  __typename?: 'addresses_aggregate';
+  aggregate?: Maybe<Addresses_Aggregate_Fields>;
+  nodes: Array<Addresses>;
 };
 
-/** aggregate fields of "items" */
-export type Items_Aggregate_Fields = {
-  __typename?: 'items_aggregate_fields';
-  avg?: Maybe<Items_Avg_Fields>;
+/** aggregate fields of "addresses" */
+export type Addresses_Aggregate_Fields = {
+  __typename?: 'addresses_aggregate_fields';
+  avg?: Maybe<Addresses_Avg_Fields>;
   count: Scalars['Int'];
-  max?: Maybe<Items_Max_Fields>;
-  min?: Maybe<Items_Min_Fields>;
-  stddev?: Maybe<Items_Stddev_Fields>;
-  stddev_pop?: Maybe<Items_Stddev_Pop_Fields>;
-  stddev_samp?: Maybe<Items_Stddev_Samp_Fields>;
-  sum?: Maybe<Items_Sum_Fields>;
-  var_pop?: Maybe<Items_Var_Pop_Fields>;
-  var_samp?: Maybe<Items_Var_Samp_Fields>;
-  variance?: Maybe<Items_Variance_Fields>;
+  max?: Maybe<Addresses_Max_Fields>;
+  min?: Maybe<Addresses_Min_Fields>;
+  stddev?: Maybe<Addresses_Stddev_Fields>;
+  stddev_pop?: Maybe<Addresses_Stddev_Pop_Fields>;
+  stddev_samp?: Maybe<Addresses_Stddev_Samp_Fields>;
+  sum?: Maybe<Addresses_Sum_Fields>;
+  var_pop?: Maybe<Addresses_Var_Pop_Fields>;
+  var_samp?: Maybe<Addresses_Var_Samp_Fields>;
+  variance?: Maybe<Addresses_Variance_Fields>;
 };
 
 
-/** aggregate fields of "items" */
-export type Items_Aggregate_FieldsCountArgs = {
-  columns?: Maybe<Array<Items_Select_Column>>;
+/** aggregate fields of "addresses" */
+export type Addresses_Aggregate_FieldsCountArgs = {
+  columns?: Maybe<Array<Addresses_Select_Column>>;
   distinct?: Maybe<Scalars['Boolean']>;
 };
 
 /** aggregate avg on columns */
-export type Items_Avg_Fields = {
-  __typename?: 'items_avg_fields';
+export type Addresses_Avg_Fields = {
+  __typename?: 'addresses_avg_fields';
+  cityId?: Maybe<Scalars['Float']>;
   id?: Maybe<Scalars['Float']>;
-  price?: Maybe<Scalars['Float']>;
-  quantity?: Maybe<Scalars['Float']>;
-  sale_price?: Maybe<Scalars['Float']>;
+  municipalityId?: Maybe<Scalars['Float']>;
+  number?: Maybe<Scalars['Float']>;
 };
 
-/** Boolean expression to filter rows from the table "items". All fields are combined with a logical 'AND'. */
-export type Items_Bool_Exp = {
-  _and?: Maybe<Array<Items_Bool_Exp>>;
-  _not?: Maybe<Items_Bool_Exp>;
-  _or?: Maybe<Array<Items_Bool_Exp>>;
-  created_at?: Maybe<Timestamptz_Comparison_Exp>;
+/** Boolean expression to filter rows from the table "addresses". All fields are combined with a logical 'AND'. */
+export type Addresses_Bool_Exp = {
+  _and?: Maybe<Array<Addresses_Bool_Exp>>;
+  _not?: Maybe<Addresses_Bool_Exp>;
+  _or?: Maybe<Array<Addresses_Bool_Exp>>;
+  cityId?: Maybe<Int_Comparison_Exp>;
   id?: Maybe<Int_Comparison_Exp>;
-  name?: Maybe<String_Comparison_Exp>;
-  price?: Maybe<Numeric_Comparison_Exp>;
-  quantity?: Maybe<Int_Comparison_Exp>;
-  sale_price?: Maybe<Numeric_Comparison_Exp>;
-  sku?: Maybe<String_Comparison_Exp>;
-  updated_at?: Maybe<Timestamptz_Comparison_Exp>;
+  municipalityId?: Maybe<Int_Comparison_Exp>;
+  number?: Maybe<Int_Comparison_Exp>;
+  street?: Maybe<String_Comparison_Exp>;
 };
 
-/** unique or primary key constraints on table "items" */
-export enum Items_Constraint {
+/** unique or primary key constraints on table "addresses" */
+export enum Addresses_Constraint {
   /** unique or primary key constraint */
-  ItemsPkey = 'items_pkey',
-  /** unique or primary key constraint */
-  ItemsSkuKey = 'items_sku_key'
+  AddressesPkey = 'addresses_pkey'
 }
 
-/** input type for incrementing numeric columns in table "items" */
-export type Items_Inc_Input = {
+/** input type for incrementing numeric columns in table "addresses" */
+export type Addresses_Inc_Input = {
+  cityId?: Maybe<Scalars['Int']>;
   id?: Maybe<Scalars['Int']>;
-  price?: Maybe<Scalars['numeric']>;
-  quantity?: Maybe<Scalars['Int']>;
-  sale_price?: Maybe<Scalars['numeric']>;
+  municipalityId?: Maybe<Scalars['Int']>;
+  number?: Maybe<Scalars['Int']>;
 };
 
-/** input type for inserting data into table "items" */
-export type Items_Insert_Input = {
-  created_at?: Maybe<Scalars['timestamptz']>;
+/** input type for inserting data into table "addresses" */
+export type Addresses_Insert_Input = {
+  cityId?: Maybe<Scalars['Int']>;
   id?: Maybe<Scalars['Int']>;
-  name?: Maybe<Scalars['String']>;
-  price?: Maybe<Scalars['numeric']>;
-  quantity?: Maybe<Scalars['Int']>;
-  sale_price?: Maybe<Scalars['numeric']>;
-  sku?: Maybe<Scalars['String']>;
-  updated_at?: Maybe<Scalars['timestamptz']>;
+  municipalityId?: Maybe<Scalars['Int']>;
+  number?: Maybe<Scalars['Int']>;
+  street?: Maybe<Scalars['String']>;
 };
 
 /** aggregate max on columns */
-export type Items_Max_Fields = {
-  __typename?: 'items_max_fields';
-  created_at?: Maybe<Scalars['timestamptz']>;
+export type Addresses_Max_Fields = {
+  __typename?: 'addresses_max_fields';
+  cityId?: Maybe<Scalars['Int']>;
   id?: Maybe<Scalars['Int']>;
-  name?: Maybe<Scalars['String']>;
-  price?: Maybe<Scalars['numeric']>;
-  quantity?: Maybe<Scalars['Int']>;
-  sale_price?: Maybe<Scalars['numeric']>;
-  sku?: Maybe<Scalars['String']>;
-  updated_at?: Maybe<Scalars['timestamptz']>;
+  municipalityId?: Maybe<Scalars['Int']>;
+  number?: Maybe<Scalars['Int']>;
+  street?: Maybe<Scalars['String']>;
 };
 
 /** aggregate min on columns */
-export type Items_Min_Fields = {
-  __typename?: 'items_min_fields';
-  created_at?: Maybe<Scalars['timestamptz']>;
+export type Addresses_Min_Fields = {
+  __typename?: 'addresses_min_fields';
+  cityId?: Maybe<Scalars['Int']>;
   id?: Maybe<Scalars['Int']>;
-  name?: Maybe<Scalars['String']>;
-  price?: Maybe<Scalars['numeric']>;
-  quantity?: Maybe<Scalars['Int']>;
-  sale_price?: Maybe<Scalars['numeric']>;
-  sku?: Maybe<Scalars['String']>;
-  updated_at?: Maybe<Scalars['timestamptz']>;
+  municipalityId?: Maybe<Scalars['Int']>;
+  number?: Maybe<Scalars['Int']>;
+  street?: Maybe<Scalars['String']>;
 };
 
-/** response of any mutation on the table "items" */
-export type Items_Mutation_Response = {
-  __typename?: 'items_mutation_response';
+/** response of any mutation on the table "addresses" */
+export type Addresses_Mutation_Response = {
+  __typename?: 'addresses_mutation_response';
   /** number of rows affected by the mutation */
   affected_rows: Scalars['Int'];
   /** data from the rows affected by the mutation */
-  returning: Array<Items>;
+  returning: Array<Addresses>;
 };
 
-/** input type for inserting object relation for remote table "items" */
-export type Items_Obj_Rel_Insert_Input = {
-  data: Items_Insert_Input;
+/** input type for inserting object relation for remote table "addresses" */
+export type Addresses_Obj_Rel_Insert_Input = {
+  data: Addresses_Insert_Input;
   /** on conflict condition */
-  on_conflict?: Maybe<Items_On_Conflict>;
+  on_conflict?: Maybe<Addresses_On_Conflict>;
 };
 
-/** on conflict condition type for table "items" */
-export type Items_On_Conflict = {
-  constraint: Items_Constraint;
-  update_columns: Array<Items_Update_Column>;
-  where?: Maybe<Items_Bool_Exp>;
+/** on conflict condition type for table "addresses" */
+export type Addresses_On_Conflict = {
+  constraint: Addresses_Constraint;
+  update_columns: Array<Addresses_Update_Column>;
+  where?: Maybe<Addresses_Bool_Exp>;
 };
 
-/** Ordering options when selecting data from "items". */
-export type Items_Order_By = {
-  created_at?: Maybe<Order_By>;
+/** Ordering options when selecting data from "addresses". */
+export type Addresses_Order_By = {
+  cityId?: Maybe<Order_By>;
   id?: Maybe<Order_By>;
-  name?: Maybe<Order_By>;
-  price?: Maybe<Order_By>;
-  quantity?: Maybe<Order_By>;
-  sale_price?: Maybe<Order_By>;
-  sku?: Maybe<Order_By>;
-  updated_at?: Maybe<Order_By>;
+  municipalityId?: Maybe<Order_By>;
+  number?: Maybe<Order_By>;
+  street?: Maybe<Order_By>;
 };
 
-/** primary key columns input for table: items */
-export type Items_Pk_Columns_Input = {
+/** primary key columns input for table: addresses */
+export type Addresses_Pk_Columns_Input = {
   id: Scalars['Int'];
 };
 
-/** select columns of table "items" */
-export enum Items_Select_Column {
+/** select columns of table "addresses" */
+export enum Addresses_Select_Column {
   /** column name */
-  CreatedAt = 'created_at',
+  CityId = 'cityId',
   /** column name */
   Id = 'id',
   /** column name */
-  Name = 'name',
+  MunicipalityId = 'municipalityId',
   /** column name */
-  Price = 'price',
+  Number = 'number',
   /** column name */
-  Quantity = 'quantity',
-  /** column name */
-  SalePrice = 'sale_price',
-  /** column name */
-  Sku = 'sku',
-  /** column name */
-  UpdatedAt = 'updated_at'
+  Street = 'street'
 }
 
-/** input type for updating data in table "items" */
-export type Items_Set_Input = {
-  created_at?: Maybe<Scalars['timestamptz']>;
+/** input type for updating data in table "addresses" */
+export type Addresses_Set_Input = {
+  cityId?: Maybe<Scalars['Int']>;
   id?: Maybe<Scalars['Int']>;
-  name?: Maybe<Scalars['String']>;
-  price?: Maybe<Scalars['numeric']>;
-  quantity?: Maybe<Scalars['Int']>;
-  sale_price?: Maybe<Scalars['numeric']>;
-  sku?: Maybe<Scalars['String']>;
-  updated_at?: Maybe<Scalars['timestamptz']>;
+  municipalityId?: Maybe<Scalars['Int']>;
+  number?: Maybe<Scalars['Int']>;
+  street?: Maybe<Scalars['String']>;
 };
 
 /** aggregate stddev on columns */
-export type Items_Stddev_Fields = {
-  __typename?: 'items_stddev_fields';
+export type Addresses_Stddev_Fields = {
+  __typename?: 'addresses_stddev_fields';
+  cityId?: Maybe<Scalars['Float']>;
   id?: Maybe<Scalars['Float']>;
-  price?: Maybe<Scalars['Float']>;
-  quantity?: Maybe<Scalars['Float']>;
-  sale_price?: Maybe<Scalars['Float']>;
+  municipalityId?: Maybe<Scalars['Float']>;
+  number?: Maybe<Scalars['Float']>;
 };
 
 /** aggregate stddev_pop on columns */
-export type Items_Stddev_Pop_Fields = {
-  __typename?: 'items_stddev_pop_fields';
+export type Addresses_Stddev_Pop_Fields = {
+  __typename?: 'addresses_stddev_pop_fields';
+  cityId?: Maybe<Scalars['Float']>;
   id?: Maybe<Scalars['Float']>;
-  price?: Maybe<Scalars['Float']>;
-  quantity?: Maybe<Scalars['Float']>;
-  sale_price?: Maybe<Scalars['Float']>;
+  municipalityId?: Maybe<Scalars['Float']>;
+  number?: Maybe<Scalars['Float']>;
 };
 
 /** aggregate stddev_samp on columns */
-export type Items_Stddev_Samp_Fields = {
-  __typename?: 'items_stddev_samp_fields';
+export type Addresses_Stddev_Samp_Fields = {
+  __typename?: 'addresses_stddev_samp_fields';
+  cityId?: Maybe<Scalars['Float']>;
   id?: Maybe<Scalars['Float']>;
-  price?: Maybe<Scalars['Float']>;
-  quantity?: Maybe<Scalars['Float']>;
-  sale_price?: Maybe<Scalars['Float']>;
+  municipalityId?: Maybe<Scalars['Float']>;
+  number?: Maybe<Scalars['Float']>;
 };
 
 /** aggregate sum on columns */
-export type Items_Sum_Fields = {
-  __typename?: 'items_sum_fields';
+export type Addresses_Sum_Fields = {
+  __typename?: 'addresses_sum_fields';
+  cityId?: Maybe<Scalars['Int']>;
   id?: Maybe<Scalars['Int']>;
-  price?: Maybe<Scalars['numeric']>;
-  quantity?: Maybe<Scalars['Int']>;
-  sale_price?: Maybe<Scalars['numeric']>;
+  municipalityId?: Maybe<Scalars['Int']>;
+  number?: Maybe<Scalars['Int']>;
 };
 
-/** update columns of table "items" */
-export enum Items_Update_Column {
+/** update columns of table "addresses" */
+export enum Addresses_Update_Column {
   /** column name */
-  CreatedAt = 'created_at',
+  CityId = 'cityId',
   /** column name */
   Id = 'id',
   /** column name */
-  Name = 'name',
+  MunicipalityId = 'municipalityId',
   /** column name */
-  Price = 'price',
+  Number = 'number',
   /** column name */
-  Quantity = 'quantity',
-  /** column name */
-  SalePrice = 'sale_price',
-  /** column name */
-  Sku = 'sku',
-  /** column name */
-  UpdatedAt = 'updated_at'
+  Street = 'street'
 }
 
 /** aggregate var_pop on columns */
-export type Items_Var_Pop_Fields = {
-  __typename?: 'items_var_pop_fields';
+export type Addresses_Var_Pop_Fields = {
+  __typename?: 'addresses_var_pop_fields';
+  cityId?: Maybe<Scalars['Float']>;
   id?: Maybe<Scalars['Float']>;
-  price?: Maybe<Scalars['Float']>;
-  quantity?: Maybe<Scalars['Float']>;
-  sale_price?: Maybe<Scalars['Float']>;
+  municipalityId?: Maybe<Scalars['Float']>;
+  number?: Maybe<Scalars['Float']>;
 };
 
 /** aggregate var_samp on columns */
-export type Items_Var_Samp_Fields = {
-  __typename?: 'items_var_samp_fields';
+export type Addresses_Var_Samp_Fields = {
+  __typename?: 'addresses_var_samp_fields';
+  cityId?: Maybe<Scalars['Float']>;
   id?: Maybe<Scalars['Float']>;
-  price?: Maybe<Scalars['Float']>;
-  quantity?: Maybe<Scalars['Float']>;
-  sale_price?: Maybe<Scalars['Float']>;
+  municipalityId?: Maybe<Scalars['Float']>;
+  number?: Maybe<Scalars['Float']>;
 };
 
 /** aggregate variance on columns */
-export type Items_Variance_Fields = {
-  __typename?: 'items_variance_fields';
+export type Addresses_Variance_Fields = {
+  __typename?: 'addresses_variance_fields';
+  cityId?: Maybe<Scalars['Float']>;
   id?: Maybe<Scalars['Float']>;
-  price?: Maybe<Scalars['Float']>;
-  quantity?: Maybe<Scalars['Float']>;
-  sale_price?: Maybe<Scalars['Float']>;
+  municipalityId?: Maybe<Scalars['Float']>;
+  number?: Maybe<Scalars['Float']>;
 };
 
 /** mutation root */
 export type Mutation_Root = {
   __typename?: 'mutation_root';
-  /** delete data from the table: "items" */
-  delete_items?: Maybe<Items_Mutation_Response>;
-  /** delete single row from the table: "items" */
-  delete_items_by_pk?: Maybe<Items>;
-  /** delete data from the table: "order_lines" */
-  delete_order_lines?: Maybe<Order_Lines_Mutation_Response>;
-  /** delete single row from the table: "order_lines" */
-  delete_order_lines_by_pk?: Maybe<Order_Lines>;
-  /** delete data from the table: "orders" */
-  delete_orders?: Maybe<Orders_Mutation_Response>;
-  /** delete single row from the table: "orders" */
-  delete_orders_by_pk?: Maybe<Orders>;
-  /** delete data from the table: "pepe" */
-  delete_pepe?: Maybe<Pepe_Mutation_Response>;
-  /** delete single row from the table: "pepe" */
-  delete_pepe_by_pk?: Maybe<Pepe>;
-  /** insert data into the table: "items" */
-  insert_items?: Maybe<Items_Mutation_Response>;
-  /** insert a single row into the table: "items" */
-  insert_items_one?: Maybe<Items>;
-  /** insert data into the table: "order_lines" */
-  insert_order_lines?: Maybe<Order_Lines_Mutation_Response>;
-  /** insert a single row into the table: "order_lines" */
-  insert_order_lines_one?: Maybe<Order_Lines>;
-  /** insert data into the table: "orders" */
-  insert_orders?: Maybe<Orders_Mutation_Response>;
-  /** insert a single row into the table: "orders" */
-  insert_orders_one?: Maybe<Orders>;
-  /** insert data into the table: "pepe" */
-  insert_pepe?: Maybe<Pepe_Mutation_Response>;
-  /** insert a single row into the table: "pepe" */
-  insert_pepe_one?: Maybe<Pepe>;
-  testAction?: Maybe<SampleOutput>;
-  /** update data of the table: "items" */
-  update_items?: Maybe<Items_Mutation_Response>;
-  /** update single row of the table: "items" */
-  update_items_by_pk?: Maybe<Items>;
-  /** update data of the table: "order_lines" */
-  update_order_lines?: Maybe<Order_Lines_Mutation_Response>;
-  /** update single row of the table: "order_lines" */
-  update_order_lines_by_pk?: Maybe<Order_Lines>;
-  /** update data of the table: "orders" */
-  update_orders?: Maybe<Orders_Mutation_Response>;
-  /** update single row of the table: "orders" */
-  update_orders_by_pk?: Maybe<Orders>;
-  /** update data of the table: "pepe" */
-  update_pepe?: Maybe<Pepe_Mutation_Response>;
-  /** update single row of the table: "pepe" */
-  update_pepe_by_pk?: Maybe<Pepe>;
+  /** delete data from the table: "addresses" */
+  delete_addresses?: Maybe<Addresses_Mutation_Response>;
+  /** delete single row from the table: "addresses" */
+  delete_addresses_by_pk?: Maybe<Addresses>;
+  /** delete data from the table: "roles" */
+  delete_roles?: Maybe<Roles_Mutation_Response>;
+  /** delete single row from the table: "roles" */
+  delete_roles_by_pk?: Maybe<Roles>;
+  /** delete data from the table: "users" */
+  delete_users?: Maybe<Users_Mutation_Response>;
+  /** delete single row from the table: "users" */
+  delete_users_by_pk?: Maybe<Users>;
+  /** delete data from the table: "votings" */
+  delete_votings?: Maybe<Votings_Mutation_Response>;
+  /** delete single row from the table: "votings" */
+  delete_votings_by_pk?: Maybe<Votings>;
+  /** insert data into the table: "addresses" */
+  insert_addresses?: Maybe<Addresses_Mutation_Response>;
+  /** insert a single row into the table: "addresses" */
+  insert_addresses_one?: Maybe<Addresses>;
+  /** insert data into the table: "roles" */
+  insert_roles?: Maybe<Roles_Mutation_Response>;
+  /** insert a single row into the table: "roles" */
+  insert_roles_one?: Maybe<Roles>;
+  /** insert data into the table: "users" */
+  insert_users?: Maybe<Users_Mutation_Response>;
+  /** insert a single row into the table: "users" */
+  insert_users_one?: Maybe<Users>;
+  /** insert data into the table: "votings" */
+  insert_votings?: Maybe<Votings_Mutation_Response>;
+  /** insert a single row into the table: "votings" */
+  insert_votings_one?: Maybe<Votings>;
+  /** update data of the table: "addresses" */
+  update_addresses?: Maybe<Addresses_Mutation_Response>;
+  /** update single row of the table: "addresses" */
+  update_addresses_by_pk?: Maybe<Addresses>;
+  /** update data of the table: "roles" */
+  update_roles?: Maybe<Roles_Mutation_Response>;
+  /** update single row of the table: "roles" */
+  update_roles_by_pk?: Maybe<Roles>;
+  /** update data of the table: "users" */
+  update_users?: Maybe<Users_Mutation_Response>;
+  /** update single row of the table: "users" */
+  update_users_by_pk?: Maybe<Users>;
+  /** update data of the table: "votings" */
+  update_votings?: Maybe<Votings_Mutation_Response>;
+  /** update single row of the table: "votings" */
+  update_votings_by_pk?: Maybe<Votings>;
 };
 
 
 /** mutation root */
-export type Mutation_RootDelete_ItemsArgs = {
-  where: Items_Bool_Exp;
+export type Mutation_RootDelete_AddressesArgs = {
+  where: Addresses_Bool_Exp;
 };
 
 
 /** mutation root */
-export type Mutation_RootDelete_Items_By_PkArgs = {
+export type Mutation_RootDelete_Addresses_By_PkArgs = {
   id: Scalars['Int'];
 };
 
 
 /** mutation root */
-export type Mutation_RootDelete_Order_LinesArgs = {
-  where: Order_Lines_Bool_Exp;
+export type Mutation_RootDelete_RolesArgs = {
+  where: Roles_Bool_Exp;
 };
 
 
 /** mutation root */
-export type Mutation_RootDelete_Order_Lines_By_PkArgs = {
+export type Mutation_RootDelete_Roles_By_PkArgs = {
   id: Scalars['Int'];
 };
 
 
 /** mutation root */
-export type Mutation_RootDelete_OrdersArgs = {
-  where: Orders_Bool_Exp;
+export type Mutation_RootDelete_UsersArgs = {
+  where: Users_Bool_Exp;
 };
 
 
 /** mutation root */
-export type Mutation_RootDelete_Orders_By_PkArgs = {
+export type Mutation_RootDelete_Users_By_PkArgs = {
   id: Scalars['Int'];
 };
 
 
 /** mutation root */
-export type Mutation_RootDelete_PepeArgs = {
-  where: Pepe_Bool_Exp;
+export type Mutation_RootDelete_VotingsArgs = {
+  where: Votings_Bool_Exp;
 };
 
 
 /** mutation root */
-export type Mutation_RootDelete_Pepe_By_PkArgs = {
+export type Mutation_RootDelete_Votings_By_PkArgs = {
   id: Scalars['Int'];
 };
 
 
 /** mutation root */
-export type Mutation_RootInsert_ItemsArgs = {
-  objects: Array<Items_Insert_Input>;
-  on_conflict?: Maybe<Items_On_Conflict>;
+export type Mutation_RootInsert_AddressesArgs = {
+  objects: Array<Addresses_Insert_Input>;
+  on_conflict?: Maybe<Addresses_On_Conflict>;
 };
 
 
 /** mutation root */
-export type Mutation_RootInsert_Items_OneArgs = {
-  object: Items_Insert_Input;
-  on_conflict?: Maybe<Items_On_Conflict>;
+export type Mutation_RootInsert_Addresses_OneArgs = {
+  object: Addresses_Insert_Input;
+  on_conflict?: Maybe<Addresses_On_Conflict>;
 };
 
 
 /** mutation root */
-export type Mutation_RootInsert_Order_LinesArgs = {
-  objects: Array<Order_Lines_Insert_Input>;
-  on_conflict?: Maybe<Order_Lines_On_Conflict>;
+export type Mutation_RootInsert_RolesArgs = {
+  objects: Array<Roles_Insert_Input>;
+  on_conflict?: Maybe<Roles_On_Conflict>;
 };
 
 
 /** mutation root */
-export type Mutation_RootInsert_Order_Lines_OneArgs = {
-  object: Order_Lines_Insert_Input;
-  on_conflict?: Maybe<Order_Lines_On_Conflict>;
+export type Mutation_RootInsert_Roles_OneArgs = {
+  object: Roles_Insert_Input;
+  on_conflict?: Maybe<Roles_On_Conflict>;
 };
 
 
 /** mutation root */
-export type Mutation_RootInsert_OrdersArgs = {
-  objects: Array<Orders_Insert_Input>;
-  on_conflict?: Maybe<Orders_On_Conflict>;
+export type Mutation_RootInsert_UsersArgs = {
+  objects: Array<Users_Insert_Input>;
+  on_conflict?: Maybe<Users_On_Conflict>;
 };
 
 
 /** mutation root */
-export type Mutation_RootInsert_Orders_OneArgs = {
-  object: Orders_Insert_Input;
-  on_conflict?: Maybe<Orders_On_Conflict>;
+export type Mutation_RootInsert_Users_OneArgs = {
+  object: Users_Insert_Input;
+  on_conflict?: Maybe<Users_On_Conflict>;
 };
 
 
 /** mutation root */
-export type Mutation_RootInsert_PepeArgs = {
-  objects: Array<Pepe_Insert_Input>;
-  on_conflict?: Maybe<Pepe_On_Conflict>;
+export type Mutation_RootInsert_VotingsArgs = {
+  objects: Array<Votings_Insert_Input>;
+  on_conflict?: Maybe<Votings_On_Conflict>;
 };
 
 
 /** mutation root */
-export type Mutation_RootInsert_Pepe_OneArgs = {
-  object: Pepe_Insert_Input;
-  on_conflict?: Maybe<Pepe_On_Conflict>;
+export type Mutation_RootInsert_Votings_OneArgs = {
+  object: Votings_Insert_Input;
+  on_conflict?: Maybe<Votings_On_Conflict>;
 };
 
 
 /** mutation root */
-export type Mutation_RootTestActionArgs = {
-  arg1: SampleInput;
+export type Mutation_RootUpdate_AddressesArgs = {
+  _inc?: Maybe<Addresses_Inc_Input>;
+  _set?: Maybe<Addresses_Set_Input>;
+  where: Addresses_Bool_Exp;
 };
 
 
 /** mutation root */
-export type Mutation_RootUpdate_ItemsArgs = {
-  _inc?: Maybe<Items_Inc_Input>;
-  _set?: Maybe<Items_Set_Input>;
-  where: Items_Bool_Exp;
+export type Mutation_RootUpdate_Addresses_By_PkArgs = {
+  _inc?: Maybe<Addresses_Inc_Input>;
+  _set?: Maybe<Addresses_Set_Input>;
+  pk_columns: Addresses_Pk_Columns_Input;
 };
 
 
 /** mutation root */
-export type Mutation_RootUpdate_Items_By_PkArgs = {
-  _inc?: Maybe<Items_Inc_Input>;
-  _set?: Maybe<Items_Set_Input>;
-  pk_columns: Items_Pk_Columns_Input;
+export type Mutation_RootUpdate_RolesArgs = {
+  _inc?: Maybe<Roles_Inc_Input>;
+  _set?: Maybe<Roles_Set_Input>;
+  where: Roles_Bool_Exp;
 };
 
 
 /** mutation root */
-export type Mutation_RootUpdate_Order_LinesArgs = {
-  _inc?: Maybe<Order_Lines_Inc_Input>;
-  _set?: Maybe<Order_Lines_Set_Input>;
-  where: Order_Lines_Bool_Exp;
+export type Mutation_RootUpdate_Roles_By_PkArgs = {
+  _inc?: Maybe<Roles_Inc_Input>;
+  _set?: Maybe<Roles_Set_Input>;
+  pk_columns: Roles_Pk_Columns_Input;
 };
 
 
 /** mutation root */
-export type Mutation_RootUpdate_Order_Lines_By_PkArgs = {
-  _inc?: Maybe<Order_Lines_Inc_Input>;
-  _set?: Maybe<Order_Lines_Set_Input>;
-  pk_columns: Order_Lines_Pk_Columns_Input;
+export type Mutation_RootUpdate_UsersArgs = {
+  _inc?: Maybe<Users_Inc_Input>;
+  _set?: Maybe<Users_Set_Input>;
+  where: Users_Bool_Exp;
 };
 
 
 /** mutation root */
-export type Mutation_RootUpdate_OrdersArgs = {
-  _inc?: Maybe<Orders_Inc_Input>;
-  _set?: Maybe<Orders_Set_Input>;
-  where: Orders_Bool_Exp;
+export type Mutation_RootUpdate_Users_By_PkArgs = {
+  _inc?: Maybe<Users_Inc_Input>;
+  _set?: Maybe<Users_Set_Input>;
+  pk_columns: Users_Pk_Columns_Input;
 };
 
 
 /** mutation root */
-export type Mutation_RootUpdate_Orders_By_PkArgs = {
-  _inc?: Maybe<Orders_Inc_Input>;
-  _set?: Maybe<Orders_Set_Input>;
-  pk_columns: Orders_Pk_Columns_Input;
+export type Mutation_RootUpdate_VotingsArgs = {
+  _inc?: Maybe<Votings_Inc_Input>;
+  _set?: Maybe<Votings_Set_Input>;
+  where: Votings_Bool_Exp;
 };
 
 
 /** mutation root */
-export type Mutation_RootUpdate_PepeArgs = {
-  _inc?: Maybe<Pepe_Inc_Input>;
-  _set?: Maybe<Pepe_Set_Input>;
-  where: Pepe_Bool_Exp;
-};
-
-
-/** mutation root */
-export type Mutation_RootUpdate_Pepe_By_PkArgs = {
-  _inc?: Maybe<Pepe_Inc_Input>;
-  _set?: Maybe<Pepe_Set_Input>;
-  pk_columns: Pepe_Pk_Columns_Input;
-};
-
-
-/** Boolean expression to compare columns of type "numeric". All fields are combined with logical 'AND'. */
-export type Numeric_Comparison_Exp = {
-  _eq?: Maybe<Scalars['numeric']>;
-  _gt?: Maybe<Scalars['numeric']>;
-  _gte?: Maybe<Scalars['numeric']>;
-  _in?: Maybe<Array<Scalars['numeric']>>;
-  _is_null?: Maybe<Scalars['Boolean']>;
-  _lt?: Maybe<Scalars['numeric']>;
-  _lte?: Maybe<Scalars['numeric']>;
-  _neq?: Maybe<Scalars['numeric']>;
-  _nin?: Maybe<Array<Scalars['numeric']>>;
+export type Mutation_RootUpdate_Votings_By_PkArgs = {
+  _inc?: Maybe<Votings_Inc_Input>;
+  _set?: Maybe<Votings_Set_Input>;
+  pk_columns: Votings_Pk_Columns_Input;
 };
 
 /** column ordering options */
@@ -608,1022 +541,430 @@ export enum Order_By {
   DescNullsLast = 'desc_nulls_last'
 }
 
-/** columns and relationships of "order_lines" */
-export type Order_Lines = {
-  __typename?: 'order_lines';
-  amount: Scalars['numeric'];
-  created_at: Scalars['timestamptz'];
-  id: Scalars['Int'];
-  /** An object relationship */
-  item: Items;
-  item_id: Scalars['Int'];
-  order_id: Scalars['Int'];
-  quantity: Scalars['Int'];
-};
-
-/** aggregated selection of "order_lines" */
-export type Order_Lines_Aggregate = {
-  __typename?: 'order_lines_aggregate';
-  aggregate?: Maybe<Order_Lines_Aggregate_Fields>;
-  nodes: Array<Order_Lines>;
-};
-
-/** aggregate fields of "order_lines" */
-export type Order_Lines_Aggregate_Fields = {
-  __typename?: 'order_lines_aggregate_fields';
-  avg?: Maybe<Order_Lines_Avg_Fields>;
-  count: Scalars['Int'];
-  max?: Maybe<Order_Lines_Max_Fields>;
-  min?: Maybe<Order_Lines_Min_Fields>;
-  stddev?: Maybe<Order_Lines_Stddev_Fields>;
-  stddev_pop?: Maybe<Order_Lines_Stddev_Pop_Fields>;
-  stddev_samp?: Maybe<Order_Lines_Stddev_Samp_Fields>;
-  sum?: Maybe<Order_Lines_Sum_Fields>;
-  var_pop?: Maybe<Order_Lines_Var_Pop_Fields>;
-  var_samp?: Maybe<Order_Lines_Var_Samp_Fields>;
-  variance?: Maybe<Order_Lines_Variance_Fields>;
-};
-
-
-/** aggregate fields of "order_lines" */
-export type Order_Lines_Aggregate_FieldsCountArgs = {
-  columns?: Maybe<Array<Order_Lines_Select_Column>>;
-  distinct?: Maybe<Scalars['Boolean']>;
-};
-
-/** order by aggregate values of table "order_lines" */
-export type Order_Lines_Aggregate_Order_By = {
-  avg?: Maybe<Order_Lines_Avg_Order_By>;
-  count?: Maybe<Order_By>;
-  max?: Maybe<Order_Lines_Max_Order_By>;
-  min?: Maybe<Order_Lines_Min_Order_By>;
-  stddev?: Maybe<Order_Lines_Stddev_Order_By>;
-  stddev_pop?: Maybe<Order_Lines_Stddev_Pop_Order_By>;
-  stddev_samp?: Maybe<Order_Lines_Stddev_Samp_Order_By>;
-  sum?: Maybe<Order_Lines_Sum_Order_By>;
-  var_pop?: Maybe<Order_Lines_Var_Pop_Order_By>;
-  var_samp?: Maybe<Order_Lines_Var_Samp_Order_By>;
-  variance?: Maybe<Order_Lines_Variance_Order_By>;
-};
-
-/** input type for inserting array relation for remote table "order_lines" */
-export type Order_Lines_Arr_Rel_Insert_Input = {
-  data: Array<Order_Lines_Insert_Input>;
-  /** on conflict condition */
-  on_conflict?: Maybe<Order_Lines_On_Conflict>;
-};
-
-/** aggregate avg on columns */
-export type Order_Lines_Avg_Fields = {
-  __typename?: 'order_lines_avg_fields';
-  amount?: Maybe<Scalars['Float']>;
-  id?: Maybe<Scalars['Float']>;
-  item_id?: Maybe<Scalars['Float']>;
-  order_id?: Maybe<Scalars['Float']>;
-  quantity?: Maybe<Scalars['Float']>;
-};
-
-/** order by avg() on columns of table "order_lines" */
-export type Order_Lines_Avg_Order_By = {
-  amount?: Maybe<Order_By>;
-  id?: Maybe<Order_By>;
-  item_id?: Maybe<Order_By>;
-  order_id?: Maybe<Order_By>;
-  quantity?: Maybe<Order_By>;
-};
-
-/** Boolean expression to filter rows from the table "order_lines". All fields are combined with a logical 'AND'. */
-export type Order_Lines_Bool_Exp = {
-  _and?: Maybe<Array<Order_Lines_Bool_Exp>>;
-  _not?: Maybe<Order_Lines_Bool_Exp>;
-  _or?: Maybe<Array<Order_Lines_Bool_Exp>>;
-  amount?: Maybe<Numeric_Comparison_Exp>;
-  created_at?: Maybe<Timestamptz_Comparison_Exp>;
-  id?: Maybe<Int_Comparison_Exp>;
-  item?: Maybe<Items_Bool_Exp>;
-  item_id?: Maybe<Int_Comparison_Exp>;
-  order_id?: Maybe<Int_Comparison_Exp>;
-  quantity?: Maybe<Int_Comparison_Exp>;
-};
-
-/** unique or primary key constraints on table "order_lines" */
-export enum Order_Lines_Constraint {
-  /** unique or primary key constraint */
-  OrderLinesPkey = 'order_lines_pkey'
-}
-
-/** input type for incrementing numeric columns in table "order_lines" */
-export type Order_Lines_Inc_Input = {
-  amount?: Maybe<Scalars['numeric']>;
-  id?: Maybe<Scalars['Int']>;
-  item_id?: Maybe<Scalars['Int']>;
-  order_id?: Maybe<Scalars['Int']>;
-  quantity?: Maybe<Scalars['Int']>;
-};
-
-/** input type for inserting data into table "order_lines" */
-export type Order_Lines_Insert_Input = {
-  amount?: Maybe<Scalars['numeric']>;
-  created_at?: Maybe<Scalars['timestamptz']>;
-  id?: Maybe<Scalars['Int']>;
-  item?: Maybe<Items_Obj_Rel_Insert_Input>;
-  item_id?: Maybe<Scalars['Int']>;
-  order_id?: Maybe<Scalars['Int']>;
-  quantity?: Maybe<Scalars['Int']>;
-};
-
-/** aggregate max on columns */
-export type Order_Lines_Max_Fields = {
-  __typename?: 'order_lines_max_fields';
-  amount?: Maybe<Scalars['numeric']>;
-  created_at?: Maybe<Scalars['timestamptz']>;
-  id?: Maybe<Scalars['Int']>;
-  item_id?: Maybe<Scalars['Int']>;
-  order_id?: Maybe<Scalars['Int']>;
-  quantity?: Maybe<Scalars['Int']>;
-};
-
-/** order by max() on columns of table "order_lines" */
-export type Order_Lines_Max_Order_By = {
-  amount?: Maybe<Order_By>;
-  created_at?: Maybe<Order_By>;
-  id?: Maybe<Order_By>;
-  item_id?: Maybe<Order_By>;
-  order_id?: Maybe<Order_By>;
-  quantity?: Maybe<Order_By>;
-};
-
-/** aggregate min on columns */
-export type Order_Lines_Min_Fields = {
-  __typename?: 'order_lines_min_fields';
-  amount?: Maybe<Scalars['numeric']>;
-  created_at?: Maybe<Scalars['timestamptz']>;
-  id?: Maybe<Scalars['Int']>;
-  item_id?: Maybe<Scalars['Int']>;
-  order_id?: Maybe<Scalars['Int']>;
-  quantity?: Maybe<Scalars['Int']>;
-};
-
-/** order by min() on columns of table "order_lines" */
-export type Order_Lines_Min_Order_By = {
-  amount?: Maybe<Order_By>;
-  created_at?: Maybe<Order_By>;
-  id?: Maybe<Order_By>;
-  item_id?: Maybe<Order_By>;
-  order_id?: Maybe<Order_By>;
-  quantity?: Maybe<Order_By>;
-};
-
-/** response of any mutation on the table "order_lines" */
-export type Order_Lines_Mutation_Response = {
-  __typename?: 'order_lines_mutation_response';
-  /** number of rows affected by the mutation */
-  affected_rows: Scalars['Int'];
-  /** data from the rows affected by the mutation */
-  returning: Array<Order_Lines>;
-};
-
-/** on conflict condition type for table "order_lines" */
-export type Order_Lines_On_Conflict = {
-  constraint: Order_Lines_Constraint;
-  update_columns: Array<Order_Lines_Update_Column>;
-  where?: Maybe<Order_Lines_Bool_Exp>;
-};
-
-/** Ordering options when selecting data from "order_lines". */
-export type Order_Lines_Order_By = {
-  amount?: Maybe<Order_By>;
-  created_at?: Maybe<Order_By>;
-  id?: Maybe<Order_By>;
-  item?: Maybe<Items_Order_By>;
-  item_id?: Maybe<Order_By>;
-  order_id?: Maybe<Order_By>;
-  quantity?: Maybe<Order_By>;
-};
-
-/** primary key columns input for table: order_lines */
-export type Order_Lines_Pk_Columns_Input = {
-  id: Scalars['Int'];
-};
-
-/** select columns of table "order_lines" */
-export enum Order_Lines_Select_Column {
-  /** column name */
-  Amount = 'amount',
-  /** column name */
-  CreatedAt = 'created_at',
-  /** column name */
-  Id = 'id',
-  /** column name */
-  ItemId = 'item_id',
-  /** column name */
-  OrderId = 'order_id',
-  /** column name */
-  Quantity = 'quantity'
-}
-
-/** input type for updating data in table "order_lines" */
-export type Order_Lines_Set_Input = {
-  amount?: Maybe<Scalars['numeric']>;
-  created_at?: Maybe<Scalars['timestamptz']>;
-  id?: Maybe<Scalars['Int']>;
-  item_id?: Maybe<Scalars['Int']>;
-  order_id?: Maybe<Scalars['Int']>;
-  quantity?: Maybe<Scalars['Int']>;
-};
-
-/** aggregate stddev on columns */
-export type Order_Lines_Stddev_Fields = {
-  __typename?: 'order_lines_stddev_fields';
-  amount?: Maybe<Scalars['Float']>;
-  id?: Maybe<Scalars['Float']>;
-  item_id?: Maybe<Scalars['Float']>;
-  order_id?: Maybe<Scalars['Float']>;
-  quantity?: Maybe<Scalars['Float']>;
-};
-
-/** order by stddev() on columns of table "order_lines" */
-export type Order_Lines_Stddev_Order_By = {
-  amount?: Maybe<Order_By>;
-  id?: Maybe<Order_By>;
-  item_id?: Maybe<Order_By>;
-  order_id?: Maybe<Order_By>;
-  quantity?: Maybe<Order_By>;
-};
-
-/** aggregate stddev_pop on columns */
-export type Order_Lines_Stddev_Pop_Fields = {
-  __typename?: 'order_lines_stddev_pop_fields';
-  amount?: Maybe<Scalars['Float']>;
-  id?: Maybe<Scalars['Float']>;
-  item_id?: Maybe<Scalars['Float']>;
-  order_id?: Maybe<Scalars['Float']>;
-  quantity?: Maybe<Scalars['Float']>;
-};
-
-/** order by stddev_pop() on columns of table "order_lines" */
-export type Order_Lines_Stddev_Pop_Order_By = {
-  amount?: Maybe<Order_By>;
-  id?: Maybe<Order_By>;
-  item_id?: Maybe<Order_By>;
-  order_id?: Maybe<Order_By>;
-  quantity?: Maybe<Order_By>;
-};
-
-/** aggregate stddev_samp on columns */
-export type Order_Lines_Stddev_Samp_Fields = {
-  __typename?: 'order_lines_stddev_samp_fields';
-  amount?: Maybe<Scalars['Float']>;
-  id?: Maybe<Scalars['Float']>;
-  item_id?: Maybe<Scalars['Float']>;
-  order_id?: Maybe<Scalars['Float']>;
-  quantity?: Maybe<Scalars['Float']>;
-};
-
-/** order by stddev_samp() on columns of table "order_lines" */
-export type Order_Lines_Stddev_Samp_Order_By = {
-  amount?: Maybe<Order_By>;
-  id?: Maybe<Order_By>;
-  item_id?: Maybe<Order_By>;
-  order_id?: Maybe<Order_By>;
-  quantity?: Maybe<Order_By>;
-};
-
-/** aggregate sum on columns */
-export type Order_Lines_Sum_Fields = {
-  __typename?: 'order_lines_sum_fields';
-  amount?: Maybe<Scalars['numeric']>;
-  id?: Maybe<Scalars['Int']>;
-  item_id?: Maybe<Scalars['Int']>;
-  order_id?: Maybe<Scalars['Int']>;
-  quantity?: Maybe<Scalars['Int']>;
-};
-
-/** order by sum() on columns of table "order_lines" */
-export type Order_Lines_Sum_Order_By = {
-  amount?: Maybe<Order_By>;
-  id?: Maybe<Order_By>;
-  item_id?: Maybe<Order_By>;
-  order_id?: Maybe<Order_By>;
-  quantity?: Maybe<Order_By>;
-};
-
-/** update columns of table "order_lines" */
-export enum Order_Lines_Update_Column {
-  /** column name */
-  Amount = 'amount',
-  /** column name */
-  CreatedAt = 'created_at',
-  /** column name */
-  Id = 'id',
-  /** column name */
-  ItemId = 'item_id',
-  /** column name */
-  OrderId = 'order_id',
-  /** column name */
-  Quantity = 'quantity'
-}
-
-/** aggregate var_pop on columns */
-export type Order_Lines_Var_Pop_Fields = {
-  __typename?: 'order_lines_var_pop_fields';
-  amount?: Maybe<Scalars['Float']>;
-  id?: Maybe<Scalars['Float']>;
-  item_id?: Maybe<Scalars['Float']>;
-  order_id?: Maybe<Scalars['Float']>;
-  quantity?: Maybe<Scalars['Float']>;
-};
-
-/** order by var_pop() on columns of table "order_lines" */
-export type Order_Lines_Var_Pop_Order_By = {
-  amount?: Maybe<Order_By>;
-  id?: Maybe<Order_By>;
-  item_id?: Maybe<Order_By>;
-  order_id?: Maybe<Order_By>;
-  quantity?: Maybe<Order_By>;
-};
-
-/** aggregate var_samp on columns */
-export type Order_Lines_Var_Samp_Fields = {
-  __typename?: 'order_lines_var_samp_fields';
-  amount?: Maybe<Scalars['Float']>;
-  id?: Maybe<Scalars['Float']>;
-  item_id?: Maybe<Scalars['Float']>;
-  order_id?: Maybe<Scalars['Float']>;
-  quantity?: Maybe<Scalars['Float']>;
-};
-
-/** order by var_samp() on columns of table "order_lines" */
-export type Order_Lines_Var_Samp_Order_By = {
-  amount?: Maybe<Order_By>;
-  id?: Maybe<Order_By>;
-  item_id?: Maybe<Order_By>;
-  order_id?: Maybe<Order_By>;
-  quantity?: Maybe<Order_By>;
-};
-
-/** aggregate variance on columns */
-export type Order_Lines_Variance_Fields = {
-  __typename?: 'order_lines_variance_fields';
-  amount?: Maybe<Scalars['Float']>;
-  id?: Maybe<Scalars['Float']>;
-  item_id?: Maybe<Scalars['Float']>;
-  order_id?: Maybe<Scalars['Float']>;
-  quantity?: Maybe<Scalars['Float']>;
-};
-
-/** order by variance() on columns of table "order_lines" */
-export type Order_Lines_Variance_Order_By = {
-  amount?: Maybe<Order_By>;
-  id?: Maybe<Order_By>;
-  item_id?: Maybe<Order_By>;
-  order_id?: Maybe<Order_By>;
-  quantity?: Maybe<Order_By>;
-};
-
-/** columns and relationships of "orders" */
-export type Orders = {
-  __typename?: 'orders';
-  amount: Scalars['numeric'];
-  created_at: Scalars['timestamptz'];
-  id: Scalars['Int'];
-  /** An array relationship */
-  order_lines: Array<Order_Lines>;
-  /** An aggregate relationship */
-  order_lines_aggregate: Order_Lines_Aggregate;
-  updated_at: Scalars['timestamptz'];
-};
-
-
-/** columns and relationships of "orders" */
-export type OrdersOrder_LinesArgs = {
-  distinct_on?: Maybe<Array<Order_Lines_Select_Column>>;
-  limit?: Maybe<Scalars['Int']>;
-  offset?: Maybe<Scalars['Int']>;
-  order_by?: Maybe<Array<Order_Lines_Order_By>>;
-  where?: Maybe<Order_Lines_Bool_Exp>;
-};
-
-
-/** columns and relationships of "orders" */
-export type OrdersOrder_Lines_AggregateArgs = {
-  distinct_on?: Maybe<Array<Order_Lines_Select_Column>>;
-  limit?: Maybe<Scalars['Int']>;
-  offset?: Maybe<Scalars['Int']>;
-  order_by?: Maybe<Array<Order_Lines_Order_By>>;
-  where?: Maybe<Order_Lines_Bool_Exp>;
-};
-
-/** aggregated selection of "orders" */
-export type Orders_Aggregate = {
-  __typename?: 'orders_aggregate';
-  aggregate?: Maybe<Orders_Aggregate_Fields>;
-  nodes: Array<Orders>;
-};
-
-/** aggregate fields of "orders" */
-export type Orders_Aggregate_Fields = {
-  __typename?: 'orders_aggregate_fields';
-  avg?: Maybe<Orders_Avg_Fields>;
-  count: Scalars['Int'];
-  max?: Maybe<Orders_Max_Fields>;
-  min?: Maybe<Orders_Min_Fields>;
-  stddev?: Maybe<Orders_Stddev_Fields>;
-  stddev_pop?: Maybe<Orders_Stddev_Pop_Fields>;
-  stddev_samp?: Maybe<Orders_Stddev_Samp_Fields>;
-  sum?: Maybe<Orders_Sum_Fields>;
-  var_pop?: Maybe<Orders_Var_Pop_Fields>;
-  var_samp?: Maybe<Orders_Var_Samp_Fields>;
-  variance?: Maybe<Orders_Variance_Fields>;
-};
-
-
-/** aggregate fields of "orders" */
-export type Orders_Aggregate_FieldsCountArgs = {
-  columns?: Maybe<Array<Orders_Select_Column>>;
-  distinct?: Maybe<Scalars['Boolean']>;
-};
-
-/** aggregate avg on columns */
-export type Orders_Avg_Fields = {
-  __typename?: 'orders_avg_fields';
-  amount?: Maybe<Scalars['Float']>;
-  id?: Maybe<Scalars['Float']>;
-};
-
-/** Boolean expression to filter rows from the table "orders". All fields are combined with a logical 'AND'. */
-export type Orders_Bool_Exp = {
-  _and?: Maybe<Array<Orders_Bool_Exp>>;
-  _not?: Maybe<Orders_Bool_Exp>;
-  _or?: Maybe<Array<Orders_Bool_Exp>>;
-  amount?: Maybe<Numeric_Comparison_Exp>;
-  created_at?: Maybe<Timestamptz_Comparison_Exp>;
-  id?: Maybe<Int_Comparison_Exp>;
-  order_lines?: Maybe<Order_Lines_Bool_Exp>;
-  updated_at?: Maybe<Timestamptz_Comparison_Exp>;
-};
-
-/** unique or primary key constraints on table "orders" */
-export enum Orders_Constraint {
-  /** unique or primary key constraint */
-  OrdersPkey = 'orders_pkey'
-}
-
-/** input type for incrementing numeric columns in table "orders" */
-export type Orders_Inc_Input = {
-  amount?: Maybe<Scalars['numeric']>;
-  id?: Maybe<Scalars['Int']>;
-};
-
-/** input type for inserting data into table "orders" */
-export type Orders_Insert_Input = {
-  amount?: Maybe<Scalars['numeric']>;
-  created_at?: Maybe<Scalars['timestamptz']>;
-  id?: Maybe<Scalars['Int']>;
-  order_lines?: Maybe<Order_Lines_Arr_Rel_Insert_Input>;
-  updated_at?: Maybe<Scalars['timestamptz']>;
-};
-
-/** aggregate max on columns */
-export type Orders_Max_Fields = {
-  __typename?: 'orders_max_fields';
-  amount?: Maybe<Scalars['numeric']>;
-  created_at?: Maybe<Scalars['timestamptz']>;
-  id?: Maybe<Scalars['Int']>;
-  updated_at?: Maybe<Scalars['timestamptz']>;
-};
-
-/** aggregate min on columns */
-export type Orders_Min_Fields = {
-  __typename?: 'orders_min_fields';
-  amount?: Maybe<Scalars['numeric']>;
-  created_at?: Maybe<Scalars['timestamptz']>;
-  id?: Maybe<Scalars['Int']>;
-  updated_at?: Maybe<Scalars['timestamptz']>;
-};
-
-/** response of any mutation on the table "orders" */
-export type Orders_Mutation_Response = {
-  __typename?: 'orders_mutation_response';
-  /** number of rows affected by the mutation */
-  affected_rows: Scalars['Int'];
-  /** data from the rows affected by the mutation */
-  returning: Array<Orders>;
-};
-
-/** on conflict condition type for table "orders" */
-export type Orders_On_Conflict = {
-  constraint: Orders_Constraint;
-  update_columns: Array<Orders_Update_Column>;
-  where?: Maybe<Orders_Bool_Exp>;
-};
-
-/** Ordering options when selecting data from "orders". */
-export type Orders_Order_By = {
-  amount?: Maybe<Order_By>;
-  created_at?: Maybe<Order_By>;
-  id?: Maybe<Order_By>;
-  order_lines_aggregate?: Maybe<Order_Lines_Aggregate_Order_By>;
-  updated_at?: Maybe<Order_By>;
-};
-
-/** primary key columns input for table: orders */
-export type Orders_Pk_Columns_Input = {
-  id: Scalars['Int'];
-};
-
-/** select columns of table "orders" */
-export enum Orders_Select_Column {
-  /** column name */
-  Amount = 'amount',
-  /** column name */
-  CreatedAt = 'created_at',
-  /** column name */
-  Id = 'id',
-  /** column name */
-  UpdatedAt = 'updated_at'
-}
-
-/** input type for updating data in table "orders" */
-export type Orders_Set_Input = {
-  amount?: Maybe<Scalars['numeric']>;
-  created_at?: Maybe<Scalars['timestamptz']>;
-  id?: Maybe<Scalars['Int']>;
-  updated_at?: Maybe<Scalars['timestamptz']>;
-};
-
-/** aggregate stddev on columns */
-export type Orders_Stddev_Fields = {
-  __typename?: 'orders_stddev_fields';
-  amount?: Maybe<Scalars['Float']>;
-  id?: Maybe<Scalars['Float']>;
-};
-
-/** aggregate stddev_pop on columns */
-export type Orders_Stddev_Pop_Fields = {
-  __typename?: 'orders_stddev_pop_fields';
-  amount?: Maybe<Scalars['Float']>;
-  id?: Maybe<Scalars['Float']>;
-};
-
-/** aggregate stddev_samp on columns */
-export type Orders_Stddev_Samp_Fields = {
-  __typename?: 'orders_stddev_samp_fields';
-  amount?: Maybe<Scalars['Float']>;
-  id?: Maybe<Scalars['Float']>;
-};
-
-/** aggregate sum on columns */
-export type Orders_Sum_Fields = {
-  __typename?: 'orders_sum_fields';
-  amount?: Maybe<Scalars['numeric']>;
-  id?: Maybe<Scalars['Int']>;
-};
-
-/** update columns of table "orders" */
-export enum Orders_Update_Column {
-  /** column name */
-  Amount = 'amount',
-  /** column name */
-  CreatedAt = 'created_at',
-  /** column name */
-  Id = 'id',
-  /** column name */
-  UpdatedAt = 'updated_at'
-}
-
-/** aggregate var_pop on columns */
-export type Orders_Var_Pop_Fields = {
-  __typename?: 'orders_var_pop_fields';
-  amount?: Maybe<Scalars['Float']>;
-  id?: Maybe<Scalars['Float']>;
-};
-
-/** aggregate var_samp on columns */
-export type Orders_Var_Samp_Fields = {
-  __typename?: 'orders_var_samp_fields';
-  amount?: Maybe<Scalars['Float']>;
-  id?: Maybe<Scalars['Float']>;
-};
-
-/** aggregate variance on columns */
-export type Orders_Variance_Fields = {
-  __typename?: 'orders_variance_fields';
-  amount?: Maybe<Scalars['Float']>;
-  id?: Maybe<Scalars['Float']>;
-};
-
-/** columns and relationships of "pepe" */
-export type Pepe = {
-  __typename?: 'pepe';
-  created_at: Scalars['timestamptz'];
-  id: Scalars['Int'];
-};
-
-/** aggregated selection of "pepe" */
-export type Pepe_Aggregate = {
-  __typename?: 'pepe_aggregate';
-  aggregate?: Maybe<Pepe_Aggregate_Fields>;
-  nodes: Array<Pepe>;
-};
-
-/** aggregate fields of "pepe" */
-export type Pepe_Aggregate_Fields = {
-  __typename?: 'pepe_aggregate_fields';
-  avg?: Maybe<Pepe_Avg_Fields>;
-  count: Scalars['Int'];
-  max?: Maybe<Pepe_Max_Fields>;
-  min?: Maybe<Pepe_Min_Fields>;
-  stddev?: Maybe<Pepe_Stddev_Fields>;
-  stddev_pop?: Maybe<Pepe_Stddev_Pop_Fields>;
-  stddev_samp?: Maybe<Pepe_Stddev_Samp_Fields>;
-  sum?: Maybe<Pepe_Sum_Fields>;
-  var_pop?: Maybe<Pepe_Var_Pop_Fields>;
-  var_samp?: Maybe<Pepe_Var_Samp_Fields>;
-  variance?: Maybe<Pepe_Variance_Fields>;
-};
-
-
-/** aggregate fields of "pepe" */
-export type Pepe_Aggregate_FieldsCountArgs = {
-  columns?: Maybe<Array<Pepe_Select_Column>>;
-  distinct?: Maybe<Scalars['Boolean']>;
-};
-
-/** aggregate avg on columns */
-export type Pepe_Avg_Fields = {
-  __typename?: 'pepe_avg_fields';
-  id?: Maybe<Scalars['Float']>;
-};
-
-/** Boolean expression to filter rows from the table "pepe". All fields are combined with a logical 'AND'. */
-export type Pepe_Bool_Exp = {
-  _and?: Maybe<Array<Pepe_Bool_Exp>>;
-  _not?: Maybe<Pepe_Bool_Exp>;
-  _or?: Maybe<Array<Pepe_Bool_Exp>>;
-  created_at?: Maybe<Timestamptz_Comparison_Exp>;
-  id?: Maybe<Int_Comparison_Exp>;
-};
-
-/** unique or primary key constraints on table "pepe" */
-export enum Pepe_Constraint {
-  /** unique or primary key constraint */
-  PepePkey = 'pepe_pkey'
-}
-
-/** input type for incrementing numeric columns in table "pepe" */
-export type Pepe_Inc_Input = {
-  id?: Maybe<Scalars['Int']>;
-};
-
-/** input type for inserting data into table "pepe" */
-export type Pepe_Insert_Input = {
-  created_at?: Maybe<Scalars['timestamptz']>;
-  id?: Maybe<Scalars['Int']>;
-};
-
-/** aggregate max on columns */
-export type Pepe_Max_Fields = {
-  __typename?: 'pepe_max_fields';
-  created_at?: Maybe<Scalars['timestamptz']>;
-  id?: Maybe<Scalars['Int']>;
-};
-
-/** aggregate min on columns */
-export type Pepe_Min_Fields = {
-  __typename?: 'pepe_min_fields';
-  created_at?: Maybe<Scalars['timestamptz']>;
-  id?: Maybe<Scalars['Int']>;
-};
-
-/** response of any mutation on the table "pepe" */
-export type Pepe_Mutation_Response = {
-  __typename?: 'pepe_mutation_response';
-  /** number of rows affected by the mutation */
-  affected_rows: Scalars['Int'];
-  /** data from the rows affected by the mutation */
-  returning: Array<Pepe>;
-};
-
-/** on conflict condition type for table "pepe" */
-export type Pepe_On_Conflict = {
-  constraint: Pepe_Constraint;
-  update_columns: Array<Pepe_Update_Column>;
-  where?: Maybe<Pepe_Bool_Exp>;
-};
-
-/** Ordering options when selecting data from "pepe". */
-export type Pepe_Order_By = {
-  created_at?: Maybe<Order_By>;
-  id?: Maybe<Order_By>;
-};
-
-/** primary key columns input for table: pepe */
-export type Pepe_Pk_Columns_Input = {
-  id: Scalars['Int'];
-};
-
-/** select columns of table "pepe" */
-export enum Pepe_Select_Column {
-  /** column name */
-  CreatedAt = 'created_at',
-  /** column name */
-  Id = 'id'
-}
-
-/** input type for updating data in table "pepe" */
-export type Pepe_Set_Input = {
-  created_at?: Maybe<Scalars['timestamptz']>;
-  id?: Maybe<Scalars['Int']>;
-};
-
-/** aggregate stddev on columns */
-export type Pepe_Stddev_Fields = {
-  __typename?: 'pepe_stddev_fields';
-  id?: Maybe<Scalars['Float']>;
-};
-
-/** aggregate stddev_pop on columns */
-export type Pepe_Stddev_Pop_Fields = {
-  __typename?: 'pepe_stddev_pop_fields';
-  id?: Maybe<Scalars['Float']>;
-};
-
-/** aggregate stddev_samp on columns */
-export type Pepe_Stddev_Samp_Fields = {
-  __typename?: 'pepe_stddev_samp_fields';
-  id?: Maybe<Scalars['Float']>;
-};
-
-/** aggregate sum on columns */
-export type Pepe_Sum_Fields = {
-  __typename?: 'pepe_sum_fields';
-  id?: Maybe<Scalars['Int']>;
-};
-
-/** update columns of table "pepe" */
-export enum Pepe_Update_Column {
-  /** column name */
-  CreatedAt = 'created_at',
-  /** column name */
-  Id = 'id'
-}
-
-/** aggregate var_pop on columns */
-export type Pepe_Var_Pop_Fields = {
-  __typename?: 'pepe_var_pop_fields';
-  id?: Maybe<Scalars['Float']>;
-};
-
-/** aggregate var_samp on columns */
-export type Pepe_Var_Samp_Fields = {
-  __typename?: 'pepe_var_samp_fields';
-  id?: Maybe<Scalars['Float']>;
-};
-
-/** aggregate variance on columns */
-export type Pepe_Variance_Fields = {
-  __typename?: 'pepe_variance_fields';
-  id?: Maybe<Scalars['Float']>;
-};
-
 export type Query_Root = {
   __typename?: 'query_root';
-  /** fetch data from the table: "items" */
-  items: Array<Items>;
-  /** fetch aggregated fields from the table: "items" */
-  items_aggregate: Items_Aggregate;
-  /** fetch data from the table: "items" using primary key columns */
-  items_by_pk?: Maybe<Items>;
-  /** An array relationship */
-  order_lines: Array<Order_Lines>;
-  /** An aggregate relationship */
-  order_lines_aggregate: Order_Lines_Aggregate;
-  /** fetch data from the table: "order_lines" using primary key columns */
-  order_lines_by_pk?: Maybe<Order_Lines>;
-  /** fetch data from the table: "orders" */
-  orders: Array<Orders>;
-  /** fetch aggregated fields from the table: "orders" */
-  orders_aggregate: Orders_Aggregate;
-  /** fetch data from the table: "orders" using primary key columns */
-  orders_by_pk?: Maybe<Orders>;
-  /** fetch data from the table: "pepe" */
-  pepe: Array<Pepe>;
-  /** fetch aggregated fields from the table: "pepe" */
-  pepe_aggregate: Pepe_Aggregate;
-  /** fetch data from the table: "pepe" using primary key columns */
-  pepe_by_pk?: Maybe<Pepe>;
+  /** fetch data from the table: "addresses" */
+  addresses: Array<Addresses>;
+  /** fetch aggregated fields from the table: "addresses" */
+  addresses_aggregate: Addresses_Aggregate;
+  /** fetch data from the table: "addresses" using primary key columns */
+  addresses_by_pk?: Maybe<Addresses>;
+  /** fetch data from the table: "roles" */
+  roles: Array<Roles>;
+  /** fetch aggregated fields from the table: "roles" */
+  roles_aggregate: Roles_Aggregate;
+  /** fetch data from the table: "roles" using primary key columns */
+  roles_by_pk?: Maybe<Roles>;
+  /** fetch data from the table: "users" */
+  users: Array<Users>;
+  /** fetch aggregated fields from the table: "users" */
+  users_aggregate: Users_Aggregate;
+  /** fetch data from the table: "users" using primary key columns */
+  users_by_pk?: Maybe<Users>;
+  /** fetch data from the table: "votings" */
+  votings: Array<Votings>;
+  /** fetch aggregated fields from the table: "votings" */
+  votings_aggregate: Votings_Aggregate;
+  /** fetch data from the table: "votings" using primary key columns */
+  votings_by_pk?: Maybe<Votings>;
 };
 
 
-export type Query_RootItemsArgs = {
-  distinct_on?: Maybe<Array<Items_Select_Column>>;
+export type Query_RootAddressesArgs = {
+  distinct_on?: Maybe<Array<Addresses_Select_Column>>;
   limit?: Maybe<Scalars['Int']>;
   offset?: Maybe<Scalars['Int']>;
-  order_by?: Maybe<Array<Items_Order_By>>;
-  where?: Maybe<Items_Bool_Exp>;
+  order_by?: Maybe<Array<Addresses_Order_By>>;
+  where?: Maybe<Addresses_Bool_Exp>;
 };
 
 
-export type Query_RootItems_AggregateArgs = {
-  distinct_on?: Maybe<Array<Items_Select_Column>>;
+export type Query_RootAddresses_AggregateArgs = {
+  distinct_on?: Maybe<Array<Addresses_Select_Column>>;
   limit?: Maybe<Scalars['Int']>;
   offset?: Maybe<Scalars['Int']>;
-  order_by?: Maybe<Array<Items_Order_By>>;
-  where?: Maybe<Items_Bool_Exp>;
+  order_by?: Maybe<Array<Addresses_Order_By>>;
+  where?: Maybe<Addresses_Bool_Exp>;
 };
 
 
-export type Query_RootItems_By_PkArgs = {
+export type Query_RootAddresses_By_PkArgs = {
   id: Scalars['Int'];
 };
 
 
-export type Query_RootOrder_LinesArgs = {
-  distinct_on?: Maybe<Array<Order_Lines_Select_Column>>;
+export type Query_RootRolesArgs = {
+  distinct_on?: Maybe<Array<Roles_Select_Column>>;
   limit?: Maybe<Scalars['Int']>;
   offset?: Maybe<Scalars['Int']>;
-  order_by?: Maybe<Array<Order_Lines_Order_By>>;
-  where?: Maybe<Order_Lines_Bool_Exp>;
+  order_by?: Maybe<Array<Roles_Order_By>>;
+  where?: Maybe<Roles_Bool_Exp>;
 };
 
 
-export type Query_RootOrder_Lines_AggregateArgs = {
-  distinct_on?: Maybe<Array<Order_Lines_Select_Column>>;
+export type Query_RootRoles_AggregateArgs = {
+  distinct_on?: Maybe<Array<Roles_Select_Column>>;
   limit?: Maybe<Scalars['Int']>;
   offset?: Maybe<Scalars['Int']>;
-  order_by?: Maybe<Array<Order_Lines_Order_By>>;
-  where?: Maybe<Order_Lines_Bool_Exp>;
+  order_by?: Maybe<Array<Roles_Order_By>>;
+  where?: Maybe<Roles_Bool_Exp>;
 };
 
 
-export type Query_RootOrder_Lines_By_PkArgs = {
+export type Query_RootRoles_By_PkArgs = {
   id: Scalars['Int'];
 };
 
 
-export type Query_RootOrdersArgs = {
-  distinct_on?: Maybe<Array<Orders_Select_Column>>;
+export type Query_RootUsersArgs = {
+  distinct_on?: Maybe<Array<Users_Select_Column>>;
   limit?: Maybe<Scalars['Int']>;
   offset?: Maybe<Scalars['Int']>;
-  order_by?: Maybe<Array<Orders_Order_By>>;
-  where?: Maybe<Orders_Bool_Exp>;
+  order_by?: Maybe<Array<Users_Order_By>>;
+  where?: Maybe<Users_Bool_Exp>;
 };
 
 
-export type Query_RootOrders_AggregateArgs = {
-  distinct_on?: Maybe<Array<Orders_Select_Column>>;
+export type Query_RootUsers_AggregateArgs = {
+  distinct_on?: Maybe<Array<Users_Select_Column>>;
   limit?: Maybe<Scalars['Int']>;
   offset?: Maybe<Scalars['Int']>;
-  order_by?: Maybe<Array<Orders_Order_By>>;
-  where?: Maybe<Orders_Bool_Exp>;
+  order_by?: Maybe<Array<Users_Order_By>>;
+  where?: Maybe<Users_Bool_Exp>;
 };
 
 
-export type Query_RootOrders_By_PkArgs = {
+export type Query_RootUsers_By_PkArgs = {
   id: Scalars['Int'];
 };
 
 
-export type Query_RootPepeArgs = {
-  distinct_on?: Maybe<Array<Pepe_Select_Column>>;
+export type Query_RootVotingsArgs = {
+  distinct_on?: Maybe<Array<Votings_Select_Column>>;
   limit?: Maybe<Scalars['Int']>;
   offset?: Maybe<Scalars['Int']>;
-  order_by?: Maybe<Array<Pepe_Order_By>>;
-  where?: Maybe<Pepe_Bool_Exp>;
+  order_by?: Maybe<Array<Votings_Order_By>>;
+  where?: Maybe<Votings_Bool_Exp>;
 };
 
 
-export type Query_RootPepe_AggregateArgs = {
-  distinct_on?: Maybe<Array<Pepe_Select_Column>>;
+export type Query_RootVotings_AggregateArgs = {
+  distinct_on?: Maybe<Array<Votings_Select_Column>>;
   limit?: Maybe<Scalars['Int']>;
   offset?: Maybe<Scalars['Int']>;
-  order_by?: Maybe<Array<Pepe_Order_By>>;
-  where?: Maybe<Pepe_Bool_Exp>;
+  order_by?: Maybe<Array<Votings_Order_By>>;
+  where?: Maybe<Votings_Bool_Exp>;
 };
 
 
-export type Query_RootPepe_By_PkArgs = {
+export type Query_RootVotings_By_PkArgs = {
   id: Scalars['Int'];
+};
+
+/** columns and relationships of "roles" */
+export type Roles = {
+  __typename?: 'roles';
+  displayValue: Scalars['String'];
+  id: Scalars['Int'];
+  value: Scalars['String'];
+};
+
+/** aggregated selection of "roles" */
+export type Roles_Aggregate = {
+  __typename?: 'roles_aggregate';
+  aggregate?: Maybe<Roles_Aggregate_Fields>;
+  nodes: Array<Roles>;
+};
+
+/** aggregate fields of "roles" */
+export type Roles_Aggregate_Fields = {
+  __typename?: 'roles_aggregate_fields';
+  avg?: Maybe<Roles_Avg_Fields>;
+  count: Scalars['Int'];
+  max?: Maybe<Roles_Max_Fields>;
+  min?: Maybe<Roles_Min_Fields>;
+  stddev?: Maybe<Roles_Stddev_Fields>;
+  stddev_pop?: Maybe<Roles_Stddev_Pop_Fields>;
+  stddev_samp?: Maybe<Roles_Stddev_Samp_Fields>;
+  sum?: Maybe<Roles_Sum_Fields>;
+  var_pop?: Maybe<Roles_Var_Pop_Fields>;
+  var_samp?: Maybe<Roles_Var_Samp_Fields>;
+  variance?: Maybe<Roles_Variance_Fields>;
+};
+
+
+/** aggregate fields of "roles" */
+export type Roles_Aggregate_FieldsCountArgs = {
+  columns?: Maybe<Array<Roles_Select_Column>>;
+  distinct?: Maybe<Scalars['Boolean']>;
+};
+
+/** aggregate avg on columns */
+export type Roles_Avg_Fields = {
+  __typename?: 'roles_avg_fields';
+  id?: Maybe<Scalars['Float']>;
+};
+
+/** Boolean expression to filter rows from the table "roles". All fields are combined with a logical 'AND'. */
+export type Roles_Bool_Exp = {
+  _and?: Maybe<Array<Roles_Bool_Exp>>;
+  _not?: Maybe<Roles_Bool_Exp>;
+  _or?: Maybe<Array<Roles_Bool_Exp>>;
+  displayValue?: Maybe<String_Comparison_Exp>;
+  id?: Maybe<Int_Comparison_Exp>;
+  value?: Maybe<String_Comparison_Exp>;
+};
+
+/** unique or primary key constraints on table "roles" */
+export enum Roles_Constraint {
+  /** unique or primary key constraint */
+  RolesPkey = 'roles_pkey',
+  /** unique or primary key constraint */
+  RolesValueKey = 'roles_value_key'
+}
+
+/** input type for incrementing numeric columns in table "roles" */
+export type Roles_Inc_Input = {
+  id?: Maybe<Scalars['Int']>;
+};
+
+/** input type for inserting data into table "roles" */
+export type Roles_Insert_Input = {
+  displayValue?: Maybe<Scalars['String']>;
+  id?: Maybe<Scalars['Int']>;
+  value?: Maybe<Scalars['String']>;
+};
+
+/** aggregate max on columns */
+export type Roles_Max_Fields = {
+  __typename?: 'roles_max_fields';
+  displayValue?: Maybe<Scalars['String']>;
+  id?: Maybe<Scalars['Int']>;
+  value?: Maybe<Scalars['String']>;
+};
+
+/** aggregate min on columns */
+export type Roles_Min_Fields = {
+  __typename?: 'roles_min_fields';
+  displayValue?: Maybe<Scalars['String']>;
+  id?: Maybe<Scalars['Int']>;
+  value?: Maybe<Scalars['String']>;
+};
+
+/** response of any mutation on the table "roles" */
+export type Roles_Mutation_Response = {
+  __typename?: 'roles_mutation_response';
+  /** number of rows affected by the mutation */
+  affected_rows: Scalars['Int'];
+  /** data from the rows affected by the mutation */
+  returning: Array<Roles>;
+};
+
+/** on conflict condition type for table "roles" */
+export type Roles_On_Conflict = {
+  constraint: Roles_Constraint;
+  update_columns: Array<Roles_Update_Column>;
+  where?: Maybe<Roles_Bool_Exp>;
+};
+
+/** Ordering options when selecting data from "roles". */
+export type Roles_Order_By = {
+  displayValue?: Maybe<Order_By>;
+  id?: Maybe<Order_By>;
+  value?: Maybe<Order_By>;
+};
+
+/** primary key columns input for table: roles */
+export type Roles_Pk_Columns_Input = {
+  id: Scalars['Int'];
+};
+
+/** select columns of table "roles" */
+export enum Roles_Select_Column {
+  /** column name */
+  DisplayValue = 'displayValue',
+  /** column name */
+  Id = 'id',
+  /** column name */
+  Value = 'value'
+}
+
+/** input type for updating data in table "roles" */
+export type Roles_Set_Input = {
+  displayValue?: Maybe<Scalars['String']>;
+  id?: Maybe<Scalars['Int']>;
+  value?: Maybe<Scalars['String']>;
+};
+
+/** aggregate stddev on columns */
+export type Roles_Stddev_Fields = {
+  __typename?: 'roles_stddev_fields';
+  id?: Maybe<Scalars['Float']>;
+};
+
+/** aggregate stddev_pop on columns */
+export type Roles_Stddev_Pop_Fields = {
+  __typename?: 'roles_stddev_pop_fields';
+  id?: Maybe<Scalars['Float']>;
+};
+
+/** aggregate stddev_samp on columns */
+export type Roles_Stddev_Samp_Fields = {
+  __typename?: 'roles_stddev_samp_fields';
+  id?: Maybe<Scalars['Float']>;
+};
+
+/** aggregate sum on columns */
+export type Roles_Sum_Fields = {
+  __typename?: 'roles_sum_fields';
+  id?: Maybe<Scalars['Int']>;
+};
+
+/** update columns of table "roles" */
+export enum Roles_Update_Column {
+  /** column name */
+  DisplayValue = 'displayValue',
+  /** column name */
+  Id = 'id',
+  /** column name */
+  Value = 'value'
+}
+
+/** aggregate var_pop on columns */
+export type Roles_Var_Pop_Fields = {
+  __typename?: 'roles_var_pop_fields';
+  id?: Maybe<Scalars['Float']>;
+};
+
+/** aggregate var_samp on columns */
+export type Roles_Var_Samp_Fields = {
+  __typename?: 'roles_var_samp_fields';
+  id?: Maybe<Scalars['Float']>;
+};
+
+/** aggregate variance on columns */
+export type Roles_Variance_Fields = {
+  __typename?: 'roles_variance_fields';
+  id?: Maybe<Scalars['Float']>;
 };
 
 export type Subscription_Root = {
   __typename?: 'subscription_root';
-  /** fetch data from the table: "items" */
-  items: Array<Items>;
-  /** fetch aggregated fields from the table: "items" */
-  items_aggregate: Items_Aggregate;
-  /** fetch data from the table: "items" using primary key columns */
-  items_by_pk?: Maybe<Items>;
-  /** An array relationship */
-  order_lines: Array<Order_Lines>;
-  /** An aggregate relationship */
-  order_lines_aggregate: Order_Lines_Aggregate;
-  /** fetch data from the table: "order_lines" using primary key columns */
-  order_lines_by_pk?: Maybe<Order_Lines>;
-  /** fetch data from the table: "orders" */
-  orders: Array<Orders>;
-  /** fetch aggregated fields from the table: "orders" */
-  orders_aggregate: Orders_Aggregate;
-  /** fetch data from the table: "orders" using primary key columns */
-  orders_by_pk?: Maybe<Orders>;
-  /** fetch data from the table: "pepe" */
-  pepe: Array<Pepe>;
-  /** fetch aggregated fields from the table: "pepe" */
-  pepe_aggregate: Pepe_Aggregate;
-  /** fetch data from the table: "pepe" using primary key columns */
-  pepe_by_pk?: Maybe<Pepe>;
+  /** fetch data from the table: "addresses" */
+  addresses: Array<Addresses>;
+  /** fetch aggregated fields from the table: "addresses" */
+  addresses_aggregate: Addresses_Aggregate;
+  /** fetch data from the table: "addresses" using primary key columns */
+  addresses_by_pk?: Maybe<Addresses>;
+  /** fetch data from the table: "roles" */
+  roles: Array<Roles>;
+  /** fetch aggregated fields from the table: "roles" */
+  roles_aggregate: Roles_Aggregate;
+  /** fetch data from the table: "roles" using primary key columns */
+  roles_by_pk?: Maybe<Roles>;
+  /** fetch data from the table: "users" */
+  users: Array<Users>;
+  /** fetch aggregated fields from the table: "users" */
+  users_aggregate: Users_Aggregate;
+  /** fetch data from the table: "users" using primary key columns */
+  users_by_pk?: Maybe<Users>;
+  /** fetch data from the table: "votings" */
+  votings: Array<Votings>;
+  /** fetch aggregated fields from the table: "votings" */
+  votings_aggregate: Votings_Aggregate;
+  /** fetch data from the table: "votings" using primary key columns */
+  votings_by_pk?: Maybe<Votings>;
 };
 
 
-export type Subscription_RootItemsArgs = {
-  distinct_on?: Maybe<Array<Items_Select_Column>>;
+export type Subscription_RootAddressesArgs = {
+  distinct_on?: Maybe<Array<Addresses_Select_Column>>;
   limit?: Maybe<Scalars['Int']>;
   offset?: Maybe<Scalars['Int']>;
-  order_by?: Maybe<Array<Items_Order_By>>;
-  where?: Maybe<Items_Bool_Exp>;
+  order_by?: Maybe<Array<Addresses_Order_By>>;
+  where?: Maybe<Addresses_Bool_Exp>;
 };
 
 
-export type Subscription_RootItems_AggregateArgs = {
-  distinct_on?: Maybe<Array<Items_Select_Column>>;
+export type Subscription_RootAddresses_AggregateArgs = {
+  distinct_on?: Maybe<Array<Addresses_Select_Column>>;
   limit?: Maybe<Scalars['Int']>;
   offset?: Maybe<Scalars['Int']>;
-  order_by?: Maybe<Array<Items_Order_By>>;
-  where?: Maybe<Items_Bool_Exp>;
+  order_by?: Maybe<Array<Addresses_Order_By>>;
+  where?: Maybe<Addresses_Bool_Exp>;
 };
 
 
-export type Subscription_RootItems_By_PkArgs = {
+export type Subscription_RootAddresses_By_PkArgs = {
   id: Scalars['Int'];
 };
 
 
-export type Subscription_RootOrder_LinesArgs = {
-  distinct_on?: Maybe<Array<Order_Lines_Select_Column>>;
+export type Subscription_RootRolesArgs = {
+  distinct_on?: Maybe<Array<Roles_Select_Column>>;
   limit?: Maybe<Scalars['Int']>;
   offset?: Maybe<Scalars['Int']>;
-  order_by?: Maybe<Array<Order_Lines_Order_By>>;
-  where?: Maybe<Order_Lines_Bool_Exp>;
+  order_by?: Maybe<Array<Roles_Order_By>>;
+  where?: Maybe<Roles_Bool_Exp>;
 };
 
 
-export type Subscription_RootOrder_Lines_AggregateArgs = {
-  distinct_on?: Maybe<Array<Order_Lines_Select_Column>>;
+export type Subscription_RootRoles_AggregateArgs = {
+  distinct_on?: Maybe<Array<Roles_Select_Column>>;
   limit?: Maybe<Scalars['Int']>;
   offset?: Maybe<Scalars['Int']>;
-  order_by?: Maybe<Array<Order_Lines_Order_By>>;
-  where?: Maybe<Order_Lines_Bool_Exp>;
+  order_by?: Maybe<Array<Roles_Order_By>>;
+  where?: Maybe<Roles_Bool_Exp>;
 };
 
 
-export type Subscription_RootOrder_Lines_By_PkArgs = {
+export type Subscription_RootRoles_By_PkArgs = {
   id: Scalars['Int'];
 };
 
 
-export type Subscription_RootOrdersArgs = {
-  distinct_on?: Maybe<Array<Orders_Select_Column>>;
+export type Subscription_RootUsersArgs = {
+  distinct_on?: Maybe<Array<Users_Select_Column>>;
   limit?: Maybe<Scalars['Int']>;
   offset?: Maybe<Scalars['Int']>;
-  order_by?: Maybe<Array<Orders_Order_By>>;
-  where?: Maybe<Orders_Bool_Exp>;
+  order_by?: Maybe<Array<Users_Order_By>>;
+  where?: Maybe<Users_Bool_Exp>;
 };
 
 
-export type Subscription_RootOrders_AggregateArgs = {
-  distinct_on?: Maybe<Array<Orders_Select_Column>>;
+export type Subscription_RootUsers_AggregateArgs = {
+  distinct_on?: Maybe<Array<Users_Select_Column>>;
   limit?: Maybe<Scalars['Int']>;
   offset?: Maybe<Scalars['Int']>;
-  order_by?: Maybe<Array<Orders_Order_By>>;
-  where?: Maybe<Orders_Bool_Exp>;
+  order_by?: Maybe<Array<Users_Order_By>>;
+  where?: Maybe<Users_Bool_Exp>;
 };
 
 
-export type Subscription_RootOrders_By_PkArgs = {
+export type Subscription_RootUsers_By_PkArgs = {
   id: Scalars['Int'];
 };
 
 
-export type Subscription_RootPepeArgs = {
-  distinct_on?: Maybe<Array<Pepe_Select_Column>>;
+export type Subscription_RootVotingsArgs = {
+  distinct_on?: Maybe<Array<Votings_Select_Column>>;
   limit?: Maybe<Scalars['Int']>;
   offset?: Maybe<Scalars['Int']>;
-  order_by?: Maybe<Array<Pepe_Order_By>>;
-  where?: Maybe<Pepe_Bool_Exp>;
+  order_by?: Maybe<Array<Votings_Order_By>>;
+  where?: Maybe<Votings_Bool_Exp>;
 };
 
 
-export type Subscription_RootPepe_AggregateArgs = {
-  distinct_on?: Maybe<Array<Pepe_Select_Column>>;
+export type Subscription_RootVotings_AggregateArgs = {
+  distinct_on?: Maybe<Array<Votings_Select_Column>>;
   limit?: Maybe<Scalars['Int']>;
   offset?: Maybe<Scalars['Int']>;
-  order_by?: Maybe<Array<Pepe_Order_By>>;
-  where?: Maybe<Pepe_Bool_Exp>;
+  order_by?: Maybe<Array<Votings_Order_By>>;
+  where?: Maybe<Votings_Bool_Exp>;
 };
 
 
-export type Subscription_RootPepe_By_PkArgs = {
+export type Subscription_RootVotings_By_PkArgs = {
   id: Scalars['Int'];
 };
 
@@ -1641,176 +982,739 @@ export type Timestamptz_Comparison_Exp = {
   _nin?: Maybe<Array<Scalars['timestamptz']>>;
 };
 
-export type ActionCallMutationVariables = Exact<{
-  arg: SampleInput;
-}>;
+/** columns and relationships of "users" */
+export type Users = {
+  __typename?: 'users';
+  /** An object relationship */
+  address: Addresses;
+  addressId: Scalars['Int'];
+  createdAt: Scalars['timestamptz'];
+  egn: Scalars['String'];
+  email?: Maybe<Scalars['String']>;
+  family: Scalars['String'];
+  id: Scalars['Int'];
+  name: Scalars['String'];
+  password?: Maybe<Scalars['String']>;
+  pin?: Maybe<Scalars['String']>;
+  roleId: Scalars['Int'];
+  secondRoleId?: Maybe<Scalars['Int']>;
+  sectionId?: Maybe<Scalars['Int']>;
+  surname: Scalars['String'];
+  updatedAt: Scalars['timestamptz'];
+};
+
+/** aggregated selection of "users" */
+export type Users_Aggregate = {
+  __typename?: 'users_aggregate';
+  aggregate?: Maybe<Users_Aggregate_Fields>;
+  nodes: Array<Users>;
+};
+
+/** aggregate fields of "users" */
+export type Users_Aggregate_Fields = {
+  __typename?: 'users_aggregate_fields';
+  avg?: Maybe<Users_Avg_Fields>;
+  count: Scalars['Int'];
+  max?: Maybe<Users_Max_Fields>;
+  min?: Maybe<Users_Min_Fields>;
+  stddev?: Maybe<Users_Stddev_Fields>;
+  stddev_pop?: Maybe<Users_Stddev_Pop_Fields>;
+  stddev_samp?: Maybe<Users_Stddev_Samp_Fields>;
+  sum?: Maybe<Users_Sum_Fields>;
+  var_pop?: Maybe<Users_Var_Pop_Fields>;
+  var_samp?: Maybe<Users_Var_Samp_Fields>;
+  variance?: Maybe<Users_Variance_Fields>;
+};
 
 
-export type ActionCallMutation = (
-  { __typename?: 'mutation_root' }
-  & { testAction?: Maybe<(
-    { __typename?: 'SampleOutput' }
-    & Pick<SampleOutput, 'accessToken'>
-  )> }
-);
+/** aggregate fields of "users" */
+export type Users_Aggregate_FieldsCountArgs = {
+  columns?: Maybe<Array<Users_Select_Column>>;
+  distinct?: Maybe<Scalars['Boolean']>;
+};
 
-export type GetOrdersQueryVariables = Exact<{
+/** aggregate avg on columns */
+export type Users_Avg_Fields = {
+  __typename?: 'users_avg_fields';
+  addressId?: Maybe<Scalars['Float']>;
+  id?: Maybe<Scalars['Float']>;
+  roleId?: Maybe<Scalars['Float']>;
+  secondRoleId?: Maybe<Scalars['Float']>;
+  sectionId?: Maybe<Scalars['Float']>;
+};
+
+/** Boolean expression to filter rows from the table "users". All fields are combined with a logical 'AND'. */
+export type Users_Bool_Exp = {
+  _and?: Maybe<Array<Users_Bool_Exp>>;
+  _not?: Maybe<Users_Bool_Exp>;
+  _or?: Maybe<Array<Users_Bool_Exp>>;
+  address?: Maybe<Addresses_Bool_Exp>;
+  addressId?: Maybe<Int_Comparison_Exp>;
+  createdAt?: Maybe<Timestamptz_Comparison_Exp>;
+  egn?: Maybe<String_Comparison_Exp>;
+  email?: Maybe<String_Comparison_Exp>;
+  family?: Maybe<String_Comparison_Exp>;
+  id?: Maybe<Int_Comparison_Exp>;
+  name?: Maybe<String_Comparison_Exp>;
+  password?: Maybe<String_Comparison_Exp>;
+  pin?: Maybe<String_Comparison_Exp>;
+  roleId?: Maybe<Int_Comparison_Exp>;
+  secondRoleId?: Maybe<Int_Comparison_Exp>;
+  sectionId?: Maybe<Int_Comparison_Exp>;
+  surname?: Maybe<String_Comparison_Exp>;
+  updatedAt?: Maybe<Timestamptz_Comparison_Exp>;
+};
+
+/** unique or primary key constraints on table "users" */
+export enum Users_Constraint {
+  /** unique or primary key constraint */
+  UsersPkey = 'users_pkey'
+}
+
+/** input type for incrementing numeric columns in table "users" */
+export type Users_Inc_Input = {
+  addressId?: Maybe<Scalars['Int']>;
+  id?: Maybe<Scalars['Int']>;
+  roleId?: Maybe<Scalars['Int']>;
+  secondRoleId?: Maybe<Scalars['Int']>;
+  sectionId?: Maybe<Scalars['Int']>;
+};
+
+/** input type for inserting data into table "users" */
+export type Users_Insert_Input = {
+  address?: Maybe<Addresses_Obj_Rel_Insert_Input>;
+  addressId?: Maybe<Scalars['Int']>;
+  createdAt?: Maybe<Scalars['timestamptz']>;
+  egn?: Maybe<Scalars['String']>;
+  email?: Maybe<Scalars['String']>;
+  family?: Maybe<Scalars['String']>;
+  id?: Maybe<Scalars['Int']>;
+  name?: Maybe<Scalars['String']>;
+  password?: Maybe<Scalars['String']>;
+  pin?: Maybe<Scalars['String']>;
+  roleId?: Maybe<Scalars['Int']>;
+  secondRoleId?: Maybe<Scalars['Int']>;
+  sectionId?: Maybe<Scalars['Int']>;
+  surname?: Maybe<Scalars['String']>;
+  updatedAt?: Maybe<Scalars['timestamptz']>;
+};
+
+/** aggregate max on columns */
+export type Users_Max_Fields = {
+  __typename?: 'users_max_fields';
+  addressId?: Maybe<Scalars['Int']>;
+  createdAt?: Maybe<Scalars['timestamptz']>;
+  egn?: Maybe<Scalars['String']>;
+  email?: Maybe<Scalars['String']>;
+  family?: Maybe<Scalars['String']>;
+  id?: Maybe<Scalars['Int']>;
+  name?: Maybe<Scalars['String']>;
+  password?: Maybe<Scalars['String']>;
+  pin?: Maybe<Scalars['String']>;
+  roleId?: Maybe<Scalars['Int']>;
+  secondRoleId?: Maybe<Scalars['Int']>;
+  sectionId?: Maybe<Scalars['Int']>;
+  surname?: Maybe<Scalars['String']>;
+  updatedAt?: Maybe<Scalars['timestamptz']>;
+};
+
+/** aggregate min on columns */
+export type Users_Min_Fields = {
+  __typename?: 'users_min_fields';
+  addressId?: Maybe<Scalars['Int']>;
+  createdAt?: Maybe<Scalars['timestamptz']>;
+  egn?: Maybe<Scalars['String']>;
+  email?: Maybe<Scalars['String']>;
+  family?: Maybe<Scalars['String']>;
+  id?: Maybe<Scalars['Int']>;
+  name?: Maybe<Scalars['String']>;
+  password?: Maybe<Scalars['String']>;
+  pin?: Maybe<Scalars['String']>;
+  roleId?: Maybe<Scalars['Int']>;
+  secondRoleId?: Maybe<Scalars['Int']>;
+  sectionId?: Maybe<Scalars['Int']>;
+  surname?: Maybe<Scalars['String']>;
+  updatedAt?: Maybe<Scalars['timestamptz']>;
+};
+
+/** response of any mutation on the table "users" */
+export type Users_Mutation_Response = {
+  __typename?: 'users_mutation_response';
+  /** number of rows affected by the mutation */
+  affected_rows: Scalars['Int'];
+  /** data from the rows affected by the mutation */
+  returning: Array<Users>;
+};
+
+/** on conflict condition type for table "users" */
+export type Users_On_Conflict = {
+  constraint: Users_Constraint;
+  update_columns: Array<Users_Update_Column>;
+  where?: Maybe<Users_Bool_Exp>;
+};
+
+/** Ordering options when selecting data from "users". */
+export type Users_Order_By = {
+  address?: Maybe<Addresses_Order_By>;
+  addressId?: Maybe<Order_By>;
+  createdAt?: Maybe<Order_By>;
+  egn?: Maybe<Order_By>;
+  email?: Maybe<Order_By>;
+  family?: Maybe<Order_By>;
+  id?: Maybe<Order_By>;
+  name?: Maybe<Order_By>;
+  password?: Maybe<Order_By>;
+  pin?: Maybe<Order_By>;
+  roleId?: Maybe<Order_By>;
+  secondRoleId?: Maybe<Order_By>;
+  sectionId?: Maybe<Order_By>;
+  surname?: Maybe<Order_By>;
+  updatedAt?: Maybe<Order_By>;
+};
+
+/** primary key columns input for table: users */
+export type Users_Pk_Columns_Input = {
+  id: Scalars['Int'];
+};
+
+/** select columns of table "users" */
+export enum Users_Select_Column {
+  /** column name */
+  AddressId = 'addressId',
+  /** column name */
+  CreatedAt = 'createdAt',
+  /** column name */
+  Egn = 'egn',
+  /** column name */
+  Email = 'email',
+  /** column name */
+  Family = 'family',
+  /** column name */
+  Id = 'id',
+  /** column name */
+  Name = 'name',
+  /** column name */
+  Password = 'password',
+  /** column name */
+  Pin = 'pin',
+  /** column name */
+  RoleId = 'roleId',
+  /** column name */
+  SecondRoleId = 'secondRoleId',
+  /** column name */
+  SectionId = 'sectionId',
+  /** column name */
+  Surname = 'surname',
+  /** column name */
+  UpdatedAt = 'updatedAt'
+}
+
+/** input type for updating data in table "users" */
+export type Users_Set_Input = {
+  addressId?: Maybe<Scalars['Int']>;
+  createdAt?: Maybe<Scalars['timestamptz']>;
+  egn?: Maybe<Scalars['String']>;
+  email?: Maybe<Scalars['String']>;
+  family?: Maybe<Scalars['String']>;
+  id?: Maybe<Scalars['Int']>;
+  name?: Maybe<Scalars['String']>;
+  password?: Maybe<Scalars['String']>;
+  pin?: Maybe<Scalars['String']>;
+  roleId?: Maybe<Scalars['Int']>;
+  secondRoleId?: Maybe<Scalars['Int']>;
+  sectionId?: Maybe<Scalars['Int']>;
+  surname?: Maybe<Scalars['String']>;
+  updatedAt?: Maybe<Scalars['timestamptz']>;
+};
+
+/** aggregate stddev on columns */
+export type Users_Stddev_Fields = {
+  __typename?: 'users_stddev_fields';
+  addressId?: Maybe<Scalars['Float']>;
+  id?: Maybe<Scalars['Float']>;
+  roleId?: Maybe<Scalars['Float']>;
+  secondRoleId?: Maybe<Scalars['Float']>;
+  sectionId?: Maybe<Scalars['Float']>;
+};
+
+/** aggregate stddev_pop on columns */
+export type Users_Stddev_Pop_Fields = {
+  __typename?: 'users_stddev_pop_fields';
+  addressId?: Maybe<Scalars['Float']>;
+  id?: Maybe<Scalars['Float']>;
+  roleId?: Maybe<Scalars['Float']>;
+  secondRoleId?: Maybe<Scalars['Float']>;
+  sectionId?: Maybe<Scalars['Float']>;
+};
+
+/** aggregate stddev_samp on columns */
+export type Users_Stddev_Samp_Fields = {
+  __typename?: 'users_stddev_samp_fields';
+  addressId?: Maybe<Scalars['Float']>;
+  id?: Maybe<Scalars['Float']>;
+  roleId?: Maybe<Scalars['Float']>;
+  secondRoleId?: Maybe<Scalars['Float']>;
+  sectionId?: Maybe<Scalars['Float']>;
+};
+
+/** aggregate sum on columns */
+export type Users_Sum_Fields = {
+  __typename?: 'users_sum_fields';
+  addressId?: Maybe<Scalars['Int']>;
+  id?: Maybe<Scalars['Int']>;
+  roleId?: Maybe<Scalars['Int']>;
+  secondRoleId?: Maybe<Scalars['Int']>;
+  sectionId?: Maybe<Scalars['Int']>;
+};
+
+/** update columns of table "users" */
+export enum Users_Update_Column {
+  /** column name */
+  AddressId = 'addressId',
+  /** column name */
+  CreatedAt = 'createdAt',
+  /** column name */
+  Egn = 'egn',
+  /** column name */
+  Email = 'email',
+  /** column name */
+  Family = 'family',
+  /** column name */
+  Id = 'id',
+  /** column name */
+  Name = 'name',
+  /** column name */
+  Password = 'password',
+  /** column name */
+  Pin = 'pin',
+  /** column name */
+  RoleId = 'roleId',
+  /** column name */
+  SecondRoleId = 'secondRoleId',
+  /** column name */
+  SectionId = 'sectionId',
+  /** column name */
+  Surname = 'surname',
+  /** column name */
+  UpdatedAt = 'updatedAt'
+}
+
+/** aggregate var_pop on columns */
+export type Users_Var_Pop_Fields = {
+  __typename?: 'users_var_pop_fields';
+  addressId?: Maybe<Scalars['Float']>;
+  id?: Maybe<Scalars['Float']>;
+  roleId?: Maybe<Scalars['Float']>;
+  secondRoleId?: Maybe<Scalars['Float']>;
+  sectionId?: Maybe<Scalars['Float']>;
+};
+
+/** aggregate var_samp on columns */
+export type Users_Var_Samp_Fields = {
+  __typename?: 'users_var_samp_fields';
+  addressId?: Maybe<Scalars['Float']>;
+  id?: Maybe<Scalars['Float']>;
+  roleId?: Maybe<Scalars['Float']>;
+  secondRoleId?: Maybe<Scalars['Float']>;
+  sectionId?: Maybe<Scalars['Float']>;
+};
+
+/** aggregate variance on columns */
+export type Users_Variance_Fields = {
+  __typename?: 'users_variance_fields';
+  addressId?: Maybe<Scalars['Float']>;
+  id?: Maybe<Scalars['Float']>;
+  roleId?: Maybe<Scalars['Float']>;
+  secondRoleId?: Maybe<Scalars['Float']>;
+  sectionId?: Maybe<Scalars['Float']>;
+};
+
+/** columns and relationships of "votings" */
+export type Votings = {
+  __typename?: 'votings';
+  createdAt: Scalars['timestamptz'];
+  endTime?: Maybe<Scalars['timestamptz']>;
+  finishedAt?: Maybe<Scalars['timestamptz']>;
+  id: Scalars['Int'];
+  startTime?: Maybe<Scalars['timestamptz']>;
+  startedAt?: Maybe<Scalars['timestamptz']>;
+  updatedAt: Scalars['timestamptz'];
+  votingTypeId: Scalars['Int'];
+};
+
+/** aggregated selection of "votings" */
+export type Votings_Aggregate = {
+  __typename?: 'votings_aggregate';
+  aggregate?: Maybe<Votings_Aggregate_Fields>;
+  nodes: Array<Votings>;
+};
+
+/** aggregate fields of "votings" */
+export type Votings_Aggregate_Fields = {
+  __typename?: 'votings_aggregate_fields';
+  avg?: Maybe<Votings_Avg_Fields>;
+  count: Scalars['Int'];
+  max?: Maybe<Votings_Max_Fields>;
+  min?: Maybe<Votings_Min_Fields>;
+  stddev?: Maybe<Votings_Stddev_Fields>;
+  stddev_pop?: Maybe<Votings_Stddev_Pop_Fields>;
+  stddev_samp?: Maybe<Votings_Stddev_Samp_Fields>;
+  sum?: Maybe<Votings_Sum_Fields>;
+  var_pop?: Maybe<Votings_Var_Pop_Fields>;
+  var_samp?: Maybe<Votings_Var_Samp_Fields>;
+  variance?: Maybe<Votings_Variance_Fields>;
+};
+
+
+/** aggregate fields of "votings" */
+export type Votings_Aggregate_FieldsCountArgs = {
+  columns?: Maybe<Array<Votings_Select_Column>>;
+  distinct?: Maybe<Scalars['Boolean']>;
+};
+
+/** aggregate avg on columns */
+export type Votings_Avg_Fields = {
+  __typename?: 'votings_avg_fields';
+  id?: Maybe<Scalars['Float']>;
+  votingTypeId?: Maybe<Scalars['Float']>;
+};
+
+/** Boolean expression to filter rows from the table "votings". All fields are combined with a logical 'AND'. */
+export type Votings_Bool_Exp = {
+  _and?: Maybe<Array<Votings_Bool_Exp>>;
+  _not?: Maybe<Votings_Bool_Exp>;
+  _or?: Maybe<Array<Votings_Bool_Exp>>;
+  createdAt?: Maybe<Timestamptz_Comparison_Exp>;
+  endTime?: Maybe<Timestamptz_Comparison_Exp>;
+  finishedAt?: Maybe<Timestamptz_Comparison_Exp>;
+  id?: Maybe<Int_Comparison_Exp>;
+  startTime?: Maybe<Timestamptz_Comparison_Exp>;
+  startedAt?: Maybe<Timestamptz_Comparison_Exp>;
+  updatedAt?: Maybe<Timestamptz_Comparison_Exp>;
+  votingTypeId?: Maybe<Int_Comparison_Exp>;
+};
+
+/** unique or primary key constraints on table "votings" */
+export enum Votings_Constraint {
+  /** unique or primary key constraint */
+  VotingsPkey = 'votings_pkey'
+}
+
+/** input type for incrementing numeric columns in table "votings" */
+export type Votings_Inc_Input = {
+  id?: Maybe<Scalars['Int']>;
+  votingTypeId?: Maybe<Scalars['Int']>;
+};
+
+/** input type for inserting data into table "votings" */
+export type Votings_Insert_Input = {
+  createdAt?: Maybe<Scalars['timestamptz']>;
+  endTime?: Maybe<Scalars['timestamptz']>;
+  finishedAt?: Maybe<Scalars['timestamptz']>;
+  id?: Maybe<Scalars['Int']>;
+  startTime?: Maybe<Scalars['timestamptz']>;
+  startedAt?: Maybe<Scalars['timestamptz']>;
+  updatedAt?: Maybe<Scalars['timestamptz']>;
+  votingTypeId?: Maybe<Scalars['Int']>;
+};
+
+/** aggregate max on columns */
+export type Votings_Max_Fields = {
+  __typename?: 'votings_max_fields';
+  createdAt?: Maybe<Scalars['timestamptz']>;
+  endTime?: Maybe<Scalars['timestamptz']>;
+  finishedAt?: Maybe<Scalars['timestamptz']>;
+  id?: Maybe<Scalars['Int']>;
+  startTime?: Maybe<Scalars['timestamptz']>;
+  startedAt?: Maybe<Scalars['timestamptz']>;
+  updatedAt?: Maybe<Scalars['timestamptz']>;
+  votingTypeId?: Maybe<Scalars['Int']>;
+};
+
+/** aggregate min on columns */
+export type Votings_Min_Fields = {
+  __typename?: 'votings_min_fields';
+  createdAt?: Maybe<Scalars['timestamptz']>;
+  endTime?: Maybe<Scalars['timestamptz']>;
+  finishedAt?: Maybe<Scalars['timestamptz']>;
+  id?: Maybe<Scalars['Int']>;
+  startTime?: Maybe<Scalars['timestamptz']>;
+  startedAt?: Maybe<Scalars['timestamptz']>;
+  updatedAt?: Maybe<Scalars['timestamptz']>;
+  votingTypeId?: Maybe<Scalars['Int']>;
+};
+
+/** response of any mutation on the table "votings" */
+export type Votings_Mutation_Response = {
+  __typename?: 'votings_mutation_response';
+  /** number of rows affected by the mutation */
+  affected_rows: Scalars['Int'];
+  /** data from the rows affected by the mutation */
+  returning: Array<Votings>;
+};
+
+/** on conflict condition type for table "votings" */
+export type Votings_On_Conflict = {
+  constraint: Votings_Constraint;
+  update_columns: Array<Votings_Update_Column>;
+  where?: Maybe<Votings_Bool_Exp>;
+};
+
+/** Ordering options when selecting data from "votings". */
+export type Votings_Order_By = {
+  createdAt?: Maybe<Order_By>;
+  endTime?: Maybe<Order_By>;
+  finishedAt?: Maybe<Order_By>;
+  id?: Maybe<Order_By>;
+  startTime?: Maybe<Order_By>;
+  startedAt?: Maybe<Order_By>;
+  updatedAt?: Maybe<Order_By>;
+  votingTypeId?: Maybe<Order_By>;
+};
+
+/** primary key columns input for table: votings */
+export type Votings_Pk_Columns_Input = {
+  id: Scalars['Int'];
+};
+
+/** select columns of table "votings" */
+export enum Votings_Select_Column {
+  /** column name */
+  CreatedAt = 'createdAt',
+  /** column name */
+  EndTime = 'endTime',
+  /** column name */
+  FinishedAt = 'finishedAt',
+  /** column name */
+  Id = 'id',
+  /** column name */
+  StartTime = 'startTime',
+  /** column name */
+  StartedAt = 'startedAt',
+  /** column name */
+  UpdatedAt = 'updatedAt',
+  /** column name */
+  VotingTypeId = 'votingTypeId'
+}
+
+/** input type for updating data in table "votings" */
+export type Votings_Set_Input = {
+  createdAt?: Maybe<Scalars['timestamptz']>;
+  endTime?: Maybe<Scalars['timestamptz']>;
+  finishedAt?: Maybe<Scalars['timestamptz']>;
+  id?: Maybe<Scalars['Int']>;
+  startTime?: Maybe<Scalars['timestamptz']>;
+  startedAt?: Maybe<Scalars['timestamptz']>;
+  updatedAt?: Maybe<Scalars['timestamptz']>;
+  votingTypeId?: Maybe<Scalars['Int']>;
+};
+
+/** aggregate stddev on columns */
+export type Votings_Stddev_Fields = {
+  __typename?: 'votings_stddev_fields';
+  id?: Maybe<Scalars['Float']>;
+  votingTypeId?: Maybe<Scalars['Float']>;
+};
+
+/** aggregate stddev_pop on columns */
+export type Votings_Stddev_Pop_Fields = {
+  __typename?: 'votings_stddev_pop_fields';
+  id?: Maybe<Scalars['Float']>;
+  votingTypeId?: Maybe<Scalars['Float']>;
+};
+
+/** aggregate stddev_samp on columns */
+export type Votings_Stddev_Samp_Fields = {
+  __typename?: 'votings_stddev_samp_fields';
+  id?: Maybe<Scalars['Float']>;
+  votingTypeId?: Maybe<Scalars['Float']>;
+};
+
+/** aggregate sum on columns */
+export type Votings_Sum_Fields = {
+  __typename?: 'votings_sum_fields';
+  id?: Maybe<Scalars['Int']>;
+  votingTypeId?: Maybe<Scalars['Int']>;
+};
+
+/** update columns of table "votings" */
+export enum Votings_Update_Column {
+  /** column name */
+  CreatedAt = 'createdAt',
+  /** column name */
+  EndTime = 'endTime',
+  /** column name */
+  FinishedAt = 'finishedAt',
+  /** column name */
+  Id = 'id',
+  /** column name */
+  StartTime = 'startTime',
+  /** column name */
+  StartedAt = 'startedAt',
+  /** column name */
+  UpdatedAt = 'updatedAt',
+  /** column name */
+  VotingTypeId = 'votingTypeId'
+}
+
+/** aggregate var_pop on columns */
+export type Votings_Var_Pop_Fields = {
+  __typename?: 'votings_var_pop_fields';
+  id?: Maybe<Scalars['Float']>;
+  votingTypeId?: Maybe<Scalars['Float']>;
+};
+
+/** aggregate var_samp on columns */
+export type Votings_Var_Samp_Fields = {
+  __typename?: 'votings_var_samp_fields';
+  id?: Maybe<Scalars['Float']>;
+  votingTypeId?: Maybe<Scalars['Float']>;
+};
+
+/** aggregate variance on columns */
+export type Votings_Variance_Fields = {
+  __typename?: 'votings_variance_fields';
+  id?: Maybe<Scalars['Float']>;
+  votingTypeId?: Maybe<Scalars['Float']>;
+};
+
+export type GetUsersQueryVariables = Exact<{
   limit?: Maybe<Scalars['Int']>;
   offset?: Maybe<Scalars['Int']>;
-  condition?: Orders_Bool_Exp;
-  orderBy?: Maybe<Array<Orders_Order_By> | Orders_Order_By>;
+  condition?: Users_Bool_Exp;
+  orderBy?: Maybe<Array<Users_Order_By> | Users_Order_By>;
 }>;
 
 
-export type GetOrdersQuery = (
+export type GetUsersQuery = (
   { __typename?: 'query_root' }
-  & { orders: Array<(
-    { __typename?: 'orders' }
-    & OrderFieldsFragment
-  )>, orders_aggregate: (
-    { __typename?: 'orders_aggregate' }
+  & { users: Array<(
+    { __typename?: 'users' }
+    & UserFieldsFragment
+  )>, users_aggregate: (
+    { __typename?: 'users_aggregate' }
     & { aggregate?: Maybe<(
-      { __typename?: 'orders_aggregate_fields' }
-      & Pick<Orders_Aggregate_Fields, 'count'>
+      { __typename?: 'users_aggregate_fields' }
+      & Pick<Users_Aggregate_Fields, 'count'>
     )> }
   ) }
 );
 
-export type CreateOrdersMutationVariables = Exact<{
-  input: Orders_Insert_Input;
+export type CreateUserMutationVariables = Exact<{
+  input: Users_Insert_Input;
 }>;
 
 
-export type CreateOrdersMutation = (
+export type CreateUserMutation = (
   { __typename?: 'mutation_root' }
-  & { insert_orders_one?: Maybe<(
-    { __typename?: 'orders' }
-    & OrderFieldsFragment
+  & { insert_users_one?: Maybe<(
+    { __typename?: 'users' }
+    & UserFieldsFragment
   )> }
 );
 
-export type UpdateOrderMutationVariables = Exact<{
+export type UpdateUserMutationVariables = Exact<{
   id: Scalars['Int'];
-  set?: Maybe<Orders_Set_Input>;
+  set: Users_Set_Input;
 }>;
 
 
-export type UpdateOrderMutation = (
+export type UpdateUserMutation = (
   { __typename?: 'mutation_root' }
-  & { update_orders_by_pk?: Maybe<(
-    { __typename?: 'orders' }
-    & OrderFieldsFragment
+  & { update_users_by_pk?: Maybe<(
+    { __typename?: 'users' }
+    & UserFieldsFragment
   )> }
 );
 
-export type OrderFieldsFragment = (
-  { __typename?: 'orders' }
-  & Pick<Orders, 'id' | 'created_at' | 'updated_at' | 'amount'>
-  & { order_lines: Array<(
-    { __typename?: 'order_lines' }
-    & Pick<Order_Lines, 'id' | 'created_at' | 'amount' | 'quantity'>
-    & { item: (
-      { __typename?: 'items' }
-      & Pick<Items, 'id' | 'created_at' | 'updated_at' | 'name' | 'price' | 'sale_price' | 'sku'>
-    ) }
-  )> }
+export type UserFieldsFragment = (
+  { __typename?: 'users' }
+  & Pick<Users, 'id' | 'createdAt' | 'updatedAt' | 'roleId' | 'secondRoleId' | 'name' | 'surname' | 'family' | 'egn' | 'email' | 'pin' | 'password' | 'addressId' | 'sectionId'>
+  & { address: (
+    { __typename?: 'addresses' }
+    & Pick<Addresses, 'id' | 'cityId' | 'municipalityId' | 'number' | 'street'>
+  ) }
 );
 
-export const OrderFieldsFragmentDoc = gql`
-    fragment OrderFields on orders {
+export const UserFieldsFragmentDoc = gql`
+    fragment UserFields on users {
   id
-  created_at
-  updated_at
-  amount
-  order_lines {
+  createdAt
+  updatedAt
+  roleId
+  secondRoleId
+  name
+  surname
+  family
+  egn
+  email
+  pin
+  password
+  addressId
+  sectionId
+  address {
     id
-    created_at
-    amount
-    quantity
-    item {
-      id
-      created_at
-      updated_at
-      name
-      price
-      sale_price
-      sku
-    }
+    cityId
+    municipalityId
+    number
+    street
   }
 }
     `;
-export const ActionCallDocument = gql`
-    mutation ActionCall($arg: SampleInput!) {
-  testAction(arg1: $arg) {
-    accessToken
+export const GetUsersDocument = gql`
+    query GetUsers($limit: Int, $offset: Int, $condition: users_bool_exp! = {}, $orderBy: [users_order_by!] = {createdAt: desc}) {
+  users(where: $condition, limit: $limit, offset: $offset, order_by: $orderBy) {
+    ...UserFields
   }
-}
-    `;
-
-  @Injectable({
-    providedIn: 'root'
-  })
-  export class ActionCallGQL extends Apollo.Mutation<ActionCallMutation, ActionCallMutationVariables> {
-    document = ActionCallDocument;
-    
-    constructor(apollo: Apollo.Apollo) {
-      super(apollo);
-    }
-  }
-export const GetOrdersDocument = gql`
-    query GetOrders($limit: Int, $offset: Int, $condition: orders_bool_exp! = {}, $orderBy: [orders_order_by!] = {created_at: desc}) {
-  orders(where: $condition, limit: $limit, offset: $offset, order_by: $orderBy) {
-    ...OrderFields
-  }
-  orders_aggregate(where: $condition) {
+  users_aggregate(where: $condition) {
     aggregate {
       count
     }
   }
 }
-    ${OrderFieldsFragmentDoc}`;
+    ${UserFieldsFragmentDoc}`;
 
   @Injectable({
     providedIn: 'root'
   })
-  export class GetOrdersGQL extends Apollo.Query<GetOrdersQuery, GetOrdersQueryVariables> {
-    document = GetOrdersDocument;
+  export class GetUsersGQL extends Apollo.Query<GetUsersQuery, GetUsersQueryVariables> {
+    document = GetUsersDocument;
     
     constructor(apollo: Apollo.Apollo) {
       super(apollo);
     }
   }
-export const CreateOrdersDocument = gql`
-    mutation CreateOrders($input: orders_insert_input!) {
-  insert_orders_one(object: $input) {
-    ...OrderFields
+export const CreateUserDocument = gql`
+    mutation CreateUser($input: users_insert_input!) {
+  insert_users_one(object: $input) {
+    ...UserFields
   }
 }
-    ${OrderFieldsFragmentDoc}`;
+    ${UserFieldsFragmentDoc}`;
 
   @Injectable({
     providedIn: 'root'
   })
-  export class CreateOrdersGQL extends Apollo.Mutation<CreateOrdersMutation, CreateOrdersMutationVariables> {
-    document = CreateOrdersDocument;
+  export class CreateUserGQL extends Apollo.Mutation<CreateUserMutation, CreateUserMutationVariables> {
+    document = CreateUserDocument;
     
     constructor(apollo: Apollo.Apollo) {
       super(apollo);
     }
   }
-export const UpdateOrderDocument = gql`
-    mutation UpdateOrder($id: Int!, $set: orders_set_input) {
-  update_orders_by_pk(pk_columns: {id: $id}, _set: $set) {
-    ...OrderFields
+export const UpdateUserDocument = gql`
+    mutation UpdateUser($id: Int!, $set: users_set_input!) {
+  update_users_by_pk(pk_columns: {id: $id}, _set: $set) {
+    ...UserFields
   }
 }
-    ${OrderFieldsFragmentDoc}`;
+    ${UserFieldsFragmentDoc}`;
 
   @Injectable({
     providedIn: 'root'
   })
-  export class UpdateOrderGQL extends Apollo.Mutation<UpdateOrderMutation, UpdateOrderMutationVariables> {
-    document = UpdateOrderDocument;
+  export class UpdateUserGQL extends Apollo.Mutation<UpdateUserMutation, UpdateUserMutationVariables> {
+    document = UpdateUserDocument;
     
     constructor(apollo: Apollo.Apollo) {
       super(apollo);

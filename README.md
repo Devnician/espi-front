@@ -31,5 +31,6 @@ To get more help on the Angular CLI use `ng help` or go check out the [Angular C
 docker-compose up --build -d
 
 DevMode:
--npm run hasura console
+npm run hasura console
+npm run watch-types
 
