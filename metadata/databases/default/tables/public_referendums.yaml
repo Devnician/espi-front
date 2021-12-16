@@ -1,0 +1,11 @@
+table:
+  name: referendums
+  schema: public
+array_relationships:
+- name: referendumRows
+  using:
+    foreign_key_constraint_on:
+      column: referendumId
+      table:
+        name: referendum_rows
+        schema: public

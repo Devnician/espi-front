@@ -1,0 +1,3 @@
+table:
+  name: referendum_votes
+  schema: public

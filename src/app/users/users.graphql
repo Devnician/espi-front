@@ -42,6 +42,8 @@ fragment UserFields on users {
   password
   addressId
   sectionId
+  voted
+  eVoted
 
   address {
     id

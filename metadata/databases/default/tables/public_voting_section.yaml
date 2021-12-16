@@ -1,0 +1,3 @@
+table:
+  name: voting_section
+  schema: public

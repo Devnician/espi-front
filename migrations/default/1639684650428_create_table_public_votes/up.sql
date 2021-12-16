@@ -1,0 +1,1 @@
+CREATE TABLE "public"."votes" ("id" serial NOT NULL, "createdAt" timestamptz NOT NULL DEFAULT now(), "votingId" integer NOT NULL, "candiateId" integer NOT NULL, "partyId" integer, PRIMARY KEY ("id") );

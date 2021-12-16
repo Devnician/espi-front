@@ -17,6 +17,19 @@ export type Scalars = {
 
 
 
+/** Boolean expression to compare columns of type "Boolean". All fields are combined with logical 'AND'. */
+export type Boolean_Comparison_Exp = {
+  _eq?: Maybe<Scalars['Boolean']>;
+  _gt?: Maybe<Scalars['Boolean']>;
+  _gte?: Maybe<Scalars['Boolean']>;
+  _in?: Maybe<Array<Scalars['Boolean']>>;
+  _is_null?: Maybe<Scalars['Boolean']>;
+  _lt?: Maybe<Scalars['Boolean']>;
+  _lte?: Maybe<Scalars['Boolean']>;
+  _neq?: Maybe<Scalars['Boolean']>;
+  _nin?: Maybe<Array<Scalars['Boolean']>>;
+};
+
 /** Boolean expression to compare columns of type "Int". All fields are combined with logical 'AND'. */
 export type Int_Comparison_Exp = {
   _eq?: Maybe<Scalars['Int']>;
@@ -989,6 +1002,7 @@ export type Users = {
   address: Addresses;
   addressId: Scalars['Int'];
   createdAt: Scalars['timestamptz'];
+  eVoted: Scalars['Boolean'];
   egn: Scalars['String'];
   email?: Maybe<Scalars['String']>;
   family: Scalars['String'];
@@ -1001,6 +1015,7 @@ export type Users = {
   sectionId?: Maybe<Scalars['Int']>;
   surname: Scalars['String'];
   updatedAt: Scalars['timestamptz'];
+  voted: Scalars['Boolean'];
 };
 
 /** aggregated selection of "users" */
@@ -1051,6 +1066,7 @@ export type Users_Bool_Exp = {
   address?: Maybe<Addresses_Bool_Exp>;
   addressId?: Maybe<Int_Comparison_Exp>;
   createdAt?: Maybe<Timestamptz_Comparison_Exp>;
+  eVoted?: Maybe<Boolean_Comparison_Exp>;
   egn?: Maybe<String_Comparison_Exp>;
   email?: Maybe<String_Comparison_Exp>;
   family?: Maybe<String_Comparison_Exp>;
@@ -1063,6 +1079,7 @@ export type Users_Bool_Exp = {
   sectionId?: Maybe<Int_Comparison_Exp>;
   surname?: Maybe<String_Comparison_Exp>;
   updatedAt?: Maybe<Timestamptz_Comparison_Exp>;
+  voted?: Maybe<Boolean_Comparison_Exp>;
 };
 
 /** unique or primary key constraints on table "users" */
@@ -1085,6 +1102,7 @@ export type Users_Insert_Input = {
   address?: Maybe<Addresses_Obj_Rel_Insert_Input>;
   addressId?: Maybe<Scalars['Int']>;
   createdAt?: Maybe<Scalars['timestamptz']>;
+  eVoted?: Maybe<Scalars['Boolean']>;
   egn?: Maybe<Scalars['String']>;
   email?: Maybe<Scalars['String']>;
   family?: Maybe<Scalars['String']>;
@@ -1097,6 +1115,7 @@ export type Users_Insert_Input = {
   sectionId?: Maybe<Scalars['Int']>;
   surname?: Maybe<Scalars['String']>;
   updatedAt?: Maybe<Scalars['timestamptz']>;
+  voted?: Maybe<Scalars['Boolean']>;
 };
 
 /** aggregate max on columns */
@@ -1158,6 +1177,7 @@ export type Users_Order_By = {
   address?: Maybe<Addresses_Order_By>;
   addressId?: Maybe<Order_By>;
   createdAt?: Maybe<Order_By>;
+  eVoted?: Maybe<Order_By>;
   egn?: Maybe<Order_By>;
   email?: Maybe<Order_By>;
   family?: Maybe<Order_By>;
@@ -1170,6 +1190,7 @@ export type Users_Order_By = {
   sectionId?: Maybe<Order_By>;
   surname?: Maybe<Order_By>;
   updatedAt?: Maybe<Order_By>;
+  voted?: Maybe<Order_By>;
 };
 
 /** primary key columns input for table: users */
@@ -1183,6 +1204,8 @@ export enum Users_Select_Column {
   AddressId = 'addressId',
   /** column name */
   CreatedAt = 'createdAt',
+  /** column name */
+  EVoted = 'eVoted',
   /** column name */
   Egn = 'egn',
   /** column name */
@@ -1206,13 +1229,16 @@ export enum Users_Select_Column {
   /** column name */
   Surname = 'surname',
   /** column name */
-  UpdatedAt = 'updatedAt'
+  UpdatedAt = 'updatedAt',
+  /** column name */
+  Voted = 'voted'
 }
 
 /** input type for updating data in table "users" */
 export type Users_Set_Input = {
   addressId?: Maybe<Scalars['Int']>;
   createdAt?: Maybe<Scalars['timestamptz']>;
+  eVoted?: Maybe<Scalars['Boolean']>;
   egn?: Maybe<Scalars['String']>;
   email?: Maybe<Scalars['String']>;
   family?: Maybe<Scalars['String']>;
@@ -1225,6 +1251,7 @@ export type Users_Set_Input = {
   sectionId?: Maybe<Scalars['Int']>;
   surname?: Maybe<Scalars['String']>;
   updatedAt?: Maybe<Scalars['timestamptz']>;
+  voted?: Maybe<Scalars['Boolean']>;
 };
 
 /** aggregate stddev on columns */
@@ -1274,6 +1301,8 @@ export enum Users_Update_Column {
   /** column name */
   CreatedAt = 'createdAt',
   /** column name */
+  EVoted = 'eVoted',
+  /** column name */
   Egn = 'egn',
   /** column name */
   Email = 'email',
@@ -1296,7 +1325,9 @@ export enum Users_Update_Column {
   /** column name */
   Surname = 'surname',
   /** column name */
-  UpdatedAt = 'updatedAt'
+  UpdatedAt = 'updatedAt',
+  /** column name */
+  Voted = 'voted'
 }
 
 /** aggregate var_pop on columns */
@@ -1629,7 +1660,7 @@ export type UpdateUserMutation = (
 
 export type UserFieldsFragment = (
   { __typename?: 'users' }
-  & Pick<Users, 'id' | 'createdAt' | 'updatedAt' | 'roleId' | 'secondRoleId' | 'name' | 'surname' | 'family' | 'egn' | 'email' | 'pin' | 'password' | 'addressId' | 'sectionId'>
+  & Pick<Users, 'id' | 'createdAt' | 'updatedAt' | 'roleId' | 'secondRoleId' | 'name' | 'surname' | 'family' | 'egn' | 'email' | 'pin' | 'password' | 'addressId' | 'sectionId' | 'voted' | 'eVoted'>
   & { address: (
     { __typename?: 'addresses' }
     & Pick<Addresses, 'id' | 'cityId' | 'municipalityId' | 'number' | 'street'>
@@ -1652,6 +1683,8 @@ export const UserFieldsFragmentDoc = gql`
   password
   addressId
   sectionId
+  voted
+  eVoted
   address {
     id
     cityId

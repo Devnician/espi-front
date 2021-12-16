@@ -1,0 +1,7 @@
+table:
+  name: electoral_roll_rows
+  schema: public
+object_relationships:
+- name: party
+  using:
+    foreign_key_constraint_on: partyId

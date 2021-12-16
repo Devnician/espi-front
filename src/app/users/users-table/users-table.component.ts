@@ -29,6 +29,8 @@ export class UsersTableComponent implements AfterViewInit {
     'surname',
     'family',
     'email',
+    'voted',
+    'eVoted',
   ];
 
   constructor(private usersService: UsersService) {
