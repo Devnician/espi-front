@@ -19,6 +19,15 @@
   Промени
 </button>
 
+<button
+  mat-raised-button
+  color="primary"
+  style="margin: 10px"
+  (click)="getDistricts()"
+>
+  Областни градове
+</button>
+
 <div class="mat-elevation-z8">
   <mat-progress-bar
     *ngIf="dataSource.loading$ | async"
@@ -111,3 +120,9 @@
     [pageSizeOptions]="[5, 10, 15, 100]"
   ></mat-paginator>
 </div>
+
+<ngx-json-viewer
+  [json]="districts | async"
+  [expanded]="false"
+></ngx-json-viewer>
+<!-- {{ districts | async | json }} -->

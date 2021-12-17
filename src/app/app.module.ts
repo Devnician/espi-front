@@ -28,6 +28,7 @@ import { httpInterceptorProviders } from './interceptors';
     MatSortModule,
     MatSnackBarModule,
     MatProgressBarModule,
+    NgxJsonViewerModule,
   ],
   providers: [httpInterceptorProviders],
   bootstrap: [AppComponent],

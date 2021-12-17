@@ -3,8 +3,10 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTable } from '@angular/material/table';
 import * as _ from 'lodash';
+import { BehaviorSubject } from 'rxjs';
 import { rowsAnimation } from 'src/app/animations/template.animations';
-import { GetUsersQuery, Users } from 'src/generated/graphql';
+import { SettlementsService } from 'src/app/settlements/settlements-service.service';
+import { GetDistrictsQuery, GetUsersQuery, Users } from 'src/generated/graphql';
 import { UsersService } from '../users-service';
 import { OrdersTableDataSource } from './users-table-datasource';
 
@@ -20,6 +22,9 @@ export class UsersTableComponent implements AfterViewInit {
   @ViewChild(MatTable) table!: MatTable<GetUsersQuery['users']>;
   dataSource: OrdersTableDataSource;
 
+  districts: BehaviorSubject<GetDistrictsQuery['settlements']> =
+    new BehaviorSubject(undefined);
+
   /** Columns displayed in the table. Columns IDs can be added, removed, or reordered. */
   displayedColumns = [
     'id',
@@ -33,7 +38,10 @@ export class UsersTableComponent implements AfterViewInit {
     'eVoted',
   ];
 
-  constructor(private usersService: UsersService) {
+  constructor(
+    private usersService: UsersService,
+    private settlementsService: SettlementsService
+  ) {
     this.dataSource = new OrdersTableDataSource(usersService);
     this.dataSource.loading.next(true);
   }
@@ -111,5 +119,18 @@ export class UsersTableComponent implements AfterViewInit {
         });
       console.log('Update', firstFromPage);
     }
+  }
+
+  /**
+   * Get district - for example
+   */
+
+  public getDistricts() {
+    this.settlementsService.getDistricts().subscribe((response) => {
+      console.log(response.data.settlements);
+      if (response.data) {
+        this.districts.next(response.data.settlements);
+      }
+    });
   }
 }

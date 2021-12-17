@@ -1,0 +1,15 @@
+table:
+  name: settlements
+  schema: public
+object_relationships:
+- name: parentSettlement
+  using:
+    foreign_key_constraint_on: parentId
+array_relationships:
+- name: settlements
+  using:
+    foreign_key_constraint_on:
+      column: parentId
+      table:
+        name: settlements
+        schema: public

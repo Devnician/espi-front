@@ -1,0 +1,18 @@
+query GetDistricts {
+  settlements(where: { isDistrict: { _eq: true } }) {
+    ...SettlementsBaseFields
+
+    childs: settlements_aggregate {
+      aggregate {
+        count
+      }
+    }
+  }
+}
+
+fragment SettlementsBaseFields on settlements {
+  id
+  parentId
+  name
+  isDistrict
+}

@@ -8,6 +8,7 @@ import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatSortModule } from '@angular/material/sort';
 import { MatTableModule } from '@angular/material/table';
+import { NgxJsonViewerModule } from 'ngx-json-viewer';
 import { UsersRoutingModule } from './users-routing.module';
 import { UsersTableComponent } from './users-table/users-table.component';
 
@@ -24,6 +25,7 @@ import { UsersTableComponent } from './users-table/users-table.component';
     MatSnackBarModule,
     MatProgressBarModule,
     MatCheckboxModule,
+    NgxJsonViewerModule,
 
     //  MatSnackBarModule,
 

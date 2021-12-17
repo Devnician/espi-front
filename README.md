@@ -30,7 +30,19 @@ To get more help on the Angular CLI use `ng help` or go check out the [Angular C
 
 docker-compose up --build -d
 
-DevMode:
+## For DevMode:
+
+## run hasura console
 npm run hasura console
+## check migration status 
+npm run hasura migrate status --database-name="default"
+## apply all new
+npm run hasura migrate apply --type up --database-name="default"
+## apply one
+npm run hasura migrate apply --type up --database-name="default" --version 1624619288822
+## after all
+npm run hasura metadata apply
+
+## Types generator
 npm run watch-types
 
