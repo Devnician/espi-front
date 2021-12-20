@@ -1,0 +1,3 @@
+table:
+  name: electoral_roll_users
+  schema: public

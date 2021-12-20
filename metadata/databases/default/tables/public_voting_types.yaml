@@ -1,11 +1,4 @@
 table:
   name: voting_types
   schema: public
-array_relationships:
-- name: votings
-  using:
-    foreign_key_constraint_on:
-      column: votingTypeId
-      table:
-        name: votings
-        schema: public
+is_enum: true

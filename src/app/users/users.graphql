@@ -41,14 +41,13 @@ fragment UserFields on users {
   pin
   password
   addressId
-  sectionId
   voted
   eVoted
 
   address {
     id
-    cityId
-    municipalityId
+    settlementId
+    districtId
     number
     street
   }

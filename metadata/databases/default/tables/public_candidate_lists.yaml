@@ -1,0 +1,3 @@
+table:
+  name: candidate_lists
+  schema: public

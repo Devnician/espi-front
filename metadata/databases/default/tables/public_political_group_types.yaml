@@ -1,0 +1,4 @@
+table:
+  name: political_group_types
+  schema: public
+is_enum: true

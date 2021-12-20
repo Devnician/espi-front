@@ -15,4 +15,5 @@ fragment SettlementsBaseFields on settlements {
   parentId
   name
   isDistrict
+  isMunicipality
 }

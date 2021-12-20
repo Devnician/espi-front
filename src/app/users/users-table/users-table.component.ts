@@ -128,6 +128,7 @@ export class UsersTableComponent implements AfterViewInit {
   public getDistricts() {
     this.settlementsService.getDistricts().subscribe((response) => {
       console.log(response.data.settlements);
+
       if (response.data) {
         this.districts.next(response.data.settlements);
       }

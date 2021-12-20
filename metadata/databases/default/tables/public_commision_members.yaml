@@ -1,0 +1,3 @@
+table:
+  name: commision_members
+  schema: public

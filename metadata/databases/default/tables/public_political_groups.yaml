@@ -1,0 +1,3 @@
+table:
+  name: political_groups
+  schema: public

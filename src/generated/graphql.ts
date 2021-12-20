@@ -80,10 +80,10 @@ export type String_Comparison_Exp = {
 /** columns and relationships of "addresses" */
 export type Addresses = {
   __typename?: 'addresses';
-  cityId: Scalars['Int'];
+  districtId: Scalars['Int'];
   id: Scalars['Int'];
-  municipalityId: Scalars['Int'];
   number: Scalars['Int'];
+  settlementId: Scalars['Int'];
   street: Scalars['String'];
 };
 
@@ -120,10 +120,10 @@ export type Addresses_Aggregate_FieldsCountArgs = {
 /** aggregate avg on columns */
 export type Addresses_Avg_Fields = {
   __typename?: 'addresses_avg_fields';
-  cityId?: Maybe<Scalars['Float']>;
+  districtId?: Maybe<Scalars['Float']>;
   id?: Maybe<Scalars['Float']>;
-  municipalityId?: Maybe<Scalars['Float']>;
   number?: Maybe<Scalars['Float']>;
+  settlementId?: Maybe<Scalars['Float']>;
 };
 
 /** Boolean expression to filter rows from the table "addresses". All fields are combined with a logical 'AND'. */
@@ -131,10 +131,10 @@ export type Addresses_Bool_Exp = {
   _and?: Maybe<Array<Addresses_Bool_Exp>>;
   _not?: Maybe<Addresses_Bool_Exp>;
   _or?: Maybe<Array<Addresses_Bool_Exp>>;
-  cityId?: Maybe<Int_Comparison_Exp>;
+  districtId?: Maybe<Int_Comparison_Exp>;
   id?: Maybe<Int_Comparison_Exp>;
-  municipalityId?: Maybe<Int_Comparison_Exp>;
   number?: Maybe<Int_Comparison_Exp>;
+  settlementId?: Maybe<Int_Comparison_Exp>;
   street?: Maybe<String_Comparison_Exp>;
 };
 
@@ -146,38 +146,38 @@ export enum Addresses_Constraint {
 
 /** input type for incrementing numeric columns in table "addresses" */
 export type Addresses_Inc_Input = {
-  cityId?: Maybe<Scalars['Int']>;
+  districtId?: Maybe<Scalars['Int']>;
   id?: Maybe<Scalars['Int']>;
-  municipalityId?: Maybe<Scalars['Int']>;
   number?: Maybe<Scalars['Int']>;
+  settlementId?: Maybe<Scalars['Int']>;
 };
 
 /** input type for inserting data into table "addresses" */
 export type Addresses_Insert_Input = {
-  cityId?: Maybe<Scalars['Int']>;
+  districtId?: Maybe<Scalars['Int']>;
   id?: Maybe<Scalars['Int']>;
-  municipalityId?: Maybe<Scalars['Int']>;
   number?: Maybe<Scalars['Int']>;
+  settlementId?: Maybe<Scalars['Int']>;
   street?: Maybe<Scalars['String']>;
 };
 
 /** aggregate max on columns */
 export type Addresses_Max_Fields = {
   __typename?: 'addresses_max_fields';
-  cityId?: Maybe<Scalars['Int']>;
+  districtId?: Maybe<Scalars['Int']>;
   id?: Maybe<Scalars['Int']>;
-  municipalityId?: Maybe<Scalars['Int']>;
   number?: Maybe<Scalars['Int']>;
+  settlementId?: Maybe<Scalars['Int']>;
   street?: Maybe<Scalars['String']>;
 };
 
 /** aggregate min on columns */
 export type Addresses_Min_Fields = {
   __typename?: 'addresses_min_fields';
-  cityId?: Maybe<Scalars['Int']>;
+  districtId?: Maybe<Scalars['Int']>;
   id?: Maybe<Scalars['Int']>;
-  municipalityId?: Maybe<Scalars['Int']>;
   number?: Maybe<Scalars['Int']>;
+  settlementId?: Maybe<Scalars['Int']>;
   street?: Maybe<Scalars['String']>;
 };
 
@@ -206,10 +206,10 @@ export type Addresses_On_Conflict = {
 
 /** Ordering options when selecting data from "addresses". */
 export type Addresses_Order_By = {
-  cityId?: Maybe<Order_By>;
+  districtId?: Maybe<Order_By>;
   id?: Maybe<Order_By>;
-  municipalityId?: Maybe<Order_By>;
   number?: Maybe<Order_By>;
+  settlementId?: Maybe<Order_By>;
   street?: Maybe<Order_By>;
 };
 
@@ -221,72 +221,72 @@ export type Addresses_Pk_Columns_Input = {
 /** select columns of table "addresses" */
 export enum Addresses_Select_Column {
   /** column name */
-  CityId = 'cityId',
+  DistrictId = 'districtId',
   /** column name */
   Id = 'id',
   /** column name */
-  MunicipalityId = 'municipalityId',
-  /** column name */
   Number = 'number',
+  /** column name */
+  SettlementId = 'settlementId',
   /** column name */
   Street = 'street'
 }
 
 /** input type for updating data in table "addresses" */
 export type Addresses_Set_Input = {
-  cityId?: Maybe<Scalars['Int']>;
+  districtId?: Maybe<Scalars['Int']>;
   id?: Maybe<Scalars['Int']>;
-  municipalityId?: Maybe<Scalars['Int']>;
   number?: Maybe<Scalars['Int']>;
+  settlementId?: Maybe<Scalars['Int']>;
   street?: Maybe<Scalars['String']>;
 };
 
 /** aggregate stddev on columns */
 export type Addresses_Stddev_Fields = {
   __typename?: 'addresses_stddev_fields';
-  cityId?: Maybe<Scalars['Float']>;
+  districtId?: Maybe<Scalars['Float']>;
   id?: Maybe<Scalars['Float']>;
-  municipalityId?: Maybe<Scalars['Float']>;
   number?: Maybe<Scalars['Float']>;
+  settlementId?: Maybe<Scalars['Float']>;
 };
 
 /** aggregate stddev_pop on columns */
 export type Addresses_Stddev_Pop_Fields = {
   __typename?: 'addresses_stddev_pop_fields';
-  cityId?: Maybe<Scalars['Float']>;
+  districtId?: Maybe<Scalars['Float']>;
   id?: Maybe<Scalars['Float']>;
-  municipalityId?: Maybe<Scalars['Float']>;
   number?: Maybe<Scalars['Float']>;
+  settlementId?: Maybe<Scalars['Float']>;
 };
 
 /** aggregate stddev_samp on columns */
 export type Addresses_Stddev_Samp_Fields = {
   __typename?: 'addresses_stddev_samp_fields';
-  cityId?: Maybe<Scalars['Float']>;
+  districtId?: Maybe<Scalars['Float']>;
   id?: Maybe<Scalars['Float']>;
-  municipalityId?: Maybe<Scalars['Float']>;
   number?: Maybe<Scalars['Float']>;
+  settlementId?: Maybe<Scalars['Float']>;
 };
 
 /** aggregate sum on columns */
 export type Addresses_Sum_Fields = {
   __typename?: 'addresses_sum_fields';
-  cityId?: Maybe<Scalars['Int']>;
+  districtId?: Maybe<Scalars['Int']>;
   id?: Maybe<Scalars['Int']>;
-  municipalityId?: Maybe<Scalars['Int']>;
   number?: Maybe<Scalars['Int']>;
+  settlementId?: Maybe<Scalars['Int']>;
 };
 
 /** update columns of table "addresses" */
 export enum Addresses_Update_Column {
   /** column name */
-  CityId = 'cityId',
+  DistrictId = 'districtId',
   /** column name */
   Id = 'id',
   /** column name */
-  MunicipalityId = 'municipalityId',
-  /** column name */
   Number = 'number',
+  /** column name */
+  SettlementId = 'settlementId',
   /** column name */
   Street = 'street'
 }
@@ -294,258 +294,717 @@ export enum Addresses_Update_Column {
 /** aggregate var_pop on columns */
 export type Addresses_Var_Pop_Fields = {
   __typename?: 'addresses_var_pop_fields';
-  cityId?: Maybe<Scalars['Float']>;
+  districtId?: Maybe<Scalars['Float']>;
   id?: Maybe<Scalars['Float']>;
-  municipalityId?: Maybe<Scalars['Float']>;
   number?: Maybe<Scalars['Float']>;
+  settlementId?: Maybe<Scalars['Float']>;
 };
 
 /** aggregate var_samp on columns */
 export type Addresses_Var_Samp_Fields = {
   __typename?: 'addresses_var_samp_fields';
-  cityId?: Maybe<Scalars['Float']>;
+  districtId?: Maybe<Scalars['Float']>;
   id?: Maybe<Scalars['Float']>;
-  municipalityId?: Maybe<Scalars['Float']>;
   number?: Maybe<Scalars['Float']>;
+  settlementId?: Maybe<Scalars['Float']>;
 };
 
 /** aggregate variance on columns */
 export type Addresses_Variance_Fields = {
   __typename?: 'addresses_variance_fields';
-  cityId?: Maybe<Scalars['Float']>;
+  districtId?: Maybe<Scalars['Float']>;
   id?: Maybe<Scalars['Float']>;
-  municipalityId?: Maybe<Scalars['Float']>;
   number?: Maybe<Scalars['Float']>;
+  settlementId?: Maybe<Scalars['Float']>;
 };
 
-/** columns and relationships of "electoral_roll_rows" */
-export type Electoral_Roll_Rows = {
-  __typename?: 'electoral_roll_rows';
+/** columns and relationships of "candidate_lists" */
+export type Candidate_Lists = {
+  __typename?: 'candidate_lists';
   createdAt: Scalars['timestamptz'];
   description: Scalars['String'];
-  electoralRollId: Scalars['Int'];
   id: Scalars['Int'];
-  /** An object relationship */
-  party?: Maybe<Parties>;
-  partyId?: Maybe<Scalars['Int']>;
+  name: Scalars['String'];
+  sectionId?: Maybe<Scalars['Int']>;
   updatedAt: Scalars['timestamptz'];
-  userId: Scalars['Int'];
+  votingId: Scalars['Int'];
 };
 
-/** aggregated selection of "electoral_roll_rows" */
-export type Electoral_Roll_Rows_Aggregate = {
-  __typename?: 'electoral_roll_rows_aggregate';
-  aggregate?: Maybe<Electoral_Roll_Rows_Aggregate_Fields>;
-  nodes: Array<Electoral_Roll_Rows>;
+/** aggregated selection of "candidate_lists" */
+export type Candidate_Lists_Aggregate = {
+  __typename?: 'candidate_lists_aggregate';
+  aggregate?: Maybe<Candidate_Lists_Aggregate_Fields>;
+  nodes: Array<Candidate_Lists>;
 };
 
-/** aggregate fields of "electoral_roll_rows" */
-export type Electoral_Roll_Rows_Aggregate_Fields = {
-  __typename?: 'electoral_roll_rows_aggregate_fields';
-  avg?: Maybe<Electoral_Roll_Rows_Avg_Fields>;
+/** aggregate fields of "candidate_lists" */
+export type Candidate_Lists_Aggregate_Fields = {
+  __typename?: 'candidate_lists_aggregate_fields';
+  avg?: Maybe<Candidate_Lists_Avg_Fields>;
   count: Scalars['Int'];
-  max?: Maybe<Electoral_Roll_Rows_Max_Fields>;
-  min?: Maybe<Electoral_Roll_Rows_Min_Fields>;
-  stddev?: Maybe<Electoral_Roll_Rows_Stddev_Fields>;
-  stddev_pop?: Maybe<Electoral_Roll_Rows_Stddev_Pop_Fields>;
-  stddev_samp?: Maybe<Electoral_Roll_Rows_Stddev_Samp_Fields>;
-  sum?: Maybe<Electoral_Roll_Rows_Sum_Fields>;
-  var_pop?: Maybe<Electoral_Roll_Rows_Var_Pop_Fields>;
-  var_samp?: Maybe<Electoral_Roll_Rows_Var_Samp_Fields>;
-  variance?: Maybe<Electoral_Roll_Rows_Variance_Fields>;
+  max?: Maybe<Candidate_Lists_Max_Fields>;
+  min?: Maybe<Candidate_Lists_Min_Fields>;
+  stddev?: Maybe<Candidate_Lists_Stddev_Fields>;
+  stddev_pop?: Maybe<Candidate_Lists_Stddev_Pop_Fields>;
+  stddev_samp?: Maybe<Candidate_Lists_Stddev_Samp_Fields>;
+  sum?: Maybe<Candidate_Lists_Sum_Fields>;
+  var_pop?: Maybe<Candidate_Lists_Var_Pop_Fields>;
+  var_samp?: Maybe<Candidate_Lists_Var_Samp_Fields>;
+  variance?: Maybe<Candidate_Lists_Variance_Fields>;
 };
 
 
-/** aggregate fields of "electoral_roll_rows" */
-export type Electoral_Roll_Rows_Aggregate_FieldsCountArgs = {
-  columns?: Maybe<Array<Electoral_Roll_Rows_Select_Column>>;
+/** aggregate fields of "candidate_lists" */
+export type Candidate_Lists_Aggregate_FieldsCountArgs = {
+  columns?: Maybe<Array<Candidate_Lists_Select_Column>>;
   distinct?: Maybe<Scalars['Boolean']>;
 };
 
 /** aggregate avg on columns */
-export type Electoral_Roll_Rows_Avg_Fields = {
-  __typename?: 'electoral_roll_rows_avg_fields';
-  electoralRollId?: Maybe<Scalars['Float']>;
+export type Candidate_Lists_Avg_Fields = {
+  __typename?: 'candidate_lists_avg_fields';
   id?: Maybe<Scalars['Float']>;
-  partyId?: Maybe<Scalars['Float']>;
-  userId?: Maybe<Scalars['Float']>;
+  sectionId?: Maybe<Scalars['Float']>;
+  votingId?: Maybe<Scalars['Float']>;
 };
 
-/** Boolean expression to filter rows from the table "electoral_roll_rows". All fields are combined with a logical 'AND'. */
-export type Electoral_Roll_Rows_Bool_Exp = {
-  _and?: Maybe<Array<Electoral_Roll_Rows_Bool_Exp>>;
-  _not?: Maybe<Electoral_Roll_Rows_Bool_Exp>;
-  _or?: Maybe<Array<Electoral_Roll_Rows_Bool_Exp>>;
+/** Boolean expression to filter rows from the table "candidate_lists". All fields are combined with a logical 'AND'. */
+export type Candidate_Lists_Bool_Exp = {
+  _and?: Maybe<Array<Candidate_Lists_Bool_Exp>>;
+  _not?: Maybe<Candidate_Lists_Bool_Exp>;
+  _or?: Maybe<Array<Candidate_Lists_Bool_Exp>>;
   createdAt?: Maybe<Timestamptz_Comparison_Exp>;
   description?: Maybe<String_Comparison_Exp>;
-  electoralRollId?: Maybe<Int_Comparison_Exp>;
   id?: Maybe<Int_Comparison_Exp>;
-  party?: Maybe<Parties_Bool_Exp>;
-  partyId?: Maybe<Int_Comparison_Exp>;
+  name?: Maybe<String_Comparison_Exp>;
+  sectionId?: Maybe<Int_Comparison_Exp>;
   updatedAt?: Maybe<Timestamptz_Comparison_Exp>;
-  userId?: Maybe<Int_Comparison_Exp>;
+  votingId?: Maybe<Int_Comparison_Exp>;
 };
 
-/** unique or primary key constraints on table "electoral_roll_rows" */
-export enum Electoral_Roll_Rows_Constraint {
+/** unique or primary key constraints on table "candidate_lists" */
+export enum Candidate_Lists_Constraint {
   /** unique or primary key constraint */
-  ElectoralRollRowsPkey = 'electoral_roll_rows_pkey'
+  CandidateListsPkey = 'candidate_lists_pkey'
 }
 
-/** input type for incrementing numeric columns in table "electoral_roll_rows" */
-export type Electoral_Roll_Rows_Inc_Input = {
-  electoralRollId?: Maybe<Scalars['Int']>;
+/** input type for incrementing numeric columns in table "candidate_lists" */
+export type Candidate_Lists_Inc_Input = {
   id?: Maybe<Scalars['Int']>;
-  partyId?: Maybe<Scalars['Int']>;
-  userId?: Maybe<Scalars['Int']>;
+  sectionId?: Maybe<Scalars['Int']>;
+  votingId?: Maybe<Scalars['Int']>;
 };
 
-/** input type for inserting data into table "electoral_roll_rows" */
-export type Electoral_Roll_Rows_Insert_Input = {
+/** input type for inserting data into table "candidate_lists" */
+export type Candidate_Lists_Insert_Input = {
   createdAt?: Maybe<Scalars['timestamptz']>;
   description?: Maybe<Scalars['String']>;
-  electoralRollId?: Maybe<Scalars['Int']>;
   id?: Maybe<Scalars['Int']>;
-  party?: Maybe<Parties_Obj_Rel_Insert_Input>;
-  partyId?: Maybe<Scalars['Int']>;
+  name?: Maybe<Scalars['String']>;
+  sectionId?: Maybe<Scalars['Int']>;
   updatedAt?: Maybe<Scalars['timestamptz']>;
-  userId?: Maybe<Scalars['Int']>;
+  votingId?: Maybe<Scalars['Int']>;
 };
 
 /** aggregate max on columns */
-export type Electoral_Roll_Rows_Max_Fields = {
-  __typename?: 'electoral_roll_rows_max_fields';
+export type Candidate_Lists_Max_Fields = {
+  __typename?: 'candidate_lists_max_fields';
   createdAt?: Maybe<Scalars['timestamptz']>;
   description?: Maybe<Scalars['String']>;
-  electoralRollId?: Maybe<Scalars['Int']>;
   id?: Maybe<Scalars['Int']>;
-  partyId?: Maybe<Scalars['Int']>;
+  name?: Maybe<Scalars['String']>;
+  sectionId?: Maybe<Scalars['Int']>;
   updatedAt?: Maybe<Scalars['timestamptz']>;
-  userId?: Maybe<Scalars['Int']>;
+  votingId?: Maybe<Scalars['Int']>;
 };
 
 /** aggregate min on columns */
-export type Electoral_Roll_Rows_Min_Fields = {
-  __typename?: 'electoral_roll_rows_min_fields';
+export type Candidate_Lists_Min_Fields = {
+  __typename?: 'candidate_lists_min_fields';
   createdAt?: Maybe<Scalars['timestamptz']>;
   description?: Maybe<Scalars['String']>;
-  electoralRollId?: Maybe<Scalars['Int']>;
   id?: Maybe<Scalars['Int']>;
-  partyId?: Maybe<Scalars['Int']>;
+  name?: Maybe<Scalars['String']>;
+  sectionId?: Maybe<Scalars['Int']>;
   updatedAt?: Maybe<Scalars['timestamptz']>;
-  userId?: Maybe<Scalars['Int']>;
+  votingId?: Maybe<Scalars['Int']>;
 };
 
-/** response of any mutation on the table "electoral_roll_rows" */
-export type Electoral_Roll_Rows_Mutation_Response = {
-  __typename?: 'electoral_roll_rows_mutation_response';
+/** response of any mutation on the table "candidate_lists" */
+export type Candidate_Lists_Mutation_Response = {
+  __typename?: 'candidate_lists_mutation_response';
   /** number of rows affected by the mutation */
   affected_rows: Scalars['Int'];
   /** data from the rows affected by the mutation */
-  returning: Array<Electoral_Roll_Rows>;
+  returning: Array<Candidate_Lists>;
 };
 
-/** on conflict condition type for table "electoral_roll_rows" */
-export type Electoral_Roll_Rows_On_Conflict = {
-  constraint: Electoral_Roll_Rows_Constraint;
-  update_columns: Array<Electoral_Roll_Rows_Update_Column>;
-  where?: Maybe<Electoral_Roll_Rows_Bool_Exp>;
+/** on conflict condition type for table "candidate_lists" */
+export type Candidate_Lists_On_Conflict = {
+  constraint: Candidate_Lists_Constraint;
+  update_columns: Array<Candidate_Lists_Update_Column>;
+  where?: Maybe<Candidate_Lists_Bool_Exp>;
 };
 
-/** Ordering options when selecting data from "electoral_roll_rows". */
-export type Electoral_Roll_Rows_Order_By = {
+/** Ordering options when selecting data from "candidate_lists". */
+export type Candidate_Lists_Order_By = {
   createdAt?: Maybe<Order_By>;
   description?: Maybe<Order_By>;
-  electoralRollId?: Maybe<Order_By>;
   id?: Maybe<Order_By>;
-  party?: Maybe<Parties_Order_By>;
-  partyId?: Maybe<Order_By>;
+  name?: Maybe<Order_By>;
+  sectionId?: Maybe<Order_By>;
   updatedAt?: Maybe<Order_By>;
-  userId?: Maybe<Order_By>;
+  votingId?: Maybe<Order_By>;
 };
 
-/** primary key columns input for table: electoral_roll_rows */
-export type Electoral_Roll_Rows_Pk_Columns_Input = {
+/** primary key columns input for table: candidate_lists */
+export type Candidate_Lists_Pk_Columns_Input = {
   id: Scalars['Int'];
 };
 
-/** select columns of table "electoral_roll_rows" */
-export enum Electoral_Roll_Rows_Select_Column {
+/** select columns of table "candidate_lists" */
+export enum Candidate_Lists_Select_Column {
   /** column name */
   CreatedAt = 'createdAt',
   /** column name */
   Description = 'description',
   /** column name */
-  ElectoralRollId = 'electoralRollId',
+  Id = 'id',
+  /** column name */
+  Name = 'name',
+  /** column name */
+  SectionId = 'sectionId',
+  /** column name */
+  UpdatedAt = 'updatedAt',
+  /** column name */
+  VotingId = 'votingId'
+}
+
+/** input type for updating data in table "candidate_lists" */
+export type Candidate_Lists_Set_Input = {
+  createdAt?: Maybe<Scalars['timestamptz']>;
+  description?: Maybe<Scalars['String']>;
+  id?: Maybe<Scalars['Int']>;
+  name?: Maybe<Scalars['String']>;
+  sectionId?: Maybe<Scalars['Int']>;
+  updatedAt?: Maybe<Scalars['timestamptz']>;
+  votingId?: Maybe<Scalars['Int']>;
+};
+
+/** aggregate stddev on columns */
+export type Candidate_Lists_Stddev_Fields = {
+  __typename?: 'candidate_lists_stddev_fields';
+  id?: Maybe<Scalars['Float']>;
+  sectionId?: Maybe<Scalars['Float']>;
+  votingId?: Maybe<Scalars['Float']>;
+};
+
+/** aggregate stddev_pop on columns */
+export type Candidate_Lists_Stddev_Pop_Fields = {
+  __typename?: 'candidate_lists_stddev_pop_fields';
+  id?: Maybe<Scalars['Float']>;
+  sectionId?: Maybe<Scalars['Float']>;
+  votingId?: Maybe<Scalars['Float']>;
+};
+
+/** aggregate stddev_samp on columns */
+export type Candidate_Lists_Stddev_Samp_Fields = {
+  __typename?: 'candidate_lists_stddev_samp_fields';
+  id?: Maybe<Scalars['Float']>;
+  sectionId?: Maybe<Scalars['Float']>;
+  votingId?: Maybe<Scalars['Float']>;
+};
+
+/** aggregate sum on columns */
+export type Candidate_Lists_Sum_Fields = {
+  __typename?: 'candidate_lists_sum_fields';
+  id?: Maybe<Scalars['Int']>;
+  sectionId?: Maybe<Scalars['Int']>;
+  votingId?: Maybe<Scalars['Int']>;
+};
+
+/** update columns of table "candidate_lists" */
+export enum Candidate_Lists_Update_Column {
+  /** column name */
+  CreatedAt = 'createdAt',
+  /** column name */
+  Description = 'description',
   /** column name */
   Id = 'id',
   /** column name */
-  PartyId = 'partyId',
+  Name = 'name',
+  /** column name */
+  SectionId = 'sectionId',
+  /** column name */
+  UpdatedAt = 'updatedAt',
+  /** column name */
+  VotingId = 'votingId'
+}
+
+/** aggregate var_pop on columns */
+export type Candidate_Lists_Var_Pop_Fields = {
+  __typename?: 'candidate_lists_var_pop_fields';
+  id?: Maybe<Scalars['Float']>;
+  sectionId?: Maybe<Scalars['Float']>;
+  votingId?: Maybe<Scalars['Float']>;
+};
+
+/** aggregate var_samp on columns */
+export type Candidate_Lists_Var_Samp_Fields = {
+  __typename?: 'candidate_lists_var_samp_fields';
+  id?: Maybe<Scalars['Float']>;
+  sectionId?: Maybe<Scalars['Float']>;
+  votingId?: Maybe<Scalars['Float']>;
+};
+
+/** aggregate variance on columns */
+export type Candidate_Lists_Variance_Fields = {
+  __typename?: 'candidate_lists_variance_fields';
+  id?: Maybe<Scalars['Float']>;
+  sectionId?: Maybe<Scalars['Float']>;
+  votingId?: Maybe<Scalars['Float']>;
+};
+
+/** columns and relationships of "candidates" */
+export type Candidates = {
+  __typename?: 'candidates';
+  candidateListId: Scalars['Int'];
+  createdAt: Scalars['timestamptz'];
+  id: Scalars['Int'];
+  politicalGroupMemberId: Scalars['Int'];
+  updatedAt: Scalars['timestamptz'];
+};
+
+/** aggregated selection of "candidates" */
+export type Candidates_Aggregate = {
+  __typename?: 'candidates_aggregate';
+  aggregate?: Maybe<Candidates_Aggregate_Fields>;
+  nodes: Array<Candidates>;
+};
+
+/** aggregate fields of "candidates" */
+export type Candidates_Aggregate_Fields = {
+  __typename?: 'candidates_aggregate_fields';
+  avg?: Maybe<Candidates_Avg_Fields>;
+  count: Scalars['Int'];
+  max?: Maybe<Candidates_Max_Fields>;
+  min?: Maybe<Candidates_Min_Fields>;
+  stddev?: Maybe<Candidates_Stddev_Fields>;
+  stddev_pop?: Maybe<Candidates_Stddev_Pop_Fields>;
+  stddev_samp?: Maybe<Candidates_Stddev_Samp_Fields>;
+  sum?: Maybe<Candidates_Sum_Fields>;
+  var_pop?: Maybe<Candidates_Var_Pop_Fields>;
+  var_samp?: Maybe<Candidates_Var_Samp_Fields>;
+  variance?: Maybe<Candidates_Variance_Fields>;
+};
+
+
+/** aggregate fields of "candidates" */
+export type Candidates_Aggregate_FieldsCountArgs = {
+  columns?: Maybe<Array<Candidates_Select_Column>>;
+  distinct?: Maybe<Scalars['Boolean']>;
+};
+
+/** aggregate avg on columns */
+export type Candidates_Avg_Fields = {
+  __typename?: 'candidates_avg_fields';
+  candidateListId?: Maybe<Scalars['Float']>;
+  id?: Maybe<Scalars['Float']>;
+  politicalGroupMemberId?: Maybe<Scalars['Float']>;
+};
+
+/** Boolean expression to filter rows from the table "candidates". All fields are combined with a logical 'AND'. */
+export type Candidates_Bool_Exp = {
+  _and?: Maybe<Array<Candidates_Bool_Exp>>;
+  _not?: Maybe<Candidates_Bool_Exp>;
+  _or?: Maybe<Array<Candidates_Bool_Exp>>;
+  candidateListId?: Maybe<Int_Comparison_Exp>;
+  createdAt?: Maybe<Timestamptz_Comparison_Exp>;
+  id?: Maybe<Int_Comparison_Exp>;
+  politicalGroupMemberId?: Maybe<Int_Comparison_Exp>;
+  updatedAt?: Maybe<Timestamptz_Comparison_Exp>;
+};
+
+/** unique or primary key constraints on table "candidates" */
+export enum Candidates_Constraint {
+  /** unique or primary key constraint */
+  CandidatesPkey = 'candidates_pkey'
+}
+
+/** input type for incrementing numeric columns in table "candidates" */
+export type Candidates_Inc_Input = {
+  candidateListId?: Maybe<Scalars['Int']>;
+  id?: Maybe<Scalars['Int']>;
+  politicalGroupMemberId?: Maybe<Scalars['Int']>;
+};
+
+/** input type for inserting data into table "candidates" */
+export type Candidates_Insert_Input = {
+  candidateListId?: Maybe<Scalars['Int']>;
+  createdAt?: Maybe<Scalars['timestamptz']>;
+  id?: Maybe<Scalars['Int']>;
+  politicalGroupMemberId?: Maybe<Scalars['Int']>;
+  updatedAt?: Maybe<Scalars['timestamptz']>;
+};
+
+/** aggregate max on columns */
+export type Candidates_Max_Fields = {
+  __typename?: 'candidates_max_fields';
+  candidateListId?: Maybe<Scalars['Int']>;
+  createdAt?: Maybe<Scalars['timestamptz']>;
+  id?: Maybe<Scalars['Int']>;
+  politicalGroupMemberId?: Maybe<Scalars['Int']>;
+  updatedAt?: Maybe<Scalars['timestamptz']>;
+};
+
+/** aggregate min on columns */
+export type Candidates_Min_Fields = {
+  __typename?: 'candidates_min_fields';
+  candidateListId?: Maybe<Scalars['Int']>;
+  createdAt?: Maybe<Scalars['timestamptz']>;
+  id?: Maybe<Scalars['Int']>;
+  politicalGroupMemberId?: Maybe<Scalars['Int']>;
+  updatedAt?: Maybe<Scalars['timestamptz']>;
+};
+
+/** response of any mutation on the table "candidates" */
+export type Candidates_Mutation_Response = {
+  __typename?: 'candidates_mutation_response';
+  /** number of rows affected by the mutation */
+  affected_rows: Scalars['Int'];
+  /** data from the rows affected by the mutation */
+  returning: Array<Candidates>;
+};
+
+/** on conflict condition type for table "candidates" */
+export type Candidates_On_Conflict = {
+  constraint: Candidates_Constraint;
+  update_columns: Array<Candidates_Update_Column>;
+  where?: Maybe<Candidates_Bool_Exp>;
+};
+
+/** Ordering options when selecting data from "candidates". */
+export type Candidates_Order_By = {
+  candidateListId?: Maybe<Order_By>;
+  createdAt?: Maybe<Order_By>;
+  id?: Maybe<Order_By>;
+  politicalGroupMemberId?: Maybe<Order_By>;
+  updatedAt?: Maybe<Order_By>;
+};
+
+/** primary key columns input for table: candidates */
+export type Candidates_Pk_Columns_Input = {
+  id: Scalars['Int'];
+};
+
+/** select columns of table "candidates" */
+export enum Candidates_Select_Column {
+  /** column name */
+  CandidateListId = 'candidateListId',
+  /** column name */
+  CreatedAt = 'createdAt',
+  /** column name */
+  Id = 'id',
+  /** column name */
+  PoliticalGroupMemberId = 'politicalGroupMemberId',
+  /** column name */
+  UpdatedAt = 'updatedAt'
+}
+
+/** input type for updating data in table "candidates" */
+export type Candidates_Set_Input = {
+  candidateListId?: Maybe<Scalars['Int']>;
+  createdAt?: Maybe<Scalars['timestamptz']>;
+  id?: Maybe<Scalars['Int']>;
+  politicalGroupMemberId?: Maybe<Scalars['Int']>;
+  updatedAt?: Maybe<Scalars['timestamptz']>;
+};
+
+/** aggregate stddev on columns */
+export type Candidates_Stddev_Fields = {
+  __typename?: 'candidates_stddev_fields';
+  candidateListId?: Maybe<Scalars['Float']>;
+  id?: Maybe<Scalars['Float']>;
+  politicalGroupMemberId?: Maybe<Scalars['Float']>;
+};
+
+/** aggregate stddev_pop on columns */
+export type Candidates_Stddev_Pop_Fields = {
+  __typename?: 'candidates_stddev_pop_fields';
+  candidateListId?: Maybe<Scalars['Float']>;
+  id?: Maybe<Scalars['Float']>;
+  politicalGroupMemberId?: Maybe<Scalars['Float']>;
+};
+
+/** aggregate stddev_samp on columns */
+export type Candidates_Stddev_Samp_Fields = {
+  __typename?: 'candidates_stddev_samp_fields';
+  candidateListId?: Maybe<Scalars['Float']>;
+  id?: Maybe<Scalars['Float']>;
+  politicalGroupMemberId?: Maybe<Scalars['Float']>;
+};
+
+/** aggregate sum on columns */
+export type Candidates_Sum_Fields = {
+  __typename?: 'candidates_sum_fields';
+  candidateListId?: Maybe<Scalars['Int']>;
+  id?: Maybe<Scalars['Int']>;
+  politicalGroupMemberId?: Maybe<Scalars['Int']>;
+};
+
+/** update columns of table "candidates" */
+export enum Candidates_Update_Column {
+  /** column name */
+  CandidateListId = 'candidateListId',
+  /** column name */
+  CreatedAt = 'createdAt',
+  /** column name */
+  Id = 'id',
+  /** column name */
+  PoliticalGroupMemberId = 'politicalGroupMemberId',
+  /** column name */
+  UpdatedAt = 'updatedAt'
+}
+
+/** aggregate var_pop on columns */
+export type Candidates_Var_Pop_Fields = {
+  __typename?: 'candidates_var_pop_fields';
+  candidateListId?: Maybe<Scalars['Float']>;
+  id?: Maybe<Scalars['Float']>;
+  politicalGroupMemberId?: Maybe<Scalars['Float']>;
+};
+
+/** aggregate var_samp on columns */
+export type Candidates_Var_Samp_Fields = {
+  __typename?: 'candidates_var_samp_fields';
+  candidateListId?: Maybe<Scalars['Float']>;
+  id?: Maybe<Scalars['Float']>;
+  politicalGroupMemberId?: Maybe<Scalars['Float']>;
+};
+
+/** aggregate variance on columns */
+export type Candidates_Variance_Fields = {
+  __typename?: 'candidates_variance_fields';
+  candidateListId?: Maybe<Scalars['Float']>;
+  id?: Maybe<Scalars['Float']>;
+  politicalGroupMemberId?: Maybe<Scalars['Float']>;
+};
+
+/** columns and relationships of "commision_members" */
+export type Commision_Members = {
+  __typename?: 'commision_members';
+  active: Scalars['Boolean'];
+  commisionId: Scalars['Int'];
+  createdAt: Scalars['timestamptz'];
+  id: Scalars['Int'];
+  isLeader?: Maybe<Scalars['Boolean']>;
+  updatedAt: Scalars['timestamptz'];
+  userId: Scalars['Int'];
+};
+
+/** aggregated selection of "commision_members" */
+export type Commision_Members_Aggregate = {
+  __typename?: 'commision_members_aggregate';
+  aggregate?: Maybe<Commision_Members_Aggregate_Fields>;
+  nodes: Array<Commision_Members>;
+};
+
+/** aggregate fields of "commision_members" */
+export type Commision_Members_Aggregate_Fields = {
+  __typename?: 'commision_members_aggregate_fields';
+  avg?: Maybe<Commision_Members_Avg_Fields>;
+  count: Scalars['Int'];
+  max?: Maybe<Commision_Members_Max_Fields>;
+  min?: Maybe<Commision_Members_Min_Fields>;
+  stddev?: Maybe<Commision_Members_Stddev_Fields>;
+  stddev_pop?: Maybe<Commision_Members_Stddev_Pop_Fields>;
+  stddev_samp?: Maybe<Commision_Members_Stddev_Samp_Fields>;
+  sum?: Maybe<Commision_Members_Sum_Fields>;
+  var_pop?: Maybe<Commision_Members_Var_Pop_Fields>;
+  var_samp?: Maybe<Commision_Members_Var_Samp_Fields>;
+  variance?: Maybe<Commision_Members_Variance_Fields>;
+};
+
+
+/** aggregate fields of "commision_members" */
+export type Commision_Members_Aggregate_FieldsCountArgs = {
+  columns?: Maybe<Array<Commision_Members_Select_Column>>;
+  distinct?: Maybe<Scalars['Boolean']>;
+};
+
+/** aggregate avg on columns */
+export type Commision_Members_Avg_Fields = {
+  __typename?: 'commision_members_avg_fields';
+  commisionId?: Maybe<Scalars['Float']>;
+  id?: Maybe<Scalars['Float']>;
+  userId?: Maybe<Scalars['Float']>;
+};
+
+/** Boolean expression to filter rows from the table "commision_members". All fields are combined with a logical 'AND'. */
+export type Commision_Members_Bool_Exp = {
+  _and?: Maybe<Array<Commision_Members_Bool_Exp>>;
+  _not?: Maybe<Commision_Members_Bool_Exp>;
+  _or?: Maybe<Array<Commision_Members_Bool_Exp>>;
+  active?: Maybe<Boolean_Comparison_Exp>;
+  commisionId?: Maybe<Int_Comparison_Exp>;
+  createdAt?: Maybe<Timestamptz_Comparison_Exp>;
+  id?: Maybe<Int_Comparison_Exp>;
+  isLeader?: Maybe<Boolean_Comparison_Exp>;
+  updatedAt?: Maybe<Timestamptz_Comparison_Exp>;
+  userId?: Maybe<Int_Comparison_Exp>;
+};
+
+/** unique or primary key constraints on table "commision_members" */
+export enum Commision_Members_Constraint {
+  /** unique or primary key constraint */
+  CommisionMembersPkey = 'commision_members_pkey',
+  /** unique or primary key constraint */
+  CommisionMembersUserIdKey = 'commision_members_userId_key'
+}
+
+/** input type for incrementing numeric columns in table "commision_members" */
+export type Commision_Members_Inc_Input = {
+  commisionId?: Maybe<Scalars['Int']>;
+  id?: Maybe<Scalars['Int']>;
+  userId?: Maybe<Scalars['Int']>;
+};
+
+/** input type for inserting data into table "commision_members" */
+export type Commision_Members_Insert_Input = {
+  active?: Maybe<Scalars['Boolean']>;
+  commisionId?: Maybe<Scalars['Int']>;
+  createdAt?: Maybe<Scalars['timestamptz']>;
+  id?: Maybe<Scalars['Int']>;
+  isLeader?: Maybe<Scalars['Boolean']>;
+  updatedAt?: Maybe<Scalars['timestamptz']>;
+  userId?: Maybe<Scalars['Int']>;
+};
+
+/** aggregate max on columns */
+export type Commision_Members_Max_Fields = {
+  __typename?: 'commision_members_max_fields';
+  commisionId?: Maybe<Scalars['Int']>;
+  createdAt?: Maybe<Scalars['timestamptz']>;
+  id?: Maybe<Scalars['Int']>;
+  updatedAt?: Maybe<Scalars['timestamptz']>;
+  userId?: Maybe<Scalars['Int']>;
+};
+
+/** aggregate min on columns */
+export type Commision_Members_Min_Fields = {
+  __typename?: 'commision_members_min_fields';
+  commisionId?: Maybe<Scalars['Int']>;
+  createdAt?: Maybe<Scalars['timestamptz']>;
+  id?: Maybe<Scalars['Int']>;
+  updatedAt?: Maybe<Scalars['timestamptz']>;
+  userId?: Maybe<Scalars['Int']>;
+};
+
+/** response of any mutation on the table "commision_members" */
+export type Commision_Members_Mutation_Response = {
+  __typename?: 'commision_members_mutation_response';
+  /** number of rows affected by the mutation */
+  affected_rows: Scalars['Int'];
+  /** data from the rows affected by the mutation */
+  returning: Array<Commision_Members>;
+};
+
+/** on conflict condition type for table "commision_members" */
+export type Commision_Members_On_Conflict = {
+  constraint: Commision_Members_Constraint;
+  update_columns: Array<Commision_Members_Update_Column>;
+  where?: Maybe<Commision_Members_Bool_Exp>;
+};
+
+/** Ordering options when selecting data from "commision_members". */
+export type Commision_Members_Order_By = {
+  active?: Maybe<Order_By>;
+  commisionId?: Maybe<Order_By>;
+  createdAt?: Maybe<Order_By>;
+  id?: Maybe<Order_By>;
+  isLeader?: Maybe<Order_By>;
+  updatedAt?: Maybe<Order_By>;
+  userId?: Maybe<Order_By>;
+};
+
+/** primary key columns input for table: commision_members */
+export type Commision_Members_Pk_Columns_Input = {
+  id: Scalars['Int'];
+};
+
+/** select columns of table "commision_members" */
+export enum Commision_Members_Select_Column {
+  /** column name */
+  Active = 'active',
+  /** column name */
+  CommisionId = 'commisionId',
+  /** column name */
+  CreatedAt = 'createdAt',
+  /** column name */
+  Id = 'id',
+  /** column name */
+  IsLeader = 'isLeader',
   /** column name */
   UpdatedAt = 'updatedAt',
   /** column name */
   UserId = 'userId'
 }
 
-/** input type for updating data in table "electoral_roll_rows" */
-export type Electoral_Roll_Rows_Set_Input = {
+/** input type for updating data in table "commision_members" */
+export type Commision_Members_Set_Input = {
+  active?: Maybe<Scalars['Boolean']>;
+  commisionId?: Maybe<Scalars['Int']>;
   createdAt?: Maybe<Scalars['timestamptz']>;
-  description?: Maybe<Scalars['String']>;
-  electoralRollId?: Maybe<Scalars['Int']>;
   id?: Maybe<Scalars['Int']>;
-  partyId?: Maybe<Scalars['Int']>;
+  isLeader?: Maybe<Scalars['Boolean']>;
   updatedAt?: Maybe<Scalars['timestamptz']>;
   userId?: Maybe<Scalars['Int']>;
 };
 
 /** aggregate stddev on columns */
-export type Electoral_Roll_Rows_Stddev_Fields = {
-  __typename?: 'electoral_roll_rows_stddev_fields';
-  electoralRollId?: Maybe<Scalars['Float']>;
+export type Commision_Members_Stddev_Fields = {
+  __typename?: 'commision_members_stddev_fields';
+  commisionId?: Maybe<Scalars['Float']>;
   id?: Maybe<Scalars['Float']>;
-  partyId?: Maybe<Scalars['Float']>;
   userId?: Maybe<Scalars['Float']>;
 };
 
 /** aggregate stddev_pop on columns */
-export type Electoral_Roll_Rows_Stddev_Pop_Fields = {
-  __typename?: 'electoral_roll_rows_stddev_pop_fields';
-  electoralRollId?: Maybe<Scalars['Float']>;
+export type Commision_Members_Stddev_Pop_Fields = {
+  __typename?: 'commision_members_stddev_pop_fields';
+  commisionId?: Maybe<Scalars['Float']>;
   id?: Maybe<Scalars['Float']>;
-  partyId?: Maybe<Scalars['Float']>;
   userId?: Maybe<Scalars['Float']>;
 };
 
 /** aggregate stddev_samp on columns */
-export type Electoral_Roll_Rows_Stddev_Samp_Fields = {
-  __typename?: 'electoral_roll_rows_stddev_samp_fields';
-  electoralRollId?: Maybe<Scalars['Float']>;
+export type Commision_Members_Stddev_Samp_Fields = {
+  __typename?: 'commision_members_stddev_samp_fields';
+  commisionId?: Maybe<Scalars['Float']>;
   id?: Maybe<Scalars['Float']>;
-  partyId?: Maybe<Scalars['Float']>;
   userId?: Maybe<Scalars['Float']>;
 };
 
 /** aggregate sum on columns */
-export type Electoral_Roll_Rows_Sum_Fields = {
-  __typename?: 'electoral_roll_rows_sum_fields';
-  electoralRollId?: Maybe<Scalars['Int']>;
+export type Commision_Members_Sum_Fields = {
+  __typename?: 'commision_members_sum_fields';
+  commisionId?: Maybe<Scalars['Int']>;
   id?: Maybe<Scalars['Int']>;
-  partyId?: Maybe<Scalars['Int']>;
   userId?: Maybe<Scalars['Int']>;
 };
 
-/** update columns of table "electoral_roll_rows" */
-export enum Electoral_Roll_Rows_Update_Column {
+/** update columns of table "commision_members" */
+export enum Commision_Members_Update_Column {
+  /** column name */
+  Active = 'active',
+  /** column name */
+  CommisionId = 'commisionId',
   /** column name */
   CreatedAt = 'createdAt',
   /** column name */
-  Description = 'description',
-  /** column name */
-  ElectoralRollId = 'electoralRollId',
-  /** column name */
   Id = 'id',
   /** column name */
-  PartyId = 'partyId',
+  IsLeader = 'isLeader',
   /** column name */
   UpdatedAt = 'updatedAt',
   /** column name */
@@ -553,40 +1012,474 @@ export enum Electoral_Roll_Rows_Update_Column {
 }
 
 /** aggregate var_pop on columns */
-export type Electoral_Roll_Rows_Var_Pop_Fields = {
-  __typename?: 'electoral_roll_rows_var_pop_fields';
-  electoralRollId?: Maybe<Scalars['Float']>;
+export type Commision_Members_Var_Pop_Fields = {
+  __typename?: 'commision_members_var_pop_fields';
+  commisionId?: Maybe<Scalars['Float']>;
   id?: Maybe<Scalars['Float']>;
-  partyId?: Maybe<Scalars['Float']>;
   userId?: Maybe<Scalars['Float']>;
 };
 
 /** aggregate var_samp on columns */
-export type Electoral_Roll_Rows_Var_Samp_Fields = {
-  __typename?: 'electoral_roll_rows_var_samp_fields';
-  electoralRollId?: Maybe<Scalars['Float']>;
+export type Commision_Members_Var_Samp_Fields = {
+  __typename?: 'commision_members_var_samp_fields';
+  commisionId?: Maybe<Scalars['Float']>;
   id?: Maybe<Scalars['Float']>;
-  partyId?: Maybe<Scalars['Float']>;
   userId?: Maybe<Scalars['Float']>;
 };
 
 /** aggregate variance on columns */
-export type Electoral_Roll_Rows_Variance_Fields = {
-  __typename?: 'electoral_roll_rows_variance_fields';
+export type Commision_Members_Variance_Fields = {
+  __typename?: 'commision_members_variance_fields';
+  commisionId?: Maybe<Scalars['Float']>;
+  id?: Maybe<Scalars['Float']>;
+  userId?: Maybe<Scalars['Float']>;
+};
+
+/** columns and relationships of "commissions" */
+export type Commissions = {
+  __typename?: 'commissions';
+  active: Scalars['Boolean'];
+  createdAt: Scalars['timestamptz'];
+  id: Scalars['Int'];
+  updatedAt: Scalars['timestamptz'];
+  votingSectionId?: Maybe<Scalars['Int']>;
+};
+
+/** aggregated selection of "commissions" */
+export type Commissions_Aggregate = {
+  __typename?: 'commissions_aggregate';
+  aggregate?: Maybe<Commissions_Aggregate_Fields>;
+  nodes: Array<Commissions>;
+};
+
+/** aggregate fields of "commissions" */
+export type Commissions_Aggregate_Fields = {
+  __typename?: 'commissions_aggregate_fields';
+  avg?: Maybe<Commissions_Avg_Fields>;
+  count: Scalars['Int'];
+  max?: Maybe<Commissions_Max_Fields>;
+  min?: Maybe<Commissions_Min_Fields>;
+  stddev?: Maybe<Commissions_Stddev_Fields>;
+  stddev_pop?: Maybe<Commissions_Stddev_Pop_Fields>;
+  stddev_samp?: Maybe<Commissions_Stddev_Samp_Fields>;
+  sum?: Maybe<Commissions_Sum_Fields>;
+  var_pop?: Maybe<Commissions_Var_Pop_Fields>;
+  var_samp?: Maybe<Commissions_Var_Samp_Fields>;
+  variance?: Maybe<Commissions_Variance_Fields>;
+};
+
+
+/** aggregate fields of "commissions" */
+export type Commissions_Aggregate_FieldsCountArgs = {
+  columns?: Maybe<Array<Commissions_Select_Column>>;
+  distinct?: Maybe<Scalars['Boolean']>;
+};
+
+/** aggregate avg on columns */
+export type Commissions_Avg_Fields = {
+  __typename?: 'commissions_avg_fields';
+  id?: Maybe<Scalars['Float']>;
+  votingSectionId?: Maybe<Scalars['Float']>;
+};
+
+/** Boolean expression to filter rows from the table "commissions". All fields are combined with a logical 'AND'. */
+export type Commissions_Bool_Exp = {
+  _and?: Maybe<Array<Commissions_Bool_Exp>>;
+  _not?: Maybe<Commissions_Bool_Exp>;
+  _or?: Maybe<Array<Commissions_Bool_Exp>>;
+  active?: Maybe<Boolean_Comparison_Exp>;
+  createdAt?: Maybe<Timestamptz_Comparison_Exp>;
+  id?: Maybe<Int_Comparison_Exp>;
+  updatedAt?: Maybe<Timestamptz_Comparison_Exp>;
+  votingSectionId?: Maybe<Int_Comparison_Exp>;
+};
+
+/** unique or primary key constraints on table "commissions" */
+export enum Commissions_Constraint {
+  /** unique or primary key constraint */
+  CommissionsPkey = 'commissions_pkey'
+}
+
+/** input type for incrementing numeric columns in table "commissions" */
+export type Commissions_Inc_Input = {
+  id?: Maybe<Scalars['Int']>;
+  votingSectionId?: Maybe<Scalars['Int']>;
+};
+
+/** input type for inserting data into table "commissions" */
+export type Commissions_Insert_Input = {
+  active?: Maybe<Scalars['Boolean']>;
+  createdAt?: Maybe<Scalars['timestamptz']>;
+  id?: Maybe<Scalars['Int']>;
+  updatedAt?: Maybe<Scalars['timestamptz']>;
+  votingSectionId?: Maybe<Scalars['Int']>;
+};
+
+/** aggregate max on columns */
+export type Commissions_Max_Fields = {
+  __typename?: 'commissions_max_fields';
+  createdAt?: Maybe<Scalars['timestamptz']>;
+  id?: Maybe<Scalars['Int']>;
+  updatedAt?: Maybe<Scalars['timestamptz']>;
+  votingSectionId?: Maybe<Scalars['Int']>;
+};
+
+/** aggregate min on columns */
+export type Commissions_Min_Fields = {
+  __typename?: 'commissions_min_fields';
+  createdAt?: Maybe<Scalars['timestamptz']>;
+  id?: Maybe<Scalars['Int']>;
+  updatedAt?: Maybe<Scalars['timestamptz']>;
+  votingSectionId?: Maybe<Scalars['Int']>;
+};
+
+/** response of any mutation on the table "commissions" */
+export type Commissions_Mutation_Response = {
+  __typename?: 'commissions_mutation_response';
+  /** number of rows affected by the mutation */
+  affected_rows: Scalars['Int'];
+  /** data from the rows affected by the mutation */
+  returning: Array<Commissions>;
+};
+
+/** on conflict condition type for table "commissions" */
+export type Commissions_On_Conflict = {
+  constraint: Commissions_Constraint;
+  update_columns: Array<Commissions_Update_Column>;
+  where?: Maybe<Commissions_Bool_Exp>;
+};
+
+/** Ordering options when selecting data from "commissions". */
+export type Commissions_Order_By = {
+  active?: Maybe<Order_By>;
+  createdAt?: Maybe<Order_By>;
+  id?: Maybe<Order_By>;
+  updatedAt?: Maybe<Order_By>;
+  votingSectionId?: Maybe<Order_By>;
+};
+
+/** primary key columns input for table: commissions */
+export type Commissions_Pk_Columns_Input = {
+  id: Scalars['Int'];
+};
+
+/** select columns of table "commissions" */
+export enum Commissions_Select_Column {
+  /** column name */
+  Active = 'active',
+  /** column name */
+  CreatedAt = 'createdAt',
+  /** column name */
+  Id = 'id',
+  /** column name */
+  UpdatedAt = 'updatedAt',
+  /** column name */
+  VotingSectionId = 'votingSectionId'
+}
+
+/** input type for updating data in table "commissions" */
+export type Commissions_Set_Input = {
+  active?: Maybe<Scalars['Boolean']>;
+  createdAt?: Maybe<Scalars['timestamptz']>;
+  id?: Maybe<Scalars['Int']>;
+  updatedAt?: Maybe<Scalars['timestamptz']>;
+  votingSectionId?: Maybe<Scalars['Int']>;
+};
+
+/** aggregate stddev on columns */
+export type Commissions_Stddev_Fields = {
+  __typename?: 'commissions_stddev_fields';
+  id?: Maybe<Scalars['Float']>;
+  votingSectionId?: Maybe<Scalars['Float']>;
+};
+
+/** aggregate stddev_pop on columns */
+export type Commissions_Stddev_Pop_Fields = {
+  __typename?: 'commissions_stddev_pop_fields';
+  id?: Maybe<Scalars['Float']>;
+  votingSectionId?: Maybe<Scalars['Float']>;
+};
+
+/** aggregate stddev_samp on columns */
+export type Commissions_Stddev_Samp_Fields = {
+  __typename?: 'commissions_stddev_samp_fields';
+  id?: Maybe<Scalars['Float']>;
+  votingSectionId?: Maybe<Scalars['Float']>;
+};
+
+/** aggregate sum on columns */
+export type Commissions_Sum_Fields = {
+  __typename?: 'commissions_sum_fields';
+  id?: Maybe<Scalars['Int']>;
+  votingSectionId?: Maybe<Scalars['Int']>;
+};
+
+/** update columns of table "commissions" */
+export enum Commissions_Update_Column {
+  /** column name */
+  Active = 'active',
+  /** column name */
+  CreatedAt = 'createdAt',
+  /** column name */
+  Id = 'id',
+  /** column name */
+  UpdatedAt = 'updatedAt',
+  /** column name */
+  VotingSectionId = 'votingSectionId'
+}
+
+/** aggregate var_pop on columns */
+export type Commissions_Var_Pop_Fields = {
+  __typename?: 'commissions_var_pop_fields';
+  id?: Maybe<Scalars['Float']>;
+  votingSectionId?: Maybe<Scalars['Float']>;
+};
+
+/** aggregate var_samp on columns */
+export type Commissions_Var_Samp_Fields = {
+  __typename?: 'commissions_var_samp_fields';
+  id?: Maybe<Scalars['Float']>;
+  votingSectionId?: Maybe<Scalars['Float']>;
+};
+
+/** aggregate variance on columns */
+export type Commissions_Variance_Fields = {
+  __typename?: 'commissions_variance_fields';
+  id?: Maybe<Scalars['Float']>;
+  votingSectionId?: Maybe<Scalars['Float']>;
+};
+
+/** columns and relationships of "electoral_roll_users" */
+export type Electoral_Roll_Users = {
+  __typename?: 'electoral_roll_users';
+  createdAt: Scalars['timestamptz'];
+  electoralRollId: Scalars['Int'];
+  id: Scalars['Int'];
+  updatedAt: Scalars['timestamptz'];
+  userId: Scalars['Int'];
+};
+
+/** aggregated selection of "electoral_roll_users" */
+export type Electoral_Roll_Users_Aggregate = {
+  __typename?: 'electoral_roll_users_aggregate';
+  aggregate?: Maybe<Electoral_Roll_Users_Aggregate_Fields>;
+  nodes: Array<Electoral_Roll_Users>;
+};
+
+/** aggregate fields of "electoral_roll_users" */
+export type Electoral_Roll_Users_Aggregate_Fields = {
+  __typename?: 'electoral_roll_users_aggregate_fields';
+  avg?: Maybe<Electoral_Roll_Users_Avg_Fields>;
+  count: Scalars['Int'];
+  max?: Maybe<Electoral_Roll_Users_Max_Fields>;
+  min?: Maybe<Electoral_Roll_Users_Min_Fields>;
+  stddev?: Maybe<Electoral_Roll_Users_Stddev_Fields>;
+  stddev_pop?: Maybe<Electoral_Roll_Users_Stddev_Pop_Fields>;
+  stddev_samp?: Maybe<Electoral_Roll_Users_Stddev_Samp_Fields>;
+  sum?: Maybe<Electoral_Roll_Users_Sum_Fields>;
+  var_pop?: Maybe<Electoral_Roll_Users_Var_Pop_Fields>;
+  var_samp?: Maybe<Electoral_Roll_Users_Var_Samp_Fields>;
+  variance?: Maybe<Electoral_Roll_Users_Variance_Fields>;
+};
+
+
+/** aggregate fields of "electoral_roll_users" */
+export type Electoral_Roll_Users_Aggregate_FieldsCountArgs = {
+  columns?: Maybe<Array<Electoral_Roll_Users_Select_Column>>;
+  distinct?: Maybe<Scalars['Boolean']>;
+};
+
+/** aggregate avg on columns */
+export type Electoral_Roll_Users_Avg_Fields = {
+  __typename?: 'electoral_roll_users_avg_fields';
   electoralRollId?: Maybe<Scalars['Float']>;
   id?: Maybe<Scalars['Float']>;
-  partyId?: Maybe<Scalars['Float']>;
+  userId?: Maybe<Scalars['Float']>;
+};
+
+/** Boolean expression to filter rows from the table "electoral_roll_users". All fields are combined with a logical 'AND'. */
+export type Electoral_Roll_Users_Bool_Exp = {
+  _and?: Maybe<Array<Electoral_Roll_Users_Bool_Exp>>;
+  _not?: Maybe<Electoral_Roll_Users_Bool_Exp>;
+  _or?: Maybe<Array<Electoral_Roll_Users_Bool_Exp>>;
+  createdAt?: Maybe<Timestamptz_Comparison_Exp>;
+  electoralRollId?: Maybe<Int_Comparison_Exp>;
+  id?: Maybe<Int_Comparison_Exp>;
+  updatedAt?: Maybe<Timestamptz_Comparison_Exp>;
+  userId?: Maybe<Int_Comparison_Exp>;
+};
+
+/** unique or primary key constraints on table "electoral_roll_users" */
+export enum Electoral_Roll_Users_Constraint {
+  /** unique or primary key constraint */
+  ElectoralRollRowsPkey = 'electoral_roll_rows_pkey'
+}
+
+/** input type for incrementing numeric columns in table "electoral_roll_users" */
+export type Electoral_Roll_Users_Inc_Input = {
+  electoralRollId?: Maybe<Scalars['Int']>;
+  id?: Maybe<Scalars['Int']>;
+  userId?: Maybe<Scalars['Int']>;
+};
+
+/** input type for inserting data into table "electoral_roll_users" */
+export type Electoral_Roll_Users_Insert_Input = {
+  createdAt?: Maybe<Scalars['timestamptz']>;
+  electoralRollId?: Maybe<Scalars['Int']>;
+  id?: Maybe<Scalars['Int']>;
+  updatedAt?: Maybe<Scalars['timestamptz']>;
+  userId?: Maybe<Scalars['Int']>;
+};
+
+/** aggregate max on columns */
+export type Electoral_Roll_Users_Max_Fields = {
+  __typename?: 'electoral_roll_users_max_fields';
+  createdAt?: Maybe<Scalars['timestamptz']>;
+  electoralRollId?: Maybe<Scalars['Int']>;
+  id?: Maybe<Scalars['Int']>;
+  updatedAt?: Maybe<Scalars['timestamptz']>;
+  userId?: Maybe<Scalars['Int']>;
+};
+
+/** aggregate min on columns */
+export type Electoral_Roll_Users_Min_Fields = {
+  __typename?: 'electoral_roll_users_min_fields';
+  createdAt?: Maybe<Scalars['timestamptz']>;
+  electoralRollId?: Maybe<Scalars['Int']>;
+  id?: Maybe<Scalars['Int']>;
+  updatedAt?: Maybe<Scalars['timestamptz']>;
+  userId?: Maybe<Scalars['Int']>;
+};
+
+/** response of any mutation on the table "electoral_roll_users" */
+export type Electoral_Roll_Users_Mutation_Response = {
+  __typename?: 'electoral_roll_users_mutation_response';
+  /** number of rows affected by the mutation */
+  affected_rows: Scalars['Int'];
+  /** data from the rows affected by the mutation */
+  returning: Array<Electoral_Roll_Users>;
+};
+
+/** on conflict condition type for table "electoral_roll_users" */
+export type Electoral_Roll_Users_On_Conflict = {
+  constraint: Electoral_Roll_Users_Constraint;
+  update_columns: Array<Electoral_Roll_Users_Update_Column>;
+  where?: Maybe<Electoral_Roll_Users_Bool_Exp>;
+};
+
+/** Ordering options when selecting data from "electoral_roll_users". */
+export type Electoral_Roll_Users_Order_By = {
+  createdAt?: Maybe<Order_By>;
+  electoralRollId?: Maybe<Order_By>;
+  id?: Maybe<Order_By>;
+  updatedAt?: Maybe<Order_By>;
+  userId?: Maybe<Order_By>;
+};
+
+/** primary key columns input for table: electoral_roll_users */
+export type Electoral_Roll_Users_Pk_Columns_Input = {
+  id: Scalars['Int'];
+};
+
+/** select columns of table "electoral_roll_users" */
+export enum Electoral_Roll_Users_Select_Column {
+  /** column name */
+  CreatedAt = 'createdAt',
+  /** column name */
+  ElectoralRollId = 'electoralRollId',
+  /** column name */
+  Id = 'id',
+  /** column name */
+  UpdatedAt = 'updatedAt',
+  /** column name */
+  UserId = 'userId'
+}
+
+/** input type for updating data in table "electoral_roll_users" */
+export type Electoral_Roll_Users_Set_Input = {
+  createdAt?: Maybe<Scalars['timestamptz']>;
+  electoralRollId?: Maybe<Scalars['Int']>;
+  id?: Maybe<Scalars['Int']>;
+  updatedAt?: Maybe<Scalars['timestamptz']>;
+  userId?: Maybe<Scalars['Int']>;
+};
+
+/** aggregate stddev on columns */
+export type Electoral_Roll_Users_Stddev_Fields = {
+  __typename?: 'electoral_roll_users_stddev_fields';
+  electoralRollId?: Maybe<Scalars['Float']>;
+  id?: Maybe<Scalars['Float']>;
+  userId?: Maybe<Scalars['Float']>;
+};
+
+/** aggregate stddev_pop on columns */
+export type Electoral_Roll_Users_Stddev_Pop_Fields = {
+  __typename?: 'electoral_roll_users_stddev_pop_fields';
+  electoralRollId?: Maybe<Scalars['Float']>;
+  id?: Maybe<Scalars['Float']>;
+  userId?: Maybe<Scalars['Float']>;
+};
+
+/** aggregate stddev_samp on columns */
+export type Electoral_Roll_Users_Stddev_Samp_Fields = {
+  __typename?: 'electoral_roll_users_stddev_samp_fields';
+  electoralRollId?: Maybe<Scalars['Float']>;
+  id?: Maybe<Scalars['Float']>;
+  userId?: Maybe<Scalars['Float']>;
+};
+
+/** aggregate sum on columns */
+export type Electoral_Roll_Users_Sum_Fields = {
+  __typename?: 'electoral_roll_users_sum_fields';
+  electoralRollId?: Maybe<Scalars['Int']>;
+  id?: Maybe<Scalars['Int']>;
+  userId?: Maybe<Scalars['Int']>;
+};
+
+/** update columns of table "electoral_roll_users" */
+export enum Electoral_Roll_Users_Update_Column {
+  /** column name */
+  CreatedAt = 'createdAt',
+  /** column name */
+  ElectoralRollId = 'electoralRollId',
+  /** column name */
+  Id = 'id',
+  /** column name */
+  UpdatedAt = 'updatedAt',
+  /** column name */
+  UserId = 'userId'
+}
+
+/** aggregate var_pop on columns */
+export type Electoral_Roll_Users_Var_Pop_Fields = {
+  __typename?: 'electoral_roll_users_var_pop_fields';
+  electoralRollId?: Maybe<Scalars['Float']>;
+  id?: Maybe<Scalars['Float']>;
+  userId?: Maybe<Scalars['Float']>;
+};
+
+/** aggregate var_samp on columns */
+export type Electoral_Roll_Users_Var_Samp_Fields = {
+  __typename?: 'electoral_roll_users_var_samp_fields';
+  electoralRollId?: Maybe<Scalars['Float']>;
+  id?: Maybe<Scalars['Float']>;
+  userId?: Maybe<Scalars['Float']>;
+};
+
+/** aggregate variance on columns */
+export type Electoral_Roll_Users_Variance_Fields = {
+  __typename?: 'electoral_roll_users_variance_fields';
+  electoralRollId?: Maybe<Scalars['Float']>;
+  id?: Maybe<Scalars['Float']>;
   userId?: Maybe<Scalars['Float']>;
 };
 
 /** columns and relationships of "electoral_rolls" */
 export type Electoral_Rolls = {
   __typename?: 'electoral_rolls';
-  closedAt: Scalars['timestamptz'];
-  closedBy: Scalars['Int'];
   createdAt: Scalars['timestamptz'];
+  createdBy: Scalars['Int'];
   id: Scalars['Int'];
-  municipalityId?: Maybe<Scalars['Int']>;
   sectionId: Scalars['Int'];
   updatedAt: Scalars['timestamptz'];
 };
@@ -624,9 +1517,8 @@ export type Electoral_Rolls_Aggregate_FieldsCountArgs = {
 /** aggregate avg on columns */
 export type Electoral_Rolls_Avg_Fields = {
   __typename?: 'electoral_rolls_avg_fields';
-  closedBy?: Maybe<Scalars['Float']>;
+  createdBy?: Maybe<Scalars['Float']>;
   id?: Maybe<Scalars['Float']>;
-  municipalityId?: Maybe<Scalars['Float']>;
   sectionId?: Maybe<Scalars['Float']>;
 };
 
@@ -635,11 +1527,9 @@ export type Electoral_Rolls_Bool_Exp = {
   _and?: Maybe<Array<Electoral_Rolls_Bool_Exp>>;
   _not?: Maybe<Electoral_Rolls_Bool_Exp>;
   _or?: Maybe<Array<Electoral_Rolls_Bool_Exp>>;
-  closedAt?: Maybe<Timestamptz_Comparison_Exp>;
-  closedBy?: Maybe<Int_Comparison_Exp>;
   createdAt?: Maybe<Timestamptz_Comparison_Exp>;
+  createdBy?: Maybe<Int_Comparison_Exp>;
   id?: Maybe<Int_Comparison_Exp>;
-  municipalityId?: Maybe<Int_Comparison_Exp>;
   sectionId?: Maybe<Int_Comparison_Exp>;
   updatedAt?: Maybe<Timestamptz_Comparison_Exp>;
 };
@@ -652,19 +1542,16 @@ export enum Electoral_Rolls_Constraint {
 
 /** input type for incrementing numeric columns in table "electoral_rolls" */
 export type Electoral_Rolls_Inc_Input = {
-  closedBy?: Maybe<Scalars['Int']>;
+  createdBy?: Maybe<Scalars['Int']>;
   id?: Maybe<Scalars['Int']>;
-  municipalityId?: Maybe<Scalars['Int']>;
   sectionId?: Maybe<Scalars['Int']>;
 };
 
 /** input type for inserting data into table "electoral_rolls" */
 export type Electoral_Rolls_Insert_Input = {
-  closedAt?: Maybe<Scalars['timestamptz']>;
-  closedBy?: Maybe<Scalars['Int']>;
   createdAt?: Maybe<Scalars['timestamptz']>;
+  createdBy?: Maybe<Scalars['Int']>;
   id?: Maybe<Scalars['Int']>;
-  municipalityId?: Maybe<Scalars['Int']>;
   sectionId?: Maybe<Scalars['Int']>;
   updatedAt?: Maybe<Scalars['timestamptz']>;
 };
@@ -672,11 +1559,9 @@ export type Electoral_Rolls_Insert_Input = {
 /** aggregate max on columns */
 export type Electoral_Rolls_Max_Fields = {
   __typename?: 'electoral_rolls_max_fields';
-  closedAt?: Maybe<Scalars['timestamptz']>;
-  closedBy?: Maybe<Scalars['Int']>;
   createdAt?: Maybe<Scalars['timestamptz']>;
+  createdBy?: Maybe<Scalars['Int']>;
   id?: Maybe<Scalars['Int']>;
-  municipalityId?: Maybe<Scalars['Int']>;
   sectionId?: Maybe<Scalars['Int']>;
   updatedAt?: Maybe<Scalars['timestamptz']>;
 };
@@ -684,11 +1569,9 @@ export type Electoral_Rolls_Max_Fields = {
 /** aggregate min on columns */
 export type Electoral_Rolls_Min_Fields = {
   __typename?: 'electoral_rolls_min_fields';
-  closedAt?: Maybe<Scalars['timestamptz']>;
-  closedBy?: Maybe<Scalars['Int']>;
   createdAt?: Maybe<Scalars['timestamptz']>;
+  createdBy?: Maybe<Scalars['Int']>;
   id?: Maybe<Scalars['Int']>;
-  municipalityId?: Maybe<Scalars['Int']>;
   sectionId?: Maybe<Scalars['Int']>;
   updatedAt?: Maybe<Scalars['timestamptz']>;
 };
@@ -711,11 +1594,9 @@ export type Electoral_Rolls_On_Conflict = {
 
 /** Ordering options when selecting data from "electoral_rolls". */
 export type Electoral_Rolls_Order_By = {
-  closedAt?: Maybe<Order_By>;
-  closedBy?: Maybe<Order_By>;
   createdAt?: Maybe<Order_By>;
+  createdBy?: Maybe<Order_By>;
   id?: Maybe<Order_By>;
-  municipalityId?: Maybe<Order_By>;
   sectionId?: Maybe<Order_By>;
   updatedAt?: Maybe<Order_By>;
 };
@@ -728,15 +1609,11 @@ export type Electoral_Rolls_Pk_Columns_Input = {
 /** select columns of table "electoral_rolls" */
 export enum Electoral_Rolls_Select_Column {
   /** column name */
-  ClosedAt = 'closedAt',
-  /** column name */
-  ClosedBy = 'closedBy',
-  /** column name */
   CreatedAt = 'createdAt',
   /** column name */
-  Id = 'id',
+  CreatedBy = 'createdBy',
   /** column name */
-  MunicipalityId = 'municipalityId',
+  Id = 'id',
   /** column name */
   SectionId = 'sectionId',
   /** column name */
@@ -745,11 +1622,9 @@ export enum Electoral_Rolls_Select_Column {
 
 /** input type for updating data in table "electoral_rolls" */
 export type Electoral_Rolls_Set_Input = {
-  closedAt?: Maybe<Scalars['timestamptz']>;
-  closedBy?: Maybe<Scalars['Int']>;
   createdAt?: Maybe<Scalars['timestamptz']>;
+  createdBy?: Maybe<Scalars['Int']>;
   id?: Maybe<Scalars['Int']>;
-  municipalityId?: Maybe<Scalars['Int']>;
   sectionId?: Maybe<Scalars['Int']>;
   updatedAt?: Maybe<Scalars['timestamptz']>;
 };
@@ -757,51 +1632,43 @@ export type Electoral_Rolls_Set_Input = {
 /** aggregate stddev on columns */
 export type Electoral_Rolls_Stddev_Fields = {
   __typename?: 'electoral_rolls_stddev_fields';
-  closedBy?: Maybe<Scalars['Float']>;
+  createdBy?: Maybe<Scalars['Float']>;
   id?: Maybe<Scalars['Float']>;
-  municipalityId?: Maybe<Scalars['Float']>;
   sectionId?: Maybe<Scalars['Float']>;
 };
 
 /** aggregate stddev_pop on columns */
 export type Electoral_Rolls_Stddev_Pop_Fields = {
   __typename?: 'electoral_rolls_stddev_pop_fields';
-  closedBy?: Maybe<Scalars['Float']>;
+  createdBy?: Maybe<Scalars['Float']>;
   id?: Maybe<Scalars['Float']>;
-  municipalityId?: Maybe<Scalars['Float']>;
   sectionId?: Maybe<Scalars['Float']>;
 };
 
 /** aggregate stddev_samp on columns */
 export type Electoral_Rolls_Stddev_Samp_Fields = {
   __typename?: 'electoral_rolls_stddev_samp_fields';
-  closedBy?: Maybe<Scalars['Float']>;
+  createdBy?: Maybe<Scalars['Float']>;
   id?: Maybe<Scalars['Float']>;
-  municipalityId?: Maybe<Scalars['Float']>;
   sectionId?: Maybe<Scalars['Float']>;
 };
 
 /** aggregate sum on columns */
 export type Electoral_Rolls_Sum_Fields = {
   __typename?: 'electoral_rolls_sum_fields';
-  closedBy?: Maybe<Scalars['Int']>;
+  createdBy?: Maybe<Scalars['Int']>;
   id?: Maybe<Scalars['Int']>;
-  municipalityId?: Maybe<Scalars['Int']>;
   sectionId?: Maybe<Scalars['Int']>;
 };
 
 /** update columns of table "electoral_rolls" */
 export enum Electoral_Rolls_Update_Column {
   /** column name */
-  ClosedAt = 'closedAt',
-  /** column name */
-  ClosedBy = 'closedBy',
-  /** column name */
   CreatedAt = 'createdAt',
   /** column name */
-  Id = 'id',
+  CreatedBy = 'createdBy',
   /** column name */
-  MunicipalityId = 'municipalityId',
+  Id = 'id',
   /** column name */
   SectionId = 'sectionId',
   /** column name */
@@ -811,27 +1678,24 @@ export enum Electoral_Rolls_Update_Column {
 /** aggregate var_pop on columns */
 export type Electoral_Rolls_Var_Pop_Fields = {
   __typename?: 'electoral_rolls_var_pop_fields';
-  closedBy?: Maybe<Scalars['Float']>;
+  createdBy?: Maybe<Scalars['Float']>;
   id?: Maybe<Scalars['Float']>;
-  municipalityId?: Maybe<Scalars['Float']>;
   sectionId?: Maybe<Scalars['Float']>;
 };
 
 /** aggregate var_samp on columns */
 export type Electoral_Rolls_Var_Samp_Fields = {
   __typename?: 'electoral_rolls_var_samp_fields';
-  closedBy?: Maybe<Scalars['Float']>;
+  createdBy?: Maybe<Scalars['Float']>;
   id?: Maybe<Scalars['Float']>;
-  municipalityId?: Maybe<Scalars['Float']>;
   sectionId?: Maybe<Scalars['Float']>;
 };
 
 /** aggregate variance on columns */
 export type Electoral_Rolls_Variance_Fields = {
   __typename?: 'electoral_rolls_variance_fields';
-  closedBy?: Maybe<Scalars['Float']>;
+  createdBy?: Maybe<Scalars['Float']>;
   id?: Maybe<Scalars['Float']>;
-  municipalityId?: Maybe<Scalars['Float']>;
   sectionId?: Maybe<Scalars['Float']>;
 };
 
@@ -842,22 +1706,46 @@ export type Mutation_Root = {
   delete_addresses?: Maybe<Addresses_Mutation_Response>;
   /** delete single row from the table: "addresses" */
   delete_addresses_by_pk?: Maybe<Addresses>;
-  /** delete data from the table: "electoral_roll_rows" */
-  delete_electoral_roll_rows?: Maybe<Electoral_Roll_Rows_Mutation_Response>;
-  /** delete single row from the table: "electoral_roll_rows" */
-  delete_electoral_roll_rows_by_pk?: Maybe<Electoral_Roll_Rows>;
+  /** delete data from the table: "candidate_lists" */
+  delete_candidate_lists?: Maybe<Candidate_Lists_Mutation_Response>;
+  /** delete single row from the table: "candidate_lists" */
+  delete_candidate_lists_by_pk?: Maybe<Candidate_Lists>;
+  /** delete data from the table: "candidates" */
+  delete_candidates?: Maybe<Candidates_Mutation_Response>;
+  /** delete single row from the table: "candidates" */
+  delete_candidates_by_pk?: Maybe<Candidates>;
+  /** delete data from the table: "commision_members" */
+  delete_commision_members?: Maybe<Commision_Members_Mutation_Response>;
+  /** delete single row from the table: "commision_members" */
+  delete_commision_members_by_pk?: Maybe<Commision_Members>;
+  /** delete data from the table: "commissions" */
+  delete_commissions?: Maybe<Commissions_Mutation_Response>;
+  /** delete single row from the table: "commissions" */
+  delete_commissions_by_pk?: Maybe<Commissions>;
+  /** delete data from the table: "electoral_roll_users" */
+  delete_electoral_roll_users?: Maybe<Electoral_Roll_Users_Mutation_Response>;
+  /** delete single row from the table: "electoral_roll_users" */
+  delete_electoral_roll_users_by_pk?: Maybe<Electoral_Roll_Users>;
   /** delete data from the table: "electoral_rolls" */
   delete_electoral_rolls?: Maybe<Electoral_Rolls_Mutation_Response>;
   /** delete single row from the table: "electoral_rolls" */
   delete_electoral_rolls_by_pk?: Maybe<Electoral_Rolls>;
-  /** delete data from the table: "parties" */
-  delete_parties?: Maybe<Parties_Mutation_Response>;
-  /** delete single row from the table: "parties" */
-  delete_parties_by_pk?: Maybe<Parties>;
-  /** delete data from the table: "referendum_rows" */
-  delete_referendum_rows?: Maybe<Referendum_Rows_Mutation_Response>;
-  /** delete single row from the table: "referendum_rows" */
-  delete_referendum_rows_by_pk?: Maybe<Referendum_Rows>;
+  /** delete data from the table: "political_group_members" */
+  delete_political_group_members?: Maybe<Political_Group_Members_Mutation_Response>;
+  /** delete single row from the table: "political_group_members" */
+  delete_political_group_members_by_pk?: Maybe<Political_Group_Members>;
+  /** delete data from the table: "political_group_types" */
+  delete_political_group_types?: Maybe<Political_Group_Types_Mutation_Response>;
+  /** delete single row from the table: "political_group_types" */
+  delete_political_group_types_by_pk?: Maybe<Political_Group_Types>;
+  /** delete data from the table: "political_groups" */
+  delete_political_groups?: Maybe<Political_Groups_Mutation_Response>;
+  /** delete single row from the table: "political_groups" */
+  delete_political_groups_by_pk?: Maybe<Political_Groups>;
+  /** delete data from the table: "referendum_questions" */
+  delete_referendum_questions?: Maybe<Referendum_Questions_Mutation_Response>;
+  /** delete single row from the table: "referendum_questions" */
+  delete_referendum_questions_by_pk?: Maybe<Referendum_Questions>;
   /** delete data from the table: "referendum_votes" */
   delete_referendum_votes?: Maybe<Referendum_Votes_Mutation_Response>;
   /** delete single row from the table: "referendum_votes" */
@@ -886,6 +1774,10 @@ export type Mutation_Root = {
   delete_voting_section?: Maybe<Voting_Section_Mutation_Response>;
   /** delete single row from the table: "voting_section" */
   delete_voting_section_by_pk?: Maybe<Voting_Section>;
+  /** delete data from the table: "voting_section_sessions" */
+  delete_voting_section_sessions?: Maybe<Voting_Section_Sessions_Mutation_Response>;
+  /** delete single row from the table: "voting_section_sessions" */
+  delete_voting_section_sessions_by_pk?: Maybe<Voting_Section_Sessions>;
   /** delete data from the table: "voting_types" */
   delete_voting_types?: Maybe<Voting_Types_Mutation_Response>;
   /** delete single row from the table: "voting_types" */
@@ -898,22 +1790,46 @@ export type Mutation_Root = {
   insert_addresses?: Maybe<Addresses_Mutation_Response>;
   /** insert a single row into the table: "addresses" */
   insert_addresses_one?: Maybe<Addresses>;
-  /** insert data into the table: "electoral_roll_rows" */
-  insert_electoral_roll_rows?: Maybe<Electoral_Roll_Rows_Mutation_Response>;
-  /** insert a single row into the table: "electoral_roll_rows" */
-  insert_electoral_roll_rows_one?: Maybe<Electoral_Roll_Rows>;
+  /** insert data into the table: "candidate_lists" */
+  insert_candidate_lists?: Maybe<Candidate_Lists_Mutation_Response>;
+  /** insert a single row into the table: "candidate_lists" */
+  insert_candidate_lists_one?: Maybe<Candidate_Lists>;
+  /** insert data into the table: "candidates" */
+  insert_candidates?: Maybe<Candidates_Mutation_Response>;
+  /** insert a single row into the table: "candidates" */
+  insert_candidates_one?: Maybe<Candidates>;
+  /** insert data into the table: "commision_members" */
+  insert_commision_members?: Maybe<Commision_Members_Mutation_Response>;
+  /** insert a single row into the table: "commision_members" */
+  insert_commision_members_one?: Maybe<Commision_Members>;
+  /** insert data into the table: "commissions" */
+  insert_commissions?: Maybe<Commissions_Mutation_Response>;
+  /** insert a single row into the table: "commissions" */
+  insert_commissions_one?: Maybe<Commissions>;
+  /** insert data into the table: "electoral_roll_users" */
+  insert_electoral_roll_users?: Maybe<Electoral_Roll_Users_Mutation_Response>;
+  /** insert a single row into the table: "electoral_roll_users" */
+  insert_electoral_roll_users_one?: Maybe<Electoral_Roll_Users>;
   /** insert data into the table: "electoral_rolls" */
   insert_electoral_rolls?: Maybe<Electoral_Rolls_Mutation_Response>;
   /** insert a single row into the table: "electoral_rolls" */
   insert_electoral_rolls_one?: Maybe<Electoral_Rolls>;
-  /** insert data into the table: "parties" */
-  insert_parties?: Maybe<Parties_Mutation_Response>;
-  /** insert a single row into the table: "parties" */
-  insert_parties_one?: Maybe<Parties>;
-  /** insert data into the table: "referendum_rows" */
-  insert_referendum_rows?: Maybe<Referendum_Rows_Mutation_Response>;
-  /** insert a single row into the table: "referendum_rows" */
-  insert_referendum_rows_one?: Maybe<Referendum_Rows>;
+  /** insert data into the table: "political_group_members" */
+  insert_political_group_members?: Maybe<Political_Group_Members_Mutation_Response>;
+  /** insert a single row into the table: "political_group_members" */
+  insert_political_group_members_one?: Maybe<Political_Group_Members>;
+  /** insert data into the table: "political_group_types" */
+  insert_political_group_types?: Maybe<Political_Group_Types_Mutation_Response>;
+  /** insert a single row into the table: "political_group_types" */
+  insert_political_group_types_one?: Maybe<Political_Group_Types>;
+  /** insert data into the table: "political_groups" */
+  insert_political_groups?: Maybe<Political_Groups_Mutation_Response>;
+  /** insert a single row into the table: "political_groups" */
+  insert_political_groups_one?: Maybe<Political_Groups>;
+  /** insert data into the table: "referendum_questions" */
+  insert_referendum_questions?: Maybe<Referendum_Questions_Mutation_Response>;
+  /** insert a single row into the table: "referendum_questions" */
+  insert_referendum_questions_one?: Maybe<Referendum_Questions>;
   /** insert data into the table: "referendum_votes" */
   insert_referendum_votes?: Maybe<Referendum_Votes_Mutation_Response>;
   /** insert a single row into the table: "referendum_votes" */
@@ -942,6 +1858,10 @@ export type Mutation_Root = {
   insert_voting_section?: Maybe<Voting_Section_Mutation_Response>;
   /** insert a single row into the table: "voting_section" */
   insert_voting_section_one?: Maybe<Voting_Section>;
+  /** insert data into the table: "voting_section_sessions" */
+  insert_voting_section_sessions?: Maybe<Voting_Section_Sessions_Mutation_Response>;
+  /** insert a single row into the table: "voting_section_sessions" */
+  insert_voting_section_sessions_one?: Maybe<Voting_Section_Sessions>;
   /** insert data into the table: "voting_types" */
   insert_voting_types?: Maybe<Voting_Types_Mutation_Response>;
   /** insert a single row into the table: "voting_types" */
@@ -954,22 +1874,46 @@ export type Mutation_Root = {
   update_addresses?: Maybe<Addresses_Mutation_Response>;
   /** update single row of the table: "addresses" */
   update_addresses_by_pk?: Maybe<Addresses>;
-  /** update data of the table: "electoral_roll_rows" */
-  update_electoral_roll_rows?: Maybe<Electoral_Roll_Rows_Mutation_Response>;
-  /** update single row of the table: "electoral_roll_rows" */
-  update_electoral_roll_rows_by_pk?: Maybe<Electoral_Roll_Rows>;
+  /** update data of the table: "candidate_lists" */
+  update_candidate_lists?: Maybe<Candidate_Lists_Mutation_Response>;
+  /** update single row of the table: "candidate_lists" */
+  update_candidate_lists_by_pk?: Maybe<Candidate_Lists>;
+  /** update data of the table: "candidates" */
+  update_candidates?: Maybe<Candidates_Mutation_Response>;
+  /** update single row of the table: "candidates" */
+  update_candidates_by_pk?: Maybe<Candidates>;
+  /** update data of the table: "commision_members" */
+  update_commision_members?: Maybe<Commision_Members_Mutation_Response>;
+  /** update single row of the table: "commision_members" */
+  update_commision_members_by_pk?: Maybe<Commision_Members>;
+  /** update data of the table: "commissions" */
+  update_commissions?: Maybe<Commissions_Mutation_Response>;
+  /** update single row of the table: "commissions" */
+  update_commissions_by_pk?: Maybe<Commissions>;
+  /** update data of the table: "electoral_roll_users" */
+  update_electoral_roll_users?: Maybe<Electoral_Roll_Users_Mutation_Response>;
+  /** update single row of the table: "electoral_roll_users" */
+  update_electoral_roll_users_by_pk?: Maybe<Electoral_Roll_Users>;
   /** update data of the table: "electoral_rolls" */
   update_electoral_rolls?: Maybe<Electoral_Rolls_Mutation_Response>;
   /** update single row of the table: "electoral_rolls" */
   update_electoral_rolls_by_pk?: Maybe<Electoral_Rolls>;
-  /** update data of the table: "parties" */
-  update_parties?: Maybe<Parties_Mutation_Response>;
-  /** update single row of the table: "parties" */
-  update_parties_by_pk?: Maybe<Parties>;
-  /** update data of the table: "referendum_rows" */
-  update_referendum_rows?: Maybe<Referendum_Rows_Mutation_Response>;
-  /** update single row of the table: "referendum_rows" */
-  update_referendum_rows_by_pk?: Maybe<Referendum_Rows>;
+  /** update data of the table: "political_group_members" */
+  update_political_group_members?: Maybe<Political_Group_Members_Mutation_Response>;
+  /** update single row of the table: "political_group_members" */
+  update_political_group_members_by_pk?: Maybe<Political_Group_Members>;
+  /** update data of the table: "political_group_types" */
+  update_political_group_types?: Maybe<Political_Group_Types_Mutation_Response>;
+  /** update single row of the table: "political_group_types" */
+  update_political_group_types_by_pk?: Maybe<Political_Group_Types>;
+  /** update data of the table: "political_groups" */
+  update_political_groups?: Maybe<Political_Groups_Mutation_Response>;
+  /** update single row of the table: "political_groups" */
+  update_political_groups_by_pk?: Maybe<Political_Groups>;
+  /** update data of the table: "referendum_questions" */
+  update_referendum_questions?: Maybe<Referendum_Questions_Mutation_Response>;
+  /** update single row of the table: "referendum_questions" */
+  update_referendum_questions_by_pk?: Maybe<Referendum_Questions>;
   /** update data of the table: "referendum_votes" */
   update_referendum_votes?: Maybe<Referendum_Votes_Mutation_Response>;
   /** update single row of the table: "referendum_votes" */
@@ -998,6 +1942,10 @@ export type Mutation_Root = {
   update_voting_section?: Maybe<Voting_Section_Mutation_Response>;
   /** update single row of the table: "voting_section" */
   update_voting_section_by_pk?: Maybe<Voting_Section>;
+  /** update data of the table: "voting_section_sessions" */
+  update_voting_section_sessions?: Maybe<Voting_Section_Sessions_Mutation_Response>;
+  /** update single row of the table: "voting_section_sessions" */
+  update_voting_section_sessions_by_pk?: Maybe<Voting_Section_Sessions>;
   /** update data of the table: "voting_types" */
   update_voting_types?: Maybe<Voting_Types_Mutation_Response>;
   /** update single row of the table: "voting_types" */
@@ -1022,13 +1970,61 @@ export type Mutation_RootDelete_Addresses_By_PkArgs = {
 
 
 /** mutation root */
-export type Mutation_RootDelete_Electoral_Roll_RowsArgs = {
-  where: Electoral_Roll_Rows_Bool_Exp;
+export type Mutation_RootDelete_Candidate_ListsArgs = {
+  where: Candidate_Lists_Bool_Exp;
 };
 
 
 /** mutation root */
-export type Mutation_RootDelete_Electoral_Roll_Rows_By_PkArgs = {
+export type Mutation_RootDelete_Candidate_Lists_By_PkArgs = {
+  id: Scalars['Int'];
+};
+
+
+/** mutation root */
+export type Mutation_RootDelete_CandidatesArgs = {
+  where: Candidates_Bool_Exp;
+};
+
+
+/** mutation root */
+export type Mutation_RootDelete_Candidates_By_PkArgs = {
+  id: Scalars['Int'];
+};
+
+
+/** mutation root */
+export type Mutation_RootDelete_Commision_MembersArgs = {
+  where: Commision_Members_Bool_Exp;
+};
+
+
+/** mutation root */
+export type Mutation_RootDelete_Commision_Members_By_PkArgs = {
+  id: Scalars['Int'];
+};
+
+
+/** mutation root */
+export type Mutation_RootDelete_CommissionsArgs = {
+  where: Commissions_Bool_Exp;
+};
+
+
+/** mutation root */
+export type Mutation_RootDelete_Commissions_By_PkArgs = {
+  id: Scalars['Int'];
+};
+
+
+/** mutation root */
+export type Mutation_RootDelete_Electoral_Roll_UsersArgs = {
+  where: Electoral_Roll_Users_Bool_Exp;
+};
+
+
+/** mutation root */
+export type Mutation_RootDelete_Electoral_Roll_Users_By_PkArgs = {
   id: Scalars['Int'];
 };
 
@@ -1046,25 +2042,49 @@ export type Mutation_RootDelete_Electoral_Rolls_By_PkArgs = {
 
 
 /** mutation root */
-export type Mutation_RootDelete_PartiesArgs = {
-  where: Parties_Bool_Exp;
+export type Mutation_RootDelete_Political_Group_MembersArgs = {
+  where: Political_Group_Members_Bool_Exp;
 };
 
 
 /** mutation root */
-export type Mutation_RootDelete_Parties_By_PkArgs = {
+export type Mutation_RootDelete_Political_Group_Members_By_PkArgs = {
   id: Scalars['Int'];
 };
 
 
 /** mutation root */
-export type Mutation_RootDelete_Referendum_RowsArgs = {
-  where: Referendum_Rows_Bool_Exp;
+export type Mutation_RootDelete_Political_Group_TypesArgs = {
+  where: Political_Group_Types_Bool_Exp;
 };
 
 
 /** mutation root */
-export type Mutation_RootDelete_Referendum_Rows_By_PkArgs = {
+export type Mutation_RootDelete_Political_Group_Types_By_PkArgs = {
+  value: Scalars['String'];
+};
+
+
+/** mutation root */
+export type Mutation_RootDelete_Political_GroupsArgs = {
+  where: Political_Groups_Bool_Exp;
+};
+
+
+/** mutation root */
+export type Mutation_RootDelete_Political_Groups_By_PkArgs = {
+  id: Scalars['Int'];
+};
+
+
+/** mutation root */
+export type Mutation_RootDelete_Referendum_QuestionsArgs = {
+  where: Referendum_Questions_Bool_Exp;
+};
+
+
+/** mutation root */
+export type Mutation_RootDelete_Referendum_Questions_By_PkArgs = {
   id: Scalars['Int'];
 };
 
@@ -1154,6 +2174,18 @@ export type Mutation_RootDelete_Voting_Section_By_PkArgs = {
 
 
 /** mutation root */
+export type Mutation_RootDelete_Voting_Section_SessionsArgs = {
+  where: Voting_Section_Sessions_Bool_Exp;
+};
+
+
+/** mutation root */
+export type Mutation_RootDelete_Voting_Section_Sessions_By_PkArgs = {
+  id: Scalars['Int'];
+};
+
+
+/** mutation root */
 export type Mutation_RootDelete_Voting_TypesArgs = {
   where: Voting_Types_Bool_Exp;
 };
@@ -1161,7 +2193,7 @@ export type Mutation_RootDelete_Voting_TypesArgs = {
 
 /** mutation root */
 export type Mutation_RootDelete_Voting_Types_By_PkArgs = {
-  id: Scalars['Int'];
+  value: Scalars['String'];
 };
 
 
@@ -1192,16 +2224,72 @@ export type Mutation_RootInsert_Addresses_OneArgs = {
 
 
 /** mutation root */
-export type Mutation_RootInsert_Electoral_Roll_RowsArgs = {
-  objects: Array<Electoral_Roll_Rows_Insert_Input>;
-  on_conflict?: Maybe<Electoral_Roll_Rows_On_Conflict>;
+export type Mutation_RootInsert_Candidate_ListsArgs = {
+  objects: Array<Candidate_Lists_Insert_Input>;
+  on_conflict?: Maybe<Candidate_Lists_On_Conflict>;
 };
 
 
 /** mutation root */
-export type Mutation_RootInsert_Electoral_Roll_Rows_OneArgs = {
-  object: Electoral_Roll_Rows_Insert_Input;
-  on_conflict?: Maybe<Electoral_Roll_Rows_On_Conflict>;
+export type Mutation_RootInsert_Candidate_Lists_OneArgs = {
+  object: Candidate_Lists_Insert_Input;
+  on_conflict?: Maybe<Candidate_Lists_On_Conflict>;
+};
+
+
+/** mutation root */
+export type Mutation_RootInsert_CandidatesArgs = {
+  objects: Array<Candidates_Insert_Input>;
+  on_conflict?: Maybe<Candidates_On_Conflict>;
+};
+
+
+/** mutation root */
+export type Mutation_RootInsert_Candidates_OneArgs = {
+  object: Candidates_Insert_Input;
+  on_conflict?: Maybe<Candidates_On_Conflict>;
+};
+
+
+/** mutation root */
+export type Mutation_RootInsert_Commision_MembersArgs = {
+  objects: Array<Commision_Members_Insert_Input>;
+  on_conflict?: Maybe<Commision_Members_On_Conflict>;
+};
+
+
+/** mutation root */
+export type Mutation_RootInsert_Commision_Members_OneArgs = {
+  object: Commision_Members_Insert_Input;
+  on_conflict?: Maybe<Commision_Members_On_Conflict>;
+};
+
+
+/** mutation root */
+export type Mutation_RootInsert_CommissionsArgs = {
+  objects: Array<Commissions_Insert_Input>;
+  on_conflict?: Maybe<Commissions_On_Conflict>;
+};
+
+
+/** mutation root */
+export type Mutation_RootInsert_Commissions_OneArgs = {
+  object: Commissions_Insert_Input;
+  on_conflict?: Maybe<Commissions_On_Conflict>;
+};
+
+
+/** mutation root */
+export type Mutation_RootInsert_Electoral_Roll_UsersArgs = {
+  objects: Array<Electoral_Roll_Users_Insert_Input>;
+  on_conflict?: Maybe<Electoral_Roll_Users_On_Conflict>;
+};
+
+
+/** mutation root */
+export type Mutation_RootInsert_Electoral_Roll_Users_OneArgs = {
+  object: Electoral_Roll_Users_Insert_Input;
+  on_conflict?: Maybe<Electoral_Roll_Users_On_Conflict>;
 };
 
 
@@ -1220,30 +2308,58 @@ export type Mutation_RootInsert_Electoral_Rolls_OneArgs = {
 
 
 /** mutation root */
-export type Mutation_RootInsert_PartiesArgs = {
-  objects: Array<Parties_Insert_Input>;
-  on_conflict?: Maybe<Parties_On_Conflict>;
+export type Mutation_RootInsert_Political_Group_MembersArgs = {
+  objects: Array<Political_Group_Members_Insert_Input>;
+  on_conflict?: Maybe<Political_Group_Members_On_Conflict>;
 };
 
 
 /** mutation root */
-export type Mutation_RootInsert_Parties_OneArgs = {
-  object: Parties_Insert_Input;
-  on_conflict?: Maybe<Parties_On_Conflict>;
+export type Mutation_RootInsert_Political_Group_Members_OneArgs = {
+  object: Political_Group_Members_Insert_Input;
+  on_conflict?: Maybe<Political_Group_Members_On_Conflict>;
 };
 
 
 /** mutation root */
-export type Mutation_RootInsert_Referendum_RowsArgs = {
-  objects: Array<Referendum_Rows_Insert_Input>;
-  on_conflict?: Maybe<Referendum_Rows_On_Conflict>;
+export type Mutation_RootInsert_Political_Group_TypesArgs = {
+  objects: Array<Political_Group_Types_Insert_Input>;
+  on_conflict?: Maybe<Political_Group_Types_On_Conflict>;
 };
 
 
 /** mutation root */
-export type Mutation_RootInsert_Referendum_Rows_OneArgs = {
-  object: Referendum_Rows_Insert_Input;
-  on_conflict?: Maybe<Referendum_Rows_On_Conflict>;
+export type Mutation_RootInsert_Political_Group_Types_OneArgs = {
+  object: Political_Group_Types_Insert_Input;
+  on_conflict?: Maybe<Political_Group_Types_On_Conflict>;
+};
+
+
+/** mutation root */
+export type Mutation_RootInsert_Political_GroupsArgs = {
+  objects: Array<Political_Groups_Insert_Input>;
+  on_conflict?: Maybe<Political_Groups_On_Conflict>;
+};
+
+
+/** mutation root */
+export type Mutation_RootInsert_Political_Groups_OneArgs = {
+  object: Political_Groups_Insert_Input;
+  on_conflict?: Maybe<Political_Groups_On_Conflict>;
+};
+
+
+/** mutation root */
+export type Mutation_RootInsert_Referendum_QuestionsArgs = {
+  objects: Array<Referendum_Questions_Insert_Input>;
+  on_conflict?: Maybe<Referendum_Questions_On_Conflict>;
+};
+
+
+/** mutation root */
+export type Mutation_RootInsert_Referendum_Questions_OneArgs = {
+  object: Referendum_Questions_Insert_Input;
+  on_conflict?: Maybe<Referendum_Questions_On_Conflict>;
 };
 
 
@@ -1346,6 +2462,20 @@ export type Mutation_RootInsert_Voting_Section_OneArgs = {
 
 
 /** mutation root */
+export type Mutation_RootInsert_Voting_Section_SessionsArgs = {
+  objects: Array<Voting_Section_Sessions_Insert_Input>;
+  on_conflict?: Maybe<Voting_Section_Sessions_On_Conflict>;
+};
+
+
+/** mutation root */
+export type Mutation_RootInsert_Voting_Section_Sessions_OneArgs = {
+  object: Voting_Section_Sessions_Insert_Input;
+  on_conflict?: Maybe<Voting_Section_Sessions_On_Conflict>;
+};
+
+
+/** mutation root */
 export type Mutation_RootInsert_Voting_TypesArgs = {
   objects: Array<Voting_Types_Insert_Input>;
   on_conflict?: Maybe<Voting_Types_On_Conflict>;
@@ -1390,18 +2520,82 @@ export type Mutation_RootUpdate_Addresses_By_PkArgs = {
 
 
 /** mutation root */
-export type Mutation_RootUpdate_Electoral_Roll_RowsArgs = {
-  _inc?: Maybe<Electoral_Roll_Rows_Inc_Input>;
-  _set?: Maybe<Electoral_Roll_Rows_Set_Input>;
-  where: Electoral_Roll_Rows_Bool_Exp;
+export type Mutation_RootUpdate_Candidate_ListsArgs = {
+  _inc?: Maybe<Candidate_Lists_Inc_Input>;
+  _set?: Maybe<Candidate_Lists_Set_Input>;
+  where: Candidate_Lists_Bool_Exp;
 };
 
 
 /** mutation root */
-export type Mutation_RootUpdate_Electoral_Roll_Rows_By_PkArgs = {
-  _inc?: Maybe<Electoral_Roll_Rows_Inc_Input>;
-  _set?: Maybe<Electoral_Roll_Rows_Set_Input>;
-  pk_columns: Electoral_Roll_Rows_Pk_Columns_Input;
+export type Mutation_RootUpdate_Candidate_Lists_By_PkArgs = {
+  _inc?: Maybe<Candidate_Lists_Inc_Input>;
+  _set?: Maybe<Candidate_Lists_Set_Input>;
+  pk_columns: Candidate_Lists_Pk_Columns_Input;
+};
+
+
+/** mutation root */
+export type Mutation_RootUpdate_CandidatesArgs = {
+  _inc?: Maybe<Candidates_Inc_Input>;
+  _set?: Maybe<Candidates_Set_Input>;
+  where: Candidates_Bool_Exp;
+};
+
+
+/** mutation root */
+export type Mutation_RootUpdate_Candidates_By_PkArgs = {
+  _inc?: Maybe<Candidates_Inc_Input>;
+  _set?: Maybe<Candidates_Set_Input>;
+  pk_columns: Candidates_Pk_Columns_Input;
+};
+
+
+/** mutation root */
+export type Mutation_RootUpdate_Commision_MembersArgs = {
+  _inc?: Maybe<Commision_Members_Inc_Input>;
+  _set?: Maybe<Commision_Members_Set_Input>;
+  where: Commision_Members_Bool_Exp;
+};
+
+
+/** mutation root */
+export type Mutation_RootUpdate_Commision_Members_By_PkArgs = {
+  _inc?: Maybe<Commision_Members_Inc_Input>;
+  _set?: Maybe<Commision_Members_Set_Input>;
+  pk_columns: Commision_Members_Pk_Columns_Input;
+};
+
+
+/** mutation root */
+export type Mutation_RootUpdate_CommissionsArgs = {
+  _inc?: Maybe<Commissions_Inc_Input>;
+  _set?: Maybe<Commissions_Set_Input>;
+  where: Commissions_Bool_Exp;
+};
+
+
+/** mutation root */
+export type Mutation_RootUpdate_Commissions_By_PkArgs = {
+  _inc?: Maybe<Commissions_Inc_Input>;
+  _set?: Maybe<Commissions_Set_Input>;
+  pk_columns: Commissions_Pk_Columns_Input;
+};
+
+
+/** mutation root */
+export type Mutation_RootUpdate_Electoral_Roll_UsersArgs = {
+  _inc?: Maybe<Electoral_Roll_Users_Inc_Input>;
+  _set?: Maybe<Electoral_Roll_Users_Set_Input>;
+  where: Electoral_Roll_Users_Bool_Exp;
+};
+
+
+/** mutation root */
+export type Mutation_RootUpdate_Electoral_Roll_Users_By_PkArgs = {
+  _inc?: Maybe<Electoral_Roll_Users_Inc_Input>;
+  _set?: Maybe<Electoral_Roll_Users_Set_Input>;
+  pk_columns: Electoral_Roll_Users_Pk_Columns_Input;
 };
 
 
@@ -1422,34 +2616,64 @@ export type Mutation_RootUpdate_Electoral_Rolls_By_PkArgs = {
 
 
 /** mutation root */
-export type Mutation_RootUpdate_PartiesArgs = {
-  _inc?: Maybe<Parties_Inc_Input>;
-  _set?: Maybe<Parties_Set_Input>;
-  where: Parties_Bool_Exp;
+export type Mutation_RootUpdate_Political_Group_MembersArgs = {
+  _inc?: Maybe<Political_Group_Members_Inc_Input>;
+  _set?: Maybe<Political_Group_Members_Set_Input>;
+  where: Political_Group_Members_Bool_Exp;
 };
 
 
 /** mutation root */
-export type Mutation_RootUpdate_Parties_By_PkArgs = {
-  _inc?: Maybe<Parties_Inc_Input>;
-  _set?: Maybe<Parties_Set_Input>;
-  pk_columns: Parties_Pk_Columns_Input;
+export type Mutation_RootUpdate_Political_Group_Members_By_PkArgs = {
+  _inc?: Maybe<Political_Group_Members_Inc_Input>;
+  _set?: Maybe<Political_Group_Members_Set_Input>;
+  pk_columns: Political_Group_Members_Pk_Columns_Input;
 };
 
 
 /** mutation root */
-export type Mutation_RootUpdate_Referendum_RowsArgs = {
-  _inc?: Maybe<Referendum_Rows_Inc_Input>;
-  _set?: Maybe<Referendum_Rows_Set_Input>;
-  where: Referendum_Rows_Bool_Exp;
+export type Mutation_RootUpdate_Political_Group_TypesArgs = {
+  _set?: Maybe<Political_Group_Types_Set_Input>;
+  where: Political_Group_Types_Bool_Exp;
 };
 
 
 /** mutation root */
-export type Mutation_RootUpdate_Referendum_Rows_By_PkArgs = {
-  _inc?: Maybe<Referendum_Rows_Inc_Input>;
-  _set?: Maybe<Referendum_Rows_Set_Input>;
-  pk_columns: Referendum_Rows_Pk_Columns_Input;
+export type Mutation_RootUpdate_Political_Group_Types_By_PkArgs = {
+  _set?: Maybe<Political_Group_Types_Set_Input>;
+  pk_columns: Political_Group_Types_Pk_Columns_Input;
+};
+
+
+/** mutation root */
+export type Mutation_RootUpdate_Political_GroupsArgs = {
+  _inc?: Maybe<Political_Groups_Inc_Input>;
+  _set?: Maybe<Political_Groups_Set_Input>;
+  where: Political_Groups_Bool_Exp;
+};
+
+
+/** mutation root */
+export type Mutation_RootUpdate_Political_Groups_By_PkArgs = {
+  _inc?: Maybe<Political_Groups_Inc_Input>;
+  _set?: Maybe<Political_Groups_Set_Input>;
+  pk_columns: Political_Groups_Pk_Columns_Input;
+};
+
+
+/** mutation root */
+export type Mutation_RootUpdate_Referendum_QuestionsArgs = {
+  _inc?: Maybe<Referendum_Questions_Inc_Input>;
+  _set?: Maybe<Referendum_Questions_Set_Input>;
+  where: Referendum_Questions_Bool_Exp;
+};
+
+
+/** mutation root */
+export type Mutation_RootUpdate_Referendum_Questions_By_PkArgs = {
+  _inc?: Maybe<Referendum_Questions_Inc_Input>;
+  _set?: Maybe<Referendum_Questions_Set_Input>;
+  pk_columns: Referendum_Questions_Pk_Columns_Input;
 };
 
 
@@ -1566,8 +2790,23 @@ export type Mutation_RootUpdate_Voting_Section_By_PkArgs = {
 
 
 /** mutation root */
+export type Mutation_RootUpdate_Voting_Section_SessionsArgs = {
+  _inc?: Maybe<Voting_Section_Sessions_Inc_Input>;
+  _set?: Maybe<Voting_Section_Sessions_Set_Input>;
+  where: Voting_Section_Sessions_Bool_Exp;
+};
+
+
+/** mutation root */
+export type Mutation_RootUpdate_Voting_Section_Sessions_By_PkArgs = {
+  _inc?: Maybe<Voting_Section_Sessions_Inc_Input>;
+  _set?: Maybe<Voting_Section_Sessions_Set_Input>;
+  pk_columns: Voting_Section_Sessions_Pk_Columns_Input;
+};
+
+
+/** mutation root */
 export type Mutation_RootUpdate_Voting_TypesArgs = {
-  _inc?: Maybe<Voting_Types_Inc_Input>;
   _set?: Maybe<Voting_Types_Set_Input>;
   where: Voting_Types_Bool_Exp;
 };
@@ -1575,7 +2814,6 @@ export type Mutation_RootUpdate_Voting_TypesArgs = {
 
 /** mutation root */
 export type Mutation_RootUpdate_Voting_Types_By_PkArgs = {
-  _inc?: Maybe<Voting_Types_Inc_Input>;
   _set?: Maybe<Voting_Types_Set_Input>;
   pk_columns: Voting_Types_Pk_Columns_Input;
 };
@@ -1612,89 +2850,459 @@ export enum Order_By {
   DescNullsLast = 'desc_nulls_last'
 }
 
-/** columns and relationships of "parties" */
-export type Parties = {
-  __typename?: 'parties';
+/** columns and relationships of "political_group_members" */
+export type Political_Group_Members = {
+  __typename?: 'political_group_members';
+  active: Scalars['Boolean'];
   createdAt: Scalars['timestamptz'];
-  description: Scalars['String'];
   id: Scalars['Int'];
-  name: Scalars['String'];
+  politicalGroupId: Scalars['Int'];
   updatedAt: Scalars['timestamptz'];
+  userId: Scalars['Int'];
 };
 
-/** aggregated selection of "parties" */
-export type Parties_Aggregate = {
-  __typename?: 'parties_aggregate';
-  aggregate?: Maybe<Parties_Aggregate_Fields>;
-  nodes: Array<Parties>;
+/** aggregated selection of "political_group_members" */
+export type Political_Group_Members_Aggregate = {
+  __typename?: 'political_group_members_aggregate';
+  aggregate?: Maybe<Political_Group_Members_Aggregate_Fields>;
+  nodes: Array<Political_Group_Members>;
 };
 
-/** aggregate fields of "parties" */
-export type Parties_Aggregate_Fields = {
-  __typename?: 'parties_aggregate_fields';
-  avg?: Maybe<Parties_Avg_Fields>;
+/** aggregate fields of "political_group_members" */
+export type Political_Group_Members_Aggregate_Fields = {
+  __typename?: 'political_group_members_aggregate_fields';
+  avg?: Maybe<Political_Group_Members_Avg_Fields>;
   count: Scalars['Int'];
-  max?: Maybe<Parties_Max_Fields>;
-  min?: Maybe<Parties_Min_Fields>;
-  stddev?: Maybe<Parties_Stddev_Fields>;
-  stddev_pop?: Maybe<Parties_Stddev_Pop_Fields>;
-  stddev_samp?: Maybe<Parties_Stddev_Samp_Fields>;
-  sum?: Maybe<Parties_Sum_Fields>;
-  var_pop?: Maybe<Parties_Var_Pop_Fields>;
-  var_samp?: Maybe<Parties_Var_Samp_Fields>;
-  variance?: Maybe<Parties_Variance_Fields>;
+  max?: Maybe<Political_Group_Members_Max_Fields>;
+  min?: Maybe<Political_Group_Members_Min_Fields>;
+  stddev?: Maybe<Political_Group_Members_Stddev_Fields>;
+  stddev_pop?: Maybe<Political_Group_Members_Stddev_Pop_Fields>;
+  stddev_samp?: Maybe<Political_Group_Members_Stddev_Samp_Fields>;
+  sum?: Maybe<Political_Group_Members_Sum_Fields>;
+  var_pop?: Maybe<Political_Group_Members_Var_Pop_Fields>;
+  var_samp?: Maybe<Political_Group_Members_Var_Samp_Fields>;
+  variance?: Maybe<Political_Group_Members_Variance_Fields>;
 };
 
 
-/** aggregate fields of "parties" */
-export type Parties_Aggregate_FieldsCountArgs = {
-  columns?: Maybe<Array<Parties_Select_Column>>;
+/** aggregate fields of "political_group_members" */
+export type Political_Group_Members_Aggregate_FieldsCountArgs = {
+  columns?: Maybe<Array<Political_Group_Members_Select_Column>>;
   distinct?: Maybe<Scalars['Boolean']>;
 };
 
 /** aggregate avg on columns */
-export type Parties_Avg_Fields = {
-  __typename?: 'parties_avg_fields';
+export type Political_Group_Members_Avg_Fields = {
+  __typename?: 'political_group_members_avg_fields';
+  id?: Maybe<Scalars['Float']>;
+  politicalGroupId?: Maybe<Scalars['Float']>;
+  userId?: Maybe<Scalars['Float']>;
+};
+
+/** Boolean expression to filter rows from the table "political_group_members". All fields are combined with a logical 'AND'. */
+export type Political_Group_Members_Bool_Exp = {
+  _and?: Maybe<Array<Political_Group_Members_Bool_Exp>>;
+  _not?: Maybe<Political_Group_Members_Bool_Exp>;
+  _or?: Maybe<Array<Political_Group_Members_Bool_Exp>>;
+  active?: Maybe<Boolean_Comparison_Exp>;
+  createdAt?: Maybe<Timestamptz_Comparison_Exp>;
+  id?: Maybe<Int_Comparison_Exp>;
+  politicalGroupId?: Maybe<Int_Comparison_Exp>;
+  updatedAt?: Maybe<Timestamptz_Comparison_Exp>;
+  userId?: Maybe<Int_Comparison_Exp>;
+};
+
+/** unique or primary key constraints on table "political_group_members" */
+export enum Political_Group_Members_Constraint {
+  /** unique or primary key constraint */
+  PatryMembersPkey = 'patry_members_pkey',
+  /** unique or primary key constraint */
+  PatryMembersUserIdKey = 'patry_members_userId_key'
+}
+
+/** input type for incrementing numeric columns in table "political_group_members" */
+export type Political_Group_Members_Inc_Input = {
+  id?: Maybe<Scalars['Int']>;
+  politicalGroupId?: Maybe<Scalars['Int']>;
+  userId?: Maybe<Scalars['Int']>;
+};
+
+/** input type for inserting data into table "political_group_members" */
+export type Political_Group_Members_Insert_Input = {
+  active?: Maybe<Scalars['Boolean']>;
+  createdAt?: Maybe<Scalars['timestamptz']>;
+  id?: Maybe<Scalars['Int']>;
+  politicalGroupId?: Maybe<Scalars['Int']>;
+  updatedAt?: Maybe<Scalars['timestamptz']>;
+  userId?: Maybe<Scalars['Int']>;
+};
+
+/** aggregate max on columns */
+export type Political_Group_Members_Max_Fields = {
+  __typename?: 'political_group_members_max_fields';
+  createdAt?: Maybe<Scalars['timestamptz']>;
+  id?: Maybe<Scalars['Int']>;
+  politicalGroupId?: Maybe<Scalars['Int']>;
+  updatedAt?: Maybe<Scalars['timestamptz']>;
+  userId?: Maybe<Scalars['Int']>;
+};
+
+/** aggregate min on columns */
+export type Political_Group_Members_Min_Fields = {
+  __typename?: 'political_group_members_min_fields';
+  createdAt?: Maybe<Scalars['timestamptz']>;
+  id?: Maybe<Scalars['Int']>;
+  politicalGroupId?: Maybe<Scalars['Int']>;
+  updatedAt?: Maybe<Scalars['timestamptz']>;
+  userId?: Maybe<Scalars['Int']>;
+};
+
+/** response of any mutation on the table "political_group_members" */
+export type Political_Group_Members_Mutation_Response = {
+  __typename?: 'political_group_members_mutation_response';
+  /** number of rows affected by the mutation */
+  affected_rows: Scalars['Int'];
+  /** data from the rows affected by the mutation */
+  returning: Array<Political_Group_Members>;
+};
+
+/** on conflict condition type for table "political_group_members" */
+export type Political_Group_Members_On_Conflict = {
+  constraint: Political_Group_Members_Constraint;
+  update_columns: Array<Political_Group_Members_Update_Column>;
+  where?: Maybe<Political_Group_Members_Bool_Exp>;
+};
+
+/** Ordering options when selecting data from "political_group_members". */
+export type Political_Group_Members_Order_By = {
+  active?: Maybe<Order_By>;
+  createdAt?: Maybe<Order_By>;
+  id?: Maybe<Order_By>;
+  politicalGroupId?: Maybe<Order_By>;
+  updatedAt?: Maybe<Order_By>;
+  userId?: Maybe<Order_By>;
+};
+
+/** primary key columns input for table: political_group_members */
+export type Political_Group_Members_Pk_Columns_Input = {
+  id: Scalars['Int'];
+};
+
+/** select columns of table "political_group_members" */
+export enum Political_Group_Members_Select_Column {
+  /** column name */
+  Active = 'active',
+  /** column name */
+  CreatedAt = 'createdAt',
+  /** column name */
+  Id = 'id',
+  /** column name */
+  PoliticalGroupId = 'politicalGroupId',
+  /** column name */
+  UpdatedAt = 'updatedAt',
+  /** column name */
+  UserId = 'userId'
+}
+
+/** input type for updating data in table "political_group_members" */
+export type Political_Group_Members_Set_Input = {
+  active?: Maybe<Scalars['Boolean']>;
+  createdAt?: Maybe<Scalars['timestamptz']>;
+  id?: Maybe<Scalars['Int']>;
+  politicalGroupId?: Maybe<Scalars['Int']>;
+  updatedAt?: Maybe<Scalars['timestamptz']>;
+  userId?: Maybe<Scalars['Int']>;
+};
+
+/** aggregate stddev on columns */
+export type Political_Group_Members_Stddev_Fields = {
+  __typename?: 'political_group_members_stddev_fields';
+  id?: Maybe<Scalars['Float']>;
+  politicalGroupId?: Maybe<Scalars['Float']>;
+  userId?: Maybe<Scalars['Float']>;
+};
+
+/** aggregate stddev_pop on columns */
+export type Political_Group_Members_Stddev_Pop_Fields = {
+  __typename?: 'political_group_members_stddev_pop_fields';
+  id?: Maybe<Scalars['Float']>;
+  politicalGroupId?: Maybe<Scalars['Float']>;
+  userId?: Maybe<Scalars['Float']>;
+};
+
+/** aggregate stddev_samp on columns */
+export type Political_Group_Members_Stddev_Samp_Fields = {
+  __typename?: 'political_group_members_stddev_samp_fields';
+  id?: Maybe<Scalars['Float']>;
+  politicalGroupId?: Maybe<Scalars['Float']>;
+  userId?: Maybe<Scalars['Float']>;
+};
+
+/** aggregate sum on columns */
+export type Political_Group_Members_Sum_Fields = {
+  __typename?: 'political_group_members_sum_fields';
+  id?: Maybe<Scalars['Int']>;
+  politicalGroupId?: Maybe<Scalars['Int']>;
+  userId?: Maybe<Scalars['Int']>;
+};
+
+/** update columns of table "political_group_members" */
+export enum Political_Group_Members_Update_Column {
+  /** column name */
+  Active = 'active',
+  /** column name */
+  CreatedAt = 'createdAt',
+  /** column name */
+  Id = 'id',
+  /** column name */
+  PoliticalGroupId = 'politicalGroupId',
+  /** column name */
+  UpdatedAt = 'updatedAt',
+  /** column name */
+  UserId = 'userId'
+}
+
+/** aggregate var_pop on columns */
+export type Political_Group_Members_Var_Pop_Fields = {
+  __typename?: 'political_group_members_var_pop_fields';
+  id?: Maybe<Scalars['Float']>;
+  politicalGroupId?: Maybe<Scalars['Float']>;
+  userId?: Maybe<Scalars['Float']>;
+};
+
+/** aggregate var_samp on columns */
+export type Political_Group_Members_Var_Samp_Fields = {
+  __typename?: 'political_group_members_var_samp_fields';
+  id?: Maybe<Scalars['Float']>;
+  politicalGroupId?: Maybe<Scalars['Float']>;
+  userId?: Maybe<Scalars['Float']>;
+};
+
+/** aggregate variance on columns */
+export type Political_Group_Members_Variance_Fields = {
+  __typename?: 'political_group_members_variance_fields';
+  id?: Maybe<Scalars['Float']>;
+  politicalGroupId?: Maybe<Scalars['Float']>;
+  userId?: Maybe<Scalars['Float']>;
+};
+
+/** columns and relationships of "political_group_types" */
+export type Political_Group_Types = {
+  __typename?: 'political_group_types';
+  description: Scalars['String'];
+  value: Scalars['String'];
+};
+
+/** aggregated selection of "political_group_types" */
+export type Political_Group_Types_Aggregate = {
+  __typename?: 'political_group_types_aggregate';
+  aggregate?: Maybe<Political_Group_Types_Aggregate_Fields>;
+  nodes: Array<Political_Group_Types>;
+};
+
+/** aggregate fields of "political_group_types" */
+export type Political_Group_Types_Aggregate_Fields = {
+  __typename?: 'political_group_types_aggregate_fields';
+  count: Scalars['Int'];
+  max?: Maybe<Political_Group_Types_Max_Fields>;
+  min?: Maybe<Political_Group_Types_Min_Fields>;
+};
+
+
+/** aggregate fields of "political_group_types" */
+export type Political_Group_Types_Aggregate_FieldsCountArgs = {
+  columns?: Maybe<Array<Political_Group_Types_Select_Column>>;
+  distinct?: Maybe<Scalars['Boolean']>;
+};
+
+/** Boolean expression to filter rows from the table "political_group_types". All fields are combined with a logical 'AND'. */
+export type Political_Group_Types_Bool_Exp = {
+  _and?: Maybe<Array<Political_Group_Types_Bool_Exp>>;
+  _not?: Maybe<Political_Group_Types_Bool_Exp>;
+  _or?: Maybe<Array<Political_Group_Types_Bool_Exp>>;
+  description?: Maybe<String_Comparison_Exp>;
+  value?: Maybe<String_Comparison_Exp>;
+};
+
+/** unique or primary key constraints on table "political_group_types" */
+export enum Political_Group_Types_Constraint {
+  /** unique or primary key constraint */
+  PoliticalGroupTypesPkey = 'political_group_types_pkey'
+}
+
+export enum Political_Group_Types_Enum {
+  /** коалиция */
+  Coalition = 'coalition',
+  /** инициативен комитет */
+  InitiativeCommittee = 'initiative_committee',
+  /** партия */
+  Party = 'party'
+}
+
+/** Boolean expression to compare columns of type "political_group_types_enum". All fields are combined with logical 'AND'. */
+export type Political_Group_Types_Enum_Comparison_Exp = {
+  _eq?: Maybe<Political_Group_Types_Enum>;
+  _in?: Maybe<Array<Political_Group_Types_Enum>>;
+  _is_null?: Maybe<Scalars['Boolean']>;
+  _neq?: Maybe<Political_Group_Types_Enum>;
+  _nin?: Maybe<Array<Political_Group_Types_Enum>>;
+};
+
+/** input type for inserting data into table "political_group_types" */
+export type Political_Group_Types_Insert_Input = {
+  description?: Maybe<Scalars['String']>;
+  value?: Maybe<Scalars['String']>;
+};
+
+/** aggregate max on columns */
+export type Political_Group_Types_Max_Fields = {
+  __typename?: 'political_group_types_max_fields';
+  description?: Maybe<Scalars['String']>;
+  value?: Maybe<Scalars['String']>;
+};
+
+/** aggregate min on columns */
+export type Political_Group_Types_Min_Fields = {
+  __typename?: 'political_group_types_min_fields';
+  description?: Maybe<Scalars['String']>;
+  value?: Maybe<Scalars['String']>;
+};
+
+/** response of any mutation on the table "political_group_types" */
+export type Political_Group_Types_Mutation_Response = {
+  __typename?: 'political_group_types_mutation_response';
+  /** number of rows affected by the mutation */
+  affected_rows: Scalars['Int'];
+  /** data from the rows affected by the mutation */
+  returning: Array<Political_Group_Types>;
+};
+
+/** on conflict condition type for table "political_group_types" */
+export type Political_Group_Types_On_Conflict = {
+  constraint: Political_Group_Types_Constraint;
+  update_columns: Array<Political_Group_Types_Update_Column>;
+  where?: Maybe<Political_Group_Types_Bool_Exp>;
+};
+
+/** Ordering options when selecting data from "political_group_types". */
+export type Political_Group_Types_Order_By = {
+  description?: Maybe<Order_By>;
+  value?: Maybe<Order_By>;
+};
+
+/** primary key columns input for table: political_group_types */
+export type Political_Group_Types_Pk_Columns_Input = {
+  value: Scalars['String'];
+};
+
+/** select columns of table "political_group_types" */
+export enum Political_Group_Types_Select_Column {
+  /** column name */
+  Description = 'description',
+  /** column name */
+  Value = 'value'
+}
+
+/** input type for updating data in table "political_group_types" */
+export type Political_Group_Types_Set_Input = {
+  description?: Maybe<Scalars['String']>;
+  value?: Maybe<Scalars['String']>;
+};
+
+/** update columns of table "political_group_types" */
+export enum Political_Group_Types_Update_Column {
+  /** column name */
+  Description = 'description',
+  /** column name */
+  Value = 'value'
+}
+
+/** columns and relationships of "political_groups" */
+export type Political_Groups = {
+  __typename?: 'political_groups';
+  createdAt: Scalars['timestamptz'];
+  description: Scalars['String'];
+  id: Scalars['Int'];
+  name: Scalars['String'];
+  type: Political_Group_Types_Enum;
+  updatedAt: Scalars['timestamptz'];
+};
+
+/** aggregated selection of "political_groups" */
+export type Political_Groups_Aggregate = {
+  __typename?: 'political_groups_aggregate';
+  aggregate?: Maybe<Political_Groups_Aggregate_Fields>;
+  nodes: Array<Political_Groups>;
+};
+
+/** aggregate fields of "political_groups" */
+export type Political_Groups_Aggregate_Fields = {
+  __typename?: 'political_groups_aggregate_fields';
+  avg?: Maybe<Political_Groups_Avg_Fields>;
+  count: Scalars['Int'];
+  max?: Maybe<Political_Groups_Max_Fields>;
+  min?: Maybe<Political_Groups_Min_Fields>;
+  stddev?: Maybe<Political_Groups_Stddev_Fields>;
+  stddev_pop?: Maybe<Political_Groups_Stddev_Pop_Fields>;
+  stddev_samp?: Maybe<Political_Groups_Stddev_Samp_Fields>;
+  sum?: Maybe<Political_Groups_Sum_Fields>;
+  var_pop?: Maybe<Political_Groups_Var_Pop_Fields>;
+  var_samp?: Maybe<Political_Groups_Var_Samp_Fields>;
+  variance?: Maybe<Political_Groups_Variance_Fields>;
+};
+
+
+/** aggregate fields of "political_groups" */
+export type Political_Groups_Aggregate_FieldsCountArgs = {
+  columns?: Maybe<Array<Political_Groups_Select_Column>>;
+  distinct?: Maybe<Scalars['Boolean']>;
+};
+
+/** aggregate avg on columns */
+export type Political_Groups_Avg_Fields = {
+  __typename?: 'political_groups_avg_fields';
   id?: Maybe<Scalars['Float']>;
 };
 
-/** Boolean expression to filter rows from the table "parties". All fields are combined with a logical 'AND'. */
-export type Parties_Bool_Exp = {
-  _and?: Maybe<Array<Parties_Bool_Exp>>;
-  _not?: Maybe<Parties_Bool_Exp>;
-  _or?: Maybe<Array<Parties_Bool_Exp>>;
+/** Boolean expression to filter rows from the table "political_groups". All fields are combined with a logical 'AND'. */
+export type Political_Groups_Bool_Exp = {
+  _and?: Maybe<Array<Political_Groups_Bool_Exp>>;
+  _not?: Maybe<Political_Groups_Bool_Exp>;
+  _or?: Maybe<Array<Political_Groups_Bool_Exp>>;
   createdAt?: Maybe<Timestamptz_Comparison_Exp>;
   description?: Maybe<String_Comparison_Exp>;
   id?: Maybe<Int_Comparison_Exp>;
   name?: Maybe<String_Comparison_Exp>;
+  type?: Maybe<Political_Group_Types_Enum_Comparison_Exp>;
   updatedAt?: Maybe<Timestamptz_Comparison_Exp>;
 };
 
-/** unique or primary key constraints on table "parties" */
-export enum Parties_Constraint {
+/** unique or primary key constraints on table "political_groups" */
+export enum Political_Groups_Constraint {
   /** unique or primary key constraint */
   PartiesNameKey = 'parties_name_key',
   /** unique or primary key constraint */
   PartiesPkey = 'parties_pkey'
 }
 
-/** input type for incrementing numeric columns in table "parties" */
-export type Parties_Inc_Input = {
+/** input type for incrementing numeric columns in table "political_groups" */
+export type Political_Groups_Inc_Input = {
   id?: Maybe<Scalars['Int']>;
 };
 
-/** input type for inserting data into table "parties" */
-export type Parties_Insert_Input = {
+/** input type for inserting data into table "political_groups" */
+export type Political_Groups_Insert_Input = {
   createdAt?: Maybe<Scalars['timestamptz']>;
   description?: Maybe<Scalars['String']>;
   id?: Maybe<Scalars['Int']>;
   name?: Maybe<Scalars['String']>;
+  type?: Maybe<Political_Group_Types_Enum>;
   updatedAt?: Maybe<Scalars['timestamptz']>;
 };
 
 /** aggregate max on columns */
-export type Parties_Max_Fields = {
-  __typename?: 'parties_max_fields';
+export type Political_Groups_Max_Fields = {
+  __typename?: 'political_groups_max_fields';
   createdAt?: Maybe<Scalars['timestamptz']>;
   description?: Maybe<Scalars['String']>;
   id?: Maybe<Scalars['Int']>;
@@ -1703,8 +3311,8 @@ export type Parties_Max_Fields = {
 };
 
 /** aggregate min on columns */
-export type Parties_Min_Fields = {
-  __typename?: 'parties_min_fields';
+export type Political_Groups_Min_Fields = {
+  __typename?: 'political_groups_min_fields';
   createdAt?: Maybe<Scalars['timestamptz']>;
   description?: Maybe<Scalars['String']>;
   id?: Maybe<Scalars['Int']>;
@@ -1712,45 +3320,39 @@ export type Parties_Min_Fields = {
   updatedAt?: Maybe<Scalars['timestamptz']>;
 };
 
-/** response of any mutation on the table "parties" */
-export type Parties_Mutation_Response = {
-  __typename?: 'parties_mutation_response';
+/** response of any mutation on the table "political_groups" */
+export type Political_Groups_Mutation_Response = {
+  __typename?: 'political_groups_mutation_response';
   /** number of rows affected by the mutation */
   affected_rows: Scalars['Int'];
   /** data from the rows affected by the mutation */
-  returning: Array<Parties>;
+  returning: Array<Political_Groups>;
 };
 
-/** input type for inserting object relation for remote table "parties" */
-export type Parties_Obj_Rel_Insert_Input = {
-  data: Parties_Insert_Input;
-  /** on conflict condition */
-  on_conflict?: Maybe<Parties_On_Conflict>;
+/** on conflict condition type for table "political_groups" */
+export type Political_Groups_On_Conflict = {
+  constraint: Political_Groups_Constraint;
+  update_columns: Array<Political_Groups_Update_Column>;
+  where?: Maybe<Political_Groups_Bool_Exp>;
 };
 
-/** on conflict condition type for table "parties" */
-export type Parties_On_Conflict = {
-  constraint: Parties_Constraint;
-  update_columns: Array<Parties_Update_Column>;
-  where?: Maybe<Parties_Bool_Exp>;
-};
-
-/** Ordering options when selecting data from "parties". */
-export type Parties_Order_By = {
+/** Ordering options when selecting data from "political_groups". */
+export type Political_Groups_Order_By = {
   createdAt?: Maybe<Order_By>;
   description?: Maybe<Order_By>;
   id?: Maybe<Order_By>;
   name?: Maybe<Order_By>;
+  type?: Maybe<Order_By>;
   updatedAt?: Maybe<Order_By>;
 };
 
-/** primary key columns input for table: parties */
-export type Parties_Pk_Columns_Input = {
+/** primary key columns input for table: political_groups */
+export type Political_Groups_Pk_Columns_Input = {
   id: Scalars['Int'];
 };
 
-/** select columns of table "parties" */
-export enum Parties_Select_Column {
+/** select columns of table "political_groups" */
+export enum Political_Groups_Select_Column {
   /** column name */
   CreatedAt = 'createdAt',
   /** column name */
@@ -1759,45 +3361,48 @@ export enum Parties_Select_Column {
   Id = 'id',
   /** column name */
   Name = 'name',
+  /** column name */
+  Type = 'type',
   /** column name */
   UpdatedAt = 'updatedAt'
 }
 
-/** input type for updating data in table "parties" */
-export type Parties_Set_Input = {
+/** input type for updating data in table "political_groups" */
+export type Political_Groups_Set_Input = {
   createdAt?: Maybe<Scalars['timestamptz']>;
   description?: Maybe<Scalars['String']>;
   id?: Maybe<Scalars['Int']>;
   name?: Maybe<Scalars['String']>;
+  type?: Maybe<Political_Group_Types_Enum>;
   updatedAt?: Maybe<Scalars['timestamptz']>;
 };
 
 /** aggregate stddev on columns */
-export type Parties_Stddev_Fields = {
-  __typename?: 'parties_stddev_fields';
+export type Political_Groups_Stddev_Fields = {
+  __typename?: 'political_groups_stddev_fields';
   id?: Maybe<Scalars['Float']>;
 };
 
 /** aggregate stddev_pop on columns */
-export type Parties_Stddev_Pop_Fields = {
-  __typename?: 'parties_stddev_pop_fields';
+export type Political_Groups_Stddev_Pop_Fields = {
+  __typename?: 'political_groups_stddev_pop_fields';
   id?: Maybe<Scalars['Float']>;
 };
 
 /** aggregate stddev_samp on columns */
-export type Parties_Stddev_Samp_Fields = {
-  __typename?: 'parties_stddev_samp_fields';
+export type Political_Groups_Stddev_Samp_Fields = {
+  __typename?: 'political_groups_stddev_samp_fields';
   id?: Maybe<Scalars['Float']>;
 };
 
 /** aggregate sum on columns */
-export type Parties_Sum_Fields = {
-  __typename?: 'parties_sum_fields';
+export type Political_Groups_Sum_Fields = {
+  __typename?: 'political_groups_sum_fields';
   id?: Maybe<Scalars['Int']>;
 };
 
-/** update columns of table "parties" */
-export enum Parties_Update_Column {
+/** update columns of table "political_groups" */
+export enum Political_Groups_Update_Column {
   /** column name */
   CreatedAt = 'createdAt',
   /** column name */
@@ -1806,25 +3411,27 @@ export enum Parties_Update_Column {
   Id = 'id',
   /** column name */
   Name = 'name',
+  /** column name */
+  Type = 'type',
   /** column name */
   UpdatedAt = 'updatedAt'
 }
 
 /** aggregate var_pop on columns */
-export type Parties_Var_Pop_Fields = {
-  __typename?: 'parties_var_pop_fields';
+export type Political_Groups_Var_Pop_Fields = {
+  __typename?: 'political_groups_var_pop_fields';
   id?: Maybe<Scalars['Float']>;
 };
 
 /** aggregate var_samp on columns */
-export type Parties_Var_Samp_Fields = {
-  __typename?: 'parties_var_samp_fields';
+export type Political_Groups_Var_Samp_Fields = {
+  __typename?: 'political_groups_var_samp_fields';
   id?: Maybe<Scalars['Float']>;
 };
 
 /** aggregate variance on columns */
-export type Parties_Variance_Fields = {
-  __typename?: 'parties_variance_fields';
+export type Political_Groups_Variance_Fields = {
+  __typename?: 'political_groups_variance_fields';
   id?: Maybe<Scalars['Float']>;
 };
 
@@ -1836,30 +3443,66 @@ export type Query_Root = {
   addresses_aggregate: Addresses_Aggregate;
   /** fetch data from the table: "addresses" using primary key columns */
   addresses_by_pk?: Maybe<Addresses>;
-  /** fetch data from the table: "electoral_roll_rows" */
-  electoral_roll_rows: Array<Electoral_Roll_Rows>;
-  /** fetch aggregated fields from the table: "electoral_roll_rows" */
-  electoral_roll_rows_aggregate: Electoral_Roll_Rows_Aggregate;
-  /** fetch data from the table: "electoral_roll_rows" using primary key columns */
-  electoral_roll_rows_by_pk?: Maybe<Electoral_Roll_Rows>;
+  /** fetch data from the table: "candidate_lists" */
+  candidate_lists: Array<Candidate_Lists>;
+  /** fetch aggregated fields from the table: "candidate_lists" */
+  candidate_lists_aggregate: Candidate_Lists_Aggregate;
+  /** fetch data from the table: "candidate_lists" using primary key columns */
+  candidate_lists_by_pk?: Maybe<Candidate_Lists>;
+  /** fetch data from the table: "candidates" */
+  candidates: Array<Candidates>;
+  /** fetch aggregated fields from the table: "candidates" */
+  candidates_aggregate: Candidates_Aggregate;
+  /** fetch data from the table: "candidates" using primary key columns */
+  candidates_by_pk?: Maybe<Candidates>;
+  /** fetch data from the table: "commision_members" */
+  commision_members: Array<Commision_Members>;
+  /** fetch aggregated fields from the table: "commision_members" */
+  commision_members_aggregate: Commision_Members_Aggregate;
+  /** fetch data from the table: "commision_members" using primary key columns */
+  commision_members_by_pk?: Maybe<Commision_Members>;
+  /** fetch data from the table: "commissions" */
+  commissions: Array<Commissions>;
+  /** fetch aggregated fields from the table: "commissions" */
+  commissions_aggregate: Commissions_Aggregate;
+  /** fetch data from the table: "commissions" using primary key columns */
+  commissions_by_pk?: Maybe<Commissions>;
+  /** fetch data from the table: "electoral_roll_users" */
+  electoral_roll_users: Array<Electoral_Roll_Users>;
+  /** fetch aggregated fields from the table: "electoral_roll_users" */
+  electoral_roll_users_aggregate: Electoral_Roll_Users_Aggregate;
+  /** fetch data from the table: "electoral_roll_users" using primary key columns */
+  electoral_roll_users_by_pk?: Maybe<Electoral_Roll_Users>;
   /** fetch data from the table: "electoral_rolls" */
   electoral_rolls: Array<Electoral_Rolls>;
   /** fetch aggregated fields from the table: "electoral_rolls" */
   electoral_rolls_aggregate: Electoral_Rolls_Aggregate;
   /** fetch data from the table: "electoral_rolls" using primary key columns */
   electoral_rolls_by_pk?: Maybe<Electoral_Rolls>;
-  /** fetch data from the table: "parties" */
-  parties: Array<Parties>;
-  /** fetch aggregated fields from the table: "parties" */
-  parties_aggregate: Parties_Aggregate;
-  /** fetch data from the table: "parties" using primary key columns */
-  parties_by_pk?: Maybe<Parties>;
-  /** fetch data from the table: "referendum_rows" */
-  referendum_rows: Array<Referendum_Rows>;
-  /** fetch aggregated fields from the table: "referendum_rows" */
-  referendum_rows_aggregate: Referendum_Rows_Aggregate;
-  /** fetch data from the table: "referendum_rows" using primary key columns */
-  referendum_rows_by_pk?: Maybe<Referendum_Rows>;
+  /** fetch data from the table: "political_group_members" */
+  political_group_members: Array<Political_Group_Members>;
+  /** fetch aggregated fields from the table: "political_group_members" */
+  political_group_members_aggregate: Political_Group_Members_Aggregate;
+  /** fetch data from the table: "political_group_members" using primary key columns */
+  political_group_members_by_pk?: Maybe<Political_Group_Members>;
+  /** fetch data from the table: "political_group_types" */
+  political_group_types: Array<Political_Group_Types>;
+  /** fetch aggregated fields from the table: "political_group_types" */
+  political_group_types_aggregate: Political_Group_Types_Aggregate;
+  /** fetch data from the table: "political_group_types" using primary key columns */
+  political_group_types_by_pk?: Maybe<Political_Group_Types>;
+  /** fetch data from the table: "political_groups" */
+  political_groups: Array<Political_Groups>;
+  /** fetch aggregated fields from the table: "political_groups" */
+  political_groups_aggregate: Political_Groups_Aggregate;
+  /** fetch data from the table: "political_groups" using primary key columns */
+  political_groups_by_pk?: Maybe<Political_Groups>;
+  /** fetch data from the table: "referendum_questions" */
+  referendum_questions: Array<Referendum_Questions>;
+  /** fetch aggregated fields from the table: "referendum_questions" */
+  referendum_questions_aggregate: Referendum_Questions_Aggregate;
+  /** fetch data from the table: "referendum_questions" using primary key columns */
+  referendum_questions_by_pk?: Maybe<Referendum_Questions>;
   /** fetch data from the table: "referendum_votes" */
   referendum_votes: Array<Referendum_Votes>;
   /** fetch aggregated fields from the table: "referendum_votes" */
@@ -1886,7 +3529,7 @@ export type Query_Root = {
   settlements_by_pk?: Maybe<Settlements>;
   /** fetch data from the table: "users" */
   users: Array<Users>;
-  /** An aggregate relationship */
+  /** fetch aggregated fields from the table: "users" */
   users_aggregate: Users_Aggregate;
   /** fetch data from the table: "users" using primary key columns */
   users_by_pk?: Maybe<Users>;
@@ -1902,6 +3545,12 @@ export type Query_Root = {
   voting_section_aggregate: Voting_Section_Aggregate;
   /** fetch data from the table: "voting_section" using primary key columns */
   voting_section_by_pk?: Maybe<Voting_Section>;
+  /** fetch data from the table: "voting_section_sessions" */
+  voting_section_sessions: Array<Voting_Section_Sessions>;
+  /** fetch aggregated fields from the table: "voting_section_sessions" */
+  voting_section_sessions_aggregate: Voting_Section_Sessions_Aggregate;
+  /** fetch data from the table: "voting_section_sessions" using primary key columns */
+  voting_section_sessions_by_pk?: Maybe<Voting_Section_Sessions>;
   /** fetch data from the table: "voting_types" */
   voting_types: Array<Voting_Types>;
   /** fetch aggregated fields from the table: "voting_types" */
@@ -1910,7 +3559,7 @@ export type Query_Root = {
   voting_types_by_pk?: Maybe<Voting_Types>;
   /** fetch data from the table: "votings" */
   votings: Array<Votings>;
-  /** An aggregate relationship */
+  /** fetch aggregated fields from the table: "votings" */
   votings_aggregate: Votings_Aggregate;
   /** fetch data from the table: "votings" using primary key columns */
   votings_by_pk?: Maybe<Votings>;
@@ -1940,25 +3589,117 @@ export type Query_RootAddresses_By_PkArgs = {
 };
 
 
-export type Query_RootElectoral_Roll_RowsArgs = {
-  distinct_on?: Maybe<Array<Electoral_Roll_Rows_Select_Column>>;
+export type Query_RootCandidate_ListsArgs = {
+  distinct_on?: Maybe<Array<Candidate_Lists_Select_Column>>;
   limit?: Maybe<Scalars['Int']>;
   offset?: Maybe<Scalars['Int']>;
-  order_by?: Maybe<Array<Electoral_Roll_Rows_Order_By>>;
-  where?: Maybe<Electoral_Roll_Rows_Bool_Exp>;
+  order_by?: Maybe<Array<Candidate_Lists_Order_By>>;
+  where?: Maybe<Candidate_Lists_Bool_Exp>;
 };
 
 
-export type Query_RootElectoral_Roll_Rows_AggregateArgs = {
-  distinct_on?: Maybe<Array<Electoral_Roll_Rows_Select_Column>>;
+export type Query_RootCandidate_Lists_AggregateArgs = {
+  distinct_on?: Maybe<Array<Candidate_Lists_Select_Column>>;
   limit?: Maybe<Scalars['Int']>;
   offset?: Maybe<Scalars['Int']>;
-  order_by?: Maybe<Array<Electoral_Roll_Rows_Order_By>>;
-  where?: Maybe<Electoral_Roll_Rows_Bool_Exp>;
+  order_by?: Maybe<Array<Candidate_Lists_Order_By>>;
+  where?: Maybe<Candidate_Lists_Bool_Exp>;
 };
 
 
-export type Query_RootElectoral_Roll_Rows_By_PkArgs = {
+export type Query_RootCandidate_Lists_By_PkArgs = {
+  id: Scalars['Int'];
+};
+
+
+export type Query_RootCandidatesArgs = {
+  distinct_on?: Maybe<Array<Candidates_Select_Column>>;
+  limit?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  order_by?: Maybe<Array<Candidates_Order_By>>;
+  where?: Maybe<Candidates_Bool_Exp>;
+};
+
+
+export type Query_RootCandidates_AggregateArgs = {
+  distinct_on?: Maybe<Array<Candidates_Select_Column>>;
+  limit?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  order_by?: Maybe<Array<Candidates_Order_By>>;
+  where?: Maybe<Candidates_Bool_Exp>;
+};
+
+
+export type Query_RootCandidates_By_PkArgs = {
+  id: Scalars['Int'];
+};
+
+
+export type Query_RootCommision_MembersArgs = {
+  distinct_on?: Maybe<Array<Commision_Members_Select_Column>>;
+  limit?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  order_by?: Maybe<Array<Commision_Members_Order_By>>;
+  where?: Maybe<Commision_Members_Bool_Exp>;
+};
+
+
+export type Query_RootCommision_Members_AggregateArgs = {
+  distinct_on?: Maybe<Array<Commision_Members_Select_Column>>;
+  limit?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  order_by?: Maybe<Array<Commision_Members_Order_By>>;
+  where?: Maybe<Commision_Members_Bool_Exp>;
+};
+
+
+export type Query_RootCommision_Members_By_PkArgs = {
+  id: Scalars['Int'];
+};
+
+
+export type Query_RootCommissionsArgs = {
+  distinct_on?: Maybe<Array<Commissions_Select_Column>>;
+  limit?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  order_by?: Maybe<Array<Commissions_Order_By>>;
+  where?: Maybe<Commissions_Bool_Exp>;
+};
+
+
+export type Query_RootCommissions_AggregateArgs = {
+  distinct_on?: Maybe<Array<Commissions_Select_Column>>;
+  limit?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  order_by?: Maybe<Array<Commissions_Order_By>>;
+  where?: Maybe<Commissions_Bool_Exp>;
+};
+
+
+export type Query_RootCommissions_By_PkArgs = {
+  id: Scalars['Int'];
+};
+
+
+export type Query_RootElectoral_Roll_UsersArgs = {
+  distinct_on?: Maybe<Array<Electoral_Roll_Users_Select_Column>>;
+  limit?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  order_by?: Maybe<Array<Electoral_Roll_Users_Order_By>>;
+  where?: Maybe<Electoral_Roll_Users_Bool_Exp>;
+};
+
+
+export type Query_RootElectoral_Roll_Users_AggregateArgs = {
+  distinct_on?: Maybe<Array<Electoral_Roll_Users_Select_Column>>;
+  limit?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  order_by?: Maybe<Array<Electoral_Roll_Users_Order_By>>;
+  where?: Maybe<Electoral_Roll_Users_Bool_Exp>;
+};
+
+
+export type Query_RootElectoral_Roll_Users_By_PkArgs = {
   id: Scalars['Int'];
 };
 
@@ -1986,48 +3727,94 @@ export type Query_RootElectoral_Rolls_By_PkArgs = {
 };
 
 
-export type Query_RootPartiesArgs = {
-  distinct_on?: Maybe<Array<Parties_Select_Column>>;
+export type Query_RootPolitical_Group_MembersArgs = {
+  distinct_on?: Maybe<Array<Political_Group_Members_Select_Column>>;
   limit?: Maybe<Scalars['Int']>;
   offset?: Maybe<Scalars['Int']>;
-  order_by?: Maybe<Array<Parties_Order_By>>;
-  where?: Maybe<Parties_Bool_Exp>;
+  order_by?: Maybe<Array<Political_Group_Members_Order_By>>;
+  where?: Maybe<Political_Group_Members_Bool_Exp>;
 };
 
 
-export type Query_RootParties_AggregateArgs = {
-  distinct_on?: Maybe<Array<Parties_Select_Column>>;
+export type Query_RootPolitical_Group_Members_AggregateArgs = {
+  distinct_on?: Maybe<Array<Political_Group_Members_Select_Column>>;
   limit?: Maybe<Scalars['Int']>;
   offset?: Maybe<Scalars['Int']>;
-  order_by?: Maybe<Array<Parties_Order_By>>;
-  where?: Maybe<Parties_Bool_Exp>;
+  order_by?: Maybe<Array<Political_Group_Members_Order_By>>;
+  where?: Maybe<Political_Group_Members_Bool_Exp>;
 };
 
 
-export type Query_RootParties_By_PkArgs = {
+export type Query_RootPolitical_Group_Members_By_PkArgs = {
   id: Scalars['Int'];
 };
 
 
-export type Query_RootReferendum_RowsArgs = {
-  distinct_on?: Maybe<Array<Referendum_Rows_Select_Column>>;
+export type Query_RootPolitical_Group_TypesArgs = {
+  distinct_on?: Maybe<Array<Political_Group_Types_Select_Column>>;
   limit?: Maybe<Scalars['Int']>;
   offset?: Maybe<Scalars['Int']>;
-  order_by?: Maybe<Array<Referendum_Rows_Order_By>>;
-  where?: Maybe<Referendum_Rows_Bool_Exp>;
+  order_by?: Maybe<Array<Political_Group_Types_Order_By>>;
+  where?: Maybe<Political_Group_Types_Bool_Exp>;
 };
 
 
-export type Query_RootReferendum_Rows_AggregateArgs = {
-  distinct_on?: Maybe<Array<Referendum_Rows_Select_Column>>;
+export type Query_RootPolitical_Group_Types_AggregateArgs = {
+  distinct_on?: Maybe<Array<Political_Group_Types_Select_Column>>;
   limit?: Maybe<Scalars['Int']>;
   offset?: Maybe<Scalars['Int']>;
-  order_by?: Maybe<Array<Referendum_Rows_Order_By>>;
-  where?: Maybe<Referendum_Rows_Bool_Exp>;
+  order_by?: Maybe<Array<Political_Group_Types_Order_By>>;
+  where?: Maybe<Political_Group_Types_Bool_Exp>;
 };
 
 
-export type Query_RootReferendum_Rows_By_PkArgs = {
+export type Query_RootPolitical_Group_Types_By_PkArgs = {
+  value: Scalars['String'];
+};
+
+
+export type Query_RootPolitical_GroupsArgs = {
+  distinct_on?: Maybe<Array<Political_Groups_Select_Column>>;
+  limit?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  order_by?: Maybe<Array<Political_Groups_Order_By>>;
+  where?: Maybe<Political_Groups_Bool_Exp>;
+};
+
+
+export type Query_RootPolitical_Groups_AggregateArgs = {
+  distinct_on?: Maybe<Array<Political_Groups_Select_Column>>;
+  limit?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  order_by?: Maybe<Array<Political_Groups_Order_By>>;
+  where?: Maybe<Political_Groups_Bool_Exp>;
+};
+
+
+export type Query_RootPolitical_Groups_By_PkArgs = {
+  id: Scalars['Int'];
+};
+
+
+export type Query_RootReferendum_QuestionsArgs = {
+  distinct_on?: Maybe<Array<Referendum_Questions_Select_Column>>;
+  limit?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  order_by?: Maybe<Array<Referendum_Questions_Order_By>>;
+  where?: Maybe<Referendum_Questions_Bool_Exp>;
+};
+
+
+export type Query_RootReferendum_Questions_AggregateArgs = {
+  distinct_on?: Maybe<Array<Referendum_Questions_Select_Column>>;
+  limit?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  order_by?: Maybe<Array<Referendum_Questions_Order_By>>;
+  where?: Maybe<Referendum_Questions_Bool_Exp>;
+};
+
+
+export type Query_RootReferendum_Questions_By_PkArgs = {
   id: Scalars['Int'];
 };
 
@@ -2193,6 +3980,29 @@ export type Query_RootVoting_Section_By_PkArgs = {
 };
 
 
+export type Query_RootVoting_Section_SessionsArgs = {
+  distinct_on?: Maybe<Array<Voting_Section_Sessions_Select_Column>>;
+  limit?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  order_by?: Maybe<Array<Voting_Section_Sessions_Order_By>>;
+  where?: Maybe<Voting_Section_Sessions_Bool_Exp>;
+};
+
+
+export type Query_RootVoting_Section_Sessions_AggregateArgs = {
+  distinct_on?: Maybe<Array<Voting_Section_Sessions_Select_Column>>;
+  limit?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  order_by?: Maybe<Array<Voting_Section_Sessions_Order_By>>;
+  where?: Maybe<Voting_Section_Sessions_Bool_Exp>;
+};
+
+
+export type Query_RootVoting_Section_Sessions_By_PkArgs = {
+  id: Scalars['Int'];
+};
+
+
 export type Query_RootVoting_TypesArgs = {
   distinct_on?: Maybe<Array<Voting_Types_Select_Column>>;
   limit?: Maybe<Scalars['Int']>;
@@ -2212,7 +4022,7 @@ export type Query_RootVoting_Types_AggregateArgs = {
 
 
 export type Query_RootVoting_Types_By_PkArgs = {
-  id: Scalars['Int'];
+  value: Scalars['String'];
 };
 
 
@@ -2238,9 +4048,9 @@ export type Query_RootVotings_By_PkArgs = {
   id: Scalars['Int'];
 };
 
-/** columns and relationships of "referendum_rows" */
-export type Referendum_Rows = {
-  __typename?: 'referendum_rows';
+/** columns and relationships of "referendum_questions" */
+export type Referendum_Questions = {
+  __typename?: 'referendum_questions';
   createdAt: Scalars['timestamptz'];
   description: Scalars['String'];
   id: Scalars['Int'];
@@ -2249,76 +4059,76 @@ export type Referendum_Rows = {
   updatedAt: Scalars['timestamptz'];
 };
 
-/** aggregated selection of "referendum_rows" */
-export type Referendum_Rows_Aggregate = {
-  __typename?: 'referendum_rows_aggregate';
-  aggregate?: Maybe<Referendum_Rows_Aggregate_Fields>;
-  nodes: Array<Referendum_Rows>;
+/** aggregated selection of "referendum_questions" */
+export type Referendum_Questions_Aggregate = {
+  __typename?: 'referendum_questions_aggregate';
+  aggregate?: Maybe<Referendum_Questions_Aggregate_Fields>;
+  nodes: Array<Referendum_Questions>;
 };
 
-/** aggregate fields of "referendum_rows" */
-export type Referendum_Rows_Aggregate_Fields = {
-  __typename?: 'referendum_rows_aggregate_fields';
-  avg?: Maybe<Referendum_Rows_Avg_Fields>;
+/** aggregate fields of "referendum_questions" */
+export type Referendum_Questions_Aggregate_Fields = {
+  __typename?: 'referendum_questions_aggregate_fields';
+  avg?: Maybe<Referendum_Questions_Avg_Fields>;
   count: Scalars['Int'];
-  max?: Maybe<Referendum_Rows_Max_Fields>;
-  min?: Maybe<Referendum_Rows_Min_Fields>;
-  stddev?: Maybe<Referendum_Rows_Stddev_Fields>;
-  stddev_pop?: Maybe<Referendum_Rows_Stddev_Pop_Fields>;
-  stddev_samp?: Maybe<Referendum_Rows_Stddev_Samp_Fields>;
-  sum?: Maybe<Referendum_Rows_Sum_Fields>;
-  var_pop?: Maybe<Referendum_Rows_Var_Pop_Fields>;
-  var_samp?: Maybe<Referendum_Rows_Var_Samp_Fields>;
-  variance?: Maybe<Referendum_Rows_Variance_Fields>;
+  max?: Maybe<Referendum_Questions_Max_Fields>;
+  min?: Maybe<Referendum_Questions_Min_Fields>;
+  stddev?: Maybe<Referendum_Questions_Stddev_Fields>;
+  stddev_pop?: Maybe<Referendum_Questions_Stddev_Pop_Fields>;
+  stddev_samp?: Maybe<Referendum_Questions_Stddev_Samp_Fields>;
+  sum?: Maybe<Referendum_Questions_Sum_Fields>;
+  var_pop?: Maybe<Referendum_Questions_Var_Pop_Fields>;
+  var_samp?: Maybe<Referendum_Questions_Var_Samp_Fields>;
+  variance?: Maybe<Referendum_Questions_Variance_Fields>;
 };
 
 
-/** aggregate fields of "referendum_rows" */
-export type Referendum_Rows_Aggregate_FieldsCountArgs = {
-  columns?: Maybe<Array<Referendum_Rows_Select_Column>>;
+/** aggregate fields of "referendum_questions" */
+export type Referendum_Questions_Aggregate_FieldsCountArgs = {
+  columns?: Maybe<Array<Referendum_Questions_Select_Column>>;
   distinct?: Maybe<Scalars['Boolean']>;
 };
 
-/** order by aggregate values of table "referendum_rows" */
-export type Referendum_Rows_Aggregate_Order_By = {
-  avg?: Maybe<Referendum_Rows_Avg_Order_By>;
+/** order by aggregate values of table "referendum_questions" */
+export type Referendum_Questions_Aggregate_Order_By = {
+  avg?: Maybe<Referendum_Questions_Avg_Order_By>;
   count?: Maybe<Order_By>;
-  max?: Maybe<Referendum_Rows_Max_Order_By>;
-  min?: Maybe<Referendum_Rows_Min_Order_By>;
-  stddev?: Maybe<Referendum_Rows_Stddev_Order_By>;
-  stddev_pop?: Maybe<Referendum_Rows_Stddev_Pop_Order_By>;
-  stddev_samp?: Maybe<Referendum_Rows_Stddev_Samp_Order_By>;
-  sum?: Maybe<Referendum_Rows_Sum_Order_By>;
-  var_pop?: Maybe<Referendum_Rows_Var_Pop_Order_By>;
-  var_samp?: Maybe<Referendum_Rows_Var_Samp_Order_By>;
-  variance?: Maybe<Referendum_Rows_Variance_Order_By>;
+  max?: Maybe<Referendum_Questions_Max_Order_By>;
+  min?: Maybe<Referendum_Questions_Min_Order_By>;
+  stddev?: Maybe<Referendum_Questions_Stddev_Order_By>;
+  stddev_pop?: Maybe<Referendum_Questions_Stddev_Pop_Order_By>;
+  stddev_samp?: Maybe<Referendum_Questions_Stddev_Samp_Order_By>;
+  sum?: Maybe<Referendum_Questions_Sum_Order_By>;
+  var_pop?: Maybe<Referendum_Questions_Var_Pop_Order_By>;
+  var_samp?: Maybe<Referendum_Questions_Var_Samp_Order_By>;
+  variance?: Maybe<Referendum_Questions_Variance_Order_By>;
 };
 
-/** input type for inserting array relation for remote table "referendum_rows" */
-export type Referendum_Rows_Arr_Rel_Insert_Input = {
-  data: Array<Referendum_Rows_Insert_Input>;
+/** input type for inserting array relation for remote table "referendum_questions" */
+export type Referendum_Questions_Arr_Rel_Insert_Input = {
+  data: Array<Referendum_Questions_Insert_Input>;
   /** on conflict condition */
-  on_conflict?: Maybe<Referendum_Rows_On_Conflict>;
+  on_conflict?: Maybe<Referendum_Questions_On_Conflict>;
 };
 
 /** aggregate avg on columns */
-export type Referendum_Rows_Avg_Fields = {
-  __typename?: 'referendum_rows_avg_fields';
+export type Referendum_Questions_Avg_Fields = {
+  __typename?: 'referendum_questions_avg_fields';
   id?: Maybe<Scalars['Float']>;
   referendumId?: Maybe<Scalars['Float']>;
 };
 
-/** order by avg() on columns of table "referendum_rows" */
-export type Referendum_Rows_Avg_Order_By = {
+/** order by avg() on columns of table "referendum_questions" */
+export type Referendum_Questions_Avg_Order_By = {
   id?: Maybe<Order_By>;
   referendumId?: Maybe<Order_By>;
 };
 
-/** Boolean expression to filter rows from the table "referendum_rows". All fields are combined with a logical 'AND'. */
-export type Referendum_Rows_Bool_Exp = {
-  _and?: Maybe<Array<Referendum_Rows_Bool_Exp>>;
-  _not?: Maybe<Referendum_Rows_Bool_Exp>;
-  _or?: Maybe<Array<Referendum_Rows_Bool_Exp>>;
+/** Boolean expression to filter rows from the table "referendum_questions". All fields are combined with a logical 'AND'. */
+export type Referendum_Questions_Bool_Exp = {
+  _and?: Maybe<Array<Referendum_Questions_Bool_Exp>>;
+  _not?: Maybe<Referendum_Questions_Bool_Exp>;
+  _or?: Maybe<Array<Referendum_Questions_Bool_Exp>>;
   createdAt?: Maybe<Timestamptz_Comparison_Exp>;
   description?: Maybe<String_Comparison_Exp>;
   id?: Maybe<Int_Comparison_Exp>;
@@ -2327,20 +4137,20 @@ export type Referendum_Rows_Bool_Exp = {
   updatedAt?: Maybe<Timestamptz_Comparison_Exp>;
 };
 
-/** unique or primary key constraints on table "referendum_rows" */
-export enum Referendum_Rows_Constraint {
+/** unique or primary key constraints on table "referendum_questions" */
+export enum Referendum_Questions_Constraint {
   /** unique or primary key constraint */
   ReferendumRowsPkey = 'referendum_rows_pkey'
 }
 
-/** input type for incrementing numeric columns in table "referendum_rows" */
-export type Referendum_Rows_Inc_Input = {
+/** input type for incrementing numeric columns in table "referendum_questions" */
+export type Referendum_Questions_Inc_Input = {
   id?: Maybe<Scalars['Int']>;
   referendumId?: Maybe<Scalars['Int']>;
 };
 
-/** input type for inserting data into table "referendum_rows" */
-export type Referendum_Rows_Insert_Input = {
+/** input type for inserting data into table "referendum_questions" */
+export type Referendum_Questions_Insert_Input = {
   createdAt?: Maybe<Scalars['timestamptz']>;
   description?: Maybe<Scalars['String']>;
   id?: Maybe<Scalars['Int']>;
@@ -2350,8 +4160,8 @@ export type Referendum_Rows_Insert_Input = {
 };
 
 /** aggregate max on columns */
-export type Referendum_Rows_Max_Fields = {
-  __typename?: 'referendum_rows_max_fields';
+export type Referendum_Questions_Max_Fields = {
+  __typename?: 'referendum_questions_max_fields';
   createdAt?: Maybe<Scalars['timestamptz']>;
   description?: Maybe<Scalars['String']>;
   id?: Maybe<Scalars['Int']>;
@@ -2360,8 +4170,8 @@ export type Referendum_Rows_Max_Fields = {
   updatedAt?: Maybe<Scalars['timestamptz']>;
 };
 
-/** order by max() on columns of table "referendum_rows" */
-export type Referendum_Rows_Max_Order_By = {
+/** order by max() on columns of table "referendum_questions" */
+export type Referendum_Questions_Max_Order_By = {
   createdAt?: Maybe<Order_By>;
   description?: Maybe<Order_By>;
   id?: Maybe<Order_By>;
@@ -2371,8 +4181,8 @@ export type Referendum_Rows_Max_Order_By = {
 };
 
 /** aggregate min on columns */
-export type Referendum_Rows_Min_Fields = {
-  __typename?: 'referendum_rows_min_fields';
+export type Referendum_Questions_Min_Fields = {
+  __typename?: 'referendum_questions_min_fields';
   createdAt?: Maybe<Scalars['timestamptz']>;
   description?: Maybe<Scalars['String']>;
   id?: Maybe<Scalars['Int']>;
@@ -2381,8 +4191,8 @@ export type Referendum_Rows_Min_Fields = {
   updatedAt?: Maybe<Scalars['timestamptz']>;
 };
 
-/** order by min() on columns of table "referendum_rows" */
-export type Referendum_Rows_Min_Order_By = {
+/** order by min() on columns of table "referendum_questions" */
+export type Referendum_Questions_Min_Order_By = {
   createdAt?: Maybe<Order_By>;
   description?: Maybe<Order_By>;
   id?: Maybe<Order_By>;
@@ -2391,24 +4201,24 @@ export type Referendum_Rows_Min_Order_By = {
   updatedAt?: Maybe<Order_By>;
 };
 
-/** response of any mutation on the table "referendum_rows" */
-export type Referendum_Rows_Mutation_Response = {
-  __typename?: 'referendum_rows_mutation_response';
+/** response of any mutation on the table "referendum_questions" */
+export type Referendum_Questions_Mutation_Response = {
+  __typename?: 'referendum_questions_mutation_response';
   /** number of rows affected by the mutation */
   affected_rows: Scalars['Int'];
   /** data from the rows affected by the mutation */
-  returning: Array<Referendum_Rows>;
+  returning: Array<Referendum_Questions>;
 };
 
-/** on conflict condition type for table "referendum_rows" */
-export type Referendum_Rows_On_Conflict = {
-  constraint: Referendum_Rows_Constraint;
-  update_columns: Array<Referendum_Rows_Update_Column>;
-  where?: Maybe<Referendum_Rows_Bool_Exp>;
+/** on conflict condition type for table "referendum_questions" */
+export type Referendum_Questions_On_Conflict = {
+  constraint: Referendum_Questions_Constraint;
+  update_columns: Array<Referendum_Questions_Update_Column>;
+  where?: Maybe<Referendum_Questions_Bool_Exp>;
 };
 
-/** Ordering options when selecting data from "referendum_rows". */
-export type Referendum_Rows_Order_By = {
+/** Ordering options when selecting data from "referendum_questions". */
+export type Referendum_Questions_Order_By = {
   createdAt?: Maybe<Order_By>;
   description?: Maybe<Order_By>;
   id?: Maybe<Order_By>;
@@ -2417,13 +4227,13 @@ export type Referendum_Rows_Order_By = {
   updatedAt?: Maybe<Order_By>;
 };
 
-/** primary key columns input for table: referendum_rows */
-export type Referendum_Rows_Pk_Columns_Input = {
+/** primary key columns input for table: referendum_questions */
+export type Referendum_Questions_Pk_Columns_Input = {
   id: Scalars['Int'];
 };
 
-/** select columns of table "referendum_rows" */
-export enum Referendum_Rows_Select_Column {
+/** select columns of table "referendum_questions" */
+export enum Referendum_Questions_Select_Column {
   /** column name */
   CreatedAt = 'createdAt',
   /** column name */
@@ -2438,8 +4248,8 @@ export enum Referendum_Rows_Select_Column {
   UpdatedAt = 'updatedAt'
 }
 
-/** input type for updating data in table "referendum_rows" */
-export type Referendum_Rows_Set_Input = {
+/** input type for updating data in table "referendum_questions" */
+export type Referendum_Questions_Set_Input = {
   createdAt?: Maybe<Scalars['timestamptz']>;
   description?: Maybe<Scalars['String']>;
   id?: Maybe<Scalars['Int']>;
@@ -2449,59 +4259,59 @@ export type Referendum_Rows_Set_Input = {
 };
 
 /** aggregate stddev on columns */
-export type Referendum_Rows_Stddev_Fields = {
-  __typename?: 'referendum_rows_stddev_fields';
+export type Referendum_Questions_Stddev_Fields = {
+  __typename?: 'referendum_questions_stddev_fields';
   id?: Maybe<Scalars['Float']>;
   referendumId?: Maybe<Scalars['Float']>;
 };
 
-/** order by stddev() on columns of table "referendum_rows" */
-export type Referendum_Rows_Stddev_Order_By = {
+/** order by stddev() on columns of table "referendum_questions" */
+export type Referendum_Questions_Stddev_Order_By = {
   id?: Maybe<Order_By>;
   referendumId?: Maybe<Order_By>;
 };
 
 /** aggregate stddev_pop on columns */
-export type Referendum_Rows_Stddev_Pop_Fields = {
-  __typename?: 'referendum_rows_stddev_pop_fields';
+export type Referendum_Questions_Stddev_Pop_Fields = {
+  __typename?: 'referendum_questions_stddev_pop_fields';
   id?: Maybe<Scalars['Float']>;
   referendumId?: Maybe<Scalars['Float']>;
 };
 
-/** order by stddev_pop() on columns of table "referendum_rows" */
-export type Referendum_Rows_Stddev_Pop_Order_By = {
+/** order by stddev_pop() on columns of table "referendum_questions" */
+export type Referendum_Questions_Stddev_Pop_Order_By = {
   id?: Maybe<Order_By>;
   referendumId?: Maybe<Order_By>;
 };
 
 /** aggregate stddev_samp on columns */
-export type Referendum_Rows_Stddev_Samp_Fields = {
-  __typename?: 'referendum_rows_stddev_samp_fields';
+export type Referendum_Questions_Stddev_Samp_Fields = {
+  __typename?: 'referendum_questions_stddev_samp_fields';
   id?: Maybe<Scalars['Float']>;
   referendumId?: Maybe<Scalars['Float']>;
 };
 
-/** order by stddev_samp() on columns of table "referendum_rows" */
-export type Referendum_Rows_Stddev_Samp_Order_By = {
+/** order by stddev_samp() on columns of table "referendum_questions" */
+export type Referendum_Questions_Stddev_Samp_Order_By = {
   id?: Maybe<Order_By>;
   referendumId?: Maybe<Order_By>;
 };
 
 /** aggregate sum on columns */
-export type Referendum_Rows_Sum_Fields = {
-  __typename?: 'referendum_rows_sum_fields';
+export type Referendum_Questions_Sum_Fields = {
+  __typename?: 'referendum_questions_sum_fields';
   id?: Maybe<Scalars['Int']>;
   referendumId?: Maybe<Scalars['Int']>;
 };
 
-/** order by sum() on columns of table "referendum_rows" */
-export type Referendum_Rows_Sum_Order_By = {
+/** order by sum() on columns of table "referendum_questions" */
+export type Referendum_Questions_Sum_Order_By = {
   id?: Maybe<Order_By>;
   referendumId?: Maybe<Order_By>;
 };
 
-/** update columns of table "referendum_rows" */
-export enum Referendum_Rows_Update_Column {
+/** update columns of table "referendum_questions" */
+export enum Referendum_Questions_Update_Column {
   /** column name */
   CreatedAt = 'createdAt',
   /** column name */
@@ -2517,40 +4327,40 @@ export enum Referendum_Rows_Update_Column {
 }
 
 /** aggregate var_pop on columns */
-export type Referendum_Rows_Var_Pop_Fields = {
-  __typename?: 'referendum_rows_var_pop_fields';
+export type Referendum_Questions_Var_Pop_Fields = {
+  __typename?: 'referendum_questions_var_pop_fields';
   id?: Maybe<Scalars['Float']>;
   referendumId?: Maybe<Scalars['Float']>;
 };
 
-/** order by var_pop() on columns of table "referendum_rows" */
-export type Referendum_Rows_Var_Pop_Order_By = {
+/** order by var_pop() on columns of table "referendum_questions" */
+export type Referendum_Questions_Var_Pop_Order_By = {
   id?: Maybe<Order_By>;
   referendumId?: Maybe<Order_By>;
 };
 
 /** aggregate var_samp on columns */
-export type Referendum_Rows_Var_Samp_Fields = {
-  __typename?: 'referendum_rows_var_samp_fields';
+export type Referendum_Questions_Var_Samp_Fields = {
+  __typename?: 'referendum_questions_var_samp_fields';
   id?: Maybe<Scalars['Float']>;
   referendumId?: Maybe<Scalars['Float']>;
 };
 
-/** order by var_samp() on columns of table "referendum_rows" */
-export type Referendum_Rows_Var_Samp_Order_By = {
+/** order by var_samp() on columns of table "referendum_questions" */
+export type Referendum_Questions_Var_Samp_Order_By = {
   id?: Maybe<Order_By>;
   referendumId?: Maybe<Order_By>;
 };
 
 /** aggregate variance on columns */
-export type Referendum_Rows_Variance_Fields = {
-  __typename?: 'referendum_rows_variance_fields';
+export type Referendum_Questions_Variance_Fields = {
+  __typename?: 'referendum_questions_variance_fields';
   id?: Maybe<Scalars['Float']>;
   referendumId?: Maybe<Scalars['Float']>;
 };
 
-/** order by variance() on columns of table "referendum_rows" */
-export type Referendum_Rows_Variance_Order_By = {
+/** order by variance() on columns of table "referendum_questions" */
+export type Referendum_Questions_Variance_Order_By = {
   id?: Maybe<Order_By>;
   referendumId?: Maybe<Order_By>;
 };
@@ -2560,7 +4370,7 @@ export type Referendum_Votes = {
   __typename?: 'referendum_votes';
   createdAt: Scalars['timestamptz'];
   id: Scalars['Int'];
-  referendumRowId: Scalars['Int'];
+  referendumQuestionId: Scalars['Int'];
   sectionId?: Maybe<Scalars['Int']>;
   vote: Scalars['Boolean'];
 };
@@ -2599,7 +4409,7 @@ export type Referendum_Votes_Aggregate_FieldsCountArgs = {
 export type Referendum_Votes_Avg_Fields = {
   __typename?: 'referendum_votes_avg_fields';
   id?: Maybe<Scalars['Float']>;
-  referendumRowId?: Maybe<Scalars['Float']>;
+  referendumQuestionId?: Maybe<Scalars['Float']>;
   sectionId?: Maybe<Scalars['Float']>;
 };
 
@@ -2610,7 +4420,7 @@ export type Referendum_Votes_Bool_Exp = {
   _or?: Maybe<Array<Referendum_Votes_Bool_Exp>>;
   createdAt?: Maybe<Timestamptz_Comparison_Exp>;
   id?: Maybe<Int_Comparison_Exp>;
-  referendumRowId?: Maybe<Int_Comparison_Exp>;
+  referendumQuestionId?: Maybe<Int_Comparison_Exp>;
   sectionId?: Maybe<Int_Comparison_Exp>;
   vote?: Maybe<Boolean_Comparison_Exp>;
 };
@@ -2624,7 +4434,7 @@ export enum Referendum_Votes_Constraint {
 /** input type for incrementing numeric columns in table "referendum_votes" */
 export type Referendum_Votes_Inc_Input = {
   id?: Maybe<Scalars['Int']>;
-  referendumRowId?: Maybe<Scalars['Int']>;
+  referendumQuestionId?: Maybe<Scalars['Int']>;
   sectionId?: Maybe<Scalars['Int']>;
 };
 
@@ -2632,7 +4442,7 @@ export type Referendum_Votes_Inc_Input = {
 export type Referendum_Votes_Insert_Input = {
   createdAt?: Maybe<Scalars['timestamptz']>;
   id?: Maybe<Scalars['Int']>;
-  referendumRowId?: Maybe<Scalars['Int']>;
+  referendumQuestionId?: Maybe<Scalars['Int']>;
   sectionId?: Maybe<Scalars['Int']>;
   vote?: Maybe<Scalars['Boolean']>;
 };
@@ -2642,7 +4452,7 @@ export type Referendum_Votes_Max_Fields = {
   __typename?: 'referendum_votes_max_fields';
   createdAt?: Maybe<Scalars['timestamptz']>;
   id?: Maybe<Scalars['Int']>;
-  referendumRowId?: Maybe<Scalars['Int']>;
+  referendumQuestionId?: Maybe<Scalars['Int']>;
   sectionId?: Maybe<Scalars['Int']>;
 };
 
@@ -2651,7 +4461,7 @@ export type Referendum_Votes_Min_Fields = {
   __typename?: 'referendum_votes_min_fields';
   createdAt?: Maybe<Scalars['timestamptz']>;
   id?: Maybe<Scalars['Int']>;
-  referendumRowId?: Maybe<Scalars['Int']>;
+  referendumQuestionId?: Maybe<Scalars['Int']>;
   sectionId?: Maybe<Scalars['Int']>;
 };
 
@@ -2675,7 +4485,7 @@ export type Referendum_Votes_On_Conflict = {
 export type Referendum_Votes_Order_By = {
   createdAt?: Maybe<Order_By>;
   id?: Maybe<Order_By>;
-  referendumRowId?: Maybe<Order_By>;
+  referendumQuestionId?: Maybe<Order_By>;
   sectionId?: Maybe<Order_By>;
   vote?: Maybe<Order_By>;
 };
@@ -2692,7 +4502,7 @@ export enum Referendum_Votes_Select_Column {
   /** column name */
   Id = 'id',
   /** column name */
-  ReferendumRowId = 'referendumRowId',
+  ReferendumQuestionId = 'referendumQuestionId',
   /** column name */
   SectionId = 'sectionId',
   /** column name */
@@ -2703,7 +4513,7 @@ export enum Referendum_Votes_Select_Column {
 export type Referendum_Votes_Set_Input = {
   createdAt?: Maybe<Scalars['timestamptz']>;
   id?: Maybe<Scalars['Int']>;
-  referendumRowId?: Maybe<Scalars['Int']>;
+  referendumQuestionId?: Maybe<Scalars['Int']>;
   sectionId?: Maybe<Scalars['Int']>;
   vote?: Maybe<Scalars['Boolean']>;
 };
@@ -2712,7 +4522,7 @@ export type Referendum_Votes_Set_Input = {
 export type Referendum_Votes_Stddev_Fields = {
   __typename?: 'referendum_votes_stddev_fields';
   id?: Maybe<Scalars['Float']>;
-  referendumRowId?: Maybe<Scalars['Float']>;
+  referendumQuestionId?: Maybe<Scalars['Float']>;
   sectionId?: Maybe<Scalars['Float']>;
 };
 
@@ -2720,7 +4530,7 @@ export type Referendum_Votes_Stddev_Fields = {
 export type Referendum_Votes_Stddev_Pop_Fields = {
   __typename?: 'referendum_votes_stddev_pop_fields';
   id?: Maybe<Scalars['Float']>;
-  referendumRowId?: Maybe<Scalars['Float']>;
+  referendumQuestionId?: Maybe<Scalars['Float']>;
   sectionId?: Maybe<Scalars['Float']>;
 };
 
@@ -2728,7 +4538,7 @@ export type Referendum_Votes_Stddev_Pop_Fields = {
 export type Referendum_Votes_Stddev_Samp_Fields = {
   __typename?: 'referendum_votes_stddev_samp_fields';
   id?: Maybe<Scalars['Float']>;
-  referendumRowId?: Maybe<Scalars['Float']>;
+  referendumQuestionId?: Maybe<Scalars['Float']>;
   sectionId?: Maybe<Scalars['Float']>;
 };
 
@@ -2736,7 +4546,7 @@ export type Referendum_Votes_Stddev_Samp_Fields = {
 export type Referendum_Votes_Sum_Fields = {
   __typename?: 'referendum_votes_sum_fields';
   id?: Maybe<Scalars['Int']>;
-  referendumRowId?: Maybe<Scalars['Int']>;
+  referendumQuestionId?: Maybe<Scalars['Int']>;
   sectionId?: Maybe<Scalars['Int']>;
 };
 
@@ -2747,7 +4557,7 @@ export enum Referendum_Votes_Update_Column {
   /** column name */
   Id = 'id',
   /** column name */
-  ReferendumRowId = 'referendumRowId',
+  ReferendumQuestionId = 'referendumQuestionId',
   /** column name */
   SectionId = 'sectionId',
   /** column name */
@@ -2758,7 +4568,7 @@ export enum Referendum_Votes_Update_Column {
 export type Referendum_Votes_Var_Pop_Fields = {
   __typename?: 'referendum_votes_var_pop_fields';
   id?: Maybe<Scalars['Float']>;
-  referendumRowId?: Maybe<Scalars['Float']>;
+  referendumQuestionId?: Maybe<Scalars['Float']>;
   sectionId?: Maybe<Scalars['Float']>;
 };
 
@@ -2766,7 +4576,7 @@ export type Referendum_Votes_Var_Pop_Fields = {
 export type Referendum_Votes_Var_Samp_Fields = {
   __typename?: 'referendum_votes_var_samp_fields';
   id?: Maybe<Scalars['Float']>;
-  referendumRowId?: Maybe<Scalars['Float']>;
+  referendumQuestionId?: Maybe<Scalars['Float']>;
   sectionId?: Maybe<Scalars['Float']>;
 };
 
@@ -2774,7 +4584,7 @@ export type Referendum_Votes_Var_Samp_Fields = {
 export type Referendum_Votes_Variance_Fields = {
   __typename?: 'referendum_votes_variance_fields';
   id?: Maybe<Scalars['Float']>;
-  referendumRowId?: Maybe<Scalars['Float']>;
+  referendumQuestionId?: Maybe<Scalars['Float']>;
   sectionId?: Maybe<Scalars['Float']>;
 };
 
@@ -2789,9 +4599,9 @@ export type Referendums = {
   municipalityId?: Maybe<Scalars['Int']>;
   name: Scalars['String'];
   /** An array relationship */
-  referendumRows: Array<Referendum_Rows>;
+  referendumRows: Array<Referendum_Questions>;
   /** An aggregate relationship */
-  referendumRows_aggregate: Referendum_Rows_Aggregate;
+  referendumRows_aggregate: Referendum_Questions_Aggregate;
   startTime: Scalars['timestamptz'];
   startedAt: Scalars['timestamptz'];
   updatedAt: Scalars['timestamptz'];
@@ -2800,21 +4610,21 @@ export type Referendums = {
 
 /** columns and relationships of "referendums" */
 export type ReferendumsReferendumRowsArgs = {
-  distinct_on?: Maybe<Array<Referendum_Rows_Select_Column>>;
+  distinct_on?: Maybe<Array<Referendum_Questions_Select_Column>>;
   limit?: Maybe<Scalars['Int']>;
   offset?: Maybe<Scalars['Int']>;
-  order_by?: Maybe<Array<Referendum_Rows_Order_By>>;
-  where?: Maybe<Referendum_Rows_Bool_Exp>;
+  order_by?: Maybe<Array<Referendum_Questions_Order_By>>;
+  where?: Maybe<Referendum_Questions_Bool_Exp>;
 };
 
 
 /** columns and relationships of "referendums" */
 export type ReferendumsReferendumRows_AggregateArgs = {
-  distinct_on?: Maybe<Array<Referendum_Rows_Select_Column>>;
+  distinct_on?: Maybe<Array<Referendum_Questions_Select_Column>>;
   limit?: Maybe<Scalars['Int']>;
   offset?: Maybe<Scalars['Int']>;
-  order_by?: Maybe<Array<Referendum_Rows_Order_By>>;
-  where?: Maybe<Referendum_Rows_Bool_Exp>;
+  order_by?: Maybe<Array<Referendum_Questions_Order_By>>;
+  where?: Maybe<Referendum_Questions_Bool_Exp>;
 };
 
 /** aggregated selection of "referendums" */
@@ -2866,7 +4676,7 @@ export type Referendums_Bool_Exp = {
   id?: Maybe<Int_Comparison_Exp>;
   municipalityId?: Maybe<Int_Comparison_Exp>;
   name?: Maybe<String_Comparison_Exp>;
-  referendumRows?: Maybe<Referendum_Rows_Bool_Exp>;
+  referendumRows?: Maybe<Referendum_Questions_Bool_Exp>;
   startTime?: Maybe<Timestamptz_Comparison_Exp>;
   startedAt?: Maybe<Timestamptz_Comparison_Exp>;
   updatedAt?: Maybe<Timestamptz_Comparison_Exp>;
@@ -2895,7 +4705,7 @@ export type Referendums_Insert_Input = {
   id?: Maybe<Scalars['Int']>;
   municipalityId?: Maybe<Scalars['Int']>;
   name?: Maybe<Scalars['String']>;
-  referendumRows?: Maybe<Referendum_Rows_Arr_Rel_Insert_Input>;
+  referendumRows?: Maybe<Referendum_Questions_Arr_Rel_Insert_Input>;
   startTime?: Maybe<Scalars['timestamptz']>;
   startedAt?: Maybe<Scalars['timestamptz']>;
   updatedAt?: Maybe<Scalars['timestamptz']>;
@@ -2956,7 +4766,7 @@ export type Referendums_Order_By = {
   id?: Maybe<Order_By>;
   municipalityId?: Maybe<Order_By>;
   name?: Maybe<Order_By>;
-  referendumRows_aggregate?: Maybe<Referendum_Rows_Aggregate_Order_By>;
+  referendumRows_aggregate?: Maybe<Referendum_Questions_Aggregate_Order_By>;
   startTime?: Maybe<Order_By>;
   startedAt?: Maybe<Order_By>;
   updatedAt?: Maybe<Order_By>;
@@ -3083,55 +4893,7 @@ export type Roles = {
   __typename?: 'roles';
   displayValue: Scalars['String'];
   id: Scalars['Int'];
-  /** fetch data from the table: "users" */
-  users: Array<Users>;
-  /** An array relationship */
-  usersWithSecondRole: Array<Users>;
-  /** An aggregate relationship */
-  usersWithSecondRole_aggregate: Users_Aggregate;
-  /** An aggregate relationship */
-  users_aggregate: Users_Aggregate;
   value: Scalars['String'];
-};
-
-
-/** columns and relationships of "roles" */
-export type RolesUsersArgs = {
-  distinct_on?: Maybe<Array<Users_Select_Column>>;
-  limit?: Maybe<Scalars['Int']>;
-  offset?: Maybe<Scalars['Int']>;
-  order_by?: Maybe<Array<Users_Order_By>>;
-  where?: Maybe<Users_Bool_Exp>;
-};
-
-
-/** columns and relationships of "roles" */
-export type RolesUsersWithSecondRoleArgs = {
-  distinct_on?: Maybe<Array<Users_Select_Column>>;
-  limit?: Maybe<Scalars['Int']>;
-  offset?: Maybe<Scalars['Int']>;
-  order_by?: Maybe<Array<Users_Order_By>>;
-  where?: Maybe<Users_Bool_Exp>;
-};
-
-
-/** columns and relationships of "roles" */
-export type RolesUsersWithSecondRole_AggregateArgs = {
-  distinct_on?: Maybe<Array<Users_Select_Column>>;
-  limit?: Maybe<Scalars['Int']>;
-  offset?: Maybe<Scalars['Int']>;
-  order_by?: Maybe<Array<Users_Order_By>>;
-  where?: Maybe<Users_Bool_Exp>;
-};
-
-
-/** columns and relationships of "roles" */
-export type RolesUsers_AggregateArgs = {
-  distinct_on?: Maybe<Array<Users_Select_Column>>;
-  limit?: Maybe<Scalars['Int']>;
-  offset?: Maybe<Scalars['Int']>;
-  order_by?: Maybe<Array<Users_Order_By>>;
-  where?: Maybe<Users_Bool_Exp>;
 };
 
 /** aggregated selection of "roles" */
@@ -3177,8 +4939,6 @@ export type Roles_Bool_Exp = {
   _or?: Maybe<Array<Roles_Bool_Exp>>;
   displayValue?: Maybe<String_Comparison_Exp>;
   id?: Maybe<Int_Comparison_Exp>;
-  users?: Maybe<Users_Bool_Exp>;
-  usersWithSecondRole?: Maybe<Users_Bool_Exp>;
   value?: Maybe<String_Comparison_Exp>;
 };
 
@@ -3199,8 +4959,6 @@ export type Roles_Inc_Input = {
 export type Roles_Insert_Input = {
   displayValue?: Maybe<Scalars['String']>;
   id?: Maybe<Scalars['Int']>;
-  users?: Maybe<Users_Arr_Rel_Insert_Input>;
-  usersWithSecondRole?: Maybe<Users_Arr_Rel_Insert_Input>;
   value?: Maybe<Scalars['String']>;
 };
 
@@ -3247,8 +5005,6 @@ export type Roles_On_Conflict = {
 export type Roles_Order_By = {
   displayValue?: Maybe<Order_By>;
   id?: Maybe<Order_By>;
-  usersWithSecondRole_aggregate?: Maybe<Users_Aggregate_Order_By>;
-  users_aggregate?: Maybe<Users_Aggregate_Order_By>;
   value?: Maybe<Order_By>;
 };
 
@@ -3331,6 +5087,7 @@ export type Settlements = {
   __typename?: 'settlements';
   id: Scalars['Int'];
   isDistrict: Scalars['Boolean'];
+  isMunicipality: Scalars['Boolean'];
   name: Scalars['String'];
   parentId?: Maybe<Scalars['Int']>;
   /** An object relationship */
@@ -3433,6 +5190,7 @@ export type Settlements_Bool_Exp = {
   _or?: Maybe<Array<Settlements_Bool_Exp>>;
   id?: Maybe<Int_Comparison_Exp>;
   isDistrict?: Maybe<Boolean_Comparison_Exp>;
+  isMunicipality?: Maybe<Boolean_Comparison_Exp>;
   name?: Maybe<String_Comparison_Exp>;
   parentId?: Maybe<Int_Comparison_Exp>;
   parentSettlement?: Maybe<Settlements_Bool_Exp>;
@@ -3455,6 +5213,7 @@ export type Settlements_Inc_Input = {
 export type Settlements_Insert_Input = {
   id?: Maybe<Scalars['Int']>;
   isDistrict?: Maybe<Scalars['Boolean']>;
+  isMunicipality?: Maybe<Scalars['Boolean']>;
   name?: Maybe<Scalars['String']>;
   parentId?: Maybe<Scalars['Int']>;
   parentSettlement?: Maybe<Settlements_Obj_Rel_Insert_Input>;
@@ -3518,6 +5277,7 @@ export type Settlements_On_Conflict = {
 export type Settlements_Order_By = {
   id?: Maybe<Order_By>;
   isDistrict?: Maybe<Order_By>;
+  isMunicipality?: Maybe<Order_By>;
   name?: Maybe<Order_By>;
   parentId?: Maybe<Order_By>;
   parentSettlement?: Maybe<Settlements_Order_By>;
@@ -3536,6 +5296,8 @@ export enum Settlements_Select_Column {
   /** column name */
   IsDistrict = 'isDistrict',
   /** column name */
+  IsMunicipality = 'isMunicipality',
+  /** column name */
   Name = 'name',
   /** column name */
   ParentId = 'parentId'
@@ -3545,6 +5307,7 @@ export enum Settlements_Select_Column {
 export type Settlements_Set_Input = {
   id?: Maybe<Scalars['Int']>;
   isDistrict?: Maybe<Scalars['Boolean']>;
+  isMunicipality?: Maybe<Scalars['Boolean']>;
   name?: Maybe<Scalars['String']>;
   parentId?: Maybe<Scalars['Int']>;
 };
@@ -3608,6 +5371,8 @@ export enum Settlements_Update_Column {
   /** column name */
   IsDistrict = 'isDistrict',
   /** column name */
+  IsMunicipality = 'isMunicipality',
+  /** column name */
   Name = 'name',
   /** column name */
   ParentId = 'parentId'
@@ -3660,30 +5425,66 @@ export type Subscription_Root = {
   addresses_aggregate: Addresses_Aggregate;
   /** fetch data from the table: "addresses" using primary key columns */
   addresses_by_pk?: Maybe<Addresses>;
-  /** fetch data from the table: "electoral_roll_rows" */
-  electoral_roll_rows: Array<Electoral_Roll_Rows>;
-  /** fetch aggregated fields from the table: "electoral_roll_rows" */
-  electoral_roll_rows_aggregate: Electoral_Roll_Rows_Aggregate;
-  /** fetch data from the table: "electoral_roll_rows" using primary key columns */
-  electoral_roll_rows_by_pk?: Maybe<Electoral_Roll_Rows>;
+  /** fetch data from the table: "candidate_lists" */
+  candidate_lists: Array<Candidate_Lists>;
+  /** fetch aggregated fields from the table: "candidate_lists" */
+  candidate_lists_aggregate: Candidate_Lists_Aggregate;
+  /** fetch data from the table: "candidate_lists" using primary key columns */
+  candidate_lists_by_pk?: Maybe<Candidate_Lists>;
+  /** fetch data from the table: "candidates" */
+  candidates: Array<Candidates>;
+  /** fetch aggregated fields from the table: "candidates" */
+  candidates_aggregate: Candidates_Aggregate;
+  /** fetch data from the table: "candidates" using primary key columns */
+  candidates_by_pk?: Maybe<Candidates>;
+  /** fetch data from the table: "commision_members" */
+  commision_members: Array<Commision_Members>;
+  /** fetch aggregated fields from the table: "commision_members" */
+  commision_members_aggregate: Commision_Members_Aggregate;
+  /** fetch data from the table: "commision_members" using primary key columns */
+  commision_members_by_pk?: Maybe<Commision_Members>;
+  /** fetch data from the table: "commissions" */
+  commissions: Array<Commissions>;
+  /** fetch aggregated fields from the table: "commissions" */
+  commissions_aggregate: Commissions_Aggregate;
+  /** fetch data from the table: "commissions" using primary key columns */
+  commissions_by_pk?: Maybe<Commissions>;
+  /** fetch data from the table: "electoral_roll_users" */
+  electoral_roll_users: Array<Electoral_Roll_Users>;
+  /** fetch aggregated fields from the table: "electoral_roll_users" */
+  electoral_roll_users_aggregate: Electoral_Roll_Users_Aggregate;
+  /** fetch data from the table: "electoral_roll_users" using primary key columns */
+  electoral_roll_users_by_pk?: Maybe<Electoral_Roll_Users>;
   /** fetch data from the table: "electoral_rolls" */
   electoral_rolls: Array<Electoral_Rolls>;
   /** fetch aggregated fields from the table: "electoral_rolls" */
   electoral_rolls_aggregate: Electoral_Rolls_Aggregate;
   /** fetch data from the table: "electoral_rolls" using primary key columns */
   electoral_rolls_by_pk?: Maybe<Electoral_Rolls>;
-  /** fetch data from the table: "parties" */
-  parties: Array<Parties>;
-  /** fetch aggregated fields from the table: "parties" */
-  parties_aggregate: Parties_Aggregate;
-  /** fetch data from the table: "parties" using primary key columns */
-  parties_by_pk?: Maybe<Parties>;
-  /** fetch data from the table: "referendum_rows" */
-  referendum_rows: Array<Referendum_Rows>;
-  /** fetch aggregated fields from the table: "referendum_rows" */
-  referendum_rows_aggregate: Referendum_Rows_Aggregate;
-  /** fetch data from the table: "referendum_rows" using primary key columns */
-  referendum_rows_by_pk?: Maybe<Referendum_Rows>;
+  /** fetch data from the table: "political_group_members" */
+  political_group_members: Array<Political_Group_Members>;
+  /** fetch aggregated fields from the table: "political_group_members" */
+  political_group_members_aggregate: Political_Group_Members_Aggregate;
+  /** fetch data from the table: "political_group_members" using primary key columns */
+  political_group_members_by_pk?: Maybe<Political_Group_Members>;
+  /** fetch data from the table: "political_group_types" */
+  political_group_types: Array<Political_Group_Types>;
+  /** fetch aggregated fields from the table: "political_group_types" */
+  political_group_types_aggregate: Political_Group_Types_Aggregate;
+  /** fetch data from the table: "political_group_types" using primary key columns */
+  political_group_types_by_pk?: Maybe<Political_Group_Types>;
+  /** fetch data from the table: "political_groups" */
+  political_groups: Array<Political_Groups>;
+  /** fetch aggregated fields from the table: "political_groups" */
+  political_groups_aggregate: Political_Groups_Aggregate;
+  /** fetch data from the table: "political_groups" using primary key columns */
+  political_groups_by_pk?: Maybe<Political_Groups>;
+  /** fetch data from the table: "referendum_questions" */
+  referendum_questions: Array<Referendum_Questions>;
+  /** fetch aggregated fields from the table: "referendum_questions" */
+  referendum_questions_aggregate: Referendum_Questions_Aggregate;
+  /** fetch data from the table: "referendum_questions" using primary key columns */
+  referendum_questions_by_pk?: Maybe<Referendum_Questions>;
   /** fetch data from the table: "referendum_votes" */
   referendum_votes: Array<Referendum_Votes>;
   /** fetch aggregated fields from the table: "referendum_votes" */
@@ -3710,7 +5511,7 @@ export type Subscription_Root = {
   settlements_by_pk?: Maybe<Settlements>;
   /** fetch data from the table: "users" */
   users: Array<Users>;
-  /** An aggregate relationship */
+  /** fetch aggregated fields from the table: "users" */
   users_aggregate: Users_Aggregate;
   /** fetch data from the table: "users" using primary key columns */
   users_by_pk?: Maybe<Users>;
@@ -3726,6 +5527,12 @@ export type Subscription_Root = {
   voting_section_aggregate: Voting_Section_Aggregate;
   /** fetch data from the table: "voting_section" using primary key columns */
   voting_section_by_pk?: Maybe<Voting_Section>;
+  /** fetch data from the table: "voting_section_sessions" */
+  voting_section_sessions: Array<Voting_Section_Sessions>;
+  /** fetch aggregated fields from the table: "voting_section_sessions" */
+  voting_section_sessions_aggregate: Voting_Section_Sessions_Aggregate;
+  /** fetch data from the table: "voting_section_sessions" using primary key columns */
+  voting_section_sessions_by_pk?: Maybe<Voting_Section_Sessions>;
   /** fetch data from the table: "voting_types" */
   voting_types: Array<Voting_Types>;
   /** fetch aggregated fields from the table: "voting_types" */
@@ -3734,7 +5541,7 @@ export type Subscription_Root = {
   voting_types_by_pk?: Maybe<Voting_Types>;
   /** fetch data from the table: "votings" */
   votings: Array<Votings>;
-  /** An aggregate relationship */
+  /** fetch aggregated fields from the table: "votings" */
   votings_aggregate: Votings_Aggregate;
   /** fetch data from the table: "votings" using primary key columns */
   votings_by_pk?: Maybe<Votings>;
@@ -3764,25 +5571,117 @@ export type Subscription_RootAddresses_By_PkArgs = {
 };
 
 
-export type Subscription_RootElectoral_Roll_RowsArgs = {
-  distinct_on?: Maybe<Array<Electoral_Roll_Rows_Select_Column>>;
+export type Subscription_RootCandidate_ListsArgs = {
+  distinct_on?: Maybe<Array<Candidate_Lists_Select_Column>>;
   limit?: Maybe<Scalars['Int']>;
   offset?: Maybe<Scalars['Int']>;
-  order_by?: Maybe<Array<Electoral_Roll_Rows_Order_By>>;
-  where?: Maybe<Electoral_Roll_Rows_Bool_Exp>;
+  order_by?: Maybe<Array<Candidate_Lists_Order_By>>;
+  where?: Maybe<Candidate_Lists_Bool_Exp>;
 };
 
 
-export type Subscription_RootElectoral_Roll_Rows_AggregateArgs = {
-  distinct_on?: Maybe<Array<Electoral_Roll_Rows_Select_Column>>;
+export type Subscription_RootCandidate_Lists_AggregateArgs = {
+  distinct_on?: Maybe<Array<Candidate_Lists_Select_Column>>;
   limit?: Maybe<Scalars['Int']>;
   offset?: Maybe<Scalars['Int']>;
-  order_by?: Maybe<Array<Electoral_Roll_Rows_Order_By>>;
-  where?: Maybe<Electoral_Roll_Rows_Bool_Exp>;
+  order_by?: Maybe<Array<Candidate_Lists_Order_By>>;
+  where?: Maybe<Candidate_Lists_Bool_Exp>;
 };
 
 
-export type Subscription_RootElectoral_Roll_Rows_By_PkArgs = {
+export type Subscription_RootCandidate_Lists_By_PkArgs = {
+  id: Scalars['Int'];
+};
+
+
+export type Subscription_RootCandidatesArgs = {
+  distinct_on?: Maybe<Array<Candidates_Select_Column>>;
+  limit?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  order_by?: Maybe<Array<Candidates_Order_By>>;
+  where?: Maybe<Candidates_Bool_Exp>;
+};
+
+
+export type Subscription_RootCandidates_AggregateArgs = {
+  distinct_on?: Maybe<Array<Candidates_Select_Column>>;
+  limit?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  order_by?: Maybe<Array<Candidates_Order_By>>;
+  where?: Maybe<Candidates_Bool_Exp>;
+};
+
+
+export type Subscription_RootCandidates_By_PkArgs = {
+  id: Scalars['Int'];
+};
+
+
+export type Subscription_RootCommision_MembersArgs = {
+  distinct_on?: Maybe<Array<Commision_Members_Select_Column>>;
+  limit?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  order_by?: Maybe<Array<Commision_Members_Order_By>>;
+  where?: Maybe<Commision_Members_Bool_Exp>;
+};
+
+
+export type Subscription_RootCommision_Members_AggregateArgs = {
+  distinct_on?: Maybe<Array<Commision_Members_Select_Column>>;
+  limit?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  order_by?: Maybe<Array<Commision_Members_Order_By>>;
+  where?: Maybe<Commision_Members_Bool_Exp>;
+};
+
+
+export type Subscription_RootCommision_Members_By_PkArgs = {
+  id: Scalars['Int'];
+};
+
+
+export type Subscription_RootCommissionsArgs = {
+  distinct_on?: Maybe<Array<Commissions_Select_Column>>;
+  limit?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  order_by?: Maybe<Array<Commissions_Order_By>>;
+  where?: Maybe<Commissions_Bool_Exp>;
+};
+
+
+export type Subscription_RootCommissions_AggregateArgs = {
+  distinct_on?: Maybe<Array<Commissions_Select_Column>>;
+  limit?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  order_by?: Maybe<Array<Commissions_Order_By>>;
+  where?: Maybe<Commissions_Bool_Exp>;
+};
+
+
+export type Subscription_RootCommissions_By_PkArgs = {
+  id: Scalars['Int'];
+};
+
+
+export type Subscription_RootElectoral_Roll_UsersArgs = {
+  distinct_on?: Maybe<Array<Electoral_Roll_Users_Select_Column>>;
+  limit?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  order_by?: Maybe<Array<Electoral_Roll_Users_Order_By>>;
+  where?: Maybe<Electoral_Roll_Users_Bool_Exp>;
+};
+
+
+export type Subscription_RootElectoral_Roll_Users_AggregateArgs = {
+  distinct_on?: Maybe<Array<Electoral_Roll_Users_Select_Column>>;
+  limit?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  order_by?: Maybe<Array<Electoral_Roll_Users_Order_By>>;
+  where?: Maybe<Electoral_Roll_Users_Bool_Exp>;
+};
+
+
+export type Subscription_RootElectoral_Roll_Users_By_PkArgs = {
   id: Scalars['Int'];
 };
 
@@ -3810,48 +5709,94 @@ export type Subscription_RootElectoral_Rolls_By_PkArgs = {
 };
 
 
-export type Subscription_RootPartiesArgs = {
-  distinct_on?: Maybe<Array<Parties_Select_Column>>;
+export type Subscription_RootPolitical_Group_MembersArgs = {
+  distinct_on?: Maybe<Array<Political_Group_Members_Select_Column>>;
   limit?: Maybe<Scalars['Int']>;
   offset?: Maybe<Scalars['Int']>;
-  order_by?: Maybe<Array<Parties_Order_By>>;
-  where?: Maybe<Parties_Bool_Exp>;
+  order_by?: Maybe<Array<Political_Group_Members_Order_By>>;
+  where?: Maybe<Political_Group_Members_Bool_Exp>;
 };
 
 
-export type Subscription_RootParties_AggregateArgs = {
-  distinct_on?: Maybe<Array<Parties_Select_Column>>;
+export type Subscription_RootPolitical_Group_Members_AggregateArgs = {
+  distinct_on?: Maybe<Array<Political_Group_Members_Select_Column>>;
   limit?: Maybe<Scalars['Int']>;
   offset?: Maybe<Scalars['Int']>;
-  order_by?: Maybe<Array<Parties_Order_By>>;
-  where?: Maybe<Parties_Bool_Exp>;
+  order_by?: Maybe<Array<Political_Group_Members_Order_By>>;
+  where?: Maybe<Political_Group_Members_Bool_Exp>;
 };
 
 
-export type Subscription_RootParties_By_PkArgs = {
+export type Subscription_RootPolitical_Group_Members_By_PkArgs = {
   id: Scalars['Int'];
 };
 
 
-export type Subscription_RootReferendum_RowsArgs = {
-  distinct_on?: Maybe<Array<Referendum_Rows_Select_Column>>;
+export type Subscription_RootPolitical_Group_TypesArgs = {
+  distinct_on?: Maybe<Array<Political_Group_Types_Select_Column>>;
   limit?: Maybe<Scalars['Int']>;
   offset?: Maybe<Scalars['Int']>;
-  order_by?: Maybe<Array<Referendum_Rows_Order_By>>;
-  where?: Maybe<Referendum_Rows_Bool_Exp>;
+  order_by?: Maybe<Array<Political_Group_Types_Order_By>>;
+  where?: Maybe<Political_Group_Types_Bool_Exp>;
 };
 
 
-export type Subscription_RootReferendum_Rows_AggregateArgs = {
-  distinct_on?: Maybe<Array<Referendum_Rows_Select_Column>>;
+export type Subscription_RootPolitical_Group_Types_AggregateArgs = {
+  distinct_on?: Maybe<Array<Political_Group_Types_Select_Column>>;
   limit?: Maybe<Scalars['Int']>;
   offset?: Maybe<Scalars['Int']>;
-  order_by?: Maybe<Array<Referendum_Rows_Order_By>>;
-  where?: Maybe<Referendum_Rows_Bool_Exp>;
+  order_by?: Maybe<Array<Political_Group_Types_Order_By>>;
+  where?: Maybe<Political_Group_Types_Bool_Exp>;
 };
 
 
-export type Subscription_RootReferendum_Rows_By_PkArgs = {
+export type Subscription_RootPolitical_Group_Types_By_PkArgs = {
+  value: Scalars['String'];
+};
+
+
+export type Subscription_RootPolitical_GroupsArgs = {
+  distinct_on?: Maybe<Array<Political_Groups_Select_Column>>;
+  limit?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  order_by?: Maybe<Array<Political_Groups_Order_By>>;
+  where?: Maybe<Political_Groups_Bool_Exp>;
+};
+
+
+export type Subscription_RootPolitical_Groups_AggregateArgs = {
+  distinct_on?: Maybe<Array<Political_Groups_Select_Column>>;
+  limit?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  order_by?: Maybe<Array<Political_Groups_Order_By>>;
+  where?: Maybe<Political_Groups_Bool_Exp>;
+};
+
+
+export type Subscription_RootPolitical_Groups_By_PkArgs = {
+  id: Scalars['Int'];
+};
+
+
+export type Subscription_RootReferendum_QuestionsArgs = {
+  distinct_on?: Maybe<Array<Referendum_Questions_Select_Column>>;
+  limit?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  order_by?: Maybe<Array<Referendum_Questions_Order_By>>;
+  where?: Maybe<Referendum_Questions_Bool_Exp>;
+};
+
+
+export type Subscription_RootReferendum_Questions_AggregateArgs = {
+  distinct_on?: Maybe<Array<Referendum_Questions_Select_Column>>;
+  limit?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  order_by?: Maybe<Array<Referendum_Questions_Order_By>>;
+  where?: Maybe<Referendum_Questions_Bool_Exp>;
+};
+
+
+export type Subscription_RootReferendum_Questions_By_PkArgs = {
   id: Scalars['Int'];
 };
 
@@ -4017,6 +5962,29 @@ export type Subscription_RootVoting_Section_By_PkArgs = {
 };
 
 
+export type Subscription_RootVoting_Section_SessionsArgs = {
+  distinct_on?: Maybe<Array<Voting_Section_Sessions_Select_Column>>;
+  limit?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  order_by?: Maybe<Array<Voting_Section_Sessions_Order_By>>;
+  where?: Maybe<Voting_Section_Sessions_Bool_Exp>;
+};
+
+
+export type Subscription_RootVoting_Section_Sessions_AggregateArgs = {
+  distinct_on?: Maybe<Array<Voting_Section_Sessions_Select_Column>>;
+  limit?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  order_by?: Maybe<Array<Voting_Section_Sessions_Order_By>>;
+  where?: Maybe<Voting_Section_Sessions_Bool_Exp>;
+};
+
+
+export type Subscription_RootVoting_Section_Sessions_By_PkArgs = {
+  id: Scalars['Int'];
+};
+
+
 export type Subscription_RootVoting_TypesArgs = {
   distinct_on?: Maybe<Array<Voting_Types_Select_Column>>;
   limit?: Maybe<Scalars['Int']>;
@@ -4036,7 +6004,7 @@ export type Subscription_RootVoting_Types_AggregateArgs = {
 
 
 export type Subscription_RootVoting_Types_By_PkArgs = {
-  id: Scalars['Int'];
+  value: Scalars['String'];
 };
 
 
@@ -4111,7 +6079,6 @@ export type Users = {
   /** An object relationship */
   secondRole?: Maybe<Roles>;
   secondRoleId?: Maybe<Scalars['Int']>;
-  sectionId?: Maybe<Scalars['Int']>;
   surname: Scalars['String'];
   updatedAt: Scalars['timestamptz'];
   voted: Scalars['Boolean'];
@@ -4147,28 +6114,6 @@ export type Users_Aggregate_FieldsCountArgs = {
   distinct?: Maybe<Scalars['Boolean']>;
 };
 
-/** order by aggregate values of table "users" */
-export type Users_Aggregate_Order_By = {
-  avg?: Maybe<Users_Avg_Order_By>;
-  count?: Maybe<Order_By>;
-  max?: Maybe<Users_Max_Order_By>;
-  min?: Maybe<Users_Min_Order_By>;
-  stddev?: Maybe<Users_Stddev_Order_By>;
-  stddev_pop?: Maybe<Users_Stddev_Pop_Order_By>;
-  stddev_samp?: Maybe<Users_Stddev_Samp_Order_By>;
-  sum?: Maybe<Users_Sum_Order_By>;
-  var_pop?: Maybe<Users_Var_Pop_Order_By>;
-  var_samp?: Maybe<Users_Var_Samp_Order_By>;
-  variance?: Maybe<Users_Variance_Order_By>;
-};
-
-/** input type for inserting array relation for remote table "users" */
-export type Users_Arr_Rel_Insert_Input = {
-  data: Array<Users_Insert_Input>;
-  /** on conflict condition */
-  on_conflict?: Maybe<Users_On_Conflict>;
-};
-
 /** aggregate avg on columns */
 export type Users_Avg_Fields = {
   __typename?: 'users_avg_fields';
@@ -4176,16 +6121,6 @@ export type Users_Avg_Fields = {
   id?: Maybe<Scalars['Float']>;
   roleId?: Maybe<Scalars['Float']>;
   secondRoleId?: Maybe<Scalars['Float']>;
-  sectionId?: Maybe<Scalars['Float']>;
-};
-
-/** order by avg() on columns of table "users" */
-export type Users_Avg_Order_By = {
-  addressId?: Maybe<Order_By>;
-  id?: Maybe<Order_By>;
-  roleId?: Maybe<Order_By>;
-  secondRoleId?: Maybe<Order_By>;
-  sectionId?: Maybe<Order_By>;
 };
 
 /** Boolean expression to filter rows from the table "users". All fields are combined with a logical 'AND'. */
@@ -4208,7 +6143,6 @@ export type Users_Bool_Exp = {
   roleId?: Maybe<Int_Comparison_Exp>;
   secondRole?: Maybe<Roles_Bool_Exp>;
   secondRoleId?: Maybe<Int_Comparison_Exp>;
-  sectionId?: Maybe<Int_Comparison_Exp>;
   surname?: Maybe<String_Comparison_Exp>;
   updatedAt?: Maybe<Timestamptz_Comparison_Exp>;
   voted?: Maybe<Boolean_Comparison_Exp>;
@@ -4216,6 +6150,8 @@ export type Users_Bool_Exp = {
 
 /** unique or primary key constraints on table "users" */
 export enum Users_Constraint {
+  /** unique or primary key constraint */
+  UsersEgnKey = 'users_egn_key',
   /** unique or primary key constraint */
   UsersPkey = 'users_pkey'
 }
@@ -4226,7 +6162,6 @@ export type Users_Inc_Input = {
   id?: Maybe<Scalars['Int']>;
   roleId?: Maybe<Scalars['Int']>;
   secondRoleId?: Maybe<Scalars['Int']>;
-  sectionId?: Maybe<Scalars['Int']>;
 };
 
 /** input type for inserting data into table "users" */
@@ -4246,7 +6181,6 @@ export type Users_Insert_Input = {
   roleId?: Maybe<Scalars['Int']>;
   secondRole?: Maybe<Roles_Obj_Rel_Insert_Input>;
   secondRoleId?: Maybe<Scalars['Int']>;
-  sectionId?: Maybe<Scalars['Int']>;
   surname?: Maybe<Scalars['String']>;
   updatedAt?: Maybe<Scalars['timestamptz']>;
   voted?: Maybe<Scalars['Boolean']>;
@@ -4266,27 +6200,8 @@ export type Users_Max_Fields = {
   pin?: Maybe<Scalars['String']>;
   roleId?: Maybe<Scalars['Int']>;
   secondRoleId?: Maybe<Scalars['Int']>;
-  sectionId?: Maybe<Scalars['Int']>;
   surname?: Maybe<Scalars['String']>;
   updatedAt?: Maybe<Scalars['timestamptz']>;
-};
-
-/** order by max() on columns of table "users" */
-export type Users_Max_Order_By = {
-  addressId?: Maybe<Order_By>;
-  createdAt?: Maybe<Order_By>;
-  egn?: Maybe<Order_By>;
-  email?: Maybe<Order_By>;
-  family?: Maybe<Order_By>;
-  id?: Maybe<Order_By>;
-  name?: Maybe<Order_By>;
-  password?: Maybe<Order_By>;
-  pin?: Maybe<Order_By>;
-  roleId?: Maybe<Order_By>;
-  secondRoleId?: Maybe<Order_By>;
-  sectionId?: Maybe<Order_By>;
-  surname?: Maybe<Order_By>;
-  updatedAt?: Maybe<Order_By>;
 };
 
 /** aggregate min on columns */
@@ -4303,27 +6218,8 @@ export type Users_Min_Fields = {
   pin?: Maybe<Scalars['String']>;
   roleId?: Maybe<Scalars['Int']>;
   secondRoleId?: Maybe<Scalars['Int']>;
-  sectionId?: Maybe<Scalars['Int']>;
   surname?: Maybe<Scalars['String']>;
   updatedAt?: Maybe<Scalars['timestamptz']>;
-};
-
-/** order by min() on columns of table "users" */
-export type Users_Min_Order_By = {
-  addressId?: Maybe<Order_By>;
-  createdAt?: Maybe<Order_By>;
-  egn?: Maybe<Order_By>;
-  email?: Maybe<Order_By>;
-  family?: Maybe<Order_By>;
-  id?: Maybe<Order_By>;
-  name?: Maybe<Order_By>;
-  password?: Maybe<Order_By>;
-  pin?: Maybe<Order_By>;
-  roleId?: Maybe<Order_By>;
-  secondRoleId?: Maybe<Order_By>;
-  sectionId?: Maybe<Order_By>;
-  surname?: Maybe<Order_By>;
-  updatedAt?: Maybe<Order_By>;
 };
 
 /** response of any mutation on the table "users" */
@@ -4359,7 +6255,6 @@ export type Users_Order_By = {
   roleId?: Maybe<Order_By>;
   secondRole?: Maybe<Roles_Order_By>;
   secondRoleId?: Maybe<Order_By>;
-  sectionId?: Maybe<Order_By>;
   surname?: Maybe<Order_By>;
   updatedAt?: Maybe<Order_By>;
   voted?: Maybe<Order_By>;
@@ -4397,8 +6292,6 @@ export enum Users_Select_Column {
   /** column name */
   SecondRoleId = 'secondRoleId',
   /** column name */
-  SectionId = 'sectionId',
-  /** column name */
   Surname = 'surname',
   /** column name */
   UpdatedAt = 'updatedAt',
@@ -4420,7 +6313,6 @@ export type Users_Set_Input = {
   pin?: Maybe<Scalars['String']>;
   roleId?: Maybe<Scalars['Int']>;
   secondRoleId?: Maybe<Scalars['Int']>;
-  sectionId?: Maybe<Scalars['Int']>;
   surname?: Maybe<Scalars['String']>;
   updatedAt?: Maybe<Scalars['timestamptz']>;
   voted?: Maybe<Scalars['Boolean']>;
@@ -4433,16 +6325,6 @@ export type Users_Stddev_Fields = {
   id?: Maybe<Scalars['Float']>;
   roleId?: Maybe<Scalars['Float']>;
   secondRoleId?: Maybe<Scalars['Float']>;
-  sectionId?: Maybe<Scalars['Float']>;
-};
-
-/** order by stddev() on columns of table "users" */
-export type Users_Stddev_Order_By = {
-  addressId?: Maybe<Order_By>;
-  id?: Maybe<Order_By>;
-  roleId?: Maybe<Order_By>;
-  secondRoleId?: Maybe<Order_By>;
-  sectionId?: Maybe<Order_By>;
 };
 
 /** aggregate stddev_pop on columns */
@@ -4452,16 +6334,6 @@ export type Users_Stddev_Pop_Fields = {
   id?: Maybe<Scalars['Float']>;
   roleId?: Maybe<Scalars['Float']>;
   secondRoleId?: Maybe<Scalars['Float']>;
-  sectionId?: Maybe<Scalars['Float']>;
-};
-
-/** order by stddev_pop() on columns of table "users" */
-export type Users_Stddev_Pop_Order_By = {
-  addressId?: Maybe<Order_By>;
-  id?: Maybe<Order_By>;
-  roleId?: Maybe<Order_By>;
-  secondRoleId?: Maybe<Order_By>;
-  sectionId?: Maybe<Order_By>;
 };
 
 /** aggregate stddev_samp on columns */
@@ -4471,16 +6343,6 @@ export type Users_Stddev_Samp_Fields = {
   id?: Maybe<Scalars['Float']>;
   roleId?: Maybe<Scalars['Float']>;
   secondRoleId?: Maybe<Scalars['Float']>;
-  sectionId?: Maybe<Scalars['Float']>;
-};
-
-/** order by stddev_samp() on columns of table "users" */
-export type Users_Stddev_Samp_Order_By = {
-  addressId?: Maybe<Order_By>;
-  id?: Maybe<Order_By>;
-  roleId?: Maybe<Order_By>;
-  secondRoleId?: Maybe<Order_By>;
-  sectionId?: Maybe<Order_By>;
 };
 
 /** aggregate sum on columns */
@@ -4490,16 +6352,6 @@ export type Users_Sum_Fields = {
   id?: Maybe<Scalars['Int']>;
   roleId?: Maybe<Scalars['Int']>;
   secondRoleId?: Maybe<Scalars['Int']>;
-  sectionId?: Maybe<Scalars['Int']>;
-};
-
-/** order by sum() on columns of table "users" */
-export type Users_Sum_Order_By = {
-  addressId?: Maybe<Order_By>;
-  id?: Maybe<Order_By>;
-  roleId?: Maybe<Order_By>;
-  secondRoleId?: Maybe<Order_By>;
-  sectionId?: Maybe<Order_By>;
 };
 
 /** update columns of table "users" */
@@ -4529,8 +6381,6 @@ export enum Users_Update_Column {
   /** column name */
   SecondRoleId = 'secondRoleId',
   /** column name */
-  SectionId = 'sectionId',
-  /** column name */
   Surname = 'surname',
   /** column name */
   UpdatedAt = 'updatedAt',
@@ -4545,16 +6395,6 @@ export type Users_Var_Pop_Fields = {
   id?: Maybe<Scalars['Float']>;
   roleId?: Maybe<Scalars['Float']>;
   secondRoleId?: Maybe<Scalars['Float']>;
-  sectionId?: Maybe<Scalars['Float']>;
-};
-
-/** order by var_pop() on columns of table "users" */
-export type Users_Var_Pop_Order_By = {
-  addressId?: Maybe<Order_By>;
-  id?: Maybe<Order_By>;
-  roleId?: Maybe<Order_By>;
-  secondRoleId?: Maybe<Order_By>;
-  sectionId?: Maybe<Order_By>;
 };
 
 /** aggregate var_samp on columns */
@@ -4564,16 +6404,6 @@ export type Users_Var_Samp_Fields = {
   id?: Maybe<Scalars['Float']>;
   roleId?: Maybe<Scalars['Float']>;
   secondRoleId?: Maybe<Scalars['Float']>;
-  sectionId?: Maybe<Scalars['Float']>;
-};
-
-/** order by var_samp() on columns of table "users" */
-export type Users_Var_Samp_Order_By = {
-  addressId?: Maybe<Order_By>;
-  id?: Maybe<Order_By>;
-  roleId?: Maybe<Order_By>;
-  secondRoleId?: Maybe<Order_By>;
-  sectionId?: Maybe<Order_By>;
 };
 
 /** aggregate variance on columns */
@@ -4583,16 +6413,6 @@ export type Users_Variance_Fields = {
   id?: Maybe<Scalars['Float']>;
   roleId?: Maybe<Scalars['Float']>;
   secondRoleId?: Maybe<Scalars['Float']>;
-  sectionId?: Maybe<Scalars['Float']>;
-};
-
-/** order by variance() on columns of table "users" */
-export type Users_Variance_Order_By = {
-  addressId?: Maybe<Order_By>;
-  id?: Maybe<Order_By>;
-  roleId?: Maybe<Order_By>;
-  secondRoleId?: Maybe<Order_By>;
-  sectionId?: Maybe<Order_By>;
 };
 
 /** columns and relationships of "votes" */
@@ -4852,8 +6672,11 @@ export type Votes_Variance_Fields = {
 /** columns and relationships of "voting_section" */
 export type Voting_Section = {
   __typename?: 'voting_section';
+  closedAt?: Maybe<Scalars['timestamptz']>;
   createdAt: Scalars['timestamptz'];
   id: Scalars['Int'];
+  openedAt?: Maybe<Scalars['timestamptz']>;
+  settlementId: Scalars['Int'];
   updatedAt: Scalars['timestamptz'];
 };
 
@@ -4891,6 +6714,7 @@ export type Voting_Section_Aggregate_FieldsCountArgs = {
 export type Voting_Section_Avg_Fields = {
   __typename?: 'voting_section_avg_fields';
   id?: Maybe<Scalars['Float']>;
+  settlementId?: Maybe<Scalars['Float']>;
 };
 
 /** Boolean expression to filter rows from the table "voting_section". All fields are combined with a logical 'AND'. */
@@ -4898,8 +6722,11 @@ export type Voting_Section_Bool_Exp = {
   _and?: Maybe<Array<Voting_Section_Bool_Exp>>;
   _not?: Maybe<Voting_Section_Bool_Exp>;
   _or?: Maybe<Array<Voting_Section_Bool_Exp>>;
+  closedAt?: Maybe<Timestamptz_Comparison_Exp>;
   createdAt?: Maybe<Timestamptz_Comparison_Exp>;
   id?: Maybe<Int_Comparison_Exp>;
+  openedAt?: Maybe<Timestamptz_Comparison_Exp>;
+  settlementId?: Maybe<Int_Comparison_Exp>;
   updatedAt?: Maybe<Timestamptz_Comparison_Exp>;
 };
 
@@ -4912,28 +6739,38 @@ export enum Voting_Section_Constraint {
 /** input type for incrementing numeric columns in table "voting_section" */
 export type Voting_Section_Inc_Input = {
   id?: Maybe<Scalars['Int']>;
+  settlementId?: Maybe<Scalars['Int']>;
 };
 
 /** input type for inserting data into table "voting_section" */
 export type Voting_Section_Insert_Input = {
+  closedAt?: Maybe<Scalars['timestamptz']>;
   createdAt?: Maybe<Scalars['timestamptz']>;
   id?: Maybe<Scalars['Int']>;
+  openedAt?: Maybe<Scalars['timestamptz']>;
+  settlementId?: Maybe<Scalars['Int']>;
   updatedAt?: Maybe<Scalars['timestamptz']>;
 };
 
 /** aggregate max on columns */
 export type Voting_Section_Max_Fields = {
   __typename?: 'voting_section_max_fields';
+  closedAt?: Maybe<Scalars['timestamptz']>;
   createdAt?: Maybe<Scalars['timestamptz']>;
   id?: Maybe<Scalars['Int']>;
+  openedAt?: Maybe<Scalars['timestamptz']>;
+  settlementId?: Maybe<Scalars['Int']>;
   updatedAt?: Maybe<Scalars['timestamptz']>;
 };
 
 /** aggregate min on columns */
 export type Voting_Section_Min_Fields = {
   __typename?: 'voting_section_min_fields';
+  closedAt?: Maybe<Scalars['timestamptz']>;
   createdAt?: Maybe<Scalars['timestamptz']>;
   id?: Maybe<Scalars['Int']>;
+  openedAt?: Maybe<Scalars['timestamptz']>;
+  settlementId?: Maybe<Scalars['Int']>;
   updatedAt?: Maybe<Scalars['timestamptz']>;
 };
 
@@ -4955,8 +6792,11 @@ export type Voting_Section_On_Conflict = {
 
 /** Ordering options when selecting data from "voting_section". */
 export type Voting_Section_Order_By = {
+  closedAt?: Maybe<Order_By>;
   createdAt?: Maybe<Order_By>;
   id?: Maybe<Order_By>;
+  openedAt?: Maybe<Order_By>;
+  settlementId?: Maybe<Order_By>;
   updatedAt?: Maybe<Order_By>;
 };
 
@@ -4968,17 +6808,333 @@ export type Voting_Section_Pk_Columns_Input = {
 /** select columns of table "voting_section" */
 export enum Voting_Section_Select_Column {
   /** column name */
+  ClosedAt = 'closedAt',
+  /** column name */
   CreatedAt = 'createdAt',
   /** column name */
   Id = 'id',
   /** column name */
+  OpenedAt = 'openedAt',
+  /** column name */
+  SettlementId = 'settlementId',
+  /** column name */
   UpdatedAt = 'updatedAt'
 }
 
+/** columns and relationships of "voting_section_sessions" */
+export type Voting_Section_Sessions = {
+  __typename?: 'voting_section_sessions';
+  candidatesListId?: Maybe<Scalars['Int']>;
+  createdAt: Scalars['timestamptz'];
+  finishedAt: Scalars['timestamptz'];
+  id: Scalars['Int'];
+  referendumId?: Maybe<Scalars['Int']>;
+  sectionId: Scalars['Int'];
+  startedAt: Scalars['timestamptz'];
+  tour?: Maybe<Scalars['Int']>;
+  updatedAt: Scalars['timestamptz'];
+  votingId: Scalars['Int'];
+};
+
+/** aggregated selection of "voting_section_sessions" */
+export type Voting_Section_Sessions_Aggregate = {
+  __typename?: 'voting_section_sessions_aggregate';
+  aggregate?: Maybe<Voting_Section_Sessions_Aggregate_Fields>;
+  nodes: Array<Voting_Section_Sessions>;
+};
+
+/** aggregate fields of "voting_section_sessions" */
+export type Voting_Section_Sessions_Aggregate_Fields = {
+  __typename?: 'voting_section_sessions_aggregate_fields';
+  avg?: Maybe<Voting_Section_Sessions_Avg_Fields>;
+  count: Scalars['Int'];
+  max?: Maybe<Voting_Section_Sessions_Max_Fields>;
+  min?: Maybe<Voting_Section_Sessions_Min_Fields>;
+  stddev?: Maybe<Voting_Section_Sessions_Stddev_Fields>;
+  stddev_pop?: Maybe<Voting_Section_Sessions_Stddev_Pop_Fields>;
+  stddev_samp?: Maybe<Voting_Section_Sessions_Stddev_Samp_Fields>;
+  sum?: Maybe<Voting_Section_Sessions_Sum_Fields>;
+  var_pop?: Maybe<Voting_Section_Sessions_Var_Pop_Fields>;
+  var_samp?: Maybe<Voting_Section_Sessions_Var_Samp_Fields>;
+  variance?: Maybe<Voting_Section_Sessions_Variance_Fields>;
+};
+
+
+/** aggregate fields of "voting_section_sessions" */
+export type Voting_Section_Sessions_Aggregate_FieldsCountArgs = {
+  columns?: Maybe<Array<Voting_Section_Sessions_Select_Column>>;
+  distinct?: Maybe<Scalars['Boolean']>;
+};
+
+/** aggregate avg on columns */
+export type Voting_Section_Sessions_Avg_Fields = {
+  __typename?: 'voting_section_sessions_avg_fields';
+  candidatesListId?: Maybe<Scalars['Float']>;
+  id?: Maybe<Scalars['Float']>;
+  referendumId?: Maybe<Scalars['Float']>;
+  sectionId?: Maybe<Scalars['Float']>;
+  tour?: Maybe<Scalars['Float']>;
+  votingId?: Maybe<Scalars['Float']>;
+};
+
+/** Boolean expression to filter rows from the table "voting_section_sessions". All fields are combined with a logical 'AND'. */
+export type Voting_Section_Sessions_Bool_Exp = {
+  _and?: Maybe<Array<Voting_Section_Sessions_Bool_Exp>>;
+  _not?: Maybe<Voting_Section_Sessions_Bool_Exp>;
+  _or?: Maybe<Array<Voting_Section_Sessions_Bool_Exp>>;
+  candidatesListId?: Maybe<Int_Comparison_Exp>;
+  createdAt?: Maybe<Timestamptz_Comparison_Exp>;
+  finishedAt?: Maybe<Timestamptz_Comparison_Exp>;
+  id?: Maybe<Int_Comparison_Exp>;
+  referendumId?: Maybe<Int_Comparison_Exp>;
+  sectionId?: Maybe<Int_Comparison_Exp>;
+  startedAt?: Maybe<Timestamptz_Comparison_Exp>;
+  tour?: Maybe<Int_Comparison_Exp>;
+  updatedAt?: Maybe<Timestamptz_Comparison_Exp>;
+  votingId?: Maybe<Int_Comparison_Exp>;
+};
+
+/** unique or primary key constraints on table "voting_section_sessions" */
+export enum Voting_Section_Sessions_Constraint {
+  /** unique or primary key constraint */
+  VotingSectionSessionsPkey = 'voting_section_sessions_pkey'
+}
+
+/** input type for incrementing numeric columns in table "voting_section_sessions" */
+export type Voting_Section_Sessions_Inc_Input = {
+  candidatesListId?: Maybe<Scalars['Int']>;
+  id?: Maybe<Scalars['Int']>;
+  referendumId?: Maybe<Scalars['Int']>;
+  sectionId?: Maybe<Scalars['Int']>;
+  tour?: Maybe<Scalars['Int']>;
+  votingId?: Maybe<Scalars['Int']>;
+};
+
+/** input type for inserting data into table "voting_section_sessions" */
+export type Voting_Section_Sessions_Insert_Input = {
+  candidatesListId?: Maybe<Scalars['Int']>;
+  createdAt?: Maybe<Scalars['timestamptz']>;
+  finishedAt?: Maybe<Scalars['timestamptz']>;
+  id?: Maybe<Scalars['Int']>;
+  referendumId?: Maybe<Scalars['Int']>;
+  sectionId?: Maybe<Scalars['Int']>;
+  startedAt?: Maybe<Scalars['timestamptz']>;
+  tour?: Maybe<Scalars['Int']>;
+  updatedAt?: Maybe<Scalars['timestamptz']>;
+  votingId?: Maybe<Scalars['Int']>;
+};
+
+/** aggregate max on columns */
+export type Voting_Section_Sessions_Max_Fields = {
+  __typename?: 'voting_section_sessions_max_fields';
+  candidatesListId?: Maybe<Scalars['Int']>;
+  createdAt?: Maybe<Scalars['timestamptz']>;
+  finishedAt?: Maybe<Scalars['timestamptz']>;
+  id?: Maybe<Scalars['Int']>;
+  referendumId?: Maybe<Scalars['Int']>;
+  sectionId?: Maybe<Scalars['Int']>;
+  startedAt?: Maybe<Scalars['timestamptz']>;
+  tour?: Maybe<Scalars['Int']>;
+  updatedAt?: Maybe<Scalars['timestamptz']>;
+  votingId?: Maybe<Scalars['Int']>;
+};
+
+/** aggregate min on columns */
+export type Voting_Section_Sessions_Min_Fields = {
+  __typename?: 'voting_section_sessions_min_fields';
+  candidatesListId?: Maybe<Scalars['Int']>;
+  createdAt?: Maybe<Scalars['timestamptz']>;
+  finishedAt?: Maybe<Scalars['timestamptz']>;
+  id?: Maybe<Scalars['Int']>;
+  referendumId?: Maybe<Scalars['Int']>;
+  sectionId?: Maybe<Scalars['Int']>;
+  startedAt?: Maybe<Scalars['timestamptz']>;
+  tour?: Maybe<Scalars['Int']>;
+  updatedAt?: Maybe<Scalars['timestamptz']>;
+  votingId?: Maybe<Scalars['Int']>;
+};
+
+/** response of any mutation on the table "voting_section_sessions" */
+export type Voting_Section_Sessions_Mutation_Response = {
+  __typename?: 'voting_section_sessions_mutation_response';
+  /** number of rows affected by the mutation */
+  affected_rows: Scalars['Int'];
+  /** data from the rows affected by the mutation */
+  returning: Array<Voting_Section_Sessions>;
+};
+
+/** on conflict condition type for table "voting_section_sessions" */
+export type Voting_Section_Sessions_On_Conflict = {
+  constraint: Voting_Section_Sessions_Constraint;
+  update_columns: Array<Voting_Section_Sessions_Update_Column>;
+  where?: Maybe<Voting_Section_Sessions_Bool_Exp>;
+};
+
+/** Ordering options when selecting data from "voting_section_sessions". */
+export type Voting_Section_Sessions_Order_By = {
+  candidatesListId?: Maybe<Order_By>;
+  createdAt?: Maybe<Order_By>;
+  finishedAt?: Maybe<Order_By>;
+  id?: Maybe<Order_By>;
+  referendumId?: Maybe<Order_By>;
+  sectionId?: Maybe<Order_By>;
+  startedAt?: Maybe<Order_By>;
+  tour?: Maybe<Order_By>;
+  updatedAt?: Maybe<Order_By>;
+  votingId?: Maybe<Order_By>;
+};
+
+/** primary key columns input for table: voting_section_sessions */
+export type Voting_Section_Sessions_Pk_Columns_Input = {
+  id: Scalars['Int'];
+};
+
+/** select columns of table "voting_section_sessions" */
+export enum Voting_Section_Sessions_Select_Column {
+  /** column name */
+  CandidatesListId = 'candidatesListId',
+  /** column name */
+  CreatedAt = 'createdAt',
+  /** column name */
+  FinishedAt = 'finishedAt',
+  /** column name */
+  Id = 'id',
+  /** column name */
+  ReferendumId = 'referendumId',
+  /** column name */
+  SectionId = 'sectionId',
+  /** column name */
+  StartedAt = 'startedAt',
+  /** column name */
+  Tour = 'tour',
+  /** column name */
+  UpdatedAt = 'updatedAt',
+  /** column name */
+  VotingId = 'votingId'
+}
+
+/** input type for updating data in table "voting_section_sessions" */
+export type Voting_Section_Sessions_Set_Input = {
+  candidatesListId?: Maybe<Scalars['Int']>;
+  createdAt?: Maybe<Scalars['timestamptz']>;
+  finishedAt?: Maybe<Scalars['timestamptz']>;
+  id?: Maybe<Scalars['Int']>;
+  referendumId?: Maybe<Scalars['Int']>;
+  sectionId?: Maybe<Scalars['Int']>;
+  startedAt?: Maybe<Scalars['timestamptz']>;
+  tour?: Maybe<Scalars['Int']>;
+  updatedAt?: Maybe<Scalars['timestamptz']>;
+  votingId?: Maybe<Scalars['Int']>;
+};
+
+/** aggregate stddev on columns */
+export type Voting_Section_Sessions_Stddev_Fields = {
+  __typename?: 'voting_section_sessions_stddev_fields';
+  candidatesListId?: Maybe<Scalars['Float']>;
+  id?: Maybe<Scalars['Float']>;
+  referendumId?: Maybe<Scalars['Float']>;
+  sectionId?: Maybe<Scalars['Float']>;
+  tour?: Maybe<Scalars['Float']>;
+  votingId?: Maybe<Scalars['Float']>;
+};
+
+/** aggregate stddev_pop on columns */
+export type Voting_Section_Sessions_Stddev_Pop_Fields = {
+  __typename?: 'voting_section_sessions_stddev_pop_fields';
+  candidatesListId?: Maybe<Scalars['Float']>;
+  id?: Maybe<Scalars['Float']>;
+  referendumId?: Maybe<Scalars['Float']>;
+  sectionId?: Maybe<Scalars['Float']>;
+  tour?: Maybe<Scalars['Float']>;
+  votingId?: Maybe<Scalars['Float']>;
+};
+
+/** aggregate stddev_samp on columns */
+export type Voting_Section_Sessions_Stddev_Samp_Fields = {
+  __typename?: 'voting_section_sessions_stddev_samp_fields';
+  candidatesListId?: Maybe<Scalars['Float']>;
+  id?: Maybe<Scalars['Float']>;
+  referendumId?: Maybe<Scalars['Float']>;
+  sectionId?: Maybe<Scalars['Float']>;
+  tour?: Maybe<Scalars['Float']>;
+  votingId?: Maybe<Scalars['Float']>;
+};
+
+/** aggregate sum on columns */
+export type Voting_Section_Sessions_Sum_Fields = {
+  __typename?: 'voting_section_sessions_sum_fields';
+  candidatesListId?: Maybe<Scalars['Int']>;
+  id?: Maybe<Scalars['Int']>;
+  referendumId?: Maybe<Scalars['Int']>;
+  sectionId?: Maybe<Scalars['Int']>;
+  tour?: Maybe<Scalars['Int']>;
+  votingId?: Maybe<Scalars['Int']>;
+};
+
+/** update columns of table "voting_section_sessions" */
+export enum Voting_Section_Sessions_Update_Column {
+  /** column name */
+  CandidatesListId = 'candidatesListId',
+  /** column name */
+  CreatedAt = 'createdAt',
+  /** column name */
+  FinishedAt = 'finishedAt',
+  /** column name */
+  Id = 'id',
+  /** column name */
+  ReferendumId = 'referendumId',
+  /** column name */
+  SectionId = 'sectionId',
+  /** column name */
+  StartedAt = 'startedAt',
+  /** column name */
+  Tour = 'tour',
+  /** column name */
+  UpdatedAt = 'updatedAt',
+  /** column name */
+  VotingId = 'votingId'
+}
+
+/** aggregate var_pop on columns */
+export type Voting_Section_Sessions_Var_Pop_Fields = {
+  __typename?: 'voting_section_sessions_var_pop_fields';
+  candidatesListId?: Maybe<Scalars['Float']>;
+  id?: Maybe<Scalars['Float']>;
+  referendumId?: Maybe<Scalars['Float']>;
+  sectionId?: Maybe<Scalars['Float']>;
+  tour?: Maybe<Scalars['Float']>;
+  votingId?: Maybe<Scalars['Float']>;
+};
+
+/** aggregate var_samp on columns */
+export type Voting_Section_Sessions_Var_Samp_Fields = {
+  __typename?: 'voting_section_sessions_var_samp_fields';
+  candidatesListId?: Maybe<Scalars['Float']>;
+  id?: Maybe<Scalars['Float']>;
+  referendumId?: Maybe<Scalars['Float']>;
+  sectionId?: Maybe<Scalars['Float']>;
+  tour?: Maybe<Scalars['Float']>;
+  votingId?: Maybe<Scalars['Float']>;
+};
+
+/** aggregate variance on columns */
+export type Voting_Section_Sessions_Variance_Fields = {
+  __typename?: 'voting_section_sessions_variance_fields';
+  candidatesListId?: Maybe<Scalars['Float']>;
+  id?: Maybe<Scalars['Float']>;
+  referendumId?: Maybe<Scalars['Float']>;
+  sectionId?: Maybe<Scalars['Float']>;
+  tour?: Maybe<Scalars['Float']>;
+  votingId?: Maybe<Scalars['Float']>;
+};
+
 /** input type for updating data in table "voting_section" */
 export type Voting_Section_Set_Input = {
+  closedAt?: Maybe<Scalars['timestamptz']>;
   createdAt?: Maybe<Scalars['timestamptz']>;
   id?: Maybe<Scalars['Int']>;
+  openedAt?: Maybe<Scalars['timestamptz']>;
+  settlementId?: Maybe<Scalars['Int']>;
   updatedAt?: Maybe<Scalars['timestamptz']>;
 };
 
@@ -4986,32 +7142,42 @@ export type Voting_Section_Set_Input = {
 export type Voting_Section_Stddev_Fields = {
   __typename?: 'voting_section_stddev_fields';
   id?: Maybe<Scalars['Float']>;
+  settlementId?: Maybe<Scalars['Float']>;
 };
 
 /** aggregate stddev_pop on columns */
 export type Voting_Section_Stddev_Pop_Fields = {
   __typename?: 'voting_section_stddev_pop_fields';
   id?: Maybe<Scalars['Float']>;
+  settlementId?: Maybe<Scalars['Float']>;
 };
 
 /** aggregate stddev_samp on columns */
 export type Voting_Section_Stddev_Samp_Fields = {
   __typename?: 'voting_section_stddev_samp_fields';
   id?: Maybe<Scalars['Float']>;
+  settlementId?: Maybe<Scalars['Float']>;
 };
 
 /** aggregate sum on columns */
 export type Voting_Section_Sum_Fields = {
   __typename?: 'voting_section_sum_fields';
   id?: Maybe<Scalars['Int']>;
+  settlementId?: Maybe<Scalars['Int']>;
 };
 
 /** update columns of table "voting_section" */
 export enum Voting_Section_Update_Column {
   /** column name */
+  ClosedAt = 'closedAt',
+  /** column name */
   CreatedAt = 'createdAt',
   /** column name */
   Id = 'id',
+  /** column name */
+  OpenedAt = 'openedAt',
+  /** column name */
+  SettlementId = 'settlementId',
   /** column name */
   UpdatedAt = 'updatedAt'
 }
@@ -5020,54 +7186,28 @@ export enum Voting_Section_Update_Column {
 export type Voting_Section_Var_Pop_Fields = {
   __typename?: 'voting_section_var_pop_fields';
   id?: Maybe<Scalars['Float']>;
+  settlementId?: Maybe<Scalars['Float']>;
 };
 
 /** aggregate var_samp on columns */
 export type Voting_Section_Var_Samp_Fields = {
   __typename?: 'voting_section_var_samp_fields';
   id?: Maybe<Scalars['Float']>;
+  settlementId?: Maybe<Scalars['Float']>;
 };
 
 /** aggregate variance on columns */
 export type Voting_Section_Variance_Fields = {
   __typename?: 'voting_section_variance_fields';
   id?: Maybe<Scalars['Float']>;
+  settlementId?: Maybe<Scalars['Float']>;
 };
 
 /** columns and relationships of "voting_types" */
 export type Voting_Types = {
   __typename?: 'voting_types';
-  createdAt: Scalars['timestamptz'];
   description: Scalars['String'];
-  displayText: Scalars['String'];
-  id: Scalars['Int'];
-  tours: Scalars['Int'];
-  updatedAt: Scalars['timestamptz'];
   value: Scalars['String'];
-  /** fetch data from the table: "votings" */
-  votings: Array<Votings>;
-  /** An aggregate relationship */
-  votings_aggregate: Votings_Aggregate;
-};
-
-
-/** columns and relationships of "voting_types" */
-export type Voting_TypesVotingsArgs = {
-  distinct_on?: Maybe<Array<Votings_Select_Column>>;
-  limit?: Maybe<Scalars['Int']>;
-  offset?: Maybe<Scalars['Int']>;
-  order_by?: Maybe<Array<Votings_Order_By>>;
-  where?: Maybe<Votings_Bool_Exp>;
-};
-
-
-/** columns and relationships of "voting_types" */
-export type Voting_TypesVotings_AggregateArgs = {
-  distinct_on?: Maybe<Array<Votings_Select_Column>>;
-  limit?: Maybe<Scalars['Int']>;
-  offset?: Maybe<Scalars['Int']>;
-  order_by?: Maybe<Array<Votings_Order_By>>;
-  where?: Maybe<Votings_Bool_Exp>;
 };
 
 /** aggregated selection of "voting_types" */
@@ -5080,17 +7220,9 @@ export type Voting_Types_Aggregate = {
 /** aggregate fields of "voting_types" */
 export type Voting_Types_Aggregate_Fields = {
   __typename?: 'voting_types_aggregate_fields';
-  avg?: Maybe<Voting_Types_Avg_Fields>;
   count: Scalars['Int'];
   max?: Maybe<Voting_Types_Max_Fields>;
   min?: Maybe<Voting_Types_Min_Fields>;
-  stddev?: Maybe<Voting_Types_Stddev_Fields>;
-  stddev_pop?: Maybe<Voting_Types_Stddev_Pop_Fields>;
-  stddev_samp?: Maybe<Voting_Types_Stddev_Samp_Fields>;
-  sum?: Maybe<Voting_Types_Sum_Fields>;
-  var_pop?: Maybe<Voting_Types_Var_Pop_Fields>;
-  var_samp?: Maybe<Voting_Types_Var_Samp_Fields>;
-  variance?: Maybe<Voting_Types_Variance_Fields>;
 };
 
 
@@ -5100,73 +7232,64 @@ export type Voting_Types_Aggregate_FieldsCountArgs = {
   distinct?: Maybe<Scalars['Boolean']>;
 };
 
-/** aggregate avg on columns */
-export type Voting_Types_Avg_Fields = {
-  __typename?: 'voting_types_avg_fields';
-  id?: Maybe<Scalars['Float']>;
-  tours?: Maybe<Scalars['Float']>;
-};
-
 /** Boolean expression to filter rows from the table "voting_types". All fields are combined with a logical 'AND'. */
 export type Voting_Types_Bool_Exp = {
   _and?: Maybe<Array<Voting_Types_Bool_Exp>>;
   _not?: Maybe<Voting_Types_Bool_Exp>;
   _or?: Maybe<Array<Voting_Types_Bool_Exp>>;
-  createdAt?: Maybe<Timestamptz_Comparison_Exp>;
   description?: Maybe<String_Comparison_Exp>;
-  displayText?: Maybe<String_Comparison_Exp>;
-  id?: Maybe<Int_Comparison_Exp>;
-  tours?: Maybe<Int_Comparison_Exp>;
-  updatedAt?: Maybe<Timestamptz_Comparison_Exp>;
   value?: Maybe<String_Comparison_Exp>;
-  votings?: Maybe<Votings_Bool_Exp>;
 };
 
 /** unique or primary key constraints on table "voting_types" */
 export enum Voting_Types_Constraint {
   /** unique or primary key constraint */
-  VotingTypesPkey = 'voting_types_pkey'
+  VotingTypesPkey = 'voting_types_pkey',
+  /** unique or primary key constraint */
+  VotingTypesValueKey = 'voting_types_value_key'
 }
 
-/** input type for incrementing numeric columns in table "voting_types" */
-export type Voting_Types_Inc_Input = {
-  id?: Maybe<Scalars['Int']>;
-  tours?: Maybe<Scalars['Int']>;
+export enum Voting_Types_Enum {
+  /** Избори за местна власт */
+  LocalGovernment = 'local_government',
+  /** Местен референдум */
+  LocalReferendum = 'local_referendum',
+  /** Кметски избори в 2 тура */
+  Mayoral = 'mayoral',
+  /** Национален референдум */
+  NationalReferendum = 'national_referendum',
+  /** Парламентарни избори */
+  Parliamentary = 'parliamentary',
+  /** Президентски избори в 2 тура */
+  Presidential = 'presidential'
+}
+
+/** Boolean expression to compare columns of type "voting_types_enum". All fields are combined with logical 'AND'. */
+export type Voting_Types_Enum_Comparison_Exp = {
+  _eq?: Maybe<Voting_Types_Enum>;
+  _in?: Maybe<Array<Voting_Types_Enum>>;
+  _is_null?: Maybe<Scalars['Boolean']>;
+  _neq?: Maybe<Voting_Types_Enum>;
+  _nin?: Maybe<Array<Voting_Types_Enum>>;
 };
 
 /** input type for inserting data into table "voting_types" */
 export type Voting_Types_Insert_Input = {
-  createdAt?: Maybe<Scalars['timestamptz']>;
   description?: Maybe<Scalars['String']>;
-  displayText?: Maybe<Scalars['String']>;
-  id?: Maybe<Scalars['Int']>;
-  tours?: Maybe<Scalars['Int']>;
-  updatedAt?: Maybe<Scalars['timestamptz']>;
   value?: Maybe<Scalars['String']>;
-  votings?: Maybe<Votings_Arr_Rel_Insert_Input>;
 };
 
 /** aggregate max on columns */
 export type Voting_Types_Max_Fields = {
   __typename?: 'voting_types_max_fields';
-  createdAt?: Maybe<Scalars['timestamptz']>;
   description?: Maybe<Scalars['String']>;
-  displayText?: Maybe<Scalars['String']>;
-  id?: Maybe<Scalars['Int']>;
-  tours?: Maybe<Scalars['Int']>;
-  updatedAt?: Maybe<Scalars['timestamptz']>;
   value?: Maybe<Scalars['String']>;
 };
 
 /** aggregate min on columns */
 export type Voting_Types_Min_Fields = {
   __typename?: 'voting_types_min_fields';
-  createdAt?: Maybe<Scalars['timestamptz']>;
   description?: Maybe<Scalars['String']>;
-  displayText?: Maybe<Scalars['String']>;
-  id?: Maybe<Scalars['Int']>;
-  tours?: Maybe<Scalars['Int']>;
-  updatedAt?: Maybe<Scalars['timestamptz']>;
   value?: Maybe<Scalars['String']>;
 };
 
@@ -5179,13 +7302,6 @@ export type Voting_Types_Mutation_Response = {
   returning: Array<Voting_Types>;
 };
 
-/** input type for inserting object relation for remote table "voting_types" */
-export type Voting_Types_Obj_Rel_Insert_Input = {
-  data: Voting_Types_Insert_Input;
-  /** on conflict condition */
-  on_conflict?: Maybe<Voting_Types_On_Conflict>;
-};
-
 /** on conflict condition type for table "voting_types" */
 export type Voting_Types_On_Conflict = {
   constraint: Voting_Types_Constraint;
@@ -5195,116 +7311,36 @@ export type Voting_Types_On_Conflict = {
 
 /** Ordering options when selecting data from "voting_types". */
 export type Voting_Types_Order_By = {
-  createdAt?: Maybe<Order_By>;
   description?: Maybe<Order_By>;
-  displayText?: Maybe<Order_By>;
-  id?: Maybe<Order_By>;
-  tours?: Maybe<Order_By>;
-  updatedAt?: Maybe<Order_By>;
   value?: Maybe<Order_By>;
-  votings_aggregate?: Maybe<Votings_Aggregate_Order_By>;
 };
 
 /** primary key columns input for table: voting_types */
 export type Voting_Types_Pk_Columns_Input = {
-  id: Scalars['Int'];
+  value: Scalars['String'];
 };
 
 /** select columns of table "voting_types" */
 export enum Voting_Types_Select_Column {
   /** column name */
-  CreatedAt = 'createdAt',
-  /** column name */
   Description = 'description',
-  /** column name */
-  DisplayText = 'displayText',
-  /** column name */
-  Id = 'id',
-  /** column name */
-  Tours = 'tours',
-  /** column name */
-  UpdatedAt = 'updatedAt',
   /** column name */
   Value = 'value'
 }
 
 /** input type for updating data in table "voting_types" */
 export type Voting_Types_Set_Input = {
-  createdAt?: Maybe<Scalars['timestamptz']>;
   description?: Maybe<Scalars['String']>;
-  displayText?: Maybe<Scalars['String']>;
-  id?: Maybe<Scalars['Int']>;
-  tours?: Maybe<Scalars['Int']>;
-  updatedAt?: Maybe<Scalars['timestamptz']>;
   value?: Maybe<Scalars['String']>;
-};
-
-/** aggregate stddev on columns */
-export type Voting_Types_Stddev_Fields = {
-  __typename?: 'voting_types_stddev_fields';
-  id?: Maybe<Scalars['Float']>;
-  tours?: Maybe<Scalars['Float']>;
-};
-
-/** aggregate stddev_pop on columns */
-export type Voting_Types_Stddev_Pop_Fields = {
-  __typename?: 'voting_types_stddev_pop_fields';
-  id?: Maybe<Scalars['Float']>;
-  tours?: Maybe<Scalars['Float']>;
-};
-
-/** aggregate stddev_samp on columns */
-export type Voting_Types_Stddev_Samp_Fields = {
-  __typename?: 'voting_types_stddev_samp_fields';
-  id?: Maybe<Scalars['Float']>;
-  tours?: Maybe<Scalars['Float']>;
-};
-
-/** aggregate sum on columns */
-export type Voting_Types_Sum_Fields = {
-  __typename?: 'voting_types_sum_fields';
-  id?: Maybe<Scalars['Int']>;
-  tours?: Maybe<Scalars['Int']>;
 };
 
 /** update columns of table "voting_types" */
 export enum Voting_Types_Update_Column {
   /** column name */
-  CreatedAt = 'createdAt',
-  /** column name */
   Description = 'description',
-  /** column name */
-  DisplayText = 'displayText',
-  /** column name */
-  Id = 'id',
-  /** column name */
-  Tours = 'tours',
-  /** column name */
-  UpdatedAt = 'updatedAt',
   /** column name */
   Value = 'value'
 }
-
-/** aggregate var_pop on columns */
-export type Voting_Types_Var_Pop_Fields = {
-  __typename?: 'voting_types_var_pop_fields';
-  id?: Maybe<Scalars['Float']>;
-  tours?: Maybe<Scalars['Float']>;
-};
-
-/** aggregate var_samp on columns */
-export type Voting_Types_Var_Samp_Fields = {
-  __typename?: 'voting_types_var_samp_fields';
-  id?: Maybe<Scalars['Float']>;
-  tours?: Maybe<Scalars['Float']>;
-};
-
-/** aggregate variance on columns */
-export type Voting_Types_Variance_Fields = {
-  __typename?: 'voting_types_variance_fields';
-  id?: Maybe<Scalars['Float']>;
-  tours?: Maybe<Scalars['Float']>;
-};
 
 /** columns and relationships of "votings" */
 export type Votings = {
@@ -5315,10 +7351,8 @@ export type Votings = {
   id: Scalars['Int'];
   startTime?: Maybe<Scalars['timestamptz']>;
   startedAt?: Maybe<Scalars['timestamptz']>;
+  type: Voting_Types_Enum;
   updatedAt: Scalars['timestamptz'];
-  /** An object relationship */
-  votingType: Voting_Types;
-  votingTypeId: Scalars['Int'];
 };
 
 /** aggregated selection of "votings" */
@@ -5351,39 +7385,10 @@ export type Votings_Aggregate_FieldsCountArgs = {
   distinct?: Maybe<Scalars['Boolean']>;
 };
 
-/** order by aggregate values of table "votings" */
-export type Votings_Aggregate_Order_By = {
-  avg?: Maybe<Votings_Avg_Order_By>;
-  count?: Maybe<Order_By>;
-  max?: Maybe<Votings_Max_Order_By>;
-  min?: Maybe<Votings_Min_Order_By>;
-  stddev?: Maybe<Votings_Stddev_Order_By>;
-  stddev_pop?: Maybe<Votings_Stddev_Pop_Order_By>;
-  stddev_samp?: Maybe<Votings_Stddev_Samp_Order_By>;
-  sum?: Maybe<Votings_Sum_Order_By>;
-  var_pop?: Maybe<Votings_Var_Pop_Order_By>;
-  var_samp?: Maybe<Votings_Var_Samp_Order_By>;
-  variance?: Maybe<Votings_Variance_Order_By>;
-};
-
-/** input type for inserting array relation for remote table "votings" */
-export type Votings_Arr_Rel_Insert_Input = {
-  data: Array<Votings_Insert_Input>;
-  /** on conflict condition */
-  on_conflict?: Maybe<Votings_On_Conflict>;
-};
-
 /** aggregate avg on columns */
 export type Votings_Avg_Fields = {
   __typename?: 'votings_avg_fields';
   id?: Maybe<Scalars['Float']>;
-  votingTypeId?: Maybe<Scalars['Float']>;
-};
-
-/** order by avg() on columns of table "votings" */
-export type Votings_Avg_Order_By = {
-  id?: Maybe<Order_By>;
-  votingTypeId?: Maybe<Order_By>;
 };
 
 /** Boolean expression to filter rows from the table "votings". All fields are combined with a logical 'AND'. */
@@ -5397,9 +7402,8 @@ export type Votings_Bool_Exp = {
   id?: Maybe<Int_Comparison_Exp>;
   startTime?: Maybe<Timestamptz_Comparison_Exp>;
   startedAt?: Maybe<Timestamptz_Comparison_Exp>;
+  type?: Maybe<Voting_Types_Enum_Comparison_Exp>;
   updatedAt?: Maybe<Timestamptz_Comparison_Exp>;
-  votingType?: Maybe<Voting_Types_Bool_Exp>;
-  votingTypeId?: Maybe<Int_Comparison_Exp>;
 };
 
 /** unique or primary key constraints on table "votings" */
@@ -5411,7 +7415,6 @@ export enum Votings_Constraint {
 /** input type for incrementing numeric columns in table "votings" */
 export type Votings_Inc_Input = {
   id?: Maybe<Scalars['Int']>;
-  votingTypeId?: Maybe<Scalars['Int']>;
 };
 
 /** input type for inserting data into table "votings" */
@@ -5422,9 +7425,8 @@ export type Votings_Insert_Input = {
   id?: Maybe<Scalars['Int']>;
   startTime?: Maybe<Scalars['timestamptz']>;
   startedAt?: Maybe<Scalars['timestamptz']>;
+  type?: Maybe<Voting_Types_Enum>;
   updatedAt?: Maybe<Scalars['timestamptz']>;
-  votingType?: Maybe<Voting_Types_Obj_Rel_Insert_Input>;
-  votingTypeId?: Maybe<Scalars['Int']>;
 };
 
 /** aggregate max on columns */
@@ -5437,19 +7439,6 @@ export type Votings_Max_Fields = {
   startTime?: Maybe<Scalars['timestamptz']>;
   startedAt?: Maybe<Scalars['timestamptz']>;
   updatedAt?: Maybe<Scalars['timestamptz']>;
-  votingTypeId?: Maybe<Scalars['Int']>;
-};
-
-/** order by max() on columns of table "votings" */
-export type Votings_Max_Order_By = {
-  createdAt?: Maybe<Order_By>;
-  endTime?: Maybe<Order_By>;
-  finishedAt?: Maybe<Order_By>;
-  id?: Maybe<Order_By>;
-  startTime?: Maybe<Order_By>;
-  startedAt?: Maybe<Order_By>;
-  updatedAt?: Maybe<Order_By>;
-  votingTypeId?: Maybe<Order_By>;
 };
 
 /** aggregate min on columns */
@@ -5462,19 +7451,6 @@ export type Votings_Min_Fields = {
   startTime?: Maybe<Scalars['timestamptz']>;
   startedAt?: Maybe<Scalars['timestamptz']>;
   updatedAt?: Maybe<Scalars['timestamptz']>;
-  votingTypeId?: Maybe<Scalars['Int']>;
-};
-
-/** order by min() on columns of table "votings" */
-export type Votings_Min_Order_By = {
-  createdAt?: Maybe<Order_By>;
-  endTime?: Maybe<Order_By>;
-  finishedAt?: Maybe<Order_By>;
-  id?: Maybe<Order_By>;
-  startTime?: Maybe<Order_By>;
-  startedAt?: Maybe<Order_By>;
-  updatedAt?: Maybe<Order_By>;
-  votingTypeId?: Maybe<Order_By>;
 };
 
 /** response of any mutation on the table "votings" */
@@ -5501,9 +7477,8 @@ export type Votings_Order_By = {
   id?: Maybe<Order_By>;
   startTime?: Maybe<Order_By>;
   startedAt?: Maybe<Order_By>;
+  type?: Maybe<Order_By>;
   updatedAt?: Maybe<Order_By>;
-  votingType?: Maybe<Voting_Types_Order_By>;
-  votingTypeId?: Maybe<Order_By>;
 };
 
 /** primary key columns input for table: votings */
@@ -5526,9 +7501,9 @@ export enum Votings_Select_Column {
   /** column name */
   StartedAt = 'startedAt',
   /** column name */
-  UpdatedAt = 'updatedAt',
+  Type = 'type',
   /** column name */
-  VotingTypeId = 'votingTypeId'
+  UpdatedAt = 'updatedAt'
 }
 
 /** input type for updating data in table "votings" */
@@ -5539,60 +7514,32 @@ export type Votings_Set_Input = {
   id?: Maybe<Scalars['Int']>;
   startTime?: Maybe<Scalars['timestamptz']>;
   startedAt?: Maybe<Scalars['timestamptz']>;
+  type?: Maybe<Voting_Types_Enum>;
   updatedAt?: Maybe<Scalars['timestamptz']>;
-  votingTypeId?: Maybe<Scalars['Int']>;
 };
 
 /** aggregate stddev on columns */
 export type Votings_Stddev_Fields = {
   __typename?: 'votings_stddev_fields';
   id?: Maybe<Scalars['Float']>;
-  votingTypeId?: Maybe<Scalars['Float']>;
-};
-
-/** order by stddev() on columns of table "votings" */
-export type Votings_Stddev_Order_By = {
-  id?: Maybe<Order_By>;
-  votingTypeId?: Maybe<Order_By>;
 };
 
 /** aggregate stddev_pop on columns */
 export type Votings_Stddev_Pop_Fields = {
   __typename?: 'votings_stddev_pop_fields';
   id?: Maybe<Scalars['Float']>;
-  votingTypeId?: Maybe<Scalars['Float']>;
-};
-
-/** order by stddev_pop() on columns of table "votings" */
-export type Votings_Stddev_Pop_Order_By = {
-  id?: Maybe<Order_By>;
-  votingTypeId?: Maybe<Order_By>;
 };
 
 /** aggregate stddev_samp on columns */
 export type Votings_Stddev_Samp_Fields = {
   __typename?: 'votings_stddev_samp_fields';
   id?: Maybe<Scalars['Float']>;
-  votingTypeId?: Maybe<Scalars['Float']>;
-};
-
-/** order by stddev_samp() on columns of table "votings" */
-export type Votings_Stddev_Samp_Order_By = {
-  id?: Maybe<Order_By>;
-  votingTypeId?: Maybe<Order_By>;
 };
 
 /** aggregate sum on columns */
 export type Votings_Sum_Fields = {
   __typename?: 'votings_sum_fields';
   id?: Maybe<Scalars['Int']>;
-  votingTypeId?: Maybe<Scalars['Int']>;
-};
-
-/** order by sum() on columns of table "votings" */
-export type Votings_Sum_Order_By = {
-  id?: Maybe<Order_By>;
-  votingTypeId?: Maybe<Order_By>;
 };
 
 /** update columns of table "votings" */
@@ -5610,48 +7557,27 @@ export enum Votings_Update_Column {
   /** column name */
   StartedAt = 'startedAt',
   /** column name */
-  UpdatedAt = 'updatedAt',
+  Type = 'type',
   /** column name */
-  VotingTypeId = 'votingTypeId'
+  UpdatedAt = 'updatedAt'
 }
 
 /** aggregate var_pop on columns */
 export type Votings_Var_Pop_Fields = {
   __typename?: 'votings_var_pop_fields';
   id?: Maybe<Scalars['Float']>;
-  votingTypeId?: Maybe<Scalars['Float']>;
-};
-
-/** order by var_pop() on columns of table "votings" */
-export type Votings_Var_Pop_Order_By = {
-  id?: Maybe<Order_By>;
-  votingTypeId?: Maybe<Order_By>;
 };
 
 /** aggregate var_samp on columns */
 export type Votings_Var_Samp_Fields = {
   __typename?: 'votings_var_samp_fields';
   id?: Maybe<Scalars['Float']>;
-  votingTypeId?: Maybe<Scalars['Float']>;
-};
-
-/** order by var_samp() on columns of table "votings" */
-export type Votings_Var_Samp_Order_By = {
-  id?: Maybe<Order_By>;
-  votingTypeId?: Maybe<Order_By>;
 };
 
 /** aggregate variance on columns */
 export type Votings_Variance_Fields = {
   __typename?: 'votings_variance_fields';
   id?: Maybe<Scalars['Float']>;
-  votingTypeId?: Maybe<Scalars['Float']>;
-};
-
-/** order by variance() on columns of table "votings" */
-export type Votings_Variance_Order_By = {
-  id?: Maybe<Order_By>;
-  votingTypeId?: Maybe<Order_By>;
 };
 
 export type GetDistrictsQueryVariables = Exact<{ [key: string]: never; }>;
@@ -5674,7 +7600,7 @@ export type GetDistrictsQuery = (
 
 export type SettlementsBaseFieldsFragment = (
   { __typename?: 'settlements' }
-  & Pick<Settlements, 'id' | 'parentId' | 'name' | 'isDistrict'>
+  & Pick<Settlements, 'id' | 'parentId' | 'name' | 'isDistrict' | 'isMunicipality'>
 );
 
 export type GetUsersQueryVariables = Exact<{
@@ -5728,10 +7654,10 @@ export type UpdateUserMutation = (
 
 export type UserFieldsFragment = (
   { __typename?: 'users' }
-  & Pick<Users, 'id' | 'createdAt' | 'updatedAt' | 'roleId' | 'secondRoleId' | 'name' | 'surname' | 'family' | 'egn' | 'email' | 'pin' | 'password' | 'addressId' | 'sectionId' | 'voted' | 'eVoted'>
+  & Pick<Users, 'id' | 'createdAt' | 'updatedAt' | 'roleId' | 'secondRoleId' | 'name' | 'surname' | 'family' | 'egn' | 'email' | 'pin' | 'password' | 'addressId' | 'voted' | 'eVoted'>
   & { address: (
     { __typename?: 'addresses' }
-    & Pick<Addresses, 'id' | 'cityId' | 'municipalityId' | 'number' | 'street'>
+    & Pick<Addresses, 'id' | 'settlementId' | 'districtId' | 'number' | 'street'>
   ) }
 );
 
@@ -5741,6 +7667,7 @@ export const SettlementsBaseFieldsFragmentDoc = gql`
   parentId
   name
   isDistrict
+  isMunicipality
 }
     `;
 export const UserFieldsFragmentDoc = gql`
@@ -5758,13 +7685,12 @@ export const UserFieldsFragmentDoc = gql`
   pin
   password
   addressId
-  sectionId
   voted
   eVoted
   address {
     id
-    cityId
-    municipalityId
+    settlementId
+    districtId
     number
     street
   }
