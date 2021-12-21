@@ -571,6 +571,18 @@
         "description": "columns and relationships of \"addresses\"",
         "fields": [
           {
+            "name": "description",
+            "description": null,
+            "args": [],
+            "type": {
+              "kind": "SCALAR",
+              "name": "String",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
             "name": "districtId",
             "description": null,
             "args": [],
@@ -1011,6 +1023,18 @@
             "deprecationReason": null
           },
           {
+            "name": "description",
+            "description": null,
+            "type": {
+              "kind": "INPUT_OBJECT",
+              "name": "String_comparison_exp",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
             "name": "districtId",
             "description": null,
             "type": {
@@ -1158,6 +1182,18 @@
         "fields": null,
         "inputFields": [
           {
+            "name": "description",
+            "description": null,
+            "type": {
+              "kind": "SCALAR",
+              "name": "String",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
             "name": "districtId",
             "description": null,
             "type": {
@@ -1227,6 +1263,18 @@
         "name": "addresses_max_fields",
         "description": "aggregate max on columns",
         "fields": [
+          {
+            "name": "description",
+            "description": null,
+            "args": [],
+            "type": {
+              "kind": "SCALAR",
+              "name": "String",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
           {
             "name": "districtId",
             "description": null,
@@ -1298,6 +1346,18 @@
         "name": "addresses_min_fields",
         "description": "aggregate min on columns",
         "fields": [
+          {
+            "name": "description",
+            "description": null,
+            "args": [],
+            "type": {
+              "kind": "SCALAR",
+              "name": "String",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
           {
             "name": "districtId",
             "description": null,
@@ -1524,6 +1584,18 @@
         "fields": null,
         "inputFields": [
           {
+            "name": "description",
+            "description": null,
+            "type": {
+              "kind": "ENUM",
+              "name": "order_by",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
             "name": "districtId",
             "description": null,
             "type": {
@@ -1624,6 +1696,12 @@
         "interfaces": null,
         "enumValues": [
           {
+            "name": "description",
+            "description": "column name",
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
             "name": "districtId",
             "description": "column name",
             "isDeprecated": false,
@@ -1662,6 +1740,18 @@
         "description": "input type for updating data in table \"addresses\"",
         "fields": null,
         "inputFields": [
+          {
+            "name": "description",
+            "description": null,
+            "type": {
+              "kind": "SCALAR",
+              "name": "String",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
           {
             "name": "districtId",
             "description": null,
@@ -1972,6 +2062,12 @@
         "interfaces": null,
         "enumValues": [
           {
+            "name": "description",
+            "description": "column name",
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
             "name": "districtId",
             "description": "column name",
             "isDeprecated": false,
@@ -2251,13 +2347,17 @@
             "deprecationReason": null
           },
           {
-            "name": "sectionId",
+            "name": "settlementId",
             "description": null,
             "args": [],
             "type": {
-              "kind": "SCALAR",
-              "name": "Int",
-              "ofType": null
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "Int",
+                "ofType": null
+              }
             },
             "isDeprecated": false,
             "deprecationReason": null
@@ -2545,7 +2645,7 @@
             "deprecationReason": null
           },
           {
-            "name": "sectionId",
+            "name": "settlementId",
             "description": null,
             "args": [],
             "type": {
@@ -2681,7 +2781,7 @@
             "deprecationReason": null
           },
           {
-            "name": "sectionId",
+            "name": "settlementId",
             "description": null,
             "type": {
               "kind": "INPUT_OBJECT",
@@ -2757,7 +2857,7 @@
             "deprecationReason": null
           },
           {
-            "name": "sectionId",
+            "name": "settlementId",
             "description": null,
             "type": {
               "kind": "SCALAR",
@@ -2840,7 +2940,7 @@
             "deprecationReason": null
           },
           {
-            "name": "sectionId",
+            "name": "settlementId",
             "description": null,
             "type": {
               "kind": "SCALAR",
@@ -2934,7 +3034,7 @@
             "deprecationReason": null
           },
           {
-            "name": "sectionId",
+            "name": "settlementId",
             "description": null,
             "args": [],
             "type": {
@@ -3029,7 +3129,7 @@
             "deprecationReason": null
           },
           {
-            "name": "sectionId",
+            "name": "settlementId",
             "description": null,
             "args": [],
             "type": {
@@ -3239,7 +3339,7 @@
             "deprecationReason": null
           },
           {
-            "name": "sectionId",
+            "name": "settlementId",
             "description": null,
             "type": {
               "kind": "ENUM",
@@ -3339,7 +3439,7 @@
             "deprecationReason": null
           },
           {
-            "name": "sectionId",
+            "name": "settlementId",
             "description": "column name",
             "isDeprecated": false,
             "deprecationReason": null
@@ -3414,7 +3514,7 @@
             "deprecationReason": null
           },
           {
-            "name": "sectionId",
+            "name": "settlementId",
             "description": null,
             "type": {
               "kind": "SCALAR",
@@ -3472,7 +3572,7 @@
             "deprecationReason": null
           },
           {
-            "name": "sectionId",
+            "name": "settlementId",
             "description": null,
             "args": [],
             "type": {
@@ -3519,7 +3619,7 @@
             "deprecationReason": null
           },
           {
-            "name": "sectionId",
+            "name": "settlementId",
             "description": null,
             "args": [],
             "type": {
@@ -3566,7 +3666,7 @@
             "deprecationReason": null
           },
           {
-            "name": "sectionId",
+            "name": "settlementId",
             "description": null,
             "args": [],
             "type": {
@@ -3613,7 +3713,7 @@
             "deprecationReason": null
           },
           {
-            "name": "sectionId",
+            "name": "settlementId",
             "description": null,
             "args": [],
             "type": {
@@ -3675,7 +3775,7 @@
             "deprecationReason": null
           },
           {
-            "name": "sectionId",
+            "name": "settlementId",
             "description": "column name",
             "isDeprecated": false,
             "deprecationReason": null
@@ -3713,7 +3813,7 @@
             "deprecationReason": null
           },
           {
-            "name": "sectionId",
+            "name": "settlementId",
             "description": null,
             "args": [],
             "type": {
@@ -3760,7 +3860,7 @@
             "deprecationReason": null
           },
           {
-            "name": "sectionId",
+            "name": "settlementId",
             "description": null,
             "args": [],
             "type": {
@@ -3807,7 +3907,7 @@
             "deprecationReason": null
           },
           {
-            "name": "sectionId",
+            "name": "settlementId",
             "description": null,
             "args": [],
             "type": {
@@ -5301,22 +5401,6 @@
         "description": "columns and relationships of \"commision_members\"",
         "fields": [
           {
-            "name": "active",
-            "description": null,
-            "args": [],
-            "type": {
-              "kind": "NON_NULL",
-              "name": null,
-              "ofType": {
-                "kind": "SCALAR",
-                "name": "Boolean",
-                "ofType": null
-              }
-            },
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
             "name": "commisionId",
             "description": null,
             "args": [],
@@ -5747,18 +5831,6 @@
             "deprecationReason": null
           },
           {
-            "name": "active",
-            "description": null,
-            "type": {
-              "kind": "INPUT_OBJECT",
-              "name": "Boolean_comparison_exp",
-              "ofType": null
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
             "name": "commisionId",
             "description": null,
             "type": {
@@ -5911,18 +5983,6 @@
         "description": "input type for inserting data into table \"commision_members\"",
         "fields": null,
         "inputFields": [
-          {
-            "name": "active",
-            "description": null,
-            "type": {
-              "kind": "SCALAR",
-              "name": "Boolean",
-              "ofType": null
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
           {
             "name": "commisionId",
             "description": null,
@@ -6263,18 +6323,6 @@
         "fields": null,
         "inputFields": [
           {
-            "name": "active",
-            "description": null,
-            "type": {
-              "kind": "ENUM",
-              "name": "order_by",
-              "ofType": null
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
             "name": "commisionId",
             "description": null,
             "type": {
@@ -6387,12 +6435,6 @@
         "interfaces": null,
         "enumValues": [
           {
-            "name": "active",
-            "description": "column name",
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
             "name": "commisionId",
             "description": "column name",
             "isDeprecated": false,
@@ -6437,18 +6479,6 @@
         "description": "input type for updating data in table \"commision_members\"",
         "fields": null,
         "inputFields": [
-          {
-            "name": "active",
-            "description": null,
-            "type": {
-              "kind": "SCALAR",
-              "name": "Boolean",
-              "ofType": null
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
           {
             "name": "commisionId",
             "description": null,
@@ -6722,12 +6752,6 @@
         "inputFields": null,
         "interfaces": null,
         "enumValues": [
-          {
-            "name": "active",
-            "description": "column name",
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
           {
             "name": "commisionId",
             "description": "column name",
@@ -8301,6 +8325,22 @@
             "deprecationReason": null
           },
           {
+            "name": "user",
+            "description": "An object relationship",
+            "args": [],
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "OBJECT",
+                "name": "users",
+                "ofType": null
+              }
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
             "name": "userId",
             "description": null,
             "args": [],
@@ -8550,6 +8590,196 @@
         "possibleTypes": null
       },
       {
+        "kind": "INPUT_OBJECT",
+        "name": "electoral_roll_users_aggregate_order_by",
+        "description": "order by aggregate values of table \"electoral_roll_users\"",
+        "fields": null,
+        "inputFields": [
+          {
+            "name": "avg",
+            "description": null,
+            "type": {
+              "kind": "INPUT_OBJECT",
+              "name": "electoral_roll_users_avg_order_by",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "count",
+            "description": null,
+            "type": {
+              "kind": "ENUM",
+              "name": "order_by",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "max",
+            "description": null,
+            "type": {
+              "kind": "INPUT_OBJECT",
+              "name": "electoral_roll_users_max_order_by",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "min",
+            "description": null,
+            "type": {
+              "kind": "INPUT_OBJECT",
+              "name": "electoral_roll_users_min_order_by",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "stddev",
+            "description": null,
+            "type": {
+              "kind": "INPUT_OBJECT",
+              "name": "electoral_roll_users_stddev_order_by",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "stddev_pop",
+            "description": null,
+            "type": {
+              "kind": "INPUT_OBJECT",
+              "name": "electoral_roll_users_stddev_pop_order_by",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "stddev_samp",
+            "description": null,
+            "type": {
+              "kind": "INPUT_OBJECT",
+              "name": "electoral_roll_users_stddev_samp_order_by",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "sum",
+            "description": null,
+            "type": {
+              "kind": "INPUT_OBJECT",
+              "name": "electoral_roll_users_sum_order_by",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "var_pop",
+            "description": null,
+            "type": {
+              "kind": "INPUT_OBJECT",
+              "name": "electoral_roll_users_var_pop_order_by",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "var_samp",
+            "description": null,
+            "type": {
+              "kind": "INPUT_OBJECT",
+              "name": "electoral_roll_users_var_samp_order_by",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "variance",
+            "description": null,
+            "type": {
+              "kind": "INPUT_OBJECT",
+              "name": "electoral_roll_users_variance_order_by",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          }
+        ],
+        "interfaces": null,
+        "enumValues": null,
+        "possibleTypes": null
+      },
+      {
+        "kind": "INPUT_OBJECT",
+        "name": "electoral_roll_users_arr_rel_insert_input",
+        "description": "input type for inserting array relation for remote table \"electoral_roll_users\"",
+        "fields": null,
+        "inputFields": [
+          {
+            "name": "data",
+            "description": null,
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "LIST",
+                "name": null,
+                "ofType": {
+                  "kind": "NON_NULL",
+                  "name": null,
+                  "ofType": {
+                    "kind": "INPUT_OBJECT",
+                    "name": "electoral_roll_users_insert_input",
+                    "ofType": null
+                  }
+                }
+              }
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "on_conflict",
+            "description": "on conflict condition",
+            "type": {
+              "kind": "INPUT_OBJECT",
+              "name": "electoral_roll_users_on_conflict",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          }
+        ],
+        "interfaces": null,
+        "enumValues": null,
+        "possibleTypes": null
+      },
+      {
         "kind": "OBJECT",
         "name": "electoral_roll_users_avg_fields",
         "description": "aggregate avg on columns",
@@ -8593,6 +8823,53 @@
         ],
         "inputFields": null,
         "interfaces": [],
+        "enumValues": null,
+        "possibleTypes": null
+      },
+      {
+        "kind": "INPUT_OBJECT",
+        "name": "electoral_roll_users_avg_order_by",
+        "description": "order by avg() on columns of table \"electoral_roll_users\"",
+        "fields": null,
+        "inputFields": [
+          {
+            "name": "electoralRollId",
+            "description": null,
+            "type": {
+              "kind": "ENUM",
+              "name": "order_by",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "id",
+            "description": null,
+            "type": {
+              "kind": "ENUM",
+              "name": "order_by",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "userId",
+            "description": null,
+            "type": {
+              "kind": "ENUM",
+              "name": "order_by",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          }
+        ],
+        "interfaces": null,
         "enumValues": null,
         "possibleTypes": null
       },
@@ -8696,6 +8973,18 @@
             "type": {
               "kind": "INPUT_OBJECT",
               "name": "timestamptz_comparison_exp",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "user",
+            "description": null,
+            "type": {
+              "kind": "INPUT_OBJECT",
+              "name": "users_bool_exp",
               "ofType": null
             },
             "defaultValue": null,
@@ -8838,6 +9127,18 @@
             "deprecationReason": null
           },
           {
+            "name": "user",
+            "description": null,
+            "type": {
+              "kind": "INPUT_OBJECT",
+              "name": "users_obj_rel_insert_input",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
             "name": "userId",
             "description": null,
             "type": {
@@ -8926,6 +9227,77 @@
         "possibleTypes": null
       },
       {
+        "kind": "INPUT_OBJECT",
+        "name": "electoral_roll_users_max_order_by",
+        "description": "order by max() on columns of table \"electoral_roll_users\"",
+        "fields": null,
+        "inputFields": [
+          {
+            "name": "createdAt",
+            "description": null,
+            "type": {
+              "kind": "ENUM",
+              "name": "order_by",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "electoralRollId",
+            "description": null,
+            "type": {
+              "kind": "ENUM",
+              "name": "order_by",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "id",
+            "description": null,
+            "type": {
+              "kind": "ENUM",
+              "name": "order_by",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "updatedAt",
+            "description": null,
+            "type": {
+              "kind": "ENUM",
+              "name": "order_by",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "userId",
+            "description": null,
+            "type": {
+              "kind": "ENUM",
+              "name": "order_by",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          }
+        ],
+        "interfaces": null,
+        "enumValues": null,
+        "possibleTypes": null
+      },
+      {
         "kind": "OBJECT",
         "name": "electoral_roll_users_min_fields",
         "description": "aggregate min on columns",
@@ -8993,6 +9365,77 @@
         ],
         "inputFields": null,
         "interfaces": [],
+        "enumValues": null,
+        "possibleTypes": null
+      },
+      {
+        "kind": "INPUT_OBJECT",
+        "name": "electoral_roll_users_min_order_by",
+        "description": "order by min() on columns of table \"electoral_roll_users\"",
+        "fields": null,
+        "inputFields": [
+          {
+            "name": "createdAt",
+            "description": null,
+            "type": {
+              "kind": "ENUM",
+              "name": "order_by",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "electoralRollId",
+            "description": null,
+            "type": {
+              "kind": "ENUM",
+              "name": "order_by",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "id",
+            "description": null,
+            "type": {
+              "kind": "ENUM",
+              "name": "order_by",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "updatedAt",
+            "description": null,
+            "type": {
+              "kind": "ENUM",
+              "name": "order_by",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "userId",
+            "description": null,
+            "type": {
+              "kind": "ENUM",
+              "name": "order_by",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          }
+        ],
+        "interfaces": null,
         "enumValues": null,
         "possibleTypes": null
       },
@@ -9158,6 +9601,18 @@
             "type": {
               "kind": "ENUM",
               "name": "order_by",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "user",
+            "description": null,
+            "type": {
+              "kind": "INPUT_OBJECT",
+              "name": "users_order_by",
               "ofType": null
             },
             "defaultValue": null,
@@ -9368,6 +9823,53 @@
         "possibleTypes": null
       },
       {
+        "kind": "INPUT_OBJECT",
+        "name": "electoral_roll_users_stddev_order_by",
+        "description": "order by stddev() on columns of table \"electoral_roll_users\"",
+        "fields": null,
+        "inputFields": [
+          {
+            "name": "electoralRollId",
+            "description": null,
+            "type": {
+              "kind": "ENUM",
+              "name": "order_by",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "id",
+            "description": null,
+            "type": {
+              "kind": "ENUM",
+              "name": "order_by",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "userId",
+            "description": null,
+            "type": {
+              "kind": "ENUM",
+              "name": "order_by",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          }
+        ],
+        "interfaces": null,
+        "enumValues": null,
+        "possibleTypes": null
+      },
+      {
         "kind": "OBJECT",
         "name": "electoral_roll_users_stddev_pop_fields",
         "description": "aggregate stddev_pop on columns",
@@ -9411,6 +9913,53 @@
         ],
         "inputFields": null,
         "interfaces": [],
+        "enumValues": null,
+        "possibleTypes": null
+      },
+      {
+        "kind": "INPUT_OBJECT",
+        "name": "electoral_roll_users_stddev_pop_order_by",
+        "description": "order by stddev_pop() on columns of table \"electoral_roll_users\"",
+        "fields": null,
+        "inputFields": [
+          {
+            "name": "electoralRollId",
+            "description": null,
+            "type": {
+              "kind": "ENUM",
+              "name": "order_by",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "id",
+            "description": null,
+            "type": {
+              "kind": "ENUM",
+              "name": "order_by",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "userId",
+            "description": null,
+            "type": {
+              "kind": "ENUM",
+              "name": "order_by",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          }
+        ],
+        "interfaces": null,
         "enumValues": null,
         "possibleTypes": null
       },
@@ -9462,6 +10011,53 @@
         "possibleTypes": null
       },
       {
+        "kind": "INPUT_OBJECT",
+        "name": "electoral_roll_users_stddev_samp_order_by",
+        "description": "order by stddev_samp() on columns of table \"electoral_roll_users\"",
+        "fields": null,
+        "inputFields": [
+          {
+            "name": "electoralRollId",
+            "description": null,
+            "type": {
+              "kind": "ENUM",
+              "name": "order_by",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "id",
+            "description": null,
+            "type": {
+              "kind": "ENUM",
+              "name": "order_by",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "userId",
+            "description": null,
+            "type": {
+              "kind": "ENUM",
+              "name": "order_by",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          }
+        ],
+        "interfaces": null,
+        "enumValues": null,
+        "possibleTypes": null
+      },
+      {
         "kind": "OBJECT",
         "name": "electoral_roll_users_sum_fields",
         "description": "aggregate sum on columns",
@@ -9505,6 +10101,53 @@
         ],
         "inputFields": null,
         "interfaces": [],
+        "enumValues": null,
+        "possibleTypes": null
+      },
+      {
+        "kind": "INPUT_OBJECT",
+        "name": "electoral_roll_users_sum_order_by",
+        "description": "order by sum() on columns of table \"electoral_roll_users\"",
+        "fields": null,
+        "inputFields": [
+          {
+            "name": "electoralRollId",
+            "description": null,
+            "type": {
+              "kind": "ENUM",
+              "name": "order_by",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "id",
+            "description": null,
+            "type": {
+              "kind": "ENUM",
+              "name": "order_by",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "userId",
+            "description": null,
+            "type": {
+              "kind": "ENUM",
+              "name": "order_by",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          }
+        ],
+        "interfaces": null,
         "enumValues": null,
         "possibleTypes": null
       },
@@ -9597,6 +10240,53 @@
         "possibleTypes": null
       },
       {
+        "kind": "INPUT_OBJECT",
+        "name": "electoral_roll_users_var_pop_order_by",
+        "description": "order by var_pop() on columns of table \"electoral_roll_users\"",
+        "fields": null,
+        "inputFields": [
+          {
+            "name": "electoralRollId",
+            "description": null,
+            "type": {
+              "kind": "ENUM",
+              "name": "order_by",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "id",
+            "description": null,
+            "type": {
+              "kind": "ENUM",
+              "name": "order_by",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "userId",
+            "description": null,
+            "type": {
+              "kind": "ENUM",
+              "name": "order_by",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          }
+        ],
+        "interfaces": null,
+        "enumValues": null,
+        "possibleTypes": null
+      },
+      {
         "kind": "OBJECT",
         "name": "electoral_roll_users_var_samp_fields",
         "description": "aggregate var_samp on columns",
@@ -9640,6 +10330,53 @@
         ],
         "inputFields": null,
         "interfaces": [],
+        "enumValues": null,
+        "possibleTypes": null
+      },
+      {
+        "kind": "INPUT_OBJECT",
+        "name": "electoral_roll_users_var_samp_order_by",
+        "description": "order by var_samp() on columns of table \"electoral_roll_users\"",
+        "fields": null,
+        "inputFields": [
+          {
+            "name": "electoralRollId",
+            "description": null,
+            "type": {
+              "kind": "ENUM",
+              "name": "order_by",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "id",
+            "description": null,
+            "type": {
+              "kind": "ENUM",
+              "name": "order_by",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "userId",
+            "description": null,
+            "type": {
+              "kind": "ENUM",
+              "name": "order_by",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          }
+        ],
+        "interfaces": null,
         "enumValues": null,
         "possibleTypes": null
       },
@@ -9691,6 +10428,53 @@
         "possibleTypes": null
       },
       {
+        "kind": "INPUT_OBJECT",
+        "name": "electoral_roll_users_variance_order_by",
+        "description": "order by variance() on columns of table \"electoral_roll_users\"",
+        "fields": null,
+        "inputFields": [
+          {
+            "name": "electoralRollId",
+            "description": null,
+            "type": {
+              "kind": "ENUM",
+              "name": "order_by",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "id",
+            "description": null,
+            "type": {
+              "kind": "ENUM",
+              "name": "order_by",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "userId",
+            "description": null,
+            "type": {
+              "kind": "ENUM",
+              "name": "order_by",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          }
+        ],
+        "interfaces": null,
+        "enumValues": null,
+        "possibleTypes": null
+      },
+      {
         "kind": "OBJECT",
         "name": "electoral_rolls",
         "description": "columns and relationships of \"electoral_rolls\"",
@@ -9712,15 +10496,193 @@
             "deprecationReason": null
           },
           {
-            "name": "createdBy",
-            "description": null,
-            "args": [],
+            "name": "electoral_roll_users",
+            "description": "fetch data from the table: \"electoral_roll_users\"",
+            "args": [
+              {
+                "name": "distinct_on",
+                "description": "distinct select on columns",
+                "type": {
+                  "kind": "LIST",
+                  "name": null,
+                  "ofType": {
+                    "kind": "NON_NULL",
+                    "name": null,
+                    "ofType": {
+                      "kind": "ENUM",
+                      "name": "electoral_roll_users_select_column",
+                      "ofType": null
+                    }
+                  }
+                },
+                "defaultValue": null,
+                "isDeprecated": false,
+                "deprecationReason": null
+              },
+              {
+                "name": "limit",
+                "description": "limit the number of rows returned",
+                "type": {
+                  "kind": "SCALAR",
+                  "name": "Int",
+                  "ofType": null
+                },
+                "defaultValue": null,
+                "isDeprecated": false,
+                "deprecationReason": null
+              },
+              {
+                "name": "offset",
+                "description": "skip the first n rows. Use only with order_by",
+                "type": {
+                  "kind": "SCALAR",
+                  "name": "Int",
+                  "ofType": null
+                },
+                "defaultValue": null,
+                "isDeprecated": false,
+                "deprecationReason": null
+              },
+              {
+                "name": "order_by",
+                "description": "sort the rows by one or more columns",
+                "type": {
+                  "kind": "LIST",
+                  "name": null,
+                  "ofType": {
+                    "kind": "NON_NULL",
+                    "name": null,
+                    "ofType": {
+                      "kind": "INPUT_OBJECT",
+                      "name": "electoral_roll_users_order_by",
+                      "ofType": null
+                    }
+                  }
+                },
+                "defaultValue": null,
+                "isDeprecated": false,
+                "deprecationReason": null
+              },
+              {
+                "name": "where",
+                "description": "filter the rows returned",
+                "type": {
+                  "kind": "INPUT_OBJECT",
+                  "name": "electoral_roll_users_bool_exp",
+                  "ofType": null
+                },
+                "defaultValue": null,
+                "isDeprecated": false,
+                "deprecationReason": null
+              }
+            ],
             "type": {
               "kind": "NON_NULL",
               "name": null,
               "ofType": {
-                "kind": "SCALAR",
-                "name": "Int",
+                "kind": "LIST",
+                "name": null,
+                "ofType": {
+                  "kind": "NON_NULL",
+                  "name": null,
+                  "ofType": {
+                    "kind": "OBJECT",
+                    "name": "electoral_roll_users",
+                    "ofType": null
+                  }
+                }
+              }
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "electoral_roll_users_aggregate",
+            "description": "fetch aggregated fields from the table: \"electoral_roll_users\"",
+            "args": [
+              {
+                "name": "distinct_on",
+                "description": "distinct select on columns",
+                "type": {
+                  "kind": "LIST",
+                  "name": null,
+                  "ofType": {
+                    "kind": "NON_NULL",
+                    "name": null,
+                    "ofType": {
+                      "kind": "ENUM",
+                      "name": "electoral_roll_users_select_column",
+                      "ofType": null
+                    }
+                  }
+                },
+                "defaultValue": null,
+                "isDeprecated": false,
+                "deprecationReason": null
+              },
+              {
+                "name": "limit",
+                "description": "limit the number of rows returned",
+                "type": {
+                  "kind": "SCALAR",
+                  "name": "Int",
+                  "ofType": null
+                },
+                "defaultValue": null,
+                "isDeprecated": false,
+                "deprecationReason": null
+              },
+              {
+                "name": "offset",
+                "description": "skip the first n rows. Use only with order_by",
+                "type": {
+                  "kind": "SCALAR",
+                  "name": "Int",
+                  "ofType": null
+                },
+                "defaultValue": null,
+                "isDeprecated": false,
+                "deprecationReason": null
+              },
+              {
+                "name": "order_by",
+                "description": "sort the rows by one or more columns",
+                "type": {
+                  "kind": "LIST",
+                  "name": null,
+                  "ofType": {
+                    "kind": "NON_NULL",
+                    "name": null,
+                    "ofType": {
+                      "kind": "INPUT_OBJECT",
+                      "name": "electoral_roll_users_order_by",
+                      "ofType": null
+                    }
+                  }
+                },
+                "defaultValue": null,
+                "isDeprecated": false,
+                "deprecationReason": null
+              },
+              {
+                "name": "where",
+                "description": "filter the rows returned",
+                "type": {
+                  "kind": "INPUT_OBJECT",
+                  "name": "electoral_roll_users_bool_exp",
+                  "ofType": null
+                },
+                "defaultValue": null,
+                "isDeprecated": false,
+                "deprecationReason": null
+              }
+            ],
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "OBJECT",
+                "name": "electoral_roll_users_aggregate",
                 "ofType": null
               }
             },
@@ -10014,18 +10976,6 @@
         "description": "aggregate avg on columns",
         "fields": [
           {
-            "name": "createdBy",
-            "description": null,
-            "args": [],
-            "type": {
-              "kind": "SCALAR",
-              "name": "Float",
-              "ofType": null
-            },
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
             "name": "id",
             "description": null,
             "args": [],
@@ -10126,11 +11076,11 @@
             "deprecationReason": null
           },
           {
-            "name": "createdBy",
+            "name": "electoral_roll_users",
             "description": null,
             "type": {
               "kind": "INPUT_OBJECT",
-              "name": "Int_comparison_exp",
+              "name": "electoral_roll_users_bool_exp",
               "ofType": null
             },
             "defaultValue": null,
@@ -10202,18 +11152,6 @@
         "fields": null,
         "inputFields": [
           {
-            "name": "createdBy",
-            "description": null,
-            "type": {
-              "kind": "SCALAR",
-              "name": "Int",
-              "ofType": null
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
             "name": "id",
             "description": null,
             "type": {
@@ -10261,11 +11199,11 @@
             "deprecationReason": null
           },
           {
-            "name": "createdBy",
+            "name": "electoral_roll_users",
             "description": null,
             "type": {
-              "kind": "SCALAR",
-              "name": "Int",
+              "kind": "INPUT_OBJECT",
+              "name": "electoral_roll_users_arr_rel_insert_input",
               "ofType": null
             },
             "defaultValue": null,
@@ -10331,18 +11269,6 @@
             "deprecationReason": null
           },
           {
-            "name": "createdBy",
-            "description": null,
-            "args": [],
-            "type": {
-              "kind": "SCALAR",
-              "name": "Int",
-              "ofType": null
-            },
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
             "name": "id",
             "description": null,
             "args": [],
@@ -10396,18 +11322,6 @@
             "type": {
               "kind": "SCALAR",
               "name": "timestamptz",
-              "ofType": null
-            },
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "createdBy",
-            "description": null,
-            "args": [],
-            "type": {
-              "kind": "SCALAR",
-              "name": "Int",
               "ofType": null
             },
             "isDeprecated": false,
@@ -10588,11 +11502,11 @@
             "deprecationReason": null
           },
           {
-            "name": "createdBy",
+            "name": "electoral_roll_users_aggregate",
             "description": null,
             "type": {
-              "kind": "ENUM",
-              "name": "order_by",
+              "kind": "INPUT_OBJECT",
+              "name": "electoral_roll_users_aggregate_order_by",
               "ofType": null
             },
             "defaultValue": null,
@@ -10682,12 +11596,6 @@
             "deprecationReason": null
           },
           {
-            "name": "createdBy",
-            "description": "column name",
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
             "name": "id",
             "description": "column name",
             "isDeprecated": false,
@@ -10720,18 +11628,6 @@
             "type": {
               "kind": "SCALAR",
               "name": "timestamptz",
-              "ofType": null
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "createdBy",
-            "description": null,
-            "type": {
-              "kind": "SCALAR",
-              "name": "Int",
               "ofType": null
             },
             "defaultValue": null,
@@ -10785,18 +11681,6 @@
         "description": "aggregate stddev on columns",
         "fields": [
           {
-            "name": "createdBy",
-            "description": null,
-            "args": [],
-            "type": {
-              "kind": "SCALAR",
-              "name": "Float",
-              "ofType": null
-            },
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
             "name": "id",
             "description": null,
             "args": [],
@@ -10831,18 +11715,6 @@
         "name": "electoral_rolls_stddev_pop_fields",
         "description": "aggregate stddev_pop on columns",
         "fields": [
-          {
-            "name": "createdBy",
-            "description": null,
-            "args": [],
-            "type": {
-              "kind": "SCALAR",
-              "name": "Float",
-              "ofType": null
-            },
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
           {
             "name": "id",
             "description": null,
@@ -10879,18 +11751,6 @@
         "description": "aggregate stddev_samp on columns",
         "fields": [
           {
-            "name": "createdBy",
-            "description": null,
-            "args": [],
-            "type": {
-              "kind": "SCALAR",
-              "name": "Float",
-              "ofType": null
-            },
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
             "name": "id",
             "description": null,
             "args": [],
@@ -10925,18 +11785,6 @@
         "name": "electoral_rolls_sum_fields",
         "description": "aggregate sum on columns",
         "fields": [
-          {
-            "name": "createdBy",
-            "description": null,
-            "args": [],
-            "type": {
-              "kind": "SCALAR",
-              "name": "Int",
-              "ofType": null
-            },
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
           {
             "name": "id",
             "description": null,
@@ -10982,12 +11830,6 @@
             "deprecationReason": null
           },
           {
-            "name": "createdBy",
-            "description": "column name",
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
             "name": "id",
             "description": "column name",
             "isDeprecated": false,
@@ -11013,18 +11855,6 @@
         "name": "electoral_rolls_var_pop_fields",
         "description": "aggregate var_pop on columns",
         "fields": [
-          {
-            "name": "createdBy",
-            "description": null,
-            "args": [],
-            "type": {
-              "kind": "SCALAR",
-              "name": "Float",
-              "ofType": null
-            },
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
           {
             "name": "id",
             "description": null,
@@ -11061,18 +11891,6 @@
         "description": "aggregate var_samp on columns",
         "fields": [
           {
-            "name": "createdBy",
-            "description": null,
-            "args": [],
-            "type": {
-              "kind": "SCALAR",
-              "name": "Float",
-              "ofType": null
-            },
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
             "name": "id",
             "description": null,
             "args": [],
@@ -11107,18 +11925,6 @@
         "name": "electoral_rolls_variance_fields",
         "description": "aggregate variance on columns",
         "fields": [
-          {
-            "name": "createdBy",
-            "description": null,
-            "args": [],
-            "type": {
-              "kind": "SCALAR",
-              "name": "Float",
-              "ofType": null
-            },
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
           {
             "name": "id",
             "description": null,
@@ -17024,7 +17830,7 @@
             "deprecationReason": null
           },
           {
-            "name": "patry_members_userId_key",
+            "name": "political_group_members_userId_politicalGroupId_key",
             "description": "unique or primary key constraint",
             "isDeprecated": false,
             "deprecationReason": null
@@ -28365,33 +29171,13 @@
             "deprecationReason": null
           },
           {
-            "name": "endTime",
-            "description": null,
-            "args": [],
-            "type": {
-              "kind": "NON_NULL",
-              "name": null,
-              "ofType": {
-                "kind": "SCALAR",
-                "name": "timestamptz",
-                "ofType": null
-              }
-            },
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
             "name": "finishedAt",
             "description": null,
             "args": [],
             "type": {
-              "kind": "NON_NULL",
-              "name": null,
-              "ofType": {
-                "kind": "SCALAR",
-                "name": "timestamptz",
-                "ofType": null
-              }
+              "kind": "SCALAR",
+              "name": "timestamptz",
+              "ofType": null
             },
             "isDeprecated": false,
             "deprecationReason": null
@@ -28635,33 +29421,13 @@
             "deprecationReason": null
           },
           {
-            "name": "startTime",
-            "description": null,
-            "args": [],
-            "type": {
-              "kind": "NON_NULL",
-              "name": null,
-              "ofType": {
-                "kind": "SCALAR",
-                "name": "timestamptz",
-                "ofType": null
-              }
-            },
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
             "name": "startedAt",
             "description": null,
             "args": [],
             "type": {
-              "kind": "NON_NULL",
-              "name": null,
-              "ofType": {
-                "kind": "SCALAR",
-                "name": "timestamptz",
-                "ofType": null
-              }
+              "kind": "SCALAR",
+              "name": "timestamptz",
+              "ofType": null
             },
             "isDeprecated": false,
             "deprecationReason": null
@@ -29033,18 +29799,6 @@
             "deprecationReason": null
           },
           {
-            "name": "endTime",
-            "description": null,
-            "type": {
-              "kind": "INPUT_OBJECT",
-              "name": "timestamptz_comparison_exp",
-              "ofType": null
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
             "name": "finishedAt",
             "description": null,
             "type": {
@@ -29098,18 +29852,6 @@
             "type": {
               "kind": "INPUT_OBJECT",
               "name": "referendum_questions_bool_exp",
-              "ofType": null
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "startTime",
-            "description": null,
-            "type": {
-              "kind": "INPUT_OBJECT",
-              "name": "timestamptz_comparison_exp",
               "ofType": null
             },
             "defaultValue": null,
@@ -29234,18 +29976,6 @@
             "deprecationReason": null
           },
           {
-            "name": "endTime",
-            "description": null,
-            "type": {
-              "kind": "SCALAR",
-              "name": "timestamptz",
-              "ofType": null
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
             "name": "finishedAt",
             "description": null,
             "type": {
@@ -29299,18 +30029,6 @@
             "type": {
               "kind": "INPUT_OBJECT",
               "name": "referendum_questions_arr_rel_insert_input",
-              "ofType": null
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "startTime",
-            "description": null,
-            "type": {
-              "kind": "SCALAR",
-              "name": "timestamptz",
               "ofType": null
             },
             "defaultValue": null,
@@ -29376,18 +30094,6 @@
             "deprecationReason": null
           },
           {
-            "name": "endTime",
-            "description": null,
-            "args": [],
-            "type": {
-              "kind": "SCALAR",
-              "name": "timestamptz",
-              "ofType": null
-            },
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
             "name": "finishedAt",
             "description": null,
             "args": [],
@@ -29430,18 +30136,6 @@
             "type": {
               "kind": "SCALAR",
               "name": "String",
-              "ofType": null
-            },
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "startTime",
-            "description": null,
-            "args": [],
-            "type": {
-              "kind": "SCALAR",
-              "name": "timestamptz",
               "ofType": null
             },
             "isDeprecated": false,
@@ -29507,18 +30201,6 @@
             "deprecationReason": null
           },
           {
-            "name": "endTime",
-            "description": null,
-            "args": [],
-            "type": {
-              "kind": "SCALAR",
-              "name": "timestamptz",
-              "ofType": null
-            },
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
             "name": "finishedAt",
             "description": null,
             "args": [],
@@ -29561,18 +30243,6 @@
             "type": {
               "kind": "SCALAR",
               "name": "String",
-              "ofType": null
-            },
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "startTime",
-            "description": null,
-            "args": [],
-            "type": {
-              "kind": "SCALAR",
-              "name": "timestamptz",
               "ofType": null
             },
             "isDeprecated": false,
@@ -29753,18 +30423,6 @@
             "deprecationReason": null
           },
           {
-            "name": "endTime",
-            "description": null,
-            "type": {
-              "kind": "ENUM",
-              "name": "order_by",
-              "ofType": null
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
             "name": "finishedAt",
             "description": null,
             "type": {
@@ -29818,18 +30476,6 @@
             "type": {
               "kind": "INPUT_OBJECT",
               "name": "referendum_questions_aggregate_order_by",
-              "ofType": null
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "startTime",
-            "description": null,
-            "type": {
-              "kind": "ENUM",
-              "name": "order_by",
               "ofType": null
             },
             "defaultValue": null,
@@ -29913,12 +30559,6 @@
             "deprecationReason": null
           },
           {
-            "name": "endTime",
-            "description": "column name",
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
             "name": "finishedAt",
             "description": "column name",
             "isDeprecated": false,
@@ -29938,12 +30578,6 @@
           },
           {
             "name": "name",
-            "description": "column name",
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "startTime",
             "description": "column name",
             "isDeprecated": false,
             "deprecationReason": null
@@ -29994,18 +30628,6 @@
             "deprecationReason": null
           },
           {
-            "name": "endTime",
-            "description": null,
-            "type": {
-              "kind": "SCALAR",
-              "name": "timestamptz",
-              "ofType": null
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
             "name": "finishedAt",
             "description": null,
             "type": {
@@ -30047,18 +30669,6 @@
             "type": {
               "kind": "SCALAR",
               "name": "String",
-              "ofType": null
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "startTime",
-            "description": null,
-            "type": {
-              "kind": "SCALAR",
-              "name": "timestamptz",
               "ofType": null
             },
             "defaultValue": null,
@@ -30255,12 +30865,6 @@
             "deprecationReason": null
           },
           {
-            "name": "endTime",
-            "description": "column name",
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
             "name": "finishedAt",
             "description": "column name",
             "isDeprecated": false,
@@ -30280,12 +30884,6 @@
           },
           {
             "name": "name",
-            "description": "column name",
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "startTime",
             "description": "column name",
             "isDeprecated": false,
             "deprecationReason": null
@@ -31520,22 +32118,6 @@
             "deprecationReason": null
           },
           {
-            "name": "isDistrict",
-            "description": null,
-            "args": [],
-            "type": {
-              "kind": "NON_NULL",
-              "name": null,
-              "ofType": {
-                "kind": "SCALAR",
-                "name": "Boolean",
-                "ofType": null
-              }
-            },
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
             "name": "isMunicipality",
             "description": null,
             "args": [],
@@ -32349,18 +32931,6 @@
             "deprecationReason": null
           },
           {
-            "name": "isDistrict",
-            "description": null,
-            "type": {
-              "kind": "INPUT_OBJECT",
-              "name": "Boolean_comparison_exp",
-              "ofType": null
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
             "name": "isMunicipality",
             "description": null,
             "type": {
@@ -32489,18 +33059,6 @@
             "type": {
               "kind": "SCALAR",
               "name": "Int",
-              "ofType": null
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "isDistrict",
-            "description": null,
-            "type": {
-              "kind": "SCALAR",
-              "name": "Boolean",
               "ofType": null
             },
             "defaultValue": null,
@@ -32932,18 +33490,6 @@
             "deprecationReason": null
           },
           {
-            "name": "isDistrict",
-            "description": null,
-            "type": {
-              "kind": "ENUM",
-              "name": "order_by",
-              "ofType": null
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
             "name": "isMunicipality",
             "description": null,
             "type": {
@@ -33050,12 +33596,6 @@
             "deprecationReason": null
           },
           {
-            "name": "isDistrict",
-            "description": "column name",
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
             "name": "isMunicipality",
             "description": "column name",
             "isDeprecated": false,
@@ -33088,18 +33628,6 @@
             "type": {
               "kind": "SCALAR",
               "name": "Int",
-              "ofType": null
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "isDistrict",
-            "description": null,
-            "type": {
-              "kind": "SCALAR",
-              "name": "Boolean",
               "ofType": null
             },
             "defaultValue": null,
@@ -33437,12 +33965,6 @@
         "enumValues": [
           {
             "name": "id",
-            "description": "column name",
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "isDistrict",
             "description": "column name",
             "isDeprecated": false,
             "deprecationReason": null
@@ -40202,6 +40724,45 @@
       },
       {
         "kind": "INPUT_OBJECT",
+        "name": "users_obj_rel_insert_input",
+        "description": "input type for inserting object relation for remote table \"users\"",
+        "fields": null,
+        "inputFields": [
+          {
+            "name": "data",
+            "description": null,
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "INPUT_OBJECT",
+                "name": "users_insert_input",
+                "ofType": null
+              }
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "on_conflict",
+            "description": "on conflict condition",
+            "type": {
+              "kind": "INPUT_OBJECT",
+              "name": "users_on_conflict",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          }
+        ],
+        "interfaces": null,
+        "enumValues": null,
+        "possibleTypes": null
+      },
+      {
+        "kind": "INPUT_OBJECT",
         "name": "users_on_conflict",
         "description": "on conflict condition type for table \"users\"",
         "fields": null,
@@ -43096,6 +43657,18 @@
         "description": "columns and relationships of \"voting_section\"",
         "fields": [
           {
+            "name": "addressId",
+            "description": null,
+            "args": [],
+            "type": {
+              "kind": "SCALAR",
+              "name": "Int",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
             "name": "closedAt",
             "description": null,
             "args": [],
@@ -43422,6 +43995,18 @@
         "description": "aggregate avg on columns",
         "fields": [
           {
+            "name": "addressId",
+            "description": null,
+            "args": [],
+            "type": {
+              "kind": "SCALAR",
+              "name": "Float",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
             "name": "id",
             "description": null,
             "args": [],
@@ -43504,6 +44089,18 @@
                   "ofType": null
                 }
               }
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "addressId",
+            "description": null,
+            "type": {
+              "kind": "INPUT_OBJECT",
+              "name": "Int_comparison_exp",
+              "ofType": null
             },
             "defaultValue": null,
             "isDeprecated": false,
@@ -43610,6 +44207,18 @@
         "fields": null,
         "inputFields": [
           {
+            "name": "addressId",
+            "description": null,
+            "type": {
+              "kind": "SCALAR",
+              "name": "Int",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
             "name": "id",
             "description": null,
             "type": {
@@ -43644,6 +44253,18 @@
         "description": "input type for inserting data into table \"voting_section\"",
         "fields": null,
         "inputFields": [
+          {
+            "name": "addressId",
+            "description": null,
+            "type": {
+              "kind": "SCALAR",
+              "name": "Int",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
           {
             "name": "closedAt",
             "description": null,
@@ -43727,6 +44348,18 @@
         "description": "aggregate max on columns",
         "fields": [
           {
+            "name": "addressId",
+            "description": null,
+            "args": [],
+            "type": {
+              "kind": "SCALAR",
+              "name": "Int",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
             "name": "closedAt",
             "description": null,
             "args": [],
@@ -43809,6 +44442,18 @@
         "name": "voting_section_min_fields",
         "description": "aggregate min on columns",
         "fields": [
+          {
+            "name": "addressId",
+            "description": null,
+            "args": [],
+            "type": {
+              "kind": "SCALAR",
+              "name": "Int",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
           {
             "name": "closedAt",
             "description": null,
@@ -44008,6 +44653,18 @@
         "fields": null,
         "inputFields": [
           {
+            "name": "addressId",
+            "description": null,
+            "type": {
+              "kind": "ENUM",
+              "name": "order_by",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
             "name": "closedAt",
             "description": null,
             "type": {
@@ -44120,6 +44777,12 @@
         "interfaces": null,
         "enumValues": [
           {
+            "name": "addressId",
+            "description": "column name",
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
             "name": "closedAt",
             "description": "column name",
             "isDeprecated": false,
@@ -44196,13 +44859,9 @@
             "description": null,
             "args": [],
             "type": {
-              "kind": "NON_NULL",
-              "name": null,
-              "ofType": {
-                "kind": "SCALAR",
-                "name": "timestamptz",
-                "ofType": null
-              }
+              "kind": "SCALAR",
+              "name": "timestamptz",
+              "ofType": null
             },
             "isDeprecated": false,
             "deprecationReason": null
@@ -44256,13 +44915,9 @@
             "description": null,
             "args": [],
             "type": {
-              "kind": "NON_NULL",
-              "name": null,
-              "ofType": {
-                "kind": "SCALAR",
-                "name": "timestamptz",
-                "ofType": null
-              }
+              "kind": "SCALAR",
+              "name": "timestamptz",
+              "ofType": null
             },
             "isDeprecated": false,
             "deprecationReason": null
@@ -46436,6 +47091,18 @@
         "fields": null,
         "inputFields": [
           {
+            "name": "addressId",
+            "description": null,
+            "type": {
+              "kind": "SCALAR",
+              "name": "Int",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
             "name": "closedAt",
             "description": null,
             "type": {
@@ -46518,6 +47185,18 @@
         "description": "aggregate stddev on columns",
         "fields": [
           {
+            "name": "addressId",
+            "description": null,
+            "args": [],
+            "type": {
+              "kind": "SCALAR",
+              "name": "Float",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
             "name": "id",
             "description": null,
             "args": [],
@@ -46552,6 +47231,18 @@
         "name": "voting_section_stddev_pop_fields",
         "description": "aggregate stddev_pop on columns",
         "fields": [
+          {
+            "name": "addressId",
+            "description": null,
+            "args": [],
+            "type": {
+              "kind": "SCALAR",
+              "name": "Float",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
           {
             "name": "id",
             "description": null,
@@ -46588,6 +47279,18 @@
         "description": "aggregate stddev_samp on columns",
         "fields": [
           {
+            "name": "addressId",
+            "description": null,
+            "args": [],
+            "type": {
+              "kind": "SCALAR",
+              "name": "Float",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
             "name": "id",
             "description": null,
             "args": [],
@@ -46622,6 +47325,18 @@
         "name": "voting_section_sum_fields",
         "description": "aggregate sum on columns",
         "fields": [
+          {
+            "name": "addressId",
+            "description": null,
+            "args": [],
+            "type": {
+              "kind": "SCALAR",
+              "name": "Int",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
           {
             "name": "id",
             "description": null,
@@ -46660,6 +47375,12 @@
         "inputFields": null,
         "interfaces": null,
         "enumValues": [
+          {
+            "name": "addressId",
+            "description": "column name",
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
           {
             "name": "closedAt",
             "description": "column name",
@@ -46705,6 +47426,18 @@
         "description": "aggregate var_pop on columns",
         "fields": [
           {
+            "name": "addressId",
+            "description": null,
+            "args": [],
+            "type": {
+              "kind": "SCALAR",
+              "name": "Float",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
             "name": "id",
             "description": null,
             "args": [],
@@ -46740,6 +47473,18 @@
         "description": "aggregate var_samp on columns",
         "fields": [
           {
+            "name": "addressId",
+            "description": null,
+            "args": [],
+            "type": {
+              "kind": "SCALAR",
+              "name": "Float",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
             "name": "id",
             "description": null,
             "args": [],
@@ -46774,6 +47519,18 @@
         "name": "voting_section_variance_fields",
         "description": "aggregate variance on columns",
         "fields": [
+          {
+            "name": "addressId",
+            "description": null,
+            "args": [],
+            "type": {
+              "kind": "SCALAR",
+              "name": "Float",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
           {
             "name": "id",
             "description": null,
@@ -47606,13 +48363,17 @@
             "deprecationReason": null
           },
           {
-            "name": "endTime",
+            "name": "description",
             "description": null,
             "args": [],
             "type": {
-              "kind": "SCALAR",
-              "name": "timestamptz",
-              "ofType": null
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "String",
+                "ofType": null
+              }
             },
             "isDeprecated": false,
             "deprecationReason": null
@@ -47646,13 +48407,17 @@
             "deprecationReason": null
           },
           {
-            "name": "startTime",
+            "name": "name",
             "description": null,
             "args": [],
             "type": {
-              "kind": "SCALAR",
-              "name": "timestamptz",
-              "ofType": null
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "String",
+                "ofType": null
+              }
             },
             "isDeprecated": false,
             "deprecationReason": null
@@ -48028,11 +48793,11 @@
             "deprecationReason": null
           },
           {
-            "name": "endTime",
+            "name": "description",
             "description": null,
             "type": {
               "kind": "INPUT_OBJECT",
-              "name": "timestamptz_comparison_exp",
+              "name": "String_comparison_exp",
               "ofType": null
             },
             "defaultValue": null,
@@ -48064,11 +48829,11 @@
             "deprecationReason": null
           },
           {
-            "name": "startTime",
+            "name": "name",
             "description": null,
             "type": {
               "kind": "INPUT_OBJECT",
-              "name": "timestamptz_comparison_exp",
+              "name": "String_comparison_exp",
               "ofType": null
             },
             "defaultValue": null,
@@ -48175,11 +48940,11 @@
             "deprecationReason": null
           },
           {
-            "name": "endTime",
+            "name": "description",
             "description": null,
             "type": {
               "kind": "SCALAR",
-              "name": "timestamptz",
+              "name": "String",
               "ofType": null
             },
             "defaultValue": null,
@@ -48211,11 +48976,11 @@
             "deprecationReason": null
           },
           {
-            "name": "startTime",
+            "name": "name",
             "description": null,
             "type": {
               "kind": "SCALAR",
-              "name": "timestamptz",
+              "name": "String",
               "ofType": null
             },
             "defaultValue": null,
@@ -48281,12 +49046,12 @@
             "deprecationReason": null
           },
           {
-            "name": "endTime",
+            "name": "description",
             "description": null,
             "args": [],
             "type": {
               "kind": "SCALAR",
-              "name": "timestamptz",
+              "name": "String",
               "ofType": null
             },
             "isDeprecated": false,
@@ -48317,12 +49082,12 @@
             "deprecationReason": null
           },
           {
-            "name": "startTime",
+            "name": "name",
             "description": null,
             "args": [],
             "type": {
               "kind": "SCALAR",
-              "name": "timestamptz",
+              "name": "String",
               "ofType": null
             },
             "isDeprecated": false,
@@ -48376,12 +49141,12 @@
             "deprecationReason": null
           },
           {
-            "name": "endTime",
+            "name": "description",
             "description": null,
             "args": [],
             "type": {
               "kind": "SCALAR",
-              "name": "timestamptz",
+              "name": "String",
               "ofType": null
             },
             "isDeprecated": false,
@@ -48412,12 +49177,12 @@
             "deprecationReason": null
           },
           {
-            "name": "startTime",
+            "name": "name",
             "description": null,
             "args": [],
             "type": {
               "kind": "SCALAR",
-              "name": "timestamptz",
+              "name": "String",
               "ofType": null
             },
             "isDeprecated": false,
@@ -48586,7 +49351,7 @@
             "deprecationReason": null
           },
           {
-            "name": "endTime",
+            "name": "description",
             "description": null,
             "type": {
               "kind": "ENUM",
@@ -48622,7 +49387,7 @@
             "deprecationReason": null
           },
           {
-            "name": "startTime",
+            "name": "name",
             "description": null,
             "type": {
               "kind": "ENUM",
@@ -48716,7 +49481,7 @@
             "deprecationReason": null
           },
           {
-            "name": "endTime",
+            "name": "description",
             "description": "column name",
             "isDeprecated": false,
             "deprecationReason": null
@@ -48734,7 +49499,7 @@
             "deprecationReason": null
           },
           {
-            "name": "startTime",
+            "name": "name",
             "description": "column name",
             "isDeprecated": false,
             "deprecationReason": null
@@ -48779,11 +49544,11 @@
             "deprecationReason": null
           },
           {
-            "name": "endTime",
+            "name": "description",
             "description": null,
             "type": {
               "kind": "SCALAR",
-              "name": "timestamptz",
+              "name": "String",
               "ofType": null
             },
             "defaultValue": null,
@@ -48815,11 +49580,11 @@
             "deprecationReason": null
           },
           {
-            "name": "startTime",
+            "name": "name",
             "description": null,
             "type": {
               "kind": "SCALAR",
-              "name": "timestamptz",
+              "name": "String",
               "ofType": null
             },
             "defaultValue": null,
@@ -48974,7 +49739,7 @@
             "deprecationReason": null
           },
           {
-            "name": "endTime",
+            "name": "description",
             "description": "column name",
             "isDeprecated": false,
             "deprecationReason": null
@@ -48992,7 +49757,7 @@
             "deprecationReason": null
           },
           {
-            "name": "startTime",
+            "name": "name",
             "description": "column name",
             "isDeprecated": false,
             "deprecationReason": null

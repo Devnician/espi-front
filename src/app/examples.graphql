@@ -1,0 +1,17 @@
+# Example for fetching electoral list for given section. Add missing paginator args(like in users table)!!!
+query GetElectoralRoll($sectionId: Int!) {
+  electoral_rolls_by_pk(id: $sectionId) {
+    id
+    createdAt
+    sectionId
+    electoral_roll_users {
+      user {
+        id
+        egn
+        name
+        surname
+        family
+      }
+    }
+  }
+}

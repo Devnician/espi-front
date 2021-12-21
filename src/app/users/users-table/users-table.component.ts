@@ -51,23 +51,23 @@ export class UsersTableComponent implements AfterViewInit {
     this.dataSource.paginator = this.paginator;
     this.table.dataSource = this.dataSource;
   }
-  addOrder() {
+  addUser() {
     console.log('Add one user');
     this.dataSource.loading.next(true);
 
     const user: any = {
-      name: 'Иван',
+      name: 'Кирил',
       surname: 'Иванов',
       family: 'Иванов',
-      egn: '8080808080',
+      egn: '8080808082',
       email: 'alabala@bala.ala',
       roleId: 2,
       address: {
         data: {
           number: 10,
           street: 'Borisova',
-          cityId: -1, // TODO
-          municipalityId: -1, // TODO
+          settlementId: 3382, // TODO
+          districtId: 3412, // TODO
         },
       },
     };
@@ -75,6 +75,7 @@ export class UsersTableComponent implements AfterViewInit {
       if (response && response.data) {
         const createdUser: Users = response.data.insert_users_one as Users;
         console.log(createdUser);
+        this.dataSource.queryRef.refetch({});
       } else {
         console.log(response);
       }

@@ -1,5 +1,5 @@
 query GetDistricts {
-  settlements(where: { isDistrict: { _eq: true } }) {
+  settlements(where: { parentId: { _is_null: true } }) {
     ...SettlementsBaseFields
 
     childs: settlements_aggregate {
@@ -14,6 +14,5 @@ fragment SettlementsBaseFields on settlements {
   id
   parentId
   name
-  isDistrict
   isMunicipality
 }
