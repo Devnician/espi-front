@@ -47,8 +47,8 @@ fragment UserFields on users {
   address {
     id
     settlementId
-    districtId
     number
     street
+    description
   }
 }

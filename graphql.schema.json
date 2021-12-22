@@ -583,22 +583,6 @@
             "deprecationReason": null
           },
           {
-            "name": "districtId",
-            "description": null,
-            "args": [],
-            "type": {
-              "kind": "NON_NULL",
-              "name": null,
-              "ofType": {
-                "kind": "SCALAR",
-                "name": "Int",
-                "ofType": null
-              }
-            },
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
             "name": "id",
             "description": null,
             "args": [],
@@ -901,18 +885,6 @@
         "description": "aggregate avg on columns",
         "fields": [
           {
-            "name": "districtId",
-            "description": null,
-            "args": [],
-            "type": {
-              "kind": "SCALAR",
-              "name": "Float",
-              "ofType": null
-            },
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
             "name": "id",
             "description": null,
             "args": [],
@@ -1035,18 +1007,6 @@
             "deprecationReason": null
           },
           {
-            "name": "districtId",
-            "description": null,
-            "type": {
-              "kind": "INPUT_OBJECT",
-              "name": "Int_comparison_exp",
-              "ofType": null
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
             "name": "id",
             "description": null,
             "type": {
@@ -1123,18 +1083,6 @@
         "fields": null,
         "inputFields": [
           {
-            "name": "districtId",
-            "description": null,
-            "type": {
-              "kind": "SCALAR",
-              "name": "Int",
-              "ofType": null
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
             "name": "id",
             "description": null,
             "type": {
@@ -1187,18 +1135,6 @@
             "type": {
               "kind": "SCALAR",
               "name": "String",
-              "ofType": null
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "districtId",
-            "description": null,
-            "type": {
-              "kind": "SCALAR",
-              "name": "Int",
               "ofType": null
             },
             "defaultValue": null,
@@ -1276,18 +1212,6 @@
             "deprecationReason": null
           },
           {
-            "name": "districtId",
-            "description": null,
-            "args": [],
-            "type": {
-              "kind": "SCALAR",
-              "name": "Int",
-              "ofType": null
-            },
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
             "name": "id",
             "description": null,
             "args": [],
@@ -1353,18 +1277,6 @@
             "type": {
               "kind": "SCALAR",
               "name": "String",
-              "ofType": null
-            },
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "districtId",
-            "description": null,
-            "args": [],
-            "type": {
-              "kind": "SCALAR",
-              "name": "Int",
               "ofType": null
             },
             "isDeprecated": false,
@@ -1596,18 +1508,6 @@
             "deprecationReason": null
           },
           {
-            "name": "districtId",
-            "description": null,
-            "type": {
-              "kind": "ENUM",
-              "name": "order_by",
-              "ofType": null
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
             "name": "id",
             "description": null,
             "type": {
@@ -1702,12 +1602,6 @@
             "deprecationReason": null
           },
           {
-            "name": "districtId",
-            "description": "column name",
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
             "name": "id",
             "description": "column name",
             "isDeprecated": false,
@@ -1746,18 +1640,6 @@
             "type": {
               "kind": "SCALAR",
               "name": "String",
-              "ofType": null
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "districtId",
-            "description": null,
-            "type": {
-              "kind": "SCALAR",
-              "name": "Int",
               "ofType": null
             },
             "defaultValue": null,
@@ -1823,18 +1705,6 @@
         "description": "aggregate stddev on columns",
         "fields": [
           {
-            "name": "districtId",
-            "description": null,
-            "args": [],
-            "type": {
-              "kind": "SCALAR",
-              "name": "Float",
-              "ofType": null
-            },
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
             "name": "id",
             "description": null,
             "args": [],
@@ -1881,18 +1751,6 @@
         "name": "addresses_stddev_pop_fields",
         "description": "aggregate stddev_pop on columns",
         "fields": [
-          {
-            "name": "districtId",
-            "description": null,
-            "args": [],
-            "type": {
-              "kind": "SCALAR",
-              "name": "Float",
-              "ofType": null
-            },
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
           {
             "name": "id",
             "description": null,
@@ -1941,18 +1799,6 @@
         "description": "aggregate stddev_samp on columns",
         "fields": [
           {
-            "name": "districtId",
-            "description": null,
-            "args": [],
-            "type": {
-              "kind": "SCALAR",
-              "name": "Float",
-              "ofType": null
-            },
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
             "name": "id",
             "description": null,
             "args": [],
@@ -1999,18 +1845,6 @@
         "name": "addresses_sum_fields",
         "description": "aggregate sum on columns",
         "fields": [
-          {
-            "name": "districtId",
-            "description": null,
-            "args": [],
-            "type": {
-              "kind": "SCALAR",
-              "name": "Int",
-              "ofType": null
-            },
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
           {
             "name": "id",
             "description": null,
@@ -2068,12 +1902,6 @@
             "deprecationReason": null
           },
           {
-            "name": "districtId",
-            "description": "column name",
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
             "name": "id",
             "description": "column name",
             "isDeprecated": false,
@@ -2105,18 +1933,6 @@
         "name": "addresses_var_pop_fields",
         "description": "aggregate var_pop on columns",
         "fields": [
-          {
-            "name": "districtId",
-            "description": null,
-            "args": [],
-            "type": {
-              "kind": "SCALAR",
-              "name": "Float",
-              "ofType": null
-            },
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
           {
             "name": "id",
             "description": null,
@@ -2165,18 +1981,6 @@
         "description": "aggregate var_samp on columns",
         "fields": [
           {
-            "name": "districtId",
-            "description": null,
-            "args": [],
-            "type": {
-              "kind": "SCALAR",
-              "name": "Float",
-              "ofType": null
-            },
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
             "name": "id",
             "description": null,
             "args": [],
@@ -2223,18 +2027,6 @@
         "name": "addresses_variance_fields",
         "description": "aggregate variance on columns",
         "fields": [
-          {
-            "name": "districtId",
-            "description": null,
-            "args": [],
-            "type": {
-              "kind": "SCALAR",
-              "name": "Float",
-              "ofType": null
-            },
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
           {
             "name": "id",
             "description": null,
@@ -2351,13 +2143,9 @@
             "description": null,
             "args": [],
             "type": {
-              "kind": "NON_NULL",
-              "name": null,
-              "ofType": {
-                "kind": "SCALAR",
-                "name": "Int",
-                "ofType": null
-              }
+              "kind": "SCALAR",
+              "name": "Int",
+              "ofType": null
             },
             "isDeprecated": false,
             "deprecationReason": null
@@ -5922,7 +5710,7 @@
             "deprecationReason": null
           },
           {
-            "name": "commision_members_userId_key",
+            "name": "commision_members_userId_commisionId_key",
             "description": "unique or primary key constraint",
             "isDeprecated": false,
             "deprecationReason": null
@@ -27724,6 +27512,18 @@
             "deprecationReason": null
           },
           {
+            "name": "eVote",
+            "description": null,
+            "args": [],
+            "type": {
+              "kind": "SCALAR",
+              "name": "String",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
             "name": "id",
             "description": null,
             "args": [],
@@ -27768,7 +27568,7 @@
             "deprecationReason": null
           },
           {
-            "name": "vote",
+            "name": "userId",
             "description": null,
             "args": [],
             "type": {
@@ -27776,9 +27576,21 @@
               "name": null,
               "ofType": {
                 "kind": "SCALAR",
-                "name": "Boolean",
+                "name": "Int",
                 "ofType": null
               }
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "vote",
+            "description": null,
+            "args": [],
+            "type": {
+              "kind": "SCALAR",
+              "name": "String",
+              "ofType": null
             },
             "isDeprecated": false,
             "deprecationReason": null
@@ -28056,6 +27868,18 @@
             },
             "isDeprecated": false,
             "deprecationReason": null
+          },
+          {
+            "name": "userId",
+            "description": null,
+            "args": [],
+            "type": {
+              "kind": "SCALAR",
+              "name": "Float",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
           }
         ],
         "inputFields": null,
@@ -28134,6 +27958,18 @@
             "deprecationReason": null
           },
           {
+            "name": "eVote",
+            "description": null,
+            "type": {
+              "kind": "INPUT_OBJECT",
+              "name": "String_comparison_exp",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
             "name": "id",
             "description": null,
             "type": {
@@ -28170,11 +28006,23 @@
             "deprecationReason": null
           },
           {
+            "name": "userId",
+            "description": null,
+            "type": {
+              "kind": "INPUT_OBJECT",
+              "name": "Int_comparison_exp",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
             "name": "vote",
             "description": null,
             "type": {
               "kind": "INPUT_OBJECT",
-              "name": "Boolean_comparison_exp",
+              "name": "String_comparison_exp",
               "ofType": null
             },
             "defaultValue": null,
@@ -28244,6 +28092,18 @@
             "defaultValue": null,
             "isDeprecated": false,
             "deprecationReason": null
+          },
+          {
+            "name": "userId",
+            "description": null,
+            "type": {
+              "kind": "SCALAR",
+              "name": "Int",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
           }
         ],
         "interfaces": null,
@@ -28262,6 +28122,18 @@
             "type": {
               "kind": "SCALAR",
               "name": "timestamptz",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "eVote",
+            "description": null,
+            "type": {
+              "kind": "SCALAR",
+              "name": "String",
               "ofType": null
             },
             "defaultValue": null,
@@ -28305,11 +28177,23 @@
             "deprecationReason": null
           },
           {
+            "name": "userId",
+            "description": null,
+            "type": {
+              "kind": "SCALAR",
+              "name": "Int",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
             "name": "vote",
             "description": null,
             "type": {
               "kind": "SCALAR",
-              "name": "Boolean",
+              "name": "String",
               "ofType": null
             },
             "defaultValue": null,
@@ -28339,6 +28223,18 @@
             "deprecationReason": null
           },
           {
+            "name": "eVote",
+            "description": null,
+            "args": [],
+            "type": {
+              "kind": "SCALAR",
+              "name": "String",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
             "name": "id",
             "description": null,
             "args": [],
@@ -28369,6 +28265,30 @@
             "type": {
               "kind": "SCALAR",
               "name": "Int",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "userId",
+            "description": null,
+            "args": [],
+            "type": {
+              "kind": "SCALAR",
+              "name": "Int",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "vote",
+            "description": null,
+            "args": [],
+            "type": {
+              "kind": "SCALAR",
+              "name": "String",
               "ofType": null
             },
             "isDeprecated": false,
@@ -28398,6 +28318,18 @@
             "deprecationReason": null
           },
           {
+            "name": "eVote",
+            "description": null,
+            "args": [],
+            "type": {
+              "kind": "SCALAR",
+              "name": "String",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
             "name": "id",
             "description": null,
             "args": [],
@@ -28428,6 +28360,30 @@
             "type": {
               "kind": "SCALAR",
               "name": "Int",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "userId",
+            "description": null,
+            "args": [],
+            "type": {
+              "kind": "SCALAR",
+              "name": "Int",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "vote",
+            "description": null,
+            "args": [],
+            "type": {
+              "kind": "SCALAR",
+              "name": "String",
               "ofType": null
             },
             "isDeprecated": false,
@@ -28572,6 +28528,18 @@
             "deprecationReason": null
           },
           {
+            "name": "eVote",
+            "description": null,
+            "type": {
+              "kind": "ENUM",
+              "name": "order_by",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
             "name": "id",
             "description": null,
             "type": {
@@ -28597,6 +28565,18 @@
           },
           {
             "name": "sectionId",
+            "description": null,
+            "type": {
+              "kind": "ENUM",
+              "name": "order_by",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "userId",
             "description": null,
             "type": {
               "kind": "ENUM",
@@ -28666,6 +28646,12 @@
             "deprecationReason": null
           },
           {
+            "name": "eVote",
+            "description": "column name",
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
             "name": "id",
             "description": "column name",
             "isDeprecated": false,
@@ -28679,6 +28665,12 @@
           },
           {
             "name": "sectionId",
+            "description": "column name",
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "userId",
             "description": "column name",
             "isDeprecated": false,
             "deprecationReason": null
@@ -28711,6 +28703,18 @@
             "deprecationReason": null
           },
           {
+            "name": "eVote",
+            "description": null,
+            "type": {
+              "kind": "SCALAR",
+              "name": "String",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
             "name": "id",
             "description": null,
             "type": {
@@ -28747,11 +28751,23 @@
             "deprecationReason": null
           },
           {
+            "name": "userId",
+            "description": null,
+            "type": {
+              "kind": "SCALAR",
+              "name": "Int",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
             "name": "vote",
             "description": null,
             "type": {
               "kind": "SCALAR",
-              "name": "Boolean",
+              "name": "String",
               "ofType": null
             },
             "defaultValue": null,
@@ -28794,6 +28810,18 @@
           },
           {
             "name": "sectionId",
+            "description": null,
+            "args": [],
+            "type": {
+              "kind": "SCALAR",
+              "name": "Float",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "userId",
             "description": null,
             "args": [],
             "type": {
@@ -28850,6 +28878,18 @@
             },
             "isDeprecated": false,
             "deprecationReason": null
+          },
+          {
+            "name": "userId",
+            "description": null,
+            "args": [],
+            "type": {
+              "kind": "SCALAR",
+              "name": "Float",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
           }
         ],
         "inputFields": null,
@@ -28888,6 +28928,18 @@
           },
           {
             "name": "sectionId",
+            "description": null,
+            "args": [],
+            "type": {
+              "kind": "SCALAR",
+              "name": "Float",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "userId",
             "description": null,
             "args": [],
             "type": {
@@ -28944,6 +28996,18 @@
             },
             "isDeprecated": false,
             "deprecationReason": null
+          },
+          {
+            "name": "userId",
+            "description": null,
+            "args": [],
+            "type": {
+              "kind": "SCALAR",
+              "name": "Int",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
           }
         ],
         "inputFields": null,
@@ -28966,6 +29030,12 @@
             "deprecationReason": null
           },
           {
+            "name": "eVote",
+            "description": "column name",
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
             "name": "id",
             "description": "column name",
             "isDeprecated": false,
@@ -28979,6 +29049,12 @@
           },
           {
             "name": "sectionId",
+            "description": "column name",
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "userId",
             "description": "column name",
             "isDeprecated": false,
             "deprecationReason": null
@@ -29023,6 +29099,18 @@
           },
           {
             "name": "sectionId",
+            "description": null,
+            "args": [],
+            "type": {
+              "kind": "SCALAR",
+              "name": "Float",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "userId",
             "description": null,
             "args": [],
             "type": {
@@ -29079,6 +29167,18 @@
             },
             "isDeprecated": false,
             "deprecationReason": null
+          },
+          {
+            "name": "userId",
+            "description": null,
+            "args": [],
+            "type": {
+              "kind": "SCALAR",
+              "name": "Float",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
           }
         ],
         "inputFields": null,
@@ -29117,6 +29217,18 @@
           },
           {
             "name": "sectionId",
+            "description": null,
+            "args": [],
+            "type": {
+              "kind": "SCALAR",
+              "name": "Float",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "userId",
             "description": null,
             "args": [],
             "type": {
@@ -29194,18 +29306,6 @@
                 "name": "Int",
                 "ofType": null
               }
-            },
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "municipalityId",
-            "description": null,
-            "args": [],
-            "type": {
-              "kind": "SCALAR",
-              "name": "Int",
-              "ofType": null
             },
             "isDeprecated": false,
             "deprecationReason": null
@@ -29416,6 +29516,18 @@
                 "name": "referendum_questions_aggregate",
                 "ofType": null
               }
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "settlementId",
+            "description": null,
+            "args": [],
+            "type": {
+              "kind": "SCALAR",
+              "name": "Int",
+              "ofType": null
             },
             "isDeprecated": false,
             "deprecationReason": null
@@ -29699,7 +29811,7 @@
             "deprecationReason": null
           },
           {
-            "name": "municipalityId",
+            "name": "settlementId",
             "description": null,
             "args": [],
             "type": {
@@ -29823,18 +29935,6 @@
             "deprecationReason": null
           },
           {
-            "name": "municipalityId",
-            "description": null,
-            "type": {
-              "kind": "INPUT_OBJECT",
-              "name": "Int_comparison_exp",
-              "ofType": null
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
             "name": "name",
             "description": null,
             "type": {
@@ -29852,6 +29952,18 @@
             "type": {
               "kind": "INPUT_OBJECT",
               "name": "referendum_questions_bool_exp",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "settlementId",
+            "description": null,
+            "type": {
+              "kind": "INPUT_OBJECT",
+              "name": "Int_comparison_exp",
               "ofType": null
             },
             "defaultValue": null,
@@ -29929,7 +30041,7 @@
             "deprecationReason": null
           },
           {
-            "name": "municipalityId",
+            "name": "settlementId",
             "description": null,
             "type": {
               "kind": "SCALAR",
@@ -30000,18 +30112,6 @@
             "deprecationReason": null
           },
           {
-            "name": "municipalityId",
-            "description": null,
-            "type": {
-              "kind": "SCALAR",
-              "name": "Int",
-              "ofType": null
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
             "name": "name",
             "description": null,
             "type": {
@@ -30029,6 +30129,18 @@
             "type": {
               "kind": "INPUT_OBJECT",
               "name": "referendum_questions_arr_rel_insert_input",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "settlementId",
+            "description": null,
+            "type": {
+              "kind": "SCALAR",
+              "name": "Int",
               "ofType": null
             },
             "defaultValue": null,
@@ -30118,24 +30230,24 @@
             "deprecationReason": null
           },
           {
-            "name": "municipalityId",
-            "description": null,
-            "args": [],
-            "type": {
-              "kind": "SCALAR",
-              "name": "Int",
-              "ofType": null
-            },
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
             "name": "name",
             "description": null,
             "args": [],
             "type": {
               "kind": "SCALAR",
               "name": "String",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "settlementId",
+            "description": null,
+            "args": [],
+            "type": {
+              "kind": "SCALAR",
+              "name": "Int",
               "ofType": null
             },
             "isDeprecated": false,
@@ -30225,24 +30337,24 @@
             "deprecationReason": null
           },
           {
-            "name": "municipalityId",
-            "description": null,
-            "args": [],
-            "type": {
-              "kind": "SCALAR",
-              "name": "Int",
-              "ofType": null
-            },
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
             "name": "name",
             "description": null,
             "args": [],
             "type": {
               "kind": "SCALAR",
               "name": "String",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "settlementId",
+            "description": null,
+            "args": [],
+            "type": {
+              "kind": "SCALAR",
+              "name": "Int",
               "ofType": null
             },
             "isDeprecated": false,
@@ -30447,18 +30559,6 @@
             "deprecationReason": null
           },
           {
-            "name": "municipalityId",
-            "description": null,
-            "type": {
-              "kind": "ENUM",
-              "name": "order_by",
-              "ofType": null
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
             "name": "name",
             "description": null,
             "type": {
@@ -30476,6 +30576,18 @@
             "type": {
               "kind": "INPUT_OBJECT",
               "name": "referendum_questions_aggregate_order_by",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "settlementId",
+            "description": null,
+            "type": {
+              "kind": "ENUM",
+              "name": "order_by",
               "ofType": null
             },
             "defaultValue": null,
@@ -30571,13 +30683,13 @@
             "deprecationReason": null
           },
           {
-            "name": "municipalityId",
+            "name": "name",
             "description": "column name",
             "isDeprecated": false,
             "deprecationReason": null
           },
           {
-            "name": "name",
+            "name": "settlementId",
             "description": "column name",
             "isDeprecated": false,
             "deprecationReason": null
@@ -30652,11 +30764,11 @@
             "deprecationReason": null
           },
           {
-            "name": "municipalityId",
+            "name": "name",
             "description": null,
             "type": {
               "kind": "SCALAR",
-              "name": "Int",
+              "name": "String",
               "ofType": null
             },
             "defaultValue": null,
@@ -30664,11 +30776,11 @@
             "deprecationReason": null
           },
           {
-            "name": "name",
+            "name": "settlementId",
             "description": null,
             "type": {
               "kind": "SCALAR",
-              "name": "String",
+              "name": "Int",
               "ofType": null
             },
             "defaultValue": null,
@@ -30722,7 +30834,7 @@
             "deprecationReason": null
           },
           {
-            "name": "municipalityId",
+            "name": "settlementId",
             "description": null,
             "args": [],
             "type": {
@@ -30757,7 +30869,7 @@
             "deprecationReason": null
           },
           {
-            "name": "municipalityId",
+            "name": "settlementId",
             "description": null,
             "args": [],
             "type": {
@@ -30792,7 +30904,7 @@
             "deprecationReason": null
           },
           {
-            "name": "municipalityId",
+            "name": "settlementId",
             "description": null,
             "args": [],
             "type": {
@@ -30827,7 +30939,7 @@
             "deprecationReason": null
           },
           {
-            "name": "municipalityId",
+            "name": "settlementId",
             "description": null,
             "args": [],
             "type": {
@@ -30877,13 +30989,13 @@
             "deprecationReason": null
           },
           {
-            "name": "municipalityId",
+            "name": "name",
             "description": "column name",
             "isDeprecated": false,
             "deprecationReason": null
           },
           {
-            "name": "name",
+            "name": "settlementId",
             "description": "column name",
             "isDeprecated": false,
             "deprecationReason": null
@@ -30921,7 +31033,7 @@
             "deprecationReason": null
           },
           {
-            "name": "municipalityId",
+            "name": "settlementId",
             "description": null,
             "args": [],
             "type": {
@@ -30956,7 +31068,7 @@
             "deprecationReason": null
           },
           {
-            "name": "municipalityId",
+            "name": "settlementId",
             "description": null,
             "args": [],
             "type": {
@@ -30991,7 +31103,7 @@
             "deprecationReason": null
           },
           {
-            "name": "municipalityId",
+            "name": "settlementId",
             "description": null,
             "args": [],
             "type": {
@@ -41890,22 +42002,6 @@
         "description": "columns and relationships of \"votes\"",
         "fields": [
           {
-            "name": "candidateId",
-            "description": null,
-            "args": [],
-            "type": {
-              "kind": "NON_NULL",
-              "name": null,
-              "ofType": {
-                "kind": "SCALAR",
-                "name": "Int",
-                "ofType": null
-              }
-            },
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
             "name": "createdAt",
             "description": null,
             "args": [],
@@ -41915,6 +42011,22 @@
               "ofType": {
                 "kind": "SCALAR",
                 "name": "timestamptz",
+                "ofType": null
+              }
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "eVote",
+            "description": null,
+            "args": [],
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "String",
                 "ofType": null
               }
             },
@@ -41938,7 +42050,7 @@
             "deprecationReason": null
           },
           {
-            "name": "partyId",
+            "name": "sectionId",
             "description": null,
             "args": [],
             "type": {
@@ -41950,12 +42062,28 @@
             "deprecationReason": null
           },
           {
-            "name": "sectionId",
+            "name": "userId",
+            "description": null,
+            "args": [],
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "Int",
+                "ofType": null
+              }
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "vote",
             "description": null,
             "args": [],
             "type": {
               "kind": "SCALAR",
-              "name": "Int",
+              "name": "String",
               "ofType": null
             },
             "isDeprecated": false,
@@ -42216,18 +42344,6 @@
         "description": "aggregate avg on columns",
         "fields": [
           {
-            "name": "candidateId",
-            "description": null,
-            "args": [],
-            "type": {
-              "kind": "SCALAR",
-              "name": "Float",
-              "ofType": null
-            },
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
             "name": "id",
             "description": null,
             "args": [],
@@ -42240,7 +42356,7 @@
             "deprecationReason": null
           },
           {
-            "name": "partyId",
+            "name": "sectionId",
             "description": null,
             "args": [],
             "type": {
@@ -42252,7 +42368,7 @@
             "deprecationReason": null
           },
           {
-            "name": "sectionId",
+            "name": "userId",
             "description": null,
             "args": [],
             "type": {
@@ -42340,11 +42456,11 @@
             "deprecationReason": null
           },
           {
-            "name": "candidateId",
+            "name": "createdAt",
             "description": null,
             "type": {
               "kind": "INPUT_OBJECT",
-              "name": "Int_comparison_exp",
+              "name": "timestamptz_comparison_exp",
               "ofType": null
             },
             "defaultValue": null,
@@ -42352,11 +42468,11 @@
             "deprecationReason": null
           },
           {
-            "name": "createdAt",
+            "name": "eVote",
             "description": null,
             "type": {
               "kind": "INPUT_OBJECT",
-              "name": "timestamptz_comparison_exp",
+              "name": "String_comparison_exp",
               "ofType": null
             },
             "defaultValue": null,
@@ -42376,7 +42492,7 @@
             "deprecationReason": null
           },
           {
-            "name": "partyId",
+            "name": "sectionId",
             "description": null,
             "type": {
               "kind": "INPUT_OBJECT",
@@ -42388,11 +42504,23 @@
             "deprecationReason": null
           },
           {
-            "name": "sectionId",
+            "name": "userId",
             "description": null,
             "type": {
               "kind": "INPUT_OBJECT",
               "name": "Int_comparison_exp",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "vote",
+            "description": null,
+            "type": {
+              "kind": "INPUT_OBJECT",
+              "name": "String_comparison_exp",
               "ofType": null
             },
             "defaultValue": null,
@@ -42440,18 +42568,6 @@
         "fields": null,
         "inputFields": [
           {
-            "name": "candidateId",
-            "description": null,
-            "type": {
-              "kind": "SCALAR",
-              "name": "Int",
-              "ofType": null
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
             "name": "id",
             "description": null,
             "type": {
@@ -42464,7 +42580,7 @@
             "deprecationReason": null
           },
           {
-            "name": "partyId",
+            "name": "sectionId",
             "description": null,
             "type": {
               "kind": "SCALAR",
@@ -42476,7 +42592,7 @@
             "deprecationReason": null
           },
           {
-            "name": "sectionId",
+            "name": "userId",
             "description": null,
             "type": {
               "kind": "SCALAR",
@@ -42511,11 +42627,11 @@
         "fields": null,
         "inputFields": [
           {
-            "name": "candidateId",
+            "name": "createdAt",
             "description": null,
             "type": {
               "kind": "SCALAR",
-              "name": "Int",
+              "name": "timestamptz",
               "ofType": null
             },
             "defaultValue": null,
@@ -42523,11 +42639,11 @@
             "deprecationReason": null
           },
           {
-            "name": "createdAt",
+            "name": "eVote",
             "description": null,
             "type": {
               "kind": "SCALAR",
-              "name": "timestamptz",
+              "name": "String",
               "ofType": null
             },
             "defaultValue": null,
@@ -42547,7 +42663,7 @@
             "deprecationReason": null
           },
           {
-            "name": "partyId",
+            "name": "sectionId",
             "description": null,
             "type": {
               "kind": "SCALAR",
@@ -42559,11 +42675,23 @@
             "deprecationReason": null
           },
           {
-            "name": "sectionId",
+            "name": "userId",
             "description": null,
             "type": {
               "kind": "SCALAR",
               "name": "Int",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "vote",
+            "description": null,
+            "type": {
+              "kind": "SCALAR",
+              "name": "String",
               "ofType": null
             },
             "defaultValue": null,
@@ -42593,24 +42721,24 @@
         "description": "aggregate max on columns",
         "fields": [
           {
-            "name": "candidateId",
-            "description": null,
-            "args": [],
-            "type": {
-              "kind": "SCALAR",
-              "name": "Int",
-              "ofType": null
-            },
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
             "name": "createdAt",
             "description": null,
             "args": [],
             "type": {
               "kind": "SCALAR",
               "name": "timestamptz",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "eVote",
+            "description": null,
+            "args": [],
+            "type": {
+              "kind": "SCALAR",
+              "name": "String",
               "ofType": null
             },
             "isDeprecated": false,
@@ -42629,7 +42757,7 @@
             "deprecationReason": null
           },
           {
-            "name": "partyId",
+            "name": "sectionId",
             "description": null,
             "args": [],
             "type": {
@@ -42641,12 +42769,24 @@
             "deprecationReason": null
           },
           {
-            "name": "sectionId",
+            "name": "userId",
             "description": null,
             "args": [],
             "type": {
               "kind": "SCALAR",
               "name": "Int",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "vote",
+            "description": null,
+            "args": [],
+            "type": {
+              "kind": "SCALAR",
+              "name": "String",
               "ofType": null
             },
             "isDeprecated": false,
@@ -42676,24 +42816,24 @@
         "description": "aggregate min on columns",
         "fields": [
           {
-            "name": "candidateId",
-            "description": null,
-            "args": [],
-            "type": {
-              "kind": "SCALAR",
-              "name": "Int",
-              "ofType": null
-            },
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
             "name": "createdAt",
             "description": null,
             "args": [],
             "type": {
               "kind": "SCALAR",
               "name": "timestamptz",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "eVote",
+            "description": null,
+            "args": [],
+            "type": {
+              "kind": "SCALAR",
+              "name": "String",
               "ofType": null
             },
             "isDeprecated": false,
@@ -42712,7 +42852,7 @@
             "deprecationReason": null
           },
           {
-            "name": "partyId",
+            "name": "sectionId",
             "description": null,
             "args": [],
             "type": {
@@ -42724,12 +42864,24 @@
             "deprecationReason": null
           },
           {
-            "name": "sectionId",
+            "name": "userId",
             "description": null,
             "args": [],
             "type": {
               "kind": "SCALAR",
               "name": "Int",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "vote",
+            "description": null,
+            "args": [],
+            "type": {
+              "kind": "SCALAR",
+              "name": "String",
               "ofType": null
             },
             "isDeprecated": false,
@@ -42874,7 +43026,7 @@
         "fields": null,
         "inputFields": [
           {
-            "name": "candidateId",
+            "name": "createdAt",
             "description": null,
             "type": {
               "kind": "ENUM",
@@ -42886,7 +43038,7 @@
             "deprecationReason": null
           },
           {
-            "name": "createdAt",
+            "name": "eVote",
             "description": null,
             "type": {
               "kind": "ENUM",
@@ -42910,7 +43062,7 @@
             "deprecationReason": null
           },
           {
-            "name": "partyId",
+            "name": "sectionId",
             "description": null,
             "type": {
               "kind": "ENUM",
@@ -42922,7 +43074,19 @@
             "deprecationReason": null
           },
           {
-            "name": "sectionId",
+            "name": "userId",
+            "description": null,
+            "type": {
+              "kind": "ENUM",
+              "name": "order_by",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "vote",
             "description": null,
             "type": {
               "kind": "ENUM",
@@ -42986,13 +43150,13 @@
         "interfaces": null,
         "enumValues": [
           {
-            "name": "candidateId",
+            "name": "createdAt",
             "description": "column name",
             "isDeprecated": false,
             "deprecationReason": null
           },
           {
-            "name": "createdAt",
+            "name": "eVote",
             "description": "column name",
             "isDeprecated": false,
             "deprecationReason": null
@@ -43004,13 +43168,19 @@
             "deprecationReason": null
           },
           {
-            "name": "partyId",
+            "name": "sectionId",
             "description": "column name",
             "isDeprecated": false,
             "deprecationReason": null
           },
           {
-            "name": "sectionId",
+            "name": "userId",
+            "description": "column name",
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "vote",
             "description": "column name",
             "isDeprecated": false,
             "deprecationReason": null
@@ -43031,11 +43201,11 @@
         "fields": null,
         "inputFields": [
           {
-            "name": "candidateId",
+            "name": "createdAt",
             "description": null,
             "type": {
               "kind": "SCALAR",
-              "name": "Int",
+              "name": "timestamptz",
               "ofType": null
             },
             "defaultValue": null,
@@ -43043,11 +43213,11 @@
             "deprecationReason": null
           },
           {
-            "name": "createdAt",
+            "name": "eVote",
             "description": null,
             "type": {
               "kind": "SCALAR",
-              "name": "timestamptz",
+              "name": "String",
               "ofType": null
             },
             "defaultValue": null,
@@ -43067,7 +43237,7 @@
             "deprecationReason": null
           },
           {
-            "name": "partyId",
+            "name": "sectionId",
             "description": null,
             "type": {
               "kind": "SCALAR",
@@ -43079,11 +43249,23 @@
             "deprecationReason": null
           },
           {
-            "name": "sectionId",
+            "name": "userId",
             "description": null,
             "type": {
               "kind": "SCALAR",
               "name": "Int",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "vote",
+            "description": null,
+            "type": {
+              "kind": "SCALAR",
+              "name": "String",
               "ofType": null
             },
             "defaultValue": null,
@@ -43113,18 +43295,6 @@
         "description": "aggregate stddev on columns",
         "fields": [
           {
-            "name": "candidateId",
-            "description": null,
-            "args": [],
-            "type": {
-              "kind": "SCALAR",
-              "name": "Float",
-              "ofType": null
-            },
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
             "name": "id",
             "description": null,
             "args": [],
@@ -43137,7 +43307,7 @@
             "deprecationReason": null
           },
           {
-            "name": "partyId",
+            "name": "sectionId",
             "description": null,
             "args": [],
             "type": {
@@ -43149,7 +43319,7 @@
             "deprecationReason": null
           },
           {
-            "name": "sectionId",
+            "name": "userId",
             "description": null,
             "args": [],
             "type": {
@@ -43184,18 +43354,6 @@
         "description": "aggregate stddev_pop on columns",
         "fields": [
           {
-            "name": "candidateId",
-            "description": null,
-            "args": [],
-            "type": {
-              "kind": "SCALAR",
-              "name": "Float",
-              "ofType": null
-            },
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
             "name": "id",
             "description": null,
             "args": [],
@@ -43208,7 +43366,7 @@
             "deprecationReason": null
           },
           {
-            "name": "partyId",
+            "name": "sectionId",
             "description": null,
             "args": [],
             "type": {
@@ -43220,7 +43378,7 @@
             "deprecationReason": null
           },
           {
-            "name": "sectionId",
+            "name": "userId",
             "description": null,
             "args": [],
             "type": {
@@ -43255,18 +43413,6 @@
         "description": "aggregate stddev_samp on columns",
         "fields": [
           {
-            "name": "candidateId",
-            "description": null,
-            "args": [],
-            "type": {
-              "kind": "SCALAR",
-              "name": "Float",
-              "ofType": null
-            },
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
             "name": "id",
             "description": null,
             "args": [],
@@ -43279,7 +43425,7 @@
             "deprecationReason": null
           },
           {
-            "name": "partyId",
+            "name": "sectionId",
             "description": null,
             "args": [],
             "type": {
@@ -43291,7 +43437,7 @@
             "deprecationReason": null
           },
           {
-            "name": "sectionId",
+            "name": "userId",
             "description": null,
             "args": [],
             "type": {
@@ -43326,18 +43472,6 @@
         "description": "aggregate sum on columns",
         "fields": [
           {
-            "name": "candidateId",
-            "description": null,
-            "args": [],
-            "type": {
-              "kind": "SCALAR",
-              "name": "Int",
-              "ofType": null
-            },
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
             "name": "id",
             "description": null,
             "args": [],
@@ -43350,7 +43484,7 @@
             "deprecationReason": null
           },
           {
-            "name": "partyId",
+            "name": "sectionId",
             "description": null,
             "args": [],
             "type": {
@@ -43362,7 +43496,7 @@
             "deprecationReason": null
           },
           {
-            "name": "sectionId",
+            "name": "userId",
             "description": null,
             "args": [],
             "type": {
@@ -43400,13 +43534,13 @@
         "interfaces": null,
         "enumValues": [
           {
-            "name": "candidateId",
+            "name": "createdAt",
             "description": "column name",
             "isDeprecated": false,
             "deprecationReason": null
           },
           {
-            "name": "createdAt",
+            "name": "eVote",
             "description": "column name",
             "isDeprecated": false,
             "deprecationReason": null
@@ -43418,13 +43552,19 @@
             "deprecationReason": null
           },
           {
-            "name": "partyId",
+            "name": "sectionId",
             "description": "column name",
             "isDeprecated": false,
             "deprecationReason": null
           },
           {
-            "name": "sectionId",
+            "name": "userId",
+            "description": "column name",
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "vote",
             "description": "column name",
             "isDeprecated": false,
             "deprecationReason": null
@@ -43444,18 +43584,6 @@
         "description": "aggregate var_pop on columns",
         "fields": [
           {
-            "name": "candidateId",
-            "description": null,
-            "args": [],
-            "type": {
-              "kind": "SCALAR",
-              "name": "Float",
-              "ofType": null
-            },
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
             "name": "id",
             "description": null,
             "args": [],
@@ -43468,7 +43596,7 @@
             "deprecationReason": null
           },
           {
-            "name": "partyId",
+            "name": "sectionId",
             "description": null,
             "args": [],
             "type": {
@@ -43480,7 +43608,7 @@
             "deprecationReason": null
           },
           {
-            "name": "sectionId",
+            "name": "userId",
             "description": null,
             "args": [],
             "type": {
@@ -43515,18 +43643,6 @@
         "description": "aggregate var_samp on columns",
         "fields": [
           {
-            "name": "candidateId",
-            "description": null,
-            "args": [],
-            "type": {
-              "kind": "SCALAR",
-              "name": "Float",
-              "ofType": null
-            },
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
             "name": "id",
             "description": null,
             "args": [],
@@ -43539,7 +43655,7 @@
             "deprecationReason": null
           },
           {
-            "name": "partyId",
+            "name": "sectionId",
             "description": null,
             "args": [],
             "type": {
@@ -43551,7 +43667,7 @@
             "deprecationReason": null
           },
           {
-            "name": "sectionId",
+            "name": "userId",
             "description": null,
             "args": [],
             "type": {
@@ -43586,18 +43702,6 @@
         "description": "aggregate variance on columns",
         "fields": [
           {
-            "name": "candidateId",
-            "description": null,
-            "args": [],
-            "type": {
-              "kind": "SCALAR",
-              "name": "Float",
-              "ofType": null
-            },
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
             "name": "id",
             "description": null,
             "args": [],
@@ -43610,7 +43714,7 @@
             "deprecationReason": null
           },
           {
-            "name": "partyId",
+            "name": "sectionId",
             "description": null,
             "args": [],
             "type": {
@@ -43622,7 +43726,7 @@
             "deprecationReason": null
           },
           {
-            "name": "sectionId",
+            "name": "userId",
             "description": null,
             "args": [],
             "type": {
