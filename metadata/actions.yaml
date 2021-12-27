@@ -1,6 +1,12 @@
-actions: []
+actions:
+- name: getAccessToken
+  definition:
+    kind: ""
+    handler: http://host.docker.internal:9000/auth/getAccessToken
 custom_types:
   enums: []
-  input_objects: []
-  objects: []
+  input_objects:
+  - name: UsersInput
+  objects:
+  - name: LoginResponse
   scalars: []

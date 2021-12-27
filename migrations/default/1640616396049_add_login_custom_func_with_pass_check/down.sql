@@ -1,0 +1,3 @@
+-- Could not auto-generate a down migration.
+-- Please write an appropriate down migration for the SQL below:
+-- CREATE OR REPLACE FUNCTION public.login(egn text, pass text)  RETURNS SETOF users  LANGUAGE sql  STABLE AS $function$   SELECT * FROM users u WHERE u."egn" = $1 AND u."password" = crypt($2, u."password") ;  $function$;

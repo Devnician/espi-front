@@ -1,0 +1,19 @@
+type Query {
+  getAccessToken(
+    args: UsersInput!
+  ): LoginResponse
+}
+
+input UsersInput {
+  egn: String!
+  pin: String!
+  password: String
+}
+
+type LoginResponse {
+  message: String
+  code: String
+  userId: Int
+  accessToken: String!
+}
+

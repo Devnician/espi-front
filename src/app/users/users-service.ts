@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { FetchResult } from '@apollo/client';
+import { ApolloQueryResult, FetchResult } from '@apollo/client';
 import { QueryRef } from 'apollo-angular';
 import { Observable } from 'rxjs';
 import {
@@ -7,6 +7,8 @@ import {
   CreateUserMutation,
   GetUsersGQL,
   GetUsersQuery,
+  LoginGQL,
+  LoginQuery,
   UpdateUserGQL,
   Users_Bool_Exp,
   Users_Order_By,
@@ -19,7 +21,8 @@ export class UsersService {
   constructor(
     private createUserGQL: CreateUserGQL,
     private updateUserGQL: UpdateUserGQL,
-    private getUsersGQL: GetUsersGQL
+    private getUsersGQL: GetUsersGQL,
+    private loginGQL: LoginGQL
   ) {}
   getUsers(
     limit = 10,
@@ -69,5 +72,24 @@ export class UsersService {
   }
   updateUser(user: Users_Set_Input) {
     return this.updateUserGQL.mutate({ id: user.id, set: user });
+  }
+
+  //SELECT (password = crypt('pepe', password)) AS pswmatch FROM users WHERE id = 2 ;
+  /**
+   * Calls express throught action
+  
+   * @returns
+   */
+  login(
+    egn: string,
+    pin: string,
+    password: string
+  ): Observable<ApolloQueryResult<LoginQuery>> {
+    console.log('Oppaa');
+    return this.loginGQL.fetch({
+      egn,
+      pin,
+      password,
+    });
   }
 }

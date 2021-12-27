@@ -135,4 +135,12 @@ export class UsersTableComponent implements AfterViewInit {
       }
     });
   }
+
+  public testLogin() {
+    //variables: { egn: '8080808080', password: 'pepe' },
+    console.log('LOGIN ATEMPT');
+    this.usersService.login('8080808080', '', 'pepe').subscribe((response) => {
+      console.log(response);
+    });
+  }
 }

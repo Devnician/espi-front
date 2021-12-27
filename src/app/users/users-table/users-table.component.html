@@ -28,6 +28,15 @@
   Областни градове
 </button>
 
+<button
+  mat-raised-button
+  color="primary"
+  style="margin: 10px"
+  (click)="testLogin()"
+>
+  тестов вход през express
+</button>
+
 <div class="mat-elevation-z8">
   <mat-progress-bar
     *ngIf="dataSource.loading$ | async"

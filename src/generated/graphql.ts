@@ -44,6 +44,14 @@ export type Int_Comparison_Exp = {
   _nin?: Maybe<Array<Scalars['Int']>>;
 };
 
+export type LoginResponse = {
+  __typename?: 'LoginResponse';
+  accessToken: Scalars['String'];
+  code: Scalars['String'];
+  message: Scalars['String'];
+  userId: Scalars['Int'];
+};
+
 /** Boolean expression to compare columns of type "String". All fields are combined with logical 'AND'. */
 export type String_Comparison_Exp = {
   _eq?: Maybe<Scalars['String']>;
@@ -75,6 +83,12 @@ export type String_Comparison_Exp = {
   _regex?: Maybe<Scalars['String']>;
   /** does the column match the given SQL regular expression */
   _similar?: Maybe<Scalars['String']>;
+};
+
+export type UsersInput = {
+  egn: Scalars['String'];
+  password?: Maybe<Scalars['String']>;
+  pin: Scalars['String'];
 };
 
 /** columns and relationships of "addresses" */
@@ -1787,6 +1801,11 @@ export type Electoral_Rolls_Variance_Fields = {
   __typename?: 'electoral_rolls_variance_fields';
   id?: Maybe<Scalars['Float']>;
   sectionId?: Maybe<Scalars['Float']>;
+};
+
+export type Login_Args = {
+  egn?: Maybe<Scalars['String']>;
+  pass?: Maybe<Scalars['String']>;
 };
 
 /** mutation root */
@@ -3569,6 +3588,11 @@ export type Query_Root = {
   electoral_rolls_aggregate: Electoral_Rolls_Aggregate;
   /** fetch data from the table: "electoral_rolls" using primary key columns */
   electoral_rolls_by_pk?: Maybe<Electoral_Rolls>;
+  getAccessToken?: Maybe<LoginResponse>;
+  /** execute function "login" which returns "users" */
+  login: Array<Users>;
+  /** execute function "login" and query aggregates on result of table type "users" */
+  login_aggregate: Users_Aggregate;
   /** fetch data from the table: "political_group_members" */
   political_group_members: Array<Political_Group_Members>;
   /** fetch aggregated fields from the table: "political_group_members" */
@@ -3611,6 +3635,10 @@ export type Query_Root = {
   roles_aggregate: Roles_Aggregate;
   /** fetch data from the table: "roles" using primary key columns */
   roles_by_pk?: Maybe<Roles>;
+  /** execute function "search_articles" which returns "settlements" */
+  search_articles: Array<Settlements>;
+  /** execute function "search_articles" and query aggregates on result of table type "settlements" */
+  search_articles_aggregate: Settlements_Aggregate;
   /** fetch data from the table: "settlements" */
   settlements: Array<Settlements>;
   /** An aggregate relationship */
@@ -3817,6 +3845,31 @@ export type Query_RootElectoral_Rolls_By_PkArgs = {
 };
 
 
+export type Query_RootGetAccessTokenArgs = {
+  args: UsersInput;
+};
+
+
+export type Query_RootLoginArgs = {
+  args: Login_Args;
+  distinct_on?: Maybe<Array<Users_Select_Column>>;
+  limit?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  order_by?: Maybe<Array<Users_Order_By>>;
+  where?: Maybe<Users_Bool_Exp>;
+};
+
+
+export type Query_RootLogin_AggregateArgs = {
+  args: Login_Args;
+  distinct_on?: Maybe<Array<Users_Select_Column>>;
+  limit?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  order_by?: Maybe<Array<Users_Order_By>>;
+  where?: Maybe<Users_Bool_Exp>;
+};
+
+
 export type Query_RootPolitical_Group_MembersArgs = {
   distinct_on?: Maybe<Array<Political_Group_Members_Select_Column>>;
   limit?: Maybe<Scalars['Int']>;
@@ -3975,6 +4028,26 @@ export type Query_RootRoles_AggregateArgs = {
 
 export type Query_RootRoles_By_PkArgs = {
   id: Scalars['Int'];
+};
+
+
+export type Query_RootSearch_ArticlesArgs = {
+  args: Search_Articles_Args;
+  distinct_on?: Maybe<Array<Settlements_Select_Column>>;
+  limit?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  order_by?: Maybe<Array<Settlements_Order_By>>;
+  where?: Maybe<Settlements_Bool_Exp>;
+};
+
+
+export type Query_RootSearch_Articles_AggregateArgs = {
+  args: Search_Articles_Args;
+  distinct_on?: Maybe<Array<Settlements_Select_Column>>;
+  limit?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  order_by?: Maybe<Array<Settlements_Order_By>>;
+  where?: Maybe<Settlements_Bool_Exp>;
 };
 
 
@@ -5183,6 +5256,10 @@ export type Roles_Variance_Fields = {
   id?: Maybe<Scalars['Float']>;
 };
 
+export type Search_Articles_Args = {
+  search?: Maybe<Scalars['String']>;
+};
+
 /** columns and relationships of "settlements" */
 export type Settlements = {
   __typename?: 'settlements';
@@ -5553,6 +5630,10 @@ export type Subscription_Root = {
   electoral_rolls_aggregate: Electoral_Rolls_Aggregate;
   /** fetch data from the table: "electoral_rolls" using primary key columns */
   electoral_rolls_by_pk?: Maybe<Electoral_Rolls>;
+  /** execute function "login" which returns "users" */
+  login: Array<Users>;
+  /** execute function "login" and query aggregates on result of table type "users" */
+  login_aggregate: Users_Aggregate;
   /** fetch data from the table: "political_group_members" */
   political_group_members: Array<Political_Group_Members>;
   /** fetch aggregated fields from the table: "political_group_members" */
@@ -5595,6 +5676,10 @@ export type Subscription_Root = {
   roles_aggregate: Roles_Aggregate;
   /** fetch data from the table: "roles" using primary key columns */
   roles_by_pk?: Maybe<Roles>;
+  /** execute function "search_articles" which returns "settlements" */
+  search_articles: Array<Settlements>;
+  /** execute function "search_articles" and query aggregates on result of table type "settlements" */
+  search_articles_aggregate: Settlements_Aggregate;
   /** fetch data from the table: "settlements" */
   settlements: Array<Settlements>;
   /** An aggregate relationship */
@@ -5801,6 +5886,26 @@ export type Subscription_RootElectoral_Rolls_By_PkArgs = {
 };
 
 
+export type Subscription_RootLoginArgs = {
+  args: Login_Args;
+  distinct_on?: Maybe<Array<Users_Select_Column>>;
+  limit?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  order_by?: Maybe<Array<Users_Order_By>>;
+  where?: Maybe<Users_Bool_Exp>;
+};
+
+
+export type Subscription_RootLogin_AggregateArgs = {
+  args: Login_Args;
+  distinct_on?: Maybe<Array<Users_Select_Column>>;
+  limit?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  order_by?: Maybe<Array<Users_Order_By>>;
+  where?: Maybe<Users_Bool_Exp>;
+};
+
+
 export type Subscription_RootPolitical_Group_MembersArgs = {
   distinct_on?: Maybe<Array<Political_Group_Members_Select_Column>>;
   limit?: Maybe<Scalars['Int']>;
@@ -5959,6 +6064,26 @@ export type Subscription_RootRoles_AggregateArgs = {
 
 export type Subscription_RootRoles_By_PkArgs = {
   id: Scalars['Int'];
+};
+
+
+export type Subscription_RootSearch_ArticlesArgs = {
+  args: Search_Articles_Args;
+  distinct_on?: Maybe<Array<Settlements_Select_Column>>;
+  limit?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  order_by?: Maybe<Array<Settlements_Order_By>>;
+  where?: Maybe<Settlements_Bool_Exp>;
+};
+
+
+export type Subscription_RootSearch_Articles_AggregateArgs = {
+  args: Search_Articles_Args;
+  distinct_on?: Maybe<Array<Settlements_Select_Column>>;
+  limit?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  order_by?: Maybe<Array<Settlements_Order_By>>;
+  where?: Maybe<Settlements_Bool_Exp>;
 };
 
 
@@ -7806,6 +7931,21 @@ export type UpdateUserMutation = (
   )> }
 );
 
+export type LoginQueryVariables = Exact<{
+  egn: Scalars['String'];
+  pin: Scalars['String'];
+  password?: Maybe<Scalars['String']>;
+}>;
+
+
+export type LoginQuery = (
+  { __typename?: 'query_root' }
+  & { getAccessToken?: Maybe<(
+    { __typename?: 'LoginResponse' }
+    & Pick<LoginResponse, 'code' | 'message' | 'userId' | 'accessToken'>
+  )> }
+);
+
 export type UserFieldsFragment = (
   { __typename?: 'users' }
   & Pick<Users, 'id' | 'createdAt' | 'updatedAt' | 'roleId' | 'secondRoleId' | 'name' | 'surname' | 'family' | 'egn' | 'email' | 'pin' | 'password' | 'addressId' | 'voted' | 'eVoted'>
@@ -7981,6 +8121,27 @@ export const UpdateUserDocument = gql`
   })
   export class UpdateUserGQL extends Apollo.Mutation<UpdateUserMutation, UpdateUserMutationVariables> {
     document = UpdateUserDocument;
+    
+    constructor(apollo: Apollo.Apollo) {
+      super(apollo);
+    }
+  }
+export const LoginDocument = gql`
+    query Login($egn: String!, $pin: String!, $password: String) {
+  getAccessToken(args: {egn: $egn, pin: $pin, password: $password}) {
+    code
+    message
+    userId
+    accessToken
+  }
+}
+    `;
+
+  @Injectable({
+    providedIn: 'root'
+  })
+  export class LoginGQL extends Apollo.Query<LoginQuery, LoginQueryVariables> {
+    document = LoginDocument;
     
     constructor(apollo: Apollo.Apollo) {
       super(apollo);

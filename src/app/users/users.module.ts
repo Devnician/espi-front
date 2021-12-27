@@ -17,11 +17,12 @@ import { UsersTableComponent } from './users-table/users-table.component';
   imports: [
     CommonModule,
     UsersRoutingModule,
+
+    ReactiveFormsModule,
     MatTableModule,
     MatPaginatorModule,
     MatSortModule,
     MatButtonModule,
-    ReactiveFormsModule,
     MatSnackBarModule,
     MatProgressBarModule,
     MatCheckboxModule,
