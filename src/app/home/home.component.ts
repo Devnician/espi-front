@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { isNullOrUndefined } from 'is-what';
+import { LoggedUser } from '../auth/logged-user.interface';
 import { AuthService } from '../services/auth-service';
 
 @Component({
@@ -8,9 +11,14 @@ import { AuthService } from '../services/auth-service';
 })
 export class HomeComponent implements OnInit {
   someObject: any;
-  constructor(private authService: AuthService) {}
+  constructor(private router: Router, private authService: AuthService) {}
+  user: LoggedUser;
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    if (isNullOrUndefined(this.user)) {
+      this.router.navigate(['login']);
+    }
+  }
 
   auth(): void {
     this.authService.callExpressLogin().subscribe((response) => {

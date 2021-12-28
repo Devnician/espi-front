@@ -1,0 +1,92 @@
+@use "@angular/material" as mat;
+// Import library functions for theme creation.
+// @import "/src/styles";
+
+.sidenav-container {
+    height: 100%;
+}
+
+.nav-toolbar {
+    justify-content: space-between;
+    align-items: center;
+}
+
+.sidenav {
+    width: 200px;
+}
+
+.sidenav .mat-toolbar {
+    background: inherit;
+}
+
+.mat-toolbar.mat-primary {
+    position: sticky;
+    top: 0;
+    z-index: 1;
+}
+
+.container {
+    padding: 5px;
+}
+
+// @mixin candy-carousel-color($config-or-theme) {
+// Extract the color configuration in case a theme has been passed.
+// This allows consumers to either pass a theme object or a color configuration.
+// $config: mat-get-color-config($config-or-theme);
+// Extract the palettes you need from the theme definition.
+// $primary: map-get($config, primary);
+// $accent: map-get($config, accent);
+
+a.active {
+    // Use mat-color to extract individual colors from a palette.
+    // background-color: mat.get-color-from-palette(mat.$blue-palette, 600);
+    color: mat.get-color-from-palette(mat.$yellow-palette, 800);
+}
+
+.fixed-bottom {
+    width: 100%;
+}
+
+.user-settings {
+    display: flex;
+    align-items: center;
+    mat-icon {
+        padding: 5px;
+    }
+}
+
+.mat-icon.spinnable {
+    animation: spin-animation 0.5s infinite;
+}
+
+@media screen and (min-width: "600px") {
+    .container {
+        padding: 25px;
+    }
+
+    .fixed-bottom {
+        position: absolute;
+        bottom: 10px;
+    }
+}
+
+@media screen and (max-height: "760px") {
+    .fixed-bottom {
+        position: relative;
+    }
+}
+
+@keyframes spin-animation {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(359deg);
+    }
+}
+
+.custom-button {
+    position: fixed;
+    right: 25px;
+    bottom: 15px;
+}

@@ -1,0 +1,119 @@
+<mat-sidenav-container class="sidenav-container">
+  <mat-sidenav
+    #drawer
+    class="sidenav"
+    fixedInViewport
+    [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'"
+    [mode]="(isHandset$ | async) ? 'over' : 'side'"
+    [opened]="(isHandset$ | async) === false"
+  >
+    <mat-toolbar>Меню</mat-toolbar>
+
+    <mat-nav-list>
+      <!-- User menus -->
+      <div *ngFor="let menu of menus">
+        <a
+          mat-list-item
+          routerLink="{{ menu.route }}"
+          routerLinkActive="active"
+        >
+          <div
+            [matBadge]="menu?.badgeSubject | async"
+            matBadgePosition="after"
+            matBadgeOverlap="true"
+            matBadgeColor="accent"
+            [matBadgeHidden]="(menu?.badgeSubject | async) <= 0"
+            style="width: 100%"
+          >
+            <div mat-line>{{ menu.label }}</div>
+          </div>
+          <mat-icon *ngIf="menu.matIcon" color="primary">{{
+            menu.matIcon
+          }}</mat-icon>
+        </a>
+      </div>
+
+      <div class="fixed-bottom">
+        <!-- System menus -->
+        <!-- <div *ngIf="systemMenus.length > 0">
+          <h3 matSubheader style="margin-top: 50px">Системни</h3>
+
+          <div *ngFor="let menu of systemMenus">
+            <a
+              mat-list-item
+              routerLink="{{ menu.route }}"
+              routerLinkActive="active"
+            >
+              <div mat-line>{{ menu.label }}</div>
+              <mat-icon mat-list-icon *ngIf="menu.matIcon" color="primary">{{
+                menu.matIcon
+              }}</mat-icon>
+            </a>
+          </div>
+        </div>
+        <a mat-list-item (click)="logout(true)">
+          <div mat-line>Изход</div>
+          <mat-icon
+            mat-list-icon
+            aria-hidden="false"
+            aria-label="Exit icon"
+            color="primary"
+            >exit_to_app</mat-icon
+          >
+        </a> -->
+      </div>
+    </mat-nav-list>
+  </mat-sidenav>
+
+  <mat-sidenav-content>
+    <mat-toolbar color="primary" class="nav-toolbar">
+      <button
+        type="button"
+        aria-label="Toggle sidenav"
+        mat-icon-button
+        (click)="drawer.toggle()"
+        *ngIf="isHandset$ | async"
+      >
+        <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
+      </button>
+      <!-- <span id="title" *ngIf="(isHandset$ | async) === false">{{
+        companyName$ | async
+      }}</span>
+      <div class="user-settings">
+        <h5 style="font-size: 14px">
+          <span *ngIf="(isHandset$ | async) === false">Здравей, </span>
+          <span>{{ user$ | async }}</span>
+        </h5>
+        <button mat-button [matMenuTriggerFor]="menu">
+          <mat-icon
+            [ngClass]="{ spinnable: (spinIcon$ | async) }"
+            [color]="(spinIcon$ | async) ? 'accent' : ''"
+            >settings</mat-icon
+          >
+        </button>
+        <mat-menu #menu="matMenu">
+          <button mat-menu-item (click)="onChangePassword()">
+            Смяна на парола
+          </button>
+        </mat-menu>
+      </div> -->
+    </mat-toolbar>
+
+    <!-- Add Content Here -->
+    <div class="container">
+      <!-- <app-breadcrumbs></app-breadcrumbs> -->
+      <router-outlet></router-outlet>
+
+      <!-- <div>
+          <button
+            class="custom-button"
+            mat-mini-fab
+            color="primary"
+            (click)="onQuestionClicked()"
+          >
+            <mat-icon>question_mark</mat-icon>
+          </button>
+        </div> -->
+    </div>
+  </mat-sidenav-content>
+</mat-sidenav-container>
