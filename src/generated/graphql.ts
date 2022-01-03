@@ -52,6 +52,18 @@ export type LoginResponse = {
   userId: Scalars['Int'];
 };
 
+export type RegisterOutput = {
+  __typename?: 'RegisterOutput';
+  accessToken: Scalars['String'];
+};
+
+export type RegisterUserInsertInput = {
+  egn: Scalars['String'];
+  email: Scalars['String'];
+  password: Scalars['String'];
+  pin: Scalars['String'];
+};
+
 /** Boolean expression to compare columns of type "String". All fields are combined with logical 'AND'. */
 export type String_Comparison_Exp = {
   _eq?: Maybe<Scalars['String']>;
@@ -1811,6 +1823,7 @@ export type Login_Args = {
 /** mutation root */
 export type Mutation_Root = {
   __typename?: 'mutation_root';
+  RegisterUser?: Maybe<RegisterOutput>;
   /** delete data from the table: "addresses" */
   delete_addresses?: Maybe<Addresses_Mutation_Response>;
   /** delete single row from the table: "addresses" */
@@ -2063,6 +2076,12 @@ export type Mutation_Root = {
   update_votings?: Maybe<Votings_Mutation_Response>;
   /** update single row of the table: "votings" */
   update_votings_by_pk?: Maybe<Votings>;
+};
+
+
+/** mutation root */
+export type Mutation_RootRegisterUserArgs = {
+  arg1: RegisterUserInsertInput;
 };
 
 
@@ -7826,6 +7845,19 @@ export type Votings_Variance_Fields = {
   id?: Maybe<Scalars['Float']>;
 };
 
+export type RegisterMutationVariables = Exact<{
+  args: RegisterUserInsertInput;
+}>;
+
+
+export type RegisterMutation = (
+  { __typename?: 'mutation_root' }
+  & { RegisterUser?: Maybe<(
+    { __typename?: 'RegisterOutput' }
+    & Pick<RegisterOutput, 'accessToken'>
+  )> }
+);
+
 export type GetElectoralRollQueryVariables = Exact<{
   sectionId: Scalars['Int'];
 }>;
@@ -7989,6 +8021,24 @@ export const UserFieldsFragmentDoc = gql`
   }
 }
     `;
+export const RegisterDocument = gql`
+    mutation Register($args: RegisterUserInsertInput!) {
+  RegisterUser(arg1: $args) {
+    accessToken
+  }
+}
+    `;
+
+  @Injectable({
+    providedIn: 'root'
+  })
+  export class RegisterGQL extends Apollo.Mutation<RegisterMutation, RegisterMutationVariables> {
+    document = RegisterDocument;
+    
+    constructor(apollo: Apollo.Apollo) {
+      super(apollo);
+    }
+  }
 export const GetElectoralRollDocument = gql`
     query GetElectoralRoll($sectionId: Int!) {
   electoral_rolls_by_pk(id: $sectionId) {

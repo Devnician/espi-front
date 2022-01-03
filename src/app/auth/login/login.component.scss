@@ -1,8 +1,12 @@
-.full-width {
-  width: 100%;
-}
-
+@use "@angular/material" as mat;
 .mat-card {
   max-width: 450px;
   margin: auto;
+}
+
+.espi-form-field {
+  margin: 5px 0;
+  width: 100%;
+  border-radius: 4px;
+  border: 0.5px solid mat.get-color-from-palette(mat.$gray-palette, 200);
 }

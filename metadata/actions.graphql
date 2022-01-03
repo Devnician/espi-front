@@ -1,3 +1,9 @@
+type Mutation {
+  RegisterUser(
+    arg1: RegisterUserInsertInput!
+  ): RegisterOutput
+}
+
 type Query {
   getAccessToken(
     args: UsersInput!
@@ -10,10 +16,21 @@ input UsersInput {
   password: String
 }
 
+input RegisterUserInsertInput {
+  egn: String!
+  pin: String!
+  email: String!
+  password: String!
+}
+
 type LoginResponse {
   message: String
   code: String
   userId: Int
+  accessToken: String!
+}
+
+type RegisterOutput {
   accessToken: String!
 }
 

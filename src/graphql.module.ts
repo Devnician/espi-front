@@ -37,14 +37,10 @@ export function createApollo(httpLink: HttpLink): any {
 
         Query: {
           fields: {
-            orders: {
+            users: {
               keyArgs: false,
               merge: false,
             },
-            // partners: {
-            //   merge: false,
-            //   keyArgs: false,
-            // },
             // users: {
             //   merge: false,
             // },

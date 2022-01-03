@@ -4,6 +4,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 import { MatDialogModule, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { MatDividerModule } from '@angular/material/divider';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
@@ -33,6 +34,8 @@ import { AuthComponent } from './auth.component';
     MatSelectModule,
     MatToolbarModule,
     MatRadioModule,
+    MatProgressBarModule,
+    MatDividerModule,
     MatProgressBarModule,
   ],
   providers: [{ provide: MAT_DIALOG_DATA, useValue: {} }],

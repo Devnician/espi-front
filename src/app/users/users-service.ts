@@ -85,7 +85,7 @@ export class UsersService {
     pin: string,
     password: string
   ): Observable<ApolloQueryResult<LoginQuery>> {
-    console.log('Oppaa');
+    console.log('Oppaa', egn, pin, password);
     return this.loginGQL.fetch({
       egn,
       pin,
