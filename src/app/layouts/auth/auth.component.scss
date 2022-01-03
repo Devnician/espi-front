@@ -1,0 +1,41 @@
+@use "@angular/material" as mat;
+@import "@angular/material/theming";
+@import "/src/styles";
+
+@include mat.core();
+
+// $primary: mat.define-palette(mat.$indigo-palette);
+// $accent: mat.define-palette(mat.$pink-palette, A200, A100, A400);
+
+.container {
+    // background: mat.get-color-from-palette($frontend-accent);
+    min-height: 100vh;
+    z-index: -1;
+}
+
+.content {
+    margin: 0 auto;
+    position: inherit;
+    width: 95%;
+    padding-bottom: 25px;
+    padding-top: 25px;
+}
+
+.nav-bar {
+    position: sticky;
+    position: -webkit-sticky; /* For macOS/iOS Safari */
+    top: 0; /* Sets the sticky toolbar to be on top */
+    z-index: 1000; /* Ensure that your app's content doesn't overlap the toolbar */
+    @include mat.elevation(4);
+    h1 {
+        margin: auto;
+    }
+}
+
+@media screen and(min-width: 1024px) {
+    .content {
+        position: relative;
+        max-width: 50%;
+        top: 75px;
+    }
+}

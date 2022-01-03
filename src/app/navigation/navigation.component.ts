@@ -113,5 +113,11 @@ export class NavigationComponent extends VixenComponent implements OnInit {
       matIcon: 'how_to_vote',
       badgeSubject: undefined,
     });
+    this.menus.push({
+      route: 'votings',
+      label: 'Изброри',
+      matIcon: 'front_hand',
+      badgeSubject: undefined,
+    });
   }
 }

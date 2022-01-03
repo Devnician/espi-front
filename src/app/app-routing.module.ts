@@ -1,57 +1,47 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { LoginComponent } from './auth/login/login.component';
-import { NavigationComponent } from './navigation/navigation.component';
+import { RegisterComponent } from './auth/register/register.component';
+import { AuthComponent } from './layouts/auth/auth.component';
+import { DefaultComponent } from './layouts/default/default.component';
+import { LoginGuard } from './quards/login.quard';
 
 const routes: Routes = [
+  // { path: '', redirectTo: 'votings', pathMatch: 'full' },
   {
-    // path: '',
-    // component: HomeComponent,
     path: '',
-    component: NavigationComponent,
-    // canActivate: [ChildGuard],
-    data: { breadcrumb: 'начало' },
+    component: DefaultComponent,
+    data: { breadcrumb: 'home' },
+  },
+  {
+    path: 'auth',
+    component: AuthComponent,
     children: [
       {
-        path: 'users',
-        loadChildren: () =>
-          import('src/app/users/users.module').then((m) => m.UsersModule),
-
-        data: {
-          title: 'Потребители',
-          breadcrumb: 'потребители',
-        },
+        path: 'login',
+        component: LoginComponent,
+        canActivate: [LoginGuard],
       },
       {
-        path: 'settlements',
-        loadChildren: () =>
-          import('src/app/settlements/settlements.module').then(
-            (m) => m.SettlementsModule
-          ),
-
-        data: {
-          title: 'Населени места',
-          breadcrumb: 'населени места',
-        },
+        path: 'register',
+        children: [
+          { path: '', component: RegisterComponent },
+          //     {
+          //       path: 'success',
+          //       component: RegistrationSuccessComponent,
+          //       canActivate: [PostRegistrationGuard],
+          //     },
+          //     {
+          //       path: 'fail',
+          //       component: RegistrationFailComponent,
+          //       canActivate: [PostRegistrationGuard],
+          //     },
+        ],
+        canActivate: [LoginGuard],
       },
-      {
-        path: 'voting-sections',
-        loadChildren: () =>
-          import('src/app/voting-sections/voting-sections.module').then(
-            (m) => m.VotingSectionsModule
-          ),
-
-        data: {
-          title: 'Избирателни секции',
-          breadcrumb: 'избирателни секции',
-        },
-      },
+      // { path: 'auth/reset-password', component: HandleResetPasswordComponent },
+      // { path: 'auth/confirm-email', component: ConfirmEmailComponent },
     ],
-  },
-
-  {
-    path: 'login',
-    component: LoginComponent,
   },
 ];
 

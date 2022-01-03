@@ -1,12 +1,14 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root',
 })
 export class AuthService {
+  private token: BehaviorSubject<string> = new BehaviorSubject(null);
+  public readonly token$ = this.token.asObservable();
   host: string = environment.expressUrl;
   constructor(
     private http: HttpClient /*private actionCallGQL: ActionCallGQL*/
