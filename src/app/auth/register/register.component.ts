@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { BehaviorSubject } from 'rxjs';
 import { Valido } from 'src/app/core/valido';
 import { VixenComponent } from 'src/app/core/vixen/vixen.component';
@@ -22,7 +23,8 @@ export class RegisterComponent extends VixenComponent implements OnInit {
   constructor(
     private fb: FormBuilder,
     public valido: Valido,
-    private auth: AuthService
+    private auth: AuthService,
+    private router: Router
   ) {
     super(valido);
   }
@@ -65,18 +67,19 @@ export class RegisterComponent extends VixenComponent implements OnInit {
     this.form.disable();
     this.loading.next(true);
     this.submitted.next(true);
-    this.auth.registerUserAndGetAccessToken(formData).subscribe((response) => {
+    this.auth.actionRegister(formData).subscribe((response) => {
       console.log(response);
       if (response.data) {
         this.loading.next(false);
-        const token = response.data.RegisterUser.accessToken;
-        console.log(token);
-        this.auth.setToken(token);
-        console.log(' redirect ');
+        const found = response.data.RegisterAction.found;
+        console.log(found);
+        if (found) {
+          console.log(' redirect ');
+          this.router.navigateByUrl('auth/register/success');
+        } else {
+          this.router.navigateByUrl('auth/register/fail');
+        }
       }
     });
-
-    // console.log('register');
-    // console.log(formData);
   }
 }

@@ -1,5 +1,6 @@
 import { DataSource } from '@angular/cdk/collections';
 import { MatPaginator } from '@angular/material/paginator';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatSort } from '@angular/material/sort';
 import { QueryRef } from 'apollo-angular';
 import { BehaviorSubject, merge, Observable } from 'rxjs';
@@ -29,7 +30,10 @@ export class OrdersTableDataSource extends DataSource<Users> {
 
   currentPageData: BehaviorSubject<Users[]> = new BehaviorSubject([]);
 
-  constructor(private usersService: UsersService) {
+  constructor(
+    private usersService: UsersService,
+    private snackBar: MatSnackBar
+  ) {
     super();
   }
 
@@ -89,9 +93,18 @@ export class OrdersTableDataSource extends DataSource<Users> {
       map(({ data, loading, errors }) => {
         this.loading.next(loading);
         if (errors) {
-          const error = errors[0].message;
+          console.log(data);
+          const errorMessage = errors[0].message;
+          console.log(errorMessage);
+          if (errorMessage.includes('query_root')) {
+            this.snackBar.open(
+              'Нямате необходимите права за достъп до тези данни!',
+              'OK',
+              { duration: 2000 }
+            );
+          }
           // this.snackBar.open(error, 'OK', { duration: 2000 });
-          throw Error(error);
+          throw Error(errorMessage);
         }
         this.counter.next(data.users_aggregate.aggregate.count);
         this.currentPageData.next(data.users as Users[]);

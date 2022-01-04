@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { ApolloQueryResult, FetchResult } from '@apollo/client';
+import { FetchResult } from '@apollo/client';
 import { QueryRef } from 'apollo-angular';
 import { Observable } from 'rxjs';
 import {
@@ -7,8 +7,8 @@ import {
   CreateUserMutation,
   GetUsersGQL,
   GetUsersQuery,
-  LoginGQL,
-  LoginQuery,
+  // LoginGQL,
+  // LoginQuery,
   UpdateUserGQL,
   Users_Bool_Exp,
   Users_Order_By,
@@ -21,8 +21,7 @@ export class UsersService {
   constructor(
     private createUserGQL: CreateUserGQL,
     private updateUserGQL: UpdateUserGQL,
-    private getUsersGQL: GetUsersGQL,
-    private loginGQL: LoginGQL
+    private getUsersGQL: GetUsersGQL // private loginGQL: LoginGQL
   ) {}
   getUsers(
     limit = 10,
@@ -47,7 +46,8 @@ export class UsersService {
     FetchResult<CreateUserMutation, Record<string, any>, Record<string, any>>
   > {
     return this.createUserGQL.mutate(
-      { input }
+      { input },
+      { errorPolicy: 'all' }
       // {
       //   update: (cache, { data }) => {
       //     const existingOrders: any = cache.readQuery({
@@ -80,16 +80,16 @@ export class UsersService {
   
    * @returns
    */
-  login(
-    egn: string,
-    pin: string,
-    password: string
-  ): Observable<ApolloQueryResult<LoginQuery>> {
-    console.log('Oppaa', egn, pin, password);
-    return this.loginGQL.fetch({
-      egn,
-      pin,
-      password,
-    });
-  }
+  // login(
+  //   egn: string,
+  //   pin: string,
+  //   password: string
+  // ): Observable<ApolloQueryResult<LoginQuery>> {
+  //   console.log('Oppaa', egn, pin, password);
+  //   return this.loginGQL.fetch({
+  //     egn,
+  //     pin,
+  //     password,
+  //   });
+  // }
 }

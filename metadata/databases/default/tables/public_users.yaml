@@ -5,9 +5,9 @@ object_relationships:
 - name: address
   using:
     foreign_key_constraint_on: addressId
-- name: role
+- name: roleType
   using:
-    foreign_key_constraint_on: roleId
-- name: secondRole
+    foreign_key_constraint_on: role
+- name: secondRoleType
   using:
-    foreign_key_constraint_on: secondRoleId
+    foreign_key_constraint_on: secondRole

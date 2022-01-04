@@ -1,0 +1,20 @@
+<mat-card>
+  <div class="header">
+    <mat-card-title>Възникна грешка при регистрацията</mat-card-title>
+  </div>
+
+  <mat-card-content>
+    <div class="image">
+      <img mat-card-image src="/assets/images/error.png" />
+    </div>
+    <!-- <h3>Грешка!</h3> -->
+    <p>Потребител с такива удостоверения не беше открит.</p>
+    <p>Моля, проверете вашите данни и опитайте отново.</p>
+  </mat-card-content>
+  <mat-card-footer>Извиняваме се за причиненото неудобство!</mat-card-footer>
+  <mat-card-actions>
+    <a routerLink="/auth/register" mat-raised-button color="primary"
+      >Опитай пак</a
+    >
+  </mat-card-actions>
+</mat-card>

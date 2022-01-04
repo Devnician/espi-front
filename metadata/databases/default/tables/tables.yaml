@@ -11,7 +11,7 @@
 - "!include public_referendum_questions.yaml"
 - "!include public_referendum_votes.yaml"
 - "!include public_referendums.yaml"
-- "!include public_roles.yaml"
+- "!include public_role_types.yaml"
 - "!include public_settlements.yaml"
 - "!include public_users.yaml"
 - "!include public_votes.yaml"

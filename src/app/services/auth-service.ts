@@ -1,11 +1,14 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { FetchResult } from '@apollo/client';
+import { ApolloQueryResult, FetchResult } from '@apollo/client';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import {
+  LoginActionGQL,
+  LoginActionQuery,
+  LoginInput,
   RegisterGQL,
-  RegisterMutation,
+  RegisterQuery,
   RegisterUserInsertInput,
 } from 'src/generated/graphql';
 
@@ -13,21 +16,44 @@ import {
   providedIn: 'root',
 })
 export class AuthService {
+  static readonly ACC_TOKEN = 'access_token';
+  static readonly FETCH_TOKEN = 'fetch-token';
+
   private token: BehaviorSubject<string> = new BehaviorSubject(null);
   public readonly token$ = this.token.asObservable();
+
   host: string = environment.expressUrl;
 
   constructor(
     private http: HttpClient,
-    private registerGQL: RegisterGQL /*private actionCallGQL: ActionCallGQL*/
-  ) {}
+    private registerGQL: RegisterGQL,
+    private loginActionGQL: LoginActionGQL /*private actionCallGQL: ActionCallGQL*/
+  ) {
+    if (environment.production === false) {
+      const token = localStorage.getItem('token');
+      console.log(token);
+      this.token.next(token);
+    }
+  }
 
-  registerUserAndGetAccessToken(
+  actionRegister(
     data: RegisterUserInsertInput
   ): Observable<
-    FetchResult<RegisterMutation, Record<string, any>, Record<string, any>>
+    FetchResult<RegisterQuery, Record<string, any>, Record<string, any>>
   > {
-    return this.registerGQL.mutate({ args: data });
+    return this.registerGQL.fetch(
+      { args: data },
+      { fetchPolicy: 'network-only' }
+    );
+  }
+
+  loginAction(
+    data: LoginInput
+  ): Observable<ApolloQueryResult<LoginActionQuery>> {
+    return this.loginActionGQL.fetch(
+      { args: data },
+      { fetchPolicy: 'network-only' }
+    );
   }
 
   // This method calls  directly Express

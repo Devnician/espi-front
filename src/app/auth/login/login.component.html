@@ -4,14 +4,22 @@
   </mat-card-header>
   <form [formGroup]="loginForm" (ngSubmit)="loginUser()">
     <mat-card-content>
+      <!-- egn -->
       <mat-form-field appearance="fill" class="espi-form-field">
-        <mat-label>Имейл адрес</mat-label>
-        <input matInput formControlName="email" type="email" />
+        <mat-label>EGN</mat-label>
+        <input matInput formControlName="egn" type="text" />
 
-        <mat-error *ngIf="loginForm.controls['email'].errors">
-          {{ valido.getErrorMessageFromControl(loginForm.controls["email"]) }}
+        <mat-error *ngIf="loginForm.controls['egn'].errors">
+          {{
+            valido.getErrorMessageFromControl(
+              loginForm.controls["egn"],
+              "ЕГН съдържа 10 цифри"
+            )
+          }}
         </mat-error>
       </mat-form-field>
+
+      <!-- Password -->
       <mat-form-field appearance="fill" class="espi-form-field">
         <mat-label>Парола</mat-label>
         <input

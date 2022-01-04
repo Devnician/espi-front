@@ -7,7 +7,7 @@
       <!-- EGN -->
       <mat-form-field appearance="fill" class="espi-form-field">
         <mat-label>ЕГН</mat-label>
-        <input matInput formControlName="egn" type="egn" />
+        <input matInput formControlName="egn" type="text" />
         <mat-error *ngIf="form.controls['egn'].errors">
           {{
             valido.getErrorMessageFromControl(

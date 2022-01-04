@@ -1,7 +1,13 @@
 actions:
-- name: RegisterUser
+- name: LoginAction
   definition:
-    kind: synchronous
+    kind: ""
+    handler: http://host.docker.internal:9000/auth/login
+  permissions:
+  - role: anonymous
+- name: RegisterAction
+  definition:
+    kind: ""
     handler: http://host.docker.internal:9000/auth/register
   permissions:
   - role: anonymous
@@ -15,7 +21,9 @@ custom_types:
   input_objects:
   - name: UsersInput
   - name: RegisterUserInsertInput
+  - name: LoginInput
   objects:
   - name: LoginResponse
   - name: RegisterOutput
+  - name: LoginOutput
   scalars: []

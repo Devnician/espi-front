@@ -1,12 +1,18 @@
 import { AfterViewInit, Component, ViewChild } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatSort } from '@angular/material/sort';
 import { MatTable } from '@angular/material/table';
 import * as _ from 'lodash';
 import { BehaviorSubject } from 'rxjs';
 import { rowsAnimation } from 'src/app/animations/template.animations';
 import { SettlementsService } from 'src/app/settlements/settlements-service.service';
-import { GetDistrictsQuery, GetUsersQuery, Users } from 'src/generated/graphql';
+import {
+  GetDistrictsQuery,
+  GetUsersQuery,
+  Role_Types_Enum,
+  Users,
+} from 'src/generated/graphql';
 import { UsersService } from '../users-service';
 import { OrdersTableDataSource } from './users-table-datasource';
 
@@ -33,6 +39,7 @@ export class UsersTableComponent implements AfterViewInit {
     'name',
     'surname',
     'family',
+    'roles',
     'email',
     'voted',
     'eVoted',
@@ -40,9 +47,10 @@ export class UsersTableComponent implements AfterViewInit {
 
   constructor(
     private usersService: UsersService,
-    private settlementsService: SettlementsService
+    private settlementsService: SettlementsService,
+    private snackBar: MatSnackBar
   ) {
-    this.dataSource = new OrdersTableDataSource(usersService);
+    this.dataSource = new OrdersTableDataSource(usersService, snackBar);
     this.dataSource.loading.next(true);
   }
 
@@ -59,18 +67,18 @@ export class UsersTableComponent implements AfterViewInit {
       name: 'Кирил',
       surname: 'Иванов',
       family: 'Иванов',
-      egn: '8080808082',
+      egn: '8080808083',
       email: 'alabala@bala.ala',
-      roleId: 2,
+      role: Role_Types_Enum.User,
       address: {
         data: {
           number: 10,
           street: 'Borisova',
           settlementId: 3382, // TODO
-          districtId: 3412, // TODO
         },
       },
     };
+
     this.usersService.createUser(user).subscribe((response) => {
       if (response && response.data) {
         const createdUser: Users = response.data.insert_users_one as Users;
@@ -78,6 +86,10 @@ export class UsersTableComponent implements AfterViewInit {
         this.dataSource.queryRef.refetch({});
       } else {
         console.log(response);
+        this.dataSource.loading.next(false);
+        if (response.errors[0].message.toString().includes('Uniqueness')) {
+          this.snackBar.open('Вече съществува потребител с това ЕГН', 'OK', {});
+        }
       }
     });
   }
@@ -94,6 +106,8 @@ export class UsersTableComponent implements AfterViewInit {
       delete firstFromPage.address;
       delete firstFromPage.createdAt;
       delete firstFromPage.updatedAt;
+      delete firstFromPage.roleType;
+      delete firstFromPage.secondRoleType;
       delete firstFromPage.__typename;
 
       //       addressId: 2
@@ -137,10 +151,12 @@ export class UsersTableComponent implements AfterViewInit {
   }
 
   public testLogin() {
-    //variables: { egn: '8080808080', password: 'pepe' },
-    console.log('LOGIN ATEMPT');
-    this.usersService.login('8080808080', '', 'pepe').subscribe((response) => {
-      console.log(response);
-    });
+    alert('remove this');
+    console.log('remove this..');
+    //   //variables: { egn: '8080808080', password: 'pepe' },
+    //   console.log('LOGIN ATEMPT');
+    //   this.usersService.login('8080808080', '', 'pepe').subscribe((response) => {
+    //     console.log(response);
+    //   });
   }
 }

@@ -79,6 +79,16 @@
       <th mat-header-cell *matHeaderCellDef mat-sort-header>фамилия</th>
       <td mat-cell *matCellDef="let row">{{ row.family }}</td>
     </ng-container>
+    <!-- roles Column -->
+    <ng-container matColumnDef="roles">
+      <th mat-header-cell *matHeaderCellDef>роли</th>
+      <td mat-cell *matCellDef="let row">
+        <div>
+          <div>1: {{ row.roleType.description }}</div>
+          <div>2: {{ row.secondRoleType?.description }}</div>
+        </div>
+      </td>
+    </ng-container>
     <!-- email Column -->
     <ng-container matColumnDef="email">
       <th mat-header-cell *matHeaderCellDef mat-sort-header>ел. поща</th>

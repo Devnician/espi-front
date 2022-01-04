@@ -40,5 +40,6 @@ services:
       HASURA_GRAPHQL_ADMIN_SECRET: myadminsecretkey
       TZ: Europe/Sofia
       # BACKEND_URL: http://backend:9000
+      HASURA_GRAPHQL_UNAUTHORIZED_ROLE: anonymous
 volumes:
   db_data:

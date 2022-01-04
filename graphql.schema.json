@@ -301,6 +301,102 @@
         "possibleTypes": null
       },
       {
+        "kind": "INPUT_OBJECT",
+        "name": "LoginInput",
+        "description": null,
+        "fields": null,
+        "inputFields": [
+          {
+            "name": "egn",
+            "description": null,
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "String",
+                "ofType": null
+              }
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "password",
+            "description": null,
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "String",
+                "ofType": null
+              }
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          }
+        ],
+        "interfaces": null,
+        "enumValues": null,
+        "possibleTypes": null
+      },
+      {
+        "kind": "SCALAR",
+        "name": "String",
+        "description": "The `String` scalar type represents textual data, represented as UTF-8 character sequences. The String type is most often used by GraphQL to represent free-form human-readable text.",
+        "fields": null,
+        "inputFields": null,
+        "interfaces": null,
+        "enumValues": null,
+        "possibleTypes": null
+      },
+      {
+        "kind": "OBJECT",
+        "name": "LoginOutput",
+        "description": null,
+        "fields": [
+          {
+            "name": "accessToken",
+            "description": null,
+            "args": [],
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "String",
+                "ofType": null
+              }
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "fetchToken",
+            "description": null,
+            "args": [],
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "String",
+                "ofType": null
+              }
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          }
+        ],
+        "inputFields": null,
+        "interfaces": [],
+        "enumValues": null,
+        "possibleTypes": null
+      },
+      {
         "kind": "OBJECT",
         "name": "LoginResponse",
         "description": null,
@@ -376,22 +472,12 @@
         "possibleTypes": null
       },
       {
-        "kind": "SCALAR",
-        "name": "String",
-        "description": "The `String` scalar type represents textual data, represented as UTF-8 character sequences. The String type is most often used by GraphQL to represent free-form human-readable text.",
-        "fields": null,
-        "inputFields": null,
-        "interfaces": null,
-        "enumValues": null,
-        "possibleTypes": null
-      },
-      {
         "kind": "OBJECT",
         "name": "RegisterOutput",
         "description": null,
         "fields": [
           {
-            "name": "accessToken",
+            "name": "found",
             "description": null,
             "args": [],
             "type": {
@@ -399,7 +485,7 @@
               "name": null,
               "ofType": {
                 "kind": "SCALAR",
-                "name": "String",
+                "name": "Boolean",
                 "ofType": null
               }
             },
@@ -12016,35 +12102,6 @@
         "description": "mutation root",
         "fields": [
           {
-            "name": "RegisterUser",
-            "description": null,
-            "args": [
-              {
-                "name": "arg1",
-                "description": null,
-                "type": {
-                  "kind": "NON_NULL",
-                  "name": null,
-                  "ofType": {
-                    "kind": "INPUT_OBJECT",
-                    "name": "RegisterUserInsertInput",
-                    "ofType": null
-                  }
-                },
-                "defaultValue": null,
-                "isDeprecated": false,
-                "deprecationReason": null
-              }
-            ],
-            "type": {
-              "kind": "OBJECT",
-              "name": "RegisterOutput",
-              "ofType": null
-            },
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
             "name": "delete_addresses",
             "description": "delete data from the table: \"addresses\"",
             "args": [
@@ -12799,8 +12856,8 @@
             "deprecationReason": null
           },
           {
-            "name": "delete_roles",
-            "description": "delete data from the table: \"roles\"",
+            "name": "delete_role_types",
+            "description": "delete data from the table: \"role_types\"",
             "args": [
               {
                 "name": "where",
@@ -12810,7 +12867,7 @@
                   "name": null,
                   "ofType": {
                     "kind": "INPUT_OBJECT",
-                    "name": "roles_bool_exp",
+                    "name": "role_types_bool_exp",
                     "ofType": null
                   }
                 },
@@ -12821,25 +12878,25 @@
             ],
             "type": {
               "kind": "OBJECT",
-              "name": "roles_mutation_response",
+              "name": "role_types_mutation_response",
               "ofType": null
             },
             "isDeprecated": false,
             "deprecationReason": null
           },
           {
-            "name": "delete_roles_by_pk",
-            "description": "delete single row from the table: \"roles\"",
+            "name": "delete_role_types_by_pk",
+            "description": "delete single row from the table: \"role_types\"",
             "args": [
               {
-                "name": "id",
+                "name": "value",
                 "description": null,
                 "type": {
                   "kind": "NON_NULL",
                   "name": null,
                   "ofType": {
                     "kind": "SCALAR",
-                    "name": "Int",
+                    "name": "String",
                     "ofType": null
                   }
                 },
@@ -12850,7 +12907,7 @@
             ],
             "type": {
               "kind": "OBJECT",
-              "name": "roles",
+              "name": "role_types",
               "ofType": null
             },
             "isDeprecated": false,
@@ -14433,8 +14490,8 @@
             "deprecationReason": null
           },
           {
-            "name": "insert_roles",
-            "description": "insert data into the table: \"roles\"",
+            "name": "insert_role_types",
+            "description": "insert data into the table: \"role_types\"",
             "args": [
               {
                 "name": "objects",
@@ -14450,7 +14507,7 @@
                       "name": null,
                       "ofType": {
                         "kind": "INPUT_OBJECT",
-                        "name": "roles_insert_input",
+                        "name": "role_types_insert_input",
                         "ofType": null
                       }
                     }
@@ -14465,7 +14522,7 @@
                 "description": "on conflict condition",
                 "type": {
                   "kind": "INPUT_OBJECT",
-                  "name": "roles_on_conflict",
+                  "name": "role_types_on_conflict",
                   "ofType": null
                 },
                 "defaultValue": null,
@@ -14475,15 +14532,15 @@
             ],
             "type": {
               "kind": "OBJECT",
-              "name": "roles_mutation_response",
+              "name": "role_types_mutation_response",
               "ofType": null
             },
             "isDeprecated": false,
             "deprecationReason": null
           },
           {
-            "name": "insert_roles_one",
-            "description": "insert a single row into the table: \"roles\"",
+            "name": "insert_role_types_one",
+            "description": "insert a single row into the table: \"role_types\"",
             "args": [
               {
                 "name": "object",
@@ -14493,7 +14550,7 @@
                   "name": null,
                   "ofType": {
                     "kind": "INPUT_OBJECT",
-                    "name": "roles_insert_input",
+                    "name": "role_types_insert_input",
                     "ofType": null
                   }
                 },
@@ -14506,7 +14563,7 @@
                 "description": "on conflict condition",
                 "type": {
                   "kind": "INPUT_OBJECT",
-                  "name": "roles_on_conflict",
+                  "name": "role_types_on_conflict",
                   "ofType": null
                 },
                 "defaultValue": null,
@@ -14516,7 +14573,7 @@
             ],
             "type": {
               "kind": "OBJECT",
-              "name": "roles",
+              "name": "role_types",
               "ofType": null
             },
             "isDeprecated": false,
@@ -16507,27 +16564,15 @@
             "deprecationReason": null
           },
           {
-            "name": "update_roles",
-            "description": "update data of the table: \"roles\"",
+            "name": "update_role_types",
+            "description": "update data of the table: \"role_types\"",
             "args": [
-              {
-                "name": "_inc",
-                "description": "increments the numeric columns with given value of the filtered values",
-                "type": {
-                  "kind": "INPUT_OBJECT",
-                  "name": "roles_inc_input",
-                  "ofType": null
-                },
-                "defaultValue": null,
-                "isDeprecated": false,
-                "deprecationReason": null
-              },
               {
                 "name": "_set",
                 "description": "sets the columns of the filtered rows to the given values",
                 "type": {
                   "kind": "INPUT_OBJECT",
-                  "name": "roles_set_input",
+                  "name": "role_types_set_input",
                   "ofType": null
                 },
                 "defaultValue": null,
@@ -16542,7 +16587,7 @@
                   "name": null,
                   "ofType": {
                     "kind": "INPUT_OBJECT",
-                    "name": "roles_bool_exp",
+                    "name": "role_types_bool_exp",
                     "ofType": null
                   }
                 },
@@ -16553,34 +16598,22 @@
             ],
             "type": {
               "kind": "OBJECT",
-              "name": "roles_mutation_response",
+              "name": "role_types_mutation_response",
               "ofType": null
             },
             "isDeprecated": false,
             "deprecationReason": null
           },
           {
-            "name": "update_roles_by_pk",
-            "description": "update single row of the table: \"roles\"",
+            "name": "update_role_types_by_pk",
+            "description": "update single row of the table: \"role_types\"",
             "args": [
-              {
-                "name": "_inc",
-                "description": "increments the numeric columns with given value of the filtered values",
-                "type": {
-                  "kind": "INPUT_OBJECT",
-                  "name": "roles_inc_input",
-                  "ofType": null
-                },
-                "defaultValue": null,
-                "isDeprecated": false,
-                "deprecationReason": null
-              },
               {
                 "name": "_set",
                 "description": "sets the columns of the filtered rows to the given values",
                 "type": {
                   "kind": "INPUT_OBJECT",
-                  "name": "roles_set_input",
+                  "name": "role_types_set_input",
                   "ofType": null
                 },
                 "defaultValue": null,
@@ -16595,7 +16628,7 @@
                   "name": null,
                   "ofType": {
                     "kind": "INPUT_OBJECT",
-                    "name": "roles_pk_columns_input",
+                    "name": "role_types_pk_columns_input",
                     "ofType": null
                   }
                 },
@@ -16606,7 +16639,7 @@
             ],
             "type": {
               "kind": "OBJECT",
-              "name": "roles",
+              "name": "role_types",
               "ofType": null
             },
             "isDeprecated": false,
@@ -21011,6 +21044,64 @@
         "description": null,
         "fields": [
           {
+            "name": "LoginAction",
+            "description": null,
+            "args": [
+              {
+                "name": "args",
+                "description": null,
+                "type": {
+                  "kind": "NON_NULL",
+                  "name": null,
+                  "ofType": {
+                    "kind": "INPUT_OBJECT",
+                    "name": "LoginInput",
+                    "ofType": null
+                  }
+                },
+                "defaultValue": null,
+                "isDeprecated": false,
+                "deprecationReason": null
+              }
+            ],
+            "type": {
+              "kind": "OBJECT",
+              "name": "LoginOutput",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "RegisterAction",
+            "description": null,
+            "args": [
+              {
+                "name": "arg1",
+                "description": null,
+                "type": {
+                  "kind": "NON_NULL",
+                  "name": null,
+                  "ofType": {
+                    "kind": "INPUT_OBJECT",
+                    "name": "RegisterUserInsertInput",
+                    "ofType": null
+                  }
+                },
+                "defaultValue": null,
+                "isDeprecated": false,
+                "deprecationReason": null
+              }
+            ],
+            "type": {
+              "kind": "OBJECT",
+              "name": "RegisterOutput",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
             "name": "addresses",
             "description": "fetch data from the table: \"addresses\"",
             "args": [
@@ -24165,8 +24256,8 @@
             "deprecationReason": null
           },
           {
-            "name": "roles",
-            "description": "fetch data from the table: \"roles\"",
+            "name": "role_types",
+            "description": "fetch data from the table: \"role_types\"",
             "args": [
               {
                 "name": "distinct_on",
@@ -24179,7 +24270,7 @@
                     "name": null,
                     "ofType": {
                       "kind": "ENUM",
-                      "name": "roles_select_column",
+                      "name": "role_types_select_column",
                       "ofType": null
                     }
                   }
@@ -24223,7 +24314,7 @@
                     "name": null,
                     "ofType": {
                       "kind": "INPUT_OBJECT",
-                      "name": "roles_order_by",
+                      "name": "role_types_order_by",
                       "ofType": null
                     }
                   }
@@ -24237,7 +24328,7 @@
                 "description": "filter the rows returned",
                 "type": {
                   "kind": "INPUT_OBJECT",
-                  "name": "roles_bool_exp",
+                  "name": "role_types_bool_exp",
                   "ofType": null
                 },
                 "defaultValue": null,
@@ -24256,7 +24347,7 @@
                   "name": null,
                   "ofType": {
                     "kind": "OBJECT",
-                    "name": "roles",
+                    "name": "role_types",
                     "ofType": null
                   }
                 }
@@ -24266,8 +24357,8 @@
             "deprecationReason": null
           },
           {
-            "name": "roles_aggregate",
-            "description": "fetch aggregated fields from the table: \"roles\"",
+            "name": "role_types_aggregate",
+            "description": "fetch aggregated fields from the table: \"role_types\"",
             "args": [
               {
                 "name": "distinct_on",
@@ -24280,7 +24371,7 @@
                     "name": null,
                     "ofType": {
                       "kind": "ENUM",
-                      "name": "roles_select_column",
+                      "name": "role_types_select_column",
                       "ofType": null
                     }
                   }
@@ -24324,7 +24415,7 @@
                     "name": null,
                     "ofType": {
                       "kind": "INPUT_OBJECT",
-                      "name": "roles_order_by",
+                      "name": "role_types_order_by",
                       "ofType": null
                     }
                   }
@@ -24338,7 +24429,7 @@
                 "description": "filter the rows returned",
                 "type": {
                   "kind": "INPUT_OBJECT",
-                  "name": "roles_bool_exp",
+                  "name": "role_types_bool_exp",
                   "ofType": null
                 },
                 "defaultValue": null,
@@ -24351,7 +24442,7 @@
               "name": null,
               "ofType": {
                 "kind": "OBJECT",
-                "name": "roles_aggregate",
+                "name": "role_types_aggregate",
                 "ofType": null
               }
             },
@@ -24359,18 +24450,18 @@
             "deprecationReason": null
           },
           {
-            "name": "roles_by_pk",
-            "description": "fetch data from the table: \"roles\" using primary key columns",
+            "name": "role_types_by_pk",
+            "description": "fetch data from the table: \"role_types\" using primary key columns",
             "args": [
               {
-                "name": "id",
+                "name": "value",
                 "description": null,
                 "type": {
                   "kind": "NON_NULL",
                   "name": null,
                   "ofType": {
                     "kind": "SCALAR",
-                    "name": "Int",
+                    "name": "String",
                     "ofType": null
                   }
                 },
@@ -24381,7 +24472,7 @@
             ],
             "type": {
               "kind": "OBJECT",
-              "name": "roles",
+              "name": "role_types",
               "ofType": null
             },
             "isDeprecated": false,
@@ -31899,11 +31990,11 @@
       },
       {
         "kind": "OBJECT",
-        "name": "roles",
-        "description": "columns and relationships of \"roles\"",
+        "name": "role_types",
+        "description": "columns and relationships of \"role_types\"",
         "fields": [
           {
-            "name": "displayValue",
+            "name": "description",
             "description": null,
             "args": [],
             "type": {
@@ -31912,22 +32003,6 @@
               "ofType": {
                 "kind": "SCALAR",
                 "name": "String",
-                "ofType": null
-              }
-            },
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "id",
-            "description": null,
-            "args": [],
-            "type": {
-              "kind": "NON_NULL",
-              "name": null,
-              "ofType": {
-                "kind": "SCALAR",
-                "name": "Int",
                 "ofType": null
               }
             },
@@ -31958,8 +32033,8 @@
       },
       {
         "kind": "OBJECT",
-        "name": "roles_aggregate",
-        "description": "aggregated selection of \"roles\"",
+        "name": "role_types_aggregate",
+        "description": "aggregated selection of \"role_types\"",
         "fields": [
           {
             "name": "aggregate",
@@ -31967,7 +32042,7 @@
             "args": [],
             "type": {
               "kind": "OBJECT",
-              "name": "roles_aggregate_fields",
+              "name": "role_types_aggregate_fields",
               "ofType": null
             },
             "isDeprecated": false,
@@ -31988,7 +32063,7 @@
                   "name": null,
                   "ofType": {
                     "kind": "OBJECT",
-                    "name": "roles",
+                    "name": "role_types",
                     "ofType": null
                   }
                 }
@@ -32005,21 +32080,9 @@
       },
       {
         "kind": "OBJECT",
-        "name": "roles_aggregate_fields",
-        "description": "aggregate fields of \"roles\"",
+        "name": "role_types_aggregate_fields",
+        "description": "aggregate fields of \"role_types\"",
         "fields": [
-          {
-            "name": "avg",
-            "description": null,
-            "args": [],
-            "type": {
-              "kind": "OBJECT",
-              "name": "roles_avg_fields",
-              "ofType": null
-            },
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
           {
             "name": "count",
             "description": null,
@@ -32035,7 +32098,7 @@
                     "name": null,
                     "ofType": {
                       "kind": "ENUM",
-                      "name": "roles_select_column",
+                      "name": "role_types_select_column",
                       "ofType": null
                     }
                   }
@@ -32075,7 +32138,7 @@
             "args": [],
             "type": {
               "kind": "OBJECT",
-              "name": "roles_max_fields",
+              "name": "role_types_max_fields",
               "ofType": null
             },
             "isDeprecated": false,
@@ -32087,114 +32150,7 @@
             "args": [],
             "type": {
               "kind": "OBJECT",
-              "name": "roles_min_fields",
-              "ofType": null
-            },
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "stddev",
-            "description": null,
-            "args": [],
-            "type": {
-              "kind": "OBJECT",
-              "name": "roles_stddev_fields",
-              "ofType": null
-            },
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "stddev_pop",
-            "description": null,
-            "args": [],
-            "type": {
-              "kind": "OBJECT",
-              "name": "roles_stddev_pop_fields",
-              "ofType": null
-            },
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "stddev_samp",
-            "description": null,
-            "args": [],
-            "type": {
-              "kind": "OBJECT",
-              "name": "roles_stddev_samp_fields",
-              "ofType": null
-            },
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "sum",
-            "description": null,
-            "args": [],
-            "type": {
-              "kind": "OBJECT",
-              "name": "roles_sum_fields",
-              "ofType": null
-            },
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "var_pop",
-            "description": null,
-            "args": [],
-            "type": {
-              "kind": "OBJECT",
-              "name": "roles_var_pop_fields",
-              "ofType": null
-            },
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "var_samp",
-            "description": null,
-            "args": [],
-            "type": {
-              "kind": "OBJECT",
-              "name": "roles_var_samp_fields",
-              "ofType": null
-            },
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "variance",
-            "description": null,
-            "args": [],
-            "type": {
-              "kind": "OBJECT",
-              "name": "roles_variance_fields",
-              "ofType": null
-            },
-            "isDeprecated": false,
-            "deprecationReason": null
-          }
-        ],
-        "inputFields": null,
-        "interfaces": [],
-        "enumValues": null,
-        "possibleTypes": null
-      },
-      {
-        "kind": "OBJECT",
-        "name": "roles_avg_fields",
-        "description": "aggregate avg on columns",
-        "fields": [
-          {
-            "name": "id",
-            "description": null,
-            "args": [],
-            "type": {
-              "kind": "SCALAR",
-              "name": "Float",
+              "name": "role_types_min_fields",
               "ofType": null
             },
             "isDeprecated": false,
@@ -32208,8 +32164,8 @@
       },
       {
         "kind": "INPUT_OBJECT",
-        "name": "roles_bool_exp",
-        "description": "Boolean expression to filter rows from the table \"roles\". All fields are combined with a logical 'AND'.",
+        "name": "role_types_bool_exp",
+        "description": "Boolean expression to filter rows from the table \"role_types\". All fields are combined with a logical 'AND'.",
         "fields": null,
         "inputFields": [
           {
@@ -32223,7 +32179,7 @@
                 "name": null,
                 "ofType": {
                   "kind": "INPUT_OBJECT",
-                  "name": "roles_bool_exp",
+                  "name": "role_types_bool_exp",
                   "ofType": null
                 }
               }
@@ -32237,7 +32193,7 @@
             "description": null,
             "type": {
               "kind": "INPUT_OBJECT",
-              "name": "roles_bool_exp",
+              "name": "role_types_bool_exp",
               "ofType": null
             },
             "defaultValue": null,
@@ -32255,7 +32211,7 @@
                 "name": null,
                 "ofType": {
                   "kind": "INPUT_OBJECT",
-                  "name": "roles_bool_exp",
+                  "name": "role_types_bool_exp",
                   "ofType": null
                 }
               }
@@ -32265,23 +32221,11 @@
             "deprecationReason": null
           },
           {
-            "name": "displayValue",
+            "name": "description",
             "description": null,
             "type": {
               "kind": "INPUT_OBJECT",
               "name": "String_comparison_exp",
-              "ofType": null
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "id",
-            "description": null,
-            "type": {
-              "kind": "INPUT_OBJECT",
-              "name": "Int_comparison_exp",
               "ofType": null
             },
             "defaultValue": null,
@@ -32307,20 +32251,14 @@
       },
       {
         "kind": "ENUM",
-        "name": "roles_constraint",
-        "description": "unique or primary key constraints on table \"roles\"",
+        "name": "role_types_constraint",
+        "description": "unique or primary key constraints on table \"role_types\"",
         "fields": null,
         "inputFields": null,
         "interfaces": null,
         "enumValues": [
           {
-            "name": "roles_pkey",
-            "description": "unique or primary key constraint",
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "roles_value_key",
+            "name": "role_types_pkey",
             "description": "unique or primary key constraint",
             "isDeprecated": false,
             "deprecationReason": null
@@ -32329,18 +32267,129 @@
         "possibleTypes": null
       },
       {
+        "kind": "ENUM",
+        "name": "role_types_enum",
+        "description": null,
+        "fields": null,
+        "inputFields": null,
+        "interfaces": null,
+        "enumValues": [
+          {
+            "name": "admin",
+            "description": "Администратор",
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "central",
+            "description": "Член на ЦИК",
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "centralLeader",
+            "description": "Ръководител на ЦИК",
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "section",
+            "description": "Член на СИК",
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "sectionLeader",
+            "description": "Ръководител на СИК",
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "user",
+            "description": "Гласоподавател",
+            "isDeprecated": false,
+            "deprecationReason": null
+          }
+        ],
+        "possibleTypes": null
+      },
+      {
         "kind": "INPUT_OBJECT",
-        "name": "roles_inc_input",
-        "description": "input type for incrementing numeric columns in table \"roles\"",
+        "name": "role_types_enum_comparison_exp",
+        "description": "Boolean expression to compare columns of type \"role_types_enum\". All fields are combined with logical 'AND'.",
         "fields": null,
         "inputFields": [
           {
-            "name": "id",
+            "name": "_eq",
+            "description": null,
+            "type": {
+              "kind": "ENUM",
+              "name": "role_types_enum",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "_in",
+            "description": null,
+            "type": {
+              "kind": "LIST",
+              "name": null,
+              "ofType": {
+                "kind": "NON_NULL",
+                "name": null,
+                "ofType": {
+                  "kind": "ENUM",
+                  "name": "role_types_enum",
+                  "ofType": null
+                }
+              }
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "_is_null",
             "description": null,
             "type": {
               "kind": "SCALAR",
-              "name": "Int",
+              "name": "Boolean",
               "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "_neq",
+            "description": null,
+            "type": {
+              "kind": "ENUM",
+              "name": "role_types_enum",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "_nin",
+            "description": null,
+            "type": {
+              "kind": "LIST",
+              "name": null,
+              "ofType": {
+                "kind": "NON_NULL",
+                "name": null,
+                "ofType": {
+                  "kind": "ENUM",
+                  "name": "role_types_enum",
+                  "ofType": null
+                }
+              }
             },
             "defaultValue": null,
             "isDeprecated": false,
@@ -32353,28 +32402,16 @@
       },
       {
         "kind": "INPUT_OBJECT",
-        "name": "roles_insert_input",
-        "description": "input type for inserting data into table \"roles\"",
+        "name": "role_types_insert_input",
+        "description": "input type for inserting data into table \"role_types\"",
         "fields": null,
         "inputFields": [
           {
-            "name": "displayValue",
+            "name": "description",
             "description": null,
             "type": {
               "kind": "SCALAR",
               "name": "String",
-              "ofType": null
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "id",
-            "description": null,
-            "type": {
-              "kind": "SCALAR",
-              "name": "Int",
               "ofType": null
             },
             "defaultValue": null,
@@ -32400,28 +32437,16 @@
       },
       {
         "kind": "OBJECT",
-        "name": "roles_max_fields",
+        "name": "role_types_max_fields",
         "description": "aggregate max on columns",
         "fields": [
           {
-            "name": "displayValue",
+            "name": "description",
             "description": null,
             "args": [],
             "type": {
               "kind": "SCALAR",
               "name": "String",
-              "ofType": null
-            },
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "id",
-            "description": null,
-            "args": [],
-            "type": {
-              "kind": "SCALAR",
-              "name": "Int",
               "ofType": null
             },
             "isDeprecated": false,
@@ -32447,28 +32472,16 @@
       },
       {
         "kind": "OBJECT",
-        "name": "roles_min_fields",
+        "name": "role_types_min_fields",
         "description": "aggregate min on columns",
         "fields": [
           {
-            "name": "displayValue",
+            "name": "description",
             "description": null,
             "args": [],
             "type": {
               "kind": "SCALAR",
               "name": "String",
-              "ofType": null
-            },
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "id",
-            "description": null,
-            "args": [],
-            "type": {
-              "kind": "SCALAR",
-              "name": "Int",
               "ofType": null
             },
             "isDeprecated": false,
@@ -32494,8 +32507,8 @@
       },
       {
         "kind": "OBJECT",
-        "name": "roles_mutation_response",
-        "description": "response of any mutation on the table \"roles\"",
+        "name": "role_types_mutation_response",
+        "description": "response of any mutation on the table \"role_types\"",
         "fields": [
           {
             "name": "affected_rows",
@@ -32528,7 +32541,7 @@
                   "name": null,
                   "ofType": {
                     "kind": "OBJECT",
-                    "name": "roles",
+                    "name": "role_types",
                     "ofType": null
                   }
                 }
@@ -32545,8 +32558,8 @@
       },
       {
         "kind": "INPUT_OBJECT",
-        "name": "roles_obj_rel_insert_input",
-        "description": "input type for inserting object relation for remote table \"roles\"",
+        "name": "role_types_obj_rel_insert_input",
+        "description": "input type for inserting object relation for remote table \"role_types\"",
         "fields": null,
         "inputFields": [
           {
@@ -32557,7 +32570,7 @@
               "name": null,
               "ofType": {
                 "kind": "INPUT_OBJECT",
-                "name": "roles_insert_input",
+                "name": "role_types_insert_input",
                 "ofType": null
               }
             },
@@ -32570,7 +32583,7 @@
             "description": "on conflict condition",
             "type": {
               "kind": "INPUT_OBJECT",
-              "name": "roles_on_conflict",
+              "name": "role_types_on_conflict",
               "ofType": null
             },
             "defaultValue": null,
@@ -32584,8 +32597,8 @@
       },
       {
         "kind": "INPUT_OBJECT",
-        "name": "roles_on_conflict",
-        "description": "on conflict condition type for table \"roles\"",
+        "name": "role_types_on_conflict",
+        "description": "on conflict condition type for table \"role_types\"",
         "fields": null,
         "inputFields": [
           {
@@ -32596,7 +32609,7 @@
               "name": null,
               "ofType": {
                 "kind": "ENUM",
-                "name": "roles_constraint",
+                "name": "role_types_constraint",
                 "ofType": null
               }
             },
@@ -32618,7 +32631,7 @@
                   "name": null,
                   "ofType": {
                     "kind": "ENUM",
-                    "name": "roles_update_column",
+                    "name": "role_types_update_column",
                     "ofType": null
                   }
                 }
@@ -32633,7 +32646,7 @@
             "description": null,
             "type": {
               "kind": "INPUT_OBJECT",
-              "name": "roles_bool_exp",
+              "name": "role_types_bool_exp",
               "ofType": null
             },
             "defaultValue": null,
@@ -32647,24 +32660,12 @@
       },
       {
         "kind": "INPUT_OBJECT",
-        "name": "roles_order_by",
-        "description": "Ordering options when selecting data from \"roles\".",
+        "name": "role_types_order_by",
+        "description": "Ordering options when selecting data from \"role_types\".",
         "fields": null,
         "inputFields": [
           {
-            "name": "displayValue",
-            "description": null,
-            "type": {
-              "kind": "ENUM",
-              "name": "order_by",
-              "ofType": null
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "id",
+            "name": "description",
             "description": null,
             "type": {
               "kind": "ENUM",
@@ -32694,19 +32695,19 @@
       },
       {
         "kind": "INPUT_OBJECT",
-        "name": "roles_pk_columns_input",
-        "description": "primary key columns input for table: roles",
+        "name": "role_types_pk_columns_input",
+        "description": "primary key columns input for table: role_types",
         "fields": null,
         "inputFields": [
           {
-            "name": "id",
+            "name": "value",
             "description": null,
             "type": {
               "kind": "NON_NULL",
               "name": null,
               "ofType": {
                 "kind": "SCALAR",
-                "name": "Int",
+                "name": "String",
                 "ofType": null
               }
             },
@@ -32721,20 +32722,14 @@
       },
       {
         "kind": "ENUM",
-        "name": "roles_select_column",
-        "description": "select columns of table \"roles\"",
+        "name": "role_types_select_column",
+        "description": "select columns of table \"role_types\"",
         "fields": null,
         "inputFields": null,
         "interfaces": null,
         "enumValues": [
           {
-            "name": "displayValue",
-            "description": "column name",
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "id",
+            "name": "description",
             "description": "column name",
             "isDeprecated": false,
             "deprecationReason": null
@@ -32750,28 +32745,16 @@
       },
       {
         "kind": "INPUT_OBJECT",
-        "name": "roles_set_input",
-        "description": "input type for updating data in table \"roles\"",
+        "name": "role_types_set_input",
+        "description": "input type for updating data in table \"role_types\"",
         "fields": null,
         "inputFields": [
           {
-            "name": "displayValue",
+            "name": "description",
             "description": null,
             "type": {
               "kind": "SCALAR",
               "name": "String",
-              "ofType": null
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "id",
-            "description": null,
-            "type": {
-              "kind": "SCALAR",
-              "name": "Int",
               "ofType": null
             },
             "defaultValue": null,
@@ -32792,117 +32775,19 @@
           }
         ],
         "interfaces": null,
-        "enumValues": null,
-        "possibleTypes": null
-      },
-      {
-        "kind": "OBJECT",
-        "name": "roles_stddev_fields",
-        "description": "aggregate stddev on columns",
-        "fields": [
-          {
-            "name": "id",
-            "description": null,
-            "args": [],
-            "type": {
-              "kind": "SCALAR",
-              "name": "Float",
-              "ofType": null
-            },
-            "isDeprecated": false,
-            "deprecationReason": null
-          }
-        ],
-        "inputFields": null,
-        "interfaces": [],
-        "enumValues": null,
-        "possibleTypes": null
-      },
-      {
-        "kind": "OBJECT",
-        "name": "roles_stddev_pop_fields",
-        "description": "aggregate stddev_pop on columns",
-        "fields": [
-          {
-            "name": "id",
-            "description": null,
-            "args": [],
-            "type": {
-              "kind": "SCALAR",
-              "name": "Float",
-              "ofType": null
-            },
-            "isDeprecated": false,
-            "deprecationReason": null
-          }
-        ],
-        "inputFields": null,
-        "interfaces": [],
-        "enumValues": null,
-        "possibleTypes": null
-      },
-      {
-        "kind": "OBJECT",
-        "name": "roles_stddev_samp_fields",
-        "description": "aggregate stddev_samp on columns",
-        "fields": [
-          {
-            "name": "id",
-            "description": null,
-            "args": [],
-            "type": {
-              "kind": "SCALAR",
-              "name": "Float",
-              "ofType": null
-            },
-            "isDeprecated": false,
-            "deprecationReason": null
-          }
-        ],
-        "inputFields": null,
-        "interfaces": [],
-        "enumValues": null,
-        "possibleTypes": null
-      },
-      {
-        "kind": "OBJECT",
-        "name": "roles_sum_fields",
-        "description": "aggregate sum on columns",
-        "fields": [
-          {
-            "name": "id",
-            "description": null,
-            "args": [],
-            "type": {
-              "kind": "SCALAR",
-              "name": "Int",
-              "ofType": null
-            },
-            "isDeprecated": false,
-            "deprecationReason": null
-          }
-        ],
-        "inputFields": null,
-        "interfaces": [],
         "enumValues": null,
         "possibleTypes": null
       },
       {
         "kind": "ENUM",
-        "name": "roles_update_column",
-        "description": "update columns of table \"roles\"",
+        "name": "role_types_update_column",
+        "description": "update columns of table \"role_types\"",
         "fields": null,
         "inputFields": null,
         "interfaces": null,
         "enumValues": [
           {
-            "name": "displayValue",
-            "description": "column name",
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "id",
+            "name": "description",
             "description": "column name",
             "isDeprecated": false,
             "deprecationReason": null
@@ -32914,75 +32799,6 @@
             "deprecationReason": null
           }
         ],
-        "possibleTypes": null
-      },
-      {
-        "kind": "OBJECT",
-        "name": "roles_var_pop_fields",
-        "description": "aggregate var_pop on columns",
-        "fields": [
-          {
-            "name": "id",
-            "description": null,
-            "args": [],
-            "type": {
-              "kind": "SCALAR",
-              "name": "Float",
-              "ofType": null
-            },
-            "isDeprecated": false,
-            "deprecationReason": null
-          }
-        ],
-        "inputFields": null,
-        "interfaces": [],
-        "enumValues": null,
-        "possibleTypes": null
-      },
-      {
-        "kind": "OBJECT",
-        "name": "roles_var_samp_fields",
-        "description": "aggregate var_samp on columns",
-        "fields": [
-          {
-            "name": "id",
-            "description": null,
-            "args": [],
-            "type": {
-              "kind": "SCALAR",
-              "name": "Float",
-              "ofType": null
-            },
-            "isDeprecated": false,
-            "deprecationReason": null
-          }
-        ],
-        "inputFields": null,
-        "interfaces": [],
-        "enumValues": null,
-        "possibleTypes": null
-      },
-      {
-        "kind": "OBJECT",
-        "name": "roles_variance_fields",
-        "description": "aggregate variance on columns",
-        "fields": [
-          {
-            "name": "id",
-            "description": null,
-            "args": [],
-            "type": {
-              "kind": "SCALAR",
-              "name": "Float",
-              "ofType": null
-            },
-            "isDeprecated": false,
-            "deprecationReason": null
-          }
-        ],
-        "inputFields": null,
-        "interfaces": [],
-        "enumValues": null,
         "possibleTypes": null
       },
       {
@@ -38243,8 +38059,8 @@
             "deprecationReason": null
           },
           {
-            "name": "roles",
-            "description": "fetch data from the table: \"roles\"",
+            "name": "role_types",
+            "description": "fetch data from the table: \"role_types\"",
             "args": [
               {
                 "name": "distinct_on",
@@ -38257,7 +38073,7 @@
                     "name": null,
                     "ofType": {
                       "kind": "ENUM",
-                      "name": "roles_select_column",
+                      "name": "role_types_select_column",
                       "ofType": null
                     }
                   }
@@ -38301,7 +38117,7 @@
                     "name": null,
                     "ofType": {
                       "kind": "INPUT_OBJECT",
-                      "name": "roles_order_by",
+                      "name": "role_types_order_by",
                       "ofType": null
                     }
                   }
@@ -38315,7 +38131,7 @@
                 "description": "filter the rows returned",
                 "type": {
                   "kind": "INPUT_OBJECT",
-                  "name": "roles_bool_exp",
+                  "name": "role_types_bool_exp",
                   "ofType": null
                 },
                 "defaultValue": null,
@@ -38334,7 +38150,7 @@
                   "name": null,
                   "ofType": {
                     "kind": "OBJECT",
-                    "name": "roles",
+                    "name": "role_types",
                     "ofType": null
                   }
                 }
@@ -38344,8 +38160,8 @@
             "deprecationReason": null
           },
           {
-            "name": "roles_aggregate",
-            "description": "fetch aggregated fields from the table: \"roles\"",
+            "name": "role_types_aggregate",
+            "description": "fetch aggregated fields from the table: \"role_types\"",
             "args": [
               {
                 "name": "distinct_on",
@@ -38358,7 +38174,7 @@
                     "name": null,
                     "ofType": {
                       "kind": "ENUM",
-                      "name": "roles_select_column",
+                      "name": "role_types_select_column",
                       "ofType": null
                     }
                   }
@@ -38402,7 +38218,7 @@
                     "name": null,
                     "ofType": {
                       "kind": "INPUT_OBJECT",
-                      "name": "roles_order_by",
+                      "name": "role_types_order_by",
                       "ofType": null
                     }
                   }
@@ -38416,7 +38232,7 @@
                 "description": "filter the rows returned",
                 "type": {
                   "kind": "INPUT_OBJECT",
-                  "name": "roles_bool_exp",
+                  "name": "role_types_bool_exp",
                   "ofType": null
                 },
                 "defaultValue": null,
@@ -38429,7 +38245,7 @@
               "name": null,
               "ofType": {
                 "kind": "OBJECT",
-                "name": "roles_aggregate",
+                "name": "role_types_aggregate",
                 "ofType": null
               }
             },
@@ -38437,18 +38253,18 @@
             "deprecationReason": null
           },
           {
-            "name": "roles_by_pk",
-            "description": "fetch data from the table: \"roles\" using primary key columns",
+            "name": "role_types_by_pk",
+            "description": "fetch data from the table: \"role_types\" using primary key columns",
             "args": [
               {
-                "name": "id",
+                "name": "value",
                 "description": null,
                 "type": {
                   "kind": "NON_NULL",
                   "name": null,
                   "ofType": {
                     "kind": "SCALAR",
-                    "name": "Int",
+                    "name": "String",
                     "ofType": null
                   }
                 },
@@ -38459,7 +38275,7 @@
             ],
             "type": {
               "kind": "OBJECT",
-              "name": "roles",
+              "name": "role_types",
               "ofType": null
             },
             "isDeprecated": false,
@@ -40719,14 +40535,14 @@
           },
           {
             "name": "role",
-            "description": "An object relationship",
+            "description": null,
             "args": [],
             "type": {
               "kind": "NON_NULL",
               "name": null,
               "ofType": {
-                "kind": "OBJECT",
-                "name": "roles",
+                "kind": "ENUM",
+                "name": "role_types_enum",
                 "ofType": null
               }
             },
@@ -40734,15 +40550,15 @@
             "deprecationReason": null
           },
           {
-            "name": "roleId",
-            "description": null,
+            "name": "roleType",
+            "description": "An object relationship",
             "args": [],
             "type": {
               "kind": "NON_NULL",
               "name": null,
               "ofType": {
-                "kind": "SCALAR",
-                "name": "Int",
+                "kind": "OBJECT",
+                "name": "role_types",
                 "ofType": null
               }
             },
@@ -40751,23 +40567,23 @@
           },
           {
             "name": "secondRole",
-            "description": "An object relationship",
+            "description": null,
             "args": [],
             "type": {
-              "kind": "OBJECT",
-              "name": "roles",
+              "kind": "ENUM",
+              "name": "role_types_enum",
               "ofType": null
             },
             "isDeprecated": false,
             "deprecationReason": null
           },
           {
-            "name": "secondRoleId",
-            "description": null,
+            "name": "secondRoleType",
+            "description": "An object relationship",
             "args": [],
             "type": {
-              "kind": "SCALAR",
-              "name": "Int",
+              "kind": "OBJECT",
+              "name": "role_types",
               "ofType": null
             },
             "isDeprecated": false,
@@ -41082,30 +40898,6 @@
             },
             "isDeprecated": false,
             "deprecationReason": null
-          },
-          {
-            "name": "roleId",
-            "description": null,
-            "args": [],
-            "type": {
-              "kind": "SCALAR",
-              "name": "Float",
-              "ofType": null
-            },
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "secondRoleId",
-            "description": null,
-            "args": [],
-            "type": {
-              "kind": "SCALAR",
-              "name": "Float",
-              "ofType": null
-            },
-            "isDeprecated": false,
-            "deprecationReason": null
           }
         ],
         "inputFields": null,
@@ -41308,7 +41100,7 @@
             "description": null,
             "type": {
               "kind": "INPUT_OBJECT",
-              "name": "roles_bool_exp",
+              "name": "role_types_enum_comparison_exp",
               "ofType": null
             },
             "defaultValue": null,
@@ -41316,11 +41108,11 @@
             "deprecationReason": null
           },
           {
-            "name": "roleId",
+            "name": "roleType",
             "description": null,
             "type": {
               "kind": "INPUT_OBJECT",
-              "name": "Int_comparison_exp",
+              "name": "role_types_bool_exp",
               "ofType": null
             },
             "defaultValue": null,
@@ -41332,7 +41124,7 @@
             "description": null,
             "type": {
               "kind": "INPUT_OBJECT",
-              "name": "roles_bool_exp",
+              "name": "role_types_enum_comparison_exp",
               "ofType": null
             },
             "defaultValue": null,
@@ -41340,11 +41132,11 @@
             "deprecationReason": null
           },
           {
-            "name": "secondRoleId",
+            "name": "secondRoleType",
             "description": null,
             "type": {
               "kind": "INPUT_OBJECT",
-              "name": "Int_comparison_exp",
+              "name": "role_types_bool_exp",
               "ofType": null
             },
             "defaultValue": null,
@@ -41435,30 +41227,6 @@
           },
           {
             "name": "id",
-            "description": null,
-            "type": {
-              "kind": "SCALAR",
-              "name": "Int",
-              "ofType": null
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "roleId",
-            "description": null,
-            "type": {
-              "kind": "SCALAR",
-              "name": "Int",
-              "ofType": null
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "secondRoleId",
             "description": null,
             "type": {
               "kind": "SCALAR",
@@ -41616,8 +41384,8 @@
             "name": "role",
             "description": null,
             "type": {
-              "kind": "INPUT_OBJECT",
-              "name": "roles_obj_rel_insert_input",
+              "kind": "ENUM",
+              "name": "role_types_enum",
               "ofType": null
             },
             "defaultValue": null,
@@ -41625,11 +41393,11 @@
             "deprecationReason": null
           },
           {
-            "name": "roleId",
+            "name": "roleType",
             "description": null,
             "type": {
-              "kind": "SCALAR",
-              "name": "Int",
+              "kind": "INPUT_OBJECT",
+              "name": "role_types_obj_rel_insert_input",
               "ofType": null
             },
             "defaultValue": null,
@@ -41640,8 +41408,8 @@
             "name": "secondRole",
             "description": null,
             "type": {
-              "kind": "INPUT_OBJECT",
-              "name": "roles_obj_rel_insert_input",
+              "kind": "ENUM",
+              "name": "role_types_enum",
               "ofType": null
             },
             "defaultValue": null,
@@ -41649,11 +41417,11 @@
             "deprecationReason": null
           },
           {
-            "name": "secondRoleId",
+            "name": "secondRoleType",
             "description": null,
             "type": {
-              "kind": "SCALAR",
-              "name": "Int",
+              "kind": "INPUT_OBJECT",
+              "name": "role_types_obj_rel_insert_input",
               "ofType": null
             },
             "defaultValue": null,
@@ -41815,30 +41583,6 @@
             "deprecationReason": null
           },
           {
-            "name": "roleId",
-            "description": null,
-            "args": [],
-            "type": {
-              "kind": "SCALAR",
-              "name": "Int",
-              "ofType": null
-            },
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "secondRoleId",
-            "description": null,
-            "args": [],
-            "type": {
-              "kind": "SCALAR",
-              "name": "Int",
-              "ofType": null
-            },
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
             "name": "surname",
             "description": null,
             "args": [],
@@ -41976,30 +41720,6 @@
             "type": {
               "kind": "SCALAR",
               "name": "String",
-              "ofType": null
-            },
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "roleId",
-            "description": null,
-            "args": [],
-            "type": {
-              "kind": "SCALAR",
-              "name": "Int",
-              "ofType": null
-            },
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "secondRoleId",
-            "description": null,
-            "args": [],
-            "type": {
-              "kind": "SCALAR",
-              "name": "Int",
               "ofType": null
             },
             "isDeprecated": false,
@@ -42330,8 +42050,8 @@
             "name": "role",
             "description": null,
             "type": {
-              "kind": "INPUT_OBJECT",
-              "name": "roles_order_by",
+              "kind": "ENUM",
+              "name": "order_by",
               "ofType": null
             },
             "defaultValue": null,
@@ -42339,11 +42059,11 @@
             "deprecationReason": null
           },
           {
-            "name": "roleId",
+            "name": "roleType",
             "description": null,
             "type": {
-              "kind": "ENUM",
-              "name": "order_by",
+              "kind": "INPUT_OBJECT",
+              "name": "role_types_order_by",
               "ofType": null
             },
             "defaultValue": null,
@@ -42354,8 +42074,8 @@
             "name": "secondRole",
             "description": null,
             "type": {
-              "kind": "INPUT_OBJECT",
-              "name": "roles_order_by",
+              "kind": "ENUM",
+              "name": "order_by",
               "ofType": null
             },
             "defaultValue": null,
@@ -42363,11 +42083,11 @@
             "deprecationReason": null
           },
           {
-            "name": "secondRoleId",
+            "name": "secondRoleType",
             "description": null,
             "type": {
-              "kind": "ENUM",
-              "name": "order_by",
+              "kind": "INPUT_OBJECT",
+              "name": "role_types_order_by",
               "ofType": null
             },
             "defaultValue": null,
@@ -42511,13 +42231,13 @@
             "deprecationReason": null
           },
           {
-            "name": "roleId",
+            "name": "role",
             "description": "column name",
             "isDeprecated": false,
             "deprecationReason": null
           },
           {
-            "name": "secondRoleId",
+            "name": "secondRole",
             "description": "column name",
             "isDeprecated": false,
             "deprecationReason": null
@@ -42670,11 +42390,11 @@
             "deprecationReason": null
           },
           {
-            "name": "roleId",
+            "name": "role",
             "description": null,
             "type": {
-              "kind": "SCALAR",
-              "name": "Int",
+              "kind": "ENUM",
+              "name": "role_types_enum",
               "ofType": null
             },
             "defaultValue": null,
@@ -42682,11 +42402,11 @@
             "deprecationReason": null
           },
           {
-            "name": "secondRoleId",
+            "name": "secondRole",
             "description": null,
             "type": {
-              "kind": "SCALAR",
-              "name": "Int",
+              "kind": "ENUM",
+              "name": "role_types_enum",
               "ofType": null
             },
             "defaultValue": null,
@@ -42762,30 +42482,6 @@
             },
             "isDeprecated": false,
             "deprecationReason": null
-          },
-          {
-            "name": "roleId",
-            "description": null,
-            "args": [],
-            "type": {
-              "kind": "SCALAR",
-              "name": "Float",
-              "ofType": null
-            },
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "secondRoleId",
-            "description": null,
-            "args": [],
-            "type": {
-              "kind": "SCALAR",
-              "name": "Float",
-              "ofType": null
-            },
-            "isDeprecated": false,
-            "deprecationReason": null
           }
         ],
         "inputFields": null,
@@ -42812,30 +42508,6 @@
           },
           {
             "name": "id",
-            "description": null,
-            "args": [],
-            "type": {
-              "kind": "SCALAR",
-              "name": "Float",
-              "ofType": null
-            },
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "roleId",
-            "description": null,
-            "args": [],
-            "type": {
-              "kind": "SCALAR",
-              "name": "Float",
-              "ofType": null
-            },
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "secondRoleId",
             "description": null,
             "args": [],
             "type": {
@@ -42880,30 +42552,6 @@
             },
             "isDeprecated": false,
             "deprecationReason": null
-          },
-          {
-            "name": "roleId",
-            "description": null,
-            "args": [],
-            "type": {
-              "kind": "SCALAR",
-              "name": "Float",
-              "ofType": null
-            },
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "secondRoleId",
-            "description": null,
-            "args": [],
-            "type": {
-              "kind": "SCALAR",
-              "name": "Float",
-              "ofType": null
-            },
-            "isDeprecated": false,
-            "deprecationReason": null
           }
         ],
         "inputFields": null,
@@ -42930,30 +42578,6 @@
           },
           {
             "name": "id",
-            "description": null,
-            "args": [],
-            "type": {
-              "kind": "SCALAR",
-              "name": "Int",
-              "ofType": null
-            },
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "roleId",
-            "description": null,
-            "args": [],
-            "type": {
-              "kind": "SCALAR",
-              "name": "Int",
-              "ofType": null
-            },
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "secondRoleId",
             "description": null,
             "args": [],
             "type": {
@@ -43039,13 +42663,13 @@
             "deprecationReason": null
           },
           {
-            "name": "roleId",
+            "name": "role",
             "description": "column name",
             "isDeprecated": false,
             "deprecationReason": null
           },
           {
-            "name": "secondRoleId",
+            "name": "secondRole",
             "description": "column name",
             "isDeprecated": false,
             "deprecationReason": null
@@ -43099,30 +42723,6 @@
             },
             "isDeprecated": false,
             "deprecationReason": null
-          },
-          {
-            "name": "roleId",
-            "description": null,
-            "args": [],
-            "type": {
-              "kind": "SCALAR",
-              "name": "Float",
-              "ofType": null
-            },
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "secondRoleId",
-            "description": null,
-            "args": [],
-            "type": {
-              "kind": "SCALAR",
-              "name": "Float",
-              "ofType": null
-            },
-            "isDeprecated": false,
-            "deprecationReason": null
           }
         ],
         "inputFields": null,
@@ -43158,30 +42758,6 @@
             },
             "isDeprecated": false,
             "deprecationReason": null
-          },
-          {
-            "name": "roleId",
-            "description": null,
-            "args": [],
-            "type": {
-              "kind": "SCALAR",
-              "name": "Float",
-              "ofType": null
-            },
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "secondRoleId",
-            "description": null,
-            "args": [],
-            "type": {
-              "kind": "SCALAR",
-              "name": "Float",
-              "ofType": null
-            },
-            "isDeprecated": false,
-            "deprecationReason": null
           }
         ],
         "inputFields": null,
@@ -43208,30 +42784,6 @@
           },
           {
             "name": "id",
-            "description": null,
-            "args": [],
-            "type": {
-              "kind": "SCALAR",
-              "name": "Float",
-              "ofType": null
-            },
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "roleId",
-            "description": null,
-            "args": [],
-            "type": {
-              "kind": "SCALAR",
-              "name": "Float",
-              "ofType": null
-            },
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "secondRoleId",
             "description": null,
             "args": [],
             "type": {

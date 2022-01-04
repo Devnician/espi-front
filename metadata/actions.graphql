@@ -1,5 +1,11 @@
-type Mutation {
-  RegisterUser(
+type Query {
+  LoginAction(
+    args: LoginInput!
+  ): LoginOutput
+}
+
+type Query {
+  RegisterAction(
     arg1: RegisterUserInsertInput!
   ): RegisterOutput
 }
@@ -23,6 +29,11 @@ input RegisterUserInsertInput {
   password: String!
 }
 
+input LoginInput {
+  egn: String!
+  password: String!
+}
+
 type LoginResponse {
   message: String
   code: String
@@ -31,6 +42,11 @@ type LoginResponse {
 }
 
 type RegisterOutput {
-  accessToken: String!
+  found: Boolean!
+}
+
+type LoginOutput {
+  accessToken: String
+  fetchToken: String
 }
 

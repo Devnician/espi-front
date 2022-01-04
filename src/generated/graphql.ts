@@ -44,6 +44,17 @@ export type Int_Comparison_Exp = {
   _nin?: Maybe<Array<Scalars['Int']>>;
 };
 
+export type LoginInput = {
+  egn: Scalars['String'];
+  password: Scalars['String'];
+};
+
+export type LoginOutput = {
+  __typename?: 'LoginOutput';
+  accessToken: Scalars['String'];
+  fetchToken: Scalars['String'];
+};
+
 export type LoginResponse = {
   __typename?: 'LoginResponse';
   accessToken: Scalars['String'];
@@ -54,7 +65,7 @@ export type LoginResponse = {
 
 export type RegisterOutput = {
   __typename?: 'RegisterOutput';
-  accessToken: Scalars['String'];
+  found: Scalars['Boolean'];
 };
 
 export type RegisterUserInsertInput = {
@@ -1823,7 +1834,6 @@ export type Login_Args = {
 /** mutation root */
 export type Mutation_Root = {
   __typename?: 'mutation_root';
-  RegisterUser?: Maybe<RegisterOutput>;
   /** delete data from the table: "addresses" */
   delete_addresses?: Maybe<Addresses_Mutation_Response>;
   /** delete single row from the table: "addresses" */
@@ -1876,10 +1886,10 @@ export type Mutation_Root = {
   delete_referendums?: Maybe<Referendums_Mutation_Response>;
   /** delete single row from the table: "referendums" */
   delete_referendums_by_pk?: Maybe<Referendums>;
-  /** delete data from the table: "roles" */
-  delete_roles?: Maybe<Roles_Mutation_Response>;
-  /** delete single row from the table: "roles" */
-  delete_roles_by_pk?: Maybe<Roles>;
+  /** delete data from the table: "role_types" */
+  delete_role_types?: Maybe<Role_Types_Mutation_Response>;
+  /** delete single row from the table: "role_types" */
+  delete_role_types_by_pk?: Maybe<Role_Types>;
   /** delete data from the table: "settlements" */
   delete_settlements?: Maybe<Settlements_Mutation_Response>;
   /** delete single row from the table: "settlements" */
@@ -1960,10 +1970,10 @@ export type Mutation_Root = {
   insert_referendums?: Maybe<Referendums_Mutation_Response>;
   /** insert a single row into the table: "referendums" */
   insert_referendums_one?: Maybe<Referendums>;
-  /** insert data into the table: "roles" */
-  insert_roles?: Maybe<Roles_Mutation_Response>;
-  /** insert a single row into the table: "roles" */
-  insert_roles_one?: Maybe<Roles>;
+  /** insert data into the table: "role_types" */
+  insert_role_types?: Maybe<Role_Types_Mutation_Response>;
+  /** insert a single row into the table: "role_types" */
+  insert_role_types_one?: Maybe<Role_Types>;
   /** insert data into the table: "settlements" */
   insert_settlements?: Maybe<Settlements_Mutation_Response>;
   /** insert a single row into the table: "settlements" */
@@ -2044,10 +2054,10 @@ export type Mutation_Root = {
   update_referendums?: Maybe<Referendums_Mutation_Response>;
   /** update single row of the table: "referendums" */
   update_referendums_by_pk?: Maybe<Referendums>;
-  /** update data of the table: "roles" */
-  update_roles?: Maybe<Roles_Mutation_Response>;
-  /** update single row of the table: "roles" */
-  update_roles_by_pk?: Maybe<Roles>;
+  /** update data of the table: "role_types" */
+  update_role_types?: Maybe<Role_Types_Mutation_Response>;
+  /** update single row of the table: "role_types" */
+  update_role_types_by_pk?: Maybe<Role_Types>;
   /** update data of the table: "settlements" */
   update_settlements?: Maybe<Settlements_Mutation_Response>;
   /** update single row of the table: "settlements" */
@@ -2076,12 +2086,6 @@ export type Mutation_Root = {
   update_votings?: Maybe<Votings_Mutation_Response>;
   /** update single row of the table: "votings" */
   update_votings_by_pk?: Maybe<Votings>;
-};
-
-
-/** mutation root */
-export type Mutation_RootRegisterUserArgs = {
-  arg1: RegisterUserInsertInput;
 };
 
 
@@ -2242,14 +2246,14 @@ export type Mutation_RootDelete_Referendums_By_PkArgs = {
 
 
 /** mutation root */
-export type Mutation_RootDelete_RolesArgs = {
-  where: Roles_Bool_Exp;
+export type Mutation_RootDelete_Role_TypesArgs = {
+  where: Role_Types_Bool_Exp;
 };
 
 
 /** mutation root */
-export type Mutation_RootDelete_Roles_By_PkArgs = {
-  id: Scalars['Int'];
+export type Mutation_RootDelete_Role_Types_By_PkArgs = {
+  value: Scalars['String'];
 };
 
 
@@ -2520,16 +2524,16 @@ export type Mutation_RootInsert_Referendums_OneArgs = {
 
 
 /** mutation root */
-export type Mutation_RootInsert_RolesArgs = {
-  objects: Array<Roles_Insert_Input>;
-  on_conflict?: Maybe<Roles_On_Conflict>;
+export type Mutation_RootInsert_Role_TypesArgs = {
+  objects: Array<Role_Types_Insert_Input>;
+  on_conflict?: Maybe<Role_Types_On_Conflict>;
 };
 
 
 /** mutation root */
-export type Mutation_RootInsert_Roles_OneArgs = {
-  object: Roles_Insert_Input;
-  on_conflict?: Maybe<Roles_On_Conflict>;
+export type Mutation_RootInsert_Role_Types_OneArgs = {
+  object: Role_Types_Insert_Input;
+  on_conflict?: Maybe<Role_Types_On_Conflict>;
 };
 
 
@@ -2838,18 +2842,16 @@ export type Mutation_RootUpdate_Referendums_By_PkArgs = {
 
 
 /** mutation root */
-export type Mutation_RootUpdate_RolesArgs = {
-  _inc?: Maybe<Roles_Inc_Input>;
-  _set?: Maybe<Roles_Set_Input>;
-  where: Roles_Bool_Exp;
+export type Mutation_RootUpdate_Role_TypesArgs = {
+  _set?: Maybe<Role_Types_Set_Input>;
+  where: Role_Types_Bool_Exp;
 };
 
 
 /** mutation root */
-export type Mutation_RootUpdate_Roles_By_PkArgs = {
-  _inc?: Maybe<Roles_Inc_Input>;
-  _set?: Maybe<Roles_Set_Input>;
-  pk_columns: Roles_Pk_Columns_Input;
+export type Mutation_RootUpdate_Role_Types_By_PkArgs = {
+  _set?: Maybe<Role_Types_Set_Input>;
+  pk_columns: Role_Types_Pk_Columns_Input;
 };
 
 
@@ -3565,6 +3567,8 @@ export type Political_Groups_Variance_Fields = {
 
 export type Query_Root = {
   __typename?: 'query_root';
+  LoginAction?: Maybe<LoginOutput>;
+  RegisterAction?: Maybe<RegisterOutput>;
   /** fetch data from the table: "addresses" */
   addresses: Array<Addresses>;
   /** fetch aggregated fields from the table: "addresses" */
@@ -3648,12 +3652,12 @@ export type Query_Root = {
   referendums_aggregate: Referendums_Aggregate;
   /** fetch data from the table: "referendums" using primary key columns */
   referendums_by_pk?: Maybe<Referendums>;
-  /** fetch data from the table: "roles" */
-  roles: Array<Roles>;
-  /** fetch aggregated fields from the table: "roles" */
-  roles_aggregate: Roles_Aggregate;
-  /** fetch data from the table: "roles" using primary key columns */
-  roles_by_pk?: Maybe<Roles>;
+  /** fetch data from the table: "role_types" */
+  role_types: Array<Role_Types>;
+  /** fetch aggregated fields from the table: "role_types" */
+  role_types_aggregate: Role_Types_Aggregate;
+  /** fetch data from the table: "role_types" using primary key columns */
+  role_types_by_pk?: Maybe<Role_Types>;
   /** execute function "search_articles" which returns "settlements" */
   search_articles: Array<Settlements>;
   /** execute function "search_articles" and query aggregates on result of table type "settlements" */
@@ -3700,6 +3704,16 @@ export type Query_Root = {
   votings_aggregate: Votings_Aggregate;
   /** fetch data from the table: "votings" using primary key columns */
   votings_by_pk?: Maybe<Votings>;
+};
+
+
+export type Query_RootLoginActionArgs = {
+  args: LoginInput;
+};
+
+
+export type Query_RootRegisterActionArgs = {
+  arg1: RegisterUserInsertInput;
 };
 
 
@@ -4027,26 +4041,26 @@ export type Query_RootReferendums_By_PkArgs = {
 };
 
 
-export type Query_RootRolesArgs = {
-  distinct_on?: Maybe<Array<Roles_Select_Column>>;
+export type Query_RootRole_TypesArgs = {
+  distinct_on?: Maybe<Array<Role_Types_Select_Column>>;
   limit?: Maybe<Scalars['Int']>;
   offset?: Maybe<Scalars['Int']>;
-  order_by?: Maybe<Array<Roles_Order_By>>;
-  where?: Maybe<Roles_Bool_Exp>;
+  order_by?: Maybe<Array<Role_Types_Order_By>>;
+  where?: Maybe<Role_Types_Bool_Exp>;
 };
 
 
-export type Query_RootRoles_AggregateArgs = {
-  distinct_on?: Maybe<Array<Roles_Select_Column>>;
+export type Query_RootRole_Types_AggregateArgs = {
+  distinct_on?: Maybe<Array<Role_Types_Select_Column>>;
   limit?: Maybe<Scalars['Int']>;
   offset?: Maybe<Scalars['Int']>;
-  order_by?: Maybe<Array<Roles_Order_By>>;
-  where?: Maybe<Roles_Bool_Exp>;
+  order_by?: Maybe<Array<Role_Types_Order_By>>;
+  where?: Maybe<Role_Types_Bool_Exp>;
 };
 
 
-export type Query_RootRoles_By_PkArgs = {
-  id: Scalars['Int'];
+export type Query_RootRole_Types_By_PkArgs = {
+  value: Scalars['String'];
 };
 
 
@@ -5081,199 +5095,149 @@ export type Referendums_Variance_Fields = {
   settlementId?: Maybe<Scalars['Float']>;
 };
 
-/** columns and relationships of "roles" */
-export type Roles = {
-  __typename?: 'roles';
-  displayValue: Scalars['String'];
-  id: Scalars['Int'];
+/** columns and relationships of "role_types" */
+export type Role_Types = {
+  __typename?: 'role_types';
+  description: Scalars['String'];
   value: Scalars['String'];
 };
 
-/** aggregated selection of "roles" */
-export type Roles_Aggregate = {
-  __typename?: 'roles_aggregate';
-  aggregate?: Maybe<Roles_Aggregate_Fields>;
-  nodes: Array<Roles>;
+/** aggregated selection of "role_types" */
+export type Role_Types_Aggregate = {
+  __typename?: 'role_types_aggregate';
+  aggregate?: Maybe<Role_Types_Aggregate_Fields>;
+  nodes: Array<Role_Types>;
 };
 
-/** aggregate fields of "roles" */
-export type Roles_Aggregate_Fields = {
-  __typename?: 'roles_aggregate_fields';
-  avg?: Maybe<Roles_Avg_Fields>;
+/** aggregate fields of "role_types" */
+export type Role_Types_Aggregate_Fields = {
+  __typename?: 'role_types_aggregate_fields';
   count: Scalars['Int'];
-  max?: Maybe<Roles_Max_Fields>;
-  min?: Maybe<Roles_Min_Fields>;
-  stddev?: Maybe<Roles_Stddev_Fields>;
-  stddev_pop?: Maybe<Roles_Stddev_Pop_Fields>;
-  stddev_samp?: Maybe<Roles_Stddev_Samp_Fields>;
-  sum?: Maybe<Roles_Sum_Fields>;
-  var_pop?: Maybe<Roles_Var_Pop_Fields>;
-  var_samp?: Maybe<Roles_Var_Samp_Fields>;
-  variance?: Maybe<Roles_Variance_Fields>;
+  max?: Maybe<Role_Types_Max_Fields>;
+  min?: Maybe<Role_Types_Min_Fields>;
 };
 
 
-/** aggregate fields of "roles" */
-export type Roles_Aggregate_FieldsCountArgs = {
-  columns?: Maybe<Array<Roles_Select_Column>>;
+/** aggregate fields of "role_types" */
+export type Role_Types_Aggregate_FieldsCountArgs = {
+  columns?: Maybe<Array<Role_Types_Select_Column>>;
   distinct?: Maybe<Scalars['Boolean']>;
 };
 
-/** aggregate avg on columns */
-export type Roles_Avg_Fields = {
-  __typename?: 'roles_avg_fields';
-  id?: Maybe<Scalars['Float']>;
-};
-
-/** Boolean expression to filter rows from the table "roles". All fields are combined with a logical 'AND'. */
-export type Roles_Bool_Exp = {
-  _and?: Maybe<Array<Roles_Bool_Exp>>;
-  _not?: Maybe<Roles_Bool_Exp>;
-  _or?: Maybe<Array<Roles_Bool_Exp>>;
-  displayValue?: Maybe<String_Comparison_Exp>;
-  id?: Maybe<Int_Comparison_Exp>;
+/** Boolean expression to filter rows from the table "role_types". All fields are combined with a logical 'AND'. */
+export type Role_Types_Bool_Exp = {
+  _and?: Maybe<Array<Role_Types_Bool_Exp>>;
+  _not?: Maybe<Role_Types_Bool_Exp>;
+  _or?: Maybe<Array<Role_Types_Bool_Exp>>;
+  description?: Maybe<String_Comparison_Exp>;
   value?: Maybe<String_Comparison_Exp>;
 };
 
-/** unique or primary key constraints on table "roles" */
-export enum Roles_Constraint {
+/** unique or primary key constraints on table "role_types" */
+export enum Role_Types_Constraint {
   /** unique or primary key constraint */
-  RolesPkey = 'roles_pkey',
-  /** unique or primary key constraint */
-  RolesValueKey = 'roles_value_key'
+  RoleTypesPkey = 'role_types_pkey'
 }
 
-/** input type for incrementing numeric columns in table "roles" */
-export type Roles_Inc_Input = {
-  id?: Maybe<Scalars['Int']>;
+export enum Role_Types_Enum {
+  /** Администратор */
+  Admin = 'admin',
+  /** Член на ЦИК */
+  Central = 'central',
+  /** Ръководител на ЦИК */
+  CentralLeader = 'centralLeader',
+  /** Член на СИК */
+  Section = 'section',
+  /** Ръководител на СИК */
+  SectionLeader = 'sectionLeader',
+  /** Гласоподавател */
+  User = 'user'
+}
+
+/** Boolean expression to compare columns of type "role_types_enum". All fields are combined with logical 'AND'. */
+export type Role_Types_Enum_Comparison_Exp = {
+  _eq?: Maybe<Role_Types_Enum>;
+  _in?: Maybe<Array<Role_Types_Enum>>;
+  _is_null?: Maybe<Scalars['Boolean']>;
+  _neq?: Maybe<Role_Types_Enum>;
+  _nin?: Maybe<Array<Role_Types_Enum>>;
 };
 
-/** input type for inserting data into table "roles" */
-export type Roles_Insert_Input = {
-  displayValue?: Maybe<Scalars['String']>;
-  id?: Maybe<Scalars['Int']>;
+/** input type for inserting data into table "role_types" */
+export type Role_Types_Insert_Input = {
+  description?: Maybe<Scalars['String']>;
   value?: Maybe<Scalars['String']>;
 };
 
 /** aggregate max on columns */
-export type Roles_Max_Fields = {
-  __typename?: 'roles_max_fields';
-  displayValue?: Maybe<Scalars['String']>;
-  id?: Maybe<Scalars['Int']>;
+export type Role_Types_Max_Fields = {
+  __typename?: 'role_types_max_fields';
+  description?: Maybe<Scalars['String']>;
   value?: Maybe<Scalars['String']>;
 };
 
 /** aggregate min on columns */
-export type Roles_Min_Fields = {
-  __typename?: 'roles_min_fields';
-  displayValue?: Maybe<Scalars['String']>;
-  id?: Maybe<Scalars['Int']>;
+export type Role_Types_Min_Fields = {
+  __typename?: 'role_types_min_fields';
+  description?: Maybe<Scalars['String']>;
   value?: Maybe<Scalars['String']>;
 };
 
-/** response of any mutation on the table "roles" */
-export type Roles_Mutation_Response = {
-  __typename?: 'roles_mutation_response';
+/** response of any mutation on the table "role_types" */
+export type Role_Types_Mutation_Response = {
+  __typename?: 'role_types_mutation_response';
   /** number of rows affected by the mutation */
   affected_rows: Scalars['Int'];
   /** data from the rows affected by the mutation */
-  returning: Array<Roles>;
+  returning: Array<Role_Types>;
 };
 
-/** input type for inserting object relation for remote table "roles" */
-export type Roles_Obj_Rel_Insert_Input = {
-  data: Roles_Insert_Input;
+/** input type for inserting object relation for remote table "role_types" */
+export type Role_Types_Obj_Rel_Insert_Input = {
+  data: Role_Types_Insert_Input;
   /** on conflict condition */
-  on_conflict?: Maybe<Roles_On_Conflict>;
+  on_conflict?: Maybe<Role_Types_On_Conflict>;
 };
 
-/** on conflict condition type for table "roles" */
-export type Roles_On_Conflict = {
-  constraint: Roles_Constraint;
-  update_columns: Array<Roles_Update_Column>;
-  where?: Maybe<Roles_Bool_Exp>;
+/** on conflict condition type for table "role_types" */
+export type Role_Types_On_Conflict = {
+  constraint: Role_Types_Constraint;
+  update_columns: Array<Role_Types_Update_Column>;
+  where?: Maybe<Role_Types_Bool_Exp>;
 };
 
-/** Ordering options when selecting data from "roles". */
-export type Roles_Order_By = {
-  displayValue?: Maybe<Order_By>;
-  id?: Maybe<Order_By>;
+/** Ordering options when selecting data from "role_types". */
+export type Role_Types_Order_By = {
+  description?: Maybe<Order_By>;
   value?: Maybe<Order_By>;
 };
 
-/** primary key columns input for table: roles */
-export type Roles_Pk_Columns_Input = {
-  id: Scalars['Int'];
+/** primary key columns input for table: role_types */
+export type Role_Types_Pk_Columns_Input = {
+  value: Scalars['String'];
 };
 
-/** select columns of table "roles" */
-export enum Roles_Select_Column {
+/** select columns of table "role_types" */
+export enum Role_Types_Select_Column {
   /** column name */
-  DisplayValue = 'displayValue',
-  /** column name */
-  Id = 'id',
+  Description = 'description',
   /** column name */
   Value = 'value'
 }
 
-/** input type for updating data in table "roles" */
-export type Roles_Set_Input = {
-  displayValue?: Maybe<Scalars['String']>;
-  id?: Maybe<Scalars['Int']>;
+/** input type for updating data in table "role_types" */
+export type Role_Types_Set_Input = {
+  description?: Maybe<Scalars['String']>;
   value?: Maybe<Scalars['String']>;
 };
 
-/** aggregate stddev on columns */
-export type Roles_Stddev_Fields = {
-  __typename?: 'roles_stddev_fields';
-  id?: Maybe<Scalars['Float']>;
-};
-
-/** aggregate stddev_pop on columns */
-export type Roles_Stddev_Pop_Fields = {
-  __typename?: 'roles_stddev_pop_fields';
-  id?: Maybe<Scalars['Float']>;
-};
-
-/** aggregate stddev_samp on columns */
-export type Roles_Stddev_Samp_Fields = {
-  __typename?: 'roles_stddev_samp_fields';
-  id?: Maybe<Scalars['Float']>;
-};
-
-/** aggregate sum on columns */
-export type Roles_Sum_Fields = {
-  __typename?: 'roles_sum_fields';
-  id?: Maybe<Scalars['Int']>;
-};
-
-/** update columns of table "roles" */
-export enum Roles_Update_Column {
+/** update columns of table "role_types" */
+export enum Role_Types_Update_Column {
   /** column name */
-  DisplayValue = 'displayValue',
-  /** column name */
-  Id = 'id',
+  Description = 'description',
   /** column name */
   Value = 'value'
 }
-
-/** aggregate var_pop on columns */
-export type Roles_Var_Pop_Fields = {
-  __typename?: 'roles_var_pop_fields';
-  id?: Maybe<Scalars['Float']>;
-};
-
-/** aggregate var_samp on columns */
-export type Roles_Var_Samp_Fields = {
-  __typename?: 'roles_var_samp_fields';
-  id?: Maybe<Scalars['Float']>;
-};
-
-/** aggregate variance on columns */
-export type Roles_Variance_Fields = {
-  __typename?: 'roles_variance_fields';
-  id?: Maybe<Scalars['Float']>;
-};
 
 export type Search_Articles_Args = {
   search?: Maybe<Scalars['String']>;
@@ -5689,12 +5653,12 @@ export type Subscription_Root = {
   referendums_aggregate: Referendums_Aggregate;
   /** fetch data from the table: "referendums" using primary key columns */
   referendums_by_pk?: Maybe<Referendums>;
-  /** fetch data from the table: "roles" */
-  roles: Array<Roles>;
-  /** fetch aggregated fields from the table: "roles" */
-  roles_aggregate: Roles_Aggregate;
-  /** fetch data from the table: "roles" using primary key columns */
-  roles_by_pk?: Maybe<Roles>;
+  /** fetch data from the table: "role_types" */
+  role_types: Array<Role_Types>;
+  /** fetch aggregated fields from the table: "role_types" */
+  role_types_aggregate: Role_Types_Aggregate;
+  /** fetch data from the table: "role_types" using primary key columns */
+  role_types_by_pk?: Maybe<Role_Types>;
   /** execute function "search_articles" which returns "settlements" */
   search_articles: Array<Settlements>;
   /** execute function "search_articles" and query aggregates on result of table type "settlements" */
@@ -6063,26 +6027,26 @@ export type Subscription_RootReferendums_By_PkArgs = {
 };
 
 
-export type Subscription_RootRolesArgs = {
-  distinct_on?: Maybe<Array<Roles_Select_Column>>;
+export type Subscription_RootRole_TypesArgs = {
+  distinct_on?: Maybe<Array<Role_Types_Select_Column>>;
   limit?: Maybe<Scalars['Int']>;
   offset?: Maybe<Scalars['Int']>;
-  order_by?: Maybe<Array<Roles_Order_By>>;
-  where?: Maybe<Roles_Bool_Exp>;
+  order_by?: Maybe<Array<Role_Types_Order_By>>;
+  where?: Maybe<Role_Types_Bool_Exp>;
 };
 
 
-export type Subscription_RootRoles_AggregateArgs = {
-  distinct_on?: Maybe<Array<Roles_Select_Column>>;
+export type Subscription_RootRole_Types_AggregateArgs = {
+  distinct_on?: Maybe<Array<Role_Types_Select_Column>>;
   limit?: Maybe<Scalars['Int']>;
   offset?: Maybe<Scalars['Int']>;
-  order_by?: Maybe<Array<Roles_Order_By>>;
-  where?: Maybe<Roles_Bool_Exp>;
+  order_by?: Maybe<Array<Role_Types_Order_By>>;
+  where?: Maybe<Role_Types_Bool_Exp>;
 };
 
 
-export type Subscription_RootRoles_By_PkArgs = {
-  id: Scalars['Int'];
+export type Subscription_RootRole_Types_By_PkArgs = {
+  value: Scalars['String'];
 };
 
 
@@ -6309,12 +6273,12 @@ export type Users = {
   name: Scalars['String'];
   password?: Maybe<Scalars['String']>;
   pin?: Maybe<Scalars['String']>;
+  role: Role_Types_Enum;
   /** An object relationship */
-  role: Roles;
-  roleId: Scalars['Int'];
+  roleType: Role_Types;
+  secondRole?: Maybe<Role_Types_Enum>;
   /** An object relationship */
-  secondRole?: Maybe<Roles>;
-  secondRoleId?: Maybe<Scalars['Int']>;
+  secondRoleType?: Maybe<Role_Types>;
   surname: Scalars['String'];
   updatedAt: Scalars['timestamptz'];
   voted: Scalars['Boolean'];
@@ -6355,8 +6319,6 @@ export type Users_Avg_Fields = {
   __typename?: 'users_avg_fields';
   addressId?: Maybe<Scalars['Float']>;
   id?: Maybe<Scalars['Float']>;
-  roleId?: Maybe<Scalars['Float']>;
-  secondRoleId?: Maybe<Scalars['Float']>;
 };
 
 /** Boolean expression to filter rows from the table "users". All fields are combined with a logical 'AND'. */
@@ -6375,10 +6337,10 @@ export type Users_Bool_Exp = {
   name?: Maybe<String_Comparison_Exp>;
   password?: Maybe<String_Comparison_Exp>;
   pin?: Maybe<String_Comparison_Exp>;
-  role?: Maybe<Roles_Bool_Exp>;
-  roleId?: Maybe<Int_Comparison_Exp>;
-  secondRole?: Maybe<Roles_Bool_Exp>;
-  secondRoleId?: Maybe<Int_Comparison_Exp>;
+  role?: Maybe<Role_Types_Enum_Comparison_Exp>;
+  roleType?: Maybe<Role_Types_Bool_Exp>;
+  secondRole?: Maybe<Role_Types_Enum_Comparison_Exp>;
+  secondRoleType?: Maybe<Role_Types_Bool_Exp>;
   surname?: Maybe<String_Comparison_Exp>;
   updatedAt?: Maybe<Timestamptz_Comparison_Exp>;
   voted?: Maybe<Boolean_Comparison_Exp>;
@@ -6396,8 +6358,6 @@ export enum Users_Constraint {
 export type Users_Inc_Input = {
   addressId?: Maybe<Scalars['Int']>;
   id?: Maybe<Scalars['Int']>;
-  roleId?: Maybe<Scalars['Int']>;
-  secondRoleId?: Maybe<Scalars['Int']>;
 };
 
 /** input type for inserting data into table "users" */
@@ -6413,10 +6373,10 @@ export type Users_Insert_Input = {
   name?: Maybe<Scalars['String']>;
   password?: Maybe<Scalars['String']>;
   pin?: Maybe<Scalars['String']>;
-  role?: Maybe<Roles_Obj_Rel_Insert_Input>;
-  roleId?: Maybe<Scalars['Int']>;
-  secondRole?: Maybe<Roles_Obj_Rel_Insert_Input>;
-  secondRoleId?: Maybe<Scalars['Int']>;
+  role?: Maybe<Role_Types_Enum>;
+  roleType?: Maybe<Role_Types_Obj_Rel_Insert_Input>;
+  secondRole?: Maybe<Role_Types_Enum>;
+  secondRoleType?: Maybe<Role_Types_Obj_Rel_Insert_Input>;
   surname?: Maybe<Scalars['String']>;
   updatedAt?: Maybe<Scalars['timestamptz']>;
   voted?: Maybe<Scalars['Boolean']>;
@@ -6434,8 +6394,6 @@ export type Users_Max_Fields = {
   name?: Maybe<Scalars['String']>;
   password?: Maybe<Scalars['String']>;
   pin?: Maybe<Scalars['String']>;
-  roleId?: Maybe<Scalars['Int']>;
-  secondRoleId?: Maybe<Scalars['Int']>;
   surname?: Maybe<Scalars['String']>;
   updatedAt?: Maybe<Scalars['timestamptz']>;
 };
@@ -6452,8 +6410,6 @@ export type Users_Min_Fields = {
   name?: Maybe<Scalars['String']>;
   password?: Maybe<Scalars['String']>;
   pin?: Maybe<Scalars['String']>;
-  roleId?: Maybe<Scalars['Int']>;
-  secondRoleId?: Maybe<Scalars['Int']>;
   surname?: Maybe<Scalars['String']>;
   updatedAt?: Maybe<Scalars['timestamptz']>;
 };
@@ -6494,10 +6450,10 @@ export type Users_Order_By = {
   name?: Maybe<Order_By>;
   password?: Maybe<Order_By>;
   pin?: Maybe<Order_By>;
-  role?: Maybe<Roles_Order_By>;
-  roleId?: Maybe<Order_By>;
-  secondRole?: Maybe<Roles_Order_By>;
-  secondRoleId?: Maybe<Order_By>;
+  role?: Maybe<Order_By>;
+  roleType?: Maybe<Role_Types_Order_By>;
+  secondRole?: Maybe<Order_By>;
+  secondRoleType?: Maybe<Role_Types_Order_By>;
   surname?: Maybe<Order_By>;
   updatedAt?: Maybe<Order_By>;
   voted?: Maybe<Order_By>;
@@ -6531,9 +6487,9 @@ export enum Users_Select_Column {
   /** column name */
   Pin = 'pin',
   /** column name */
-  RoleId = 'roleId',
+  Role = 'role',
   /** column name */
-  SecondRoleId = 'secondRoleId',
+  SecondRole = 'secondRole',
   /** column name */
   Surname = 'surname',
   /** column name */
@@ -6554,8 +6510,8 @@ export type Users_Set_Input = {
   name?: Maybe<Scalars['String']>;
   password?: Maybe<Scalars['String']>;
   pin?: Maybe<Scalars['String']>;
-  roleId?: Maybe<Scalars['Int']>;
-  secondRoleId?: Maybe<Scalars['Int']>;
+  role?: Maybe<Role_Types_Enum>;
+  secondRole?: Maybe<Role_Types_Enum>;
   surname?: Maybe<Scalars['String']>;
   updatedAt?: Maybe<Scalars['timestamptz']>;
   voted?: Maybe<Scalars['Boolean']>;
@@ -6566,8 +6522,6 @@ export type Users_Stddev_Fields = {
   __typename?: 'users_stddev_fields';
   addressId?: Maybe<Scalars['Float']>;
   id?: Maybe<Scalars['Float']>;
-  roleId?: Maybe<Scalars['Float']>;
-  secondRoleId?: Maybe<Scalars['Float']>;
 };
 
 /** aggregate stddev_pop on columns */
@@ -6575,8 +6529,6 @@ export type Users_Stddev_Pop_Fields = {
   __typename?: 'users_stddev_pop_fields';
   addressId?: Maybe<Scalars['Float']>;
   id?: Maybe<Scalars['Float']>;
-  roleId?: Maybe<Scalars['Float']>;
-  secondRoleId?: Maybe<Scalars['Float']>;
 };
 
 /** aggregate stddev_samp on columns */
@@ -6584,8 +6536,6 @@ export type Users_Stddev_Samp_Fields = {
   __typename?: 'users_stddev_samp_fields';
   addressId?: Maybe<Scalars['Float']>;
   id?: Maybe<Scalars['Float']>;
-  roleId?: Maybe<Scalars['Float']>;
-  secondRoleId?: Maybe<Scalars['Float']>;
 };
 
 /** aggregate sum on columns */
@@ -6593,8 +6543,6 @@ export type Users_Sum_Fields = {
   __typename?: 'users_sum_fields';
   addressId?: Maybe<Scalars['Int']>;
   id?: Maybe<Scalars['Int']>;
-  roleId?: Maybe<Scalars['Int']>;
-  secondRoleId?: Maybe<Scalars['Int']>;
 };
 
 /** update columns of table "users" */
@@ -6620,9 +6568,9 @@ export enum Users_Update_Column {
   /** column name */
   Pin = 'pin',
   /** column name */
-  RoleId = 'roleId',
+  Role = 'role',
   /** column name */
-  SecondRoleId = 'secondRoleId',
+  SecondRole = 'secondRole',
   /** column name */
   Surname = 'surname',
   /** column name */
@@ -6636,8 +6584,6 @@ export type Users_Var_Pop_Fields = {
   __typename?: 'users_var_pop_fields';
   addressId?: Maybe<Scalars['Float']>;
   id?: Maybe<Scalars['Float']>;
-  roleId?: Maybe<Scalars['Float']>;
-  secondRoleId?: Maybe<Scalars['Float']>;
 };
 
 /** aggregate var_samp on columns */
@@ -6645,8 +6591,6 @@ export type Users_Var_Samp_Fields = {
   __typename?: 'users_var_samp_fields';
   addressId?: Maybe<Scalars['Float']>;
   id?: Maybe<Scalars['Float']>;
-  roleId?: Maybe<Scalars['Float']>;
-  secondRoleId?: Maybe<Scalars['Float']>;
 };
 
 /** aggregate variance on columns */
@@ -6654,8 +6598,6 @@ export type Users_Variance_Fields = {
   __typename?: 'users_variance_fields';
   addressId?: Maybe<Scalars['Float']>;
   id?: Maybe<Scalars['Float']>;
-  roleId?: Maybe<Scalars['Float']>;
-  secondRoleId?: Maybe<Scalars['Float']>;
 };
 
 /** columns and relationships of "votes" */
@@ -7845,16 +7787,29 @@ export type Votings_Variance_Fields = {
   id?: Maybe<Scalars['Float']>;
 };
 
-export type RegisterMutationVariables = Exact<{
+export type RegisterQueryVariables = Exact<{
   args: RegisterUserInsertInput;
 }>;
 
 
-export type RegisterMutation = (
-  { __typename?: 'mutation_root' }
-  & { RegisterUser?: Maybe<(
+export type RegisterQuery = (
+  { __typename?: 'query_root' }
+  & { RegisterAction?: Maybe<(
     { __typename?: 'RegisterOutput' }
-    & Pick<RegisterOutput, 'accessToken'>
+    & Pick<RegisterOutput, 'found'>
+  )> }
+);
+
+export type LoginActionQueryVariables = Exact<{
+  args: LoginInput;
+}>;
+
+
+export type LoginActionQuery = (
+  { __typename?: 'query_root' }
+  & { LoginAction?: Maybe<(
+    { __typename?: 'LoginOutput' }
+    & Pick<LoginOutput, 'accessToken' | 'fetchToken'>
   )> }
 );
 
@@ -7963,25 +7918,16 @@ export type UpdateUserMutation = (
   )> }
 );
 
-export type LoginQueryVariables = Exact<{
-  egn: Scalars['String'];
-  pin: Scalars['String'];
-  password?: Maybe<Scalars['String']>;
-}>;
-
-
-export type LoginQuery = (
-  { __typename?: 'query_root' }
-  & { getAccessToken?: Maybe<(
-    { __typename?: 'LoginResponse' }
-    & Pick<LoginResponse, 'code' | 'message' | 'userId' | 'accessToken'>
-  )> }
-);
-
 export type UserFieldsFragment = (
   { __typename?: 'users' }
-  & Pick<Users, 'id' | 'createdAt' | 'updatedAt' | 'roleId' | 'secondRoleId' | 'name' | 'surname' | 'family' | 'egn' | 'email' | 'pin' | 'password' | 'addressId' | 'voted' | 'eVoted'>
-  & { address: (
+  & Pick<Users, 'id' | 'createdAt' | 'updatedAt' | 'name' | 'surname' | 'family' | 'egn' | 'email' | 'pin' | 'password' | 'addressId' | 'voted' | 'eVoted'>
+  & { roleType: (
+    { __typename?: 'role_types' }
+    & Pick<Role_Types, 'value' | 'description'>
+  ), secondRoleType?: Maybe<(
+    { __typename?: 'role_types' }
+    & Pick<Role_Types, 'value' | 'description'>
+  )>, address: (
     { __typename?: 'addresses' }
     & Pick<Addresses, 'id' | 'settlementId' | 'number' | 'street' | 'description'>
   ) }
@@ -8000,8 +7946,6 @@ export const UserFieldsFragmentDoc = gql`
   id
   createdAt
   updatedAt
-  roleId
-  secondRoleId
   name
   surname
   family
@@ -8012,6 +7956,14 @@ export const UserFieldsFragmentDoc = gql`
   addressId
   voted
   eVoted
+  roleType {
+    value
+    description
+  }
+  secondRoleType {
+    value
+    description
+  }
   address {
     id
     settlementId
@@ -8022,9 +7974,9 @@ export const UserFieldsFragmentDoc = gql`
 }
     `;
 export const RegisterDocument = gql`
-    mutation Register($args: RegisterUserInsertInput!) {
-  RegisterUser(arg1: $args) {
-    accessToken
+    query Register($args: RegisterUserInsertInput!) {
+  RegisterAction(arg1: $args) {
+    found
   }
 }
     `;
@@ -8032,8 +7984,27 @@ export const RegisterDocument = gql`
   @Injectable({
     providedIn: 'root'
   })
-  export class RegisterGQL extends Apollo.Mutation<RegisterMutation, RegisterMutationVariables> {
+  export class RegisterGQL extends Apollo.Query<RegisterQuery, RegisterQueryVariables> {
     document = RegisterDocument;
+    
+    constructor(apollo: Apollo.Apollo) {
+      super(apollo);
+    }
+  }
+export const LoginActionDocument = gql`
+    query LoginAction($args: LoginInput!) {
+  LoginAction(args: $args) {
+    accessToken
+    fetchToken
+  }
+}
+    `;
+
+  @Injectable({
+    providedIn: 'root'
+  })
+  export class LoginActionGQL extends Apollo.Query<LoginActionQuery, LoginActionQueryVariables> {
+    document = LoginActionDocument;
     
     constructor(apollo: Apollo.Apollo) {
       super(apollo);
@@ -8171,27 +8142,6 @@ export const UpdateUserDocument = gql`
   })
   export class UpdateUserGQL extends Apollo.Mutation<UpdateUserMutation, UpdateUserMutationVariables> {
     document = UpdateUserDocument;
-    
-    constructor(apollo: Apollo.Apollo) {
-      super(apollo);
-    }
-  }
-export const LoginDocument = gql`
-    query Login($egn: String!, $pin: String!, $password: String) {
-  getAccessToken(args: {egn: $egn, pin: $pin, password: $password}) {
-    code
-    message
-    userId
-    accessToken
-  }
-}
-    `;
-
-  @Injectable({
-    providedIn: 'root'
-  })
-  export class LoginGQL extends Apollo.Query<LoginQuery, LoginQueryVariables> {
-    document = LoginDocument;
     
     constructor(apollo: Apollo.Apollo) {
       super(apollo);

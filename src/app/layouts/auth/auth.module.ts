@@ -15,11 +15,19 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { RouterModule } from '@angular/router';
 import { LoginComponent } from 'src/app/auth/login/login.component';
+import { RegisterFailComponent } from 'src/app/auth/register-fail/register-fail.component';
+import { RegisterSuccessComponent } from 'src/app/auth/register-success/register-success.component';
 import { RegisterComponent } from 'src/app/auth/register/register.component';
 import { AuthComponent } from './auth.component';
 
 @NgModule({
-  declarations: [LoginComponent, RegisterComponent, AuthComponent],
+  declarations: [
+    LoginComponent,
+    RegisterComponent,
+    RegisterSuccessComponent,
+    RegisterFailComponent,
+    AuthComponent,
+  ],
   imports: [
     CommonModule,
     MatInputModule,
