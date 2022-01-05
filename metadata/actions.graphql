@@ -10,12 +10,6 @@ type Query {
   ): RegisterOutput
 }
 
-type Query {
-  getAccessToken(
-    args: UsersInput!
-  ): LoginResponse
-}
-
 input UsersInput {
   egn: String!
   pin: String!

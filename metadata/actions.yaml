@@ -11,11 +11,6 @@ actions:
     handler: http://host.docker.internal:9000/auth/register
   permissions:
   - role: anonymous
-- name: getAccessToken
-  definition:
-    kind: ""
-    handler: http://host.docker.internal:9000/auth/getAccessToken
-    forward_client_headers: true
 custom_types:
   enums: []
   input_objects:
