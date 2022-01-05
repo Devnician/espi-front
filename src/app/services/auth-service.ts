@@ -11,18 +11,23 @@ import {
   RegisterQuery,
   RegisterUserInsertInput,
 } from 'src/generated/graphql';
+import { LoggedUser } from '../auth/logged-user.interface';
+import { TokenTypes } from '../auth/token-types.enum';
 
 @Injectable({
   providedIn: 'root',
 })
 export class AuthService {
-  static readonly ACC_TOKEN = 'access_token';
-  static readonly FETCH_TOKEN = 'fetch-token';
+  private accessToken: BehaviorSubject<string> = new BehaviorSubject(null);
+  public readonly accessToken$ = this.accessToken.asObservable();
 
-  private token: BehaviorSubject<string> = new BehaviorSubject(null);
-  public readonly token$ = this.token.asObservable();
+  private fetchToken: BehaviorSubject<string> = new BehaviorSubject(null);
+  public readonly fetchToken$ = this.fetchToken.asObservable();
 
-  host: string = environment.expressUrl;
+  private user: BehaviorSubject<LoggedUser> = new BehaviorSubject(null);
+  public readonly user$ = this.user.asObservable();
+
+  // host: string = environment.expressUrl;
 
   constructor(
     private http: HttpClient,
@@ -30,9 +35,10 @@ export class AuthService {
     private loginActionGQL: LoginActionGQL /*private actionCallGQL: ActionCallGQL*/
   ) {
     if (environment.production === false) {
-      const token = localStorage.getItem('token');
-      console.log(token);
-      this.token.next(token);
+      const accessT = localStorage.getItem(TokenTypes.ACCESS_TOKEN);
+      const fetchT = localStorage.getItem(TokenTypes.FETCH_TOKEN);
+      console.log('tokens from local..');
+      this.accessToken.next(accessT);
     }
   }
 
@@ -43,7 +49,7 @@ export class AuthService {
   > {
     return this.registerGQL.fetch(
       { args: data },
-      { fetchPolicy: 'network-only' }
+      { fetchPolicy: 'network-only', errorPolicy: 'all' }
     );
   }
 
@@ -52,20 +58,42 @@ export class AuthService {
   ): Observable<ApolloQueryResult<LoginActionQuery>> {
     return this.loginActionGQL.fetch(
       { args: data },
-      { fetchPolicy: 'network-only' }
+      { fetchPolicy: 'network-only', errorPolicy: 'all' }
     );
   }
 
   // This method calls  directly Express
-  callExpressLogin(): Observable<any> {
-    return this.http.get<any>(this.host + 'login/');
+  // callExpressLogin(): Observable<any> {
+  //   return this.http.get<any>(this.host + 'login/');
+  // }
+
+  setAccessToken(token: string) {
+    this.accessToken.next(token);
   }
 
-  callExpressThroughHasuraActions(username: string, password: string) {
-    // return this.actionCallGQL.mutate({ arg: { username, password } });
+  setFetchToken(token: string) {
+    this.fetchToken.next(token);
   }
 
-  setToken(token: string) {
-    this.token.next(token);
+  setLoggedUser(user: LoggedUser) {
+    this.user.next(user);
+  }
+  /**
+   * Nullifies subjects
+   */
+  clearAll() {
+    this.setAccessToken(null);
+    this.setFetchToken(null);
+    this.setLoggedUser(null);
+  }
+
+  saveTokensInLocalStorage(accToken: string, fetchToken: string) {
+    localStorage.setItem(TokenTypes.ACCESS_TOKEN, accToken);
+    localStorage.setItem(TokenTypes.FETCH_TOKEN, fetchToken);
+  }
+
+  TokensFromLocalStorage() {
+    localStorage.removeItem(TokenTypes.ACCESS_TOKEN);
+    localStorage.removeItem(TokenTypes.FETCH_TOKEN);
   }
 }

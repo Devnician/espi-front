@@ -43,6 +43,7 @@ export class UsersTableComponent implements AfterViewInit {
     'email',
     'voted',
     'eVoted',
+    'actions',
   ];
 
   constructor(
@@ -93,7 +94,13 @@ export class UsersTableComponent implements AfterViewInit {
       }
     });
   }
-
+  testCall(user: Users) {
+    console.log(user);
+    alert(JSON.stringify(user));
+  }
+  /**
+   * Delete this...
+   */
   updateFirst() {
     this.dataSource.loading.next(true);
     // console.log(this.dataSource.currentPageData.value);
@@ -143,20 +150,9 @@ export class UsersTableComponent implements AfterViewInit {
   public getDistricts() {
     this.settlementsService.getDistricts().subscribe((response) => {
       console.log(response.data.settlements);
-
       if (response.data) {
         this.districts.next(response.data.settlements);
       }
     });
-  }
-
-  public testLogin() {
-    alert('remove this');
-    console.log('remove this..');
-    //   //variables: { egn: '8080808080', password: 'pepe' },
-    //   console.log('LOGIN ATEMPT');
-    //   this.usersService.login('8080808080', '', 'pepe').subscribe((response) => {
-    //     console.log(response);
-    //   });
   }
 }

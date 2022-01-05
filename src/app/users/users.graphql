@@ -27,15 +27,6 @@ mutation UpdateUser($id: Int!, $set: users_set_input!) {
   }
 }
 
-# query Login($egn: String!, $pin: String!, $password: String) {
-#   getAccessToken(args: { egn: $egn, pin: $pin, password: $password }) {
-#     code
-#     message
-#     userId
-#     accessToken
-#   }
-# }
-
 fragment UserFields on users {
   id
   createdAt

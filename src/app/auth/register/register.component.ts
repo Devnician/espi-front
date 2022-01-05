@@ -68,13 +68,13 @@ export class RegisterComponent extends VixenComponent implements OnInit {
     this.loading.next(true);
     this.submitted.next(true);
     this.auth.actionRegister(formData).subscribe((response) => {
-      console.log(response);
+      // console.log(response);
       if (response.data) {
         this.loading.next(false);
         const found = response.data.RegisterAction.found;
-        console.log(found);
+        //  console.log(found);
         if (found) {
-          console.log(' redirect ');
+          //   console.log(' redirect ');
           this.router.navigateByUrl('auth/register/success');
         } else {
           this.router.navigateByUrl('auth/register/fail');

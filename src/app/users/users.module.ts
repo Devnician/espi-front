@@ -3,6 +3,8 @@ import { NgModule } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCheckboxModule } from '@angular/material/checkbox';
+import { MatIconModule } from '@angular/material/icon';
+import { MatMenuModule } from '@angular/material/menu';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
@@ -31,7 +33,7 @@ import { UsersTableComponent } from './users-table/users-table.component';
     //  MatSnackBarModule,
 
     // MatButtonModule,
-    // MatIconModule,
+    MatIconModule,
     // MatInputModule,
     // MatSelectModule,
     // MatRadioModule,
@@ -39,7 +41,7 @@ import { UsersTableComponent } from './users-table/users-table.component';
     // MatAutocompleteModule,
     // ReactiveFormsModule,
     // MatSlideToggleModule,
-    // MatMenuModule,
+    MatMenuModule,
     // MatDialogModule,
     // MatSnackBarModule,
     // MatProgressBarModule,

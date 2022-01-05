@@ -2,13 +2,14 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
+import { JwtHelperService } from '@auth0/angular-jwt';
 import { isNullOrUndefined } from 'is-what';
 import { BehaviorSubject } from 'rxjs';
 import { Valido } from 'src/app/core/valido';
 import { VixenComponent } from 'src/app/core/vixen/vixen.component';
 import { AuthService } from 'src/app/services/auth-service';
+import { environment } from 'src/environments/environment';
 import { LoginOutput } from 'src/generated/graphql';
-
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -25,7 +26,8 @@ export class LoginComponent extends VixenComponent implements OnInit {
     public valido: Valido,
     private auth: AuthService,
     private router: Router,
-    private snackBar: MatSnackBar
+    private snackBar: MatSnackBar,
+    private jwtHelper: JwtHelperService
   ) {
     super(valido);
   }
@@ -49,7 +51,6 @@ export class LoginComponent extends VixenComponent implements OnInit {
   loginUser() {
     this.loading.next(true);
     this.loginForm.disable();
-    console.log('LOGIN');
     if (this.loginForm.invalid) {
       this.valido.validateAllFormFields(this.loginForm);
       return;
@@ -61,15 +62,26 @@ export class LoginComponent extends VixenComponent implements OnInit {
       .loginAction({ password: formData.password, egn: formData.egn })
       .subscribe((response) => {
         const output: LoginOutput = response.data.LoginAction;
-        console.log(output);
-        if (isNullOrUndefined(output.accessToken)) {
+
+        const accessT: string = output.accessToken;
+        const fetchT = output.fetchToken;
+        //  console.log(output);
+        if (isNullOrUndefined(accessT)) {
           this.snackBar.open('Невалидни удостоверения', 'ОК', {
             duration: 5000,
           });
         } else {
-          this.auth.setToken(output.accessToken);
-          localStorage.setItem('access_token', output.accessToken);
-          localStorage.setItem('fetch_token', output.fetchToken);
+          this.auth.setAccessToken(accessT);
+          this.auth.setFetchToken(fetchT);
+
+          const res = this.jwtHelper.decodeToken(accessT);
+          //  console.log(res);
+          this.auth.setLoggedUser(res.user);
+          //  console.log('decoded: ');
+          //   console.log(res);
+          if (environment.production === false) {
+            this.auth.saveTokensInLocalStorage(accessT, fetchT);
+          }
           this.router.navigateByUrl('/');
         }
         this.loginForm.enable();

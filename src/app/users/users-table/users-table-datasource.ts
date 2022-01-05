@@ -93,6 +93,7 @@ export class OrdersTableDataSource extends DataSource<Users> {
       map(({ data, loading, errors }) => {
         this.loading.next(loading);
         if (errors) {
+          console.log(errors);
           console.log(data);
           const errorMessage = errors[0].message;
           console.log(errorMessage);

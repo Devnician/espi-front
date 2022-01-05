@@ -1,23 +1,20 @@
-<button mat-raised-button color="primary" style="margin: 10px" routerLink="">
-  Home
-</button>
-
 <button
   mat-raised-button
   color="primary"
   style="margin: 10px"
   (click)="addUser()"
 >
-  Добави
+  Добави гласоподавател
 </button>
-<button
+
+<!-- <button
   mat-raised-button
   color="primary"
   style="margin: 10px"
   (click)="updateFirst()"
 >
   Промени
-</button>
+</button> -->
 
 <button
   mat-raised-button
@@ -26,15 +23,6 @@
   (click)="getDistricts()"
 >
   Областни градове
-</button>
-
-<button
-  mat-raised-button
-  color="primary"
-  style="margin: 10px"
-  (click)="testLogin()"
->
-  тестов вход през express
 </button>
 
 <div class="mat-elevation-z8">
@@ -115,6 +103,26 @@
           [checked]="row.eVoted"
           [disabled]="true"
         ></mat-checkbox>
+      </td>
+    </ng-container>
+
+    <!-- actions Column -->
+    <ng-container matColumnDef="actions">
+      <th mat-header-cell *matHeaderCellDef>действия</th>
+      <td mat-cell *matCellDef="let row">
+        <button
+          mat-icon-button
+          [matMenuTriggerFor]="menu"
+          aria-label="Example icon-button with a menu"
+        >
+          <mat-icon>more_vert</mat-icon>
+        </button>
+        <mat-menu #menu="matMenu">
+          <button mat-menu-item (click)="testCall(row)">
+            <mat-icon>edit</mat-icon>
+            <span>Редактирай</span>
+          </button>
+        </mat-menu>
       </td>
     </ng-container>
 

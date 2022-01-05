@@ -20,7 +20,7 @@ export class LoginGuard implements CanActivate {
     state: RouterStateSnapshot
   ): Observable<boolean | UrlTree> {
     // return of(true);
-    return this.authService.token$.pipe(
+    return this.authService.accessToken$.pipe(
       map((token) => {
         console.log('login guard');
         if (token && state.url.indexOf('auth/login') > -1) {

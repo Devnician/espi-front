@@ -7,8 +7,10 @@
 }
 
 .nav-toolbar {
+    display: flex;
+    // justify-content: end;
     justify-content: space-between;
-    align-items: center;
+    // align-items: center;
 }
 
 .sidenav {
@@ -43,22 +45,6 @@ a.active {
     color: mat.get-color-from-palette(mat.$yellow-palette, 800);
 }
 
-.fixed-bottom {
-    width: 100%;
-}
-
-.user-settings {
-    display: flex;
-    align-items: center;
-    mat-icon {
-        padding: 5px;
-    }
-}
-
-.mat-icon.spinnable {
-    animation: spin-animation 0.5s infinite;
-}
-
 @media screen and (min-width: "600px") {
     .container {
         padding: 25px;
@@ -83,6 +69,16 @@ a.active {
     100% {
         transform: rotate(359deg);
     }
+}
+
+.user-logo {
+    height: 40px;
+    width: 40px;
+    margin: 0px;
+    margin-left: 10px;
+}
+.user-logo:hover {
+    opacity: 0.8;
 }
 
 .custom-button {

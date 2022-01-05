@@ -3,11 +3,12 @@ import {
   Breakpoints,
   BreakpointState,
 } from '@angular/cdk/layout';
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, HostListener, OnInit, ViewChild } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { MatDrawer } from '@angular/material/sidenav/drawer';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
+import { JwtHelperService } from '@auth0/angular-jwt';
 import {
   filter,
   map,
@@ -16,8 +17,13 @@ import {
   switchMap,
   withLatestFrom,
 } from 'rxjs';
+import { environment } from 'src/environments/environment';
+import { Role_Types_Enum } from 'src/generated/graphql';
+import { LoggedUser } from '../auth/logged-user.interface';
+import { TokenTypes } from '../auth/token-types.enum';
 import { Valido } from '../core/valido';
 import { VixenComponent } from '../core/vixen/vixen.component';
+import { AuthService } from '../services/auth-service';
 import { EspiMenu } from './espi-menu.interface';
 
 @Component({
@@ -34,19 +40,30 @@ export class NavigationComponent extends VixenComponent implements OnInit {
       shareReplay()
     );
   menus: EspiMenu[] = [];
+  user: LoggedUser;
+
   constructor(
     private router: Router,
     private dialog: MatDialog,
     private activatedRoute: ActivatedRoute,
     private breakpointObserver: BreakpointObserver,
     private snackbar: MatSnackBar,
-    public valido: Valido
+    public valido: Valido,
+    private auth: AuthService,
+    private jwtHelper: JwtHelperService
   ) {
     super(valido);
+
+    if (environment.production === false) {
+      const accessT = localStorage.getItem(TokenTypes.ACCESS_TOKEN);
+      const res = this.jwtHelper.decodeToken(accessT);
+      console.log(res);
+      this.auth.setLoggedUser(res.user);
+    }
   }
 
   ngOnInit(): void {
-    this.determineUserPermisionsAndMenus('admin'); // TODO - add enum !!! //this.role.value);
+    this.determineUserPermisionsAndMenus(Role_Types_Enum.Admin);
 
     this.subscriptions.push(
       this.router.events
@@ -76,7 +93,12 @@ export class NavigationComponent extends VixenComponent implements OnInit {
         .subscribe((title: string) => {
           console.log(title);
           // this.titleService.setTitle(title);
-        })
+        }),
+
+      this.auth.user$.subscribe((data) => {
+        console.log(data);
+        this.user = data;
+      })
     );
   }
 
@@ -119,5 +141,39 @@ export class NavigationComponent extends VixenComponent implements OnInit {
       matIcon: 'front_hand',
       badgeSubject: undefined,
     });
+  }
+
+  @HostListener('window:beforeunload', ['$event'])
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  beforeUnloadHander(event): void {
+    if (environment.production === true) {
+      this.clearUserData();
+    } else {
+      // console.log('Developer just reloads page..');
+    }
+  }
+
+  onChangePassword() {
+    console.log('change pass');
+  }
+
+  onLogout() {
+    this.clearUserData();
+    this.router.navigate(['auth/login']);
+  }
+
+  private clearUserData() {
+    this.auth.clearAll();
+    if (environment.production === false) {
+      this.auth.TokensFromLocalStorage();
+    }
+  }
+  onRoleChanged(event: any) {
+    console.log(event.value);
+
+    // this.user.currentRole = event.value === 1 ?
+    // this.auth.user$.subscribe((user) => {
+    //   console.log(user);
+    // });
   }
 }
