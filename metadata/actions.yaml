@@ -5,6 +5,17 @@ actions:
     handler: http://host.docker.internal:9000/auth/login
   permissions:
   - role: anonymous
+- name: RefreshToken
+  definition:
+    kind: ""
+    handler: http://host.docker.internal:9000/auth/refresh
+    forward_client_headers: true
+  permissions:
+  - role: user
+  - role: sectionLeader
+  - role: section
+  - role: centralLeader
+  - role: central
 - name: RegisterAction
   definition:
     kind: ""
@@ -17,8 +28,10 @@ custom_types:
   - name: UsersInput
   - name: RegisterUserInsertInput
   - name: LoginInput
+  - name: SwitchRoleInput
   objects:
   - name: LoginResponse
   - name: RegisterOutput
   - name: LoginOutput
+  - name: SwithcRoleOutput
   scalars: []

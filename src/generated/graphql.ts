@@ -55,14 +55,6 @@ export type LoginOutput = {
   fetchToken: Scalars['String'];
 };
 
-export type LoginResponse = {
-  __typename?: 'LoginResponse';
-  accessToken: Scalars['String'];
-  code: Scalars['String'];
-  message: Scalars['String'];
-  userId: Scalars['Int'];
-};
-
 export type RegisterOutput = {
   __typename?: 'RegisterOutput';
   found: Scalars['Boolean'];
@@ -108,10 +100,14 @@ export type String_Comparison_Exp = {
   _similar?: Maybe<Scalars['String']>;
 };
 
-export type UsersInput = {
-  egn: Scalars['String'];
-  password?: Maybe<Scalars['String']>;
-  pin: Scalars['String'];
+export type SwitchRoleInput = {
+  roleIndex: Scalars['Int'];
+  userId: Scalars['Int'];
+};
+
+export type SwithcRoleOutput = {
+  __typename?: 'SwithcRoleOutput';
+  fetchToken: Scalars['String'];
 };
 
 /** columns and relationships of "addresses" */
@@ -3568,6 +3564,7 @@ export type Political_Groups_Variance_Fields = {
 export type Query_Root = {
   __typename?: 'query_root';
   LoginAction?: Maybe<LoginOutput>;
+  RefreshToken?: Maybe<SwithcRoleOutput>;
   RegisterAction?: Maybe<RegisterOutput>;
   /** fetch data from the table: "addresses" */
   addresses: Array<Addresses>;
@@ -3611,7 +3608,6 @@ export type Query_Root = {
   electoral_rolls_aggregate: Electoral_Rolls_Aggregate;
   /** fetch data from the table: "electoral_rolls" using primary key columns */
   electoral_rolls_by_pk?: Maybe<Electoral_Rolls>;
-  getAccessToken?: Maybe<LoginResponse>;
   /** execute function "login" which returns "users" */
   login: Array<Users>;
   /** execute function "login" and query aggregates on result of table type "users" */
@@ -3658,10 +3654,6 @@ export type Query_Root = {
   role_types_aggregate: Role_Types_Aggregate;
   /** fetch data from the table: "role_types" using primary key columns */
   role_types_by_pk?: Maybe<Role_Types>;
-  /** execute function "search_articles" which returns "settlements" */
-  search_articles: Array<Settlements>;
-  /** execute function "search_articles" and query aggregates on result of table type "settlements" */
-  search_articles_aggregate: Settlements_Aggregate;
   /** fetch data from the table: "settlements" */
   settlements: Array<Settlements>;
   /** An aggregate relationship */
@@ -3709,6 +3701,11 @@ export type Query_Root = {
 
 export type Query_RootLoginActionArgs = {
   args: LoginInput;
+};
+
+
+export type Query_RootRefreshTokenArgs = {
+  args: SwitchRoleInput;
 };
 
 
@@ -3875,11 +3872,6 @@ export type Query_RootElectoral_Rolls_AggregateArgs = {
 
 export type Query_RootElectoral_Rolls_By_PkArgs = {
   id: Scalars['Int'];
-};
-
-
-export type Query_RootGetAccessTokenArgs = {
-  args: UsersInput;
 };
 
 
@@ -4061,26 +4053,6 @@ export type Query_RootRole_Types_AggregateArgs = {
 
 export type Query_RootRole_Types_By_PkArgs = {
   value: Scalars['String'];
-};
-
-
-export type Query_RootSearch_ArticlesArgs = {
-  args: Search_Articles_Args;
-  distinct_on?: Maybe<Array<Settlements_Select_Column>>;
-  limit?: Maybe<Scalars['Int']>;
-  offset?: Maybe<Scalars['Int']>;
-  order_by?: Maybe<Array<Settlements_Order_By>>;
-  where?: Maybe<Settlements_Bool_Exp>;
-};
-
-
-export type Query_RootSearch_Articles_AggregateArgs = {
-  args: Search_Articles_Args;
-  distinct_on?: Maybe<Array<Settlements_Select_Column>>;
-  limit?: Maybe<Scalars['Int']>;
-  offset?: Maybe<Scalars['Int']>;
-  order_by?: Maybe<Array<Settlements_Order_By>>;
-  where?: Maybe<Settlements_Bool_Exp>;
 };
 
 
@@ -5239,10 +5211,6 @@ export enum Role_Types_Update_Column {
   Value = 'value'
 }
 
-export type Search_Articles_Args = {
-  search?: Maybe<Scalars['String']>;
-};
-
 /** columns and relationships of "settlements" */
 export type Settlements = {
   __typename?: 'settlements';
@@ -5659,10 +5627,6 @@ export type Subscription_Root = {
   role_types_aggregate: Role_Types_Aggregate;
   /** fetch data from the table: "role_types" using primary key columns */
   role_types_by_pk?: Maybe<Role_Types>;
-  /** execute function "search_articles" which returns "settlements" */
-  search_articles: Array<Settlements>;
-  /** execute function "search_articles" and query aggregates on result of table type "settlements" */
-  search_articles_aggregate: Settlements_Aggregate;
   /** fetch data from the table: "settlements" */
   settlements: Array<Settlements>;
   /** An aggregate relationship */
@@ -6047,26 +6011,6 @@ export type Subscription_RootRole_Types_AggregateArgs = {
 
 export type Subscription_RootRole_Types_By_PkArgs = {
   value: Scalars['String'];
-};
-
-
-export type Subscription_RootSearch_ArticlesArgs = {
-  args: Search_Articles_Args;
-  distinct_on?: Maybe<Array<Settlements_Select_Column>>;
-  limit?: Maybe<Scalars['Int']>;
-  offset?: Maybe<Scalars['Int']>;
-  order_by?: Maybe<Array<Settlements_Order_By>>;
-  where?: Maybe<Settlements_Bool_Exp>;
-};
-
-
-export type Subscription_RootSearch_Articles_AggregateArgs = {
-  args: Search_Articles_Args;
-  distinct_on?: Maybe<Array<Settlements_Select_Column>>;
-  limit?: Maybe<Scalars['Int']>;
-  offset?: Maybe<Scalars['Int']>;
-  order_by?: Maybe<Array<Settlements_Order_By>>;
-  where?: Maybe<Settlements_Bool_Exp>;
 };
 
 
@@ -7813,6 +7757,19 @@ export type LoginActionQuery = (
   )> }
 );
 
+export type RefreshQueryVariables = Exact<{
+  args: SwitchRoleInput;
+}>;
+
+
+export type RefreshQuery = (
+  { __typename?: 'query_root' }
+  & { RefreshToken?: Maybe<(
+    { __typename?: 'SwithcRoleOutput' }
+    & Pick<SwithcRoleOutput, 'fetchToken'>
+  )> }
+);
+
 export type GetElectoralRollQueryVariables = Exact<{
   sectionId: Scalars['Int'];
 }>;
@@ -7920,7 +7877,7 @@ export type UpdateUserMutation = (
 
 export type UserFieldsFragment = (
   { __typename?: 'users' }
-  & Pick<Users, 'id' | 'createdAt' | 'updatedAt' | 'name' | 'surname' | 'family' | 'egn' | 'email' | 'pin' | 'password' | 'addressId' | 'voted' | 'eVoted'>
+  & Pick<Users, 'id' | 'createdAt' | 'updatedAt' | 'name' | 'surname' | 'family' | 'egn' | 'email' | 'pin' | 'addressId' | 'voted' | 'eVoted'>
   & { roleType: (
     { __typename?: 'role_types' }
     & Pick<Role_Types, 'value' | 'description'>
@@ -7952,7 +7909,6 @@ export const UserFieldsFragmentDoc = gql`
   egn
   email
   pin
-  password
   addressId
   voted
   eVoted
@@ -8005,6 +7961,24 @@ export const LoginActionDocument = gql`
   })
   export class LoginActionGQL extends Apollo.Query<LoginActionQuery, LoginActionQueryVariables> {
     document = LoginActionDocument;
+    
+    constructor(apollo: Apollo.Apollo) {
+      super(apollo);
+    }
+  }
+export const RefreshDocument = gql`
+    query Refresh($args: SwitchRoleInput!) {
+  RefreshToken(args: $args) {
+    fetchToken
+  }
+}
+    `;
+
+  @Injectable({
+    providedIn: 'root'
+  })
+  export class RefreshGQL extends Apollo.Query<RefreshQuery, RefreshQueryVariables> {
+    document = RefreshDocument;
     
     constructor(apollo: Apollo.Apollo) {
       super(apollo);

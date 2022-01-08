@@ -37,7 +37,7 @@ fragment UserFields on users {
   egn
   email
   pin
-  password
+  # password
   addressId
   voted
   eVoted

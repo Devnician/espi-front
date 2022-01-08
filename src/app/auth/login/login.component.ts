@@ -8,8 +8,8 @@ import { BehaviorSubject } from 'rxjs';
 import { Valido } from 'src/app/core/valido';
 import { VixenComponent } from 'src/app/core/vixen/vixen.component';
 import { AuthService } from 'src/app/services/auth-service';
-import { environment } from 'src/environments/environment';
 import { LoginOutput } from 'src/generated/graphql';
+import { TokenTypes } from '../token-types.enum';
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -72,17 +72,10 @@ export class LoginComponent extends VixenComponent implements OnInit {
           });
         } else {
           this.auth.setAccessToken(accessT);
-          this.auth.setFetchToken(fetchT);
-
           const res = this.jwtHelper.decodeToken(accessT);
-          //  console.log(res);
           this.auth.setLoggedUser(res.user);
-          //  console.log('decoded: ');
-          //   console.log(res);
-          if (environment.production === false) {
-            this.auth.saveTokensInLocalStorage(accessT, fetchT);
-          }
-          this.router.navigateByUrl('/');
+          localStorage.setItem(TokenTypes.ACCESS_TOKEN, accessT);
+          this.auth.setFetchTokenAndRedirectToHome(fetchT, this.router);
         }
         this.loginForm.enable();
         this.loading.next(false);

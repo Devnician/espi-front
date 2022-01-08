@@ -5,6 +5,12 @@ type Query {
 }
 
 type Query {
+  RefreshToken(
+    args: SwitchRoleInput!
+  ): SwithcRoleOutput
+}
+
+type Query {
   RegisterAction(
     arg1: RegisterUserInsertInput!
   ): RegisterOutput
@@ -28,6 +34,11 @@ input LoginInput {
   password: String!
 }
 
+input SwitchRoleInput {
+  userId: Int!
+  roleIndex: Int!
+}
+
 type LoginResponse {
   message: String
   code: String
@@ -42,5 +53,9 @@ type RegisterOutput {
 type LoginOutput {
   accessToken: String
   fetchToken: String
+}
+
+type SwithcRoleOutput {
+  fetchToken: String!
 }
 

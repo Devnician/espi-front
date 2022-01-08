@@ -117,22 +117,6 @@ export class UsersTableComponent implements AfterViewInit {
       delete firstFromPage.secondRoleType;
       delete firstFromPage.__typename;
 
-      //       addressId: 2
-      // createdAt: "2021-12-15T20:07:08.31307+00:00"
-      // egn: "8080808080"
-      // email: "alabala@bala.ala"
-      // family: "Иванов"
-      // id: 2
-      // name: "Иван"
-      // password: null
-      // pin: null
-      // roleId: 2
-      // secondRoleId: null
-      // sectionId: null
-      // surname: "Иванов"
-      // updatedAt: "2021-12-15T20:13:13.624189+00:00"
-      // __typename: "users"
-
       this.usersService
         .updateUser(firstFromPage)
         .subscribe(({ errors, data }) => {

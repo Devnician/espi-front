@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Router } from '@angular/router';
 import { ApolloQueryResult, FetchResult } from '@apollo/client';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
@@ -7,6 +8,8 @@ import {
   LoginActionGQL,
   LoginActionQuery,
   LoginInput,
+  RefreshGQL,
+  RefreshQuery,
   RegisterGQL,
   RegisterQuery,
   RegisterUserInsertInput,
@@ -27,12 +30,16 @@ export class AuthService {
   private user: BehaviorSubject<LoggedUser> = new BehaviorSubject(null);
   public readonly user$ = this.user.asObservable();
 
+  private userRoleIndex: BehaviorSubject<number> = new BehaviorSubject(0);
+  public readonly userRoleIndex$ = this.userRoleIndex.asObservable();
+
   // host: string = environment.expressUrl;
 
   constructor(
     private http: HttpClient,
     private registerGQL: RegisterGQL,
-    private loginActionGQL: LoginActionGQL /*private actionCallGQL: ActionCallGQL*/
+    private loginActionGQL: LoginActionGQL,
+    private refreshGQL: RefreshGQL
   ) {
     if (environment.production === false) {
       const accessT = localStorage.getItem(TokenTypes.ACCESS_TOKEN);
@@ -41,6 +48,8 @@ export class AuthService {
       this.accessToken.next(accessT);
     }
   }
+
+  // Calls
 
   actionRegister(
     data: RegisterUserInsertInput
@@ -61,11 +70,26 @@ export class AuthService {
       { fetchPolicy: 'network-only', errorPolicy: 'all' }
     );
   }
+  frefreshToken(
+    userId: number,
+    roleIndex: number
+  ): Observable<ApolloQueryResult<RefreshQuery>> {
+    return this.refreshGQL.fetch({ args: { userId, roleIndex } });
+  }
 
   // This method calls  directly Express
   // callExpressLogin(): Observable<any> {
   //   return this.http.get<any>(this.host + 'login/');
   // }
+  //  utils
+
+  setFetchTokenAndRedirectToHome(fetchToken: string, router: Router) {
+    this.setFetchToken(fetchToken);
+    if (environment.production === false) {
+      localStorage.setItem(TokenTypes.FETCH_TOKEN, fetchToken);
+    }
+    router.navigateByUrl('/');
+  }
 
   setAccessToken(token: string) {
     this.accessToken.next(token);
@@ -78,6 +102,9 @@ export class AuthService {
   setLoggedUser(user: LoggedUser) {
     this.user.next(user);
   }
+  setCurrentRoleIndex(index: number) {
+    this.userRoleIndex.next(index);
+  }
   /**
    * Nullifies subjects
    */
@@ -87,12 +114,7 @@ export class AuthService {
     this.setLoggedUser(null);
   }
 
-  saveTokensInLocalStorage(accToken: string, fetchToken: string) {
-    localStorage.setItem(TokenTypes.ACCESS_TOKEN, accToken);
-    localStorage.setItem(TokenTypes.FETCH_TOKEN, fetchToken);
-  }
-
-  TokensFromLocalStorage() {
+  clearTokensFromLocalStorage() {
     localStorage.removeItem(TokenTypes.ACCESS_TOKEN);
     localStorage.removeItem(TokenTypes.FETCH_TOKEN);
   }

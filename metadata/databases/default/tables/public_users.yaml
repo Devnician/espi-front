@@ -11,3 +11,98 @@ object_relationships:
 - name: secondRoleType
   using:
     foreign_key_constraint_on: secondRole
+select_permissions:
+- permission:
+    allow_aggregations: true
+    columns:
+    - addressId
+    - createdAt
+    - eVoted
+    - egn
+    - email
+    - family
+    - id
+    - name
+    - role
+    - secondRole
+    - surname
+    - updatedAt
+    - voted
+    filter: {}
+  role: central
+- permission:
+    allow_aggregations: true
+    columns:
+    - addressId
+    - createdAt
+    - eVoted
+    - egn
+    - email
+    - family
+    - id
+    - name
+    - role
+    - secondRole
+    - surname
+    - updatedAt
+    - voted
+    filter: {}
+  role: centralLeader
+- permission:
+    allow_aggregations: true
+    columns:
+    - addressId
+    - createdAt
+    - eVoted
+    - egn
+    - email
+    - family
+    - id
+    - name
+    - role
+    - secondRole
+    - surname
+    - updatedAt
+    - voted
+    filter: {}
+  role: section
+- permission:
+    allow_aggregations: true
+    columns:
+    - addressId
+    - createdAt
+    - eVoted
+    - egn
+    - email
+    - family
+    - id
+    - name
+    - pin
+    - role
+    - secondRole
+    - surname
+    - updatedAt
+    - voted
+    filter: {}
+  role: sectionLeader
+- permission:
+    allow_aggregations: true
+    columns:
+    - addressId
+    - createdAt
+    - eVoted
+    - egn
+    - email
+    - family
+    - id
+    - name
+    - pin
+    - role
+    - secondRole
+    - surname
+    - updatedAt
+    - voted
+    filter:
+      id:
+        _eq: X-Hasura-User-Id
+  role: user

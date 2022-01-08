@@ -9,3 +9,9 @@ query LoginAction($args: LoginInput!) {
     fetchToken
   }
 }
+# Change role(get token) or refresh token
+query Refresh($args: SwitchRoleInput!) {
+  RefreshToken(args: $args) {
+    fetchToken
+  }
+}

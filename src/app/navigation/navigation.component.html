@@ -55,8 +55,6 @@
                 {{ user?.name }} {{ user?.surname }} {{ user?.family }}
               </div>
               <div style="font-size: 12px; text-align: end">
-                <!-- {{ user?.currentRole.description }} -->
-
                 <!-- roleType: Role_Types;
                 secondRoleType: Role_Types; -->
                 <mat-radio-group
@@ -64,17 +62,21 @@
                   style="padding-top: 5px"
                   (change)="onRoleChanged($event)"
                 >
-                  <mat-radio-button value="1" [checked]="true">{{
-                    user?.roleType.description
-                  }}</mat-radio-button>
-                  <mat-radio-button style="padding-left: 5px" value="2">{{
-                    user?.secondRoleType.description
-                  }}</mat-radio-button>
+                  <mat-radio-button
+                    #fOpt
+                    value="0"
+                    [checked]="fOpt.value === (userObservables[1] | async) + ''"
+                    >{{ user?.roleType.description }}</mat-radio-button
+                  >
+                  <mat-radio-button
+                    #sOpt
+                    style="padding-left: 5px"
+                    value="1"
+                    [checked]="sOpt.value === (userObservables[1] | async) + ''"
+                    >{{ user?.secondRoleType.description }}</mat-radio-button
+                  >
                 </mat-radio-group>
               </div>
-              <!-- roleType: Role_Types;
-              secondRoleType: Role_Types;
-              currentRole: Role_Types; -->
             </div>
             <button
               mat-icon-button

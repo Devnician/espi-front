@@ -10,6 +10,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
 import { JwtHelperService } from '@auth0/angular-jwt';
 import {
+  combineLatest,
   filter,
   map,
   Observable,
@@ -41,6 +42,11 @@ export class NavigationComponent extends VixenComponent implements OnInit {
     );
   menus: EspiMenu[] = [];
   user: LoggedUser;
+  //currentRole$: Observable<number> = this.auth.userRoleIndex$;
+  userObservables: Observable<any>[] = [
+    this.auth.user$,
+    this.auth.userRoleIndex$,
+  ];
 
   constructor(
     private router: Router,
@@ -63,8 +69,6 @@ export class NavigationComponent extends VixenComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.determineUserPermisionsAndMenus(Role_Types_Enum.Admin);
-
     this.subscriptions.push(
       this.router.events
         .pipe(
@@ -92,55 +96,67 @@ export class NavigationComponent extends VixenComponent implements OnInit {
         )
         .subscribe((title: string) => {
           console.log(title);
-          // this.titleService.setTitle(title);
-        }),
-
-      this.auth.user$.subscribe((data) => {
-        console.log(data);
-        this.user = data;
-      })
+        })
     );
+    combineLatest(this.userObservables).subscribe((observableResults) => {
+      this.user = observableResults[0];
+      const roleIndex = observableResults[1];
+      const currentRole = (
+        roleIndex === 0
+          ? this.user.roleType.value
+          : this.user.secondRoleType.value
+      ) as Role_Types_Enum;
+      this.buildMenuForThisRole(currentRole);
+    });
   }
 
-  private determineUserPermisionsAndMenus(role: string): void {
-    // this.initPermissionsForMenus();
-
-    // switch (role) {
-    //   case User_Role_Enum.Admin:
-
-    //   case User_Role_Enum.User:
-    this.buildMenuForThisRole(role);
-    //     break;
-    //   default:
-    //     this.menus = [];
-    //     break;
-    // }
-  }
-  buildMenuForThisRole(role: string) {
-    this.menus.push({
-      route: 'users',
-      label: 'Гласоподаватели',
-      matIcon: 'groups',
-      badgeSubject: undefined,
-    });
-    this.menus.push({
-      route: 'settlements',
-      label: 'Населени места',
-      matIcon: 'location_city',
-      badgeSubject: undefined,
-    });
-    this.menus.push({
-      route: 'voting-sections',
-      label: 'Секции',
-      matIcon: 'how_to_vote',
-      badgeSubject: undefined,
-    });
-    this.menus.push({
-      route: 'votings',
-      label: 'Изброри',
-      matIcon: 'front_hand',
-      badgeSubject: undefined,
-    });
+  private buildMenuForThisRole(role: Role_Types_Enum) {
+    console.log('Rebuild menu for role: ' + role);
+    this.menus = [];
+    switch (role) {
+      case Role_Types_Enum.Admin:
+      case Role_Types_Enum.CentralLeader:
+      case Role_Types_Enum.Central:
+      case Role_Types_Enum.SectionLeader:
+      case Role_Types_Enum.Section:
+        this.menus.push({
+          route: 'users',
+          label: 'Гласоподаватели',
+          matIcon: 'groups',
+          badgeSubject: undefined,
+        });
+        this.menus.push({
+          route: 'settlements',
+          label: 'Населени места',
+          matIcon: 'location_city',
+          badgeSubject: undefined,
+        });
+        this.menus.push({
+          route: 'voting-sections',
+          label: 'Секции',
+          matIcon: 'how_to_vote',
+          badgeSubject: undefined,
+        });
+        this.menus.push({
+          route: 'votings',
+          label: 'Изброри',
+          matIcon: 'front_hand',
+          badgeSubject: undefined,
+        });
+        break;
+      case Role_Types_Enum.User:
+        this.menus.push({
+          route: 'votings',
+          label: 'Изброри',
+          matIcon: 'front_hand',
+          badgeSubject: undefined,
+        });
+        break;
+      default:
+        // ?? Who is here
+        this.auth.clearAll();
+        break;
+    }
   }
 
   @HostListener('window:beforeunload', ['$event'])
@@ -165,15 +181,29 @@ export class NavigationComponent extends VixenComponent implements OnInit {
   private clearUserData() {
     this.auth.clearAll();
     if (environment.production === false) {
-      this.auth.TokensFromLocalStorage();
+      this.auth.clearTokensFromLocalStorage();
     }
   }
   onRoleChanged(event: any) {
-    console.log(event.value);
-
-    // this.user.currentRole = event.value === 1 ?
-    // this.auth.user$.subscribe((user) => {
-    //   console.log(user);
-    // });
+    const roleIndex: number = parseInt(event.value);
+    this.auth.setCurrentRoleIndex(roleIndex);
+    this.auth.frefreshToken(this.user.id, roleIndex).subscribe((response) => {
+      if (response.error) {
+        console.log(response.error);
+        this.snackbar.open(
+          'Възникна грешка. Ролята Ви не беше промемена успешно.',
+          'ОК',
+          {}
+        );
+        return;
+      }
+      if (response.data?.RefreshToken?.fetchToken) {
+        const newFetchToken: string = response.data.RefreshToken.fetchToken;
+        this.auth.setFetchTokenAndRedirectToHome(newFetchToken, this.router);
+        this.snackbar.open('Ролята Ви беше променена успешно.', 'ОК', {
+          duration: 5000,
+        });
+      }
+    });
   }
 }
