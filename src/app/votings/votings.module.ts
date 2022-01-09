@@ -8,9 +8,11 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatMenuModule } from '@angular/material/menu';
 import { VotingsDashboardComponent } from './votings-dashboard/votings-dashboard.component';
 import { VotingsRoutingModule } from './votings-routing.module';
+import { ReferendumComponent } from './referendum/referendum.component';
+import { VoteComponent } from './vote/vote.component';
 
 @NgModule({
-  declarations: [VotingsDashboardComponent],
+  declarations: [VotingsDashboardComponent, ReferendumComponent, VoteComponent],
   imports: [
     CommonModule,
     VotingsRoutingModule,

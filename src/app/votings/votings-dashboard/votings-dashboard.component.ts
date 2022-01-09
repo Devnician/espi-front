@@ -1,5 +1,6 @@
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 interface VotingParams {
@@ -44,7 +45,10 @@ export class VotingsDashboardComponent {
       })
     );
 
-  constructor(private breakpointObserver: BreakpointObserver) {
+  constructor(
+    private breakpointObserver: BreakpointObserver,
+    private router: Router
+  ) {
     this.initVotingsCards();
   }
 
@@ -60,8 +64,8 @@ export class VotingsDashboardComponent {
         id: 1,
       },
       {
-        title: 'Президентски избори 2022',
-        text: 'Описание на избора',
+        title: 'Референдум 2022',
+        text: 'Описание на референдума',
         cols: 2,
         rows: 1,
         type: 'alabala',
@@ -71,7 +75,13 @@ export class VotingsDashboardComponent {
   }
 
   goToVotingComponent(vote: VotingParams) {
-    alert(JSON.stringify(vote));
+    if (vote.id === 1) {
+      this.router.navigate['votings/vote'];
+    }
+    if (vote.id === 2) {
+      this.router.navigate['votings/referendum'];
+    }
+    // alert(JSON.stringify(vote));
     //console.log(vote);
   }
 }
