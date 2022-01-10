@@ -18,12 +18,7 @@ import { DefaultComponent } from './default.component';
 
 //import { JwtModule, JWT_OPTIONS } from '@auth0/angular-jwt';
 @NgModule({
-  declarations: [
-    DefaultComponent,
-    NavigationComponent,
-    //  HomeComponent,
-    VixenComponent,
-  ],
+  declarations: [DefaultComponent, NavigationComponent, VixenComponent],
   imports: [
     CommonModule,
     RouterModule,
@@ -37,6 +32,7 @@ import { DefaultComponent } from './default.component';
     MatMenuModule,
     MatSlideToggleModule,
     MatRadioModule,
+
     JwtModule.forRoot({
       jwtOptionsProvider: {
         provide: JWT_OPTIONS,
