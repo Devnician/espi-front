@@ -8,6 +8,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatGridListModule } from '@angular/material/grid-list';
 import { MatIconModule } from '@angular/material/icon';
 import { MatMenuModule } from '@angular/material/menu';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatRadioModule } from '@angular/material/radio';
 import { MatStepperModule } from '@angular/material/stepper';
 import { ReferendumComponent } from './referendum/referendum.component';
@@ -30,6 +31,7 @@ import { VotingsRoutingModule } from './votings-routing.module';
     MatStepperModule,
     MatFormFieldModule,
     MatRadioModule,
+    MatProgressSpinnerModule,
   ],
 })
 export class VotingsModule {}

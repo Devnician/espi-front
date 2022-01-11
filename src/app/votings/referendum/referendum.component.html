@@ -10,111 +10,103 @@
   <mat-step
     *ngFor="let q of questions | async"
     [ngSwitch]="q"
-    [completed]="q.completed"
+    [completed]="q.response > -1"
     [label]="q.label"
   >
-    <ng-template matStepLabel>Question 1</ng-template>
-    <div style="width: 100%; height: 100%"></div>
-    <mat-card class="example-card">
+    <ng-template matStepLabel>
+      {{ q.isPreview ? "Преглед" : "Въпрос " + q.questionNumber }}
+    </ng-template>
+    <mat-card class="example-card" *ngIf="q.isPreview === false">
       <mat-card-header>
-        <mat-card-title>Въпрос № 1</mat-card-title>
-        <mat-card-subtitle>Отговорете на въпроса с ДА или НЕ</mat-card-subtitle>
+        <mat-card-title>Въпрос № {{ q.questionNumber }}</mat-card-title>
+        <mat-card-subtitle
+          >Моля, отговорете на въпроса с ДА или НЕ:
+        </mat-card-subtitle>
       </mat-card-header>
       <mat-card-content>
         <div>
           <mat-card-title
             style="height: 250px; text-align: center; font-size: xx-large"
-            >{{ q.text }} {{ q.completed }}</mat-card-title
-          >
+            >{{ q.text }}
+          </mat-card-title>
         </div>
-
         <div>
           <mat-radio-group
             aria-label="Select an option"
             class="radio-gr"
-            (change)="q.completed = true"
+            (change)="q.response = +$event.value; check()"
           >
-            <mat-radio-button #fOpt value="0" [checked]="false" color="warn"
-              >ДА</mat-radio-button
-            >
-            <mat-radio-button
-              #sOpt
-              style="padding-left: 5px"
-              value="1"
-              [checked]="false"
-              color="warn"
+            <mat-radio-button #sOpt value="0" [checked]="false" color="warn"
               >НЕ</mat-radio-button
             >
-            <mat-radio-button
-              #sOpt
-              style="padding-left: 5px"
-              value="1"
-              [checked]="false"
-              color="warn"
-              >НЯМАМ МНЕНИЕ</mat-radio-button
+            <mat-radio-button #fOpt value="1" [checked]="false" color="warn"
+              >ДА</mat-radio-button
             >
           </mat-radio-group>
         </div>
       </mat-card-content>
     </mat-card>
 
+    <mat-card class="example-card" *ngIf="q.isPreview === true">
+      <mat-card-header>
+        <mat-card-title>Преглед на отговорите</mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+        <div>
+          <table style="width: 100%">
+            <tr>
+              <th>Въпрос</th>
+              <th>Отговор</th>
+            </tr>
+            <tr *ngFor="let q2 of questions | async">
+              <td *ngIf="q2.questionNumber > 0" style="width: 100%">
+                <strong> {{ q2.text }}</strong>
+              </td>
+              <td
+                *ngIf="q2.questionNumber > 0"
+                style="width: 300px; text-align: center"
+              >
+                <strong *ngIf="q2.response === 0">НЕ</strong>
+                <strong *ngIf="q2.response === 1">ДА</strong>
+                <strong *ngIf="q2.response < 0" style="color: brown">
+                  Не сте отговорили.
+                </strong>
+              </td>
+            </tr>
+          </table>
+        </div>
+      </mat-card-content>
+    </mat-card>
+
     <div align="center" class="button-bar">
-      <button mat-raised-button matStepperPrevious color="accent">Назад</button>
-      <button mat-raised-button color="accent">Напред</button>
+      <button
+        mat-raised-button
+        matStepperPrevious
+        *ngIf="q.questionNumber !== 1"
+        color="accent"
+      >
+        Назад
+      </button>
+      <button
+        *ngIf="q.questionNumber !== 0"
+        mat-raised-button
+        matStepperNext
+        color="accent"
+      >
+        Напред
+      </button>
+      <button
+        *ngIf="q.questionNumber === 0 && done$ | async"
+        mat-raised-button
+        color="primary"
+        (click)="vote()"
+      >
+        Гласувай
+      </button>
     </div>
   </mat-step>
-
-  <!-- <mat-step [stepControl]="secondFormGroup">
-    <ng-template matStepLabel>Question 2</ng-template>
-
-    <button mat-button class="stepper-button" matStepperPrevious>Назад</button>
-    <button
-      mat-raised-button
-      color="accent"
-      class="stepper-button"
-      matStepperNext
-    >
-      Напред
-    </button>
-  </mat-step> -->
-
-  <!-- <mat-step>
-    <ng-template matStepLabel>Преглед</ng-template>
-    
-    <ng-template matStepContent>
-      <mat-card class="final-message">
-        <mat-card-content>
-          <p>Вашите отговори:</p>
-        </mat-card-content>
-      </mat-card>
-      <div class="row">
-        <div class="col">
-          <mat-card class="example-card">
-            <mat-card-header>
-              <mat-card-title>Въпрос 1</mat-card-title>
-             
-            </mat-card-header>
-            <mat-card-content> fffff </mat-card-content>
-          </mat-card>
-        </div>
-        <div class="col">
-          <mat-card class="example-card">
-            <mat-card-header>
-              <mat-card-title>Въпрос 2</mat-card-title>
-             
-            </mat-card-header>
-            <mat-card-content> </mat-card-content>
-          </mat-card>
-        </div>
-      </div>
-      <div align="center" class="final-message">
-        <button mat-button matStepperPrevious>Назад</button>
-        <button mat-raised-button color="accent">Изпрати</button>
-      </div>
-    </ng-template>
-  </mat-step> -->
 </mat-horizontal-stepper>
-<!-- 
+
 <div *ngIf="loading$ | async" class="loader">
   <mat-spinner></mat-spinner>
-</div> -->
+</div>
