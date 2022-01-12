@@ -11,16 +11,26 @@ import { MatMenuModule } from '@angular/material/menu';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatRadioModule } from '@angular/material/radio';
 import { MatStepperModule } from '@angular/material/stepper';
+import { MatTabsModule } from '@angular/material/tabs';
 import { ReferendumComponent } from './referendum/referendum.component';
+import { ChildComponent } from './vote/child/child.component';
+import { ParentComponent } from './vote/parent/parent.component';
 import { VoteComponent } from './vote/vote.component';
 import { VotingsDashboardComponent } from './votings-dashboard/votings-dashboard.component';
 import { VotingsRoutingModule } from './votings-routing.module';
 @NgModule({
-  declarations: [VotingsDashboardComponent, ReferendumComponent, VoteComponent],
+  declarations: [
+    VotingsDashboardComponent,
+    ReferendumComponent,
+    VoteComponent,
+    ParentComponent,
+    ChildComponent,
+  ],
   imports: [
     CommonModule,
     FormsModule,
     ReactiveFormsModule,
+    // BrowserAnimationsModule,
     VotingsRoutingModule,
     MatGridListModule,
     MatCardModule,
@@ -32,6 +42,7 @@ import { VotingsRoutingModule } from './votings-routing.module';
     MatFormFieldModule,
     MatRadioModule,
     MatProgressSpinnerModule,
+    MatTabsModule,
   ],
 })
 export class VotingsModule {}
