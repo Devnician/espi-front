@@ -1,1 +1,112 @@
-<p>referendum works!</p>
+<!-- <mat-horizontal-stepper ...>
+    <mat-step *ngFor=let step of [0,1,2]" [ngSwitch]="step" [completed]="steps[step].completed" [label]="steps[step].label">
+      <app-my-component-0 *ngSwitchCase="0" [someInput0]="someInput0" (someOutput0)="onSomeOutput0($event)"></app-my-component-0>
+      <app-my-component-1 *ngSwitchCase="1" [someInput1]="someInput1" (someOutput1)="onSomeOutput1($event)"></app-my-component-1>
+      <app-my-component-2 *ngSwitchCase="2" [someInput2]="someInput2" (someOutput2)="onSomeOutput2($event)"></app-my-component-2>
+    </mat-step>
+  </mat-horizontal-stepper> -->
+<mat-horizontal-stepper [linear]="false" #stepper>
+  <!--  [stepControl]="firstFormGroup" -->
+  <mat-step
+    *ngFor="let q of questions | async"
+    [ngSwitch]="q"
+    [completed]="q.response > -1"
+    [label]="q.label"
+  >
+    <ng-template matStepLabel>
+      {{ q.isPreview ? "Преглед" : "Въпрос " + q.questionNumber }}
+    </ng-template>
+    <mat-card class="example-card" *ngIf="q.isPreview === false">
+      <mat-card-header>
+        <mat-card-title>Въпрос № {{ q.questionNumber }}</mat-card-title>
+        <mat-card-subtitle
+          >Моля, отговорете на въпроса с ДА или НЕ:
+        </mat-card-subtitle>
+      </mat-card-header>
+      <mat-card-content>
+        <div>
+          <mat-card-title
+            style="height: 250px; text-align: center; font-size: xx-large"
+            >{{ q.text }}
+          </mat-card-title>
+        </div>
+        <div>
+          <mat-radio-group
+            aria-label="Select an option"
+            class="radio-gr"
+            (change)="q.response = +$event.value; check()"
+          >
+            <mat-radio-button #sOpt value="0" [checked]="false" color="warn"
+              >НЕ</mat-radio-button
+            >
+            <mat-radio-button #fOpt value="1" [checked]="false" color="warn"
+              >ДА</mat-radio-button
+            >
+          </mat-radio-group>
+        </div>
+      </mat-card-content>
+    </mat-card>
+
+    <mat-card class="example-card" *ngIf="q.isPreview === true">
+      <mat-card-header>
+        <mat-card-title>Преглед на отговорите</mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+        <div>
+          <table style="width: 100%">
+            <tr>
+              <th>Въпрос</th>
+              <th>Отговор</th>
+            </tr>
+            <tr *ngFor="let q2 of questions | async">
+              <td *ngIf="q2.questionNumber > 0" style="width: 100%">
+                <strong> {{ q2.text }}</strong>
+              </td>
+              <td
+                *ngIf="q2.questionNumber > 0"
+                style="width: 300px; text-align: center"
+              >
+                <strong *ngIf="q2.response === 0">НЕ</strong>
+                <strong *ngIf="q2.response === 1">ДА</strong>
+                <strong *ngIf="q2.response < 0" style="color: brown">
+                  Не сте отговорили.
+                </strong>
+              </td>
+            </tr>
+          </table>
+        </div>
+      </mat-card-content>
+    </mat-card>
+
+    <div align="center" class="button-bar">
+      <button
+        mat-raised-button
+        matStepperPrevious
+        *ngIf="q.questionNumber !== 1"
+        color="accent"
+      >
+        Назад
+      </button>
+      <button
+        *ngIf="q.questionNumber !== 0"
+        mat-raised-button
+        matStepperNext
+        color="accent"
+      >
+        Напред
+      </button>
+      <button
+        *ngIf="q.questionNumber === 0 && done$ | async"
+        mat-raised-button
+        color="primary"
+        (click)="vote()"
+      >
+        Гласувай
+      </button>
+    </div>
+  </mat-step>
+</mat-horizontal-stepper>
+
+<div *ngIf="loading$ | async" class="loader">
+  <mat-spinner></mat-spinner>
+</div>

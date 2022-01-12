@@ -1,6 +1,6 @@
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 import { Component } from '@angular/core';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 interface VotingParams {
@@ -47,7 +47,8 @@ export class VotingsDashboardComponent {
 
   constructor(
     private breakpointObserver: BreakpointObserver,
-    private router: Router
+    private router: Router,
+    private activatedRoute: ActivatedRoute
   ) {
     this.initVotingsCards();
   }
@@ -75,11 +76,20 @@ export class VotingsDashboardComponent {
   }
 
   goToVotingComponent(vote: VotingParams) {
+    console.log('go to vote', vote);
+    // console.log(this.activatedRoute.url.);
+    // this.router.navigate(['vote'], {
+    //   relativeTo: this.activatedRoute,
+    // });
     if (vote.id === 1) {
-      this.router.navigate['votings/vote'];
+      this.router.navigate(['vote'], {
+        relativeTo: this.activatedRoute,
+      });
     }
     if (vote.id === 2) {
-      this.router.navigate['votings/referendum'];
+      this.router.navigate(['referendum'], {
+        relativeTo: this.activatedRoute,
+      });
     }
     // alert(JSON.stringify(vote));
     //console.log(vote);
