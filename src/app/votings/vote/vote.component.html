@@ -1,19 +1,29 @@
 <h2>{{ label }}</h2>
-<div class="container">
-  <div id="content">
-    <div id="main-content" style="background-color: primary">
-      <mat-tab-group
-        [selectedIndex]="selected.value"
-        (selectedIndexChange)="selected.setValue($event)"
-      >
-        <mat-tab *ngFor="let pg of politicalGroups | async">
-          <ng-template mat-tab-label> {{ pg.buletineNumber }} </ng-template>
-          <div style="display: flex; width: 100%">
-            <app-parent style="width: 100%" [group]="pg"></app-parent>
-            <app-child style="width: 100%" [candidates]="pg.childs"></app-child>
-          </div>
-        </mat-tab>
-      </mat-tab-group>
-    </div>
+<div id="main-content" style="background-color: primary">
+  <mat-tab-group
+    [selectedIndex]="selected.value"
+    (selectedIndexChange)="
+      selected.setValue($event); onSelectPoliticalGroup($event)
+    "
+  >
+    <mat-tab *ngFor="let pg of politicalGroups | async">
+      <ng-template mat-tab-label> {{ pg.buletineNumber }} </ng-template>
+      <div style="display: flex; width: 100%">
+        <app-parent style="width: 100%" [group]="pg"></app-parent>
+        <app-child style="width: 100%" [candidates]="pg.childs"></app-child>
+      </div>
+    </mat-tab>
+  </mat-tab-group>
+
+  <div mat-card-actions align="end">
+    <button
+      mat-raised-button
+      type="button"
+      (click)="goToPreviewPage()"
+      color="accent"
+      [disabled]="canGoToPreview()"
+    >
+      Гласувам <mat-icon>front_hand</mat-icon>
+    </button>
   </div>
 </div>

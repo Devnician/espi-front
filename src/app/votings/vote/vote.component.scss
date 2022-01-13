@@ -1,10 +1,10 @@
 @import "src/styles.scss";
-:host {
-    // padding-top: 80px;
-    display: flex;
-    flex-direction: column;
-    overflow: hidden;
-}
+// :host {
+//     // padding-top: 80px;
+//     display: flex;
+//     flex-direction: column;
+//     overflow: hidden;
+// }
 
 :host ::ng-deep .mat-tab-labels {
     flex-direction: column;
@@ -36,29 +36,31 @@ mat-tab-body {
 /* Styles for the active tab label */
 :host ::ng-deep.mat-tab-label.mat-tab-label-active {
     width: 50px;
-    background-color: transparent;
+    // background-color: transparent;
     color: white;
     font-size: x-large;
     background-color: $primary;
     border-top-left-radius: 2px;
     border-bottom-left-radius: 2px;
 }
+
 /* Styles for the active tab label */
 :host ::ng-deep.mat-tab-label {
-    background-color: transparent;
-    /* background-color: lightgray; */
+    // background-color: transparent;
+    background-color: lightgray;
 }
 .mat-tab-group {
     flex-direction: row !important;
+    height: 100%;
 }
 
 .mat-tab-labels {
     flex-direction: column !important;
 }
 
-.mat-tab-label-active {
-    border-right: 2px solid red !important;
-}
+// .mat-tab-label-active {
+//     border-right: 2px solid red !important;
+// }
 
 .mat-ink-bar {
     display: none;

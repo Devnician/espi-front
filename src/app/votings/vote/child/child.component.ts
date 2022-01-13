@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { Candidate } from '../vote.component';
 
 @Component({
@@ -8,13 +8,7 @@ import { Candidate } from '../vote.component';
 })
 export class ChildComponent implements OnInit {
   @Input() candidates: Candidate[];
-  @Output() childEmiter = new EventEmitter<any>();
-
   constructor() {}
 
   ngOnInit(): void {}
-
-  doSomeAction() {
-    // emit:   this.childEmiter.emit( 'something');
-  }
 }

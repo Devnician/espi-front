@@ -1,3 +1,69 @@
 table:
   name: votings
   schema: public
+select_permissions:
+- permission:
+    allow_aggregations: true
+    columns:
+    - id
+    - createdAt
+    - updatedAt
+    - startedAt
+    - finishedAt
+    - type
+    - name
+    - description
+    filter: {}
+  role: central
+- permission:
+    allow_aggregations: true
+    columns:
+    - id
+    - createdAt
+    - updatedAt
+    - startedAt
+    - finishedAt
+    - type
+    - name
+    - description
+    filter: {}
+  role: centralLeader
+- permission:
+    allow_aggregations: true
+    columns:
+    - id
+    - createdAt
+    - updatedAt
+    - startedAt
+    - finishedAt
+    - type
+    - name
+    - description
+    filter: {}
+  role: section
+- permission:
+    allow_aggregations: true
+    columns:
+    - id
+    - createdAt
+    - updatedAt
+    - startedAt
+    - finishedAt
+    - type
+    - name
+    - description
+    filter: {}
+  role: sectionLeader
+- permission:
+    allow_aggregations: true
+    columns:
+    - id
+    - createdAt
+    - updatedAt
+    - startedAt
+    - finishedAt
+    - type
+    - name
+    - description
+    filter: {}
+  role: user

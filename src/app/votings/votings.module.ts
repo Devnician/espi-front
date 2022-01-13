@@ -4,15 +4,20 @@ import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
+import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatGridListModule } from '@angular/material/grid-list';
 import { MatIconModule } from '@angular/material/icon';
 import { MatMenuModule } from '@angular/material/menu';
+import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatRadioModule } from '@angular/material/radio';
+import { MatSortModule } from '@angular/material/sort';
 import { MatStepperModule } from '@angular/material/stepper';
+import { MatTableModule } from '@angular/material/table';
 import { MatTabsModule } from '@angular/material/tabs';
 import { ReferendumComponent } from './referendum/referendum.component';
+import { ChildTableComponent } from './vote/child/child-table/child-table.component';
 import { ChildComponent } from './vote/child/child.component';
 import { ParentComponent } from './vote/parent/parent.component';
 import { VoteComponent } from './vote/vote.component';
@@ -25,12 +30,12 @@ import { VotingsRoutingModule } from './votings-routing.module';
     VoteComponent,
     ParentComponent,
     ChildComponent,
+    ChildTableComponent,
   ],
   imports: [
     CommonModule,
     FormsModule,
     ReactiveFormsModule,
-    // BrowserAnimationsModule,
     VotingsRoutingModule,
     MatGridListModule,
     MatCardModule,
@@ -43,6 +48,10 @@ import { VotingsRoutingModule } from './votings-routing.module';
     MatRadioModule,
     MatProgressSpinnerModule,
     MatTabsModule,
+    MatTableModule,
+    MatPaginatorModule,
+    MatSortModule,
+    MatCheckboxModule,
   ],
 })
 export class VotingsModule {}

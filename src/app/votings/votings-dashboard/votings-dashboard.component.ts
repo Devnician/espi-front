@@ -3,6 +3,8 @@ import { Component } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
+import { Votings } from 'src/generated/graphql';
+import { VotingsService } from '../voting-service.service';
 interface VotingParams {
   title: string;
   text: string;
@@ -48,9 +50,22 @@ export class VotingsDashboardComponent {
   constructor(
     private breakpointObserver: BreakpointObserver,
     private router: Router,
-    private activatedRoute: ActivatedRoute
+    private activatedRoute: ActivatedRoute,
+    private voitngsService: VotingsService
   ) {
+    this.getStartedVotings();
     this.initVotingsCards();
+  }
+  getStartedVotings() {
+    this.voitngsService.getStartedVotings().subscribe((response) => {
+      if (response.data) {
+        const votings: Votings[] = response.data.votings;
+        console.log(votings);
+        console.log(response.data.votings_aggregate.aggregate.count);
+        // const votingsCount = response.data.
+      }
+      console.log(response);
+    });
   }
 
   initVotingsCards() {

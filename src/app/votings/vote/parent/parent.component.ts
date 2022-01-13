@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { PolitGroup } from '../vote.component';
 
 @Component({
@@ -6,10 +6,8 @@ import { PolitGroup } from '../vote.component';
   templateUrl: './parent.component.html',
   styleUrls: ['./parent.component.scss'],
 })
-export class ParentComponent implements OnInit {
+export class ParentComponent {
   @Input() group: PolitGroup;
-  @Output() parentEmiter = new EventEmitter<any>();
-  constructor() {}
 
-  ngOnInit(): void {}
+  constructor() {}
 }
