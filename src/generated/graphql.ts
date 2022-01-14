@@ -7890,6 +7890,23 @@ export type UserFieldsFragment = (
   ) }
 );
 
+export type GetStartedVotingsQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type GetStartedVotingsQuery = (
+  { __typename?: 'query_root' }
+  & { votings: Array<(
+    { __typename?: 'votings' }
+    & Pick<Votings, 'id' | 'createdAt' | 'startedAt' | 'updatedAt' | 'finishedAt' | 'type' | 'name' | 'description'>
+  )>, votings_aggregate: (
+    { __typename?: 'votings_aggregate' }
+    & { aggregate?: Maybe<(
+      { __typename?: 'votings_aggregate_fields' }
+      & Pick<Votings_Aggregate_Fields, 'count'>
+    )> }
+  ) }
+);
+
 export const SettlementsBaseFieldsFragmentDoc = gql`
     fragment SettlementsBaseFields on settlements {
   id
@@ -8116,6 +8133,38 @@ export const UpdateUserDocument = gql`
   })
   export class UpdateUserGQL extends Apollo.Mutation<UpdateUserMutation, UpdateUserMutationVariables> {
     document = UpdateUserDocument;
+    
+    constructor(apollo: Apollo.Apollo) {
+      super(apollo);
+    }
+  }
+export const GetStartedVotingsDocument = gql`
+    query GetStartedVotings {
+  votings(
+    where: {_and: [{startedAt: {_is_null: false}}, {finishedAt: {_is_null: true}}]}
+  ) {
+    id
+    createdAt
+    startedAt
+    updatedAt
+    finishedAt
+    type
+    name
+    description
+  }
+  votings_aggregate {
+    aggregate {
+      count
+    }
+  }
+}
+    `;
+
+  @Injectable({
+    providedIn: 'root'
+  })
+  export class GetStartedVotingsGQL extends Apollo.Query<GetStartedVotingsQuery, GetStartedVotingsQueryVariables> {
+    document = GetStartedVotingsDocument;
     
     constructor(apollo: Apollo.Apollo) {
       super(apollo);
