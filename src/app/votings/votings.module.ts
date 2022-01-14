@@ -23,6 +23,7 @@ import { ParentComponent } from './vote/parent/parent.component';
 import { VoteComponent } from './vote/vote.component';
 import { VotingsDashboardComponent } from './votings-dashboard/votings-dashboard.component';
 import { VotingsRoutingModule } from './votings-routing.module';
+import { VotePreviewComponent } from './vote/vote-preview/vote-preview.component';
 @NgModule({
   declarations: [
     VotingsDashboardComponent,
@@ -31,6 +32,7 @@ import { VotingsRoutingModule } from './votings-routing.module';
     ParentComponent,
     ChildComponent,
     ChildTableComponent,
+    VotePreviewComponent,
   ],
   imports: [
     CommonModule,

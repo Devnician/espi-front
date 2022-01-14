@@ -1,0 +1,25 @@
+<p>vote-preview works!</p>
+<div>
+  All data
+  <div>
+    {{ selectedPolitGroup | async | json }}
+  </div>
+
+  Candidate
+  <div>
+    {{ selectedCandidate | async | json }}
+  </div>
+  <!-- add form, butons ... -->
+
+  <div mat-card-actions align="end">
+    <button
+      mat-raised-button
+      type="button"
+      (click)="vote()"
+      color="accent"
+      [disabled]="canVote()"
+    >
+      Гласувам <mat-icon>front_hand</mat-icon>
+    </button>
+  </div>
+</div>

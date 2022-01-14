@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
+import { Router } from '@angular/router';
 import { isNullOrUndefined } from 'is-what';
 import { BehaviorSubject } from 'rxjs';
+import { Donkey } from 'src/app/services/donkey.service';
 // fake interfaces
 
 export interface Candidate {
@@ -29,7 +31,7 @@ export class VoteComponent implements OnInit {
     undefined
   );
 
-  constructor() {
+  constructor(private donkey: Donkey, private router: Router) {
     this.label = 'Избори за ......';
   }
 
@@ -71,11 +73,7 @@ export class VoteComponent implements OnInit {
 
   goToPreviewPage() {
     const selectedPolitGroup: PolitGroup = this.selectedPoliticalGroup.value;
-    const selectedPerson: Candidate = selectedPolitGroup.childs.filter(
-      (p) => p.selected
-    )[0];
-    console.log(selectedPolitGroup); // Party
-    console.log(selectedPerson); // Candidate - if any
-    alert('GO TO PREVIEW COMPONENT...');
+    this.donkey.load({ selectedPolitGroup });
+    this.router.navigateByUrl('/votings/preview');
   }
 }
