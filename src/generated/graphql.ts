@@ -4801,6 +4801,8 @@ export type Referendums = {
   referendumRows: Array<Referendum_Questions>;
   /** An aggregate relationship */
   referendumRows_aggregate: Referendum_Questions_Aggregate;
+  /** An object relationship */
+  settlement?: Maybe<Settlements>;
   settlementId?: Maybe<Scalars['Int']>;
   startedAt?: Maybe<Scalars['timestamptz']>;
   updatedAt: Scalars['timestamptz'];
@@ -4874,6 +4876,7 @@ export type Referendums_Bool_Exp = {
   id?: Maybe<Int_Comparison_Exp>;
   name?: Maybe<String_Comparison_Exp>;
   referendumRows?: Maybe<Referendum_Questions_Bool_Exp>;
+  settlement?: Maybe<Settlements_Bool_Exp>;
   settlementId?: Maybe<Int_Comparison_Exp>;
   startedAt?: Maybe<Timestamptz_Comparison_Exp>;
   updatedAt?: Maybe<Timestamptz_Comparison_Exp>;
@@ -4901,6 +4904,7 @@ export type Referendums_Insert_Input = {
   id?: Maybe<Scalars['Int']>;
   name?: Maybe<Scalars['String']>;
   referendumRows?: Maybe<Referendum_Questions_Arr_Rel_Insert_Input>;
+  settlement?: Maybe<Settlements_Obj_Rel_Insert_Input>;
   settlementId?: Maybe<Scalars['Int']>;
   startedAt?: Maybe<Scalars['timestamptz']>;
   updatedAt?: Maybe<Scalars['timestamptz']>;
@@ -4956,6 +4960,7 @@ export type Referendums_Order_By = {
   id?: Maybe<Order_By>;
   name?: Maybe<Order_By>;
   referendumRows_aggregate?: Maybe<Referendum_Questions_Aggregate_Order_By>;
+  settlement?: Maybe<Settlements_Order_By>;
   settlementId?: Maybe<Order_By>;
   startedAt?: Maybe<Order_By>;
   updatedAt?: Maybe<Order_By>;
@@ -7453,6 +7458,13 @@ export type Voting_Types_Mutation_Response = {
   returning: Array<Voting_Types>;
 };
 
+/** input type for inserting object relation for remote table "voting_types" */
+export type Voting_Types_Obj_Rel_Insert_Input = {
+  data: Voting_Types_Insert_Input;
+  /** on conflict condition */
+  on_conflict?: Maybe<Voting_Types_On_Conflict>;
+};
+
 /** on conflict condition type for table "voting_types" */
 export type Voting_Types_On_Conflict = {
   constraint: Voting_Types_Constraint;
@@ -7504,6 +7516,8 @@ export type Votings = {
   startedAt?: Maybe<Scalars['timestamptz']>;
   type: Voting_Types_Enum;
   updatedAt: Scalars['timestamptz'];
+  /** An object relationship */
+  voting_type: Voting_Types;
 };
 
 /** aggregated selection of "votings" */
@@ -7555,6 +7569,7 @@ export type Votings_Bool_Exp = {
   startedAt?: Maybe<Timestamptz_Comparison_Exp>;
   type?: Maybe<Voting_Types_Enum_Comparison_Exp>;
   updatedAt?: Maybe<Timestamptz_Comparison_Exp>;
+  voting_type?: Maybe<Voting_Types_Bool_Exp>;
 };
 
 /** unique or primary key constraints on table "votings" */
@@ -7578,6 +7593,7 @@ export type Votings_Insert_Input = {
   startedAt?: Maybe<Scalars['timestamptz']>;
   type?: Maybe<Voting_Types_Enum>;
   updatedAt?: Maybe<Scalars['timestamptz']>;
+  voting_type?: Maybe<Voting_Types_Obj_Rel_Insert_Input>;
 };
 
 /** aggregate max on columns */
@@ -7630,6 +7646,7 @@ export type Votings_Order_By = {
   startedAt?: Maybe<Order_By>;
   type?: Maybe<Order_By>;
   updatedAt?: Maybe<Order_By>;
+  voting_type?: Maybe<Voting_Types_Order_By>;
 };
 
 /** primary key columns input for table: votings */
@@ -7890,6 +7907,58 @@ export type UserFieldsFragment = (
   ) }
 );
 
+export type GetReferendumsQueryVariables = Exact<{
+  limit?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  condition?: Referendums_Bool_Exp;
+  orderBy?: Maybe<Array<Referendums_Order_By> | Referendums_Order_By>;
+}>;
+
+
+export type GetReferendumsQuery = (
+  { __typename?: 'query_root' }
+  & { referendums: Array<(
+    { __typename?: 'referendums' }
+    & Pick<Referendums, 'id' | 'createdAt' | 'updatedAt' | 'name' | 'description' | 'settlementId' | 'startedAt' | 'finishedAt'>
+    & { settlement?: Maybe<(
+      { __typename?: 'settlements' }
+      & Pick<Settlements, 'id' | 'name' | 'parentId' | 'isMunicipality'>
+    )> }
+  )>, referendums_aggregate: (
+    { __typename?: 'referendums_aggregate' }
+    & { aggregate?: Maybe<(
+      { __typename?: 'referendums_aggregate_fields' }
+      & Pick<Referendums_Aggregate_Fields, 'count'>
+    )> }
+  ) }
+);
+
+export type GetVotingsQueryVariables = Exact<{
+  limit?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  condition?: Votings_Bool_Exp;
+  orderBy?: Maybe<Array<Votings_Order_By> | Votings_Order_By>;
+}>;
+
+
+export type GetVotingsQuery = (
+  { __typename?: 'query_root' }
+  & { votings: Array<(
+    { __typename?: 'votings' }
+    & Pick<Votings, 'id' | 'createdAt' | 'updatedAt' | 'name' | 'description' | 'type' | 'startedAt' | 'finishedAt'>
+    & { voting_type: (
+      { __typename?: 'voting_types' }
+      & Pick<Voting_Types, 'value' | 'description'>
+    ) }
+  )>, votings_aggregate: (
+    { __typename?: 'votings_aggregate' }
+    & { aggregate?: Maybe<(
+      { __typename?: 'votings_aggregate_fields' }
+      & Pick<Votings_Aggregate_Fields, 'count'>
+    )> }
+  ) }
+);
+
 export type GetStartedVotingsQueryVariables = Exact<{ [key: string]: never; }>;
 
 
@@ -8133,6 +8202,81 @@ export const UpdateUserDocument = gql`
   })
   export class UpdateUserGQL extends Apollo.Mutation<UpdateUserMutation, UpdateUserMutationVariables> {
     document = UpdateUserDocument;
+    
+    constructor(apollo: Apollo.Apollo) {
+      super(apollo);
+    }
+  }
+export const GetReferendumsDocument = gql`
+    query GetReferendums($limit: Int, $offset: Int, $condition: referendums_bool_exp! = {}, $orderBy: [referendums_order_by!] = {createdAt: desc}) {
+  referendums(
+    where: $condition
+    limit: $limit
+    offset: $offset
+    order_by: $orderBy
+  ) {
+    id
+    createdAt
+    updatedAt
+    name
+    description
+    settlementId
+    settlement {
+      id
+      name
+      parentId
+      isMunicipality
+    }
+    startedAt
+    finishedAt
+  }
+  referendums_aggregate {
+    aggregate {
+      count
+    }
+  }
+}
+    `;
+
+  @Injectable({
+    providedIn: 'root'
+  })
+  export class GetReferendumsGQL extends Apollo.Query<GetReferendumsQuery, GetReferendumsQueryVariables> {
+    document = GetReferendumsDocument;
+    
+    constructor(apollo: Apollo.Apollo) {
+      super(apollo);
+    }
+  }
+export const GetVotingsDocument = gql`
+    query GetVotings($limit: Int, $offset: Int, $condition: votings_bool_exp! = {}, $orderBy: [votings_order_by!] = {createdAt: desc}) {
+  votings(where: $condition, limit: $limit, offset: $offset, order_by: $orderBy) {
+    id
+    createdAt
+    updatedAt
+    name
+    description
+    type
+    voting_type {
+      value
+      description
+    }
+    startedAt
+    finishedAt
+  }
+  votings_aggregate {
+    aggregate {
+      count
+    }
+  }
+}
+    `;
+
+  @Injectable({
+    providedIn: 'root'
+  })
+  export class GetVotingsGQL extends Apollo.Query<GetVotingsQuery, GetVotingsQueryVariables> {
+    document = GetVotingsDocument;
     
     constructor(apollo: Apollo.Apollo) {
       super(apollo);

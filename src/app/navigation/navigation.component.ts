@@ -137,9 +137,23 @@ export class NavigationComponent extends VixenComponent implements OnInit {
           matIcon: 'how_to_vote',
           badgeSubject: undefined,
         });
+
         this.menus.push({
-          route: 'votings',
-          label: 'Изброри',
+          route: 'votings/votings-list',
+          label: 'Избори',
+          matIcon: 'list',
+          badgeSubject: undefined,
+        });
+        this.menus.push({
+          route: 'votings/referendums-list',
+          label: 'Референдуми',
+          matIcon: 'list',
+          badgeSubject: undefined,
+        });
+
+        this.menus.push({
+          route: 'votings/dashboard',
+          label: 'Гласуване',
           matIcon: 'front_hand',
           badgeSubject: undefined,
         });
@@ -147,7 +161,7 @@ export class NavigationComponent extends VixenComponent implements OnInit {
       case Role_Types_Enum.User:
         this.menus.push({
           route: 'votings',
-          label: 'Изброри',
+          label: 'Гласуване',
           matIcon: 'front_hand',
           badgeSubject: undefined,
         });

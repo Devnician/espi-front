@@ -5,32 +5,32 @@ import { MatSort } from '@angular/material/sort';
 import { QueryRef } from 'apollo-angular';
 import { BehaviorSubject, merge, Observable } from 'rxjs';
 import { map, startWith, switchMap, tap } from 'rxjs/operators';
-import { UsersService } from 'src/app/users/users-service';
 import {
-  GetUsersQuery,
+  GetVotingsQuery,
   Order_By,
-  Users,
-  Users_Order_By,
+  Votings,
+  Votings_Order_By,
 } from 'src/generated/graphql';
+import { VotingsService } from '../voting-service.service';
 
 /**
- * Data source for the OrdersTable view. This class should
+ * Data source for the VotingsTable view. This class should
  * encapsulate all logic for fetching and manipulating the displayed data
  * (including sorting, pagination, and filtering).
  */
-export class OrdersTableDataSource extends DataSource<Users> {
-  data$: Observable<GetUsersQuery['users']>;
+export class VotingsTableDataSource extends DataSource<Votings> {
+  data$: Observable<GetVotingsQuery['votings']>;
   paginator: MatPaginator;
   counter: BehaviorSubject<number> = new BehaviorSubject(0);
   sort: MatSort;
-  queryRef: QueryRef<GetUsersQuery>;
+  queryRef: QueryRef<GetVotingsQuery>;
 
   loading: BehaviorSubject<any> = new BehaviorSubject(true);
   loading$ = this.loading.asObservable();
-  currentPageData: BehaviorSubject<Users[]> = new BehaviorSubject([]);
+  currentPageData: BehaviorSubject<Votings[]> = new BehaviorSubject([]);
 
   constructor(
-    private usersService: UsersService,
+    private votingsService: VotingsService,
     private snackBar: MatSnackBar
   ) {
     super();
@@ -41,14 +41,12 @@ export class OrdersTableDataSource extends DataSource<Users> {
    * the returned stream emits new items.
    * @returns A stream of the items to be rendered.
    */
-  connect(): Observable<Users[] | any> {
+  connect(): Observable<Votings[]> {
     const limit: number = this.paginator.pageSize;
     const offset: number = this.paginator.pageIndex * this.paginator.pageSize;
-    const order_by: Users_Order_By = { createdAt: Order_By.Asc };
+    const order_by: Votings_Order_By = { createdAt: Order_By.Asc };
 
-    // Combine everything that affects the rendered data into one update
-    // stream for the data-table to consume.
-    this.queryRef = this.usersService.getUsers(limit, offset, {}, order_by);
+    this.queryRef = this.votingsService.getVotings(limit, offset, {}, order_by);
     // Combine everything that affects the rendered data into one update
     // stream for the data-table to consume.
     const dataMutations = [
@@ -98,12 +96,16 @@ export class OrdersTableDataSource extends DataSource<Users> {
               { duration: 2000 }
             );
           }
-          // this.snackBar.open(error, 'OK', { duration: 2000 });
-          throw Error(errorMessage);
+
+          this.counter.next(0);
+          console.log(errorMessage);
+          this.currentPageData.next([]);
+          // throw Error(errorMessage);
+          return [];
         }
-        this.counter.next(data.users_aggregate.aggregate.count);
-        this.currentPageData.next(data.users as Users[]);
-        return data.users;
+        this.counter.next(data.votings_aggregate.aggregate.count);
+        this.currentPageData.next(data.votings);
+        return this.currentPageData.value;
       })
     );
   }
@@ -112,7 +114,5 @@ export class OrdersTableDataSource extends DataSource<Users> {
    *  Called when the table is being destroyed. Use this function, to clean up
    * any open connections or free any held resources that were set up during connect.
    */
-  disconnect(): void {
-    // *
-  }
+  disconnect(): void {}
 }

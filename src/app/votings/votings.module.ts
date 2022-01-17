@@ -10,6 +10,7 @@ import { MatGridListModule } from '@angular/material/grid-list';
 import { MatIconModule } from '@angular/material/icon';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatPaginatorModule } from '@angular/material/paginator';
+import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatRadioModule } from '@angular/material/radio';
 import { MatSortModule } from '@angular/material/sort';
@@ -17,13 +18,15 @@ import { MatStepperModule } from '@angular/material/stepper';
 import { MatTableModule } from '@angular/material/table';
 import { MatTabsModule } from '@angular/material/tabs';
 import { ReferendumComponent } from './referendum/referendum.component';
+import { ReferendumsTableComponent } from './referendums-table/referendums-table.component';
 import { ChildTableComponent } from './vote/child/child-table/child-table.component';
 import { ChildComponent } from './vote/child/child.component';
 import { ParentComponent } from './vote/parent/parent.component';
+import { VotePreviewComponent } from './vote/vote-preview/vote-preview.component';
 import { VoteComponent } from './vote/vote.component';
 import { VotingsDashboardComponent } from './votings-dashboard/votings-dashboard.component';
 import { VotingsRoutingModule } from './votings-routing.module';
-import { VotePreviewComponent } from './vote/vote-preview/vote-preview.component';
+import { VotingsTableComponent } from './votings-table/votings-table.component';
 @NgModule({
   declarations: [
     VotingsDashboardComponent,
@@ -33,6 +36,8 @@ import { VotePreviewComponent } from './vote/vote-preview/vote-preview.component
     ChildComponent,
     ChildTableComponent,
     VotePreviewComponent,
+    VotingsTableComponent,
+    ReferendumsTableComponent,
   ],
   imports: [
     CommonModule,
@@ -54,6 +59,7 @@ import { VotePreviewComponent } from './vote/vote-preview/vote-preview.component
     MatPaginatorModule,
     MatSortModule,
     MatCheckboxModule,
+    MatProgressBarModule,
   ],
 })
 export class VotingsModule {}

@@ -61,6 +61,7 @@ export class LoginComponent extends VixenComponent implements OnInit {
     this.auth
       .loginAction({ password: formData.password, egn: formData.egn })
       .subscribe((response) => {
+        console.log(response);
         const output: LoginOutput = response.data.LoginAction;
 
         const accessT: string = output.accessToken;
