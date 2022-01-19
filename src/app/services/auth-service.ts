@@ -70,7 +70,8 @@ export class AuthService {
       { fetchPolicy: 'network-only', errorPolicy: 'all' }
     );
   }
-  frefreshToken(
+
+  refreshToken(
     userId: number,
     roleIndex: number
   ): Observable<ApolloQueryResult<RefreshQuery>> {
@@ -83,12 +84,18 @@ export class AuthService {
   // }
   //  utils
 
-  setFetchTokenAndRedirectToHome(fetchToken: string, router: Router) {
+  setFetchTokenAndOptionalRedirectToHome(
+    fetchToken: string,
+    router: Router,
+    goHome: boolean
+  ) {
     this.setFetchToken(fetchToken);
     if (environment.production === false) {
       localStorage.setItem(TokenTypes.FETCH_TOKEN, fetchToken);
     }
-    router.navigateByUrl('/');
+    if (goHome) {
+      router.navigateByUrl('/');
+    }
   }
 
   setAccessToken(token: string) {

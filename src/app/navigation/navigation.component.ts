@@ -3,7 +3,13 @@ import {
   Breakpoints,
   BreakpointState,
 } from '@angular/cdk/layout';
-import { Component, HostListener, OnInit, ViewChild } from '@angular/core';
+import {
+  Component,
+  HostListener,
+  OnDestroy,
+  OnInit,
+  ViewChild,
+} from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { MatDrawer } from '@angular/material/sidenav/drawer';
 import { MatSnackBar } from '@angular/material/snack-bar';
@@ -32,7 +38,10 @@ import { EspiMenu } from './espi-menu.interface';
   templateUrl: './navigation.component.html',
   styleUrls: ['./navigation.component.scss'],
 })
-export class NavigationComponent extends VixenComponent implements OnInit {
+export class NavigationComponent
+  extends VixenComponent
+  implements OnInit, OnDestroy
+{
   @ViewChild('drawer') drawer: MatDrawer;
   public readonly isHandset$: Observable<boolean> = this.breakpointObserver
     .observe(Breakpoints.Handset)
@@ -42,6 +51,7 @@ export class NavigationComponent extends VixenComponent implements OnInit {
     );
   menus: EspiMenu[] = [];
   user: LoggedUser;
+  private interval: any;
   //currentRole$: Observable<number> = this.auth.userRoleIndex$;
   userObservables: Observable<any>[] = [
     this.auth.user$,
@@ -84,30 +94,36 @@ export class NavigationComponent extends VixenComponent implements OnInit {
             return [a, b];
           }),
           map(() => {
-            let child = this.activatedRoute.firstChild;
-            while (child.firstChild) {
-              child = child.firstChild;
-            }
-            if (child.snapshot.data['title']) {
-              return child.snapshot.data['title'];
-            }
+            // let child = this.activatedRoute?.firstChild;
+            // while (child.firstChild) {
+            //   child = child.firstChild;
+            // }
+            // if (child.snapshot.data['title']) {
+            //   return child.snapshot.data['title'];
+            // }
             return 'TITLE'; //appTitle;
           })
         )
         .subscribe((title: string) => {
-          console.log(title);
+          //console.log(title);
         })
     );
     combineLatest(this.userObservables).subscribe((observableResults) => {
       this.user = observableResults[0];
-      const roleIndex = observableResults[1];
-      const currentRole = (
-        roleIndex === 0
-          ? this.user.roleType.value
-          : this.user.secondRoleType.value
-      ) as Role_Types_Enum;
-      this.buildMenuForThisRole(currentRole);
+      if (this.user) {
+        const roleIndex = observableResults[1];
+        const currentRole = (
+          roleIndex === 0
+            ? this.user.roleType.value
+            : this.user.secondRoleType.value
+        ) as Role_Types_Enum;
+        this.buildMenuForThisRole(currentRole);
+      } else {
+        console.log('the user is gone..');
+      }
     });
+
+    this.startRefreshToken();
   }
 
   private buildMenuForThisRole(role: Role_Types_Enum) {
@@ -201,7 +217,7 @@ export class NavigationComponent extends VixenComponent implements OnInit {
   onRoleChanged(event: any) {
     const roleIndex: number = parseInt(event.value);
     this.auth.setCurrentRoleIndex(roleIndex);
-    this.auth.frefreshToken(this.user.id, roleIndex).subscribe((response) => {
+    this.auth.refreshToken(this.user.id, roleIndex).subscribe((response) => {
       if (response.error) {
         console.log(response.error);
         this.snackbar.open(
@@ -213,11 +229,66 @@ export class NavigationComponent extends VixenComponent implements OnInit {
       }
       if (response.data?.RefreshToken?.fetchToken) {
         const newFetchToken: string = response.data.RefreshToken.fetchToken;
-        this.auth.setFetchTokenAndRedirectToHome(newFetchToken, this.router);
+        this.auth.setFetchTokenAndOptionalRedirectToHome(
+          newFetchToken,
+          this.router,
+          true
+        );
         this.snackbar.open('Ролята Ви беше променена успешно.', 'ОК', {
           duration: 5000,
         });
       }
     });
+  }
+  /**
+   *
+   */
+  startRefreshToken() {
+    this.interval = setInterval(() => {
+      this.subscriptions.push(
+        // get current role
+        this.auth.userRoleIndex$.subscribe((roleIndex) => {
+          // TODO add some expiration checks..
+          this.auth.fetchToken$
+            .subscribe((fetchToken) => {
+              const decoded = this.jwtHelper.decodeToken(fetchToken);
+              console.log(decoded);
+              //   .getTokenExpirationDate(fetchToken);
+              // console.log(expireInDate);
+              // const expire = moment(expireInDate);
+              // const now = moment();
+
+              // const minutes = expire.diff(now, 'milliseconds');
+              // console.log(expire, now, minutes);
+            })
+            .unsubscribe();
+
+          // get new fetch token
+          this.auth
+            .refreshToken(this.user.id, roleIndex)
+            .subscribe((response) => {
+              if (response.error || response.errors) {
+                console.log(response);
+                this.onLogout();
+              }
+
+              if (response.data?.RefreshToken?.fetchToken) {
+                const newFetchToken: string =
+                  response.data.RefreshToken.fetchToken;
+                this.auth.setFetchTokenAndOptionalRedirectToHome(
+                  newFetchToken,
+                  this.router,
+                  false
+                );
+                console.log('The fetch token is fresh..');
+              }
+            })
+            .unsubscribe();
+        })
+      );
+    }, 5 * 1000);
+  }
+  ngOnDestroy(): void {
+    clearInterval(this.interval);
   }
 }

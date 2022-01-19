@@ -76,7 +76,11 @@ export class LoginComponent extends VixenComponent implements OnInit {
           const res = this.jwtHelper.decodeToken(accessT);
           this.auth.setLoggedUser(res.user);
           localStorage.setItem(TokenTypes.ACCESS_TOKEN, accessT);
-          this.auth.setFetchTokenAndRedirectToHome(fetchT, this.router);
+          this.auth.setFetchTokenAndOptionalRedirectToHome(
+            fetchT,
+            this.router,
+            true
+          );
         }
         this.loginForm.enable();
         this.loading.next(false);
