@@ -13,3 +13,40 @@ array_relationships:
       table:
         name: settlements
         schema: public
+select_permissions:
+- permission:
+    allow_aggregations: true
+    columns:
+    - id
+    - parentId
+    - name
+    - isMunicipality
+    filter: {}
+  role: central
+- permission:
+    allow_aggregations: true
+    columns:
+    - id
+    - parentId
+    - name
+    - isMunicipality
+    filter: {}
+  role: centralLeader
+- permission:
+    allow_aggregations: true
+    columns:
+    - id
+    - parentId
+    - name
+    - isMunicipality
+    filter: {}
+  role: section
+- permission:
+    allow_aggregations: true
+    columns:
+    - id
+    - parentId
+    - name
+    - isMunicipality
+    filter: {}
+  role: sectionLeader

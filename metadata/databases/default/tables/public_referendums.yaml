@@ -1,6 +1,10 @@
 table:
   name: referendums
   schema: public
+object_relationships:
+- name: settlement
+  using:
+    foreign_key_constraint_on: settlementId
 array_relationships:
 - name: referendumRows
   using:
@@ -9,3 +13,30 @@ array_relationships:
       table:
         name: referendum_questions
         schema: public
+select_permissions:
+- permission:
+    allow_aggregations: true
+    columns:
+    - id
+    - createdAt
+    - updatedAt
+    - name
+    - description
+    - settlementId
+    - startedAt
+    - finishedAt
+    filter: {}
+  role: central
+- permission:
+    allow_aggregations: true
+    columns:
+    - id
+    - createdAt
+    - updatedAt
+    - name
+    - description
+    - settlementId
+    - startedAt
+    - finishedAt
+    filter: {}
+  role: centralLeader

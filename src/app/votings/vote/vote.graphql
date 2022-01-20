@@ -1,3 +1,69 @@
+query GetReferendums(
+  $limit: Int
+  $offset: Int
+  $condition: referendums_bool_exp! = {}
+  $orderBy: [referendums_order_by!] = { createdAt: desc }
+) {
+  referendums(
+    where: $condition
+    limit: $limit
+    offset: $offset
+    order_by: $orderBy
+  ) {
+    id
+    createdAt
+    updatedAt
+    name
+    description
+    settlementId
+    settlement {
+      id
+      name
+      parentId
+      isMunicipality
+    }
+    startedAt
+    finishedAt
+  }
+  referendums_aggregate {
+    aggregate {
+      count
+    }
+  }
+}
+
+query GetVotings(
+  $limit: Int
+  $offset: Int
+  $condition: votings_bool_exp! = {}
+  $orderBy: [votings_order_by!] = { createdAt: desc }
+) {
+  votings(
+    where: $condition
+    limit: $limit
+    offset: $offset
+    order_by: $orderBy
+  ) {
+    id
+    createdAt
+    updatedAt
+    name
+    description
+    type
+    voting_type {
+      value
+      description
+    }
+    startedAt
+    finishedAt
+  }
+  votings_aggregate {
+    aggregate {
+      count
+    }
+  }
+}
+
 query GetStartedVotings {
   votings(
     where: {

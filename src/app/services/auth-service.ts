@@ -44,7 +44,7 @@ export class AuthService {
     if (environment.production === false) {
       const accessT = localStorage.getItem(TokenTypes.ACCESS_TOKEN);
       const fetchT = localStorage.getItem(TokenTypes.FETCH_TOKEN);
-      console.log('tokens from local..');
+      console.log('tokens from local storage..');
       this.accessToken.next(accessT);
     }
   }
@@ -70,25 +70,29 @@ export class AuthService {
       { fetchPolicy: 'network-only', errorPolicy: 'all' }
     );
   }
-  frefreshToken(
+
+  refreshToken(
     userId: number,
     roleIndex: number
   ): Observable<ApolloQueryResult<RefreshQuery>> {
-    return this.refreshGQL.fetch({ args: { userId, roleIndex } });
+    return this.refreshGQL.fetch(
+      { args: { userId, roleIndex } },
+      { fetchPolicy: 'network-only', errorPolicy: 'all' }
+    );
   }
 
-  // This method calls  directly Express
-  // callExpressLogin(): Observable<any> {
-  //   return this.http.get<any>(this.host + 'login/');
-  // }
-  //  utils
-
-  setFetchTokenAndRedirectToHome(fetchToken: string, router: Router) {
+  setFetchTokenAndOptionalRedirectToHome(
+    fetchToken: string,
+    router: Router,
+    goHome: boolean
+  ) {
     this.setFetchToken(fetchToken);
     if (environment.production === false) {
       localStorage.setItem(TokenTypes.FETCH_TOKEN, fetchToken);
     }
-    router.navigateByUrl('/');
+    if (goHome) {
+      router.navigateByUrl('/');
+    }
   }
 
   setAccessToken(token: string) {

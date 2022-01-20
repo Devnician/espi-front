@@ -3,12 +3,19 @@ import {
   Breakpoints,
   BreakpointState,
 } from '@angular/cdk/layout';
-import { Component, HostListener, OnInit, ViewChild } from '@angular/core';
+import {
+  Component,
+  HostListener,
+  OnDestroy,
+  OnInit,
+  ViewChild,
+} from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { MatDrawer } from '@angular/material/sidenav/drawer';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
 import { JwtHelperService } from '@auth0/angular-jwt';
+import * as moment from 'moment';
 import {
   combineLatest,
   filter,
@@ -32,7 +39,10 @@ import { EspiMenu } from './espi-menu.interface';
   templateUrl: './navigation.component.html',
   styleUrls: ['./navigation.component.scss'],
 })
-export class NavigationComponent extends VixenComponent implements OnInit {
+export class NavigationComponent
+  extends VixenComponent
+  implements OnInit, OnDestroy
+{
   @ViewChild('drawer') drawer: MatDrawer;
   public readonly isHandset$: Observable<boolean> = this.breakpointObserver
     .observe(Breakpoints.Handset)
@@ -42,6 +52,7 @@ export class NavigationComponent extends VixenComponent implements OnInit {
     );
   menus: EspiMenu[] = [];
   user: LoggedUser;
+  private interval: any;
   //currentRole$: Observable<number> = this.auth.userRoleIndex$;
   userObservables: Observable<any>[] = [
     this.auth.user$,
@@ -63,7 +74,6 @@ export class NavigationComponent extends VixenComponent implements OnInit {
     if (environment.production === false) {
       const accessT = localStorage.getItem(TokenTypes.ACCESS_TOKEN);
       const res = this.jwtHelper.decodeToken(accessT);
-      console.log(res);
       this.auth.setLoggedUser(res.user);
     }
   }
@@ -84,30 +94,36 @@ export class NavigationComponent extends VixenComponent implements OnInit {
             return [a, b];
           }),
           map(() => {
-            let child = this.activatedRoute.firstChild;
-            while (child.firstChild) {
-              child = child.firstChild;
-            }
-            if (child.snapshot.data['title']) {
-              return child.snapshot.data['title'];
-            }
+            // let child = this.activatedRoute?.firstChild;
+            // while (child.firstChild) {
+            //   child = child.firstChild;
+            // }
+            // if (child.snapshot.data['title']) {
+            //   return child.snapshot.data['title'];
+            // }
             return 'TITLE'; //appTitle;
           })
         )
         .subscribe((title: string) => {
-          console.log(title);
+          //console.log(title);
         })
     );
     combineLatest(this.userObservables).subscribe((observableResults) => {
       this.user = observableResults[0];
-      const roleIndex = observableResults[1];
-      const currentRole = (
-        roleIndex === 0
-          ? this.user.roleType.value
-          : this.user.secondRoleType.value
-      ) as Role_Types_Enum;
-      this.buildMenuForThisRole(currentRole);
+      if (this.user) {
+        const roleIndex = observableResults[1];
+        const currentRole = (
+          roleIndex === 0
+            ? this.user.roleType.value
+            : this.user.secondRoleType.value
+        ) as Role_Types_Enum;
+        this.buildMenuForThisRole(currentRole);
+      } else {
+        console.log('the user is gone..');
+      }
     });
+
+    this.startRefreshToken();
   }
 
   private buildMenuForThisRole(role: Role_Types_Enum) {
@@ -137,9 +153,23 @@ export class NavigationComponent extends VixenComponent implements OnInit {
           matIcon: 'how_to_vote',
           badgeSubject: undefined,
         });
+
         this.menus.push({
-          route: 'votings',
-          label: 'Изброри',
+          route: 'votings/votings-list',
+          label: 'Избори',
+          matIcon: 'list',
+          badgeSubject: undefined,
+        });
+        this.menus.push({
+          route: 'votings/referendums-list',
+          label: 'Референдуми',
+          matIcon: 'list',
+          badgeSubject: undefined,
+        });
+
+        this.menus.push({
+          route: 'votings/dashboard',
+          label: 'Гласуване',
           matIcon: 'front_hand',
           badgeSubject: undefined,
         });
@@ -147,7 +177,7 @@ export class NavigationComponent extends VixenComponent implements OnInit {
       case Role_Types_Enum.User:
         this.menus.push({
           route: 'votings',
-          label: 'Изброри',
+          label: 'Гласуване',
           matIcon: 'front_hand',
           badgeSubject: undefined,
         });
@@ -187,7 +217,7 @@ export class NavigationComponent extends VixenComponent implements OnInit {
   onRoleChanged(event: any) {
     const roleIndex: number = parseInt(event.value);
     this.auth.setCurrentRoleIndex(roleIndex);
-    this.auth.frefreshToken(this.user.id, roleIndex).subscribe((response) => {
+    this.auth.refreshToken(this.user.id, roleIndex).subscribe((response) => {
       if (response.error) {
         console.log(response.error);
         this.snackbar.open(
@@ -199,11 +229,64 @@ export class NavigationComponent extends VixenComponent implements OnInit {
       }
       if (response.data?.RefreshToken?.fetchToken) {
         const newFetchToken: string = response.data.RefreshToken.fetchToken;
-        this.auth.setFetchTokenAndRedirectToHome(newFetchToken, this.router);
+        this.auth.setFetchTokenAndOptionalRedirectToHome(
+          newFetchToken,
+          this.router,
+          true
+        );
         this.snackbar.open('Ролята Ви беше променена успешно.', 'ОК', {
           duration: 5000,
         });
       }
     });
+  }
+  /**
+   *
+   */
+  startRefreshToken() {
+    // console.log(' start refresh');
+    this.interval = setInterval(() => {
+      this.subscriptions.push(
+        // get current role
+        this.auth.userRoleIndex$.subscribe((roleIndex) => {
+          // console.log('check');
+          this.auth.fetchToken$.subscribe((fetchToken) => {
+            const expirationDate: Date =
+              this.jwtHelper.getTokenExpirationDate(fetchToken);
+
+            const expireMoment = moment(expirationDate);
+            const now = moment();
+            const minutes = expireMoment.diff(now, 'minutes');
+            // console.log(minutes);
+            if (minutes <= 2) {
+              // console.log('REFRESH');
+              this.refreshToken(this.user.id, roleIndex);
+            } else {
+              console.log('OK');
+            }
+          });
+          //.unsubscribe();
+        })
+      );
+    }, 45 * 1000);
+  }
+  refreshToken(id: number, roleIndex: number) {
+    this.auth.refreshToken(this.user.id, roleIndex).subscribe((response) => {
+      if (response.error || response.errors) {
+        this.onLogout();
+      }
+
+      if (response.data?.RefreshToken?.fetchToken) {
+        const newFetchToken: string = response.data.RefreshToken.fetchToken;
+        this.auth.setFetchTokenAndOptionalRedirectToHome(
+          newFetchToken,
+          this.router,
+          false
+        );
+      }
+    });
+  }
+  ngOnDestroy(): void {
+    clearInterval(this.interval);
   }
 }

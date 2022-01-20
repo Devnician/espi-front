@@ -59,7 +59,7 @@ export class VotingsDashboardComponent {
   getStartedVotings() {
     this.voitngsService.getStartedVotings().subscribe((response) => {
       if (response.data) {
-        const votings: Votings[] = response.data.votings;
+        const votings: Votings[] = response.data.votings as Votings[];
         console.log(votings);
         console.log(response.data.votings_aggregate.aggregate.count);
         // const votingsCount = response.data.

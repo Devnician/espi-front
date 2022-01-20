@@ -1,9 +1,11 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { ReferendumComponent } from './referendum/referendum.component';
+import { ReferendumsTableComponent } from './referendums-table/referendums-table.component';
 import { VotePreviewComponent } from './vote/vote-preview/vote-preview.component';
 import { VoteComponent } from './vote/vote.component';
 import { VotingsDashboardComponent } from './votings-dashboard/votings-dashboard.component';
+import { VotingsTableComponent } from './votings-table/votings-table.component';
 
 const routes: Routes = [
   // { path: '', component: VotingsDashboardComponent },
@@ -11,7 +13,7 @@ const routes: Routes = [
     path: '',
     children: [
       {
-        path: '',
+        path: 'dashboard',
         component: VotingsDashboardComponent,
       },
       {
@@ -25,6 +27,15 @@ const routes: Routes = [
       {
         path: 'preview',
         component: VotePreviewComponent,
+      },
+
+      {
+        path: 'referendums-list',
+        component: ReferendumsTableComponent,
+      },
+      {
+        path: 'votings-list',
+        component: VotingsTableComponent,
       },
     ],
   },

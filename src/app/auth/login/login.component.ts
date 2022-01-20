@@ -61,11 +61,11 @@ export class LoginComponent extends VixenComponent implements OnInit {
     this.auth
       .loginAction({ password: formData.password, egn: formData.egn })
       .subscribe((response) => {
+        console.log(response);
         const output: LoginOutput = response.data.LoginAction;
 
         const accessT: string = output.accessToken;
         const fetchT = output.fetchToken;
-        //  console.log(output);
         if (isNullOrUndefined(accessT)) {
           this.snackBar.open('Невалидни удостоверения', 'ОК', {
             duration: 5000,
@@ -75,7 +75,11 @@ export class LoginComponent extends VixenComponent implements OnInit {
           const res = this.jwtHelper.decodeToken(accessT);
           this.auth.setLoggedUser(res.user);
           localStorage.setItem(TokenTypes.ACCESS_TOKEN, accessT);
-          this.auth.setFetchTokenAndRedirectToHome(fetchT, this.router);
+          this.auth.setFetchTokenAndOptionalRedirectToHome(
+            fetchT,
+            this.router,
+            true
+          );
         }
         this.loginForm.enable();
         this.loading.next(false);
