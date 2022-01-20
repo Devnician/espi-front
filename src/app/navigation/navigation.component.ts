@@ -15,6 +15,7 @@ import { MatDrawer } from '@angular/material/sidenav/drawer';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
 import { JwtHelperService } from '@auth0/angular-jwt';
+import * as moment from 'moment';
 import {
   combineLatest,
   filter,
@@ -73,7 +74,6 @@ export class NavigationComponent
     if (environment.production === false) {
       const accessT = localStorage.getItem(TokenTypes.ACCESS_TOKEN);
       const res = this.jwtHelper.decodeToken(accessT);
-      console.log(res);
       this.auth.setLoggedUser(res.user);
     }
   }
@@ -244,49 +244,49 @@ export class NavigationComponent
    *
    */
   startRefreshToken() {
+    // console.log(' start refresh');
     this.interval = setInterval(() => {
       this.subscriptions.push(
         // get current role
         this.auth.userRoleIndex$.subscribe((roleIndex) => {
-          // TODO add some expiration checks..
-          this.auth.fetchToken$
-            .subscribe((fetchToken) => {
-              const decoded = this.jwtHelper.decodeToken(fetchToken);
-              console.log(decoded);
-              //   .getTokenExpirationDate(fetchToken);
-              // console.log(expireInDate);
-              // const expire = moment(expireInDate);
-              // const now = moment();
+          // console.log('check');
+          this.auth.fetchToken$.subscribe((fetchToken) => {
+            const expirationDate: Date =
+              this.jwtHelper.getTokenExpirationDate(fetchToken);
 
-              // const minutes = expire.diff(now, 'milliseconds');
-              // console.log(expire, now, minutes);
-            })
-            .unsubscribe();
-
-          // get new fetch token
-          this.auth
-            .refreshToken(this.user.id, roleIndex)
-            .subscribe((response) => {
-              if (response.error || response.errors) {
-                console.log(response);
-                this.onLogout();
-              }
-
-              if (response.data?.RefreshToken?.fetchToken) {
-                const newFetchToken: string =
-                  response.data.RefreshToken.fetchToken;
-                this.auth.setFetchTokenAndOptionalRedirectToHome(
-                  newFetchToken,
-                  this.router,
-                  false
-                );
-                console.log('The fetch token is fresh..');
-              }
-            })
-            .unsubscribe();
+            const expireMoment = moment(expirationDate);
+            const now = moment();
+            const minutes = expireMoment.diff(now, 'minutes');
+            // console.log(minutes);
+            if (minutes <= 2) {
+              // console.log('REFRESH');
+              this.refreshToken(this.user.id, roleIndex);
+            } else {
+              console.log('OK');
+            }
+          });
+          //.unsubscribe();
         })
       );
-    }, 5 * 1000);
+    }, 45 * 1000);
+  }
+  refreshToken(id: number, roleIndex: number) {
+    this.auth.refreshToken(this.user.id, roleIndex).subscribe((response) => {
+      if (response.error || response.errors) {
+        console.log('LOGOUT.....');
+        this.onLogout();
+      }
+
+      if (response.data?.RefreshToken?.fetchToken) {
+        const newFetchToken: string = response.data.RefreshToken.fetchToken;
+        this.auth.setFetchTokenAndOptionalRedirectToHome(
+          newFetchToken,
+          this.router,
+          false
+        );
+        console.log('The fetch token is fresh..');
+      }
+    });
   }
   ngOnDestroy(): void {
     clearInterval(this.interval);

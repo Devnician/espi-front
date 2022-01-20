@@ -66,7 +66,6 @@ export class LoginComponent extends VixenComponent implements OnInit {
 
         const accessT: string = output.accessToken;
         const fetchT = output.fetchToken;
-        //  console.log(output);
         if (isNullOrUndefined(accessT)) {
           this.snackBar.open('Невалидни удостоверения', 'ОК', {
             duration: 5000,
