@@ -273,7 +273,6 @@ export class NavigationComponent
   refreshToken(id: number, roleIndex: number) {
     this.auth.refreshToken(this.user.id, roleIndex).subscribe((response) => {
       if (response.error || response.errors) {
-        console.log('LOGOUT.....');
         this.onLogout();
       }
 
@@ -284,7 +283,6 @@ export class NavigationComponent
           this.router,
           false
         );
-        console.log('The fetch token is fresh..');
       }
     });
   }
