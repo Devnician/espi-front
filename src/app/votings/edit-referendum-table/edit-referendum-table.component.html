@@ -1,0 +1,50 @@
+<div class="mat-elevation-z4">
+  <table mat-table class="full-width-table" matSort aria-label="Elements">
+    <!-- Id Column -->
+    <ng-container matColumnDef="id">
+      <th mat-header-cell *matHeaderCellDef>Id</th>
+      <td mat-cell *matCellDef="let row">{{ row.id }}</td>
+    </ng-container>
+
+    <!-- Question Column -->
+    <ng-container matColumnDef="question">
+      <th mat-header-cell *matHeaderCellDef>Въпрос</th>
+      <td mat-cell *matCellDef="let row">{{ row.question }}</td>
+    </ng-container>
+
+    <!-- createdAt Column -->
+    <ng-container matColumnDef="createdAt">
+      <th mat-header-cell *matHeaderCellDef>Създаден на</th>
+      <td mat-cell *matCellDef="let row">{{ row.createdAt }}</td>
+    </ng-container>
+    <!-- updatedAt Column -->
+    <ng-container matColumnDef="updatedAt">
+      <th mat-header-cell *matHeaderCellDef>Променен на</th>
+      <td mat-cell *matCellDef="let row">{{ row.updatedAt }}</td>
+    </ng-container>
+
+    <tr
+      mat-header-row
+      *matHeaderRowDef="
+        isUpdate ? editDisplayedColumns : createDisplayedColumns
+      "
+    ></tr>
+    <tr
+      mat-row
+      *matRowDef="
+        let row;
+        columns: isUpdate ? editDisplayedColumns : createDisplayedColumns
+      "
+    ></tr>
+  </table>
+
+  <mat-paginator
+    #paginator
+    [length]="dataSource?.data?.length"
+    [pageIndex]="0"
+    [pageSize]="10"
+    [pageSizeOptions]="[5, 10, 20]"
+    aria-label="Select page"
+  >
+  </mat-paginator>
+</div>

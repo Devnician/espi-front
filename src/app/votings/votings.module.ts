@@ -8,15 +8,19 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatGridListModule } from '@angular/material/grid-list';
 import { MatIconModule } from '@angular/material/icon';
+import { MatInputModule } from '@angular/material/input';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatRadioModule } from '@angular/material/radio';
+import { MatSelectModule } from '@angular/material/select';
 import { MatSortModule } from '@angular/material/sort';
 import { MatStepperModule } from '@angular/material/stepper';
 import { MatTableModule } from '@angular/material/table';
 import { MatTabsModule } from '@angular/material/tabs';
+import { EditReferendumTableComponent } from './edit-referendum-table/edit-referendum-table.component';
+import { EditReferendumComponent } from './edit-referendum/edit-referendum.component';
 import { ReferendumComponent } from './referendum/referendum.component';
 import { ReferendumsTableComponent } from './referendums-table/referendums-table.component';
 import { ChildTableComponent } from './vote/child/child-table/child-table.component';
@@ -38,6 +42,8 @@ import { VotingsTableComponent } from './votings-table/votings-table.component';
     VotePreviewComponent,
     VotingsTableComponent,
     ReferendumsTableComponent,
+    EditReferendumComponent,
+    EditReferendumTableComponent,
   ],
   imports: [
     CommonModule,
@@ -60,6 +66,8 @@ import { VotingsTableComponent } from './votings-table/votings-table.component';
     MatSortModule,
     MatCheckboxModule,
     MatProgressBarModule,
+    MatInputModule,
+    MatSelectModule,
   ],
 })
 export class VotingsModule {}
