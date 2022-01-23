@@ -15,6 +15,7 @@ import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatRadioModule } from '@angular/material/radio';
 import { MatSelectModule } from '@angular/material/select';
+import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { MatSortModule } from '@angular/material/sort';
 import { MatStepperModule } from '@angular/material/stepper';
 import { MatTableModule } from '@angular/material/table';
@@ -68,6 +69,7 @@ import { VotingsTableComponent } from './votings-table/votings-table.component';
     MatProgressBarModule,
     MatInputModule,
     MatSelectModule,
+    MatSlideToggleModule,
   ],
 })
 export class VotingsModule {}

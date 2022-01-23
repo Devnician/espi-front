@@ -3,7 +3,7 @@
     mat-fab
     aria-label="icon-button"
     color="accent"
-    (click)="createReferendum()"
+    (click)="openDialog(undefined)"
   >
     <mat-icon>add</mat-icon>
   </button>
@@ -18,31 +18,43 @@
   <table mat-table class="full-width-table" matSort aria-label="Elements">
     <!-- Id Column -->
     <ng-container matColumnDef="id">
-      <th mat-header-cell *matHeaderCellDef mat-sort-header>Id</th>
+      <th mat-header-cell *matHeaderCellDef>Id</th>
       <td mat-cell *matCellDef="let row">{{ row.id }}</td>
     </ng-container>
 
     <!-- Name Column -->
     <ng-container matColumnDef="name">
-      <th mat-header-cell *matHeaderCellDef mat-sort-header>Name</th>
+      <th mat-header-cell *matHeaderCellDef>Наименование</th>
       <td mat-cell *matCellDef="let row">{{ row.name }}</td>
     </ng-container>
 
     <!-- startedAt Column -->
     <ng-container matColumnDef="startedAt">
-      <th mat-header-cell *matHeaderCellDef mat-sort-header>startedAt</th>
-      <td mat-cell *matCellDef="let row">{{ row.startedAt }}</td>
+      <th mat-header-cell *matHeaderCellDef>Стартирал на</th>
+      <td mat-cell *matCellDef="let row">
+        {{ row.startedAt | date: "d.MM.YYYY HH:mm:ss" }}
+      </td>
     </ng-container>
 
     <!-- finishedAt Column -->
     <ng-container matColumnDef="finishedAt">
-      <th mat-header-cell *matHeaderCellDef mat-sort-header>finishedAt</th>
-      <td mat-cell *matCellDef="let row">{{ row.finishedAt }}</td>
+      <th mat-header-cell *matHeaderCellDef>Приключен на</th>
+      <td mat-cell *matCellDef="let row">
+        {{ row.finishedAt | date: "d.MM.YYYY HH:mm:ss" }}
+      </td>
+    </ng-container>
+
+    <!-- questions Column -->
+    <ng-container matColumnDef="questions">
+      <th mat-header-cell *matHeaderCellDef>Брой въпроси</th>
+      <td mat-cell *matCellDef="let row">
+        {{ row.referendumQuestions.length }}
+      </td>
     </ng-container>
 
     <!-- Actions Column -->
     <ng-container matColumnDef="actions">
-      <th mat-header-cell *matHeaderCellDef mat-sort-header>Действия</th>
+      <th mat-header-cell *matHeaderCellDef>Действия</th>
       <td mat-cell *matCellDef="let row">
         <button
           mat-icon-button
@@ -52,7 +64,11 @@
           <mat-icon>more_vert</mat-icon>
         </button>
         <mat-menu #menu="matMenu">
-          <button mat-menu-item (click)="editReferendum(row)">
+          <button
+            mat-menu-item
+            (click)="openDialog(row)"
+            disabled="{{ row.locked && canUnlock() === false }}"
+          >
             <mat-icon>edit</mat-icon>
             <span>Редактиране</span>
           </button>

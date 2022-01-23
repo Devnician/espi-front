@@ -281,6 +281,7 @@ export class NavigationComponent
 
       if (response.data?.RefreshToken?.fetchToken) {
         const newFetchToken: string = response.data.RefreshToken.fetchToken;
+        console.log('NEW TOKEN...');
         this.auth.setFetchTokenAndOptionalRedirectToHome(
           newFetchToken,
           this.router,

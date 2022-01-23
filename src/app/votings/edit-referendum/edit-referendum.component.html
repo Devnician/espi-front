@@ -1,9 +1,31 @@
 <form [formGroup]="form" novalidate (ngSubmit)="onSubmit()">
+  <mat-progress-bar
+    *ngIf="loading$ | async"
+    color="warn"
+    mode="indeterminate"
+  ></mat-progress-bar>
   <mat-card class="shipping-card">
     <mat-card-header>
-      <mat-card-title>{{
-        isUpdate ? "Редактиране" : "Създаване"
-      }}</mat-card-title>
+      <div style="display: flex; width: 100%">
+        <div style="width: 100%">
+          <mat-card-title>
+            {{
+              (isUpdate | async)
+                ? "Редактиране на данни за референдум"
+                : "Създаване на референдум"
+            }}
+          </mat-card-title>
+        </div>
+
+        <mat-checkbox
+          style="height: 40px"
+          #chekBox
+          color="warn"
+          formControlName="locked"
+          (change)="lockStateChanged($event)"
+          >{{ chekBox.checked ? "Заключен" : "Отключен" }}
+        </mat-checkbox>
+      </div>
     </mat-card-header>
     <mat-card-content>
       <div class="mat-elevation-z4 form-sector full-width">
@@ -20,7 +42,6 @@
         </div>
 
         <div class="row">
-          <!-- <div class="col"> -->
           <mat-form-field class="full-width">
             <input
               matInput
@@ -28,39 +49,54 @@
               formControlName="description"
             />
           </mat-form-field>
-          <!-- </div> -->
         </div>
       </div>
 
-      <div *ngIf="isUpdate" class="mat-elevation-z4 form-sector full-width">
-        Добавяне на въпрос:
-        <div class="row">
-          <!-- <div class="col"> -->
-          <mat-form-field class="full-width">
-            <input matInput placeholder="Въпрос" />
-          </mat-form-field>
-          <!-- </div> -->
-        </div>
-
-        <!--  [disabled]="" -->
-        <div>
-          <button
-            type="button"
-            mat-mini-fab
-            class="m-l-15"
-            color="accent"
-            (click)="addQuestion()"
-          >
-            <mat-icon>add</mat-icon>
-          </button>
+      <div class="mat-elevation-z4 form-sector full-width">
+        <div class="full-width">
+          Добавяне на въпрос:
+          <div style="display: flex">
+            <mat-form-field class="full-width">
+              <input matInput #questionField placeholder="Въпрос" />
+            </mat-form-field>
+            <div>
+              <button
+                type="button"
+                mat-mini-fab
+                class="m-l-15"
+                color="accent"
+                (click)="addQuestion(questionField)"
+                [disabled]="isSubformDisabled()"
+              >
+                <mat-icon>add</mat-icon>
+              </button>
+            </div>
+          </div>
         </div>
       </div>
 
-      <app-edit-referendum-table> </app-edit-referendum-table>
+      <app-edit-referendum-table
+        [dataSource]="datasource"
+        [isUpdate]="isUpdate$"
+      >
+      </app-edit-referendum-table>
     </mat-card-content>
     <mat-card-actions align="end">
-      <button mat-raised-button color="accent" type="submit">
-        {{ isUpdate ? "Промени" : "Създай" }}
+      <button
+        mat-raised-button
+        color="primary"
+        (click)="onCancel()"
+        type="button"
+      >
+        Затвори
+      </button>
+      <button
+        mat-raised-button
+        color="accent"
+        type="submit"
+        [disabled]="form?.invalid"
+      >
+        {{ (isUpdate | async) ? "Промени" : "Създай" }}
       </button>
     </mat-card-actions>
   </mat-card>

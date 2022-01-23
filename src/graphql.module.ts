@@ -59,10 +59,22 @@ export function createApollo(httpLink: HttpLink): any {
           },
         },
       },
+      referendums: {
+        merge: false,
+        fields: {
+          referendumQuestions: {
+            merge: false,
+          },
+        },
+      },
 
       Query: {
         fields: {
           users: {
+            keyArgs: false,
+            merge: false,
+          },
+          referendums: {
             keyArgs: false,
             merge: false,
           },

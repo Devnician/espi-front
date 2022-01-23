@@ -1,7 +1,6 @@
-import { AfterViewInit, Component, ViewChild } from '@angular/core';
-import { MatPaginator } from '@angular/material/paginator';
-import { MatSort } from '@angular/material/sort';
+import { AfterViewInit, Component, Input, ViewChild } from '@angular/core';
 import { MatTable } from '@angular/material/table';
+import { Observable } from 'rxjs';
 import { Referendum_Questions } from 'src/generated/graphql';
 import { EditReferendumTableDataSource } from './edit-referendum-table-datasource';
 
@@ -11,22 +10,27 @@ import { EditReferendumTableDataSource } from './edit-referendum-table-datasourc
   styleUrls: ['./edit-referendum-table.component.scss'],
 })
 export class EditReferendumTableComponent implements AfterViewInit {
-  @ViewChild(MatPaginator) paginator!: MatPaginator;
-  @ViewChild(MatSort) sort!: MatSort;
   @ViewChild(MatTable) table!: MatTable<Referendum_Questions>;
-  dataSource: EditReferendumTableDataSource;
-  isUpdate = false;
+  @Input() isUpdate: Observable<boolean>;
+  @Input() dataSource: EditReferendumTableDataSource;
 
-  createDisplayedColumns = ['id', 'question'];
-  editDisplayedColumns = ['id', 'createdAt', 'updatedAt', 'question'];
+  createDisplayedColumns = ['question'];
+  editDisplayedColumns = ['createdAt', 'updatedAt', 'question', 'actions'];
 
   constructor() {
     this.dataSource = new EditReferendumTableDataSource();
   }
 
   ngAfterViewInit(): void {
-    this.dataSource.sort = this.sort;
-    this.dataSource.paginator = this.paginator;
     this.table.dataSource = this.dataSource;
+  }
+
+  removeQuestion(question: Referendum_Questions, index: number) {
+    if (question.id) {
+      this.dataSource.identifiersOfRemovedQuestions.push(question.id);
+    }
+    const data = this.dataSource.data.value;
+    data.splice(index, 1);
+    this.dataSource.data.next(data);
   }
 }
