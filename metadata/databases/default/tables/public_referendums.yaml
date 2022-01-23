@@ -6,37 +6,122 @@ object_relationships:
   using:
     foreign_key_constraint_on: settlementId
 array_relationships:
-- name: referendumRows
+- name: referendumQuestions
   using:
     foreign_key_constraint_on:
       column: referendumId
       table:
         name: referendum_questions
         schema: public
+insert_permissions:
+- permission:
+    backend_only: false
+    check: {}
+    columns:
+    - description
+    - finishedAt
+    - name
+    - settlementId
+    - startedAt
+  role: central
+- permission:
+    backend_only: false
+    check: {}
+    columns:
+    - description
+    - finishedAt
+    - locked
+    - name
+    - settlementId
+    - startedAt
+  role: centralLeader
 select_permissions:
 - permission:
     allow_aggregations: true
     columns:
-    - id
     - createdAt
-    - updatedAt
-    - name
     - description
+    - finishedAt
+    - id
+    - locked
+    - name
     - settlementId
     - startedAt
-    - finishedAt
+    - updatedAt
     filter: {}
   role: central
 - permission:
     allow_aggregations: true
     columns:
-    - id
     - createdAt
-    - updatedAt
-    - name
     - description
+    - finishedAt
+    - id
+    - locked
+    - name
     - settlementId
     - startedAt
+    - updatedAt
+    filter: {}
+  role: centralLeader
+- permission:
+    columns:
+    - locked
+    - id
+    - settlementId
+    - description
+    - name
+    - createdAt
     - finishedAt
+    - startedAt
+    - updatedAt
+    filter: {}
+  role: section
+- permission:
+    columns:
+    - locked
+    - id
+    - settlementId
+    - description
+    - name
+    - createdAt
+    - finishedAt
+    - startedAt
+    - updatedAt
+    filter: {}
+  role: sectionLeader
+- permission:
+    columns:
+    - locked
+    - id
+    - settlementId
+    - description
+    - name
+    - createdAt
+    - finishedAt
+    - startedAt
+    - updatedAt
+    filter: {}
+  role: user
+update_permissions:
+- permission:
+    check: {}
+    columns:
+    - description
+    - finishedAt
+    - name
+    - settlementId
+    - startedAt
+    filter: {}
+  role: central
+- permission:
+    check: {}
+    columns:
+    - description
+    - finishedAt
+    - locked
+    - name
+    - settlementId
+    - startedAt
     filter: {}
   role: centralLeader

@@ -244,33 +244,36 @@ export class NavigationComponent
    *
    */
   startRefreshToken() {
-    // console.log(' start refresh');
+    console.log(' start refresh');
+    // get current role
+    this.authUser();
     this.interval = setInterval(() => {
-      this.subscriptions.push(
-        // get current role
-        this.auth.userRoleIndex$.subscribe((roleIndex) => {
-          // console.log('check');
-          this.auth.fetchToken$.subscribe((fetchToken) => {
-            const expirationDate: Date =
-              this.jwtHelper.getTokenExpirationDate(fetchToken);
-
-            const expireMoment = moment(expirationDate);
-            const now = moment();
-            const minutes = expireMoment.diff(now, 'minutes');
-            // console.log(minutes);
-            if (minutes <= 2) {
-              // console.log('REFRESH');
-              this.refreshToken(this.user.id, roleIndex);
-            } else {
-              console.log('OK');
-            }
-          });
-          //.unsubscribe();
-        })
-      );
+      this.authUser();
     }, 45 * 1000);
   }
-  refreshToken(id: number, roleIndex: number) {
+
+  authUser() {
+    this.auth.userRoleIndex$.subscribe((roleIndex) => {
+      // console.log('check');
+      this.auth.fetchToken$.subscribe((fetchToken) => {
+        const expirationDate: Date =
+          this.jwtHelper.getTokenExpirationDate(fetchToken);
+
+        const expireMoment = moment(expirationDate);
+        const now = moment();
+        const minutes = expireMoment.diff(now, 'minutes');
+        // console.log(minutes);
+        if (minutes <= 2) {
+          console.log('call backend');
+          this.refreshToken(this.user.id, roleIndex);
+        } else {
+          console.log('OK');
+        }
+      });
+    });
+  }
+
+  private refreshToken(id: number, roleIndex: number) {
     this.auth.refreshToken(this.user.id, roleIndex).subscribe((response) => {
       if (response.error || response.errors) {
         this.onLogout();
@@ -278,6 +281,7 @@ export class NavigationComponent
 
       if (response.data?.RefreshToken?.fetchToken) {
         const newFetchToken: string = response.data.RefreshToken.fetchToken;
+        console.log('NEW TOKEN...');
         this.auth.setFetchTokenAndOptionalRedirectToHome(
           newFetchToken,
           this.router,

@@ -1,13 +1,20 @@
 import { Injectable } from '@angular/core';
-import { ApolloQueryResult } from '@apollo/client';
+import { ApolloQueryResult, FetchResult } from '@apollo/client';
 import { Observable } from 'rxjs';
 import {
+  CreateReferendumGQL,
+  CreateReferendumMutation,
   GetReferendumsGQL,
   GetStartedVotingsGQL,
   GetStartedVotingsQuery,
   GetVotingsGQL,
   Referendums_Bool_Exp,
+  Referendums_Insert_Input,
   Referendums_Order_By,
+  Referendums_Set_Input,
+  Referendum_Questions_Insert_Input,
+  UpdateReferendumAndQuestionGQL,
+  UpdateReferendumAndQuestionMutation,
   Votings_Bool_Exp,
   Votings_Order_By,
 } from 'src/generated/graphql';
@@ -16,10 +23,49 @@ import {
 })
 export class VotingsService {
   constructor(
+    private createReferendumGQL: CreateReferendumGQL,
+    private updateReferendumAndQuestionGQL: UpdateReferendumAndQuestionGQL,
     private getReferendumsGQL: GetReferendumsGQL,
     private getVotingsGQL: GetVotingsGQL,
     private getStartedVotingsGQL: GetStartedVotingsGQL
   ) {}
+
+  createReferendum(
+    referendumInput: Referendums_Insert_Input
+  ): Observable<
+    FetchResult<
+      CreateReferendumMutation,
+      Record<string, any>,
+      Record<string, any>
+    >
+  > {
+    return this.createReferendumGQL.mutate(
+      { referendum: referendumInput },
+      { errorPolicy: 'all' }
+    );
+  }
+  updateReferendum(
+    referendumId: number,
+    set: Referendums_Set_Input,
+    questions: Referendum_Questions_Insert_Input[],
+    removed: number[]
+  ): Observable<
+    FetchResult<
+      UpdateReferendumAndQuestionMutation,
+      Record<string, any>,
+      Record<string, any>
+    >
+  > {
+    return this.updateReferendumAndQuestionGQL.mutate(
+      {
+        referendumId,
+        set,
+        questions,
+        removed,
+      },
+      { errorPolicy: 'all' }
+    );
+  }
 
   getReferendums(
     limit = 10,

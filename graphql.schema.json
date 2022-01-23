@@ -26007,22 +26007,6 @@
             "deprecationReason": null
           },
           {
-            "name": "description",
-            "description": null,
-            "args": [],
-            "type": {
-              "kind": "NON_NULL",
-              "name": null,
-              "ofType": {
-                "kind": "SCALAR",
-                "name": "String",
-                "ofType": null
-              }
-            },
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
             "name": "id",
             "description": null,
             "args": [],
@@ -26039,7 +26023,7 @@
             "deprecationReason": null
           },
           {
-            "name": "name",
+            "name": "question",
             "description": null,
             "args": [],
             "type": {
@@ -26650,18 +26634,6 @@
             "deprecationReason": null
           },
           {
-            "name": "description",
-            "description": null,
-            "type": {
-              "kind": "INPUT_OBJECT",
-              "name": "String_comparison_exp",
-              "ofType": null
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
             "name": "id",
             "description": null,
             "type": {
@@ -26674,7 +26646,7 @@
             "deprecationReason": null
           },
           {
-            "name": "name",
+            "name": "question",
             "description": null,
             "type": {
               "kind": "INPUT_OBJECT",
@@ -26785,18 +26757,6 @@
             "deprecationReason": null
           },
           {
-            "name": "description",
-            "description": null,
-            "type": {
-              "kind": "SCALAR",
-              "name": "String",
-              "ofType": null
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
             "name": "id",
             "description": null,
             "type": {
@@ -26809,7 +26769,7 @@
             "deprecationReason": null
           },
           {
-            "name": "name",
+            "name": "question",
             "description": null,
             "type": {
               "kind": "SCALAR",
@@ -26867,18 +26827,6 @@
             "deprecationReason": null
           },
           {
-            "name": "description",
-            "description": null,
-            "args": [],
-            "type": {
-              "kind": "SCALAR",
-              "name": "String",
-              "ofType": null
-            },
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
             "name": "id",
             "description": null,
             "args": [],
@@ -26891,7 +26839,7 @@
             "deprecationReason": null
           },
           {
-            "name": "name",
+            "name": "question",
             "description": null,
             "args": [],
             "type": {
@@ -26951,18 +26899,6 @@
             "deprecationReason": null
           },
           {
-            "name": "description",
-            "description": null,
-            "type": {
-              "kind": "ENUM",
-              "name": "order_by",
-              "ofType": null
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
             "name": "id",
             "description": null,
             "type": {
@@ -26975,7 +26911,7 @@
             "deprecationReason": null
           },
           {
-            "name": "name",
+            "name": "question",
             "description": null,
             "type": {
               "kind": "ENUM",
@@ -27033,18 +26969,6 @@
             "deprecationReason": null
           },
           {
-            "name": "description",
-            "description": null,
-            "args": [],
-            "type": {
-              "kind": "SCALAR",
-              "name": "String",
-              "ofType": null
-            },
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
             "name": "id",
             "description": null,
             "args": [],
@@ -27057,7 +26981,7 @@
             "deprecationReason": null
           },
           {
-            "name": "name",
+            "name": "question",
             "description": null,
             "args": [],
             "type": {
@@ -27117,18 +27041,6 @@
             "deprecationReason": null
           },
           {
-            "name": "description",
-            "description": null,
-            "type": {
-              "kind": "ENUM",
-              "name": "order_by",
-              "ofType": null
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
             "name": "id",
             "description": null,
             "type": {
@@ -27141,7 +27053,7 @@
             "deprecationReason": null
           },
           {
-            "name": "name",
+            "name": "question",
             "description": null,
             "type": {
               "kind": "ENUM",
@@ -27314,18 +27226,6 @@
             "deprecationReason": null
           },
           {
-            "name": "description",
-            "description": null,
-            "type": {
-              "kind": "ENUM",
-              "name": "order_by",
-              "ofType": null
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
             "name": "id",
             "description": null,
             "type": {
@@ -27338,7 +27238,7 @@
             "deprecationReason": null
           },
           {
-            "name": "name",
+            "name": "question",
             "description": null,
             "type": {
               "kind": "ENUM",
@@ -27420,19 +27320,13 @@
             "deprecationReason": null
           },
           {
-            "name": "description",
-            "description": "column name",
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
             "name": "id",
             "description": "column name",
             "isDeprecated": false,
             "deprecationReason": null
           },
           {
-            "name": "name",
+            "name": "question",
             "description": "column name",
             "isDeprecated": false,
             "deprecationReason": null
@@ -27471,18 +27365,6 @@
             "deprecationReason": null
           },
           {
-            "name": "description",
-            "description": null,
-            "type": {
-              "kind": "SCALAR",
-              "name": "String",
-              "ofType": null
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
             "name": "id",
             "description": null,
             "type": {
@@ -27495,7 +27377,7 @@
             "deprecationReason": null
           },
           {
-            "name": "name",
+            "name": "question",
             "description": null,
             "type": {
               "kind": "SCALAR",
@@ -27830,19 +27712,13 @@
             "deprecationReason": null
           },
           {
-            "name": "description",
-            "description": "column name",
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
             "name": "id",
             "description": "column name",
             "isDeprecated": false,
             "deprecationReason": null
           },
           {
-            "name": "name",
+            "name": "question",
             "description": "column name",
             "isDeprecated": false,
             "deprecationReason": null
@@ -29893,6 +29769,22 @@
             "deprecationReason": null
           },
           {
+            "name": "locked",
+            "description": null,
+            "args": [],
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "Boolean",
+                "ofType": null
+              }
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
             "name": "name",
             "description": null,
             "args": [],
@@ -29909,7 +29801,7 @@
             "deprecationReason": null
           },
           {
-            "name": "referendumRows",
+            "name": "referendumQuestions",
             "description": "An array relationship",
             "args": [
               {
@@ -30010,7 +29902,7 @@
             "deprecationReason": null
           },
           {
-            "name": "referendumRows_aggregate",
+            "name": "referendumQuestions_aggregate",
             "description": "An aggregate relationship",
             "args": [
               {
@@ -30529,6 +30421,18 @@
             "deprecationReason": null
           },
           {
+            "name": "locked",
+            "description": null,
+            "type": {
+              "kind": "INPUT_OBJECT",
+              "name": "Boolean_comparison_exp",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
             "name": "name",
             "description": null,
             "type": {
@@ -30541,7 +30445,7 @@
             "deprecationReason": null
           },
           {
-            "name": "referendumRows",
+            "name": "referendumQuestions",
             "description": null,
             "type": {
               "kind": "INPUT_OBJECT",
@@ -30718,6 +30622,18 @@
             "deprecationReason": null
           },
           {
+            "name": "locked",
+            "description": null,
+            "type": {
+              "kind": "SCALAR",
+              "name": "Boolean",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
             "name": "name",
             "description": null,
             "type": {
@@ -30730,7 +30646,7 @@
             "deprecationReason": null
           },
           {
-            "name": "referendumRows",
+            "name": "referendumQuestions",
             "description": null,
             "type": {
               "kind": "INPUT_OBJECT",
@@ -31177,6 +31093,18 @@
             "deprecationReason": null
           },
           {
+            "name": "locked",
+            "description": null,
+            "type": {
+              "kind": "ENUM",
+              "name": "order_by",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
             "name": "name",
             "description": null,
             "type": {
@@ -31189,7 +31117,7 @@
             "deprecationReason": null
           },
           {
-            "name": "referendumRows_aggregate",
+            "name": "referendumQuestions_aggregate",
             "description": null,
             "type": {
               "kind": "INPUT_OBJECT",
@@ -31313,6 +31241,12 @@
             "deprecationReason": null
           },
           {
+            "name": "locked",
+            "description": "column name",
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
             "name": "name",
             "description": "column name",
             "isDeprecated": false,
@@ -31387,6 +31321,18 @@
             "type": {
               "kind": "SCALAR",
               "name": "Int",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "locked",
+            "description": null,
+            "type": {
+              "kind": "SCALAR",
+              "name": "Boolean",
               "ofType": null
             },
             "defaultValue": null,
@@ -31614,6 +31560,12 @@
           },
           {
             "name": "id",
+            "description": "column name",
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "locked",
             "description": "column name",
             "isDeprecated": false,
             "deprecationReason": null

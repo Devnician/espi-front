@@ -1,0 +1,137 @@
+mutation CreateReferendum($referendum: referendums_insert_input!) {
+  insert_referendums_one(object: $referendum) {
+    ...ReferendumFields
+  }
+}
+
+mutation UpdateReferendumAndQuestion(
+  $referendumId: Int!
+  $set: referendums_set_input!
+  $questions: [referendum_questions_insert_input!]!
+  $removed: [Int!]
+) {
+  insert_referendum_questions(
+    objects: $questions
+    on_conflict: {
+      constraint: referendum_rows_pkey
+      update_columns: [question]
+    }
+  ) {
+    returning {
+      ...ReferendumQuestionsFields
+    }
+  }
+  delete_referendum_questions(where: { id: { _in: $removed } }) {
+    affected_rows
+  }
+  update_referendums_by_pk(pk_columns: { id: $referendumId }, _set: $set) {
+    ...ReferendumFields
+  }
+}
+
+query GetReferendums(
+  $limit: Int
+  $offset: Int
+  $condition: referendums_bool_exp! = {}
+  $orderBy: [referendums_order_by!] = { createdAt: desc }
+) {
+  referendums(
+    where: $condition
+    limit: $limit
+    offset: $offset
+    order_by: $orderBy
+  ) {
+    ...ReferendumFields
+  }
+  referendums_aggregate {
+    aggregate {
+      count
+    }
+  }
+}
+
+fragment ReferendumFields on referendums {
+  id
+  createdAt
+  updatedAt
+  locked
+  name
+  description
+  settlementId
+  settlement {
+    id
+    name
+    parentId
+    isMunicipality
+  }
+  startedAt
+  finishedAt
+  referendumQuestions {
+    ...ReferendumQuestionsFields
+  }
+}
+
+fragment ReferendumQuestionsFields on referendum_questions {
+  id
+  createdAt
+  updatedAt
+  question
+  referendumId
+}
+
+query GetVotings(
+  $limit: Int
+  $offset: Int
+  $condition: votings_bool_exp! = {}
+  $orderBy: [votings_order_by!] = { createdAt: desc }
+) {
+  votings(
+    where: $condition
+    limit: $limit
+    offset: $offset
+    order_by: $orderBy
+  ) {
+    id
+    createdAt
+    updatedAt
+    name
+    description
+    type
+    voting_type {
+      value
+      description
+    }
+    startedAt
+    finishedAt
+  }
+  votings_aggregate {
+    aggregate {
+      count
+    }
+  }
+}
+
+query GetStartedVotings {
+  votings(
+    where: {
+      _and: [
+        { startedAt: { _is_null: false } }
+        { finishedAt: { _is_null: true } }
+      ]
+    }
+  ) {
+    id
+    createdAt
+    startedAt
+    updatedAt
+    finishedAt
+    type
+    name
+    description
+  }
+  votings_aggregate {
+    aggregate {
+      count
+    }
+  }
+}

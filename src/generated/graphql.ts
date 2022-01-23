@@ -4220,9 +4220,8 @@ export type Query_RootVotings_By_PkArgs = {
 export type Referendum_Questions = {
   __typename?: 'referendum_questions';
   createdAt: Scalars['timestamptz'];
-  description: Scalars['String'];
   id: Scalars['Int'];
-  name: Scalars['String'];
+  question: Scalars['String'];
   referendumId: Scalars['Int'];
   updatedAt: Scalars['timestamptz'];
 };
@@ -4298,9 +4297,8 @@ export type Referendum_Questions_Bool_Exp = {
   _not?: Maybe<Referendum_Questions_Bool_Exp>;
   _or?: Maybe<Array<Referendum_Questions_Bool_Exp>>;
   createdAt?: Maybe<Timestamptz_Comparison_Exp>;
-  description?: Maybe<String_Comparison_Exp>;
   id?: Maybe<Int_Comparison_Exp>;
-  name?: Maybe<String_Comparison_Exp>;
+  question?: Maybe<String_Comparison_Exp>;
   referendumId?: Maybe<Int_Comparison_Exp>;
   updatedAt?: Maybe<Timestamptz_Comparison_Exp>;
 };
@@ -4320,9 +4318,8 @@ export type Referendum_Questions_Inc_Input = {
 /** input type for inserting data into table "referendum_questions" */
 export type Referendum_Questions_Insert_Input = {
   createdAt?: Maybe<Scalars['timestamptz']>;
-  description?: Maybe<Scalars['String']>;
   id?: Maybe<Scalars['Int']>;
-  name?: Maybe<Scalars['String']>;
+  question?: Maybe<Scalars['String']>;
   referendumId?: Maybe<Scalars['Int']>;
   updatedAt?: Maybe<Scalars['timestamptz']>;
 };
@@ -4331,9 +4328,8 @@ export type Referendum_Questions_Insert_Input = {
 export type Referendum_Questions_Max_Fields = {
   __typename?: 'referendum_questions_max_fields';
   createdAt?: Maybe<Scalars['timestamptz']>;
-  description?: Maybe<Scalars['String']>;
   id?: Maybe<Scalars['Int']>;
-  name?: Maybe<Scalars['String']>;
+  question?: Maybe<Scalars['String']>;
   referendumId?: Maybe<Scalars['Int']>;
   updatedAt?: Maybe<Scalars['timestamptz']>;
 };
@@ -4341,9 +4337,8 @@ export type Referendum_Questions_Max_Fields = {
 /** order by max() on columns of table "referendum_questions" */
 export type Referendum_Questions_Max_Order_By = {
   createdAt?: Maybe<Order_By>;
-  description?: Maybe<Order_By>;
   id?: Maybe<Order_By>;
-  name?: Maybe<Order_By>;
+  question?: Maybe<Order_By>;
   referendumId?: Maybe<Order_By>;
   updatedAt?: Maybe<Order_By>;
 };
@@ -4352,9 +4347,8 @@ export type Referendum_Questions_Max_Order_By = {
 export type Referendum_Questions_Min_Fields = {
   __typename?: 'referendum_questions_min_fields';
   createdAt?: Maybe<Scalars['timestamptz']>;
-  description?: Maybe<Scalars['String']>;
   id?: Maybe<Scalars['Int']>;
-  name?: Maybe<Scalars['String']>;
+  question?: Maybe<Scalars['String']>;
   referendumId?: Maybe<Scalars['Int']>;
   updatedAt?: Maybe<Scalars['timestamptz']>;
 };
@@ -4362,9 +4356,8 @@ export type Referendum_Questions_Min_Fields = {
 /** order by min() on columns of table "referendum_questions" */
 export type Referendum_Questions_Min_Order_By = {
   createdAt?: Maybe<Order_By>;
-  description?: Maybe<Order_By>;
   id?: Maybe<Order_By>;
-  name?: Maybe<Order_By>;
+  question?: Maybe<Order_By>;
   referendumId?: Maybe<Order_By>;
   updatedAt?: Maybe<Order_By>;
 };
@@ -4388,9 +4381,8 @@ export type Referendum_Questions_On_Conflict = {
 /** Ordering options when selecting data from "referendum_questions". */
 export type Referendum_Questions_Order_By = {
   createdAt?: Maybe<Order_By>;
-  description?: Maybe<Order_By>;
   id?: Maybe<Order_By>;
-  name?: Maybe<Order_By>;
+  question?: Maybe<Order_By>;
   referendumId?: Maybe<Order_By>;
   updatedAt?: Maybe<Order_By>;
 };
@@ -4405,11 +4397,9 @@ export enum Referendum_Questions_Select_Column {
   /** column name */
   CreatedAt = 'createdAt',
   /** column name */
-  Description = 'description',
-  /** column name */
   Id = 'id',
   /** column name */
-  Name = 'name',
+  Question = 'question',
   /** column name */
   ReferendumId = 'referendumId',
   /** column name */
@@ -4419,9 +4409,8 @@ export enum Referendum_Questions_Select_Column {
 /** input type for updating data in table "referendum_questions" */
 export type Referendum_Questions_Set_Input = {
   createdAt?: Maybe<Scalars['timestamptz']>;
-  description?: Maybe<Scalars['String']>;
   id?: Maybe<Scalars['Int']>;
-  name?: Maybe<Scalars['String']>;
+  question?: Maybe<Scalars['String']>;
   referendumId?: Maybe<Scalars['Int']>;
   updatedAt?: Maybe<Scalars['timestamptz']>;
 };
@@ -4483,11 +4472,9 @@ export enum Referendum_Questions_Update_Column {
   /** column name */
   CreatedAt = 'createdAt',
   /** column name */
-  Description = 'description',
-  /** column name */
   Id = 'id',
   /** column name */
-  Name = 'name',
+  Question = 'question',
   /** column name */
   ReferendumId = 'referendumId',
   /** column name */
@@ -4796,11 +4783,12 @@ export type Referendums = {
   description: Scalars['String'];
   finishedAt?: Maybe<Scalars['timestamptz']>;
   id: Scalars['Int'];
+  locked: Scalars['Boolean'];
   name: Scalars['String'];
   /** An array relationship */
-  referendumRows: Array<Referendum_Questions>;
+  referendumQuestions: Array<Referendum_Questions>;
   /** An aggregate relationship */
-  referendumRows_aggregate: Referendum_Questions_Aggregate;
+  referendumQuestions_aggregate: Referendum_Questions_Aggregate;
   /** An object relationship */
   settlement?: Maybe<Settlements>;
   settlementId?: Maybe<Scalars['Int']>;
@@ -4810,7 +4798,7 @@ export type Referendums = {
 
 
 /** columns and relationships of "referendums" */
-export type ReferendumsReferendumRowsArgs = {
+export type ReferendumsReferendumQuestionsArgs = {
   distinct_on?: Maybe<Array<Referendum_Questions_Select_Column>>;
   limit?: Maybe<Scalars['Int']>;
   offset?: Maybe<Scalars['Int']>;
@@ -4820,7 +4808,7 @@ export type ReferendumsReferendumRowsArgs = {
 
 
 /** columns and relationships of "referendums" */
-export type ReferendumsReferendumRows_AggregateArgs = {
+export type ReferendumsReferendumQuestions_AggregateArgs = {
   distinct_on?: Maybe<Array<Referendum_Questions_Select_Column>>;
   limit?: Maybe<Scalars['Int']>;
   offset?: Maybe<Scalars['Int']>;
@@ -4874,8 +4862,9 @@ export type Referendums_Bool_Exp = {
   description?: Maybe<String_Comparison_Exp>;
   finishedAt?: Maybe<Timestamptz_Comparison_Exp>;
   id?: Maybe<Int_Comparison_Exp>;
+  locked?: Maybe<Boolean_Comparison_Exp>;
   name?: Maybe<String_Comparison_Exp>;
-  referendumRows?: Maybe<Referendum_Questions_Bool_Exp>;
+  referendumQuestions?: Maybe<Referendum_Questions_Bool_Exp>;
   settlement?: Maybe<Settlements_Bool_Exp>;
   settlementId?: Maybe<Int_Comparison_Exp>;
   startedAt?: Maybe<Timestamptz_Comparison_Exp>;
@@ -4902,8 +4891,9 @@ export type Referendums_Insert_Input = {
   description?: Maybe<Scalars['String']>;
   finishedAt?: Maybe<Scalars['timestamptz']>;
   id?: Maybe<Scalars['Int']>;
+  locked?: Maybe<Scalars['Boolean']>;
   name?: Maybe<Scalars['String']>;
-  referendumRows?: Maybe<Referendum_Questions_Arr_Rel_Insert_Input>;
+  referendumQuestions?: Maybe<Referendum_Questions_Arr_Rel_Insert_Input>;
   settlement?: Maybe<Settlements_Obj_Rel_Insert_Input>;
   settlementId?: Maybe<Scalars['Int']>;
   startedAt?: Maybe<Scalars['timestamptz']>;
@@ -4958,8 +4948,9 @@ export type Referendums_Order_By = {
   description?: Maybe<Order_By>;
   finishedAt?: Maybe<Order_By>;
   id?: Maybe<Order_By>;
+  locked?: Maybe<Order_By>;
   name?: Maybe<Order_By>;
-  referendumRows_aggregate?: Maybe<Referendum_Questions_Aggregate_Order_By>;
+  referendumQuestions_aggregate?: Maybe<Referendum_Questions_Aggregate_Order_By>;
   settlement?: Maybe<Settlements_Order_By>;
   settlementId?: Maybe<Order_By>;
   startedAt?: Maybe<Order_By>;
@@ -4982,6 +4973,8 @@ export enum Referendums_Select_Column {
   /** column name */
   Id = 'id',
   /** column name */
+  Locked = 'locked',
+  /** column name */
   Name = 'name',
   /** column name */
   SettlementId = 'settlementId',
@@ -4997,6 +4990,7 @@ export type Referendums_Set_Input = {
   description?: Maybe<Scalars['String']>;
   finishedAt?: Maybe<Scalars['timestamptz']>;
   id?: Maybe<Scalars['Int']>;
+  locked?: Maybe<Scalars['Boolean']>;
   name?: Maybe<Scalars['String']>;
   settlementId?: Maybe<Scalars['Int']>;
   startedAt?: Maybe<Scalars['timestamptz']>;
@@ -5041,6 +5035,8 @@ export enum Referendums_Update_Column {
   FinishedAt = 'finishedAt',
   /** column name */
   Id = 'id',
+  /** column name */
+  Locked = 'locked',
   /** column name */
   Name = 'name',
   /** column name */
@@ -7907,6 +7903,44 @@ export type UserFieldsFragment = (
   ) }
 );
 
+export type CreateReferendumMutationVariables = Exact<{
+  referendum: Referendums_Insert_Input;
+}>;
+
+
+export type CreateReferendumMutation = (
+  { __typename?: 'mutation_root' }
+  & { insert_referendums_one?: Maybe<(
+    { __typename?: 'referendums' }
+    & ReferendumFieldsFragment
+  )> }
+);
+
+export type UpdateReferendumAndQuestionMutationVariables = Exact<{
+  referendumId: Scalars['Int'];
+  set: Referendums_Set_Input;
+  questions: Array<Referendum_Questions_Insert_Input> | Referendum_Questions_Insert_Input;
+  removed?: Maybe<Array<Scalars['Int']> | Scalars['Int']>;
+}>;
+
+
+export type UpdateReferendumAndQuestionMutation = (
+  { __typename?: 'mutation_root' }
+  & { insert_referendum_questions?: Maybe<(
+    { __typename?: 'referendum_questions_mutation_response' }
+    & { returning: Array<(
+      { __typename?: 'referendum_questions' }
+      & ReferendumQuestionsFieldsFragment
+    )> }
+  )>, delete_referendum_questions?: Maybe<(
+    { __typename?: 'referendum_questions_mutation_response' }
+    & Pick<Referendum_Questions_Mutation_Response, 'affected_rows'>
+  )>, update_referendums_by_pk?: Maybe<(
+    { __typename?: 'referendums' }
+    & ReferendumFieldsFragment
+  )> }
+);
+
 export type GetReferendumsQueryVariables = Exact<{
   limit?: Maybe<Scalars['Int']>;
   offset?: Maybe<Scalars['Int']>;
@@ -7919,11 +7953,7 @@ export type GetReferendumsQuery = (
   { __typename?: 'query_root' }
   & { referendums: Array<(
     { __typename?: 'referendums' }
-    & Pick<Referendums, 'id' | 'createdAt' | 'updatedAt' | 'name' | 'description' | 'settlementId' | 'startedAt' | 'finishedAt'>
-    & { settlement?: Maybe<(
-      { __typename?: 'settlements' }
-      & Pick<Settlements, 'id' | 'name' | 'parentId' | 'isMunicipality'>
-    )> }
+    & ReferendumFieldsFragment
   )>, referendums_aggregate: (
     { __typename?: 'referendums_aggregate' }
     & { aggregate?: Maybe<(
@@ -7931,6 +7961,23 @@ export type GetReferendumsQuery = (
       & Pick<Referendums_Aggregate_Fields, 'count'>
     )> }
   ) }
+);
+
+export type ReferendumFieldsFragment = (
+  { __typename?: 'referendums' }
+  & Pick<Referendums, 'id' | 'createdAt' | 'updatedAt' | 'locked' | 'name' | 'description' | 'settlementId' | 'startedAt' | 'finishedAt'>
+  & { settlement?: Maybe<(
+    { __typename?: 'settlements' }
+    & Pick<Settlements, 'id' | 'name' | 'parentId' | 'isMunicipality'>
+  )>, referendumQuestions: Array<(
+    { __typename?: 'referendum_questions' }
+    & ReferendumQuestionsFieldsFragment
+  )> }
+);
+
+export type ReferendumQuestionsFieldsFragment = (
+  { __typename?: 'referendum_questions' }
+  & Pick<Referendum_Questions, 'id' | 'createdAt' | 'updatedAt' | 'question' | 'referendumId'>
 );
 
 export type GetVotingsQueryVariables = Exact<{
@@ -8015,6 +8062,37 @@ export const UserFieldsFragmentDoc = gql`
   }
 }
     `;
+export const ReferendumQuestionsFieldsFragmentDoc = gql`
+    fragment ReferendumQuestionsFields on referendum_questions {
+  id
+  createdAt
+  updatedAt
+  question
+  referendumId
+}
+    `;
+export const ReferendumFieldsFragmentDoc = gql`
+    fragment ReferendumFields on referendums {
+  id
+  createdAt
+  updatedAt
+  locked
+  name
+  description
+  settlementId
+  settlement {
+    id
+    name
+    parentId
+    isMunicipality
+  }
+  startedAt
+  finishedAt
+  referendumQuestions {
+    ...ReferendumQuestionsFields
+  }
+}
+    ${ReferendumQuestionsFieldsFragmentDoc}`;
 export const RegisterDocument = gql`
     query Register($args: RegisterUserInsertInput!) {
   RegisterAction(arg1: $args) {
@@ -8207,6 +8285,54 @@ export const UpdateUserDocument = gql`
       super(apollo);
     }
   }
+export const CreateReferendumDocument = gql`
+    mutation CreateReferendum($referendum: referendums_insert_input!) {
+  insert_referendums_one(object: $referendum) {
+    ...ReferendumFields
+  }
+}
+    ${ReferendumFieldsFragmentDoc}`;
+
+  @Injectable({
+    providedIn: 'root'
+  })
+  export class CreateReferendumGQL extends Apollo.Mutation<CreateReferendumMutation, CreateReferendumMutationVariables> {
+    document = CreateReferendumDocument;
+    
+    constructor(apollo: Apollo.Apollo) {
+      super(apollo);
+    }
+  }
+export const UpdateReferendumAndQuestionDocument = gql`
+    mutation UpdateReferendumAndQuestion($referendumId: Int!, $set: referendums_set_input!, $questions: [referendum_questions_insert_input!]!, $removed: [Int!]) {
+  insert_referendum_questions(
+    objects: $questions
+    on_conflict: {constraint: referendum_rows_pkey, update_columns: [question]}
+  ) {
+    returning {
+      ...ReferendumQuestionsFields
+    }
+  }
+  delete_referendum_questions(where: {id: {_in: $removed}}) {
+    affected_rows
+  }
+  update_referendums_by_pk(pk_columns: {id: $referendumId}, _set: $set) {
+    ...ReferendumFields
+  }
+}
+    ${ReferendumQuestionsFieldsFragmentDoc}
+${ReferendumFieldsFragmentDoc}`;
+
+  @Injectable({
+    providedIn: 'root'
+  })
+  export class UpdateReferendumAndQuestionGQL extends Apollo.Mutation<UpdateReferendumAndQuestionMutation, UpdateReferendumAndQuestionMutationVariables> {
+    document = UpdateReferendumAndQuestionDocument;
+    
+    constructor(apollo: Apollo.Apollo) {
+      super(apollo);
+    }
+  }
 export const GetReferendumsDocument = gql`
     query GetReferendums($limit: Int, $offset: Int, $condition: referendums_bool_exp! = {}, $orderBy: [referendums_order_by!] = {createdAt: desc}) {
   referendums(
@@ -8215,20 +8341,7 @@ export const GetReferendumsDocument = gql`
     offset: $offset
     order_by: $orderBy
   ) {
-    id
-    createdAt
-    updatedAt
-    name
-    description
-    settlementId
-    settlement {
-      id
-      name
-      parentId
-      isMunicipality
-    }
-    startedAt
-    finishedAt
+    ...ReferendumFields
   }
   referendums_aggregate {
     aggregate {
@@ -8236,7 +8349,7 @@ export const GetReferendumsDocument = gql`
     }
   }
 }
-    `;
+    ${ReferendumFieldsFragmentDoc}`;
 
   @Injectable({
     providedIn: 'root'
