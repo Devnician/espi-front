@@ -15,6 +15,7 @@ import { MatDrawer } from '@angular/material/sidenav/drawer';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
 import { JwtHelperService } from '@auth0/angular-jwt';
+import { isNullOrUndefined } from 'is-what';
 import * as moment from 'moment';
 import {
   combineLatest,
@@ -73,6 +74,10 @@ export class NavigationComponent
 
     if (environment.production === false) {
       const accessT = localStorage.getItem(TokenTypes.ACCESS_TOKEN);
+      if (isNullOrUndefined(accessT)) {
+        this.onLogout();
+      }
+      console.log(accessT);
       const res = this.jwtHelper.decodeToken(accessT);
       this.auth.setLoggedUser(res.user);
     }
@@ -109,6 +114,7 @@ export class NavigationComponent
         })
     );
     combineLatest(this.userObservables).subscribe((observableResults) => {
+      console.log(observableResults);
       this.user = observableResults[0];
       if (this.user) {
         const roleIndex = observableResults[1];
@@ -275,6 +281,7 @@ export class NavigationComponent
 
   private refreshToken(id: number, roleIndex: number) {
     this.auth.refreshToken(this.user.id, roleIndex).subscribe((response) => {
+      console.log(response);
       if (response.error || response.errors) {
         this.onLogout();
       }

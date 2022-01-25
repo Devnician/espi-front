@@ -11,6 +11,41 @@ object_relationships:
 - name: secondRoleType
   using:
     foreign_key_constraint_on: secondRole
+insert_permissions:
+- permission:
+    backend_only: false
+    check: {}
+    columns:
+    - addressId
+    - eVoted
+    - egn
+    - email
+    - family
+    - name
+    - password
+    - pin
+    - role
+    - secondRole
+    - surname
+    - voted
+  role: central
+- permission:
+    backend_only: false
+    check: {}
+    columns:
+    - addressId
+    - eVoted
+    - egn
+    - email
+    - family
+    - name
+    - password
+    - pin
+    - role
+    - secondRole
+    - surname
+    - voted
+  role: centralLeader
 select_permissions:
 - permission:
     allow_aggregations: true

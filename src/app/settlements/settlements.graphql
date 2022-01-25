@@ -2,7 +2,7 @@ query GetDistricts {
   settlements(where: { parentId: { _is_null: true } }) {
     ...SettlementsBaseFields
 
-    childSettlements: settlements_aggregate {
+    settlements_aggregate {
       aggregate {
         count
       }

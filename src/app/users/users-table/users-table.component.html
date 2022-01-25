@@ -2,19 +2,10 @@
   mat-raised-button
   color="primary"
   style="margin: 10px"
-  (click)="addUser()"
+  (click)="editUser(null)"
 >
   Добави гласоподавател
 </button>
-
-<!-- <button
-  mat-raised-button
-  color="primary"
-  style="margin: 10px"
-  (click)="updateFirst()"
->
-  Промени
-</button> -->
 
 <button
   mat-raised-button
@@ -118,7 +109,7 @@
           <mat-icon>more_vert</mat-icon>
         </button>
         <mat-menu #menu="matMenu">
-          <button mat-menu-item (click)="testCall(row)">
+          <button mat-menu-item (click)="editUser(row)">
             <mat-icon>edit</mat-icon>
             <span>Редактирай</span>
           </button>

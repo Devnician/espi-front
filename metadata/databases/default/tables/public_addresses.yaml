@@ -1,6 +1,27 @@
 table:
   name: addresses
   schema: public
+insert_permissions:
+- permission:
+    backend_only: false
+    check: {}
+    columns:
+    - id
+    - settlementId
+    - street
+    - number
+    - description
+  role: central
+- permission:
+    backend_only: false
+    check: {}
+    columns:
+    - id
+    - number
+    - settlementId
+    - description
+    - street
+  role: centralLeader
 select_permissions:
 - permission:
     allow_aggregations: true

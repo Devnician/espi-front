@@ -7823,7 +7823,7 @@ export type GetDistrictsQuery = (
   { __typename?: 'query_root' }
   & { settlements: Array<(
     { __typename?: 'settlements' }
-    & { childSettlements: (
+    & { settlements_aggregate: (
       { __typename?: 'settlements_aggregate' }
       & { aggregate?: Maybe<(
         { __typename?: 'settlements_aggregate_fields' }
@@ -8206,7 +8206,7 @@ export const GetDistrictsDocument = gql`
     query GetDistricts {
   settlements(where: {parentId: {_is_null: true}}) {
     ...SettlementsBaseFields
-    childSettlements: settlements_aggregate {
+    settlements_aggregate {
       aggregate {
         count
       }

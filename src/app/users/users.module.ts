@@ -13,9 +13,14 @@ import { MatTableModule } from '@angular/material/table';
 import { NgxJsonViewerModule } from 'ngx-json-viewer';
 import { UsersRoutingModule } from './users-routing.module';
 import { UsersTableComponent } from './users-table/users-table.component';
+import { EditUserComponent } from './edit-user/edit-user.component';
+import { MatInputModule } from '@angular/material/input';
+import { MatSelectModule } from '@angular/material/select';
+import { MatRadioModule } from '@angular/material/radio';
+import { MatCardModule } from '@angular/material/card';
 
 @NgModule({
-  declarations: [UsersTableComponent],
+  declarations: [UsersTableComponent, EditUserComponent],
   imports: [
     CommonModule,
     UsersRoutingModule,
@@ -42,6 +47,10 @@ import { UsersTableComponent } from './users-table/users-table.component';
     // ReactiveFormsModule,
     // MatSlideToggleModule,
     MatMenuModule,
+    MatInputModule,
+    MatSelectModule,
+    MatRadioModule,
+    MatCardModule,
     // MatDialogModule,
     // MatSnackBarModule,
     // MatProgressBarModule,
