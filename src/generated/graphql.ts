@@ -7816,6 +7816,19 @@ export type ReferendumVotesBySectionIdQuery = (
   )> }
 );
 
+export type AutoSuggestSettlementsQueryVariables = Exact<{
+  condition: Settlements_Bool_Exp;
+}>;
+
+
+export type AutoSuggestSettlementsQuery = (
+  { __typename?: 'query_root' }
+  & { settlements: Array<(
+    { __typename?: 'settlements' }
+    & Pick<Settlements, 'id' | 'name' | 'isMunicipality' | 'parentId'>
+  )> }
+);
+
 export type GetDistrictsQueryVariables = Exact<{ [key: string]: never; }>;
 
 
@@ -8197,6 +8210,27 @@ export const ReferendumVotesBySectionIdDocument = gql`
   })
   export class ReferendumVotesBySectionIdGQL extends Apollo.Query<ReferendumVotesBySectionIdQuery, ReferendumVotesBySectionIdQueryVariables> {
     document = ReferendumVotesBySectionIdDocument;
+    
+    constructor(apollo: Apollo.Apollo) {
+      super(apollo);
+    }
+  }
+export const AutoSuggestSettlementsDocument = gql`
+    query AutoSuggestSettlements($condition: settlements_bool_exp!) {
+  settlements(where: $condition) {
+    id
+    name
+    isMunicipality
+    parentId
+  }
+}
+    `;
+
+  @Injectable({
+    providedIn: 'root'
+  })
+  export class AutoSuggestSettlementsGQL extends Apollo.Query<AutoSuggestSettlementsQuery, AutoSuggestSettlementsQueryVariables> {
+    document = AutoSuggestSettlementsDocument;
     
     constructor(apollo: Apollo.Apollo) {
       super(apollo);

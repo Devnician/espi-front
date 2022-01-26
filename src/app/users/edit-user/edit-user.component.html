@@ -1,4 +1,9 @@
 <form [formGroup]="form" novalidate (ngSubmit)="onSubmit()">
+  <mat-progress-bar
+    *ngIf="loading$ | async"
+    color="warn"
+    mode="indeterminate"
+  ></mat-progress-bar>
   <mat-card class="shipping-card">
     <mat-card-header>
       <mat-card-title>Данни за потребител</mat-card-title>
@@ -115,37 +120,94 @@ description: null
 number: 10
 settlementId: 3382
 street: "Borisova" -->
+      <!-- ADDRESS -->
+      <div class="row mat-elevation-z4 form-sector" style="display: flow-root">
+        <div class="row">
+          <div class="col">
+            <mat-form-field class="full-width">
+              <input
+                matInput
+                placeholder="Област"
+                formControlName="districtName"
+                [matAutocomplete]="filterDistricts"
+                (keyup)="onSearch('district')"
+              />
+              <mat-autocomplete
+                #filterDistricts="matAutocomplete"
+                (optionSelected)="onDistrictSelected()"
+              >
+                <ng-container>
+                  <mat-option
+                    *ngFor="let district of districts$ | async"
+                    [value]="district.name"
+                  >
+                    {{ district.name }}
+                  </mat-option>
+                </ng-container>
+              </mat-autocomplete>
+            </mat-form-field>
+          </div>
 
-      <div class="row mat-elevation-z4 form-sector">
-        <div class="col">
-          <mat-form-field class="full-width">
-            <input matInput placeholder="Улица" formControlName="street" />
-            <mat-error *ngIf="form.controls['street'].errors">
-              {{ valido.getErrorMessageFromControl(form.controls["street"]) }}
-            </mat-error>
-          </mat-form-field>
+          <div class="col">
+            <mat-form-field class="full-width">
+              <input
+                matInput
+                placeholder="Населено място"
+                formControlName="settlementName"
+                [matAutocomplete]="filterSettlements"
+                (keyup)="onSearch('settlement')"
+                [readonly]="isSettlementAutoDisabled()"
+              />
+              <mat-autocomplete
+                #filterSettlements="matAutocomplete"
+                (optionSelected)="onSettlementSelected()"
+              >
+                <ng-container>
+                  <mat-option
+                    *ngFor="let settlement of settlements$ | async"
+                    [value]="settlement.name"
+                  >
+                    {{ settlement.name }}
+                  </mat-option>
+                </ng-container>
+              </mat-autocomplete>
+            </mat-form-field>
+          </div>
         </div>
-        <div class="col">
-          <mat-form-field class="full-width">
-            <input matInput placeholder="номер" formControlName="number" />
-            <mat-error *ngIf="form.controls['number'].errors">
-              {{ valido.getErrorMessageFromControl(form.controls["number"]) }}
-            </mat-error>
-          </mat-form-field>
-        </div>
-        <div class="col">
-          <mat-form-field class="full-width">
-            <input
-              matInput
-              placeholder="описание"
-              formControlName="description"
-            />
-            <mat-error *ngIf="form.controls['description'].errors">
-              {{
-                valido.getErrorMessageFromControl(form.controls["description"])
-              }}
-            </mat-error>
-          </mat-form-field>
+
+        <div class="row">
+          <div class="col">
+            <mat-form-field class="full-width">
+              <input matInput placeholder="Улица" formControlName="street" />
+              <mat-error *ngIf="form.controls['street'].errors">
+                {{ valido.getErrorMessageFromControl(form.controls["street"]) }}
+              </mat-error>
+            </mat-form-field>
+          </div>
+          <div class="col">
+            <mat-form-field class="full-width">
+              <input matInput placeholder="номер" formControlName="number" />
+              <mat-error *ngIf="form.controls['number'].errors">
+                {{ valido.getErrorMessageFromControl(form.controls["number"]) }}
+              </mat-error>
+            </mat-form-field>
+          </div>
+          <div class="col">
+            <mat-form-field class="full-width">
+              <input
+                matInput
+                placeholder="описание"
+                formControlName="description"
+              />
+              <mat-error *ngIf="form.controls['description'].errors">
+                {{
+                  valido.getErrorMessageFromControl(
+                    form.controls["description"]
+                  )
+                }}
+              </mat-error>
+            </mat-form-field>
+          </div>
         </div>
       </div>
     </mat-card-content>
@@ -157,3 +219,5 @@ street: "Borisova" -->
     </mat-card-actions>
   </mat-card>
 </form>
+
+<pre>{{ form.getRawValue() | json }}</pre>
