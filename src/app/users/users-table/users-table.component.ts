@@ -4,7 +4,6 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatSort } from '@angular/material/sort';
 import { MatTable } from '@angular/material/table';
-import * as _ from 'lodash';
 import { BehaviorSubject } from 'rxjs';
 import { rowsAnimation } from 'src/app/animations/template.animations';
 import { SettlementsService } from 'src/app/settlements/settlements-service.service';
@@ -113,34 +112,6 @@ export class UsersTableComponent implements AfterViewInit {
   testCall(user: Users) {
     console.log(user);
     alert(JSON.stringify(user));
-  }
-  /**
-   * Delete this...
-   */
-  updateFirst() {
-    this.dataSource.loading.next(true);
-    // console.log(this.dataSource.currentPageData.value);
-    const firstFromPage: Users = _.cloneDeep(
-      _.first(this.dataSource.currentPageData.value)
-    );
-    if (firstFromPage) {
-      console.log(firstFromPage);
-      // HERE must clean useless data
-      delete firstFromPage.address;
-      delete firstFromPage.createdAt;
-      delete firstFromPage.updatedAt;
-      delete firstFromPage.roleType;
-      delete firstFromPage.secondRoleType;
-      delete firstFromPage.__typename;
-
-      this.usersService
-        .updateUser(firstFromPage)
-        .subscribe(({ errors, data }) => {
-          console.log(errors);
-          console.log(data);
-        });
-      console.log('Update', firstFromPage);
-    }
   }
 
   /**

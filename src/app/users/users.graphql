@@ -21,8 +21,16 @@ mutation CreateUser($input: users_insert_input!) {
   }
 }
 
-mutation UpdateUser($id: Int!, $set: users_set_input!) {
-  update_users_by_pk(pk_columns: { id: $id }, _set: $set) {
+mutation UpdateUser(
+  $addrId: Int!
+  $addressSet: addresses_set_input!
+  $userId: Int!
+  $userSet: users_set_input!
+) {
+  update_addresses_by_pk(pk_columns: { id: $addrId }, _set: $addressSet) {
+    ...AddressShort
+  }
+  update_users_by_pk(pk_columns: { id: $userId }, _set: $userSet) {
     ...UserFields
   }
 }
@@ -51,10 +59,24 @@ fragment UserFields on users {
   }
 
   address {
-    id
-    settlementId
-    number
-    street
-    description
+    ...AddressShort
+    settlement {
+      id
+      name
+      isMunicipality
+      parentId
+      parentSettlement {
+        id
+        isMunicipality
+        name
+      }
+    }
   }
+}
+fragment AddressShort on addresses {
+  id
+  number
+  street
+  description
+  settlementId
 }

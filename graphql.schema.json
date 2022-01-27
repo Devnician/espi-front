@@ -1782,7 +1782,23 @@
               "name": null,
               "ofType": {
                 "kind": "SCALAR",
-                "name": "Int",
+                "name": "String",
+                "ofType": null
+              }
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "settlement",
+            "description": "An object relationship",
+            "args": [],
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "OBJECT",
+                "name": "settlements",
                 "ofType": null
               }
             },
@@ -2072,18 +2088,6 @@
             "deprecationReason": null
           },
           {
-            "name": "number",
-            "description": null,
-            "args": [],
-            "type": {
-              "kind": "SCALAR",
-              "name": "Float",
-              "ofType": null
-            },
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
             "name": "settlementId",
             "description": null,
             "args": [],
@@ -2188,7 +2192,19 @@
             "description": null,
             "type": {
               "kind": "INPUT_OBJECT",
-              "name": "Int_comparison_exp",
+              "name": "String_comparison_exp",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "settlement",
+            "description": null,
+            "type": {
+              "kind": "INPUT_OBJECT",
+              "name": "settlements_bool_exp",
               "ofType": null
             },
             "defaultValue": null,
@@ -2260,18 +2276,6 @@
             "deprecationReason": null
           },
           {
-            "name": "number",
-            "description": null,
-            "type": {
-              "kind": "SCALAR",
-              "name": "Int",
-              "ofType": null
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
             "name": "settlementId",
             "description": null,
             "type": {
@@ -2323,7 +2327,19 @@
             "description": null,
             "type": {
               "kind": "SCALAR",
-              "name": "Int",
+              "name": "String",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "settlement",
+            "description": null,
+            "type": {
+              "kind": "INPUT_OBJECT",
+              "name": "settlements_obj_rel_insert_input",
               "ofType": null
             },
             "defaultValue": null,
@@ -2394,7 +2410,7 @@
             "args": [],
             "type": {
               "kind": "SCALAR",
-              "name": "Int",
+              "name": "String",
               "ofType": null
             },
             "isDeprecated": false,
@@ -2465,7 +2481,7 @@
             "args": [],
             "type": {
               "kind": "SCALAR",
-              "name": "Int",
+              "name": "String",
               "ofType": null
             },
             "isDeprecated": false,
@@ -2697,6 +2713,18 @@
             "deprecationReason": null
           },
           {
+            "name": "settlement",
+            "description": null,
+            "type": {
+              "kind": "INPUT_OBJECT",
+              "name": "settlements_order_by",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
             "name": "settlementId",
             "description": null,
             "type": {
@@ -2828,7 +2856,7 @@
             "description": null,
             "type": {
               "kind": "SCALAR",
-              "name": "Int",
+              "name": "String",
               "ofType": null
             },
             "defaultValue": null,
@@ -2882,18 +2910,6 @@
             "deprecationReason": null
           },
           {
-            "name": "number",
-            "description": null,
-            "args": [],
-            "type": {
-              "kind": "SCALAR",
-              "name": "Float",
-              "ofType": null
-            },
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
             "name": "settlementId",
             "description": null,
             "args": [],
@@ -2918,18 +2934,6 @@
         "fields": [
           {
             "name": "id",
-            "description": null,
-            "args": [],
-            "type": {
-              "kind": "SCALAR",
-              "name": "Float",
-              "ofType": null
-            },
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "number",
             "description": null,
             "args": [],
             "type": {
@@ -2976,18 +2980,6 @@
             "deprecationReason": null
           },
           {
-            "name": "number",
-            "description": null,
-            "args": [],
-            "type": {
-              "kind": "SCALAR",
-              "name": "Float",
-              "ofType": null
-            },
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
             "name": "settlementId",
             "description": null,
             "args": [],
@@ -3012,18 +3004,6 @@
         "fields": [
           {
             "name": "id",
-            "description": null,
-            "args": [],
-            "type": {
-              "kind": "SCALAR",
-              "name": "Int",
-              "ofType": null
-            },
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "number",
             "description": null,
             "args": [],
             "type": {
@@ -3111,18 +3091,6 @@
             "deprecationReason": null
           },
           {
-            "name": "number",
-            "description": null,
-            "args": [],
-            "type": {
-              "kind": "SCALAR",
-              "name": "Float",
-              "ofType": null
-            },
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
             "name": "settlementId",
             "description": null,
             "args": [],
@@ -3158,18 +3126,6 @@
             "deprecationReason": null
           },
           {
-            "name": "number",
-            "description": null,
-            "args": [],
-            "type": {
-              "kind": "SCALAR",
-              "name": "Float",
-              "ofType": null
-            },
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
             "name": "settlementId",
             "description": null,
             "args": [],
@@ -3194,18 +3150,6 @@
         "fields": [
           {
             "name": "id",
-            "description": null,
-            "args": [],
-            "type": {
-              "kind": "SCALAR",
-              "name": "Float",
-              "ofType": null
-            },
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "number",
             "description": null,
             "args": [],
             "type": {

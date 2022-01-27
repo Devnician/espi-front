@@ -77,7 +77,7 @@ export class NavigationComponent
       if (isNullOrUndefined(accessT)) {
         this.onLogout();
       }
-      console.log(accessT);
+      // console.log(accessT);
       const res = this.jwtHelper.decodeToken(accessT);
       this.auth.setLoggedUser(res.user);
     }

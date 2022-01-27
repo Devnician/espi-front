@@ -125,13 +125,17 @@ street: "Borisova" -->
         <div class="row">
           <div class="col">
             <mat-form-field class="full-width">
-              <input
-                matInput
-                placeholder="Област"
-                formControlName="districtName"
-                [matAutocomplete]="filterDistricts"
-                (keyup)="onSearch('district')"
-              />
+              <div style="display: flex">
+                <input
+                  matInput
+                  placeholder="Област"
+                  formControlName="districtName"
+                  [matAutocomplete]="filterDistricts"
+                  (keyup)="onSearch('district')"
+                />
+
+                <mat-icon>search</mat-icon>
+              </div>
               <mat-autocomplete
                 #filterDistricts="matAutocomplete"
                 (optionSelected)="onDistrictSelected()"
@@ -150,14 +154,17 @@ street: "Borisova" -->
 
           <div class="col">
             <mat-form-field class="full-width">
-              <input
-                matInput
-                placeholder="Населено място"
-                formControlName="settlementName"
-                [matAutocomplete]="filterSettlements"
-                (keyup)="onSearch('settlement')"
-                [readonly]="isSettlementAutoDisabled()"
-              />
+              <div style="display: flex">
+                <input
+                  matInput
+                  placeholder="Населено място"
+                  formControlName="settlementName"
+                  [matAutocomplete]="filterSettlements"
+                  (keyup)="onSearch('settlement')"
+                  [readonly]="isSettlementAutoDisabled()"
+                />
+                <mat-icon>search</mat-icon>
+              </div>
               <mat-autocomplete
                 #filterSettlements="matAutocomplete"
                 (optionSelected)="onSettlementSelected()"
@@ -212,10 +219,23 @@ street: "Borisova" -->
       </div>
     </mat-card-content>
     <mat-card-actions align="end">
-      <button mat-raised-button color="primary" (click)="close()" type="button">
+      <button
+        [disabled]="loading$ | async"
+        mat-raised-button
+        (click)="close()"
+        type="button"
+      >
         Затвори
       </button>
-      <button mat-raised-button color="primary" type="submit">Запази</button>
+      <!-- [disabled]="(loading$ | async) === true || form.invalid" -->
+      <button
+        [disabled]="(loading$ | async) === true"
+        mat-raised-button
+        color="primary"
+        type="submit"
+      >
+        Запази
+      </button>
     </mat-card-actions>
   </mat-card>
 </form>
