@@ -1,3 +1,6 @@
+ALTER TABLE "public"."users"
+ADD "role" text;
+
 alter table "public"."users"
   add constraint "users_role_fkey"
   foreign key ("role")
