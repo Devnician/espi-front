@@ -9,14 +9,14 @@
   </button>
 </div>
 
-<!-- <button
+<button
   mat-raised-button
   color="primary"
   style="margin: 10px"
   (click)="getDistricts()"
 >
   Областни градове
-</button> -->
+</button>
 
 <div class="mat-elevation-z8">
   <mat-progress-bar
@@ -60,6 +60,11 @@
       <th mat-header-cell *matHeaderCellDef mat-sort-header>фамилия</th>
       <td mat-cell *matCellDef="let row">{{ row.family }}</td>
     </ng-container>
+    <!-- egn Column -->
+    <ng-container matColumnDef="egn">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>egn</th>
+      <td mat-cell *matCellDef="let row">{{ row.egn }}</td>
+    </ng-container>
     <!-- roles Column -->
     <ng-container matColumnDef="roles">
       <th mat-header-cell *matHeaderCellDef>роли</th>
@@ -79,11 +84,12 @@
     <ng-container matColumnDef="voted">
       <th mat-header-cell *matHeaderCellDef mat-sort-header>гласувал</th>
       <td mat-cell *matCellDef="let row">
-        <mat-checkbox
+        <!-- <mat-checkbox
           color="accent"
           [checked]="row.voted"
           [disabled]="true"
-        ></mat-checkbox>
+        ></mat-checkbox> -->
+        {{ row.voted }}
       </td>
     </ng-container>
     <!-- eVoted Column -->
@@ -91,11 +97,12 @@
       <th mat-header-cell *matHeaderCellDef mat-sort-header>е-гласувал</th>
       <td mat-cell *matCellDef="let row">
         <!--  (change)="onVatStatementChange($event)" -->
-        <mat-checkbox
+        <!-- <mat-checkbox
           color="accent"
           [checked]="row.eVoted"
           [disabled]="true"
-        ></mat-checkbox>
+        ></mat-checkbox> -->
+        {{ row.eVoted }}
       </td>
     </ng-container>
 

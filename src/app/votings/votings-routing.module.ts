@@ -15,6 +15,16 @@ const routes: Routes = [
       {
         path: 'dashboard',
         component: VotingsDashboardComponent,
+        // children: [
+        //   {
+        //     path: 'referendum',
+        //     component: ReferendumComponent,
+        //   },
+        //   {
+        //     path: 'vote',
+        //     component: VoteComponent,
+        //   },
+        // ],
       },
       {
         path: 'referendum',
