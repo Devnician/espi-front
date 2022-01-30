@@ -44,7 +44,7 @@ export class OrdersTableDataSource extends DataSource<Users> {
   connect(): Observable<Users[] | any> {
     const limit: number = this.paginator.pageSize;
     const offset: number = this.paginator.pageIndex * this.paginator.pageSize;
-    const order_by: Users_Order_By = { createdAt: Order_By.Asc };
+    const order_by: Users_Order_By = { createdAt: Order_By.Desc };
 
     // Combine everything that affects the rendered data into one update
     // stream for the data-table to consume.

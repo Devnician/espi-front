@@ -1,20 +1,13 @@
-<button
-  mat-raised-button
-  color="primary"
-  style="margin: 10px"
-  (click)="addUser()"
->
-  Добави гласоподавател
-</button>
-
-<!-- <button
-  mat-raised-button
-  color="primary"
-  style="margin: 10px"
-  (click)="updateFirst()"
->
-  Промени
-</button> -->
+<div style="display: flex; justify-content: flex-end">
+  <button
+    mat-raised-button
+    color="accent"
+    style="margin: 10px"
+    (click)="editUser(null)"
+  >
+    Добави гласоподавател
+  </button>
+</div>
 
 <button
   mat-raised-button
@@ -47,7 +40,7 @@
     </ng-container>
     <!-- updatedAt Column -->
     <ng-container matColumnDef="updatedAt">
-      <th mat-header-cell *matHeaderCellDef mat-sort-header>създаден на</th>
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>промемен на</th>
       <td mat-cell *matCellDef="let row">
         {{ row.updatedAt | date: "d.MM.YYYY HH:mm:ss" }}
       </td>
@@ -66,6 +59,11 @@
     <ng-container matColumnDef="family">
       <th mat-header-cell *matHeaderCellDef mat-sort-header>фамилия</th>
       <td mat-cell *matCellDef="let row">{{ row.family }}</td>
+    </ng-container>
+    <!-- egn Column -->
+    <ng-container matColumnDef="egn">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>egn</th>
+      <td mat-cell *matCellDef="let row">{{ row.egn }}</td>
     </ng-container>
     <!-- roles Column -->
     <ng-container matColumnDef="roles">
@@ -86,11 +84,12 @@
     <ng-container matColumnDef="voted">
       <th mat-header-cell *matHeaderCellDef mat-sort-header>гласувал</th>
       <td mat-cell *matCellDef="let row">
-        <mat-checkbox
+        <!-- <mat-checkbox
           color="accent"
           [checked]="row.voted"
           [disabled]="true"
-        ></mat-checkbox>
+        ></mat-checkbox> -->
+        {{ row.voted }}
       </td>
     </ng-container>
     <!-- eVoted Column -->
@@ -98,11 +97,12 @@
       <th mat-header-cell *matHeaderCellDef mat-sort-header>е-гласувал</th>
       <td mat-cell *matCellDef="let row">
         <!--  (change)="onVatStatementChange($event)" -->
-        <mat-checkbox
+        <!-- <mat-checkbox
           color="accent"
           [checked]="row.eVoted"
           [disabled]="true"
-        ></mat-checkbox>
+        ></mat-checkbox> -->
+        {{ row.eVoted }}
       </td>
     </ng-container>
 
@@ -118,7 +118,7 @@
           <mat-icon>more_vert</mat-icon>
         </button>
         <mat-menu #menu="matMenu">
-          <button mat-menu-item (click)="testCall(row)">
+          <button mat-menu-item (click)="editUser(row)">
             <mat-icon>edit</mat-icon>
             <span>Редактирай</span>
           </button>

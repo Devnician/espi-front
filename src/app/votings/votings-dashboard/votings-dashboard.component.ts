@@ -92,19 +92,11 @@ export class VotingsDashboardComponent {
 
   goToVotingComponent(vote: VotingParams) {
     console.log('go to vote', vote);
-    // console.log(this.activatedRoute.url.);
-    // this.router.navigate(['vote'], {
-    //   relativeTo: this.activatedRoute,
-    // });
     if (vote.id === 1) {
-      this.router.navigate(['vote'], {
-        relativeTo: this.activatedRoute,
-      });
+      this.router.navigateByUrl('votings/vote');
     }
     if (vote.id === 2) {
-      this.router.navigate(['referendum'], {
-        relativeTo: this.activatedRoute,
-      });
+      this.router.navigateByUrl('votings/referendum');
     }
     // alert(JSON.stringify(vote));
     //console.log(vote);
