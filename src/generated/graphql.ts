@@ -7915,14 +7915,19 @@ export type UserFieldsFragment = (
     { __typename?: 'addresses' }
     & { settlement: (
       { __typename?: 'settlements' }
-      & Pick<Settlements, 'id' | 'name' | 'isMunicipality' | 'parentId'>
-      & { parentSettlement?: Maybe<(
-        { __typename?: 'settlements' }
-        & Pick<Settlements, 'id' | 'isMunicipality' | 'name'>
-      )> }
+      & SettlementFiledsFragment
     ) }
     & AddressShortFragment
   ) }
+);
+
+export type SettlementFiledsFragment = (
+  { __typename?: 'settlements' }
+  & Pick<Settlements, 'id' | 'name' | 'isMunicipality' | 'parentId'>
+  & { parentSettlement?: Maybe<(
+    { __typename?: 'settlements' }
+    & Pick<Settlements, 'id' | 'isMunicipality' | 'name'>
+  )> }
 );
 
 export type AddressShortFragment = (
@@ -7995,7 +8000,7 @@ export type ReferendumFieldsFragment = (
   & Pick<Referendums, 'id' | 'createdAt' | 'updatedAt' | 'locked' | 'name' | 'description' | 'settlementId' | 'startedAt' | 'finishedAt'>
   & { settlement?: Maybe<(
     { __typename?: 'settlements' }
-    & Pick<Settlements, 'id' | 'name' | 'parentId' | 'isMunicipality'>
+    & SettlementFiledsFragment
   )>, referendumQuestions: Array<(
     { __typename?: 'referendum_questions' }
     & ReferendumQuestionsFieldsFragment
@@ -8067,6 +8072,19 @@ export const AddressShortFragmentDoc = gql`
   settlementId
 }
     `;
+export const SettlementFiledsFragmentDoc = gql`
+    fragment SettlementFileds on settlements {
+  id
+  name
+  isMunicipality
+  parentId
+  parentSettlement {
+    id
+    isMunicipality
+    name
+  }
+}
+    `;
 export const UserFieldsFragmentDoc = gql`
     fragment UserFields on users {
   id
@@ -8091,19 +8109,12 @@ export const UserFieldsFragmentDoc = gql`
   address {
     ...AddressShort
     settlement {
-      id
-      name
-      isMunicipality
-      parentId
-      parentSettlement {
-        id
-        isMunicipality
-        name
-      }
+      ...SettlementFileds
     }
   }
 }
-    ${AddressShortFragmentDoc}`;
+    ${AddressShortFragmentDoc}
+${SettlementFiledsFragmentDoc}`;
 export const ReferendumQuestionsFieldsFragmentDoc = gql`
     fragment ReferendumQuestionsFields on referendum_questions {
   id
@@ -8123,10 +8134,7 @@ export const ReferendumFieldsFragmentDoc = gql`
   description
   settlementId
   settlement {
-    id
-    name
-    parentId
-    isMunicipality
+    ...SettlementFileds
   }
   startedAt
   finishedAt
@@ -8134,7 +8142,8 @@ export const ReferendumFieldsFragmentDoc = gql`
     ...ReferendumQuestionsFields
   }
 }
-    ${ReferendumQuestionsFieldsFragmentDoc}`;
+    ${SettlementFiledsFragmentDoc}
+${ReferendumQuestionsFieldsFragmentDoc}`;
 export const RegisterDocument = gql`
     query Register($args: RegisterUserInsertInput!) {
   RegisterAction(arg1: $args) {

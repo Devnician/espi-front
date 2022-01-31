@@ -44,7 +44,7 @@ export class ReferendumsTableDataSource extends DataSource<Referendums> {
   connect(): Observable<Referendums[]> {
     const limit: number = this.paginator.pageSize;
     const offset: number = this.paginator.pageIndex * this.paginator.pageSize;
-    const order_by: Referendums_Order_By = { createdAt: Order_By.Asc };
+    const order_by: Referendums_Order_By = { id: Order_By.Asc };
 
     this.queryRef = this.votingsService.getReferendums(
       limit,

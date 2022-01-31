@@ -59,10 +59,7 @@ fragment ReferendumFields on referendums {
   description
   settlementId
   settlement {
-    id
-    name
-    parentId
-    isMunicipality
+    ...SettlementFileds
   }
   startedAt
   finishedAt
