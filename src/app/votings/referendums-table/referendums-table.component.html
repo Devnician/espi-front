@@ -39,6 +39,14 @@
       <td mat-cell *matCellDef="let row">{{ row.name }}</td>
     </ng-container>
 
+    <!-- startDate Column -->
+    <ng-container matColumnDef="startDate">
+      <th mat-header-cell *matHeaderCellDef>Планиран за</th>
+      <td mat-cell *matCellDef="let row">
+        {{ row.startDate | date: "d.MM.YYYY" }}
+      </td>
+    </ng-container>
+
     <!-- startedAt Column -->
     <ng-container matColumnDef="startedAt">
       <th mat-header-cell *matHeaderCellDef>Стартирал на</th>

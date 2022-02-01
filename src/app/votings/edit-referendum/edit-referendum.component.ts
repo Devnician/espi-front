@@ -6,11 +6,13 @@ import {
   FormGroup,
   Validators,
 } from '@angular/forms';
+import { MatDatepickerInputEvent } from '@angular/material/datepicker';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { MatSlideToggleChange } from '@angular/material/slide-toggle';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { isNullOrUndefined } from 'is-what';
 import * as _ from 'lodash';
+import * as moment from 'moment';
 import {
   BehaviorSubject,
   debounceTime,
@@ -63,6 +65,7 @@ export class EditReferendumComponent implements OnInit {
   private user: LoggedUser;
 
   canLock: BehaviorSubject<any> = new BehaviorSubject(false);
+  minDate = moment().endOf('day');
 
   constructor(
     private fb: FormBuilder,
@@ -85,6 +88,12 @@ export class EditReferendumComponent implements OnInit {
       this.datasource.data.next(this.referendum.referendumQuestions);
       this.form.addControl('id', new FormControl(this.origin.id));
 
+      if (this.referendum.startDate) {
+        this.minDate = undefined;
+      } else {
+        this.minDate = moment().endOf('day');
+      }
+
       if (
         this.user.roleType.value === Role_Types_Enum.CentralLeader ||
         this.user?.secondRoleType.value === Role_Types_Enum.CentralLeader
@@ -98,6 +107,7 @@ export class EditReferendumComponent implements OnInit {
       name: [this.referendum?.name, Validators.required],
       description: [this.referendum?.description, Validators.required],
       locked: [this.referendum ? this.referendum.locked : false],
+      startDate: [this.referendum?.startDate],
 
       districtName: [this.referendum?.settlement?.parentSettlement.name],
       districtId: [this.referendum?.settlement?.parentSettlement.id],
@@ -148,6 +158,12 @@ export class EditReferendumComponent implements OnInit {
     );
   }
 
+  onDateSelected(type: any, event: MatDatepickerInputEvent<Date>): void {
+    // const day = moment(event.value);
+    // const selectedStartDate = day.startOf('day').toDate();
+    this.minDate = moment().endOf('day');
+  }
+
   /**
    * On search by clientName
    */
@@ -173,7 +189,7 @@ export class EditReferendumComponent implements OnInit {
   }
 
   isChecked(): boolean {
-    return !isNullOrUndefined(this.referendum.settlement);
+    return !isNullOrUndefined(this.referendum?.settlement);
   }
 
   onDistrictSelected() {

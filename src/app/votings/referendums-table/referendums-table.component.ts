@@ -27,6 +27,7 @@ export class ReferendumsTableComponent implements AfterViewInit {
   displayedColumns = [
     'id',
     'name',
+    'startDate',
     'startedAt',
     'finishedAt',
     'questions',
@@ -67,7 +68,7 @@ export class ReferendumsTableComponent implements AfterViewInit {
   openDialog(referendum: Referendums) {
     const config = new MatDialogConfig<any>();
     // config.closeOnNavigation = true;
-    // config.disableClose = true;
+    config.disableClose = true;
     config.data = {
       referendum,
       user: this.loggedUSer,

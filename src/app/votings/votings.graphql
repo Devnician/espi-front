@@ -54,6 +54,7 @@ fragment ReferendumFields on referendums {
   id
   createdAt
   updatedAt
+  startDate
   locked
   name
   description

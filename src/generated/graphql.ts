@@ -12,6 +12,7 @@ export type Scalars = {
   Boolean: boolean;
   Int: number;
   Float: number;
+  date: any;
   timestamp: any;
   timestamptz: any;
 };
@@ -1258,6 +1259,20 @@ export type Commissions_Variance_Fields = {
   __typename?: 'commissions_variance_fields';
   id?: Maybe<Scalars['Float']>;
   votingSectionId?: Maybe<Scalars['Float']>;
+};
+
+
+/** Boolean expression to compare columns of type "date". All fields are combined with logical 'AND'. */
+export type Date_Comparison_Exp = {
+  _eq?: Maybe<Scalars['date']>;
+  _gt?: Maybe<Scalars['date']>;
+  _gte?: Maybe<Scalars['date']>;
+  _in?: Maybe<Array<Scalars['date']>>;
+  _is_null?: Maybe<Scalars['Boolean']>;
+  _lt?: Maybe<Scalars['date']>;
+  _lte?: Maybe<Scalars['date']>;
+  _neq?: Maybe<Scalars['date']>;
+  _nin?: Maybe<Array<Scalars['date']>>;
 };
 
 /** columns and relationships of "electoral_roll_users" */
@@ -4788,6 +4803,7 @@ export type Referendums = {
   /** An object relationship */
   settlement?: Maybe<Settlements>;
   settlementId?: Maybe<Scalars['Int']>;
+  startDate?: Maybe<Scalars['date']>;
   startedAt?: Maybe<Scalars['timestamptz']>;
   updatedAt: Scalars['timestamptz'];
 };
@@ -4863,6 +4879,7 @@ export type Referendums_Bool_Exp = {
   referendumQuestions?: Maybe<Referendum_Questions_Bool_Exp>;
   settlement?: Maybe<Settlements_Bool_Exp>;
   settlementId?: Maybe<Int_Comparison_Exp>;
+  startDate?: Maybe<Date_Comparison_Exp>;
   startedAt?: Maybe<Timestamptz_Comparison_Exp>;
   updatedAt?: Maybe<Timestamptz_Comparison_Exp>;
 };
@@ -4892,6 +4909,7 @@ export type Referendums_Insert_Input = {
   referendumQuestions?: Maybe<Referendum_Questions_Arr_Rel_Insert_Input>;
   settlement?: Maybe<Settlements_Obj_Rel_Insert_Input>;
   settlementId?: Maybe<Scalars['Int']>;
+  startDate?: Maybe<Scalars['date']>;
   startedAt?: Maybe<Scalars['timestamptz']>;
   updatedAt?: Maybe<Scalars['timestamptz']>;
 };
@@ -4905,6 +4923,7 @@ export type Referendums_Max_Fields = {
   id?: Maybe<Scalars['Int']>;
   name?: Maybe<Scalars['String']>;
   settlementId?: Maybe<Scalars['Int']>;
+  startDate?: Maybe<Scalars['date']>;
   startedAt?: Maybe<Scalars['timestamptz']>;
   updatedAt?: Maybe<Scalars['timestamptz']>;
 };
@@ -4918,6 +4937,7 @@ export type Referendums_Min_Fields = {
   id?: Maybe<Scalars['Int']>;
   name?: Maybe<Scalars['String']>;
   settlementId?: Maybe<Scalars['Int']>;
+  startDate?: Maybe<Scalars['date']>;
   startedAt?: Maybe<Scalars['timestamptz']>;
   updatedAt?: Maybe<Scalars['timestamptz']>;
 };
@@ -4949,6 +4969,7 @@ export type Referendums_Order_By = {
   referendumQuestions_aggregate?: Maybe<Referendum_Questions_Aggregate_Order_By>;
   settlement?: Maybe<Settlements_Order_By>;
   settlementId?: Maybe<Order_By>;
+  startDate?: Maybe<Order_By>;
   startedAt?: Maybe<Order_By>;
   updatedAt?: Maybe<Order_By>;
 };
@@ -4975,6 +4996,8 @@ export enum Referendums_Select_Column {
   /** column name */
   SettlementId = 'settlementId',
   /** column name */
+  StartDate = 'startDate',
+  /** column name */
   StartedAt = 'startedAt',
   /** column name */
   UpdatedAt = 'updatedAt'
@@ -4989,6 +5012,7 @@ export type Referendums_Set_Input = {
   locked?: Maybe<Scalars['Boolean']>;
   name?: Maybe<Scalars['String']>;
   settlementId?: Maybe<Scalars['Int']>;
+  startDate?: Maybe<Scalars['date']>;
   startedAt?: Maybe<Scalars['timestamptz']>;
   updatedAt?: Maybe<Scalars['timestamptz']>;
 };
@@ -5037,6 +5061,8 @@ export enum Referendums_Update_Column {
   Name = 'name',
   /** column name */
   SettlementId = 'settlementId',
+  /** column name */
+  StartDate = 'startDate',
   /** column name */
   StartedAt = 'startedAt',
   /** column name */
@@ -7997,7 +8023,7 @@ export type GetReferendumsQuery = (
 
 export type ReferendumFieldsFragment = (
   { __typename?: 'referendums' }
-  & Pick<Referendums, 'id' | 'createdAt' | 'updatedAt' | 'locked' | 'name' | 'description' | 'settlementId' | 'startedAt' | 'finishedAt'>
+  & Pick<Referendums, 'id' | 'createdAt' | 'updatedAt' | 'startDate' | 'locked' | 'name' | 'description' | 'settlementId' | 'startedAt' | 'finishedAt'>
   & { settlement?: Maybe<(
     { __typename?: 'settlements' }
     & SettlementFiledsFragment
@@ -8129,6 +8155,7 @@ export const ReferendumFieldsFragmentDoc = gql`
   id
   createdAt
   updatedAt
+  startDate
   locked
   name
   description
