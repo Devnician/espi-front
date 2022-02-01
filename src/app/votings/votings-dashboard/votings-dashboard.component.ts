@@ -46,16 +46,16 @@ export class VotingsDashboardComponent {
   }
 
   initVotingsCards() {
-    // Get the current votings from database..
+    //TODO:Precise the query.
     this.cards = from(this.voitngsService.getReferendums(99, null, {}, {}).result())
-      .pipe(map(r => r.data.referendums.map((ref, i) => {
+      .pipe(map(res => res.data.referendums.map(r => {
         return {
-          title: ref.name,
-          text: ref.description,
+          title: r.name,
+          text: r.description,
           cols: 1,
           rows: 1,
-          type: 'alabala',
-          id: i,
+          type: "referendum",
+          id: r.id,
         } as VotingParams
       })));
 
@@ -68,14 +68,14 @@ export class VotingsDashboardComponent {
     // this.router.navigate(['vote'], {
     //   relativeTo: this.activatedRoute,
     // });
-    if (vote.id === 1) {
-      this.router.navigate(['vote'], {
-        relativeTo: this.activatedRoute,
-      });
-    }
-    if (vote.id === 2) {
-      this.router.navigate(['referendum'], {
-        relativeTo: this.activatedRoute,
+    // if (vote.id === 1) {
+    //   this.router.navigate(['vote'], {
+    //     relativeTo: this.activatedRoute,
+    //   });
+    // }
+    if (vote.type === "referendum") {
+      this.router.navigate([`/votings/referendum/${vote.id}`], {
+        relativeTo: this.activatedRoute
       });
     }
     // alert(JSON.stringify(vote));
