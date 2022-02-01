@@ -1,7 +1,7 @@
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 import { Component } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { BehaviorSubject, Observable } from 'rxjs';
+import { BehaviorSubject, from, Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { Votings } from 'src/generated/graphql';
 import { VotingsService } from '../voting-service.service';
@@ -22,30 +22,7 @@ interface VotingParams {
 export class VotingsDashboardComponent {
   votings: BehaviorSubject<VotingParams[]> = new BehaviorSubject([]);
   /** Based on the screen size, switch from standard to one column per row */
-  cards: Observable<VotingParams[]> = this.breakpointObserver
-    .observe(Breakpoints.Handset)
-    .pipe(
-      map(({ matches }) => {
-        console.log(matches);
-        const params = this.votings.value;
-        const res = [];
-
-        if (matches) {
-          params.forEach((element) => {
-            element.cols = 2;
-            element.rows = 1;
-            res.push(element);
-          });
-          return res;
-        }
-        params.forEach((element) => {
-          element.cols = 1;
-          element.rows = 1;
-          res.push(element);
-        });
-        return res;
-      })
-    );
+  cards: Observable<VotingParams[]>;
 
   constructor(
     private breakpointObserver: BreakpointObserver,
@@ -70,24 +47,19 @@ export class VotingsDashboardComponent {
 
   initVotingsCards() {
     // Get the current votings from database..
-    this.votings.next([
-      {
-        title: 'Парламентарни избори 2022',
-        text: 'Описание на избора',
-        cols: 2,
-        rows: 1,
-        type: 'alabala',
-        id: 1,
-      },
-      {
-        title: 'Референдум 2022',
-        text: 'Описание на референдума',
-        cols: 2,
-        rows: 1,
-        type: 'alabala',
-        id: 2,
-      },
-    ]);
+    this.cards = from(this.voitngsService.getReferendums(99, null, {}, {}).result())
+      .pipe(map(r => r.data.referendums.map((ref, i) => {
+        return {
+          title: ref.name,
+          text: ref.description,
+          cols: 1,
+          rows: 1,
+          type: 'alabala',
+          id: i,
+        } as VotingParams
+      })));
+
+
   }
 
   goToVotingComponent(vote: VotingParams) {
