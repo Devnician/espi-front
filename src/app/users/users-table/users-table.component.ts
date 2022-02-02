@@ -34,8 +34,9 @@ export class UsersTableComponent implements AfterViewInit {
   /** Columns displayed in the table. Columns IDs can be added, removed, or reordered. */
   displayedColumns = [
     'id',
-    'createdAt',
-    'updatedAt',
+    // 'createdAt',
+    // 'updatedAt',
+    'egn',
     'name',
     'surname',
     'family',
@@ -46,6 +47,7 @@ export class UsersTableComponent implements AfterViewInit {
     'actions',
   ];
 
+  value = 'Clear me';
   constructor(
     private usersService: UsersService,
     private settlementsService: SettlementsService,
@@ -138,5 +140,26 @@ export class UsersTableComponent implements AfterViewInit {
         this.districts.next(response.data.settlements);
       }
     });
+  }
+
+  searchChanged(value:string){
+    this.dataSource.queryRef.refetch({
+      limit: this.paginator.pageSize,
+      offset: this.paginator.pageIndex * this.paginator.pageSize,
+      condition: {egn: {_like: `%${value}%`}},
+      orderBy: {},
+    })
+    console.log(value)
+  }
+
+  onSearchClear(){
+    this.value="";
+    this.dataSource.queryRef.refetch({
+      limit: this.paginator.pageSize,
+      offset: this.paginator.pageIndex * this.paginator.pageSize,
+      condition: {},
+      orderBy: {},
+    });
+    console.log("onSearchClear");
   }
 }
