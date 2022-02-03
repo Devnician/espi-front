@@ -46,8 +46,8 @@ export class VotingsDashboardComponent {
   }
 
   initVotingsCards() {
-    //TODO:Precise the query.
-    this.cards = from(this.voitngsService.getReferendums(99, null, {}, {}).result())
+    //TODO: merge with votings.
+    this.cards = from(this.voitngsService.getReferendums(99, null, {locked: {_eq: true}}, {}).result())
       .pipe(map(res => res.data.referendums.map(r => {
         return {
           title: r.name,
@@ -58,8 +58,6 @@ export class VotingsDashboardComponent {
           id: r.id,
         } as VotingParams
       })));
-
-
   }
 
   goToVotingComponent(vote: VotingParams) {

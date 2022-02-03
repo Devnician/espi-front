@@ -47,7 +47,7 @@ export class UsersTableComponent implements AfterViewInit {
     'actions',
   ];
 
-  value = 'Clear me';
+  value = '';
   constructor(
     private usersService: UsersService,
     private settlementsService: SettlementsService,
