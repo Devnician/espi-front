@@ -84,6 +84,16 @@ export class VotingsService {
     );
   }
 
+  DELETE_THIS_METHOD_getReferendums() {
+    return this.getReferendumsGQL.fetch(
+      {},
+      {
+        fetchPolicy: 'network-only',
+        errorPolicy: 'all',
+      }
+    );
+  }
+
   getVotings(
     limit = 10,
     offset = 0,
