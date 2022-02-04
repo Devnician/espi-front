@@ -114,7 +114,7 @@ export class NavigationComponent
         })
     );
     combineLatest(this.userObservables).subscribe((observableResults) => {
-      console.log(observableResults);
+      // console.log(observableResults);
       this.user = observableResults[0];
       if (this.user) {
         const roleIndex = observableResults[1];
@@ -182,7 +182,7 @@ export class NavigationComponent
         break;
       case Role_Types_Enum.User:
         this.menus.push({
-          route: 'votings',
+          route: 'votings/dashboard',
           label: 'Гласуване',
           matIcon: 'front_hand',
           badgeSubject: undefined,

@@ -97,6 +97,7 @@ select_permissions:
     filter: {}
   role: sectionLeader
 - permission:
+    allow_aggregations: true
     columns:
     - createdAt
     - description

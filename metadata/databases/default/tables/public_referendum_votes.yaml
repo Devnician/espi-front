@@ -1,3 +1,13 @@
 table:
   name: referendum_votes
   schema: public
+insert_permissions:
+- permission:
+    backend_only: false
+    check: {}
+    columns:
+    - eVote
+    - questionId
+    - userId
+    - vote
+  role: user

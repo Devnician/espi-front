@@ -2,6 +2,8 @@ import { Injectable } from '@angular/core';
 import { ApolloQueryResult, FetchResult } from '@apollo/client';
 import { Observable } from 'rxjs';
 import {
+  AddVoteForTheReferendumGQL,
+  AddVoteForTheReferendumMutation,
   CreateReferendumGQL,
   CreateReferendumMutation,
   GetReferendumsGQL,
@@ -13,6 +15,7 @@ import {
   Referendums_Order_By,
   Referendums_Set_Input,
   Referendum_Questions_Insert_Input,
+  Referendum_Votes_Insert_Input,
   UpdateReferendumAndQuestionGQL,
   UpdateReferendumAndQuestionMutation,
   Votings_Bool_Exp,
@@ -27,7 +30,8 @@ export class VotingsService {
     private updateReferendumAndQuestionGQL: UpdateReferendumAndQuestionGQL,
     private getReferendumsGQL: GetReferendumsGQL,
     private getVotingsGQL: GetVotingsGQL,
-    private getStartedVotingsGQL: GetStartedVotingsGQL
+    private getStartedVotingsGQL: GetStartedVotingsGQL,
+    private addVoteForTheReferendumGQL: AddVoteForTheReferendumGQL
   ) {}
 
   createReferendum(
@@ -113,5 +117,22 @@ export class VotingsService {
 
   getStartedVotings(): Observable<ApolloQueryResult<GetStartedVotingsQuery>> {
     return this.getStartedVotingsGQL.fetch();
+  }
+
+  //#region VOTES
+  addVoteForReferendum(
+    answers: Referendum_Votes_Insert_Input[]
+  ): Observable<
+    FetchResult<
+      AddVoteForTheReferendumMutation,
+      Record<string, any>,
+      Record<string, any>
+    >
+  > {
+    console.log(answers);
+    return this.addVoteForTheReferendumGQL.mutate(
+      { votes: answers },
+      { errorPolicy: 'all' }
+    );
   }
 }

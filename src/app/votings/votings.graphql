@@ -133,3 +133,10 @@ query GetStartedVotings {
     }
   }
 }
+
+# VOTES
+mutation AddVoteForTheReferendum($votes: [referendum_votes_insert_input!]!) {
+  insert_referendum_votes(objects: $votes) {
+    affected_rows
+  }
+}

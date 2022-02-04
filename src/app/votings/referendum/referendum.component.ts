@@ -1,9 +1,15 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import * as _ from 'lodash';
 import { BehaviorSubject } from 'rxjs';
+import { LoggedUser } from 'src/app/auth/logged-user.interface';
+import { AuthService } from 'src/app/services/auth-service';
 import { Donkey } from 'src/app/services/donkey.service';
-import { Referendums, Referendum_Votes } from 'src/generated/graphql';
+import {
+  Referendums,
+  Referendum_Votes_Insert_Input,
+} from 'src/generated/graphql';
 import { VotingsService } from '../voting-service.service';
 import { CustomReferendumQuestion } from './custom-referendum.class';
 @Component({
@@ -19,13 +25,26 @@ export class ReferendumComponent implements OnInit {
   done$ = this.done.asObservable();
   private loading: BehaviorSubject<boolean> = new BehaviorSubject(false);
   loading$ = this.loading.asObservable();
+  private user: LoggedUser;
+  private currentRoleIndex: number;
 
   referendum: Referendums;
   constructor(
     private fb: FormBuilder,
     private votingsService: VotingsService,
-    private donkey: Donkey
-  ) {}
+    private donkey: Donkey,
+    private authService: AuthService,
+    private snackBar: MatSnackBar
+  ) {
+    this.authService.user$.subscribe((data) => {
+      this.user = data;
+    });
+
+    this.authService.userRoleIndex$.subscribe((data) => {
+      console.log(data);
+      this.currentRoleIndex = data;
+    });
+  }
 
   ngOnInit() {
     // use Donkey
@@ -41,6 +60,7 @@ export class ReferendumComponent implements OnInit {
     this.votingsService
       .DELETE_THIS_METHOD_getReferendums()
       .subscribe((response) => {
+        console.log(response);
         if (response.data.referendums) {
           const all: Referendums[] = response.data.referendums as Referendums[];
           console.log(all);
@@ -73,31 +93,52 @@ export class ReferendumComponent implements OnInit {
     });
   }
   vote() {
-    //     0:
-    // createdAt: "2022-02-01T16:53:01.451691+00:00"
-    // id: 17
-    // question: "Въпрос"
-    // questionNumber: 1
-    // referendumId: 8
-    // response: 1
-    // updatedAt: "2022-02-01T16:57:31.998267+00:00"
-    // __typename: "referendum_questions"
-
-    const referendumVotes: Referendum_Votes[] = [];
+    const referendumVotes: Referendum_Votes_Insert_Input[] = [];
     this.questions.value.forEach((customQuestion) => {
-      // referendumVotes.push({referendumQuestionId: customQuestion.id, userId: ???});
+      console.log(customQuestion);
+      if (customQuestion.questionNumber > 0) {
+        referendumVotes.push({
+          questionId: customQuestion.id,
+          eVote:
+            customQuestion.response === 1
+              ? true
+              : customQuestion.response === 0
+              ? false
+              : undefined,
+          userId: this.user.id,
+        });
+      }
     });
+    console.log(referendumVotes);
+    this.votingsService
+      .addVoteForReferendum(referendumVotes)
+      .subscribe((response) => {
+        if (response.data) {
+          const affected = response.data.insert_referendum_votes.affected_rows;
+          console.log(affected);
+          this.snackBar
+            .open('Вие гласувахте успешно.', 'Разбрах', {})
+            .afterDismissed()
+            .subscribe(() => {
+              console.log('Redirect to somewhere...');
+            });
+        }
+        if (response.errors) {
+          console.log(response.errors);
 
-    // referendum result
-    console.log(this.questions.value);
-    // prepare vot from custom questions..
-    // this.loading.next(true);
-    // setTimeout(() => {
-    //   this.loading.next(false);
-    //   // alabala
-    // }, 2000);
+          if (response.errors[0].message.includes('mutation_root')) {
+            const roleLabel =
+              this.currentRoleIndex === 0
+                ? this.user.roleType.description
+                : this.user.secondRoleType.description;
 
-    // alert(JSON.stringify(this.questions.value));
-    // this.loading.next(false);
+            this.snackBar.open(
+              `Нямата права за извършване на това действие. Влезли сте като :  "${roleLabel}"`,
+              'Разбрах',
+              {}
+            );
+          }
+        }
+      });
   }
 }

@@ -6,15 +6,14 @@ import {
   RouterStateSnapshot,
   UrlTree,
 } from '@angular/router';
-import { Observable } from 'rxjs';
+import { map, Observable } from 'rxjs';
 import { AuthService } from '../services/auth-service';
-//import { Token } from '../auth/token.interface';
 
 @Injectable({
   providedIn: 'root',
 })
 export class BaseGuard implements CanActivate {
-  constructor(private auth: AuthService, private router: Router) {}
+  constructor(private authService: AuthService, private router: Router) {}
 
   canActivate(
     childRoute: ActivatedRouteSnapshot,
@@ -24,24 +23,18 @@ export class BaseGuard implements CanActivate {
     | Promise<boolean | UrlTree>
     | boolean
     | UrlTree {
-    // console.log(childRoute, childRoute.data);
-    console.log('Can I ..');
-    if (true /*'all is correct'*/) {
-      //return this.router.createUrlTree(['/']);
-      return true;
-    } else {
-      return this.router.createUrlTree(['/auth', 'login']);
-    }
-
-    // return this.auth.token$.pipe(
-    //   switchMap(() => this.auth.getToken()),
-    //   map((token: Token) => {
-    //     console.log(token);
-    //     if (token) {
-    //       return true;
-    //     }
-    //     return this.router.createUrlTree(['/auth', 'login']);
-    //   })
-    // );
+    return this.authService.user$.pipe(
+      map((user) => {
+        console.log('BASE GUARD: ');
+        console.log('Can the user visit this..' + user);
+        // TODO -  add path checks for user
+        // console.log(state.url);
+        if (user && state.url.indexOf('auth/login') > -1) {
+          console.log('Create url tree from login Guard...');
+          return this.router.createUrlTree(['/']);
+        }
+        return true;
+      })
+    );
   }
 }

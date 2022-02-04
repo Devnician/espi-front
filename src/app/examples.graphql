@@ -19,12 +19,12 @@ query GetElectoralRoll($sectionId: Int!) {
 query ReferendumVotesBySectionId($sectionId: Int!) {
   referendum_votes(
     where: { sectionId: { _eq: $sectionId } }
-    order_by: { referendumQuestionId: asc }
+    order_by: { questionId: asc }
   ) {
     id
     createdAt
     sectionId
-    referendumQuestionId
+    questionId
     vote
     eVote
   }
