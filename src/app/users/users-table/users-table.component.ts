@@ -35,7 +35,6 @@ export class UsersTableComponent implements AfterViewInit {
     'name',
     'surname',
     'family',
-    'egn',
     'roles',
     'email',
     'voted',
