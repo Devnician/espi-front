@@ -49,6 +49,7 @@ fragment UserFields on users {
   addressId
   voted
   eVoted
+  votingSectionId
   roleType {
     value
     description
