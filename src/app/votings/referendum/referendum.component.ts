@@ -114,6 +114,7 @@ export class ReferendumComponent implements OnInit {
             .afterDismissed()
             .subscribe(() => {
               console.log('Redirect to somewhere...');
+              history.back();
             });
         }
         if (response.errors) {
