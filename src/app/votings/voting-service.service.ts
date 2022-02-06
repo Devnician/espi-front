@@ -7,6 +7,8 @@ import {
   CreateReferendumGQL,
   CreateReferendumMutation,
   GetReferendumsGQL,
+  GetStartedReferendumsGQL,
+  GetStartedReferendumsQuery,
   GetStartedVotingsGQL,
   GetStartedVotingsQuery,
   GetVotingsGQL,
@@ -29,6 +31,7 @@ export class VotingsService {
     private createReferendumGQL: CreateReferendumGQL,
     private updateReferendumAndQuestionGQL: UpdateReferendumAndQuestionGQL,
     private getReferendumsGQL: GetReferendumsGQL,
+    private getStartedReferendumsGQL: GetStartedReferendumsGQL,
     private getVotingsGQL: GetVotingsGQL,
     private getStartedVotingsGQL: GetStartedVotingsGQL,
     private addVoteForTheReferendumGQL: AddVoteForTheReferendumGQL
@@ -116,7 +119,34 @@ export class VotingsService {
   }
 
   getStartedVotings(): Observable<ApolloQueryResult<GetStartedVotingsQuery>> {
-    return this.getStartedVotingsGQL.fetch();
+    const where: Votings_Bool_Exp = {
+      _and: [
+        { locked: { _eq: true } },
+        { startedAt: { _is_null: false } },
+        { finishedAt: { _is_null: true } },
+      ],
+    };
+    return this.getStartedVotingsGQL.fetch(
+      { where },
+      { fetchPolicy: 'network-only' }
+    );
+  }
+
+  getStartedReferendums(): Observable<
+    ApolloQueryResult<GetStartedReferendumsQuery>
+  > {
+    const where: Referendums_Bool_Exp = {
+      _and: [
+        { locked: { _eq: true } },
+        { startedAt: { _is_null: false } },
+        { finishedAt: { _is_null: true } },
+      ],
+    };
+
+    return this.getStartedReferendumsGQL.fetch(
+      { where },
+      { fetchPolicy: 'network-only' }
+    );
   }
 
   //#region VOTES

@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import * as _ from 'lodash';
 import { BehaviorSubject } from 'rxjs';
@@ -12,6 +11,15 @@ import {
 } from 'src/generated/graphql';
 import { VotingsService } from '../voting-service.service';
 import { CustomReferendumQuestion } from './custom-referendum.class';
+
+export interface Question {
+  questionNumber: number; // !NOTE - zero is last page
+  text: string;
+  label: string;
+  isPreview: boolean;
+  response: number;
+}
+
 @Component({
   selector: 'app-referendum',
   templateUrl: './referendum.component.html',
@@ -30,7 +38,6 @@ export class ReferendumComponent implements OnInit {
 
   referendum: Referendums;
   constructor(
-    private fb: FormBuilder,
     private votingsService: VotingsService,
     private donkey: Donkey,
     private authService: AuthService,
@@ -39,36 +46,21 @@ export class ReferendumComponent implements OnInit {
     this.authService.user$.subscribe((data) => {
       this.user = data;
     });
-
     this.authService.userRoleIndex$.subscribe((data) => {
-      console.log(data);
       this.currentRoleIndex = data;
     });
   }
 
   ngOnInit() {
-    // use Donkey
+    //this.id = +this.activatedRoute.snapshot.paramMap.get("id");
     if (this.donkey.isLoaded()) {
-      // get
-      const referefndum = this.donkey.unload();
-      //  and show..
+      this.referendum = this.donkey.unload();
+      this.showReferendumToUSer(this.referendum);
+    } else {
+      history.back();
     }
+  }
 
-    this.getReferendumFromSomewhere();
-  }
-  getReferendumFromSomewhere() {
-    this.votingsService
-      .DELETE_THIS_METHOD_getReferendums()
-      .subscribe((response) => {
-        console.log(response);
-        if (response.data.referendums) {
-          const all: Referendums[] = response.data.referendums as Referendums[];
-          console.log(all);
-          this.referendum = all[0];
-          this.showReferendumToUSer(this.referendum);
-        }
-      });
-  }
   private showReferendumToUSer(referendum: Referendums) {
     const preparedQuestions: CustomReferendumQuestion[] = [];
     referendum.referendumQuestions.forEach((q) => {
@@ -84,6 +76,7 @@ export class ReferendumComponent implements OnInit {
     } as CustomReferendumQuestion);
     this.questions.next(preparedQuestions);
   }
+
   check() {
     this.questions.subscribe((res) => {
       const result = res.filter(

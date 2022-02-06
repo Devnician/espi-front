@@ -79,7 +79,7 @@ export class NavigationComponent
       }
       // console.log(accessT);
       const res = this.jwtHelper.decodeToken(accessT);
-      this.auth.setLoggedUser(res.user);
+      this.auth.setLoggedUser(res?.user);
     }
   }
 
@@ -177,6 +177,13 @@ export class NavigationComponent
           route: 'votings/dashboard',
           label: 'Гласуване',
           matIcon: 'front_hand',
+          badgeSubject: undefined,
+        });
+
+        this.menus.push({
+          route: 'votings/dashboard',
+          label: 'Преброяване',
+          matIcon: 'functions',
           badgeSubject: undefined,
         });
         break;
