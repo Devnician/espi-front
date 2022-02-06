@@ -4,7 +4,7 @@
 
 .shipping-card {
   min-width: 120px;
-  margin: 20px auto;
+  margin: 0px;
 }
 
 .mat-radio-button {
@@ -25,15 +25,6 @@
 .col:last-child {
   margin-right: 0;
 }
-
-.form-sector {
-  width: auto;
-  border: solid 0.5px #ced1d4;
-  border-radius: 1px;
-  padding: 5px;
-  margin: 7px 0;
-}
-
 input:read-only {
   background-color: #c3ccd3;
 }

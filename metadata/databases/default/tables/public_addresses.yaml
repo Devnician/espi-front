@@ -1,6 +1,31 @@
 table:
   name: addresses
   schema: public
+object_relationships:
+- name: settlement
+  using:
+    foreign_key_constraint_on: settlementId
+insert_permissions:
+- permission:
+    backend_only: false
+    check: {}
+    columns:
+    - id
+    - settlementId
+    - street
+    - number
+    - description
+  role: central
+- permission:
+    backend_only: false
+    check: {}
+    columns:
+    - id
+    - number
+    - settlementId
+    - description
+    - street
+  role: centralLeader
 select_permissions:
 - permission:
     allow_aggregations: true

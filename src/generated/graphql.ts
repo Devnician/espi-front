@@ -12,6 +12,7 @@ export type Scalars = {
   Boolean: boolean;
   Int: number;
   Float: number;
+  date: any;
   timestamp: any;
   timestamptz: any;
 };
@@ -115,7 +116,9 @@ export type Addresses = {
   __typename?: 'addresses';
   description?: Maybe<Scalars['String']>;
   id: Scalars['Int'];
-  number: Scalars['Int'];
+  number: Scalars['String'];
+  /** An object relationship */
+  settlement: Settlements;
   settlementId: Scalars['Int'];
   street: Scalars['String'];
 };
@@ -154,7 +157,6 @@ export type Addresses_Aggregate_FieldsCountArgs = {
 export type Addresses_Avg_Fields = {
   __typename?: 'addresses_avg_fields';
   id?: Maybe<Scalars['Float']>;
-  number?: Maybe<Scalars['Float']>;
   settlementId?: Maybe<Scalars['Float']>;
 };
 
@@ -165,7 +167,8 @@ export type Addresses_Bool_Exp = {
   _or?: Maybe<Array<Addresses_Bool_Exp>>;
   description?: Maybe<String_Comparison_Exp>;
   id?: Maybe<Int_Comparison_Exp>;
-  number?: Maybe<Int_Comparison_Exp>;
+  number?: Maybe<String_Comparison_Exp>;
+  settlement?: Maybe<Settlements_Bool_Exp>;
   settlementId?: Maybe<Int_Comparison_Exp>;
   street?: Maybe<String_Comparison_Exp>;
 };
@@ -179,7 +182,6 @@ export enum Addresses_Constraint {
 /** input type for incrementing numeric columns in table "addresses" */
 export type Addresses_Inc_Input = {
   id?: Maybe<Scalars['Int']>;
-  number?: Maybe<Scalars['Int']>;
   settlementId?: Maybe<Scalars['Int']>;
 };
 
@@ -187,7 +189,8 @@ export type Addresses_Inc_Input = {
 export type Addresses_Insert_Input = {
   description?: Maybe<Scalars['String']>;
   id?: Maybe<Scalars['Int']>;
-  number?: Maybe<Scalars['Int']>;
+  number?: Maybe<Scalars['String']>;
+  settlement?: Maybe<Settlements_Obj_Rel_Insert_Input>;
   settlementId?: Maybe<Scalars['Int']>;
   street?: Maybe<Scalars['String']>;
 };
@@ -197,7 +200,7 @@ export type Addresses_Max_Fields = {
   __typename?: 'addresses_max_fields';
   description?: Maybe<Scalars['String']>;
   id?: Maybe<Scalars['Int']>;
-  number?: Maybe<Scalars['Int']>;
+  number?: Maybe<Scalars['String']>;
   settlementId?: Maybe<Scalars['Int']>;
   street?: Maybe<Scalars['String']>;
 };
@@ -207,7 +210,7 @@ export type Addresses_Min_Fields = {
   __typename?: 'addresses_min_fields';
   description?: Maybe<Scalars['String']>;
   id?: Maybe<Scalars['Int']>;
-  number?: Maybe<Scalars['Int']>;
+  number?: Maybe<Scalars['String']>;
   settlementId?: Maybe<Scalars['Int']>;
   street?: Maybe<Scalars['String']>;
 };
@@ -240,6 +243,7 @@ export type Addresses_Order_By = {
   description?: Maybe<Order_By>;
   id?: Maybe<Order_By>;
   number?: Maybe<Order_By>;
+  settlement?: Maybe<Settlements_Order_By>;
   settlementId?: Maybe<Order_By>;
   street?: Maybe<Order_By>;
 };
@@ -267,7 +271,7 @@ export enum Addresses_Select_Column {
 export type Addresses_Set_Input = {
   description?: Maybe<Scalars['String']>;
   id?: Maybe<Scalars['Int']>;
-  number?: Maybe<Scalars['Int']>;
+  number?: Maybe<Scalars['String']>;
   settlementId?: Maybe<Scalars['Int']>;
   street?: Maybe<Scalars['String']>;
 };
@@ -276,7 +280,6 @@ export type Addresses_Set_Input = {
 export type Addresses_Stddev_Fields = {
   __typename?: 'addresses_stddev_fields';
   id?: Maybe<Scalars['Float']>;
-  number?: Maybe<Scalars['Float']>;
   settlementId?: Maybe<Scalars['Float']>;
 };
 
@@ -284,7 +287,6 @@ export type Addresses_Stddev_Fields = {
 export type Addresses_Stddev_Pop_Fields = {
   __typename?: 'addresses_stddev_pop_fields';
   id?: Maybe<Scalars['Float']>;
-  number?: Maybe<Scalars['Float']>;
   settlementId?: Maybe<Scalars['Float']>;
 };
 
@@ -292,7 +294,6 @@ export type Addresses_Stddev_Pop_Fields = {
 export type Addresses_Stddev_Samp_Fields = {
   __typename?: 'addresses_stddev_samp_fields';
   id?: Maybe<Scalars['Float']>;
-  number?: Maybe<Scalars['Float']>;
   settlementId?: Maybe<Scalars['Float']>;
 };
 
@@ -300,7 +301,6 @@ export type Addresses_Stddev_Samp_Fields = {
 export type Addresses_Sum_Fields = {
   __typename?: 'addresses_sum_fields';
   id?: Maybe<Scalars['Int']>;
-  number?: Maybe<Scalars['Int']>;
   settlementId?: Maybe<Scalars['Int']>;
 };
 
@@ -322,7 +322,6 @@ export enum Addresses_Update_Column {
 export type Addresses_Var_Pop_Fields = {
   __typename?: 'addresses_var_pop_fields';
   id?: Maybe<Scalars['Float']>;
-  number?: Maybe<Scalars['Float']>;
   settlementId?: Maybe<Scalars['Float']>;
 };
 
@@ -330,7 +329,6 @@ export type Addresses_Var_Pop_Fields = {
 export type Addresses_Var_Samp_Fields = {
   __typename?: 'addresses_var_samp_fields';
   id?: Maybe<Scalars['Float']>;
-  number?: Maybe<Scalars['Float']>;
   settlementId?: Maybe<Scalars['Float']>;
 };
 
@@ -338,7 +336,6 @@ export type Addresses_Var_Samp_Fields = {
 export type Addresses_Variance_Fields = {
   __typename?: 'addresses_variance_fields';
   id?: Maybe<Scalars['Float']>;
-  number?: Maybe<Scalars['Float']>;
   settlementId?: Maybe<Scalars['Float']>;
 };
 
@@ -1262,6 +1259,20 @@ export type Commissions_Variance_Fields = {
   __typename?: 'commissions_variance_fields';
   id?: Maybe<Scalars['Float']>;
   votingSectionId?: Maybe<Scalars['Float']>;
+};
+
+
+/** Boolean expression to compare columns of type "date". All fields are combined with logical 'AND'. */
+export type Date_Comparison_Exp = {
+  _eq?: Maybe<Scalars['date']>;
+  _gt?: Maybe<Scalars['date']>;
+  _gte?: Maybe<Scalars['date']>;
+  _in?: Maybe<Array<Scalars['date']>>;
+  _is_null?: Maybe<Scalars['Boolean']>;
+  _lt?: Maybe<Scalars['date']>;
+  _lte?: Maybe<Scalars['date']>;
+  _neq?: Maybe<Scalars['date']>;
+  _nin?: Maybe<Array<Scalars['date']>>;
 };
 
 /** columns and relationships of "electoral_roll_users" */
@@ -4792,6 +4803,7 @@ export type Referendums = {
   /** An object relationship */
   settlement?: Maybe<Settlements>;
   settlementId?: Maybe<Scalars['Int']>;
+  startDate?: Maybe<Scalars['date']>;
   startedAt?: Maybe<Scalars['timestamptz']>;
   updatedAt: Scalars['timestamptz'];
 };
@@ -4867,6 +4879,7 @@ export type Referendums_Bool_Exp = {
   referendumQuestions?: Maybe<Referendum_Questions_Bool_Exp>;
   settlement?: Maybe<Settlements_Bool_Exp>;
   settlementId?: Maybe<Int_Comparison_Exp>;
+  startDate?: Maybe<Date_Comparison_Exp>;
   startedAt?: Maybe<Timestamptz_Comparison_Exp>;
   updatedAt?: Maybe<Timestamptz_Comparison_Exp>;
 };
@@ -4896,6 +4909,7 @@ export type Referendums_Insert_Input = {
   referendumQuestions?: Maybe<Referendum_Questions_Arr_Rel_Insert_Input>;
   settlement?: Maybe<Settlements_Obj_Rel_Insert_Input>;
   settlementId?: Maybe<Scalars['Int']>;
+  startDate?: Maybe<Scalars['date']>;
   startedAt?: Maybe<Scalars['timestamptz']>;
   updatedAt?: Maybe<Scalars['timestamptz']>;
 };
@@ -4909,6 +4923,7 @@ export type Referendums_Max_Fields = {
   id?: Maybe<Scalars['Int']>;
   name?: Maybe<Scalars['String']>;
   settlementId?: Maybe<Scalars['Int']>;
+  startDate?: Maybe<Scalars['date']>;
   startedAt?: Maybe<Scalars['timestamptz']>;
   updatedAt?: Maybe<Scalars['timestamptz']>;
 };
@@ -4922,6 +4937,7 @@ export type Referendums_Min_Fields = {
   id?: Maybe<Scalars['Int']>;
   name?: Maybe<Scalars['String']>;
   settlementId?: Maybe<Scalars['Int']>;
+  startDate?: Maybe<Scalars['date']>;
   startedAt?: Maybe<Scalars['timestamptz']>;
   updatedAt?: Maybe<Scalars['timestamptz']>;
 };
@@ -4953,6 +4969,7 @@ export type Referendums_Order_By = {
   referendumQuestions_aggregate?: Maybe<Referendum_Questions_Aggregate_Order_By>;
   settlement?: Maybe<Settlements_Order_By>;
   settlementId?: Maybe<Order_By>;
+  startDate?: Maybe<Order_By>;
   startedAt?: Maybe<Order_By>;
   updatedAt?: Maybe<Order_By>;
 };
@@ -4979,6 +4996,8 @@ export enum Referendums_Select_Column {
   /** column name */
   SettlementId = 'settlementId',
   /** column name */
+  StartDate = 'startDate',
+  /** column name */
   StartedAt = 'startedAt',
   /** column name */
   UpdatedAt = 'updatedAt'
@@ -4993,6 +5012,7 @@ export type Referendums_Set_Input = {
   locked?: Maybe<Scalars['Boolean']>;
   name?: Maybe<Scalars['String']>;
   settlementId?: Maybe<Scalars['Int']>;
+  startDate?: Maybe<Scalars['date']>;
   startedAt?: Maybe<Scalars['timestamptz']>;
   updatedAt?: Maybe<Scalars['timestamptz']>;
 };
@@ -5041,6 +5061,8 @@ export enum Referendums_Update_Column {
   Name = 'name',
   /** column name */
   SettlementId = 'settlementId',
+  /** column name */
+  StartDate = 'startDate',
   /** column name */
   StartedAt = 'startedAt',
   /** column name */
@@ -7816,6 +7838,19 @@ export type ReferendumVotesBySectionIdQuery = (
   )> }
 );
 
+export type AutoSuggestSettlementsQueryVariables = Exact<{
+  condition: Settlements_Bool_Exp;
+}>;
+
+
+export type AutoSuggestSettlementsQuery = (
+  { __typename?: 'query_root' }
+  & { settlements: Array<(
+    { __typename?: 'settlements' }
+    & Pick<Settlements, 'id' | 'name' | 'isMunicipality' | 'parentId'>
+  )> }
+);
+
 export type GetDistrictsQueryVariables = Exact<{ [key: string]: never; }>;
 
 
@@ -7823,7 +7858,7 @@ export type GetDistrictsQuery = (
   { __typename?: 'query_root' }
   & { settlements: Array<(
     { __typename?: 'settlements' }
-    & { childSettlements: (
+    & { settlements_aggregate: (
       { __typename?: 'settlements_aggregate' }
       & { aggregate?: Maybe<(
         { __typename?: 'settlements_aggregate_fields' }
@@ -7875,14 +7910,19 @@ export type CreateUserMutation = (
 );
 
 export type UpdateUserMutationVariables = Exact<{
-  id: Scalars['Int'];
-  set: Users_Set_Input;
+  addrId: Scalars['Int'];
+  addressSet: Addresses_Set_Input;
+  userId: Scalars['Int'];
+  userSet: Users_Set_Input;
 }>;
 
 
 export type UpdateUserMutation = (
   { __typename?: 'mutation_root' }
-  & { update_users_by_pk?: Maybe<(
+  & { update_addresses_by_pk?: Maybe<(
+    { __typename?: 'addresses' }
+    & AddressShortFragment
+  )>, update_users_by_pk?: Maybe<(
     { __typename?: 'users' }
     & UserFieldsFragment
   )> }
@@ -7899,8 +7939,26 @@ export type UserFieldsFragment = (
     & Pick<Role_Types, 'value' | 'description'>
   )>, address: (
     { __typename?: 'addresses' }
-    & Pick<Addresses, 'id' | 'settlementId' | 'number' | 'street' | 'description'>
+    & { settlement: (
+      { __typename?: 'settlements' }
+      & SettlementFiledsFragment
+    ) }
+    & AddressShortFragment
   ) }
+);
+
+export type SettlementFiledsFragment = (
+  { __typename?: 'settlements' }
+  & Pick<Settlements, 'id' | 'name' | 'isMunicipality' | 'parentId'>
+  & { parentSettlement?: Maybe<(
+    { __typename?: 'settlements' }
+    & Pick<Settlements, 'id' | 'isMunicipality' | 'name'>
+  )> }
+);
+
+export type AddressShortFragment = (
+  { __typename?: 'addresses' }
+  & Pick<Addresses, 'id' | 'number' | 'street' | 'description' | 'settlementId'>
 );
 
 export type CreateReferendumMutationVariables = Exact<{
@@ -7965,10 +8023,10 @@ export type GetReferendumsQuery = (
 
 export type ReferendumFieldsFragment = (
   { __typename?: 'referendums' }
-  & Pick<Referendums, 'id' | 'createdAt' | 'updatedAt' | 'locked' | 'name' | 'description' | 'settlementId' | 'startedAt' | 'finishedAt'>
+  & Pick<Referendums, 'id' | 'createdAt' | 'updatedAt' | 'startDate' | 'locked' | 'name' | 'description' | 'settlementId' | 'startedAt' | 'finishedAt'>
   & { settlement?: Maybe<(
     { __typename?: 'settlements' }
-    & Pick<Settlements, 'id' | 'name' | 'parentId' | 'isMunicipality'>
+    & SettlementFiledsFragment
   )>, referendumQuestions: Array<(
     { __typename?: 'referendum_questions' }
     & ReferendumQuestionsFieldsFragment
@@ -8031,6 +8089,28 @@ export const SettlementsBaseFieldsFragmentDoc = gql`
   isMunicipality
 }
     `;
+export const AddressShortFragmentDoc = gql`
+    fragment AddressShort on addresses {
+  id
+  number
+  street
+  description
+  settlementId
+}
+    `;
+export const SettlementFiledsFragmentDoc = gql`
+    fragment SettlementFileds on settlements {
+  id
+  name
+  isMunicipality
+  parentId
+  parentSettlement {
+    id
+    isMunicipality
+    name
+  }
+}
+    `;
 export const UserFieldsFragmentDoc = gql`
     fragment UserFields on users {
   id
@@ -8053,14 +8133,14 @@ export const UserFieldsFragmentDoc = gql`
     description
   }
   address {
-    id
-    settlementId
-    number
-    street
-    description
+    ...AddressShort
+    settlement {
+      ...SettlementFileds
+    }
   }
 }
-    `;
+    ${AddressShortFragmentDoc}
+${SettlementFiledsFragmentDoc}`;
 export const ReferendumQuestionsFieldsFragmentDoc = gql`
     fragment ReferendumQuestionsFields on referendum_questions {
   id
@@ -8075,15 +8155,13 @@ export const ReferendumFieldsFragmentDoc = gql`
   id
   createdAt
   updatedAt
+  startDate
   locked
   name
   description
   settlementId
   settlement {
-    id
-    name
-    parentId
-    isMunicipality
+    ...SettlementFileds
   }
   startedAt
   finishedAt
@@ -8091,7 +8169,8 @@ export const ReferendumFieldsFragmentDoc = gql`
     ...ReferendumQuestionsFields
   }
 }
-    ${ReferendumQuestionsFieldsFragmentDoc}`;
+    ${SettlementFiledsFragmentDoc}
+${ReferendumQuestionsFieldsFragmentDoc}`;
 export const RegisterDocument = gql`
     query Register($args: RegisterUserInsertInput!) {
   RegisterAction(arg1: $args) {
@@ -8202,11 +8281,32 @@ export const ReferendumVotesBySectionIdDocument = gql`
       super(apollo);
     }
   }
+export const AutoSuggestSettlementsDocument = gql`
+    query AutoSuggestSettlements($condition: settlements_bool_exp!) {
+  settlements(where: $condition) {
+    id
+    name
+    isMunicipality
+    parentId
+  }
+}
+    `;
+
+  @Injectable({
+    providedIn: 'root'
+  })
+  export class AutoSuggestSettlementsGQL extends Apollo.Query<AutoSuggestSettlementsQuery, AutoSuggestSettlementsQueryVariables> {
+    document = AutoSuggestSettlementsDocument;
+    
+    constructor(apollo: Apollo.Apollo) {
+      super(apollo);
+    }
+  }
 export const GetDistrictsDocument = gql`
     query GetDistricts {
   settlements(where: {parentId: {_is_null: true}}) {
     ...SettlementsBaseFields
-    childSettlements: settlements_aggregate {
+    settlements_aggregate {
       aggregate {
         count
       }
@@ -8267,12 +8367,16 @@ export const CreateUserDocument = gql`
     }
   }
 export const UpdateUserDocument = gql`
-    mutation UpdateUser($id: Int!, $set: users_set_input!) {
-  update_users_by_pk(pk_columns: {id: $id}, _set: $set) {
+    mutation UpdateUser($addrId: Int!, $addressSet: addresses_set_input!, $userId: Int!, $userSet: users_set_input!) {
+  update_addresses_by_pk(pk_columns: {id: $addrId}, _set: $addressSet) {
+    ...AddressShort
+  }
+  update_users_by_pk(pk_columns: {id: $userId}, _set: $userSet) {
     ...UserFields
   }
 }
-    ${UserFieldsFragmentDoc}`;
+    ${AddressShortFragmentDoc}
+${UserFieldsFragmentDoc}`;
 
   @Injectable({
     providedIn: 'root'

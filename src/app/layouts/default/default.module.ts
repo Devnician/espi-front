@@ -1,6 +1,8 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
+import { MatMomentDateModule } from '@angular/material-moment-adapter';
 import { MatBadgeModule } from '@angular/material/badge';
+import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatIconModule } from '@angular/material/icon';
 import { MatListModule } from '@angular/material/list';
 import { MatMenuModule } from '@angular/material/menu';
@@ -15,6 +17,7 @@ import { VixenComponent } from 'src/app/core/vixen/vixen.component';
 import { NavigationComponent } from 'src/app/navigation/navigation.component';
 import { DefaultRoutingModule } from './default-routing.module';
 import { DefaultComponent } from './default.component';
+// import { MatMomentDateModule } from '@angular/material-moment-adapter';
 
 //import { JwtModule, JWT_OPTIONS } from '@auth0/angular-jwt';
 @NgModule({
@@ -47,9 +50,9 @@ import { DefaultComponent } from './default.component';
       },
     }),
     // MatBadgeModule,
-    //  MatMomentDateModule,
-    // MatDatepickerModule,
+    MatMomentDateModule,
+    MatDatepickerModule,
   ],
-  // exports: [NgxJsonViewerModule],
+  providers: [MatDatepickerModule, MatMomentDateModule],
 })
 export class DefaultModule {}

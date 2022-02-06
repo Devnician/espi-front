@@ -3,6 +3,7 @@ import { FetchResult } from '@apollo/client';
 import { QueryRef } from 'apollo-angular';
 import { Observable } from 'rxjs';
 import {
+  Addresses_Set_Input,
   CreateUserGQL,
   CreateUserMutation,
   GetUsersGQL,
@@ -23,22 +24,6 @@ export class UsersService {
     private updateUserGQL: UpdateUserGQL,
     private getUsersGQL: GetUsersGQL // private loginGQL: LoginGQL
   ) {}
-  getUsers(
-    limit = 10,
-    offset = 0,
-    condition: Users_Bool_Exp = {},
-    orderBy: Users_Order_By
-  ): QueryRef<GetUsersQuery> {
-    return this.getUsersGQL.watch(
-      { limit, offset, condition, orderBy },
-      {
-        fetchPolicy: 'network-only',
-        partialRefetch: true,
-        errorPolicy: 'all',
-        pollInterval: 5 * 1000,
-      }
-    );
-  }
 
   createUser(
     input: Users_Set_Input
@@ -70,8 +55,30 @@ export class UsersService {
       // }
     );
   }
-  updateUser(user: Users_Set_Input) {
-    return this.updateUserGQL.mutate({ id: user.id, set: user });
+  getUsers(
+    limit = 10,
+    offset = 0,
+    condition: Users_Bool_Exp = {},
+    orderBy: Users_Order_By
+  ): QueryRef<GetUsersQuery> {
+    return this.getUsersGQL.watch(
+      { limit, offset, condition, orderBy },
+      {
+        fetchPolicy: 'network-only',
+        partialRefetch: true,
+        errorPolicy: 'all',
+        pollInterval: 5 * 1000,
+      }
+    );
+  }
+
+  updateUser(addressSet: Addresses_Set_Input, userSet: Users_Set_Input) {
+    return this.updateUserGQL.mutate({
+      addrId: addressSet.id,
+      addressSet,
+      userId: userSet.id,
+      userSet,
+    });
   }
 
   //SELECT (password = crypt('pepe', password)) AS pswmatch FROM users WHERE id = 2 ;

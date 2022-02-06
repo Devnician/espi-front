@@ -1,18 +1,14 @@
 import { AfterViewInit, Component, ViewChild } from '@angular/core';
+import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatSort } from '@angular/material/sort';
 import { MatTable } from '@angular/material/table';
-import * as _ from 'lodash';
 import { BehaviorSubject } from 'rxjs';
 import { rowsAnimation } from 'src/app/animations/template.animations';
 import { SettlementsService } from 'src/app/settlements/settlements-service.service';
-import {
-  GetDistrictsQuery,
-  GetUsersQuery,
-  Role_Types_Enum,
-  Users,
-} from 'src/generated/graphql';
+import { GetDistrictsQuery, GetUsersQuery, Users } from 'src/generated/graphql';
+import { EditUserComponent } from '../edit-user/edit-user.component';
 import { UsersService } from '../users-service';
 import { OrdersTableDataSource } from './users-table-datasource';
 
@@ -27,7 +23,6 @@ export class UsersTableComponent implements AfterViewInit {
   @ViewChild(MatSort) sort!: MatSort;
   @ViewChild(MatTable) table!: MatTable<GetUsersQuery['users']>;
   dataSource: OrdersTableDataSource;
-
   districts: BehaviorSubject<GetDistrictsQuery['settlements']> =
     new BehaviorSubject(undefined);
 
@@ -40,6 +35,7 @@ export class UsersTableComponent implements AfterViewInit {
     'name',
     'surname',
     'family',
+    'egn',
     'roles',
     'email',
     'voted',
@@ -51,7 +47,8 @@ export class UsersTableComponent implements AfterViewInit {
   constructor(
     private usersService: UsersService,
     private settlementsService: SettlementsService,
-    private snackBar: MatSnackBar
+    private snackBar: MatSnackBar,
+    private dialog: MatDialog
   ) {
     this.dataSource = new OrdersTableDataSource(usersService, snackBar);
     this.dataSource.loading.next(true);
@@ -62,71 +59,62 @@ export class UsersTableComponent implements AfterViewInit {
     this.dataSource.paginator = this.paginator;
     this.table.dataSource = this.dataSource;
   }
-  addUser() {
-    console.log('Add one user');
-    this.dataSource.loading.next(true);
+  // addUser() {
+  //   console.log('Add one user');
+  //   this.dataSource.loading.next(true);
 
-    const user: any = {
-      name: 'Кирил',
-      surname: 'Иванов',
-      family: 'Иванов',
-      egn: '8080808083',
-      email: 'alabala@bala.ala',
-      role: Role_Types_Enum.User,
-      address: {
-        data: {
-          number: 10,
-          street: 'Borisova',
-          settlementId: 3382, // TODO
-        },
-      },
+  //   const user: any = {
+  //     name: 'Кирил',
+  //     surname: 'Иванов',
+  //     family: 'Иванов',
+  //     egn: '8080808083',
+  //     email: 'alabala@bala.ala',
+  //     role: Role_Types_Enum.User,
+  //     address: {
+  //       data: {
+  //         number: 10,
+  //         street: 'Borisova',
+  //         settlementId: 3382, // TODO
+  //       },
+  //     },
+  //   };
+
+  //   this.usersService.createUser(user).subscribe((response) => {
+  //     if (response && response.data) {
+  //       const createdUser: Users = response.data.insert_users_one as Users;
+  //       console.log(createdUser);
+  //       this.dataSource.queryRef.refetch({});
+  //     } else {
+  //       console.log(response);
+  //       this.dataSource.loading.next(false);
+  //       if (response.errors[0].message.toString().includes('Uniqueness')) {
+  //         this.snackBar.open('Вече съществува потребител с това ЕГН', 'OK', {});
+  //       }
+  //     }
+  //   });
+  // }
+
+  editUser(user: Users) {
+    this.openDialog(user);
+  }
+  private openDialog(user: Users) {
+    const config = new MatDialogConfig<any>();
+    // config.closeOnNavigation = true;
+    // config.disableClose = true;
+    config.data = {
+      user,
+      // loggedUser: this.loggedUSer,
     };
+    (config.width = '80vw'), (config.height = 'fit-content');
 
-    this.usersService.createUser(user).subscribe((response) => {
-      if (response && response.data) {
-        const createdUser: Users = response.data.insert_users_one as Users;
-        console.log(createdUser);
-        this.dataSource.queryRef.refetch({});
-      } else {
-        console.log(response);
-        this.dataSource.loading.next(false);
-        if (response.errors[0].message.toString().includes('Uniqueness')) {
-          this.snackBar.open('Вече съществува потребител с това ЕГН', 'OK', {});
-        }
-      }
+    const dialogRef = this.dialog.open(EditUserComponent, config);
+    dialogRef.afterClosed().subscribe((dialogResponse) => {
+      console.log(dialogResponse);
     });
   }
   testCall(user: Users) {
     console.log(user);
     alert(JSON.stringify(user));
-  }
-  /**
-   * Delete this...
-   */
-  updateFirst() {
-    this.dataSource.loading.next(true);
-    // console.log(this.dataSource.currentPageData.value);
-    const firstFromPage: Users = _.cloneDeep(
-      _.first(this.dataSource.currentPageData.value)
-    );
-    if (firstFromPage) {
-      console.log(firstFromPage);
-      // HERE must clean useless data
-      delete firstFromPage.address;
-      delete firstFromPage.createdAt;
-      delete firstFromPage.updatedAt;
-      delete firstFromPage.roleType;
-      delete firstFromPage.secondRoleType;
-      delete firstFromPage.__typename;
-
-      this.usersService
-        .updateUser(firstFromPage)
-        .subscribe(({ errors, data }) => {
-          console.log(errors);
-          console.log(data);
-        });
-      console.log('Update', firstFromPage);
-    }
   }
 
   /**
