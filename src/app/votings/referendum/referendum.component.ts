@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
+import { ActivatedRoute } from '@angular/router';
 import { BehaviorSubject } from 'rxjs';
+import { VotingsService } from '../voting-service.service';
 export interface Question {
   questionNumber: number; // !NOTE - zero is last page
   text: string;
@@ -21,42 +23,70 @@ export class ReferendumComponent implements OnInit {
   done$ = this.done.asObservable();
   private loading: BehaviorSubject<boolean> = new BehaviorSubject(false);
   loading$ = this.loading.asObservable();
-  constructor(private fb: FormBuilder) {}
+
+  id: number;
+  constructor(private fb: FormBuilder,
+    private activatedRoute: ActivatedRoute,
+    private voitngsService: VotingsService
+  ) { }
 
   ngOnInit() {
-    const qu: Question[] = [];
-    qu.push({
-      questionNumber: 1,
-      text: 'Текст на въпроса..',
-      label: 'label',
-      isPreview: false,
-      response: -1,
-    });
-    qu.push({
-      questionNumber: 2,
-      text: 'Текст на въпроса..',
+    this.id = +this.activatedRoute.snapshot.paramMap.get("id");
+    this.voitngsService.getReferendums(99, null, { id: { _eq: 1 } }, {}).result().then(r =>
+      this.questions.next([
+        ...r.data.referendums[0].referendumQuestions.map(q => {
+          return {
+            questionNumber: q.id,
+            text: q.question,
+            label: 'label',
+            isPreview: false,
+            response: -1,
+          }
+        }),
+        {
+          //Generates preview page
+          questionNumber: 0,
+          text: '',
+          label: 'label',
+          isPreview: true,
+          response: -1,
+        },]
+      )
+    )
 
-      label: '?',
-      isPreview: false,
-      response: -1,
-    });
-    qu.push({
-      questionNumber: 3,
-      text: 'Текст на въпроса..',
+    // let qu = []
+    // qu.push({
+    //   questionNumber: 1,
+    //   text: 'Текст на въпроса..',
+    //   label: 'label',
+    //   isPreview: false,
+    //   response: -1,
+    // });
+    // qu.push({
+    //   questionNumber: 2,
+    //   text: 'Текст на въпроса..',
 
-      label: 'label',
-      isPreview: false,
-      response: -1,
-    });
-    qu.push({
-      questionNumber: 0,
-      text: '',
+    //   label: '?',
+    //   isPreview: false,
+    //   response: -1,
+    // });
+    // qu.push({
+    //   questionNumber: 3,
+    //   text: 'Текст на въпроса..',
 
-      label: 'label',
-      isPreview: true,
-      response: -1,
-    });
-    this.questions.next(qu);
+    //   label: 'label',
+    //   isPreview: false,
+    //   response: -1,
+    // });
+    // qu.push({
+    //   questionNumber: 0,
+    //   text: '',
+
+    //   label: 'label',
+    //   isPreview: true,
+    //   response: -1,
+    // });
+    // this.questions.next(qu);
   }
   check() {
     this.questions.subscribe((res) => {

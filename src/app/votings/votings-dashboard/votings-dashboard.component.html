@@ -1,6 +1,6 @@
 <div class="grid-container">
-  <h1 *ngIf="(cards | async).length > 0" class="mat-h1">Избори</h1>
-  <h1 *ngIf="(cards | async).length === 0" class="mat-h1">
+  <h1 *ngIf="(cards | async)?.length > 0" class="mat-h1">Избори</h1>
+  <h1 *ngIf="(cards | async)?.length === 0" class="mat-h1">
     В момента не се провеждат избори.
   </h1>
   <mat-grid-list cols="2" rowHeight="350px">

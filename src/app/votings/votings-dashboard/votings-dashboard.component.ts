@@ -1,7 +1,7 @@
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 import { Component } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { BehaviorSubject, Observable } from 'rxjs';
+import { BehaviorSubject, from, Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { Votings } from 'src/generated/graphql';
 import { VotingsService } from '../voting-service.service';
@@ -22,30 +22,7 @@ interface VotingParams {
 export class VotingsDashboardComponent {
   votings: BehaviorSubject<VotingParams[]> = new BehaviorSubject([]);
   /** Based on the screen size, switch from standard to one column per row */
-  cards: Observable<VotingParams[]> = this.breakpointObserver
-    .observe(Breakpoints.Handset)
-    .pipe(
-      map(({ matches }) => {
-        console.log(matches);
-        const params = this.votings.value;
-        const res = [];
-
-        if (matches) {
-          params.forEach((element) => {
-            element.cols = 2;
-            element.rows = 1;
-            res.push(element);
-          });
-          return res;
-        }
-        params.forEach((element) => {
-          element.cols = 1;
-          element.rows = 1;
-          res.push(element);
-        });
-        return res;
-      })
-    );
+  cards: Observable<VotingParams[]>;
 
   constructor(
     private breakpointObserver: BreakpointObserver,
@@ -69,25 +46,18 @@ export class VotingsDashboardComponent {
   }
 
   initVotingsCards() {
-    // Get the current votings from database..
-    this.votings.next([
-      {
-        title: 'Парламентарни избори 2022',
-        text: 'Описание на избора',
-        cols: 2,
-        rows: 1,
-        type: 'alabala',
-        id: 1,
-      },
-      {
-        title: 'Референдум 2022',
-        text: 'Описание на референдума',
-        cols: 2,
-        rows: 1,
-        type: 'alabala',
-        id: 2,
-      },
-    ]);
+    //TODO: merge with votings.
+    this.cards = from(this.voitngsService.getReferendums(99, null, {locked: {_eq: true}}, {}).result())
+      .pipe(map(res => res.data.referendums.map(r => {
+        return {
+          title: r.name,
+          text: r.description,
+          cols: 1,
+          rows: 1,
+          type: "referendum",
+          id: r.id,
+        } as VotingParams
+      })));
   }
 
   goToVotingComponent(vote: VotingParams) {
@@ -96,14 +66,14 @@ export class VotingsDashboardComponent {
     // this.router.navigate(['vote'], {
     //   relativeTo: this.activatedRoute,
     // });
-    if (vote.id === 1) {
-      this.router.navigate(['vote'], {
-        relativeTo: this.activatedRoute,
-      });
-    }
-    if (vote.id === 2) {
-      this.router.navigate(['referendum'], {
-        relativeTo: this.activatedRoute,
+    // if (vote.id === 1) {
+    //   this.router.navigate(['vote'], {
+    //     relativeTo: this.activatedRoute,
+    //   });
+    // }
+    if (vote.type === "referendum") {
+      this.router.navigate([`/votings/referendum/${vote.id}`], {
+        relativeTo: this.activatedRoute
       });
     }
     // alert(JSON.stringify(vote));
