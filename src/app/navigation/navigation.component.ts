@@ -74,7 +74,7 @@ export class NavigationComponent
     if (environment.production === false) {
       const accessT = localStorage.getItem(TokenTypes.ACCESS_TOKEN);
       const res = this.jwtHelper.decodeToken(accessT);
-      this.auth.setLoggedUser(res.user);
+      this.auth.setLoggedUser(res?.user);
     }
   }
 
@@ -171,6 +171,13 @@ export class NavigationComponent
           route: 'votings/dashboard',
           label: 'Гласуване',
           matIcon: 'front_hand',
+          badgeSubject: undefined,
+        });
+
+        this.menus.push({
+          route: 'votings/dashboard',
+          label: 'Преброяване',
+          matIcon: 'functions',
           badgeSubject: undefined,
         });
         break;
