@@ -28,6 +28,7 @@ insert_permissions:
     - secondRole
     - surname
     - voted
+    - votingSectionId
   role: central
 - permission:
     backend_only: false
@@ -45,6 +46,7 @@ insert_permissions:
     - secondRole
     - surname
     - voted
+    - votingSectionId
   role: centralLeader
 select_permissions:
 - permission:
@@ -63,6 +65,7 @@ select_permissions:
     - surname
     - updatedAt
     - voted
+    - votingSectionId
     filter: {}
   role: central
 - permission:
@@ -81,6 +84,7 @@ select_permissions:
     - surname
     - updatedAt
     - voted
+    - votingSectionId
     filter: {}
   role: centralLeader
 - permission:
@@ -99,6 +103,7 @@ select_permissions:
     - surname
     - updatedAt
     - voted
+    - votingSectionId
     filter: {}
   role: section
 - permission:
@@ -118,6 +123,7 @@ select_permissions:
     - surname
     - updatedAt
     - voted
+    - votingSectionId
     filter: {}
   role: sectionLeader
 - permission:
@@ -137,6 +143,7 @@ select_permissions:
     - surname
     - updatedAt
     - voted
+    - votingSectionId
     filter:
       id:
         _eq: X-Hasura-User-Id

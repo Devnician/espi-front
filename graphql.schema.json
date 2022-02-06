@@ -28971,7 +28971,7 @@
             "args": [],
             "type": {
               "kind": "SCALAR",
-              "name": "String",
+              "name": "Boolean",
               "ofType": null
             },
             "isDeprecated": false,
@@ -28994,7 +28994,7 @@
             "deprecationReason": null
           },
           {
-            "name": "referendumQuestionId",
+            "name": "questionId",
             "description": null,
             "args": [],
             "type": {
@@ -29043,7 +29043,7 @@
             "args": [],
             "type": {
               "kind": "SCALAR",
-              "name": "String",
+              "name": "Boolean",
               "ofType": null
             },
             "isDeprecated": false,
@@ -29300,7 +29300,7 @@
             "deprecationReason": null
           },
           {
-            "name": "referendumQuestionId",
+            "name": "questionId",
             "description": null,
             "args": [],
             "type": {
@@ -29416,7 +29416,7 @@
             "description": null,
             "type": {
               "kind": "INPUT_OBJECT",
-              "name": "String_comparison_exp",
+              "name": "Boolean_comparison_exp",
               "ofType": null
             },
             "defaultValue": null,
@@ -29436,7 +29436,7 @@
             "deprecationReason": null
           },
           {
-            "name": "referendumQuestionId",
+            "name": "questionId",
             "description": null,
             "type": {
               "kind": "INPUT_OBJECT",
@@ -29476,7 +29476,7 @@
             "description": null,
             "type": {
               "kind": "INPUT_OBJECT",
-              "name": "String_comparison_exp",
+              "name": "Boolean_comparison_exp",
               "ofType": null
             },
             "defaultValue": null,
@@ -29524,7 +29524,7 @@
             "deprecationReason": null
           },
           {
-            "name": "referendumQuestionId",
+            "name": "questionId",
             "description": null,
             "type": {
               "kind": "SCALAR",
@@ -29587,7 +29587,7 @@
             "description": null,
             "type": {
               "kind": "SCALAR",
-              "name": "String",
+              "name": "Boolean",
               "ofType": null
             },
             "defaultValue": null,
@@ -29607,7 +29607,7 @@
             "deprecationReason": null
           },
           {
-            "name": "referendumQuestionId",
+            "name": "questionId",
             "description": null,
             "type": {
               "kind": "SCALAR",
@@ -29647,7 +29647,7 @@
             "description": null,
             "type": {
               "kind": "SCALAR",
-              "name": "String",
+              "name": "Boolean",
               "ofType": null
             },
             "defaultValue": null,
@@ -29677,18 +29677,6 @@
             "deprecationReason": null
           },
           {
-            "name": "eVote",
-            "description": null,
-            "args": [],
-            "type": {
-              "kind": "SCALAR",
-              "name": "String",
-              "ofType": null
-            },
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
             "name": "id",
             "description": null,
             "args": [],
@@ -29701,7 +29689,7 @@
             "deprecationReason": null
           },
           {
-            "name": "referendumQuestionId",
+            "name": "questionId",
             "description": null,
             "args": [],
             "type": {
@@ -29731,18 +29719,6 @@
             "type": {
               "kind": "SCALAR",
               "name": "Int",
-              "ofType": null
-            },
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "vote",
-            "description": null,
-            "args": [],
-            "type": {
-              "kind": "SCALAR",
-              "name": "String",
               "ofType": null
             },
             "isDeprecated": false,
@@ -29772,18 +29748,6 @@
             "deprecationReason": null
           },
           {
-            "name": "eVote",
-            "description": null,
-            "args": [],
-            "type": {
-              "kind": "SCALAR",
-              "name": "String",
-              "ofType": null
-            },
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
             "name": "id",
             "description": null,
             "args": [],
@@ -29796,7 +29760,7 @@
             "deprecationReason": null
           },
           {
-            "name": "referendumQuestionId",
+            "name": "questionId",
             "description": null,
             "args": [],
             "type": {
@@ -29826,18 +29790,6 @@
             "type": {
               "kind": "SCALAR",
               "name": "Int",
-              "ofType": null
-            },
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "vote",
-            "description": null,
-            "args": [],
-            "type": {
-              "kind": "SCALAR",
-              "name": "String",
               "ofType": null
             },
             "isDeprecated": false,
@@ -30006,7 +29958,7 @@
             "deprecationReason": null
           },
           {
-            "name": "referendumQuestionId",
+            "name": "questionId",
             "description": null,
             "type": {
               "kind": "ENUM",
@@ -30112,7 +30064,7 @@
             "deprecationReason": null
           },
           {
-            "name": "referendumQuestionId",
+            "name": "questionId",
             "description": "column name",
             "isDeprecated": false,
             "deprecationReason": null
@@ -30161,7 +30113,7 @@
             "description": null,
             "type": {
               "kind": "SCALAR",
-              "name": "String",
+              "name": "Boolean",
               "ofType": null
             },
             "defaultValue": null,
@@ -30181,7 +30133,7 @@
             "deprecationReason": null
           },
           {
-            "name": "referendumQuestionId",
+            "name": "questionId",
             "description": null,
             "type": {
               "kind": "SCALAR",
@@ -30221,7 +30173,7 @@
             "description": null,
             "type": {
               "kind": "SCALAR",
-              "name": "String",
+              "name": "Boolean",
               "ofType": null
             },
             "defaultValue": null,
@@ -30251,7 +30203,7 @@
             "deprecationReason": null
           },
           {
-            "name": "referendumQuestionId",
+            "name": "questionId",
             "description": null,
             "args": [],
             "type": {
@@ -30310,7 +30262,7 @@
             "deprecationReason": null
           },
           {
-            "name": "referendumQuestionId",
+            "name": "questionId",
             "description": null,
             "args": [],
             "type": {
@@ -30369,7 +30321,7 @@
             "deprecationReason": null
           },
           {
-            "name": "referendumQuestionId",
+            "name": "questionId",
             "description": null,
             "args": [],
             "type": {
@@ -30428,7 +30380,7 @@
             "deprecationReason": null
           },
           {
-            "name": "referendumQuestionId",
+            "name": "questionId",
             "description": null,
             "args": [],
             "type": {
@@ -30496,7 +30448,7 @@
             "deprecationReason": null
           },
           {
-            "name": "referendumQuestionId",
+            "name": "questionId",
             "description": "column name",
             "isDeprecated": false,
             "deprecationReason": null
@@ -30540,7 +30492,7 @@
             "deprecationReason": null
           },
           {
-            "name": "referendumQuestionId",
+            "name": "questionId",
             "description": null,
             "args": [],
             "type": {
@@ -30599,7 +30551,7 @@
             "deprecationReason": null
           },
           {
-            "name": "referendumQuestionId",
+            "name": "questionId",
             "description": null,
             "args": [],
             "type": {
@@ -30658,7 +30610,7 @@
             "deprecationReason": null
           },
           {
-            "name": "referendumQuestionId",
+            "name": "questionId",
             "description": null,
             "args": [],
             "type": {
@@ -49911,6 +49863,22 @@
             "deprecationReason": null
           },
           {
+            "name": "locked",
+            "description": null,
+            "args": [],
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "Boolean",
+                "ofType": null
+              }
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
             "name": "name",
             "description": null,
             "args": [],
@@ -50349,6 +50317,18 @@
             "deprecationReason": null
           },
           {
+            "name": "locked",
+            "description": null,
+            "type": {
+              "kind": "INPUT_OBJECT",
+              "name": "Boolean_comparison_exp",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
             "name": "name",
             "description": null,
             "type": {
@@ -50501,6 +50481,18 @@
             "type": {
               "kind": "SCALAR",
               "name": "Int",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "locked",
+            "description": null,
+            "type": {
+              "kind": "SCALAR",
+              "name": "Boolean",
               "ofType": null
             },
             "defaultValue": null,
@@ -50931,6 +50923,18 @@
             "deprecationReason": null
           },
           {
+            "name": "locked",
+            "description": null,
+            "type": {
+              "kind": "ENUM",
+              "name": "order_by",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
             "name": "name",
             "description": null,
             "type": {
@@ -51055,6 +51059,12 @@
             "deprecationReason": null
           },
           {
+            "name": "locked",
+            "description": "column name",
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
             "name": "name",
             "description": "column name",
             "isDeprecated": false,
@@ -51129,6 +51139,18 @@
             "type": {
               "kind": "SCALAR",
               "name": "Int",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "locked",
+            "description": null,
+            "type": {
+              "kind": "SCALAR",
+              "name": "Boolean",
               "ofType": null
             },
             "defaultValue": null,
@@ -51308,6 +51330,12 @@
           },
           {
             "name": "id",
+            "description": "column name",
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "locked",
             "description": "column name",
             "isDeprecated": false,
             "deprecationReason": null

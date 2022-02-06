@@ -3,8 +3,6 @@
 - "!include public_candidates.yaml"
 - "!include public_commision_members.yaml"
 - "!include public_commissions.yaml"
-- "!include public_electoral_roll_users.yaml"
-- "!include public_electoral_rolls.yaml"
 - "!include public_political_group_members.yaml"
 - "!include public_political_group_types.yaml"
 - "!include public_political_groups.yaml"

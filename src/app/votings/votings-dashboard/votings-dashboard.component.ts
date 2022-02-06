@@ -1,9 +1,9 @@
-import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
+import { BreakpointObserver } from '@angular/cdk/layout';
 import { Component } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
-import { BehaviorSubject, from, Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
-import { Votings } from 'src/generated/graphql';
+import { Router } from '@angular/router';
+import { BehaviorSubject, combineLatest, Observable, switchMap } from 'rxjs';
+import { Donkey } from 'src/app/services/donkey.service';
+import { Referendums, Votings } from 'src/generated/graphql';
 import { VotingsService } from '../voting-service.service';
 interface VotingParams {
   title: string;
@@ -20,63 +20,105 @@ interface VotingParams {
   styleUrls: ['./votings-dashboard.component.scss'],
 })
 export class VotingsDashboardComponent {
-  votings: BehaviorSubject<VotingParams[]> = new BehaviorSubject([]);
+  referendums: BehaviorSubject<Referendums[]> = new BehaviorSubject([]);
+  votings: BehaviorSubject<Votings[]> = new BehaviorSubject([]);
   /** Based on the screen size, switch from standard to one column per row */
-  cards: Observable<VotingParams[]>;
+  cards: BehaviorSubject<VotingParams[]> = new BehaviorSubject([]);
+  // cards$: Observable<VotingParams[]>;
+  private loading: BehaviorSubject<boolean> = new BehaviorSubject(false);
+  loading$ = this.loading.asObservable();
+
+  loadedReferendums: BehaviorSubject<boolean> = new BehaviorSubject(false);
+  loadedVotings: BehaviorSubject<boolean> = new BehaviorSubject(false);
+  observables: Observable<boolean>[] = [
+    this.loadedReferendums,
+    this.loadedVotings,
+  ];
 
   constructor(
     private breakpointObserver: BreakpointObserver,
     private router: Router,
-    private activatedRoute: ActivatedRoute,
-    private voitngsService: VotingsService
+    private voitngsService: VotingsService,
+
+    private donkey: Donkey
   ) {
+    this.loading.next(true);
+    this.getStartedReferendums();
     this.getStartedVotings();
-    this.initVotingsCards();
-  }
-  getStartedVotings() {
-    this.voitngsService.getStartedVotings().subscribe((response) => {
-      if (response.data) {
-        const votings: Votings[] = response.data.votings as Votings[];
-        console.log(votings);
-        console.log(response.data.votings_aggregate.aggregate.count);
-        // const votingsCount = response.data.
+    combineLatest(this.observables).subscribe((observableResults) => {
+      if (observableResults.indexOf(false) < 0) {
+        this.loading.next(false);
       }
-      console.log(response);
     });
   }
-
-  initVotingsCards() {
-    //TODO: merge with votings.
-    this.cards = from(this.voitngsService.getReferendums(99, null, {locked: {_eq: true}}, {}).result())
-      .pipe(map(res => res.data.referendums.map(r => {
-        return {
-          title: r.name,
-          text: r.description,
-          cols: 1,
-          rows: 1,
-          type: "referendum",
-          id: r.id,
-        } as VotingParams
-      })));
+  getStartedVotings() {
+    this.voitngsService
+      .getStartedVotings()
+      .pipe(
+        switchMap((response) => {
+          const votings = response.data.votings;
+          this.votings.next(votings as Votings[]);
+          return this.votings;
+        })
+      )
+      .subscribe((votings) => {
+        const votingsParams: VotingParams[] = votings.map((voting) => {
+          return {
+            title: voting.name,
+            text: voting.description,
+            cols: 1,
+            rows: 1,
+            type: voting.type,
+            id: voting.id,
+          } as VotingParams;
+        });
+        const currentCards: VotingParams[] = this.cards.value;
+        currentCards.push(...votingsParams);
+        this.cards.next(currentCards);
+        this.loadedVotings.next(true);
+      });
+  }
+  getStartedReferendums() {
+    this.voitngsService
+      .getStartedReferendums()
+      .pipe(
+        switchMap((response) => {
+          const referendums = response.data.referendums;
+          this.referendums.next(referendums as Referendums[]);
+          return this.referendums;
+        })
+      )
+      .subscribe((referendums) => {
+        const referendumsParams: VotingParams[] = referendums.map(
+          (referendum) => {
+            return {
+              title: referendum.name,
+              text: referendum.description,
+              cols: 1,
+              rows: 1,
+              type: 'referendum',
+              id: referendum.id,
+            } as VotingParams;
+          }
+        );
+        const currentCards: VotingParams[] = this.cards.value;
+        currentCards.push(...referendumsParams);
+        this.cards.next(currentCards);
+        this.loadedReferendums.next(true);
+      });
   }
 
   goToVotingComponent(vote: VotingParams) {
     console.log('go to vote', vote);
-    // console.log(this.activatedRoute.url.);
-    // this.router.navigate(['vote'], {
-    //   relativeTo: this.activatedRoute,
-    // });
-    // if (vote.id === 1) {
-    //   this.router.navigate(['vote'], {
-    //     relativeTo: this.activatedRoute,
-    //   });
-    // }
-    if (vote.type === "referendum") {
-      this.router.navigate([`/votings/referendum/${vote.id}`], {
-        relativeTo: this.activatedRoute
-      });
+
+    if (vote.type === 'referendum' || vote.type === 'national_referendum') {
+      const referendum = this.referendums.value.find((r) => r.id === vote.id);
+      this.donkey.load(referendum);
+      this.router.navigate(['/votings/referendum']);
+    } else {
+      const voting = this.votings.value.find((v) => v.id === vote.id);
+      console.log('Open vote screen');
+      console.log(voting);
     }
-    // alert(JSON.stringify(vote));
-    //console.log(vote);
   }
 }

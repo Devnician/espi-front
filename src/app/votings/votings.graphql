@@ -1,3 +1,5 @@
+# REFERENDUMS
+
 mutation CreateReferendum($referendum: referendums_insert_input!) {
   insert_referendums_one(object: $referendum) {
     ...ReferendumFields
@@ -50,6 +52,17 @@ query GetReferendums(
   }
 }
 
+query GetStartedReferendums($where: referendums_bool_exp) {
+  referendums(where: $where) {
+    ...ReferendumFields
+  }
+  referendums_aggregate(where: $where) {
+    aggregate {
+      count
+    }
+  }
+}
+
 fragment ReferendumFields on referendums {
   id
   createdAt
@@ -77,6 +90,13 @@ fragment ReferendumQuestionsFields on referendum_questions {
   referendumId
 }
 
+mutation AddVoteForTheReferendum($votes: [referendum_votes_insert_input!]!) {
+  insert_referendum_votes(objects: $votes) {
+    affected_rows
+  }
+}
+
+#  VOTINGS
 query GetVotings(
   $limit: Int
   $offset: Int
@@ -89,18 +109,7 @@ query GetVotings(
     offset: $offset
     order_by: $orderBy
   ) {
-    id
-    createdAt
-    updatedAt
-    name
-    description
-    type
-    voting_type {
-      value
-      description
-    }
-    startedAt
-    finishedAt
+    ...VotingVields
   }
   votings_aggregate {
     aggregate {
@@ -109,27 +118,29 @@ query GetVotings(
   }
 }
 
-query GetStartedVotings {
-  votings(
-    where: {
-      _and: [
-        { startedAt: { _is_null: false } }
-        { finishedAt: { _is_null: true } }
-      ]
-    }
-  ) {
-    id
-    createdAt
-    startedAt
-    updatedAt
-    finishedAt
-    type
-    name
-    description
+query GetStartedVotings($where: votings_bool_exp) {
+  votings(where: $where) {
+    ...VotingVields
   }
-  votings_aggregate {
+  votings_aggregate(where: $where) {
     aggregate {
       count
     }
   }
+}
+
+fragment VotingVields on votings {
+  id
+  createdAt
+  updatedAt
+  name
+  description
+  type
+  locked
+  voting_type {
+    value
+    description
+  }
+  startedAt
+  finishedAt
 }

@@ -17,6 +17,10 @@ const routes: Routes = [
         component: VotingsDashboardComponent,
       },
       {
+        path: 'referendum',
+        component: ReferendumComponent,
+      },
+      {
         path: 'referendum/:id',
         component: ReferendumComponent,
       },
