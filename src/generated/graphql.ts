@@ -6058,7 +6058,6 @@ export type Voting_Section = {
   createdAt: Scalars['timestamptz'];
   id: Scalars['Int'];
   openedAt?: Maybe<Scalars['timestamptz']>;
-  settlementId: Scalars['Int'];
   updatedAt: Scalars['timestamptz'];
 };
 
@@ -6097,7 +6096,6 @@ export type Voting_Section_Avg_Fields = {
   __typename?: 'voting_section_avg_fields';
   addressId?: Maybe<Scalars['Float']>;
   id?: Maybe<Scalars['Float']>;
-  settlementId?: Maybe<Scalars['Float']>;
 };
 
 /** Boolean expression to filter rows from the table "voting_section". All fields are combined with a logical 'AND'. */
@@ -6110,7 +6108,6 @@ export type Voting_Section_Bool_Exp = {
   createdAt?: Maybe<Timestamptz_Comparison_Exp>;
   id?: Maybe<Int_Comparison_Exp>;
   openedAt?: Maybe<Timestamptz_Comparison_Exp>;
-  settlementId?: Maybe<Int_Comparison_Exp>;
   updatedAt?: Maybe<Timestamptz_Comparison_Exp>;
 };
 
@@ -6124,7 +6121,6 @@ export enum Voting_Section_Constraint {
 export type Voting_Section_Inc_Input = {
   addressId?: Maybe<Scalars['Int']>;
   id?: Maybe<Scalars['Int']>;
-  settlementId?: Maybe<Scalars['Int']>;
 };
 
 /** input type for inserting data into table "voting_section" */
@@ -6134,7 +6130,6 @@ export type Voting_Section_Insert_Input = {
   createdAt?: Maybe<Scalars['timestamptz']>;
   id?: Maybe<Scalars['Int']>;
   openedAt?: Maybe<Scalars['timestamptz']>;
-  settlementId?: Maybe<Scalars['Int']>;
   updatedAt?: Maybe<Scalars['timestamptz']>;
 };
 
@@ -6146,7 +6141,6 @@ export type Voting_Section_Max_Fields = {
   createdAt?: Maybe<Scalars['timestamptz']>;
   id?: Maybe<Scalars['Int']>;
   openedAt?: Maybe<Scalars['timestamptz']>;
-  settlementId?: Maybe<Scalars['Int']>;
   updatedAt?: Maybe<Scalars['timestamptz']>;
 };
 
@@ -6158,7 +6152,6 @@ export type Voting_Section_Min_Fields = {
   createdAt?: Maybe<Scalars['timestamptz']>;
   id?: Maybe<Scalars['Int']>;
   openedAt?: Maybe<Scalars['timestamptz']>;
-  settlementId?: Maybe<Scalars['Int']>;
   updatedAt?: Maybe<Scalars['timestamptz']>;
 };
 
@@ -6185,7 +6178,6 @@ export type Voting_Section_Order_By = {
   createdAt?: Maybe<Order_By>;
   id?: Maybe<Order_By>;
   openedAt?: Maybe<Order_By>;
-  settlementId?: Maybe<Order_By>;
   updatedAt?: Maybe<Order_By>;
 };
 
@@ -6206,8 +6198,6 @@ export enum Voting_Section_Select_Column {
   Id = 'id',
   /** column name */
   OpenedAt = 'openedAt',
-  /** column name */
-  SettlementId = 'settlementId',
   /** column name */
   UpdatedAt = 'updatedAt'
 }
@@ -6526,7 +6516,6 @@ export type Voting_Section_Set_Input = {
   createdAt?: Maybe<Scalars['timestamptz']>;
   id?: Maybe<Scalars['Int']>;
   openedAt?: Maybe<Scalars['timestamptz']>;
-  settlementId?: Maybe<Scalars['Int']>;
   updatedAt?: Maybe<Scalars['timestamptz']>;
 };
 
@@ -6535,7 +6524,6 @@ export type Voting_Section_Stddev_Fields = {
   __typename?: 'voting_section_stddev_fields';
   addressId?: Maybe<Scalars['Float']>;
   id?: Maybe<Scalars['Float']>;
-  settlementId?: Maybe<Scalars['Float']>;
 };
 
 /** aggregate stddev_pop on columns */
@@ -6543,7 +6531,6 @@ export type Voting_Section_Stddev_Pop_Fields = {
   __typename?: 'voting_section_stddev_pop_fields';
   addressId?: Maybe<Scalars['Float']>;
   id?: Maybe<Scalars['Float']>;
-  settlementId?: Maybe<Scalars['Float']>;
 };
 
 /** aggregate stddev_samp on columns */
@@ -6551,7 +6538,6 @@ export type Voting_Section_Stddev_Samp_Fields = {
   __typename?: 'voting_section_stddev_samp_fields';
   addressId?: Maybe<Scalars['Float']>;
   id?: Maybe<Scalars['Float']>;
-  settlementId?: Maybe<Scalars['Float']>;
 };
 
 /** aggregate sum on columns */
@@ -6559,7 +6545,6 @@ export type Voting_Section_Sum_Fields = {
   __typename?: 'voting_section_sum_fields';
   addressId?: Maybe<Scalars['Int']>;
   id?: Maybe<Scalars['Int']>;
-  settlementId?: Maybe<Scalars['Int']>;
 };
 
 /** update columns of table "voting_section" */
@@ -6575,8 +6560,6 @@ export enum Voting_Section_Update_Column {
   /** column name */
   OpenedAt = 'openedAt',
   /** column name */
-  SettlementId = 'settlementId',
-  /** column name */
   UpdatedAt = 'updatedAt'
 }
 
@@ -6585,7 +6568,6 @@ export type Voting_Section_Var_Pop_Fields = {
   __typename?: 'voting_section_var_pop_fields';
   addressId?: Maybe<Scalars['Float']>;
   id?: Maybe<Scalars['Float']>;
-  settlementId?: Maybe<Scalars['Float']>;
 };
 
 /** aggregate var_samp on columns */
@@ -6593,7 +6575,6 @@ export type Voting_Section_Var_Samp_Fields = {
   __typename?: 'voting_section_var_samp_fields';
   addressId?: Maybe<Scalars['Float']>;
   id?: Maybe<Scalars['Float']>;
-  settlementId?: Maybe<Scalars['Float']>;
 };
 
 /** aggregate variance on columns */
@@ -6601,7 +6582,6 @@ export type Voting_Section_Variance_Fields = {
   __typename?: 'voting_section_variance_fields';
   addressId?: Maybe<Scalars['Float']>;
   id?: Maybe<Scalars['Float']>;
-  settlementId?: Maybe<Scalars['Float']>;
 };
 
 /** columns and relationships of "voting_types" */
