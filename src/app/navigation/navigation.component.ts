@@ -79,7 +79,7 @@ export class NavigationComponent
       }
       // console.log(accessT);
       const res = this.jwtHelper.decodeToken(accessT);
-      this.auth.setLoggedUser(res.user);
+      this.auth.setLoggedUser(res?.user);
     }
   }
 
@@ -114,7 +114,7 @@ export class NavigationComponent
         })
     );
     combineLatest(this.userObservables).subscribe((observableResults) => {
-      console.log(observableResults);
+      // console.log(observableResults);
       this.user = observableResults[0];
       if (this.user) {
         const roleIndex = observableResults[1];
@@ -179,10 +179,17 @@ export class NavigationComponent
           matIcon: 'front_hand',
           badgeSubject: undefined,
         });
+
+        this.menus.push({
+          route: 'votings/dashboard',
+          label: 'Преброяване',
+          matIcon: 'functions',
+          badgeSubject: undefined,
+        });
         break;
       case Role_Types_Enum.User:
         this.menus.push({
-          route: 'votings',
+          route: 'votings/dashboard',
           label: 'Гласуване',
           matIcon: 'front_hand',
           badgeSubject: undefined,

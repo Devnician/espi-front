@@ -50,3 +50,11 @@ select_permissions:
     - isMunicipality
     filter: {}
   role: sectionLeader
+- permission:
+    columns:
+    - id
+    - parentId
+    - name
+    - isMunicipality
+    filter: {}
+  role: user

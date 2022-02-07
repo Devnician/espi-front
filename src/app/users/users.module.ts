@@ -38,6 +38,8 @@ import { UsersTableComponent } from './users-table/users-table.component';
     NgxJsonViewerModule,
     FormsModule,
 
+    FormsModule,
+
     //  MatSnackBarModule,
 
     // MatButtonModule,
@@ -66,6 +68,7 @@ import { UsersTableComponent } from './users-table/users-table.component';
     // MatDividerModule,
     // MatGridListModule,
     MatFormFieldModule,
+    MatInputModule,
     MatAutocompleteModule,
     //ScrollingModule,
 

@@ -67,6 +67,8 @@ export class Valido {
       return 'Полето "Стара парола" и полето "Нова парола" са с еднакви стойности!';
     } else if (control.hasError('wrongPassword')) {
       return 'Грешна парола!';
+    } else if (control.hasError('matDatepickerMin')) {
+      return 'Избраната дата не е позволена';
     } else if (control.errors) {
       // next error
       console.log(control.errors);

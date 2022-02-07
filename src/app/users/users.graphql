@@ -49,6 +49,7 @@ fragment UserFields on users {
   addressId
   voted
   eVoted
+  votingSectionId
   roleType {
     value
     description
@@ -61,16 +62,20 @@ fragment UserFields on users {
   address {
     ...AddressShort
     settlement {
-      id
-      name
-      isMunicipality
-      parentId
-      parentSettlement {
-        id
-        isMunicipality
-        name
-      }
+      ...SettlementFileds
     }
+  }
+}
+
+fragment SettlementFileds on settlements {
+  id
+  name
+  isMunicipality
+  parentId
+  parentSettlement {
+    id
+    isMunicipality
+    name
   }
 }
 fragment AddressShort on addresses {

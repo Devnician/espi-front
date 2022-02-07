@@ -1,6 +1,10 @@
 table:
   name: addresses
   schema: public
+object_relationships:
+- name: settlement
+  using:
+    foreign_key_constraint_on: settlementId
 insert_permissions:
 - permission:
     backend_only: false

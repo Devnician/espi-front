@@ -22,12 +22,14 @@ export class LoginGuard implements CanActivate {
     // return of(true);
     return this.authService.accessToken$.pipe(
       map((token) => {
-        console.log('login guard');
+        console.log('LOGIN GUARD');
+        console.log(token);
+        console.log(state.url);
+
         if (token && state.url.indexOf('auth/login') > -1) {
           console.log('Create url tree from login Guard...');
           return this.router.createUrlTree(['/']);
         }
-
         return true;
       })
     );

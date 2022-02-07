@@ -2,9 +2,13 @@ import { Injectable } from '@angular/core';
 import { ApolloQueryResult, FetchResult } from '@apollo/client';
 import { Observable } from 'rxjs';
 import {
+  AddVoteForTheReferendumGQL,
+  AddVoteForTheReferendumMutation,
   CreateReferendumGQL,
   CreateReferendumMutation,
   GetReferendumsGQL,
+  GetStartedReferendumsGQL,
+  GetStartedReferendumsQuery,
   GetStartedVotingsGQL,
   GetStartedVotingsQuery,
   GetVotingsGQL,
@@ -13,6 +17,7 @@ import {
   Referendums_Order_By,
   Referendums_Set_Input,
   Referendum_Questions_Insert_Input,
+  Referendum_Votes_Insert_Input,
   UpdateReferendumAndQuestionGQL,
   UpdateReferendumAndQuestionMutation,
   Votings_Bool_Exp,
@@ -26,8 +31,10 @@ export class VotingsService {
     private createReferendumGQL: CreateReferendumGQL,
     private updateReferendumAndQuestionGQL: UpdateReferendumAndQuestionGQL,
     private getReferendumsGQL: GetReferendumsGQL,
+    private getStartedReferendumsGQL: GetStartedReferendumsGQL,
     private getVotingsGQL: GetVotingsGQL,
-    private getStartedVotingsGQL: GetStartedVotingsGQL
+    private getStartedVotingsGQL: GetStartedVotingsGQL,
+    private addVoteForTheReferendumGQL: AddVoteForTheReferendumGQL
   ) {}
 
   createReferendum(
@@ -84,6 +91,16 @@ export class VotingsService {
     );
   }
 
+  DELETE_THIS_METHOD_getReferendums() {
+    return this.getReferendumsGQL.fetch(
+      {},
+      {
+        fetchPolicy: 'network-only',
+        errorPolicy: 'all',
+      }
+    );
+  }
+
   getVotings(
     limit = 10,
     offset = 0,
@@ -102,6 +119,50 @@ export class VotingsService {
   }
 
   getStartedVotings(): Observable<ApolloQueryResult<GetStartedVotingsQuery>> {
-    return this.getStartedVotingsGQL.fetch();
+    const where: Votings_Bool_Exp = {
+      _and: [
+        { locked: { _eq: true } },
+        { startedAt: { _is_null: false } },
+        { finishedAt: { _is_null: true } },
+      ],
+    };
+    return this.getStartedVotingsGQL.fetch(
+      { where },
+      { fetchPolicy: 'network-only' }
+    );
+  }
+
+  getStartedReferendums(): Observable<
+    ApolloQueryResult<GetStartedReferendumsQuery>
+  > {
+    const where: Referendums_Bool_Exp = {
+      _and: [
+        { locked: { _eq: true } },
+        { startedAt: { _is_null: false } },
+        { finishedAt: { _is_null: true } },
+      ],
+    };
+
+    return this.getStartedReferendumsGQL.fetch(
+      { where },
+      { fetchPolicy: 'network-only' }
+    );
+  }
+
+  //#region VOTES
+  addVoteForReferendum(
+    answers: Referendum_Votes_Insert_Input[]
+  ): Observable<
+    FetchResult<
+      AddVoteForTheReferendumMutation,
+      Record<string, any>,
+      Record<string, any>
+    >
+  > {
+    console.log(answers);
+    return this.addVoteForTheReferendumGQL.mutate(
+      { votes: answers },
+      { errorPolicy: 'all' }
+    );
   }
 }

@@ -1,22 +1,13 @@
-<!-- <mat-horizontal-stepper ...>
-    <mat-step *ngFor=let step of [0,1,2]" [ngSwitch]="step" [completed]="steps[step].completed" [label]="steps[step].label">
-      <app-my-component-0 *ngSwitchCase="0" [someInput0]="someInput0" (someOutput0)="onSomeOutput0($event)"></app-my-component-0>
-      <app-my-component-1 *ngSwitchCase="1" [someInput1]="someInput1" (someOutput1)="onSomeOutput1($event)"></app-my-component-1>
-      <app-my-component-2 *ngSwitchCase="2" [someInput2]="someInput2" (someOutput2)="onSomeOutput2($event)"></app-my-component-2>
-    </mat-step>
-  </mat-horizontal-stepper> -->
 <mat-horizontal-stepper [linear]="false" #stepper>
-  <!--  [stepControl]="firstFormGroup" -->
   <mat-step
     *ngFor="let q of questions | async"
     [ngSwitch]="q"
     [completed]="q.response > -1"
-    [label]="q.label"
   >
     <ng-template matStepLabel>
-      {{ q.isPreview ? "Преглед" : "Въпрос " + q.questionNumber }}
+      {{ q.questionNumber === 0 ? "Преглед" : "Въпрос " + q.questionNumber }}
     </ng-template>
-    <mat-card class="example-card" *ngIf="q.isPreview === false">
+    <mat-card class="example-card" *ngIf="q.questionNumber > 0">
       <mat-card-header>
         <mat-card-title>Въпрос № {{ q.questionNumber }}</mat-card-title>
         <mat-card-subtitle
@@ -27,7 +18,7 @@
         <div>
           <mat-card-title
             style="height: 250px; text-align: center; font-size: xx-large"
-            >{{ q.text }}
+            >{{ q.question }}
           </mat-card-title>
         </div>
         <div>
@@ -47,7 +38,7 @@
       </mat-card-content>
     </mat-card>
 
-    <mat-card class="example-card" *ngIf="q.isPreview === true">
+    <mat-card class="example-card" *ngIf="q.questionNumber === 0">
       <mat-card-header>
         <mat-card-title>Преглед на отговорите</mat-card-title>
       </mat-card-header>
@@ -60,7 +51,7 @@
             </tr>
             <tr *ngFor="let q2 of questions | async">
               <td *ngIf="q2.questionNumber > 0" style="width: 100%">
-                <strong> {{ q2.text }}</strong>
+                <strong> {{ q2.question }}</strong>
               </td>
               <td
                 *ngIf="q2.questionNumber > 0"
