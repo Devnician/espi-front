@@ -1,3 +1,11 @@
 .full-width-table {
   width: 100%;
 }
+.table-header-search {
+  width: 100% !important;
+  display: inline-flex;
+  box-sizing: border-box;
+  background-color: #ffffff;
+  border: solid 0.5px #d9dde0;
+  border-radius: 2px;
+}

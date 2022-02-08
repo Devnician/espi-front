@@ -37,9 +37,6 @@ import { UsersTableComponent } from './users-table/users-table.component';
     MatCheckboxModule,
     NgxJsonViewerModule,
     FormsModule,
-
-    FormsModule,
-
     //  MatSnackBarModule,
 
     // MatButtonModule,

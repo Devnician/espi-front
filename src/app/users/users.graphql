@@ -66,22 +66,3 @@ fragment UserFields on users {
     }
   }
 }
-
-fragment SettlementFileds on settlements {
-  id
-  name
-  isMunicipality
-  parentId
-  parentSettlement {
-    id
-    isMunicipality
-    name
-  }
-}
-fragment AddressShort on addresses {
-  id
-  number
-  street
-  description
-  settlementId
-}

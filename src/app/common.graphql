@@ -1,0 +1,44 @@
+# mutation ActionCall($arg: SampleInput!) {
+#   testAction(arg1: $arg) {
+#     accessToken
+#   }
+# }
+
+# Addresses
+fragment AddressShort on addresses {
+  id
+  number
+  street
+  description
+  settlementId
+}
+
+fragment AddressFull on addresses {
+  id
+  street
+  number
+  description
+  settlementId
+  settlement {
+    ...SettlementFileds
+  }
+}
+# Settlements
+fragment SettlementsBaseFields on settlements {
+  id
+  parentId
+  name
+  isMunicipality
+}
+
+fragment SettlementFileds on settlements {
+  id
+  name
+  isMunicipality
+  parentId
+  parentSettlement {
+    id
+    isMunicipality
+    name
+  }
+}

@@ -1,51 +1,42 @@
 import { DataSource } from '@angular/cdk/collections';
+import { Injector } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatSort } from '@angular/material/sort';
-import { map } from 'rxjs/operators';
-import { Observable, of as observableOf, merge } from 'rxjs';
-
-// TODO: Replace this with your own data model type
-export interface VotingSectionsTableItem {
-  name: string;
-  id: number;
-}
-
-// TODO: replace this with real data from your application
-const EXAMPLE_DATA: VotingSectionsTableItem[] = [
-  {id: 1, name: 'Hydrogen'},
-  {id: 2, name: 'Helium'},
-  {id: 3, name: 'Lithium'},
-  {id: 4, name: 'Beryllium'},
-  {id: 5, name: 'Boron'},
-  {id: 6, name: 'Carbon'},
-  {id: 7, name: 'Nitrogen'},
-  {id: 8, name: 'Oxygen'},
-  {id: 9, name: 'Fluorine'},
-  {id: 10, name: 'Neon'},
-  {id: 11, name: 'Sodium'},
-  {id: 12, name: 'Magnesium'},
-  {id: 13, name: 'Aluminum'},
-  {id: 14, name: 'Silicon'},
-  {id: 15, name: 'Phosphorus'},
-  {id: 16, name: 'Sulfur'},
-  {id: 17, name: 'Chlorine'},
-  {id: 18, name: 'Argon'},
-  {id: 19, name: 'Potassium'},
-  {id: 20, name: 'Calcium'},
-];
+import { QueryRef } from 'apollo-angular';
+import { BehaviorSubject, merge, Observable } from 'rxjs';
+import { map, startWith, switchMap, tap } from 'rxjs/operators';
+import {
+  GetVotingSectionsQuery,
+  Order_By,
+  Voting_Section,
+  Voting_Section_Bool_Exp,
+  Voting_Section_Order_By,
+} from 'src/generated/graphql';
+import { VotingSectionsService } from '../voting-section.service';
 
 /**
  * Data source for the VotingSectionsTable view. This class should
  * encapsulate all logic for fetching and manipulating the displayed data
  * (including sorting, pagination, and filtering).
  */
-export class VotingSectionsTableDataSource extends DataSource<VotingSectionsTableItem> {
-  data: VotingSectionsTableItem[] = EXAMPLE_DATA;
-  paginator: MatPaginator | undefined;
-  sort: MatSort | undefined;
+export class VotingSectionsTableDataSource extends DataSource<Voting_Section> {
+  data$: Observable<GetVotingSectionsQuery['voting_section']>;
+  paginator: MatPaginator;
+  counter: BehaviorSubject<number> = new BehaviorSubject(0);
+  sort: MatSort;
+  queryRef: QueryRef<GetVotingSectionsQuery>;
 
-  constructor() {
+  condition: BehaviorSubject<Voting_Section_Bool_Exp> = new BehaviorSubject({});
+
+  loading: BehaviorSubject<any> = new BehaviorSubject(true);
+  loading$ = this.loading.asObservable();
+  private votingSectionsService: VotingSectionsService;
+  private snackBar: MatSnackBar;
+  constructor(private injector: Injector) {
     super();
+    this.votingSectionsService = this.injector.get(VotingSectionsService);
+    this.snackBar = this.injector.get(MatSnackBar);
   }
 
   /**
@@ -53,17 +44,77 @@ export class VotingSectionsTableDataSource extends DataSource<VotingSectionsTabl
    * the returned stream emits new items.
    * @returns A stream of the items to be rendered.
    */
-  connect(): Observable<VotingSectionsTableItem[]> {
-    if (this.paginator && this.sort) {
-      // Combine everything that affects the rendered data into one update
-      // stream for the data-table to consume.
-      return merge(observableOf(this.data), this.paginator.page, this.sort.sortChange)
-        .pipe(map(() => {
-          return this.getPagedData(this.getSortedData([...this.data ]));
-        }));
-    } else {
-      throw Error('Please set the paginator and sort on the data source before connecting.');
-    }
+  connect(): Observable<Voting_Section[] | any> {
+    const limit: number = this.paginator.pageSize;
+    const offset: number = this.paginator.pageIndex * this.paginator.pageSize;
+    const order_by: Voting_Section_Order_By = { createdAt: Order_By.Desc };
+
+    // Combine everything that affects the rendered data into one update
+    // stream for the data-table to consume.
+    this.queryRef = this.votingSectionsService.getVotingSections(
+      limit,
+      offset,
+      this.condition.value,
+      order_by
+    );
+    // Combine everything that affects the rendered data into one update
+    // stream for the data-table to consume.
+    const dataMutations = [
+      this.queryRef.valueChanges,
+      this.condition,
+      // this.paginator.page,
+      // this.sort.sortChange,
+    ];
+
+    return merge(
+      this.paginator.page,
+      this.sort.sortChange,
+      ...dataMutations
+    ).pipe(
+      startWith({}),
+      tap(() => this.loading.next(true)),
+      switchMap((fromWhere) => {
+        let order: any = new Object({});
+        if (this.sort.active && this.sort.active.length > 0) {
+          const field = this.sort.active;
+          this.sort.direction.indexOf('sc') !== -1
+            ? (order[this.sort.active] = this.sort.direction)
+            : (order = {});
+        }
+
+        if (Object.keys(fromWhere).indexOf('data') < 0) {
+          return this.queryRef.refetch({
+            limit: this.paginator.pageSize,
+            offset: this.paginator.pageIndex * this.paginator.pageSize,
+            condition: this.condition.value,
+            orderBy: order,
+          });
+        } else {
+          return this.queryRef.valueChanges;
+        }
+      }),
+      map(({ data, loading, errors }) => {
+        this.loading.next(loading);
+        if (errors) {
+          console.log(errors);
+          console.log(data);
+          const errorMessage = errors[0].message;
+          console.log(errorMessage);
+          if (errorMessage.includes('query_root')) {
+            this.snackBar.open(
+              'Нямате необходимите права за достъп до тези данни!',
+              'OK',
+              { duration: 2000 }
+            );
+          }
+          // this.snackBar.open(error, 'OK', { duration: 2000 });
+          throw Error(errorMessage);
+        }
+        this.counter.next(data.voting_section_aggregate.aggregate.count);
+        // this.currentPageData.next(data.users as Users[]);
+        return data.voting_section;
+      })
+    );
   }
 
   /**
@@ -71,41 +122,4 @@ export class VotingSectionsTableDataSource extends DataSource<VotingSectionsTabl
    * any open connections or free any held resources that were set up during connect.
    */
   disconnect(): void {}
-
-  /**
-   * Paginate the data (client-side). If you're using server-side pagination,
-   * this would be replaced by requesting the appropriate data from the server.
-   */
-  private getPagedData(data: VotingSectionsTableItem[]): VotingSectionsTableItem[] {
-    if (this.paginator) {
-      const startIndex = this.paginator.pageIndex * this.paginator.pageSize;
-      return data.splice(startIndex, this.paginator.pageSize);
-    } else {
-      return data;
-    }
-  }
-
-  /**
-   * Sort the data (client-side). If you're using server-side sorting,
-   * this would be replaced by requesting the appropriate data from the server.
-   */
-  private getSortedData(data: VotingSectionsTableItem[]): VotingSectionsTableItem[] {
-    if (!this.sort || !this.sort.active || this.sort.direction === '') {
-      return data;
-    }
-
-    return data.sort((a, b) => {
-      const isAsc = this.sort?.direction === 'asc';
-      switch (this.sort?.active) {
-        case 'name': return compare(a.name, b.name, isAsc);
-        case 'id': return compare(+a.id, +b.id, isAsc);
-        default: return 0;
-      }
-    });
-  }
-}
-
-/** Simple sort comparator for example ID/Name columns (for client-side sorting). */
-function compare(a: string | number, b: string | number, isAsc: boolean): number {
-  return (a < b ? -1 : 1) * (isAsc ? 1 : -1);
 }
