@@ -5454,9 +5454,9 @@ export type Users = {
   name: Scalars['String'];
   password?: Maybe<Scalars['String']>;
   pin?: Maybe<Scalars['String']>;
-  role: Role_Types_Enum;
+  role?: Maybe<Role_Types_Enum>;
   /** An object relationship */
-  roleType: Role_Types;
+  roleType?: Maybe<Role_Types>;
   secondRole?: Maybe<Role_Types_Enum>;
   /** An object relationship */
   secondRoleType?: Maybe<Role_Types>;
@@ -7041,6 +7041,25 @@ export type RefreshQuery = (
   )> }
 );
 
+export type GetFinishedReferendumsQueryVariables = Exact<{
+  where?: Maybe<Referendums_Bool_Exp>;
+}>;
+
+
+export type GetFinishedReferendumsQuery = (
+  { __typename?: 'query_root' }
+  & { referendums: Array<(
+    { __typename?: 'referendums' }
+    & ReferendumFieldsFragment
+  )>, referendums_aggregate: (
+    { __typename?: 'referendums_aggregate' }
+    & { aggregate?: Maybe<(
+      { __typename?: 'referendums_aggregate_fields' }
+      & Pick<Referendums_Aggregate_Fields, 'count'>
+    )> }
+  ) }
+);
+
 export type ReferendumVotesBySectionIdQueryVariables = Exact<{
   sectionId: Scalars['Int'];
 }>;
@@ -7147,10 +7166,10 @@ export type UpdateUserMutation = (
 export type UserFieldsFragment = (
   { __typename?: 'users' }
   & Pick<Users, 'id' | 'createdAt' | 'updatedAt' | 'name' | 'surname' | 'family' | 'egn' | 'email' | 'addressId' | 'voted' | 'eVoted' | 'votingSectionId'>
-  & { roleType: (
+  & { roleType?: Maybe<(
     { __typename?: 'role_types' }
     & Pick<Role_Types, 'value' | 'description'>
-  ), secondRoleType?: Maybe<(
+  )>, secondRoleType?: Maybe<(
     { __typename?: 'role_types' }
     & Pick<Role_Types, 'value' | 'description'>
   )>, address: (
@@ -7494,6 +7513,29 @@ export const RefreshDocument = gql`
   })
   export class RefreshGQL extends Apollo.Query<RefreshQuery, RefreshQueryVariables> {
     document = RefreshDocument;
+    
+    constructor(apollo: Apollo.Apollo) {
+      super(apollo);
+    }
+  }
+export const GetFinishedReferendumsDocument = gql`
+    query GetFinishedReferendums($where: referendums_bool_exp) {
+  referendums(where: $where) {
+    ...ReferendumFields
+  }
+  referendums_aggregate(where: $where) {
+    aggregate {
+      count
+    }
+  }
+}
+    ${ReferendumFieldsFragmentDoc}`;
+
+  @Injectable({
+    providedIn: 'root'
+  })
+  export class GetFinishedReferendumsGQL extends Apollo.Query<GetFinishedReferendumsQuery, GetFinishedReferendumsQueryVariables> {
+    document = GetFinishedReferendumsDocument;
     
     constructor(apollo: Apollo.Apollo) {
       super(apollo);

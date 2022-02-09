@@ -1,0 +1,10 @@
+query GetFinishedReferendums($where: referendums_bool_exp) {
+  referendums(where: $where) {
+    ...ReferendumFields
+  }
+  referendums_aggregate(where: $where) {
+    aggregate {
+      count
+    }
+  }
+}
