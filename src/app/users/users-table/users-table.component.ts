@@ -10,7 +10,7 @@ import { SettlementsService } from 'src/app/settlements/settlements-service.serv
 import { GetDistrictsQuery, GetUsersQuery, Users } from 'src/generated/graphql';
 import { EditUserComponent } from '../edit-user/edit-user.component';
 import { UsersService } from '../users-service';
-import { OrdersTableDataSource } from './users-table-datasource';
+import { UsersTableDataSource } from './users-table-datasource';
 
 @Component({
   selector: 'app-orders-table',
@@ -22,7 +22,7 @@ export class UsersTableComponent implements AfterViewInit {
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
   @ViewChild(MatTable) table!: MatTable<GetUsersQuery['users']>;
-  dataSource: OrdersTableDataSource;
+  dataSource: UsersTableDataSource;
   districts: BehaviorSubject<GetDistrictsQuery['settlements']> =
     new BehaviorSubject(undefined);
 
@@ -49,7 +49,7 @@ export class UsersTableComponent implements AfterViewInit {
     private snackBar: MatSnackBar,
     private dialog: MatDialog
   ) {
-    this.dataSource = new OrdersTableDataSource(usersService, snackBar);
+    this.dataSource = new UsersTableDataSource(usersService, snackBar);
     this.dataSource.loading.next(true);
   }
 
@@ -129,24 +129,24 @@ export class UsersTableComponent implements AfterViewInit {
     });
   }
 
-  searchChanged(value:string){
+  searchChanged(value: string) {
     this.dataSource.queryRef.refetch({
       limit: this.paginator.pageSize,
       offset: this.paginator.pageIndex * this.paginator.pageSize,
-      condition: {egn: {_like: `%${value}%`}},
+      condition: { egn: { _like: `%${value}%` } },
       orderBy: {},
-    })
-    console.log(value)
+    });
+    console.log(value);
   }
 
-  onSearchClear(){
-    this.value="";
+  onSearchClear() {
+    this.value = '';
     this.dataSource.queryRef.refetch({
       limit: this.paginator.pageSize,
       offset: this.paginator.pageIndex * this.paginator.pageSize,
       condition: {},
       orderBy: {},
     });
-    console.log("onSearchClear");
+    console.log('onSearchClear');
   }
 }

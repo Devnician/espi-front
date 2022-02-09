@@ -1,9 +1,6 @@
 query AutoSuggestSettlements($condition: settlements_bool_exp!) {
   settlements(where: $condition) {
-    id
-    name
-    isMunicipality
-    parentId
+    ...SettlementsBaseFields
   }
   # settlements_aggregate(where: {
   #     _and: [{ isMunicipality: {  _eq: true } }, {name:{_ilike:$name}}]
@@ -20,11 +17,4 @@ query GetDistricts {
       }
     }
   }
-}
-
-fragment SettlementsBaseFields on settlements {
-  id
-  parentId
-  name
-  isMunicipality
 }

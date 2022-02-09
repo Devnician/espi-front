@@ -1,3 +1,30 @@
 table:
   name: voting_section
   schema: public
+object_relationships:
+- name: address
+  using:
+    foreign_key_constraint_on: addressId
+select_permissions:
+- permission:
+    allow_aggregations: true
+    columns:
+    - addressId
+    - id
+    - closedAt
+    - createdAt
+    - openedAt
+    - updatedAt
+    filter: {}
+  role: central
+- permission:
+    allow_aggregations: true
+    columns:
+    - id
+    - createdAt
+    - updatedAt
+    - openedAt
+    - closedAt
+    - addressId
+    filter: {}
+  role: centralLeader

@@ -6053,12 +6053,13 @@ export type Votes_Variance_Fields = {
 /** columns and relationships of "voting_section" */
 export type Voting_Section = {
   __typename?: 'voting_section';
+  /** An object relationship */
+  address?: Maybe<Addresses>;
   addressId?: Maybe<Scalars['Int']>;
   closedAt?: Maybe<Scalars['timestamptz']>;
   createdAt: Scalars['timestamptz'];
   id: Scalars['Int'];
   openedAt?: Maybe<Scalars['timestamptz']>;
-  settlementId: Scalars['Int'];
   updatedAt: Scalars['timestamptz'];
 };
 
@@ -6097,7 +6098,6 @@ export type Voting_Section_Avg_Fields = {
   __typename?: 'voting_section_avg_fields';
   addressId?: Maybe<Scalars['Float']>;
   id?: Maybe<Scalars['Float']>;
-  settlementId?: Maybe<Scalars['Float']>;
 };
 
 /** Boolean expression to filter rows from the table "voting_section". All fields are combined with a logical 'AND'. */
@@ -6105,12 +6105,12 @@ export type Voting_Section_Bool_Exp = {
   _and?: Maybe<Array<Voting_Section_Bool_Exp>>;
   _not?: Maybe<Voting_Section_Bool_Exp>;
   _or?: Maybe<Array<Voting_Section_Bool_Exp>>;
+  address?: Maybe<Addresses_Bool_Exp>;
   addressId?: Maybe<Int_Comparison_Exp>;
   closedAt?: Maybe<Timestamptz_Comparison_Exp>;
   createdAt?: Maybe<Timestamptz_Comparison_Exp>;
   id?: Maybe<Int_Comparison_Exp>;
   openedAt?: Maybe<Timestamptz_Comparison_Exp>;
-  settlementId?: Maybe<Int_Comparison_Exp>;
   updatedAt?: Maybe<Timestamptz_Comparison_Exp>;
 };
 
@@ -6124,17 +6124,16 @@ export enum Voting_Section_Constraint {
 export type Voting_Section_Inc_Input = {
   addressId?: Maybe<Scalars['Int']>;
   id?: Maybe<Scalars['Int']>;
-  settlementId?: Maybe<Scalars['Int']>;
 };
 
 /** input type for inserting data into table "voting_section" */
 export type Voting_Section_Insert_Input = {
+  address?: Maybe<Addresses_Obj_Rel_Insert_Input>;
   addressId?: Maybe<Scalars['Int']>;
   closedAt?: Maybe<Scalars['timestamptz']>;
   createdAt?: Maybe<Scalars['timestamptz']>;
   id?: Maybe<Scalars['Int']>;
   openedAt?: Maybe<Scalars['timestamptz']>;
-  settlementId?: Maybe<Scalars['Int']>;
   updatedAt?: Maybe<Scalars['timestamptz']>;
 };
 
@@ -6146,7 +6145,6 @@ export type Voting_Section_Max_Fields = {
   createdAt?: Maybe<Scalars['timestamptz']>;
   id?: Maybe<Scalars['Int']>;
   openedAt?: Maybe<Scalars['timestamptz']>;
-  settlementId?: Maybe<Scalars['Int']>;
   updatedAt?: Maybe<Scalars['timestamptz']>;
 };
 
@@ -6158,7 +6156,6 @@ export type Voting_Section_Min_Fields = {
   createdAt?: Maybe<Scalars['timestamptz']>;
   id?: Maybe<Scalars['Int']>;
   openedAt?: Maybe<Scalars['timestamptz']>;
-  settlementId?: Maybe<Scalars['Int']>;
   updatedAt?: Maybe<Scalars['timestamptz']>;
 };
 
@@ -6180,12 +6177,12 @@ export type Voting_Section_On_Conflict = {
 
 /** Ordering options when selecting data from "voting_section". */
 export type Voting_Section_Order_By = {
+  address?: Maybe<Addresses_Order_By>;
   addressId?: Maybe<Order_By>;
   closedAt?: Maybe<Order_By>;
   createdAt?: Maybe<Order_By>;
   id?: Maybe<Order_By>;
   openedAt?: Maybe<Order_By>;
-  settlementId?: Maybe<Order_By>;
   updatedAt?: Maybe<Order_By>;
 };
 
@@ -6206,8 +6203,6 @@ export enum Voting_Section_Select_Column {
   Id = 'id',
   /** column name */
   OpenedAt = 'openedAt',
-  /** column name */
-  SettlementId = 'settlementId',
   /** column name */
   UpdatedAt = 'updatedAt'
 }
@@ -6526,7 +6521,6 @@ export type Voting_Section_Set_Input = {
   createdAt?: Maybe<Scalars['timestamptz']>;
   id?: Maybe<Scalars['Int']>;
   openedAt?: Maybe<Scalars['timestamptz']>;
-  settlementId?: Maybe<Scalars['Int']>;
   updatedAt?: Maybe<Scalars['timestamptz']>;
 };
 
@@ -6535,7 +6529,6 @@ export type Voting_Section_Stddev_Fields = {
   __typename?: 'voting_section_stddev_fields';
   addressId?: Maybe<Scalars['Float']>;
   id?: Maybe<Scalars['Float']>;
-  settlementId?: Maybe<Scalars['Float']>;
 };
 
 /** aggregate stddev_pop on columns */
@@ -6543,7 +6536,6 @@ export type Voting_Section_Stddev_Pop_Fields = {
   __typename?: 'voting_section_stddev_pop_fields';
   addressId?: Maybe<Scalars['Float']>;
   id?: Maybe<Scalars['Float']>;
-  settlementId?: Maybe<Scalars['Float']>;
 };
 
 /** aggregate stddev_samp on columns */
@@ -6551,7 +6543,6 @@ export type Voting_Section_Stddev_Samp_Fields = {
   __typename?: 'voting_section_stddev_samp_fields';
   addressId?: Maybe<Scalars['Float']>;
   id?: Maybe<Scalars['Float']>;
-  settlementId?: Maybe<Scalars['Float']>;
 };
 
 /** aggregate sum on columns */
@@ -6559,7 +6550,6 @@ export type Voting_Section_Sum_Fields = {
   __typename?: 'voting_section_sum_fields';
   addressId?: Maybe<Scalars['Int']>;
   id?: Maybe<Scalars['Int']>;
-  settlementId?: Maybe<Scalars['Int']>;
 };
 
 /** update columns of table "voting_section" */
@@ -6575,8 +6565,6 @@ export enum Voting_Section_Update_Column {
   /** column name */
   OpenedAt = 'openedAt',
   /** column name */
-  SettlementId = 'settlementId',
-  /** column name */
   UpdatedAt = 'updatedAt'
 }
 
@@ -6585,7 +6573,6 @@ export type Voting_Section_Var_Pop_Fields = {
   __typename?: 'voting_section_var_pop_fields';
   addressId?: Maybe<Scalars['Float']>;
   id?: Maybe<Scalars['Float']>;
-  settlementId?: Maybe<Scalars['Float']>;
 };
 
 /** aggregate var_samp on columns */
@@ -6593,7 +6580,6 @@ export type Voting_Section_Var_Samp_Fields = {
   __typename?: 'voting_section_var_samp_fields';
   addressId?: Maybe<Scalars['Float']>;
   id?: Maybe<Scalars['Float']>;
-  settlementId?: Maybe<Scalars['Float']>;
 };
 
 /** aggregate variance on columns */
@@ -6601,7 +6587,6 @@ export type Voting_Section_Variance_Fields = {
   __typename?: 'voting_section_variance_fields';
   addressId?: Maybe<Scalars['Float']>;
   id?: Maybe<Scalars['Float']>;
-  settlementId?: Maybe<Scalars['Float']>;
 };
 
 /** columns and relationships of "voting_types" */
@@ -7041,6 +7026,34 @@ export type RefreshQuery = (
   )> }
 );
 
+export type AddressShortFragment = (
+  { __typename?: 'addresses' }
+  & Pick<Addresses, 'id' | 'number' | 'street' | 'description' | 'settlementId'>
+);
+
+export type AddressFullFragment = (
+  { __typename?: 'addresses' }
+  & Pick<Addresses, 'id' | 'street' | 'number' | 'description' | 'settlementId'>
+  & { settlement: (
+    { __typename?: 'settlements' }
+    & SettlementFiledsFragment
+  ) }
+);
+
+export type SettlementsBaseFieldsFragment = (
+  { __typename?: 'settlements' }
+  & Pick<Settlements, 'id' | 'parentId' | 'name' | 'isMunicipality'>
+);
+
+export type SettlementFiledsFragment = (
+  { __typename?: 'settlements' }
+  & Pick<Settlements, 'id' | 'name' | 'isMunicipality' | 'parentId'>
+  & { parentSettlement?: Maybe<(
+    { __typename?: 'settlements' }
+    & Pick<Settlements, 'id' | 'isMunicipality' | 'name'>
+  )> }
+);
+
 export type ReferendumVotesBySectionIdQueryVariables = Exact<{
   sectionId: Scalars['Int'];
 }>;
@@ -7063,7 +7076,7 @@ export type AutoSuggestSettlementsQuery = (
   { __typename?: 'query_root' }
   & { settlements: Array<(
     { __typename?: 'settlements' }
-    & Pick<Settlements, 'id' | 'name' | 'isMunicipality' | 'parentId'>
+    & SettlementsBaseFieldsFragment
   )> }
 );
 
@@ -7083,11 +7096,6 @@ export type GetDistrictsQuery = (
     ) }
     & SettlementsBaseFieldsFragment
   )> }
-);
-
-export type SettlementsBaseFieldsFragment = (
-  { __typename?: 'settlements' }
-  & Pick<Settlements, 'id' | 'parentId' | 'name' | 'isMunicipality'>
 );
 
 export type GetUsersQueryVariables = Exact<{
@@ -7163,18 +7171,30 @@ export type UserFieldsFragment = (
   ) }
 );
 
-export type SettlementFiledsFragment = (
-  { __typename?: 'settlements' }
-  & Pick<Settlements, 'id' | 'name' | 'isMunicipality' | 'parentId'>
-  & { parentSettlement?: Maybe<(
-    { __typename?: 'settlements' }
-    & Pick<Settlements, 'id' | 'isMunicipality' | 'name'>
-  )> }
-);
+export type GetVotingSectionsQueryVariables = Exact<{
+  limit?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  condition?: Voting_Section_Bool_Exp;
+  orderBy?: Maybe<Array<Voting_Section_Order_By> | Voting_Section_Order_By>;
+}>;
 
-export type AddressShortFragment = (
-  { __typename?: 'addresses' }
-  & Pick<Addresses, 'id' | 'number' | 'street' | 'description' | 'settlementId'>
+
+export type GetVotingSectionsQuery = (
+  { __typename?: 'query_root' }
+  & { voting_section: Array<(
+    { __typename?: 'voting_section' }
+    & Pick<Voting_Section, 'id' | 'createdAt' | 'updatedAt' | 'openedAt' | 'closedAt' | 'addressId'>
+    & { address?: Maybe<(
+      { __typename?: 'addresses' }
+      & AddressFullFragment
+    )> }
+  )>, voting_section_aggregate: (
+    { __typename?: 'voting_section_aggregate' }
+    & { aggregate?: Maybe<(
+      { __typename?: 'voting_section_aggregate_fields' }
+      & Pick<Voting_Section_Aggregate_Fields, 'count'>
+    )> }
+  ) }
 );
 
 export type CreateReferendumMutationVariables = Exact<{
@@ -7336,6 +7356,31 @@ export type VotingVieldsFragment = (
   ) }
 );
 
+export const SettlementFiledsFragmentDoc = gql`
+    fragment SettlementFileds on settlements {
+  id
+  name
+  isMunicipality
+  parentId
+  parentSettlement {
+    id
+    isMunicipality
+    name
+  }
+}
+    `;
+export const AddressFullFragmentDoc = gql`
+    fragment AddressFull on addresses {
+  id
+  street
+  number
+  description
+  settlementId
+  settlement {
+    ...SettlementFileds
+  }
+}
+    ${SettlementFiledsFragmentDoc}`;
 export const SettlementsBaseFieldsFragmentDoc = gql`
     fragment SettlementsBaseFields on settlements {
   id
@@ -7351,19 +7396,6 @@ export const AddressShortFragmentDoc = gql`
   street
   description
   settlementId
-}
-    `;
-export const SettlementFiledsFragmentDoc = gql`
-    fragment SettlementFileds on settlements {
-  id
-  name
-  isMunicipality
-  parentId
-  parentSettlement {
-    id
-    isMunicipality
-    name
-  }
 }
     `;
 export const UserFieldsFragmentDoc = gql`
@@ -7528,13 +7560,10 @@ export const ReferendumVotesBySectionIdDocument = gql`
 export const AutoSuggestSettlementsDocument = gql`
     query AutoSuggestSettlements($condition: settlements_bool_exp!) {
   settlements(where: $condition) {
-    id
-    name
-    isMunicipality
-    parentId
+    ...SettlementsBaseFields
   }
 }
-    `;
+    ${SettlementsBaseFieldsFragmentDoc}`;
 
   @Injectable({
     providedIn: 'root'
@@ -7627,6 +7656,42 @@ ${UserFieldsFragmentDoc}`;
   })
   export class UpdateUserGQL extends Apollo.Mutation<UpdateUserMutation, UpdateUserMutationVariables> {
     document = UpdateUserDocument;
+    
+    constructor(apollo: Apollo.Apollo) {
+      super(apollo);
+    }
+  }
+export const GetVotingSectionsDocument = gql`
+    query GetVotingSections($limit: Int, $offset: Int, $condition: voting_section_bool_exp! = {}, $orderBy: [voting_section_order_by!] = {createdAt: desc}) {
+  voting_section(
+    limit: $limit
+    offset: $offset
+    where: $condition
+    order_by: $orderBy
+  ) {
+    id
+    createdAt
+    updatedAt
+    openedAt
+    closedAt
+    addressId
+    address {
+      ...AddressFull
+    }
+  }
+  voting_section_aggregate(where: $condition) {
+    aggregate {
+      count
+    }
+  }
+}
+    ${AddressFullFragmentDoc}`;
+
+  @Injectable({
+    providedIn: 'root'
+  })
+  export class GetVotingSectionsGQL extends Apollo.Query<GetVotingSectionsQuery, GetVotingSectionsQueryVariables> {
+    document = GetVotingSectionsDocument;
     
     constructor(apollo: Apollo.Apollo) {
       super(apollo);
