@@ -27,9 +27,11 @@ export class VixenComponent implements OnInit, OnDestroy {
     this.authService = this.injector.get(AuthService);
     this.subscriptions.push(
       this.authService.user$.subscribe((data) => {
+        console.log(data);
         this.user.next(data);
       }),
       this.authService.userRoleIndex$.subscribe((data) => {
+        console.log(data);
         this.currentRoleIndex.next(data);
       })
     );

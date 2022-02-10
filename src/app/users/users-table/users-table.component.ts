@@ -1,14 +1,20 @@
-import { AfterViewInit, Component, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, Injector, ViewChild } from '@angular/core';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatSort } from '@angular/material/sort';
 import { MatTable } from '@angular/material/table';
-import { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject, map, Observable } from 'rxjs';
 import { rowsAnimation } from 'src/app/animations/template.animations';
-import { AuthService } from 'src/app/services/auth-service';
+import { VixenComponent } from 'src/app/core/vixen/vixen.component';
 import { SettlementsService } from 'src/app/settlements/settlements-service.service';
-import { GetDistrictsQuery, GetUsersQuery, Users } from 'src/generated/graphql';
+import { UsersGenerator } from 'src/app/utils/users-generateor.class';
+import {
+  GetDistrictsQuery,
+  GetUsersQuery,
+  Role_Types_Enum,
+  Users,
+} from 'src/generated/graphql';
 import { EditUserComponent } from '../edit-user/edit-user.component';
 import { UsersService } from '../users-service';
 import { UsersTableDataSource } from './users-table-datasource';
@@ -19,7 +25,10 @@ import { UsersTableDataSource } from './users-table-datasource';
   styleUrls: ['./users-table.component.scss'],
   animations: [rowsAnimation],
 })
-export class UsersTableComponent implements AfterViewInit {
+export class UsersTableComponent
+  extends VixenComponent
+  implements AfterViewInit
+{
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
   @ViewChild(MatTable) table!: MatTable<GetUsersQuery['users']>;
@@ -45,12 +54,14 @@ export class UsersTableComponent implements AfterViewInit {
 
   value = '';
   constructor(
-    private authService: AuthService,
     private usersService: UsersService,
     private settlementsService: SettlementsService,
     private snackBar: MatSnackBar,
-    private dialog: MatDialog
+    private dialog: MatDialog,
+
+    injector: Injector
   ) {
+    super(injector);
     this.dataSource = new UsersTableDataSource(usersService, snackBar);
     this.dataSource.loading.next(true);
   }
@@ -150,5 +161,28 @@ export class UsersTableComponent implements AfterViewInit {
       orderBy: {},
     });
     console.log('onSearchClear');
+  }
+
+  canUserSeeThis(): Observable<boolean> {
+    return this.user$.pipe(
+      map((user) => {
+        const result =
+          user.roleType.value === Role_Types_Enum.CentralLeader ||
+          user?.secondRoleType?.value === Role_Types_Enum.Central;
+        return result;
+      })
+    );
+  }
+
+  generateUsers() {
+    const generator: UsersGenerator = new UsersGenerator();
+    console.log('use generator..');
+
+    console.log(generator.generateEgn(true));
+    console.log(generator.generateEgn(false));
+    // generator.getRandomMomentBetween(
+    //   moment('1940-01-01T10:00:00'),
+    //   moment('1999-11-31T10:00:00')
+    // );
   }
 }

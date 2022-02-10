@@ -1,5 +1,14 @@
 <div style="display: flex; justify-content: flex-end">
   <button
+    *ngIf="canUserSeeThis() | async"
+    mat-raised-button
+    color="accent"
+    style="margin: 10px"
+    (click)="generateUsers()"
+  >
+    Генерирай потребители
+  </button>
+  <button
     mat-raised-button
     color="accent"
     style="margin: 10px"
