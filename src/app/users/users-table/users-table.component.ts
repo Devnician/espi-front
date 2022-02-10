@@ -6,6 +6,7 @@ import { MatSort } from '@angular/material/sort';
 import { MatTable } from '@angular/material/table';
 import { BehaviorSubject } from 'rxjs';
 import { rowsAnimation } from 'src/app/animations/template.animations';
+import { AuthService } from 'src/app/services/auth-service';
 import { SettlementsService } from 'src/app/settlements/settlements-service.service';
 import { GetDistrictsQuery, GetUsersQuery, Users } from 'src/generated/graphql';
 import { EditUserComponent } from '../edit-user/edit-user.component';
@@ -44,6 +45,7 @@ export class UsersTableComponent implements AfterViewInit {
 
   value = '';
   constructor(
+    private authService: AuthService,
     private usersService: UsersService,
     private settlementsService: SettlementsService,
     private snackBar: MatSnackBar,

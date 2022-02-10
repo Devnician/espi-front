@@ -9,19 +9,30 @@
   </button>
 </div>
 
-<button
+<!-- <button
   mat-raised-button
   color="primary"
   style="margin: 10px"
   (click)="getDistricts()"
 >
   Областни градове
-</button>
+</button> -->
 
 <mat-form-field class="example-form-field" appearance="fill">
   <mat-label>Въведи ЕГН</mat-label>
-  <input matInput (input)="searchChanged(value)" type="text" [(ngModel)]="value">
-  <button *ngIf="value" matSuffix mat-icon-button aria-label="Clear" (click)="onSearchClear()">
+  <input
+    matInput
+    (input)="searchChanged(value)"
+    type="text"
+    [(ngModel)]="value"
+  />
+  <button
+    *ngIf="value"
+    matSuffix
+    mat-icon-button
+    aria-label="Clear"
+    (click)="onSearchClear()"
+  >
     <mat-icon>close</mat-icon>
   </button>
 </mat-form-field>
@@ -158,8 +169,8 @@
   ></mat-paginator>
 </div>
 
-<ngx-json-viewer
+<!-- <ngx-json-viewer
   [json]="districts | async"
   [expanded]="false"
-></ngx-json-viewer>
+></ngx-json-viewer> -->
 <!-- {{ districts | async | json }} -->

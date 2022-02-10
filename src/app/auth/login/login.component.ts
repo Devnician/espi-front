@@ -1,13 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Injector, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import { JwtHelperService } from '@auth0/angular-jwt';
 import { isNullOrUndefined } from 'is-what';
 import { BehaviorSubject } from 'rxjs';
-import { Valido } from 'src/app/core/valido';
 import { VixenComponent } from 'src/app/core/vixen/vixen.component';
-import { AuthService } from 'src/app/services/auth-service';
 import { LoginOutput } from 'src/generated/graphql';
 import { TokenTypes } from '../token-types.enum';
 @Component({
@@ -23,13 +21,12 @@ export class LoginComponent extends VixenComponent implements OnInit {
 
   constructor(
     private fb: FormBuilder,
-    public valido: Valido,
-    private auth: AuthService,
+    protected injector: Injector,
     private router: Router,
     private snackBar: MatSnackBar,
     private jwtHelper: JwtHelperService
   ) {
-    super(valido);
+    super(injector);
   }
 
   ngOnInit(): void {
@@ -58,7 +55,7 @@ export class LoginComponent extends VixenComponent implements OnInit {
     const formData = this.loginForm.value;
     formData.egn = formData.egn.toString();
 
-    this.auth
+    this.authService
       .loginAction({ password: formData.password, egn: formData.egn })
       .subscribe((response) => {
         console.log(response);
@@ -71,11 +68,11 @@ export class LoginComponent extends VixenComponent implements OnInit {
             duration: 5000,
           });
         } else {
-          this.auth.setAccessToken(accessT);
+          this.authService.setAccessToken(accessT);
           const res = this.jwtHelper.decodeToken(accessT);
-          this.auth.setLoggedUser(res.user);
+          this.authService.setLoggedUser(res.user);
           localStorage.setItem(TokenTypes.ACCESS_TOKEN, accessT);
-          this.auth.setFetchTokenAndOptionalRedirectToHome(
+          this.authService.setFetchTokenAndOptionalRedirectToHome(
             fetchT,
             this.router,
             true
