@@ -8,7 +8,7 @@ import { BehaviorSubject, map, Observable } from 'rxjs';
 import { rowsAnimation } from 'src/app/animations/template.animations';
 import { VixenComponent } from 'src/app/core/vixen/vixen.component';
 import { SettlementsService } from 'src/app/settlements/settlements-service.service';
-import { UsersGenerator } from 'src/app/utils/users-generateor.class';
+import { UsersGenerator } from 'src/app/utils/users-generator.class';
 import {
   GetDistrictsQuery,
   GetUsersQuery,
@@ -71,40 +71,6 @@ export class UsersTableComponent
     this.dataSource.paginator = this.paginator;
     this.table.dataSource = this.dataSource;
   }
-  // addUser() {
-  //   console.log('Add one user');
-  //   this.dataSource.loading.next(true);
-
-  //   const user: any = {
-  //     name: 'Кирил',
-  //     surname: 'Иванов',
-  //     family: 'Иванов',
-  //     egn: '8080808083',
-  //     email: 'alabala@bala.ala',
-  //     role: Role_Types_Enum.User,
-  //     address: {
-  //       data: {
-  //         number: 10,
-  //         street: 'Borisova',
-  //         settlementId: 3382, // TODO
-  //       },
-  //     },
-  //   };
-
-  //   this.usersService.createUser(user).subscribe((response) => {
-  //     if (response && response.data) {
-  //       const createdUser: Users = response.data.insert_users_one as Users;
-  //       console.log(createdUser);
-  //       this.dataSource.queryRef.refetch({});
-  //     } else {
-  //       console.log(response);
-  //       this.dataSource.loading.next(false);
-  //       if (response.errors[0].message.toString().includes('Uniqueness')) {
-  //         this.snackBar.open('Вече съществува потребител с това ЕГН', 'OK', {});
-  //       }
-  //     }
-  //   });
-  // }
 
   editUser(user: Users) {
     this.openDialog(user);
@@ -122,6 +88,7 @@ export class UsersTableComponent
     const dialogRef = this.dialog.open(EditUserComponent, config);
     dialogRef.afterClosed().subscribe((dialogResponse) => {
       console.log(dialogResponse);
+      // dialogRef.close();
     });
   }
   testCall(user: Users) {
@@ -185,4 +152,38 @@ export class UsersTableComponent
     //   moment('1999-11-31T10:00:00')
     // );
   }
+  // addUser() {
+  //   console.log('Add one user');
+  //   this.dataSource.loading.next(true);
+
+  //   const user: any = {
+  //     name: 'Кирил',
+  //     surname: 'Иванов',
+  //     family: 'Иванов',
+  //     egn: '8080808083',
+  //     email: 'alabala@bala.ala',
+  //     role: Role_Types_Enum.User,
+  //     address: {
+  //       data: {
+  //         number: 10,
+  //         street: 'Borisova',
+  //         settlementId: 3382, // TODO
+  //       },
+  //     },
+  //   };
+
+  //   this.usersService.createUser(user).subscribe((response) => {
+  //     if (response && response.data) {
+  //       const createdUser: Users = response.data.insert_users_one as Users;
+  //       console.log(createdUser);
+  //       this.dataSource.queryRef.refetch({});
+  //     } else {
+  //       console.log(response);
+  //       this.dataSource.loading.next(false);
+  //       if (response.errors[0].message.toString().includes('Uniqueness')) {
+  //         this.snackBar.open('Вече съществува потребител с това ЕГН', 'OK', {});
+  //       }
+  //     }
+  //   });
+  // }
 }

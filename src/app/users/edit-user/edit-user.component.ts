@@ -85,9 +85,9 @@ export class EditUserComponent implements OnInit {
       secondRoleType: [this.user?.secondRoleType?.value],
       // address
       districtName: [this.user?.address.settlement.parentSettlement.name],
-      districtId: [this.user?.address.settlement.parentId],
+      districtId: [this.user?.address.settlement.parentId, Validators.required],
       settlementName: [this.user?.address.settlement.name],
-      settlementId: [this.user?.address.settlementId],
+      settlementId: [this.user?.address.settlementId, Validators.required],
       addressId: [this.user?.addressId],
       description: [this.user?.address.description],
       number: [this.user?.address.number],
@@ -230,11 +230,13 @@ export class EditUserComponent implements OnInit {
         role: formData.roleType,
         secondRole: formData.secondRoleType,
         address: { data: address },
+        pin: formData.pin,
       };
 
       console.log(user);
       this.usersService.createUser(user).subscribe((response) => {
         console.log(response);
+        this.dialogRef.close({ resuls: 'success' });
       });
     }
   }
@@ -244,33 +246,4 @@ export class EditUserComponent implements OnInit {
     delete formData.districtName;
     delete formData.settlementName;
   }
-
-  //   /**
-  //  * Delete this...
-  //  */
-  //    updateFirst() {
-  //     this.dataSource.loading.next(true);
-  //     // console.log(this.dataSource.currentPageData.value);
-  //     const firstFromPage: Users = _.cloneDeep(
-  //       _.first(this.dataSource.currentPageData.value)
-  //     );
-  //     if (firstFromPage) {
-  //       console.log(firstFromPage);
-  //       // HERE must clean useless data
-  //       delete firstFromPage.address;
-  //       delete firstFromPage.createdAt;
-  //       delete firstFromPage.updatedAt;
-  //       delete firstFromPage.roleType;
-  //       delete firstFromPage.secondRoleType;
-  //       delete firstFromPage.__typename;
-
-  //       this.usersService
-  //         .updateUser(firstFromPage)
-  //         .subscribe(({ errors, data }) => {
-  //           console.log(errors);
-  //           console.log(data);
-  //         });
-  //       console.log('Update', firstFromPage);
-  //     }
-  //   }
 }
