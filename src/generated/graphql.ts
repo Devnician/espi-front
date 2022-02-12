@@ -7154,7 +7154,7 @@ export type UpdateUserMutation = (
 
 export type UserFieldsFragment = (
   { __typename?: 'users' }
-  & Pick<Users, 'id' | 'createdAt' | 'updatedAt' | 'name' | 'surname' | 'family' | 'egn' | 'email' | 'addressId' | 'voted' | 'eVoted' | 'votingSectionId'>
+  & Pick<Users, 'id' | 'createdAt' | 'updatedAt' | 'name' | 'surname' | 'family' | 'egn' | 'email' | 'pin' | 'addressId' | 'voted' | 'eVoted' | 'votingSectionId'>
   & { roleType: (
     { __typename?: 'role_types' }
     & Pick<Role_Types, 'value' | 'description'>
@@ -7408,6 +7408,7 @@ export const UserFieldsFragmentDoc = gql`
   family
   egn
   email
+  pin
   addressId
   voted
   eVoted

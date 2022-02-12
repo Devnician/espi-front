@@ -60,6 +60,7 @@ select_permissions:
     - family
     - id
     - name
+    - pin
     - role
     - secondRole
     - surname
@@ -79,6 +80,7 @@ select_permissions:
     - family
     - id
     - name
+    - pin
     - role
     - secondRole
     - surname
