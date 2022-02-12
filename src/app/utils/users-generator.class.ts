@@ -1,21 +1,67 @@
 export class UsersGenerator {
+  private femaleNames: string[] = [
+    'Павлина',
+    'Калина',
+    'Милена',
+    'Кристина',
+    'Радка',
+  ];
+  private femaleNamesLength = this.femaleNames.length;
+  private maleNames: string[] = ['Иван', 'Драган', 'Теодор', 'Крум', 'Стамат'];
+  private maleNamesLength = this.maleNames.length;
+
+  private surnamesAndFamily: string[] = [
+    'Иванов',
+    'Петров',
+    'Стефанов',
+    'Драгомиров',
+    'Павлов',
+    'Георгиев',
+    'Варадинов',
+    'Владимиров',
+  ];
+  private surnamesAndFamilyLength = this.surnamesAndFamily.length;
+
+  private streetNames: string[] = [
+    'Александровска',
+    'Николаевска',
+    'Перуника',
+    'Албатрос',
+    'Изгрев',
+    'Първи май',
+    'Гагарин',
+    'Толбухин',
+  ];
+  private streetNamesLength = this.streetNames.length;
   constructor() {
     //*
   }
 
-  generateRnadomNames() {
-    console.log('ffff');
+  getRandomStreetName(): string {
+    const index = this.getRandomInteger(0, this.streetNamesLength - 1);
+    return this.streetNames[index];
   }
   generatePin() {
     return Math.random().toString(36).slice(-8).toUpperCase();
   }
+  generateFirstName(isMale: boolean): string {
+    const index = this.getRandomInteger(
+      0,
+      isMale ? this.maleNamesLength - 1 : this.femaleNamesLength - 1
+    );
+    return isMale ? this.maleNames[index] : this.femaleNames[index];
+  }
+  getSurnameOrFamily(isMale: boolean) {
+    const index = this.getRandomInteger(0, this.surnamesAndFamilyLength - 1);
+    return this.surnamesAndFamily[index] + (isMale ? '' : 'а');
+  }
 
-  generateEgn(male: boolean): string {
+  generateEgn(isMale: boolean): string {
     const day = this.getRandomInteger(1, 31);
     const month = this.getRandomInteger(1, 12);
     const year = this.getRandomInteger(40, 99);
     const city = this.getRandomInteger(0, 99);
-    const sex = this.getNumberBeforeLast(male);
+    const sex = this.getNumberBeforeLast(isMale);
 
     const egn =
       year +
@@ -53,7 +99,7 @@ export class UsersGenerator {
   }
 
   // Returns an integer random number between min (included) and max (included)
-  getRandomInteger(min, max) {
+  getRandomInteger(min, max): number {
     return Math.floor(Math.random() * (max - min + 1)) + min;
   }
 

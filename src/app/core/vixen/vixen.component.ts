@@ -1,4 +1,4 @@
-import { Component, Injector, OnDestroy, OnInit } from '@angular/core';
+import { Component, Injector, OnDestroy } from '@angular/core';
 import { isNullOrUndefined } from 'is-what';
 import { BehaviorSubject, Observable, Subscription } from 'rxjs';
 import { LoggedUser } from 'src/app/auth/logged-user.interface';
@@ -9,7 +9,7 @@ import { Valido } from '../valido';
   selector: 'app-vixen',
   template: 'empty',
 })
-export class VixenComponent implements OnInit, OnDestroy {
+export class VixenComponent implements OnDestroy {
   /**
    * Array for all Subscription objects. For each object in OnDestroy method will be invoked `unsubscribe` method.
    */
@@ -36,8 +36,6 @@ export class VixenComponent implements OnInit, OnDestroy {
       })
     );
   }
-
-  ngOnInit(): void {}
 
   ngOnDestroy(): void {
     Object.entries(this).forEach((field) => {

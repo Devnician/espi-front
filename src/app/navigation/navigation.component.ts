@@ -165,13 +165,15 @@ export class NavigationComponent
           matIcon: 'list',
           badgeSubject: undefined,
         });
-
-        this.menus.push({
-          route: 'votings/dashboard',
-          label: 'Гласуване',
-          matIcon: 'front_hand',
-          badgeSubject: undefined,
-        });
+        if (environment.production === false) {
+          // in prod this menu should not be visible. Vote only with the role "USER"
+          this.menus.push({
+            route: 'votings/dashboard',
+            label: 'Гласуване',
+            matIcon: 'front_hand',
+            badgeSubject: undefined,
+          });
+        }
 
         this.menus.push({
           route: 'votings/dashboard',

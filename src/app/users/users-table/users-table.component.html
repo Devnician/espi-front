@@ -4,9 +4,10 @@
     mat-raised-button
     color="accent"
     style="margin: 10px"
+    [disabled]="importWorks | async"
     (click)="generateUsers()"
   >
-    Генерирай потребители
+    Генерирай 100 000 потребители
   </button>
   <button
     mat-raised-button

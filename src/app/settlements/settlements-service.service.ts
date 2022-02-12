@@ -1,8 +1,11 @@
 import { Injectable } from '@angular/core';
+import { ApolloQueryResult } from '@apollo/client';
 import { Observable, of } from 'rxjs';
 import {
   AutoSuggestSettlementsGQL,
   GetDistrictsGQL,
+  GetMunicipalitiesIdsGQL,
+  GetMunicipalitiesIdsQuery,
   Settlements_Bool_Exp,
 } from 'src/generated/graphql';
 
@@ -12,7 +15,8 @@ import {
 export class SettlementsService {
   constructor(
     private GetDistrictsGQL: GetDistrictsGQL,
-    private autoSuggestSettlementsGQL: AutoSuggestSettlementsGQL
+    private autoSuggestSettlementsGQL: AutoSuggestSettlementsGQL,
+    private getMunicipalitiesIdsGQL: GetMunicipalitiesIdsGQL // private g:GetMun
   ) {}
 
   public getDistricts() {
@@ -48,5 +52,11 @@ export class SettlementsService {
       ],
     };
     return this.autoSuggestSettlementsGQL.fetch({ condition: cond });
+  }
+
+  getMunicipalitiesIds(): Observable<
+    ApolloQueryResult<GetMunicipalitiesIdsQuery>
+  > {
+    return this.getMunicipalitiesIdsGQL.fetch();
   }
 }

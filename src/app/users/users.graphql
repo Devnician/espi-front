@@ -35,6 +35,15 @@ mutation UpdateUser(
   }
 }
 
+mutation BulkInsertUsers($objects: [users_insert_input!]!) {
+  insert_users(
+    objects: $objects
+    on_conflict: { constraint: users_egn_key, update_columns: [] }
+  ) {
+    affected_rows
+  }
+}
+
 fragment UserFields on users {
   id
   createdAt

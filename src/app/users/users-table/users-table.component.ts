@@ -1,19 +1,31 @@
-import { AfterViewInit, Component, Injector, ViewChild } from '@angular/core';
+import {
+  AfterViewInit,
+  Component,
+  Injector,
+  OnInit,
+  ViewChild,
+} from '@angular/core';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatSort } from '@angular/material/sort';
 import { MatTable } from '@angular/material/table';
-import { BehaviorSubject, map, Observable } from 'rxjs';
+import { FetchResult } from 'apollo-link';
+import * as moment from 'moment';
+import { BehaviorSubject, forkJoin, map, Observable, Subscription } from 'rxjs';
 import { rowsAnimation } from 'src/app/animations/template.animations';
 import { VixenComponent } from 'src/app/core/vixen/vixen.component';
 import { SettlementsService } from 'src/app/settlements/settlements-service.service';
 import { UsersGenerator } from 'src/app/utils/users-generator.class';
 import {
+  Addresses_Insert_Input,
+  BulkInsertUsersMutation,
   GetDistrictsQuery,
+  GetMunicipalitiesIdsQuery,
   GetUsersQuery,
   Role_Types_Enum,
   Users,
+  Users_Insert_Input,
 } from 'src/generated/graphql';
 import { EditUserComponent } from '../edit-user/edit-user.component';
 import { UsersService } from '../users-service';
@@ -27,7 +39,7 @@ import { UsersTableDataSource } from './users-table-datasource';
 })
 export class UsersTableComponent
   extends VixenComponent
-  implements AfterViewInit
+  implements OnInit, AfterViewInit
 {
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
@@ -53,6 +65,11 @@ export class UsersTableComponent
   ];
 
   value = '';
+  generator: UsersGenerator = new UsersGenerator();
+
+  municipalitiesIds: GetMunicipalitiesIdsQuery['settlements'];
+  municipalitiesLength: number;
+  importWorks: BehaviorSubject<boolean> = new BehaviorSubject(false);
   constructor(
     private usersService: UsersService,
     private settlementsService: SettlementsService,
@@ -64,6 +81,16 @@ export class UsersTableComponent
     super(injector);
     this.dataSource = new UsersTableDataSource(usersService, snackBar);
     this.dataSource.loading.next(true);
+  }
+  ngOnInit(): void {
+    this.settlementsService.getMunicipalitiesIds().subscribe((response) => {
+      console.log(response);
+      if (response.data) {
+        this.municipalitiesIds = response.data.settlements;
+        this.municipalitiesLength =
+          response.data.settlements_aggregate.aggregate.count;
+      }
+    });
   }
 
   ngAfterViewInit(): void {
@@ -90,10 +117,6 @@ export class UsersTableComponent
       console.log(dialogResponse);
       // dialogRef.close();
     });
-  }
-  testCall(user: Users) {
-    console.log(user);
-    alert(JSON.stringify(user));
   }
 
   /**
@@ -142,50 +165,87 @@ export class UsersTableComponent
   }
 
   generateUsers() {
-    const generator: UsersGenerator = new UsersGenerator();
+    this.dataSource.loading.next(true);
+    this.importWorks.next(true);
     console.log('use generator..');
+    const email = 'email@email.com';
+    console.log('start: ' + moment().toDate());
+    let users: Users_Insert_Input[] = [];
+    const max = 100000;
+    const batchSize = 500;
+    let partitionCounter = 0;
+    let affectedRowsCounter = 0;
 
-    console.log(generator.generateEgn(true));
-    console.log(generator.generateEgn(false));
+    const observables: Observable<
+      FetchResult<
+        BulkInsertUsersMutation,
+        Record<string, any>,
+        Record<string, any>
+      >
+    >[] = [];
+    for (let index = 0; index < max; index++) {
+      partitionCounter++;
 
-    console.log(generator.generatePin());
-    // generator.getRandomMomentBetween(
-    //   moment('1940-01-01T10:00:00'),
-    //   moment('1999-11-31T10:00:00')
-    // );
+      const isMale = index % 2 === 0;
+      const rand = this.generator.getRandomInteger(
+        0,
+        this.municipalitiesLength - 1
+      );
+      //console.log(rand);
+      const randomMuniId = this.municipalitiesIds[rand].id;
+      const address: Addresses_Insert_Input = {
+        settlementId: randomMuniId,
+        street: this.generator.getRandomStreetName(),
+        number: this.generator.getRandomInteger(1, 120).toString(),
+        description: 'Описание...',
+      };
+
+      const egn = this.generator.generateEgn(isMale);
+      const name = this.generator.generateFirstName(isMale);
+      const surname = this.generator.getSurnameOrFamily(isMale);
+      const family = this.generator.getSurnameOrFamily(isMale);
+      const pin = this.generator.generatePin();
+      const user: Users_Insert_Input = {
+        egn,
+        name,
+        surname,
+        family,
+        role: Role_Types_Enum.User,
+        address: { data: address },
+        pin,
+      };
+      users.push(user);
+      if (partitionCounter === batchSize || index === max - 1) {
+        partitionCounter = 0;
+        // flush users
+        observables.push(this.usersService.bulkInsertUsers(users));
+        users = [];
+      }
+    }
+
+    const obsMerge = forkJoin(observables);
+
+    const subs: Subscription = obsMerge.subscribe((values) => {
+      values.forEach((response) => {
+        const aff = response.data.insert_users.affected_rows;
+
+        affectedRowsCounter += aff;
+      });
+      console.log('THEN: unsubscribe...');
+      subs.unsubscribe();
+      console.log('everything done with', values);
+      console.log(affectedRowsCounter);
+      console.log('done: ' + moment().toDate());
+
+      this.snackBar.open(
+        'Бяха създадeни ' +
+          affectedRowsCounter +
+          ' записа за данни за потребител и адрес',
+        'OK',
+        {}
+      );
+      this.importWorks.next(false);
+      this.dataSource.loading.next(false);
+    });
   }
-  // addUser() {
-  //   console.log('Add one user');
-  //   this.dataSource.loading.next(true);
-
-  //   const user: any = {
-  //     name: 'Кирил',
-  //     surname: 'Иванов',
-  //     family: 'Иванов',
-  //     egn: '8080808083',
-  //     email: 'alabala@bala.ala',
-  //     role: Role_Types_Enum.User,
-  //     address: {
-  //       data: {
-  //         number: 10,
-  //         street: 'Borisova',
-  //         settlementId: 3382, // TODO
-  //       },
-  //     },
-  //   };
-
-  //   this.usersService.createUser(user).subscribe((response) => {
-  //     if (response && response.data) {
-  //       const createdUser: Users = response.data.insert_users_one as Users;
-  //       console.log(createdUser);
-  //       this.dataSource.queryRef.refetch({});
-  //     } else {
-  //       console.log(response);
-  //       this.dataSource.loading.next(false);
-  //       if (response.errors[0].message.toString().includes('Uniqueness')) {
-  //         this.snackBar.open('Вече съществува потребител с това ЕГН', 'OK', {});
-  //       }
-  //     }
-  //   });
-  // }
 }

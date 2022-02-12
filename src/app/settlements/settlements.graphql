@@ -18,3 +18,14 @@ query GetDistricts {
     }
   }
 }
+
+query GetMunicipalitiesIds {
+  settlements(where: { isMunicipality: { _eq: true } }) {
+    id
+  }
+  settlements_aggregate(where: { isMunicipality: { _eq: true } }) {
+    aggregate {
+      count
+    }
+  }
+}
