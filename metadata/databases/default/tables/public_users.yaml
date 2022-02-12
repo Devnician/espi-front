@@ -148,3 +148,42 @@ select_permissions:
       id:
         _eq: X-Hasura-User-Id
   role: user
+update_permissions:
+- permission:
+    check: {}
+    columns:
+    - addressId
+    - eVoted
+    - egn
+    - email
+    - family
+    - id
+    - name
+    - password
+    - pin
+    - role
+    - secondRole
+    - surname
+    - voted
+    - votingSectionId
+    filter: {}
+  role: central
+- permission:
+    check: {}
+    columns:
+    - addressId
+    - eVoted
+    - egn
+    - email
+    - family
+    - id
+    - name
+    - password
+    - pin
+    - role
+    - secondRole
+    - surname
+    - voted
+    - votingSectionId
+    filter: {}
+  role: centralLeader

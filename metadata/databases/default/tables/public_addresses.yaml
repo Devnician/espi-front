@@ -76,3 +76,24 @@ select_permissions:
       id:
         _eq: X-Hasura-User-Id
   role: user
+update_permissions:
+- permission:
+    check: {}
+    columns:
+    - description
+    - id
+    - number
+    - settlementId
+    - street
+    filter: {}
+  role: central
+- permission:
+    check: {}
+    columns:
+    - description
+    - id
+    - number
+    - settlementId
+    - street
+    filter: {}
+  role: centralLeader

@@ -147,6 +147,8 @@ export class UsersTableComponent
 
     console.log(generator.generateEgn(true));
     console.log(generator.generateEgn(false));
+
+    console.log(generator.generatePin());
     // generator.getRandomMomentBetween(
     //   moment('1940-01-01T10:00:00'),
     //   moment('1999-11-31T10:00:00')

@@ -6,6 +6,9 @@ export class UsersGenerator {
   generateRnadomNames() {
     console.log('ffff');
   }
+  generatePin() {
+    return Math.random().toString(36).slice(-8).toUpperCase();
+  }
 
   generateEgn(male: boolean): string {
     const day = this.getRandomInteger(1, 31);
