@@ -3,9 +3,10 @@ import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { BehaviorSubject, combineLatest, Observable, switchMap } from 'rxjs';
 import { Donkey } from 'src/app/services/donkey.service';
-import { Referendums, Votings } from 'src/generated/graphql';
+import { Referendums, Referendum_Countings, Votings } from 'src/generated/graphql';
 import { VotingsService } from '../../votings/voting-service.service';
 import { CountingService } from '../counting-service.service';
+import { Custom_Referendum_Countings } from '../types';
 interface VotingParams {
   title: string;
   text: string;
@@ -23,6 +24,7 @@ interface VotingParams {
 export class CountingsDashboardComponent {
   referendums: BehaviorSubject<Referendums[]> = new BehaviorSubject([]);
   votings: BehaviorSubject<Votings[]> = new BehaviorSubject([]);
+  countings: BehaviorSubject<Custom_Referendum_Countings[]> = new BehaviorSubject([]);
   /** Based on the screen size, switch from standard to one column per row */
   cards: BehaviorSubject<VotingParams[]> = new BehaviorSubject([]);
   // cards$: Observable<VotingParams[]>;
@@ -40,13 +42,14 @@ export class CountingsDashboardComponent {
     private breakpointObserver: BreakpointObserver,
     private router: Router,
     private voitngsService: VotingsService,
-    private countingService :CountingService,
+    private countingService: CountingService,
 
     private donkey: Donkey
   ) {
     this.loading.next(true);
     this.getStartedReferendums();
     this.getStartedVotings();
+    this.getReferendumCountings();
     combineLatest(this.observables).subscribe((observableResults) => {
       if (observableResults.indexOf(false) < 0) {
         this.loading.next(false);
@@ -108,6 +111,31 @@ export class CountingsDashboardComponent {
         this.cards.next(currentCards);
         this.loadedReferendums.next(true);
       });
+  }
+
+
+  getReferendumCountings() {
+    this.countingService.getReferendumCountingsById(1)
+    .pipe(
+      switchMap((response) => {
+      const countings = response.data.referendum_countings.map(q=>
+        {
+          return{
+            referendumId: q.question.referendumId,
+            question: q.question.question,
+            votesCount: q.votesCount,
+            votesTrue: q.votesTrue,
+            votesFalse: q.votesFalse
+          }
+        }
+        );
+      this.countings.next(countings as Custom_Referendum_Countings[]);
+      return this.countings;
+    })
+    )
+    .subscribe((countings)=>{
+      console.log("countings"+JSON.stringify(countings))
+    })
   }
 
   goToVotingComponent(vote: VotingParams) {

@@ -26,10 +26,12 @@ import { MatTableModule } from '@angular/material/table';
 import { MatTabsModule } from '@angular/material/tabs';
 import { CountingsDashboardComponent } from './countings-dashboard/countings-dashboard.component';
 import { CountingsRoutingModule } from './countings-routing.module';
+import { CountingsFilterPipe } from './filter.pipe';
 
 @NgModule({
   declarations: [
-    CountingsDashboardComponent
+    CountingsDashboardComponent,
+    CountingsFilterPipe
   ],
   imports: [
     //TODO: Clear not needed imports

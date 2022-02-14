@@ -1,6 +1,14 @@
 table:
   name: referendum_questions
   schema: public
+array_relationships:
+- name: referendum_votes
+  using:
+    foreign_key_constraint_on:
+      column: questionId
+      table:
+        name: referendum_votes
+        schema: public
 insert_permissions:
 - permission:
     backend_only: false

@@ -12,7 +12,7 @@
       В момента не се провеждат избори.
     </h1>
   </div>
-  <mat-grid-list cols="2" rowHeight="350px">
+  <mat-grid-list cols="1" rowHeight="350px">
     <mat-grid-tile
       *ngFor="let card of cards | async"
       [colspan]="card.cols"
@@ -22,7 +22,7 @@
         <mat-card-header>
           <mat-card-title>
             {{ card.title }}
-            <button
+            <!-- <button
               mat-icon-button
               class="more-button"
               [matMenuTriggerFor]="menu"
@@ -32,13 +32,18 @@
             </button>
             <mat-menu #menu="matMenu" xPosition="before">
               <button mat-menu-item (click)="goToVotingComponent(card)">
-                Гласуване
+                Резултати
               </button>
-            </mat-menu>
+            </mat-menu> -->
           </mat-card-title>
         </mat-card-header>
         <mat-card-content class="dashboard-card-content">
           <div>{{ card.text }}</div>
+          <section *ngFor="let question of countings | async | countingsfilter: card.id">
+            <h4>Въпрос: <strong>{{question.question}}</strong></h4>
+            <p>За: {{question.votesTrue}}</p>
+            <p>Против: {{question.votesFalse}}</p>
+          </section>
         </mat-card-content>
       </mat-card>
     </mat-grid-tile>

@@ -124,7 +124,7 @@ export class ReferendumComponent implements OnInit {
             const roleLabel =
               this.currentRoleIndex === 0
                 ? this.user.roleType.description
-                : this.user.secondRoleType.description;
+                : this.user.secondRoleType?.description;
 
             this.snackBar.open(
               `Нямата права за извършване на това действие. Влезли сте като :  "${roleLabel}"`,

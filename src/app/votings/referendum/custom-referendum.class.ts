@@ -1,4 +1,4 @@
-import { Referendum_Questions } from 'src/generated/graphql';
+import { Referendum_Questions, Referendum_Votes, Referendum_Votes_Aggregate } from 'src/generated/graphql';
 
 export class CustomReferendumQuestion implements Referendum_Questions {
   questionNumber: number; // !NOTE - zero is the last page
@@ -11,4 +11,6 @@ export class CustomReferendumQuestion implements Referendum_Questions {
   question: string;
   referendumId: number;
   updatedAt: any;
+  referendum_votes: Referendum_Votes[];
+  referendum_votes_aggregate: Referendum_Votes_Aggregate;
 }

@@ -8,3 +8,16 @@ query GetFinishedReferendums($where: referendums_bool_exp) {
     }
   }
 }
+
+query getReferendumCountings($where: referendum_countings_bool_exp) {
+  referendum_countings(where: $where) {
+    question {
+      referendumId
+      id
+      question
+    }
+    votesCount
+    votesTrue
+    votesFalse
+  }
+}
