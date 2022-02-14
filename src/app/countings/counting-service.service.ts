@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { GetFinishedReferendumsGQL, GetFinishedReferendumsQuery, GetReferendumCountingsGQL, GetReferendumCountingsQuery, Referendums_Bool_Exp } from 'src/generated/graphql';
+import { GetFinishedReferendumsGQL, GetFinishedReferendumsQuery, GetReferendumCountingsGQL, GetReferendumCountingsQuery, Referendums_Bool_Exp, Referendum_Countings_Bool_Exp } from 'src/generated/graphql';
 import { ApolloQueryResult, FetchResult } from '@apollo/client';
 
 
@@ -31,9 +31,9 @@ export class CountingService {
     );
   }
 
-  getReferendumCountingsById(id: number): Observable<
+  getReferendumCountings(where?: Referendum_Countings_Bool_Exp): Observable<
     ApolloQueryResult<GetReferendumCountingsQuery>
   > {
-    return this.getReferendumCountingsGQL.fetch()
+    return this.getReferendumCountingsGQL.fetch({ where },{ fetchPolicy: 'network-only' })
   }
 }

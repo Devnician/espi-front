@@ -33,9 +33,11 @@ export class CountingsDashboardComponent {
 
   loadedReferendums: BehaviorSubject<boolean> = new BehaviorSubject(false);
   loadedVotings: BehaviorSubject<boolean> = new BehaviorSubject(false);
+  loadedCountings: BehaviorSubject<boolean> = new BehaviorSubject(false);
   observables: Observable<boolean>[] = [
     this.loadedReferendums,
     this.loadedVotings,
+    this.loadedCountings
   ];
 
   constructor(
@@ -115,27 +117,27 @@ export class CountingsDashboardComponent {
 
 
   getReferendumCountings() {
-    this.countingService.getReferendumCountingsById(1)
-    .pipe(
-      switchMap((response) => {
-      const countings = response.data.referendum_countings.map(q=>
-        {
-          return{
-            referendumId: q.question.referendumId,
-            question: q.question.question,
-            votesCount: q.votesCount,
-            votesTrue: q.votesTrue,
-            votesFalse: q.votesFalse
+    this.countingService.getReferendumCountings()
+      .pipe(
+        switchMap((response) => {
+          const countings = response.data.referendum_countings.map(q => {
+            return {
+              referendumId: q.question.referendumId,
+              question: q.question.question,
+              votesCount: q.votesCount,
+              votesTrue: q.votesTrue,
+              votesFalse: q.votesFalse
+            }
           }
-        }
-        );
-      this.countings.next(countings as Custom_Referendum_Countings[]);
-      return this.countings;
-    })
-    )
-    .subscribe((countings)=>{
-      console.log("countings"+JSON.stringify(countings))
-    })
+          );
+          this.countings.next(countings as Custom_Referendum_Countings[]);
+          return this.countings;
+        })
+      )
+      .subscribe((countings) => {
+        console.log("countings" + JSON.stringify(countings))
+        this.loadedCountings.next(true)
+      })
   }
 
   goToVotingComponent(vote: VotingParams) {
