@@ -2,7 +2,9 @@ import { BreakpointObserver } from '@angular/cdk/layout';
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { BehaviorSubject, combineLatest, Observable, switchMap } from 'rxjs';
+import { AuthService } from 'src/app/services/auth-service';
 import { Donkey } from 'src/app/services/donkey.service';
+import { UsersService } from 'src/app/users/users-service';
 import { Referendums, Votings } from 'src/generated/graphql';
 import { VotingsService } from '../voting-service.service';
 interface VotingParams {
@@ -20,6 +22,7 @@ interface VotingParams {
   styleUrls: ['./votings-dashboard.component.scss'],
 })
 export class VotingsDashboardComponent {
+  isVoted: boolean;
   referendums: BehaviorSubject<Referendums[]> = new BehaviorSubject([]);
   votings: BehaviorSubject<Votings[]> = new BehaviorSubject([]);
   /** Based on the screen size, switch from standard to one column per row */
@@ -39,9 +42,12 @@ export class VotingsDashboardComponent {
     private breakpointObserver: BreakpointObserver,
     private router: Router,
     private voitngsService: VotingsService,
+    private usersService: UsersService,
+    private authService: AuthService,
 
     private donkey: Donkey
   ) {
+    this.checkIfUserVoted();
     this.loading.next(true);
     this.getStartedReferendums();
     this.getStartedVotings();
@@ -49,6 +55,13 @@ export class VotingsDashboardComponent {
       if (observableResults.indexOf(false) < 0) {
         this.loading.next(false);
       }
+    });
+  }
+  checkIfUserVoted() {
+    this.authService.user$.subscribe(u => {
+      this.usersService.getUsers(1, 0, { id: { _eq: u.id } }, {}).valueChanges.subscribe(v =>
+       this.isVoted = v.data.users[0].voted
+      )
     });
   }
   getStartedVotings() {
