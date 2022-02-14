@@ -34,6 +34,6 @@ export class CountingService {
   getReferendumCountings(where?: Referendum_Countings_Bool_Exp): Observable<
     ApolloQueryResult<GetReferendumCountingsQuery>
   > {
-    return this.getReferendumCountingsGQL.fetch({ where },{ fetchPolicy: 'network-only' })
+    return this.getReferendumCountingsGQL.fetch({ where }, { fetchPolicy: 'network-only' })
   }
 }
