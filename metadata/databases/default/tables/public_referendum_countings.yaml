@@ -1,0 +1,30 @@
+table:
+  name: referendum_countings
+  schema: public
+object_relationships:
+- name: question
+  using:
+    manual_configuration:
+      column_mapping:
+        questionId: id
+      insertion_order: null
+      remote_table:
+        name: referendum_questions
+        schema: public
+select_permissions:
+- permission:
+    columns:
+    - votesCount
+    - votesFalse
+    - votesTrue
+    - questionId
+    filter: {}
+  role: central
+- permission:
+    columns:
+    - questionId
+    - votesCount
+    - votesTrue
+    - votesFalse
+    filter: {}
+  role: centralLeader

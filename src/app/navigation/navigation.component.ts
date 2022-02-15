@@ -176,7 +176,7 @@ export class NavigationComponent
         }
 
         this.menus.push({
-          route: 'votings/dashboard',
+          route: 'countings/dashboard',
           label: 'Преброяване',
           matIcon: 'functions',
           badgeSubject: undefined,
