@@ -117,7 +117,8 @@ export class VotingsDashboardComponent {
       this.router.navigate(['/votings/referendum']);
     } else {
       const voting = this.votings.value.find((v) => v.id === vote.id);
-      console.log('Open vote screen');
+      //console.log('Open vote screen');
+      this.router.navigate(['/votings/vote']);
       console.log(voting);
     }
   }

@@ -1,0 +1,28 @@
+query GetVotingSections(
+  $limit: Int
+  $offset: Int
+  $condition: voting_section_bool_exp! = {}
+  $orderBy: [voting_section_order_by!] = { createdAt: desc }
+) {
+  voting_section(
+    limit: $limit
+    offset: $offset
+    where: $condition
+    order_by: $orderBy
+  ) {
+    id
+    createdAt
+    updatedAt
+    openedAt
+    closedAt
+    addressId
+    address {
+      ...AddressFull
+    }
+  }
+  voting_section_aggregate(where: $condition) {
+    aggregate {
+      count
+    }
+  }
+}

@@ -4,6 +4,8 @@ import { QueryRef } from 'apollo-angular';
 import { Observable } from 'rxjs';
 import {
   Addresses_Set_Input,
+  BulkInsertUsersGQL,
+  BulkInsertUsersMutation,
   CreateUserGQL,
   CreateUserMutation,
   GetUsersGQL,
@@ -12,6 +14,7 @@ import {
   // LoginQuery,
   UpdateUserGQL,
   Users_Bool_Exp,
+  Users_Insert_Input,
   Users_Order_By,
   Users_Set_Input,
 } from 'src/generated/graphql';
@@ -22,7 +25,8 @@ export class UsersService {
   constructor(
     private createUserGQL: CreateUserGQL,
     private updateUserGQL: UpdateUserGQL,
-    private getUsersGQL: GetUsersGQL // private loginGQL: LoginGQL
+    private getUsersGQL: GetUsersGQL, // private loginGQL: LoginGQL
+    private bulkInsertUsersGQL: BulkInsertUsersGQL
   ) {}
 
   createUser(
@@ -79,6 +83,19 @@ export class UsersService {
       userId: userSet.id,
       userSet,
     });
+  }
+
+  bulkInsertUsers(
+    users: Users_Insert_Input[]
+  ): Observable<
+    FetchResult<
+      BulkInsertUsersMutation,
+      Record<string, any>,
+      Record<string, any>
+    >
+  > {
+    console.log(users.length);
+    return this.bulkInsertUsersGQL.mutate({ objects: users });
   }
 
   //SELECT (password = crypt('pepe', password)) AS pswmatch FROM users WHERE id = 2 ;

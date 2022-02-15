@@ -6,6 +6,7 @@ import {
 import {
   Component,
   HostListener,
+  Injector,
   OnDestroy,
   OnInit,
   ViewChild,
@@ -28,11 +29,8 @@ import {
 } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { Role_Types_Enum } from 'src/generated/graphql';
-import { LoggedUser } from '../auth/logged-user.interface';
 import { TokenTypes } from '../auth/token-types.enum';
-import { Valido } from '../core/valido';
 import { VixenComponent } from '../core/vixen/vixen.component';
-import { AuthService } from '../services/auth-service';
 import { EspiMenu } from './espi-menu.interface';
 
 @Component({
@@ -52,12 +50,10 @@ export class NavigationComponent
       shareReplay()
     );
   menus: EspiMenu[] = [];
-  user: LoggedUser;
   private interval: any;
-  //currentRole$: Observable<number> = this.auth.userRoleIndex$;
   userObservables: Observable<any>[] = [
-    this.auth.user$,
-    this.auth.userRoleIndex$,
+    this.authService.user$,
+    this.authService.userRoleIndex$,
   ];
 
   constructor(
@@ -66,11 +62,10 @@ export class NavigationComponent
     private activatedRoute: ActivatedRoute,
     private breakpointObserver: BreakpointObserver,
     private snackbar: MatSnackBar,
-    public valido: Valido,
-    private auth: AuthService,
+    protected injector: Injector,
     private jwtHelper: JwtHelperService
   ) {
-    super(valido);
+    super(injector);
 
     if (environment.production === false) {
       const accessT = localStorage.getItem(TokenTypes.ACCESS_TOKEN);
@@ -79,7 +74,7 @@ export class NavigationComponent
       }
       // console.log(accessT);
       const res = this.jwtHelper.decodeToken(accessT);
-      this.auth.setLoggedUser(res?.user);
+      this.authService.setLoggedUser(res?.user);
     }
   }
 
@@ -115,13 +110,11 @@ export class NavigationComponent
     );
     combineLatest(this.userObservables).subscribe((observableResults) => {
       // console.log(observableResults);
-      this.user = observableResults[0];
-      if (this.user) {
+      const user = observableResults[0];
+      if (user) {
         const roleIndex = observableResults[1];
         const currentRole = (
-          roleIndex === 0
-            ? this.user.roleType.value
-            : this.user.secondRoleType.value
+          roleIndex === 0 ? user.roleType.value : user.secondRoleType.value
         ) as Role_Types_Enum;
         this.buildMenuForThisRole(currentRole);
       } else {
@@ -172,13 +165,15 @@ export class NavigationComponent
           matIcon: 'list',
           badgeSubject: undefined,
         });
-
-        this.menus.push({
-          route: 'votings/dashboard',
-          label: 'Гласуване',
-          matIcon: 'front_hand',
-          badgeSubject: undefined,
-        });
+        if (environment.production === false) {
+          // in prod this menu should not be visible. Vote only with the role "USER"
+          this.menus.push({
+            route: 'votings/dashboard',
+            label: 'Гласуване',
+            matIcon: 'front_hand',
+            badgeSubject: undefined,
+          });
+        }
 
         this.menus.push({
           route: 'countings/dashboard',
@@ -197,7 +192,7 @@ export class NavigationComponent
         break;
       default:
         // ?? Who is here
-        this.auth.clearAll();
+        this.authService.clearAll();
         break;
     }
   }
@@ -222,15 +217,16 @@ export class NavigationComponent
   }
 
   private clearUserData() {
-    this.auth.clearAll();
+    this.authService.clearAll();
     if (environment.production === false) {
-      this.auth.clearTokensFromLocalStorage();
+      this.authService.clearTokensFromLocalStorage();
     }
   }
   onRoleChanged(event: any) {
     const roleIndex: number = parseInt(event.value);
-    this.auth.setCurrentRoleIndex(roleIndex);
-    this.auth.refreshToken(this.user.id, roleIndex).subscribe((response) => {
+
+    this.authService.setCurrentRoleIndex(roleIndex);
+    this.authService.refreshToken(/*u.id,*/ roleIndex).subscribe((response) => {
       if (response.error) {
         console.log(response.error);
         this.snackbar.open(
@@ -242,7 +238,7 @@ export class NavigationComponent
       }
       if (response.data?.RefreshToken?.fetchToken) {
         const newFetchToken: string = response.data.RefreshToken.fetchToken;
-        this.auth.setFetchTokenAndOptionalRedirectToHome(
+        this.authService.setFetchTokenAndOptionalRedirectToHome(
           newFetchToken,
           this.router,
           true
@@ -266,9 +262,9 @@ export class NavigationComponent
   }
 
   authUser() {
-    this.auth.userRoleIndex$.subscribe((roleIndex) => {
+    this.authService.userRoleIndex$.subscribe((roleIndex) => {
       // console.log('check');
-      this.auth.fetchToken$.subscribe((fetchToken) => {
+      this.authService.fetchToken$.subscribe((fetchToken) => {
         const expirationDate: Date =
           this.jwtHelper.getTokenExpirationDate(fetchToken);
 
@@ -278,7 +274,7 @@ export class NavigationComponent
         // console.log(minutes);
         if (minutes <= 2) {
           console.log('call backend');
-          this.refreshToken(this.user.id, roleIndex);
+          this.refreshToken(/*this.user.id,*/ roleIndex);
         } else {
           console.log('OK');
         }
@@ -286,23 +282,25 @@ export class NavigationComponent
     });
   }
 
-  private refreshToken(id: number, roleIndex: number) {
-    this.auth.refreshToken(this.user.id, roleIndex).subscribe((response) => {
-      console.log(response);
-      if (response.error || response.errors) {
-        this.onLogout();
-      }
+  private refreshToken(/*id: number,*/ roleIndex: number) {
+    this.authService
+      .refreshToken(/*this.user.id,*/ roleIndex)
+      .subscribe((response) => {
+        console.log(response);
+        if (response.error || response.errors) {
+          this.onLogout();
+        }
 
-      if (response.data?.RefreshToken?.fetchToken) {
-        const newFetchToken: string = response.data.RefreshToken.fetchToken;
-        console.log('NEW TOKEN...');
-        this.auth.setFetchTokenAndOptionalRedirectToHome(
-          newFetchToken,
-          this.router,
-          false
-        );
-      }
-    });
+        if (response.data?.RefreshToken?.fetchToken) {
+          const newFetchToken: string = response.data.RefreshToken.fetchToken;
+          console.log('NEW TOKEN...');
+          this.authService.setFetchTokenAndOptionalRedirectToHome(
+            newFetchToken,
+            this.router,
+            false
+          );
+        }
+      });
   }
   ngOnDestroy(): void {
     clearInterval(this.interval);

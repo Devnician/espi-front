@@ -18,7 +18,7 @@ import {
  * encapsulate all logic for fetching and manipulating the displayed data
  * (including sorting, pagination, and filtering).
  */
-export class OrdersTableDataSource extends DataSource<Users> {
+export class UsersTableDataSource extends DataSource<Users> {
   data$: Observable<GetUsersQuery['users']>;
   paginator: MatPaginator;
   counter: BehaviorSubject<number> = new BehaviorSubject(0);
