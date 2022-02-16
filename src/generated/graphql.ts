@@ -1276,6 +1276,194 @@ export type Commissions_Variance_Fields = {
   votingSectionId?: Maybe<Scalars['Float']>;
 };
 
+/**
+ * for non-trackable functions
+ *
+ *
+ * columns and relationships of "counters"
+ */
+export type Counters = {
+  __typename?: 'counters';
+  counter: Scalars['Int'];
+  id: Scalars['Int'];
+};
+
+/** aggregated selection of "counters" */
+export type Counters_Aggregate = {
+  __typename?: 'counters_aggregate';
+  aggregate?: Maybe<Counters_Aggregate_Fields>;
+  nodes: Array<Counters>;
+};
+
+/** aggregate fields of "counters" */
+export type Counters_Aggregate_Fields = {
+  __typename?: 'counters_aggregate_fields';
+  avg?: Maybe<Counters_Avg_Fields>;
+  count: Scalars['Int'];
+  max?: Maybe<Counters_Max_Fields>;
+  min?: Maybe<Counters_Min_Fields>;
+  stddev?: Maybe<Counters_Stddev_Fields>;
+  stddev_pop?: Maybe<Counters_Stddev_Pop_Fields>;
+  stddev_samp?: Maybe<Counters_Stddev_Samp_Fields>;
+  sum?: Maybe<Counters_Sum_Fields>;
+  var_pop?: Maybe<Counters_Var_Pop_Fields>;
+  var_samp?: Maybe<Counters_Var_Samp_Fields>;
+  variance?: Maybe<Counters_Variance_Fields>;
+};
+
+
+/** aggregate fields of "counters" */
+export type Counters_Aggregate_FieldsCountArgs = {
+  columns?: Maybe<Array<Counters_Select_Column>>;
+  distinct?: Maybe<Scalars['Boolean']>;
+};
+
+/** aggregate avg on columns */
+export type Counters_Avg_Fields = {
+  __typename?: 'counters_avg_fields';
+  counter?: Maybe<Scalars['Float']>;
+  id?: Maybe<Scalars['Float']>;
+};
+
+/** Boolean expression to filter rows from the table "counters". All fields are combined with a logical 'AND'. */
+export type Counters_Bool_Exp = {
+  _and?: Maybe<Array<Counters_Bool_Exp>>;
+  _not?: Maybe<Counters_Bool_Exp>;
+  _or?: Maybe<Array<Counters_Bool_Exp>>;
+  counter?: Maybe<Int_Comparison_Exp>;
+  id?: Maybe<Int_Comparison_Exp>;
+};
+
+/** unique or primary key constraints on table "counters" */
+export enum Counters_Constraint {
+  /** unique or primary key constraint */
+  CountersPkey = 'counters_pkey'
+}
+
+/** input type for incrementing numeric columns in table "counters" */
+export type Counters_Inc_Input = {
+  counter?: Maybe<Scalars['Int']>;
+  id?: Maybe<Scalars['Int']>;
+};
+
+/** input type for inserting data into table "counters" */
+export type Counters_Insert_Input = {
+  counter?: Maybe<Scalars['Int']>;
+  id?: Maybe<Scalars['Int']>;
+};
+
+/** aggregate max on columns */
+export type Counters_Max_Fields = {
+  __typename?: 'counters_max_fields';
+  counter?: Maybe<Scalars['Int']>;
+  id?: Maybe<Scalars['Int']>;
+};
+
+/** aggregate min on columns */
+export type Counters_Min_Fields = {
+  __typename?: 'counters_min_fields';
+  counter?: Maybe<Scalars['Int']>;
+  id?: Maybe<Scalars['Int']>;
+};
+
+/** response of any mutation on the table "counters" */
+export type Counters_Mutation_Response = {
+  __typename?: 'counters_mutation_response';
+  /** number of rows affected by the mutation */
+  affected_rows: Scalars['Int'];
+  /** data from the rows affected by the mutation */
+  returning: Array<Counters>;
+};
+
+/** on conflict condition type for table "counters" */
+export type Counters_On_Conflict = {
+  constraint: Counters_Constraint;
+  update_columns: Array<Counters_Update_Column>;
+  where?: Maybe<Counters_Bool_Exp>;
+};
+
+/** Ordering options when selecting data from "counters". */
+export type Counters_Order_By = {
+  counter?: Maybe<Order_By>;
+  id?: Maybe<Order_By>;
+};
+
+/** primary key columns input for table: counters */
+export type Counters_Pk_Columns_Input = {
+  id: Scalars['Int'];
+};
+
+/** select columns of table "counters" */
+export enum Counters_Select_Column {
+  /** column name */
+  Counter = 'counter',
+  /** column name */
+  Id = 'id'
+}
+
+/** input type for updating data in table "counters" */
+export type Counters_Set_Input = {
+  counter?: Maybe<Scalars['Int']>;
+  id?: Maybe<Scalars['Int']>;
+};
+
+/** aggregate stddev on columns */
+export type Counters_Stddev_Fields = {
+  __typename?: 'counters_stddev_fields';
+  counter?: Maybe<Scalars['Float']>;
+  id?: Maybe<Scalars['Float']>;
+};
+
+/** aggregate stddev_pop on columns */
+export type Counters_Stddev_Pop_Fields = {
+  __typename?: 'counters_stddev_pop_fields';
+  counter?: Maybe<Scalars['Float']>;
+  id?: Maybe<Scalars['Float']>;
+};
+
+/** aggregate stddev_samp on columns */
+export type Counters_Stddev_Samp_Fields = {
+  __typename?: 'counters_stddev_samp_fields';
+  counter?: Maybe<Scalars['Float']>;
+  id?: Maybe<Scalars['Float']>;
+};
+
+/** aggregate sum on columns */
+export type Counters_Sum_Fields = {
+  __typename?: 'counters_sum_fields';
+  counter?: Maybe<Scalars['Int']>;
+  id?: Maybe<Scalars['Int']>;
+};
+
+/** update columns of table "counters" */
+export enum Counters_Update_Column {
+  /** column name */
+  Counter = 'counter',
+  /** column name */
+  Id = 'id'
+}
+
+/** aggregate var_pop on columns */
+export type Counters_Var_Pop_Fields = {
+  __typename?: 'counters_var_pop_fields';
+  counter?: Maybe<Scalars['Float']>;
+  id?: Maybe<Scalars['Float']>;
+};
+
+/** aggregate var_samp on columns */
+export type Counters_Var_Samp_Fields = {
+  __typename?: 'counters_var_samp_fields';
+  counter?: Maybe<Scalars['Float']>;
+  id?: Maybe<Scalars['Float']>;
+};
+
+/** aggregate variance on columns */
+export type Counters_Variance_Fields = {
+  __typename?: 'counters_variance_fields';
+  counter?: Maybe<Scalars['Float']>;
+  id?: Maybe<Scalars['Float']>;
+};
+
 
 /** Boolean expression to compare columns of type "date". All fields are combined with logical 'AND'. */
 export type Date_Comparison_Exp = {
@@ -1288,6 +1476,10 @@ export type Date_Comparison_Exp = {
   _lte?: Maybe<Scalars['date']>;
   _neq?: Maybe<Scalars['date']>;
   _nin?: Maybe<Array<Scalars['date']>>;
+};
+
+export type Distribute_The_Undistributed_Users_New_Args = {
+  lim?: Maybe<Scalars['Int']>;
 };
 
 export type Login_Args = {
@@ -1318,6 +1510,10 @@ export type Mutation_Root = {
   delete_commissions?: Maybe<Commissions_Mutation_Response>;
   /** delete single row from the table: "commissions" */
   delete_commissions_by_pk?: Maybe<Commissions>;
+  /** delete data from the table: "counters" */
+  delete_counters?: Maybe<Counters_Mutation_Response>;
+  /** delete single row from the table: "counters" */
+  delete_counters_by_pk?: Maybe<Counters>;
   /** delete data from the table: "political_group_members" */
   delete_political_group_members?: Maybe<Political_Group_Members_Mutation_Response>;
   /** delete single row from the table: "political_group_members" */
@@ -1374,6 +1570,8 @@ export type Mutation_Root = {
   delete_votings?: Maybe<Votings_Mutation_Response>;
   /** delete single row from the table: "votings" */
   delete_votings_by_pk?: Maybe<Votings>;
+  /** execute VOLATILE function "distribute_the_undistributed_users_new" which returns "counters" */
+  distribute_the_undistributed_users_new: Array<Counters>;
   /** insert data into the table: "addresses" */
   insert_addresses?: Maybe<Addresses_Mutation_Response>;
   /** insert a single row into the table: "addresses" */
@@ -1394,6 +1592,10 @@ export type Mutation_Root = {
   insert_commissions?: Maybe<Commissions_Mutation_Response>;
   /** insert a single row into the table: "commissions" */
   insert_commissions_one?: Maybe<Commissions>;
+  /** insert data into the table: "counters" */
+  insert_counters?: Maybe<Counters_Mutation_Response>;
+  /** insert a single row into the table: "counters" */
+  insert_counters_one?: Maybe<Counters>;
   /** insert data into the table: "political_group_members" */
   insert_political_group_members?: Maybe<Political_Group_Members_Mutation_Response>;
   /** insert a single row into the table: "political_group_members" */
@@ -1470,6 +1672,10 @@ export type Mutation_Root = {
   update_commissions?: Maybe<Commissions_Mutation_Response>;
   /** update single row of the table: "commissions" */
   update_commissions_by_pk?: Maybe<Commissions>;
+  /** update data of the table: "counters" */
+  update_counters?: Maybe<Counters_Mutation_Response>;
+  /** update single row of the table: "counters" */
+  update_counters_by_pk?: Maybe<Counters>;
   /** update data of the table: "political_group_members" */
   update_political_group_members?: Maybe<Political_Group_Members_Mutation_Response>;
   /** update single row of the table: "political_group_members" */
@@ -1585,6 +1791,18 @@ export type Mutation_RootDelete_CommissionsArgs = {
 
 /** mutation root */
 export type Mutation_RootDelete_Commissions_By_PkArgs = {
+  id: Scalars['Int'];
+};
+
+
+/** mutation root */
+export type Mutation_RootDelete_CountersArgs = {
+  where: Counters_Bool_Exp;
+};
+
+
+/** mutation root */
+export type Mutation_RootDelete_Counters_By_PkArgs = {
   id: Scalars['Int'];
 };
 
@@ -1758,6 +1976,17 @@ export type Mutation_RootDelete_Votings_By_PkArgs = {
 
 
 /** mutation root */
+export type Mutation_RootDistribute_The_Undistributed_Users_NewArgs = {
+  args: Distribute_The_Undistributed_Users_New_Args;
+  distinct_on?: Maybe<Array<Counters_Select_Column>>;
+  limit?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  order_by?: Maybe<Array<Counters_Order_By>>;
+  where?: Maybe<Counters_Bool_Exp>;
+};
+
+
+/** mutation root */
 export type Mutation_RootInsert_AddressesArgs = {
   objects: Array<Addresses_Insert_Input>;
   on_conflict?: Maybe<Addresses_On_Conflict>;
@@ -1824,6 +2053,20 @@ export type Mutation_RootInsert_CommissionsArgs = {
 export type Mutation_RootInsert_Commissions_OneArgs = {
   object: Commissions_Insert_Input;
   on_conflict?: Maybe<Commissions_On_Conflict>;
+};
+
+
+/** mutation root */
+export type Mutation_RootInsert_CountersArgs = {
+  objects: Array<Counters_Insert_Input>;
+  on_conflict?: Maybe<Counters_On_Conflict>;
+};
+
+
+/** mutation root */
+export type Mutation_RootInsert_Counters_OneArgs = {
+  object: Counters_Insert_Input;
+  on_conflict?: Maybe<Counters_On_Conflict>;
 };
 
 
@@ -2100,6 +2343,22 @@ export type Mutation_RootUpdate_Commissions_By_PkArgs = {
   _inc?: Maybe<Commissions_Inc_Input>;
   _set?: Maybe<Commissions_Set_Input>;
   pk_columns: Commissions_Pk_Columns_Input;
+};
+
+
+/** mutation root */
+export type Mutation_RootUpdate_CountersArgs = {
+  _inc?: Maybe<Counters_Inc_Input>;
+  _set?: Maybe<Counters_Set_Input>;
+  where: Counters_Bool_Exp;
+};
+
+
+/** mutation root */
+export type Mutation_RootUpdate_Counters_By_PkArgs = {
+  _inc?: Maybe<Counters_Inc_Input>;
+  _set?: Maybe<Counters_Set_Input>;
+  pk_columns: Counters_Pk_Columns_Input;
 };
 
 
@@ -2956,6 +3215,12 @@ export type Query_Root = {
   commissions_aggregate: Commissions_Aggregate;
   /** fetch data from the table: "commissions" using primary key columns */
   commissions_by_pk?: Maybe<Commissions>;
+  /** fetch data from the table: "counters" */
+  counters: Array<Counters>;
+  /** fetch aggregated fields from the table: "counters" */
+  counters_aggregate: Counters_Aggregate;
+  /** fetch data from the table: "counters" using primary key columns */
+  counters_by_pk?: Maybe<Counters>;
   /** execute function "login" which returns "users" */
   login: Array<Users>;
   /** execute function "login" and query aggregates on result of table type "users" */
@@ -3177,6 +3442,29 @@ export type Query_RootCommissions_AggregateArgs = {
 
 
 export type Query_RootCommissions_By_PkArgs = {
+  id: Scalars['Int'];
+};
+
+
+export type Query_RootCountersArgs = {
+  distinct_on?: Maybe<Array<Counters_Select_Column>>;
+  limit?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  order_by?: Maybe<Array<Counters_Order_By>>;
+  where?: Maybe<Counters_Bool_Exp>;
+};
+
+
+export type Query_RootCounters_AggregateArgs = {
+  distinct_on?: Maybe<Array<Counters_Select_Column>>;
+  limit?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  order_by?: Maybe<Array<Counters_Order_By>>;
+  where?: Maybe<Counters_Bool_Exp>;
+};
+
+
+export type Query_RootCounters_By_PkArgs = {
   id: Scalars['Int'];
 };
 
@@ -5196,6 +5484,12 @@ export type Subscription_Root = {
   commissions_aggregate: Commissions_Aggregate;
   /** fetch data from the table: "commissions" using primary key columns */
   commissions_by_pk?: Maybe<Commissions>;
+  /** fetch data from the table: "counters" */
+  counters: Array<Counters>;
+  /** fetch aggregated fields from the table: "counters" */
+  counters_aggregate: Counters_Aggregate;
+  /** fetch data from the table: "counters" using primary key columns */
+  counters_by_pk?: Maybe<Counters>;
   /** execute function "login" which returns "users" */
   login: Array<Users>;
   /** execute function "login" and query aggregates on result of table type "users" */
@@ -5402,6 +5696,29 @@ export type Subscription_RootCommissions_AggregateArgs = {
 
 
 export type Subscription_RootCommissions_By_PkArgs = {
+  id: Scalars['Int'];
+};
+
+
+export type Subscription_RootCountersArgs = {
+  distinct_on?: Maybe<Array<Counters_Select_Column>>;
+  limit?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  order_by?: Maybe<Array<Counters_Order_By>>;
+  where?: Maybe<Counters_Bool_Exp>;
+};
+
+
+export type Subscription_RootCounters_AggregateArgs = {
+  distinct_on?: Maybe<Array<Counters_Select_Column>>;
+  limit?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  order_by?: Maybe<Array<Counters_Order_By>>;
+  where?: Maybe<Counters_Bool_Exp>;
+};
+
+
+export type Subscription_RootCounters_By_PkArgs = {
   id: Scalars['Int'];
 };
 
@@ -5808,9 +6125,9 @@ export type Users = {
   name: Scalars['String'];
   password?: Maybe<Scalars['String']>;
   pin?: Maybe<Scalars['String']>;
-  role?: Maybe<Role_Types_Enum>;
+  role: Role_Types_Enum;
   /** An object relationship */
-  roleType?: Maybe<Role_Types>;
+  roleType: Role_Types;
   secondRole?: Maybe<Role_Types_Enum>;
   /** An object relationship */
   secondRoleType?: Maybe<Role_Types>;
@@ -7575,10 +7892,10 @@ export type BulkInsertUsersMutation = (
 export type UserFieldsFragment = (
   { __typename?: 'users' }
   & Pick<Users, 'id' | 'createdAt' | 'updatedAt' | 'name' | 'surname' | 'family' | 'egn' | 'email' | 'pin' | 'addressId' | 'voted' | 'eVoted' | 'votingSectionId'>
-  & { roleType?: Maybe<(
+  & { roleType: (
     { __typename?: 'role_types' }
     & Pick<Role_Types, 'value' | 'description'>
-  )>, secondRoleType?: Maybe<(
+  ), secondRoleType?: Maybe<(
     { __typename?: 'role_types' }
     & Pick<Role_Types, 'value' | 'description'>
   )>, address: (
@@ -7589,6 +7906,19 @@ export type UserFieldsFragment = (
     ) }
     & AddressShortFragment
   ) }
+);
+
+export type DistributeUsersMutationVariables = Exact<{
+  arg: Distribute_The_Undistributed_Users_New_Args;
+}>;
+
+
+export type DistributeUsersMutation = (
+  { __typename?: 'mutation_root' }
+  & { distribute_the_undistributed_users_new: Array<(
+    { __typename?: 'counters' }
+    & Pick<Counters, 'id' | 'counter'>
+  )> }
 );
 
 export type GetVotingSectionsQueryVariables = Exact<{
@@ -8169,6 +8499,25 @@ export const BulkInsertUsersDocument = gql`
   })
   export class BulkInsertUsersGQL extends Apollo.Mutation<BulkInsertUsersMutation, BulkInsertUsersMutationVariables> {
     document = BulkInsertUsersDocument;
+    
+    constructor(apollo: Apollo.Apollo) {
+      super(apollo);
+    }
+  }
+export const DistributeUsersDocument = gql`
+    mutation distributeUsers($arg: distribute_the_undistributed_users_new_args!) {
+  distribute_the_undistributed_users_new(args: $arg) {
+    id
+    counter
+  }
+}
+    `;
+
+  @Injectable({
+    providedIn: 'root'
+  })
+  export class DistributeUsersGQL extends Apollo.Mutation<DistributeUsersMutation, DistributeUsersMutationVariables> {
+    document = DistributeUsersDocument;
     
     constructor(apollo: Apollo.Apollo) {
       super(apollo);

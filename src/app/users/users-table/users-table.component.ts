@@ -70,6 +70,15 @@ export class UsersTableComponent
   municipalitiesIds: GetMunicipalitiesIdsQuery['settlements'];
   municipalitiesLength: number;
   importWorks: BehaviorSubject<boolean> = new BehaviorSubject(false);
+  distirbutorWorks: BehaviorSubject<boolean> = new BehaviorSubject(false);
+  /**
+   *
+   * @param usersService
+   * @param settlementsService
+   * @param snackBar
+   * @param dialog
+   * @param injector
+   */
   constructor(
     private usersService: UsersService,
     private settlementsService: SettlementsService,
@@ -247,5 +256,9 @@ export class UsersTableComponent
       this.importWorks.next(false);
       this.dataSource.loading.next(false);
     });
+  }
+
+  distributeTheUndistributedUsers() {
+    console.log('distribute ');
   }
 }

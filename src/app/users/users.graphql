@@ -75,3 +75,10 @@ fragment UserFields on users {
     }
   }
 }
+# distributor
+mutation distributeUsers($arg: distribute_the_undistributed_users_new_args!) {
+  distribute_the_undistributed_users_new(args: $arg) {
+    id
+    counter
+  }
+}

@@ -10,6 +10,16 @@
     Генерирай 100 000 потребители
   </button>
   <button
+    *ngIf="canUserSeeThis() | async"
+    mat-raised-button
+    color="accent"
+    style="margin: 10px"
+    [disabled]="distirbutorWorks | async"
+    (click)="distributeTheUndistributedUsers()"
+  >
+    Разпредели потребителите
+  </button>
+  <button
     mat-raised-button
     color="accent"
     style="margin: 10px"
