@@ -24,6 +24,7 @@ import { MatSortModule } from '@angular/material/sort';
 import { MatStepperModule } from '@angular/material/stepper';
 import { MatTableModule } from '@angular/material/table';
 import { MatTabsModule } from '@angular/material/tabs';
+import { Donkey } from '../services/donkey.service';
 import { EditReferendumTableComponent } from './edit-referendum-table/edit-referendum-table.component';
 import { EditReferendumComponent } from './edit-referendum/edit-referendum.component';
 import { ReferendumComponent } from './referendum/referendum.component';
@@ -82,6 +83,6 @@ import { VotingsTableComponent } from './votings-table/votings-table.component';
     MatMomentDateModule,
     MatDatepickerModule,
   ],
-  providers: [MatDatepickerModule, MatMomentDateModule],
+  providers: [MatDatepickerModule, MatMomentDateModule, Donkey],
 })
 export class VotingsModule {}
