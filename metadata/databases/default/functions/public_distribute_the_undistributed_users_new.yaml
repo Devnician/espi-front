@@ -1,3 +1,6 @@
 function:
   name: distribute_the_undistributed_users_new
   schema: public
+permissions:
+- role: centralLeader
+- role: central

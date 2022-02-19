@@ -7908,6 +7908,20 @@ export type UserFieldsFragment = (
   ) }
 );
 
+export type CountUndistributedToVotingSectionsQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type CountUndistributedToVotingSectionsQuery = (
+  { __typename?: 'query_root' }
+  & { users_aggregate: (
+    { __typename?: 'users_aggregate' }
+    & { aggregate?: Maybe<(
+      { __typename?: 'users_aggregate_fields' }
+      & Pick<Users_Aggregate_Fields, 'count'>
+    )> }
+  ) }
+);
+
 export type DistributeUsersMutationVariables = Exact<{
   arg: Distribute_The_Undistributed_Users_New_Args;
 }>;
@@ -8499,6 +8513,26 @@ export const BulkInsertUsersDocument = gql`
   })
   export class BulkInsertUsersGQL extends Apollo.Mutation<BulkInsertUsersMutation, BulkInsertUsersMutationVariables> {
     document = BulkInsertUsersDocument;
+    
+    constructor(apollo: Apollo.Apollo) {
+      super(apollo);
+    }
+  }
+export const CountUndistributedToVotingSectionsDocument = gql`
+    query countUndistributedToVotingSections {
+  users_aggregate(where: {votingSectionId: {_is_null: true}}) {
+    aggregate {
+      count
+    }
+  }
+}
+    `;
+
+  @Injectable({
+    providedIn: 'root'
+  })
+  export class CountUndistributedToVotingSectionsGQL extends Apollo.Query<CountUndistributedToVotingSectionsQuery, CountUndistributedToVotingSectionsQueryVariables> {
+    document = CountUndistributedToVotingSectionsDocument;
     
     constructor(apollo: Apollo.Apollo) {
       super(apollo);

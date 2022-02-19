@@ -76,6 +76,15 @@ fragment UserFields on users {
   }
 }
 # distributor
+
+query countUndistributedToVotingSections {
+  users_aggregate(where: { votingSectionId: { _is_null: true } }) {
+    aggregate {
+      count
+    }
+  }
+}
+
 mutation distributeUsers($arg: distribute_the_undistributed_users_new_args!) {
   distribute_the_undistributed_users_new(args: $arg) {
     id

@@ -11,8 +11,14 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatSort } from '@angular/material/sort';
 import { MatTable } from '@angular/material/table';
 import { FetchResult } from 'apollo-link';
-import * as moment from 'moment';
-import { BehaviorSubject, forkJoin, map, Observable, Subscription } from 'rxjs';
+import {
+  BehaviorSubject,
+  forkJoin,
+  map,
+  Observable,
+  Subscription,
+  take,
+} from 'rxjs';
 import { rowsAnimation } from 'src/app/animations/template.animations';
 import { VixenComponent } from 'src/app/core/vixen/vixen.component';
 import { SettlementsService } from 'src/app/settlements/settlements-service.service';
@@ -70,7 +76,11 @@ export class UsersTableComponent
   municipalitiesIds: GetMunicipalitiesIdsQuery['settlements'];
   municipalitiesLength: number;
   importWorks: BehaviorSubject<boolean> = new BehaviorSubject(false);
+  undistributedUsers: BehaviorSubject<number> = new BehaviorSubject(0);
   distirbutorWorks: BehaviorSubject<boolean> = new BehaviorSubject(false);
+
+  limit: BehaviorSubject<number> = new BehaviorSubject(50000);
+
   /**
    *
    * @param usersService
@@ -93,13 +103,31 @@ export class UsersTableComponent
   }
   ngOnInit(): void {
     this.settlementsService.getMunicipalitiesIds().subscribe((response) => {
-      console.log(response);
       if (response.data) {
         this.municipalitiesIds = response.data.settlements;
         this.municipalitiesLength =
           response.data.settlements_aggregate.aggregate.count;
       }
     });
+    this.checkUndistributed();
+  }
+  checkUndistributed() {
+    this.dataSource.loading.next(true);
+    this.subscriptions.push(
+      this.usersService
+        .countUndistributedToVotingSections()
+        .pipe(take(1))
+        .subscribe(({ data, loading }) => {
+          const counter = data.users_aggregate.aggregate.count;
+          this.dataSource.loading.next(loading);
+          if (counter > 0) {
+            this.undistributedUsers.next(counter);
+            if (counter < this.limit.value) {
+              this.limit.next(counter);
+            }
+          }
+        })
+    );
   }
 
   ngAfterViewInit(): void {
@@ -176,9 +204,9 @@ export class UsersTableComponent
   generateUsers() {
     this.dataSource.loading.next(true);
     this.importWorks.next(true);
-    console.log('use generator..');
-    const email = 'email@email.com';
-    console.log('start: ' + moment().toDate());
+    //console.log('use generator..');
+    // const email = 'email@email.com';
+    // console.log('start: ' + moment().toDate());
     let users: Users_Insert_Input[] = [];
     const max = 100000;
     const batchSize = 500;
@@ -240,11 +268,8 @@ export class UsersTableComponent
 
         affectedRowsCounter += aff;
       });
-      console.log('THEN: unsubscribe...');
+
       subs.unsubscribe();
-      console.log('everything done with', values);
-      console.log(affectedRowsCounter);
-      console.log('done: ' + moment().toDate());
 
       this.snackBar.open(
         'Бяха създадeни ' +
@@ -259,6 +284,25 @@ export class UsersTableComponent
   }
 
   distributeTheUndistributedUsers() {
-    console.log('distribute ');
+    this.dataSource.loading.next(true);
+    this.distirbutorWorks.next(true);
+    this.usersService
+      .distributeUsers(this.limit.value)
+      .subscribe(({ data, errors }) => {
+        if (errors) {
+          console.log(errors);
+        }
+        if (data.distribute_the_undistributed_users_new.length > 0) {
+          const count = data.distribute_the_undistributed_users_new[0].counter;
+          this.snackBar.open(
+            'По секции бяха разпределени ' + count + ' потребители.',
+            'ОК',
+            { duration: 10000 }
+          );
+          this.distirbutorWorks.next(false);
+          this.dataSource.loading.next(true);
+          this.checkUndistributed();
+        }
+      });
   }
 }
