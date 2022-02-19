@@ -1,0 +1,1 @@
+DROP FUNCTION distribute_the_undistributed_users;

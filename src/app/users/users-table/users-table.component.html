@@ -1,24 +1,59 @@
-<div style="display: flex; justify-content: flex-end">
-  <button
-    *ngIf="canUserSeeThis() | async"
-    mat-raised-button
-    color="accent"
-    style="margin: 10px"
-    [disabled]="importWorks | async"
-    (click)="generateUsers()"
-  >
-    Генерирай 100 000 потребители
-  </button>
-  <button
-    mat-raised-button
-    color="accent"
-    style="margin: 10px"
-    (click)="editUser(null)"
-  >
-    Добави гласоподавател
-  </button>
-</div>
+<div style="display: flex">
+  <mat-form-field class="espi-egn-search" appearance="fill">
+    <mat-label>Въведи ЕГН</mat-label>
+    <input
+      matInput
+      (input)="searchChanged(value)"
+      type="text"
+      [(ngModel)]="value"
+    />
+    <button
+      *ngIf="value"
+      matSuffix
+      mat-icon-button
+      aria-label="Clear"
+      (click)="onSearchClear()"
+    >
+      <mat-icon>close</mat-icon></button
+    ><mat-hint>търсене по ЕГН</mat-hint>
+  </mat-form-field>
 
+  <div style="display: flex; justify-content: flex-end">
+    <button
+      class="espi-big-button"
+      *ngIf="canUserSeeThis() | async"
+      mat-raised-button
+      color="accent"
+      [disabled]="importWorks | async"
+      (click)="generateUsers()"
+    >
+      генерирай 100 000 потребители
+    </button>
+    <button
+      *ngIf="(canUserSeeThis() | async) && (undistributedUsers | async) > 0"
+      mat-raised-button
+      color="accent"
+      class="espi-big-button"
+      [disabled]="distirbutorWorks | async"
+      (click)="distributeTheUndistributedUsers()"
+    >
+      разпредели {{ limit | async }} потребители
+    </button>
+    <button
+      mat-raised-button
+      color="accent"
+      class="espi-big-button"
+      (click)="editUser(null)"
+    >
+      добави гласоподавател
+    </button>
+  </div>
+</div>
+<mat-card-header *ngIf="(undistributedUsers | async) > 0">
+  <mat-card-title>
+    В системата има {{ undistributedUsers | async }} неразпределени потребители.
+  </mat-card-title>
+</mat-card-header>
 <!-- <button
   mat-raised-button
   color="primary"
@@ -27,25 +62,6 @@
 >
   Областни градове
 </button> -->
-
-<mat-form-field class="example-form-field" appearance="fill">
-  <mat-label>Въведи ЕГН</mat-label>
-  <input
-    matInput
-    (input)="searchChanged(value)"
-    type="text"
-    [(ngModel)]="value"
-  />
-  <button
-    *ngIf="value"
-    matSuffix
-    mat-icon-button
-    aria-label="Clear"
-    (click)="onSearchClear()"
-  >
-    <mat-icon>close</mat-icon>
-  </button>
-</mat-form-field>
 
 <div class="mat-elevation-z8">
   <mat-progress-bar
