@@ -10,6 +10,7 @@ import {
   GetUsersQuery,
   Order_By,
   Users,
+  Users_Bool_Exp,
   Users_Order_By,
 } from 'src/generated/graphql';
 
@@ -28,6 +29,8 @@ export class UsersTableDataSource extends DataSource<Users> {
   loading: BehaviorSubject<any> = new BehaviorSubject(true);
   loading$ = this.loading.asObservable();
   currentPageData: BehaviorSubject<Users[]> = new BehaviorSubject([]);
+
+  condition: BehaviorSubject<Users_Bool_Exp> = new BehaviorSubject({});
 
   constructor(
     private usersService: UsersService,
@@ -53,6 +56,7 @@ export class UsersTableDataSource extends DataSource<Users> {
     // stream for the data-table to consume.
     const dataMutations = [
       this.queryRef.valueChanges,
+      this.condition,
       // this.paginator.page,
       // this.sort.sortChange,
     ];
@@ -77,7 +81,7 @@ export class UsersTableDataSource extends DataSource<Users> {
           return this.queryRef.refetch({
             limit: this.paginator.pageSize,
             offset: this.paginator.pageIndex * this.paginator.pageSize,
-            condition: {},
+            condition: this.condition.value,
             orderBy: order,
           });
         } else {

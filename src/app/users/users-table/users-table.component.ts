@@ -5,6 +5,7 @@ import {
   OnInit,
   ViewChild,
 } from '@angular/core';
+import { FormBuilder } from '@angular/forms';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSnackBar } from '@angular/material/snack-bar';
@@ -13,6 +14,8 @@ import { MatTable } from '@angular/material/table';
 import { FetchResult } from 'apollo-link';
 import {
   BehaviorSubject,
+  combineLatest,
+  debounceTime,
   forkJoin,
   map,
   Observable,
@@ -31,10 +34,12 @@ import {
   GetUsersQuery,
   Role_Types_Enum,
   Users,
+  Users_Bool_Exp,
   Users_Insert_Input,
 } from 'src/generated/graphql';
 import { EditUserComponent } from '../edit-user/edit-user.component';
 import { UsersService } from '../users-service';
+import { UserFilters } from './user-filters.interface';
 import { UsersTableDataSource } from './users-table-datasource';
 
 @Component({
@@ -70,9 +75,8 @@ export class UsersTableComponent
     'actions',
   ];
 
-  value = '';
+  searchForm = this.fb.group({ egnFormControl: [null] });
   generator: UsersGenerator = new UsersGenerator();
-
   municipalitiesIds: GetMunicipalitiesIdsQuery['settlements'];
   municipalitiesLength: number;
   importWorks: BehaviorSubject<boolean> = new BehaviorSubject(false);
@@ -80,6 +84,7 @@ export class UsersTableComponent
   distirbutorWorks: BehaviorSubject<boolean> = new BehaviorSubject(false);
 
   limit: BehaviorSubject<number> = new BehaviorSubject(50000);
+  filters: UserFilters = { egn: undefined, votingSectionId: undefined };
 
   /**
    *
@@ -94,6 +99,7 @@ export class UsersTableComponent
     private settlementsService: SettlementsService,
     private snackBar: MatSnackBar,
     private dialog: MatDialog,
+    private fb: FormBuilder,
 
     injector: Injector
   ) {
@@ -102,6 +108,19 @@ export class UsersTableComponent
     this.dataSource.loading.next(true);
   }
   ngOnInit(): void {
+    combineLatest(this.userObservables).subscribe((data) => {
+      const user = data[0];
+      const index = data[1];
+      const role: Role_Types_Enum = this.getUSerRole(user as Users, index);
+      if (
+        role === Role_Types_Enum.Section ||
+        role === Role_Types_Enum.SectionLeader
+      ) {
+        this.filters.votingSectionId = user.votingSectionId;
+        this.buildConditionAndNotifyDatasource();
+      }
+    });
+
     this.settlementsService.getMunicipalitiesIds().subscribe((response) => {
       if (response.data) {
         this.municipalitiesIds = response.data.settlements;
@@ -110,7 +129,14 @@ export class UsersTableComponent
       }
     });
     this.checkUndistributed();
+    this.searchForm
+      .get('egnFormControl')
+      .valueChanges.pipe(debounceTime(800))
+      .subscribe((data) => {
+        this.searchChanged(data);
+      });
   }
+
   checkUndistributed() {
     this.dataSource.loading.next(true);
     this.subscriptions.push(
@@ -170,24 +196,22 @@ export class UsersTableComponent
   }
 
   searchChanged(value: string) {
-    this.dataSource.queryRef.refetch({
-      limit: this.paginator.pageSize,
-      offset: this.paginator.pageIndex * this.paginator.pageSize,
-      condition: { egn: { _like: `%${value}%` } },
-      orderBy: {},
-    });
-    console.log(value);
+    this.filters.egn = value ?? undefined;
+    this.buildConditionAndNotifyDatasource();
   }
 
-  onSearchClear() {
-    this.value = '';
-    this.dataSource.queryRef.refetch({
-      limit: this.paginator.pageSize,
-      offset: this.paginator.pageIndex * this.paginator.pageSize,
-      condition: {},
-      orderBy: {},
-    });
-    console.log('onSearchClear');
+  buildConditionAndNotifyDatasource() {
+    const whereClause: Users_Bool_Exp = { _and: [] };
+    if (this.filters.egn) {
+      whereClause._and.push({ egn: { _like: `%${this.filters.egn}%` } });
+    }
+    if (this.filters.votingSectionId) {
+      whereClause._and.push({
+        votingSectionId: { _eq: this.filters.votingSectionId },
+      });
+    }
+
+    this.dataSource.condition.next(whereClause);
   }
 
   canUserSeeThis(): Observable<boolean> {
@@ -204,7 +228,7 @@ export class UsersTableComponent
   generateUsers() {
     this.dataSource.loading.next(true);
     this.importWorks.next(true);
-    //console.log('use generator..');
+    // console.log('use generator..');
     // const email = 'email@email.com';
     // console.log('start: ' + moment().toDate());
     let users: Users_Insert_Input[] = [];

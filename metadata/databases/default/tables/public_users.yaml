@@ -11,6 +11,9 @@ object_relationships:
 - name: secondRoleType
   using:
     foreign_key_constraint_on: secondRole
+- name: voting_section
+  using:
+    foreign_key_constraint_on: votingSectionId
 insert_permissions:
 - permission:
     backend_only: false
@@ -100,6 +103,7 @@ select_permissions:
     - family
     - id
     - name
+    - pin
     - role
     - secondRole
     - surname

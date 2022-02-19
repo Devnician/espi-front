@@ -1,27 +1,24 @@
-<div style="display: flex">
+<div style="display: flex" [formGroup]="searchForm">
   <mat-form-field class="espi-egn-search" appearance="fill">
     <mat-label>Въведи ЕГН</mat-label>
-    <input
-      matInput
-      (input)="searchChanged(value)"
-      type="text"
-      [(ngModel)]="value"
-    />
+    <input #egnInput matInput type="text" formControlName="egnFormControl" />
     <button
-      *ngIf="value"
+      *ngIf="egnInput.value.length > 0"
       matSuffix
       mat-icon-button
       aria-label="Clear"
-      (click)="onSearchClear()"
+      (click)="searchChanged(undefined); egnInput.value = ''"
     >
       <mat-icon>close</mat-icon></button
     ><mat-hint>търсене по ЕГН</mat-hint>
   </mat-form-field>
 
-  <div style="display: flex; justify-content: flex-end">
+  <div
+    *ngIf="canUserSeeThis() | async"
+    style="display: flex; justify-content: flex-end"
+  >
     <button
       class="espi-big-button"
-      *ngIf="canUserSeeThis() | async"
       mat-raised-button
       color="accent"
       [disabled]="importWorks | async"
@@ -30,7 +27,7 @@
       генерирай 100 000 потребители
     </button>
     <button
-      *ngIf="(canUserSeeThis() | async) && (undistributedUsers | async) > 0"
+      *ngIf="(undistributedUsers | async) > 0"
       mat-raised-button
       color="accent"
       class="espi-big-button"
@@ -49,7 +46,9 @@
     </button>
   </div>
 </div>
-<mat-card-header *ngIf="(undistributedUsers | async) > 0">
+<mat-card-header
+  *ngIf="(canUserSeeThis() | async) && (undistributedUsers | async) > 0"
+>
   <mat-card-title>
     В системата има {{ undistributedUsers | async }} неразпределени потребители.
   </mat-card-title>
