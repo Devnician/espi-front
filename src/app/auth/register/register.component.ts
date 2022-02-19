@@ -1,10 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Injector, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { BehaviorSubject } from 'rxjs';
-import { Valido } from 'src/app/core/valido';
 import { VixenComponent } from 'src/app/core/vixen/vixen.component';
-import { AuthService } from 'src/app/services/auth-service';
 
 @Component({
   selector: 'app-register',
@@ -16,17 +14,15 @@ export class RegisterComponent extends VixenComponent implements OnInit {
   hide = false;
   private loading: BehaviorSubject<boolean> = new BehaviorSubject(false);
   public readonly loading$ = this.loading.asObservable();
-
   private submitted: BehaviorSubject<boolean> = new BehaviorSubject(false);
   public readonly submitted$ = this.submitted.asObservable();
 
   constructor(
     private fb: FormBuilder,
-    public valido: Valido,
-    private auth: AuthService,
-    private router: Router
+    private router: Router,
+    protected injector: Injector
   ) {
-    super(valido);
+    super(injector);
   }
 
   ngOnInit(): void {
@@ -67,7 +63,7 @@ export class RegisterComponent extends VixenComponent implements OnInit {
     this.form.disable();
     this.loading.next(true);
     this.submitted.next(true);
-    this.auth.actionRegister(formData).subscribe((response) => {
+    this.authService.actionRegister(formData).subscribe((response) => {
       // console.log(response);
       if (response.data) {
         this.loading.next(false);

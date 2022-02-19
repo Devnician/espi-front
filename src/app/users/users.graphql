@@ -35,6 +35,15 @@ mutation UpdateUser(
   }
 }
 
+mutation BulkInsertUsers($objects: [users_insert_input!]!) {
+  insert_users(
+    objects: $objects
+    on_conflict: { constraint: users_egn_key, update_columns: [] }
+  ) {
+    affected_rows
+  }
+}
+
 fragment UserFields on users {
   id
   createdAt
@@ -44,7 +53,7 @@ fragment UserFields on users {
   family
   egn
   email
-  # pin
+  pin
   # password
   addressId
   voted
@@ -66,22 +75,19 @@ fragment UserFields on users {
     }
   }
 }
+# distributor
 
-fragment SettlementFileds on settlements {
-  id
-  name
-  isMunicipality
-  parentId
-  parentSettlement {
-    id
-    isMunicipality
-    name
+query countUndistributedToVotingSections {
+  users_aggregate(where: { votingSectionId: { _is_null: true } }) {
+    aggregate {
+      count
+    }
   }
 }
-fragment AddressShort on addresses {
-  id
-  number
-  street
-  description
-  settlementId
+
+mutation distributeUsers($arg: distribute_the_undistributed_users_new_args!) {
+  distribute_the_undistributed_users_new(args: $arg) {
+    id
+    counter
+  }
 }

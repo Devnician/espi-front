@@ -12,6 +12,7 @@ export type Scalars = {
   Boolean: boolean;
   Int: number;
   Float: number;
+  bigint: any;
   date: any;
   timestamp: any;
   timestamptz: any;
@@ -337,6 +338,20 @@ export type Addresses_Variance_Fields = {
   __typename?: 'addresses_variance_fields';
   id?: Maybe<Scalars['Float']>;
   settlementId?: Maybe<Scalars['Float']>;
+};
+
+
+/** Boolean expression to compare columns of type "bigint". All fields are combined with logical 'AND'. */
+export type Bigint_Comparison_Exp = {
+  _eq?: Maybe<Scalars['bigint']>;
+  _gt?: Maybe<Scalars['bigint']>;
+  _gte?: Maybe<Scalars['bigint']>;
+  _in?: Maybe<Array<Scalars['bigint']>>;
+  _is_null?: Maybe<Scalars['Boolean']>;
+  _lt?: Maybe<Scalars['bigint']>;
+  _lte?: Maybe<Scalars['bigint']>;
+  _neq?: Maybe<Scalars['bigint']>;
+  _nin?: Maybe<Array<Scalars['bigint']>>;
 };
 
 /** columns and relationships of "candidate_lists" */
@@ -1261,6 +1276,194 @@ export type Commissions_Variance_Fields = {
   votingSectionId?: Maybe<Scalars['Float']>;
 };
 
+/**
+ * for non-trackable functions
+ *
+ *
+ * columns and relationships of "counters"
+ */
+export type Counters = {
+  __typename?: 'counters';
+  counter: Scalars['Int'];
+  id: Scalars['Int'];
+};
+
+/** aggregated selection of "counters" */
+export type Counters_Aggregate = {
+  __typename?: 'counters_aggregate';
+  aggregate?: Maybe<Counters_Aggregate_Fields>;
+  nodes: Array<Counters>;
+};
+
+/** aggregate fields of "counters" */
+export type Counters_Aggregate_Fields = {
+  __typename?: 'counters_aggregate_fields';
+  avg?: Maybe<Counters_Avg_Fields>;
+  count: Scalars['Int'];
+  max?: Maybe<Counters_Max_Fields>;
+  min?: Maybe<Counters_Min_Fields>;
+  stddev?: Maybe<Counters_Stddev_Fields>;
+  stddev_pop?: Maybe<Counters_Stddev_Pop_Fields>;
+  stddev_samp?: Maybe<Counters_Stddev_Samp_Fields>;
+  sum?: Maybe<Counters_Sum_Fields>;
+  var_pop?: Maybe<Counters_Var_Pop_Fields>;
+  var_samp?: Maybe<Counters_Var_Samp_Fields>;
+  variance?: Maybe<Counters_Variance_Fields>;
+};
+
+
+/** aggregate fields of "counters" */
+export type Counters_Aggregate_FieldsCountArgs = {
+  columns?: Maybe<Array<Counters_Select_Column>>;
+  distinct?: Maybe<Scalars['Boolean']>;
+};
+
+/** aggregate avg on columns */
+export type Counters_Avg_Fields = {
+  __typename?: 'counters_avg_fields';
+  counter?: Maybe<Scalars['Float']>;
+  id?: Maybe<Scalars['Float']>;
+};
+
+/** Boolean expression to filter rows from the table "counters". All fields are combined with a logical 'AND'. */
+export type Counters_Bool_Exp = {
+  _and?: Maybe<Array<Counters_Bool_Exp>>;
+  _not?: Maybe<Counters_Bool_Exp>;
+  _or?: Maybe<Array<Counters_Bool_Exp>>;
+  counter?: Maybe<Int_Comparison_Exp>;
+  id?: Maybe<Int_Comparison_Exp>;
+};
+
+/** unique or primary key constraints on table "counters" */
+export enum Counters_Constraint {
+  /** unique or primary key constraint */
+  CountersPkey = 'counters_pkey'
+}
+
+/** input type for incrementing numeric columns in table "counters" */
+export type Counters_Inc_Input = {
+  counter?: Maybe<Scalars['Int']>;
+  id?: Maybe<Scalars['Int']>;
+};
+
+/** input type for inserting data into table "counters" */
+export type Counters_Insert_Input = {
+  counter?: Maybe<Scalars['Int']>;
+  id?: Maybe<Scalars['Int']>;
+};
+
+/** aggregate max on columns */
+export type Counters_Max_Fields = {
+  __typename?: 'counters_max_fields';
+  counter?: Maybe<Scalars['Int']>;
+  id?: Maybe<Scalars['Int']>;
+};
+
+/** aggregate min on columns */
+export type Counters_Min_Fields = {
+  __typename?: 'counters_min_fields';
+  counter?: Maybe<Scalars['Int']>;
+  id?: Maybe<Scalars['Int']>;
+};
+
+/** response of any mutation on the table "counters" */
+export type Counters_Mutation_Response = {
+  __typename?: 'counters_mutation_response';
+  /** number of rows affected by the mutation */
+  affected_rows: Scalars['Int'];
+  /** data from the rows affected by the mutation */
+  returning: Array<Counters>;
+};
+
+/** on conflict condition type for table "counters" */
+export type Counters_On_Conflict = {
+  constraint: Counters_Constraint;
+  update_columns: Array<Counters_Update_Column>;
+  where?: Maybe<Counters_Bool_Exp>;
+};
+
+/** Ordering options when selecting data from "counters". */
+export type Counters_Order_By = {
+  counter?: Maybe<Order_By>;
+  id?: Maybe<Order_By>;
+};
+
+/** primary key columns input for table: counters */
+export type Counters_Pk_Columns_Input = {
+  id: Scalars['Int'];
+};
+
+/** select columns of table "counters" */
+export enum Counters_Select_Column {
+  /** column name */
+  Counter = 'counter',
+  /** column name */
+  Id = 'id'
+}
+
+/** input type for updating data in table "counters" */
+export type Counters_Set_Input = {
+  counter?: Maybe<Scalars['Int']>;
+  id?: Maybe<Scalars['Int']>;
+};
+
+/** aggregate stddev on columns */
+export type Counters_Stddev_Fields = {
+  __typename?: 'counters_stddev_fields';
+  counter?: Maybe<Scalars['Float']>;
+  id?: Maybe<Scalars['Float']>;
+};
+
+/** aggregate stddev_pop on columns */
+export type Counters_Stddev_Pop_Fields = {
+  __typename?: 'counters_stddev_pop_fields';
+  counter?: Maybe<Scalars['Float']>;
+  id?: Maybe<Scalars['Float']>;
+};
+
+/** aggregate stddev_samp on columns */
+export type Counters_Stddev_Samp_Fields = {
+  __typename?: 'counters_stddev_samp_fields';
+  counter?: Maybe<Scalars['Float']>;
+  id?: Maybe<Scalars['Float']>;
+};
+
+/** aggregate sum on columns */
+export type Counters_Sum_Fields = {
+  __typename?: 'counters_sum_fields';
+  counter?: Maybe<Scalars['Int']>;
+  id?: Maybe<Scalars['Int']>;
+};
+
+/** update columns of table "counters" */
+export enum Counters_Update_Column {
+  /** column name */
+  Counter = 'counter',
+  /** column name */
+  Id = 'id'
+}
+
+/** aggregate var_pop on columns */
+export type Counters_Var_Pop_Fields = {
+  __typename?: 'counters_var_pop_fields';
+  counter?: Maybe<Scalars['Float']>;
+  id?: Maybe<Scalars['Float']>;
+};
+
+/** aggregate var_samp on columns */
+export type Counters_Var_Samp_Fields = {
+  __typename?: 'counters_var_samp_fields';
+  counter?: Maybe<Scalars['Float']>;
+  id?: Maybe<Scalars['Float']>;
+};
+
+/** aggregate variance on columns */
+export type Counters_Variance_Fields = {
+  __typename?: 'counters_variance_fields';
+  counter?: Maybe<Scalars['Float']>;
+  id?: Maybe<Scalars['Float']>;
+};
+
 
 /** Boolean expression to compare columns of type "date". All fields are combined with logical 'AND'. */
 export type Date_Comparison_Exp = {
@@ -1273,6 +1476,10 @@ export type Date_Comparison_Exp = {
   _lte?: Maybe<Scalars['date']>;
   _neq?: Maybe<Scalars['date']>;
   _nin?: Maybe<Array<Scalars['date']>>;
+};
+
+export type Distribute_The_Undistributed_Users_New_Args = {
+  lim?: Maybe<Scalars['Int']>;
 };
 
 export type Login_Args = {
@@ -1303,6 +1510,10 @@ export type Mutation_Root = {
   delete_commissions?: Maybe<Commissions_Mutation_Response>;
   /** delete single row from the table: "commissions" */
   delete_commissions_by_pk?: Maybe<Commissions>;
+  /** delete data from the table: "counters" */
+  delete_counters?: Maybe<Counters_Mutation_Response>;
+  /** delete single row from the table: "counters" */
+  delete_counters_by_pk?: Maybe<Counters>;
   /** delete data from the table: "political_group_members" */
   delete_political_group_members?: Maybe<Political_Group_Members_Mutation_Response>;
   /** delete single row from the table: "political_group_members" */
@@ -1359,6 +1570,8 @@ export type Mutation_Root = {
   delete_votings?: Maybe<Votings_Mutation_Response>;
   /** delete single row from the table: "votings" */
   delete_votings_by_pk?: Maybe<Votings>;
+  /** execute VOLATILE function "distribute_the_undistributed_users_new" which returns "counters" */
+  distribute_the_undistributed_users_new: Array<Counters>;
   /** insert data into the table: "addresses" */
   insert_addresses?: Maybe<Addresses_Mutation_Response>;
   /** insert a single row into the table: "addresses" */
@@ -1379,6 +1592,10 @@ export type Mutation_Root = {
   insert_commissions?: Maybe<Commissions_Mutation_Response>;
   /** insert a single row into the table: "commissions" */
   insert_commissions_one?: Maybe<Commissions>;
+  /** insert data into the table: "counters" */
+  insert_counters?: Maybe<Counters_Mutation_Response>;
+  /** insert a single row into the table: "counters" */
+  insert_counters_one?: Maybe<Counters>;
   /** insert data into the table: "political_group_members" */
   insert_political_group_members?: Maybe<Political_Group_Members_Mutation_Response>;
   /** insert a single row into the table: "political_group_members" */
@@ -1455,6 +1672,10 @@ export type Mutation_Root = {
   update_commissions?: Maybe<Commissions_Mutation_Response>;
   /** update single row of the table: "commissions" */
   update_commissions_by_pk?: Maybe<Commissions>;
+  /** update data of the table: "counters" */
+  update_counters?: Maybe<Counters_Mutation_Response>;
+  /** update single row of the table: "counters" */
+  update_counters_by_pk?: Maybe<Counters>;
   /** update data of the table: "political_group_members" */
   update_political_group_members?: Maybe<Political_Group_Members_Mutation_Response>;
   /** update single row of the table: "political_group_members" */
@@ -1570,6 +1791,18 @@ export type Mutation_RootDelete_CommissionsArgs = {
 
 /** mutation root */
 export type Mutation_RootDelete_Commissions_By_PkArgs = {
+  id: Scalars['Int'];
+};
+
+
+/** mutation root */
+export type Mutation_RootDelete_CountersArgs = {
+  where: Counters_Bool_Exp;
+};
+
+
+/** mutation root */
+export type Mutation_RootDelete_Counters_By_PkArgs = {
   id: Scalars['Int'];
 };
 
@@ -1743,6 +1976,17 @@ export type Mutation_RootDelete_Votings_By_PkArgs = {
 
 
 /** mutation root */
+export type Mutation_RootDistribute_The_Undistributed_Users_NewArgs = {
+  args: Distribute_The_Undistributed_Users_New_Args;
+  distinct_on?: Maybe<Array<Counters_Select_Column>>;
+  limit?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  order_by?: Maybe<Array<Counters_Order_By>>;
+  where?: Maybe<Counters_Bool_Exp>;
+};
+
+
+/** mutation root */
 export type Mutation_RootInsert_AddressesArgs = {
   objects: Array<Addresses_Insert_Input>;
   on_conflict?: Maybe<Addresses_On_Conflict>;
@@ -1809,6 +2053,20 @@ export type Mutation_RootInsert_CommissionsArgs = {
 export type Mutation_RootInsert_Commissions_OneArgs = {
   object: Commissions_Insert_Input;
   on_conflict?: Maybe<Commissions_On_Conflict>;
+};
+
+
+/** mutation root */
+export type Mutation_RootInsert_CountersArgs = {
+  objects: Array<Counters_Insert_Input>;
+  on_conflict?: Maybe<Counters_On_Conflict>;
+};
+
+
+/** mutation root */
+export type Mutation_RootInsert_Counters_OneArgs = {
+  object: Counters_Insert_Input;
+  on_conflict?: Maybe<Counters_On_Conflict>;
 };
 
 
@@ -2085,6 +2343,22 @@ export type Mutation_RootUpdate_Commissions_By_PkArgs = {
   _inc?: Maybe<Commissions_Inc_Input>;
   _set?: Maybe<Commissions_Set_Input>;
   pk_columns: Commissions_Pk_Columns_Input;
+};
+
+
+/** mutation root */
+export type Mutation_RootUpdate_CountersArgs = {
+  _inc?: Maybe<Counters_Inc_Input>;
+  _set?: Maybe<Counters_Set_Input>;
+  where: Counters_Bool_Exp;
+};
+
+
+/** mutation root */
+export type Mutation_RootUpdate_Counters_By_PkArgs = {
+  _inc?: Maybe<Counters_Inc_Input>;
+  _set?: Maybe<Counters_Set_Input>;
+  pk_columns: Counters_Pk_Columns_Input;
 };
 
 
@@ -2941,6 +3215,12 @@ export type Query_Root = {
   commissions_aggregate: Commissions_Aggregate;
   /** fetch data from the table: "commissions" using primary key columns */
   commissions_by_pk?: Maybe<Commissions>;
+  /** fetch data from the table: "counters" */
+  counters: Array<Counters>;
+  /** fetch aggregated fields from the table: "counters" */
+  counters_aggregate: Counters_Aggregate;
+  /** fetch data from the table: "counters" using primary key columns */
+  counters_by_pk?: Maybe<Counters>;
   /** execute function "login" which returns "users" */
   login: Array<Users>;
   /** execute function "login" and query aggregates on result of table type "users" */
@@ -2963,6 +3243,10 @@ export type Query_Root = {
   political_groups_aggregate: Political_Groups_Aggregate;
   /** fetch data from the table: "political_groups" using primary key columns */
   political_groups_by_pk?: Maybe<Political_Groups>;
+  /** fetch data from the table: "referendum_countings" */
+  referendum_countings: Array<Referendum_Countings>;
+  /** fetch aggregated fields from the table: "referendum_countings" */
+  referendum_countings_aggregate: Referendum_Countings_Aggregate;
   /** fetch data from the table: "referendum_questions" */
   referendum_questions: Array<Referendum_Questions>;
   /** fetch aggregated fields from the table: "referendum_questions" */
@@ -3162,6 +3446,29 @@ export type Query_RootCommissions_By_PkArgs = {
 };
 
 
+export type Query_RootCountersArgs = {
+  distinct_on?: Maybe<Array<Counters_Select_Column>>;
+  limit?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  order_by?: Maybe<Array<Counters_Order_By>>;
+  where?: Maybe<Counters_Bool_Exp>;
+};
+
+
+export type Query_RootCounters_AggregateArgs = {
+  distinct_on?: Maybe<Array<Counters_Select_Column>>;
+  limit?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  order_by?: Maybe<Array<Counters_Order_By>>;
+  where?: Maybe<Counters_Bool_Exp>;
+};
+
+
+export type Query_RootCounters_By_PkArgs = {
+  id: Scalars['Int'];
+};
+
+
 export type Query_RootLoginArgs = {
   args: Login_Args;
   distinct_on?: Maybe<Array<Users_Select_Column>>;
@@ -3248,6 +3555,24 @@ export type Query_RootPolitical_Groups_AggregateArgs = {
 
 export type Query_RootPolitical_Groups_By_PkArgs = {
   id: Scalars['Int'];
+};
+
+
+export type Query_RootReferendum_CountingsArgs = {
+  distinct_on?: Maybe<Array<Referendum_Countings_Select_Column>>;
+  limit?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  order_by?: Maybe<Array<Referendum_Countings_Order_By>>;
+  where?: Maybe<Referendum_Countings_Bool_Exp>;
+};
+
+
+export type Query_RootReferendum_Countings_AggregateArgs = {
+  distinct_on?: Maybe<Array<Referendum_Countings_Select_Column>>;
+  limit?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  order_by?: Maybe<Array<Referendum_Countings_Order_By>>;
+  where?: Maybe<Referendum_Countings_Bool_Exp>;
 };
 
 
@@ -3503,6 +3828,170 @@ export type Query_RootVotings_By_PkArgs = {
   id: Scalars['Int'];
 };
 
+/** columns and relationships of "referendum_countings" */
+export type Referendum_Countings = {
+  __typename?: 'referendum_countings';
+  /** An object relationship */
+  question?: Maybe<Referendum_Questions>;
+  questionId?: Maybe<Scalars['Int']>;
+  votesCount?: Maybe<Scalars['bigint']>;
+  votesFalse?: Maybe<Scalars['bigint']>;
+  votesTrue?: Maybe<Scalars['bigint']>;
+};
+
+/** aggregated selection of "referendum_countings" */
+export type Referendum_Countings_Aggregate = {
+  __typename?: 'referendum_countings_aggregate';
+  aggregate?: Maybe<Referendum_Countings_Aggregate_Fields>;
+  nodes: Array<Referendum_Countings>;
+};
+
+/** aggregate fields of "referendum_countings" */
+export type Referendum_Countings_Aggregate_Fields = {
+  __typename?: 'referendum_countings_aggregate_fields';
+  avg?: Maybe<Referendum_Countings_Avg_Fields>;
+  count: Scalars['Int'];
+  max?: Maybe<Referendum_Countings_Max_Fields>;
+  min?: Maybe<Referendum_Countings_Min_Fields>;
+  stddev?: Maybe<Referendum_Countings_Stddev_Fields>;
+  stddev_pop?: Maybe<Referendum_Countings_Stddev_Pop_Fields>;
+  stddev_samp?: Maybe<Referendum_Countings_Stddev_Samp_Fields>;
+  sum?: Maybe<Referendum_Countings_Sum_Fields>;
+  var_pop?: Maybe<Referendum_Countings_Var_Pop_Fields>;
+  var_samp?: Maybe<Referendum_Countings_Var_Samp_Fields>;
+  variance?: Maybe<Referendum_Countings_Variance_Fields>;
+};
+
+
+/** aggregate fields of "referendum_countings" */
+export type Referendum_Countings_Aggregate_FieldsCountArgs = {
+  columns?: Maybe<Array<Referendum_Countings_Select_Column>>;
+  distinct?: Maybe<Scalars['Boolean']>;
+};
+
+/** aggregate avg on columns */
+export type Referendum_Countings_Avg_Fields = {
+  __typename?: 'referendum_countings_avg_fields';
+  questionId?: Maybe<Scalars['Float']>;
+  votesCount?: Maybe<Scalars['Float']>;
+  votesFalse?: Maybe<Scalars['Float']>;
+  votesTrue?: Maybe<Scalars['Float']>;
+};
+
+/** Boolean expression to filter rows from the table "referendum_countings". All fields are combined with a logical 'AND'. */
+export type Referendum_Countings_Bool_Exp = {
+  _and?: Maybe<Array<Referendum_Countings_Bool_Exp>>;
+  _not?: Maybe<Referendum_Countings_Bool_Exp>;
+  _or?: Maybe<Array<Referendum_Countings_Bool_Exp>>;
+  question?: Maybe<Referendum_Questions_Bool_Exp>;
+  questionId?: Maybe<Int_Comparison_Exp>;
+  votesCount?: Maybe<Bigint_Comparison_Exp>;
+  votesFalse?: Maybe<Bigint_Comparison_Exp>;
+  votesTrue?: Maybe<Bigint_Comparison_Exp>;
+};
+
+/** aggregate max on columns */
+export type Referendum_Countings_Max_Fields = {
+  __typename?: 'referendum_countings_max_fields';
+  questionId?: Maybe<Scalars['Int']>;
+  votesCount?: Maybe<Scalars['bigint']>;
+  votesFalse?: Maybe<Scalars['bigint']>;
+  votesTrue?: Maybe<Scalars['bigint']>;
+};
+
+/** aggregate min on columns */
+export type Referendum_Countings_Min_Fields = {
+  __typename?: 'referendum_countings_min_fields';
+  questionId?: Maybe<Scalars['Int']>;
+  votesCount?: Maybe<Scalars['bigint']>;
+  votesFalse?: Maybe<Scalars['bigint']>;
+  votesTrue?: Maybe<Scalars['bigint']>;
+};
+
+/** Ordering options when selecting data from "referendum_countings". */
+export type Referendum_Countings_Order_By = {
+  question?: Maybe<Referendum_Questions_Order_By>;
+  questionId?: Maybe<Order_By>;
+  votesCount?: Maybe<Order_By>;
+  votesFalse?: Maybe<Order_By>;
+  votesTrue?: Maybe<Order_By>;
+};
+
+/** select columns of table "referendum_countings" */
+export enum Referendum_Countings_Select_Column {
+  /** column name */
+  QuestionId = 'questionId',
+  /** column name */
+  VotesCount = 'votesCount',
+  /** column name */
+  VotesFalse = 'votesFalse',
+  /** column name */
+  VotesTrue = 'votesTrue'
+}
+
+/** aggregate stddev on columns */
+export type Referendum_Countings_Stddev_Fields = {
+  __typename?: 'referendum_countings_stddev_fields';
+  questionId?: Maybe<Scalars['Float']>;
+  votesCount?: Maybe<Scalars['Float']>;
+  votesFalse?: Maybe<Scalars['Float']>;
+  votesTrue?: Maybe<Scalars['Float']>;
+};
+
+/** aggregate stddev_pop on columns */
+export type Referendum_Countings_Stddev_Pop_Fields = {
+  __typename?: 'referendum_countings_stddev_pop_fields';
+  questionId?: Maybe<Scalars['Float']>;
+  votesCount?: Maybe<Scalars['Float']>;
+  votesFalse?: Maybe<Scalars['Float']>;
+  votesTrue?: Maybe<Scalars['Float']>;
+};
+
+/** aggregate stddev_samp on columns */
+export type Referendum_Countings_Stddev_Samp_Fields = {
+  __typename?: 'referendum_countings_stddev_samp_fields';
+  questionId?: Maybe<Scalars['Float']>;
+  votesCount?: Maybe<Scalars['Float']>;
+  votesFalse?: Maybe<Scalars['Float']>;
+  votesTrue?: Maybe<Scalars['Float']>;
+};
+
+/** aggregate sum on columns */
+export type Referendum_Countings_Sum_Fields = {
+  __typename?: 'referendum_countings_sum_fields';
+  questionId?: Maybe<Scalars['Int']>;
+  votesCount?: Maybe<Scalars['bigint']>;
+  votesFalse?: Maybe<Scalars['bigint']>;
+  votesTrue?: Maybe<Scalars['bigint']>;
+};
+
+/** aggregate var_pop on columns */
+export type Referendum_Countings_Var_Pop_Fields = {
+  __typename?: 'referendum_countings_var_pop_fields';
+  questionId?: Maybe<Scalars['Float']>;
+  votesCount?: Maybe<Scalars['Float']>;
+  votesFalse?: Maybe<Scalars['Float']>;
+  votesTrue?: Maybe<Scalars['Float']>;
+};
+
+/** aggregate var_samp on columns */
+export type Referendum_Countings_Var_Samp_Fields = {
+  __typename?: 'referendum_countings_var_samp_fields';
+  questionId?: Maybe<Scalars['Float']>;
+  votesCount?: Maybe<Scalars['Float']>;
+  votesFalse?: Maybe<Scalars['Float']>;
+  votesTrue?: Maybe<Scalars['Float']>;
+};
+
+/** aggregate variance on columns */
+export type Referendum_Countings_Variance_Fields = {
+  __typename?: 'referendum_countings_variance_fields';
+  questionId?: Maybe<Scalars['Float']>;
+  votesCount?: Maybe<Scalars['Float']>;
+  votesFalse?: Maybe<Scalars['Float']>;
+  votesTrue?: Maybe<Scalars['Float']>;
+};
+
 /** columns and relationships of "referendum_questions" */
 export type Referendum_Questions = {
   __typename?: 'referendum_questions';
@@ -3510,7 +3999,31 @@ export type Referendum_Questions = {
   id: Scalars['Int'];
   question: Scalars['String'];
   referendumId: Scalars['Int'];
+  /** fetch data from the table: "referendum_votes" */
+  referendum_votes: Array<Referendum_Votes>;
+  /** fetch aggregated fields from the table: "referendum_votes" */
+  referendum_votes_aggregate: Referendum_Votes_Aggregate;
   updatedAt: Scalars['timestamptz'];
+};
+
+
+/** columns and relationships of "referendum_questions" */
+export type Referendum_QuestionsReferendum_VotesArgs = {
+  distinct_on?: Maybe<Array<Referendum_Votes_Select_Column>>;
+  limit?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  order_by?: Maybe<Array<Referendum_Votes_Order_By>>;
+  where?: Maybe<Referendum_Votes_Bool_Exp>;
+};
+
+
+/** columns and relationships of "referendum_questions" */
+export type Referendum_QuestionsReferendum_Votes_AggregateArgs = {
+  distinct_on?: Maybe<Array<Referendum_Votes_Select_Column>>;
+  limit?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  order_by?: Maybe<Array<Referendum_Votes_Order_By>>;
+  where?: Maybe<Referendum_Votes_Bool_Exp>;
 };
 
 /** aggregated selection of "referendum_questions" */
@@ -3587,6 +4100,7 @@ export type Referendum_Questions_Bool_Exp = {
   id?: Maybe<Int_Comparison_Exp>;
   question?: Maybe<String_Comparison_Exp>;
   referendumId?: Maybe<Int_Comparison_Exp>;
+  referendum_votes?: Maybe<Referendum_Votes_Bool_Exp>;
   updatedAt?: Maybe<Timestamptz_Comparison_Exp>;
 };
 
@@ -3608,6 +4122,7 @@ export type Referendum_Questions_Insert_Input = {
   id?: Maybe<Scalars['Int']>;
   question?: Maybe<Scalars['String']>;
   referendumId?: Maybe<Scalars['Int']>;
+  referendum_votes?: Maybe<Referendum_Votes_Arr_Rel_Insert_Input>;
   updatedAt?: Maybe<Scalars['timestamptz']>;
 };
 
@@ -3671,6 +4186,7 @@ export type Referendum_Questions_Order_By = {
   id?: Maybe<Order_By>;
   question?: Maybe<Order_By>;
   referendumId?: Maybe<Order_By>;
+  referendum_votes_aggregate?: Maybe<Referendum_Votes_Aggregate_Order_By>;
   updatedAt?: Maybe<Order_By>;
 };
 
@@ -3849,6 +4365,28 @@ export type Referendum_Votes_Aggregate_FieldsCountArgs = {
   distinct?: Maybe<Scalars['Boolean']>;
 };
 
+/** order by aggregate values of table "referendum_votes" */
+export type Referendum_Votes_Aggregate_Order_By = {
+  avg?: Maybe<Referendum_Votes_Avg_Order_By>;
+  count?: Maybe<Order_By>;
+  max?: Maybe<Referendum_Votes_Max_Order_By>;
+  min?: Maybe<Referendum_Votes_Min_Order_By>;
+  stddev?: Maybe<Referendum_Votes_Stddev_Order_By>;
+  stddev_pop?: Maybe<Referendum_Votes_Stddev_Pop_Order_By>;
+  stddev_samp?: Maybe<Referendum_Votes_Stddev_Samp_Order_By>;
+  sum?: Maybe<Referendum_Votes_Sum_Order_By>;
+  var_pop?: Maybe<Referendum_Votes_Var_Pop_Order_By>;
+  var_samp?: Maybe<Referendum_Votes_Var_Samp_Order_By>;
+  variance?: Maybe<Referendum_Votes_Variance_Order_By>;
+};
+
+/** input type for inserting array relation for remote table "referendum_votes" */
+export type Referendum_Votes_Arr_Rel_Insert_Input = {
+  data: Array<Referendum_Votes_Insert_Input>;
+  /** on conflict condition */
+  on_conflict?: Maybe<Referendum_Votes_On_Conflict>;
+};
+
 /** aggregate avg on columns */
 export type Referendum_Votes_Avg_Fields = {
   __typename?: 'referendum_votes_avg_fields';
@@ -3856,6 +4394,14 @@ export type Referendum_Votes_Avg_Fields = {
   questionId?: Maybe<Scalars['Float']>;
   sectionId?: Maybe<Scalars['Float']>;
   userId?: Maybe<Scalars['Float']>;
+};
+
+/** order by avg() on columns of table "referendum_votes" */
+export type Referendum_Votes_Avg_Order_By = {
+  id?: Maybe<Order_By>;
+  questionId?: Maybe<Order_By>;
+  sectionId?: Maybe<Order_By>;
+  userId?: Maybe<Order_By>;
 };
 
 /** Boolean expression to filter rows from the table "referendum_votes". All fields are combined with a logical 'AND'. */
@@ -3907,6 +4453,15 @@ export type Referendum_Votes_Max_Fields = {
   userId?: Maybe<Scalars['Int']>;
 };
 
+/** order by max() on columns of table "referendum_votes" */
+export type Referendum_Votes_Max_Order_By = {
+  createdAt?: Maybe<Order_By>;
+  id?: Maybe<Order_By>;
+  questionId?: Maybe<Order_By>;
+  sectionId?: Maybe<Order_By>;
+  userId?: Maybe<Order_By>;
+};
+
 /** aggregate min on columns */
 export type Referendum_Votes_Min_Fields = {
   __typename?: 'referendum_votes_min_fields';
@@ -3915,6 +4470,15 @@ export type Referendum_Votes_Min_Fields = {
   questionId?: Maybe<Scalars['Int']>;
   sectionId?: Maybe<Scalars['Int']>;
   userId?: Maybe<Scalars['Int']>;
+};
+
+/** order by min() on columns of table "referendum_votes" */
+export type Referendum_Votes_Min_Order_By = {
+  createdAt?: Maybe<Order_By>;
+  id?: Maybe<Order_By>;
+  questionId?: Maybe<Order_By>;
+  sectionId?: Maybe<Order_By>;
+  userId?: Maybe<Order_By>;
 };
 
 /** response of any mutation on the table "referendum_votes" */
@@ -3987,6 +4551,14 @@ export type Referendum_Votes_Stddev_Fields = {
   userId?: Maybe<Scalars['Float']>;
 };
 
+/** order by stddev() on columns of table "referendum_votes" */
+export type Referendum_Votes_Stddev_Order_By = {
+  id?: Maybe<Order_By>;
+  questionId?: Maybe<Order_By>;
+  sectionId?: Maybe<Order_By>;
+  userId?: Maybe<Order_By>;
+};
+
 /** aggregate stddev_pop on columns */
 export type Referendum_Votes_Stddev_Pop_Fields = {
   __typename?: 'referendum_votes_stddev_pop_fields';
@@ -3994,6 +4566,14 @@ export type Referendum_Votes_Stddev_Pop_Fields = {
   questionId?: Maybe<Scalars['Float']>;
   sectionId?: Maybe<Scalars['Float']>;
   userId?: Maybe<Scalars['Float']>;
+};
+
+/** order by stddev_pop() on columns of table "referendum_votes" */
+export type Referendum_Votes_Stddev_Pop_Order_By = {
+  id?: Maybe<Order_By>;
+  questionId?: Maybe<Order_By>;
+  sectionId?: Maybe<Order_By>;
+  userId?: Maybe<Order_By>;
 };
 
 /** aggregate stddev_samp on columns */
@@ -4005,6 +4585,14 @@ export type Referendum_Votes_Stddev_Samp_Fields = {
   userId?: Maybe<Scalars['Float']>;
 };
 
+/** order by stddev_samp() on columns of table "referendum_votes" */
+export type Referendum_Votes_Stddev_Samp_Order_By = {
+  id?: Maybe<Order_By>;
+  questionId?: Maybe<Order_By>;
+  sectionId?: Maybe<Order_By>;
+  userId?: Maybe<Order_By>;
+};
+
 /** aggregate sum on columns */
 export type Referendum_Votes_Sum_Fields = {
   __typename?: 'referendum_votes_sum_fields';
@@ -4012,6 +4600,14 @@ export type Referendum_Votes_Sum_Fields = {
   questionId?: Maybe<Scalars['Int']>;
   sectionId?: Maybe<Scalars['Int']>;
   userId?: Maybe<Scalars['Int']>;
+};
+
+/** order by sum() on columns of table "referendum_votes" */
+export type Referendum_Votes_Sum_Order_By = {
+  id?: Maybe<Order_By>;
+  questionId?: Maybe<Order_By>;
+  sectionId?: Maybe<Order_By>;
+  userId?: Maybe<Order_By>;
 };
 
 /** update columns of table "referendum_votes" */
@@ -4041,6 +4637,14 @@ export type Referendum_Votes_Var_Pop_Fields = {
   userId?: Maybe<Scalars['Float']>;
 };
 
+/** order by var_pop() on columns of table "referendum_votes" */
+export type Referendum_Votes_Var_Pop_Order_By = {
+  id?: Maybe<Order_By>;
+  questionId?: Maybe<Order_By>;
+  sectionId?: Maybe<Order_By>;
+  userId?: Maybe<Order_By>;
+};
+
 /** aggregate var_samp on columns */
 export type Referendum_Votes_Var_Samp_Fields = {
   __typename?: 'referendum_votes_var_samp_fields';
@@ -4050,6 +4654,14 @@ export type Referendum_Votes_Var_Samp_Fields = {
   userId?: Maybe<Scalars['Float']>;
 };
 
+/** order by var_samp() on columns of table "referendum_votes" */
+export type Referendum_Votes_Var_Samp_Order_By = {
+  id?: Maybe<Order_By>;
+  questionId?: Maybe<Order_By>;
+  sectionId?: Maybe<Order_By>;
+  userId?: Maybe<Order_By>;
+};
+
 /** aggregate variance on columns */
 export type Referendum_Votes_Variance_Fields = {
   __typename?: 'referendum_votes_variance_fields';
@@ -4057,6 +4669,14 @@ export type Referendum_Votes_Variance_Fields = {
   questionId?: Maybe<Scalars['Float']>;
   sectionId?: Maybe<Scalars['Float']>;
   userId?: Maybe<Scalars['Float']>;
+};
+
+/** order by variance() on columns of table "referendum_votes" */
+export type Referendum_Votes_Variance_Order_By = {
+  id?: Maybe<Order_By>;
+  questionId?: Maybe<Order_By>;
+  sectionId?: Maybe<Order_By>;
+  userId?: Maybe<Order_By>;
 };
 
 /** columns and relationships of "referendums" */
@@ -4864,6 +5484,12 @@ export type Subscription_Root = {
   commissions_aggregate: Commissions_Aggregate;
   /** fetch data from the table: "commissions" using primary key columns */
   commissions_by_pk?: Maybe<Commissions>;
+  /** fetch data from the table: "counters" */
+  counters: Array<Counters>;
+  /** fetch aggregated fields from the table: "counters" */
+  counters_aggregate: Counters_Aggregate;
+  /** fetch data from the table: "counters" using primary key columns */
+  counters_by_pk?: Maybe<Counters>;
   /** execute function "login" which returns "users" */
   login: Array<Users>;
   /** execute function "login" and query aggregates on result of table type "users" */
@@ -4886,6 +5512,10 @@ export type Subscription_Root = {
   political_groups_aggregate: Political_Groups_Aggregate;
   /** fetch data from the table: "political_groups" using primary key columns */
   political_groups_by_pk?: Maybe<Political_Groups>;
+  /** fetch data from the table: "referendum_countings" */
+  referendum_countings: Array<Referendum_Countings>;
+  /** fetch aggregated fields from the table: "referendum_countings" */
+  referendum_countings_aggregate: Referendum_Countings_Aggregate;
   /** fetch data from the table: "referendum_questions" */
   referendum_questions: Array<Referendum_Questions>;
   /** fetch aggregated fields from the table: "referendum_questions" */
@@ -5070,6 +5700,29 @@ export type Subscription_RootCommissions_By_PkArgs = {
 };
 
 
+export type Subscription_RootCountersArgs = {
+  distinct_on?: Maybe<Array<Counters_Select_Column>>;
+  limit?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  order_by?: Maybe<Array<Counters_Order_By>>;
+  where?: Maybe<Counters_Bool_Exp>;
+};
+
+
+export type Subscription_RootCounters_AggregateArgs = {
+  distinct_on?: Maybe<Array<Counters_Select_Column>>;
+  limit?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  order_by?: Maybe<Array<Counters_Order_By>>;
+  where?: Maybe<Counters_Bool_Exp>;
+};
+
+
+export type Subscription_RootCounters_By_PkArgs = {
+  id: Scalars['Int'];
+};
+
+
 export type Subscription_RootLoginArgs = {
   args: Login_Args;
   distinct_on?: Maybe<Array<Users_Select_Column>>;
@@ -5156,6 +5809,24 @@ export type Subscription_RootPolitical_Groups_AggregateArgs = {
 
 export type Subscription_RootPolitical_Groups_By_PkArgs = {
   id: Scalars['Int'];
+};
+
+
+export type Subscription_RootReferendum_CountingsArgs = {
+  distinct_on?: Maybe<Array<Referendum_Countings_Select_Column>>;
+  limit?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  order_by?: Maybe<Array<Referendum_Countings_Order_By>>;
+  where?: Maybe<Referendum_Countings_Bool_Exp>;
+};
+
+
+export type Subscription_RootReferendum_Countings_AggregateArgs = {
+  distinct_on?: Maybe<Array<Referendum_Countings_Select_Column>>;
+  limit?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  order_by?: Maybe<Array<Referendum_Countings_Order_By>>;
+  where?: Maybe<Referendum_Countings_Bool_Exp>;
 };
 
 
@@ -6053,12 +6724,13 @@ export type Votes_Variance_Fields = {
 /** columns and relationships of "voting_section" */
 export type Voting_Section = {
   __typename?: 'voting_section';
+  /** An object relationship */
+  address?: Maybe<Addresses>;
   addressId?: Maybe<Scalars['Int']>;
   closedAt?: Maybe<Scalars['timestamptz']>;
   createdAt: Scalars['timestamptz'];
   id: Scalars['Int'];
   openedAt?: Maybe<Scalars['timestamptz']>;
-  settlementId: Scalars['Int'];
   updatedAt: Scalars['timestamptz'];
 };
 
@@ -6097,7 +6769,6 @@ export type Voting_Section_Avg_Fields = {
   __typename?: 'voting_section_avg_fields';
   addressId?: Maybe<Scalars['Float']>;
   id?: Maybe<Scalars['Float']>;
-  settlementId?: Maybe<Scalars['Float']>;
 };
 
 /** Boolean expression to filter rows from the table "voting_section". All fields are combined with a logical 'AND'. */
@@ -6105,12 +6776,12 @@ export type Voting_Section_Bool_Exp = {
   _and?: Maybe<Array<Voting_Section_Bool_Exp>>;
   _not?: Maybe<Voting_Section_Bool_Exp>;
   _or?: Maybe<Array<Voting_Section_Bool_Exp>>;
+  address?: Maybe<Addresses_Bool_Exp>;
   addressId?: Maybe<Int_Comparison_Exp>;
   closedAt?: Maybe<Timestamptz_Comparison_Exp>;
   createdAt?: Maybe<Timestamptz_Comparison_Exp>;
   id?: Maybe<Int_Comparison_Exp>;
   openedAt?: Maybe<Timestamptz_Comparison_Exp>;
-  settlementId?: Maybe<Int_Comparison_Exp>;
   updatedAt?: Maybe<Timestamptz_Comparison_Exp>;
 };
 
@@ -6124,17 +6795,16 @@ export enum Voting_Section_Constraint {
 export type Voting_Section_Inc_Input = {
   addressId?: Maybe<Scalars['Int']>;
   id?: Maybe<Scalars['Int']>;
-  settlementId?: Maybe<Scalars['Int']>;
 };
 
 /** input type for inserting data into table "voting_section" */
 export type Voting_Section_Insert_Input = {
+  address?: Maybe<Addresses_Obj_Rel_Insert_Input>;
   addressId?: Maybe<Scalars['Int']>;
   closedAt?: Maybe<Scalars['timestamptz']>;
   createdAt?: Maybe<Scalars['timestamptz']>;
   id?: Maybe<Scalars['Int']>;
   openedAt?: Maybe<Scalars['timestamptz']>;
-  settlementId?: Maybe<Scalars['Int']>;
   updatedAt?: Maybe<Scalars['timestamptz']>;
 };
 
@@ -6146,7 +6816,6 @@ export type Voting_Section_Max_Fields = {
   createdAt?: Maybe<Scalars['timestamptz']>;
   id?: Maybe<Scalars['Int']>;
   openedAt?: Maybe<Scalars['timestamptz']>;
-  settlementId?: Maybe<Scalars['Int']>;
   updatedAt?: Maybe<Scalars['timestamptz']>;
 };
 
@@ -6158,7 +6827,6 @@ export type Voting_Section_Min_Fields = {
   createdAt?: Maybe<Scalars['timestamptz']>;
   id?: Maybe<Scalars['Int']>;
   openedAt?: Maybe<Scalars['timestamptz']>;
-  settlementId?: Maybe<Scalars['Int']>;
   updatedAt?: Maybe<Scalars['timestamptz']>;
 };
 
@@ -6180,12 +6848,12 @@ export type Voting_Section_On_Conflict = {
 
 /** Ordering options when selecting data from "voting_section". */
 export type Voting_Section_Order_By = {
+  address?: Maybe<Addresses_Order_By>;
   addressId?: Maybe<Order_By>;
   closedAt?: Maybe<Order_By>;
   createdAt?: Maybe<Order_By>;
   id?: Maybe<Order_By>;
   openedAt?: Maybe<Order_By>;
-  settlementId?: Maybe<Order_By>;
   updatedAt?: Maybe<Order_By>;
 };
 
@@ -6206,8 +6874,6 @@ export enum Voting_Section_Select_Column {
   Id = 'id',
   /** column name */
   OpenedAt = 'openedAt',
-  /** column name */
-  SettlementId = 'settlementId',
   /** column name */
   UpdatedAt = 'updatedAt'
 }
@@ -6526,7 +7192,6 @@ export type Voting_Section_Set_Input = {
   createdAt?: Maybe<Scalars['timestamptz']>;
   id?: Maybe<Scalars['Int']>;
   openedAt?: Maybe<Scalars['timestamptz']>;
-  settlementId?: Maybe<Scalars['Int']>;
   updatedAt?: Maybe<Scalars['timestamptz']>;
 };
 
@@ -6535,7 +7200,6 @@ export type Voting_Section_Stddev_Fields = {
   __typename?: 'voting_section_stddev_fields';
   addressId?: Maybe<Scalars['Float']>;
   id?: Maybe<Scalars['Float']>;
-  settlementId?: Maybe<Scalars['Float']>;
 };
 
 /** aggregate stddev_pop on columns */
@@ -6543,7 +7207,6 @@ export type Voting_Section_Stddev_Pop_Fields = {
   __typename?: 'voting_section_stddev_pop_fields';
   addressId?: Maybe<Scalars['Float']>;
   id?: Maybe<Scalars['Float']>;
-  settlementId?: Maybe<Scalars['Float']>;
 };
 
 /** aggregate stddev_samp on columns */
@@ -6551,7 +7214,6 @@ export type Voting_Section_Stddev_Samp_Fields = {
   __typename?: 'voting_section_stddev_samp_fields';
   addressId?: Maybe<Scalars['Float']>;
   id?: Maybe<Scalars['Float']>;
-  settlementId?: Maybe<Scalars['Float']>;
 };
 
 /** aggregate sum on columns */
@@ -6559,7 +7221,6 @@ export type Voting_Section_Sum_Fields = {
   __typename?: 'voting_section_sum_fields';
   addressId?: Maybe<Scalars['Int']>;
   id?: Maybe<Scalars['Int']>;
-  settlementId?: Maybe<Scalars['Int']>;
 };
 
 /** update columns of table "voting_section" */
@@ -6575,8 +7236,6 @@ export enum Voting_Section_Update_Column {
   /** column name */
   OpenedAt = 'openedAt',
   /** column name */
-  SettlementId = 'settlementId',
-  /** column name */
   UpdatedAt = 'updatedAt'
 }
 
@@ -6585,7 +7244,6 @@ export type Voting_Section_Var_Pop_Fields = {
   __typename?: 'voting_section_var_pop_fields';
   addressId?: Maybe<Scalars['Float']>;
   id?: Maybe<Scalars['Float']>;
-  settlementId?: Maybe<Scalars['Float']>;
 };
 
 /** aggregate var_samp on columns */
@@ -6593,7 +7251,6 @@ export type Voting_Section_Var_Samp_Fields = {
   __typename?: 'voting_section_var_samp_fields';
   addressId?: Maybe<Scalars['Float']>;
   id?: Maybe<Scalars['Float']>;
-  settlementId?: Maybe<Scalars['Float']>;
 };
 
 /** aggregate variance on columns */
@@ -6601,7 +7258,6 @@ export type Voting_Section_Variance_Fields = {
   __typename?: 'voting_section_variance_fields';
   addressId?: Maybe<Scalars['Float']>;
   id?: Maybe<Scalars['Float']>;
-  settlementId?: Maybe<Scalars['Float']>;
 };
 
 /** columns and relationships of "voting_types" */
@@ -7041,6 +7697,70 @@ export type RefreshQuery = (
   )> }
 );
 
+export type AddressShortFragment = (
+  { __typename?: 'addresses' }
+  & Pick<Addresses, 'id' | 'number' | 'street' | 'description' | 'settlementId'>
+);
+
+export type AddressFullFragment = (
+  { __typename?: 'addresses' }
+  & Pick<Addresses, 'id' | 'street' | 'number' | 'description' | 'settlementId'>
+  & { settlement: (
+    { __typename?: 'settlements' }
+    & SettlementFiledsFragment
+  ) }
+);
+
+export type SettlementsBaseFieldsFragment = (
+  { __typename?: 'settlements' }
+  & Pick<Settlements, 'id' | 'parentId' | 'name' | 'isMunicipality'>
+);
+
+export type SettlementFiledsFragment = (
+  { __typename?: 'settlements' }
+  & Pick<Settlements, 'id' | 'name' | 'isMunicipality' | 'parentId'>
+  & { parentSettlement?: Maybe<(
+    { __typename?: 'settlements' }
+    & Pick<Settlements, 'id' | 'isMunicipality' | 'name'>
+  )> }
+);
+
+export type GetFinishedReferendumsQueryVariables = Exact<{
+  where?: Maybe<Referendums_Bool_Exp>;
+}>;
+
+
+export type GetFinishedReferendumsQuery = (
+  { __typename?: 'query_root' }
+  & { referendums: Array<(
+    { __typename?: 'referendums' }
+    & ReferendumFieldsFragment
+  )>, referendums_aggregate: (
+    { __typename?: 'referendums_aggregate' }
+    & { aggregate?: Maybe<(
+      { __typename?: 'referendums_aggregate_fields' }
+      & Pick<Referendums_Aggregate_Fields, 'count'>
+    )> }
+  ) }
+);
+
+export type GetReferendumCountingsQueryVariables = Exact<{
+  where?: Maybe<Referendum_Countings_Bool_Exp>;
+}>;
+
+
+export type GetReferendumCountingsQuery = (
+  { __typename?: 'query_root' }
+  & { referendum_countings: Array<(
+    { __typename?: 'referendum_countings' }
+    & Pick<Referendum_Countings, 'votesCount' | 'votesTrue' | 'votesFalse'>
+    & { question?: Maybe<(
+      { __typename?: 'referendum_questions' }
+      & Pick<Referendum_Questions, 'referendumId' | 'id' | 'question'>
+    )> }
+  )> }
+);
+
 export type ReferendumVotesBySectionIdQueryVariables = Exact<{
   sectionId: Scalars['Int'];
 }>;
@@ -7063,7 +7783,7 @@ export type AutoSuggestSettlementsQuery = (
   { __typename?: 'query_root' }
   & { settlements: Array<(
     { __typename?: 'settlements' }
-    & Pick<Settlements, 'id' | 'name' | 'isMunicipality' | 'parentId'>
+    & SettlementsBaseFieldsFragment
   )> }
 );
 
@@ -7085,9 +7805,21 @@ export type GetDistrictsQuery = (
   )> }
 );
 
-export type SettlementsBaseFieldsFragment = (
-  { __typename?: 'settlements' }
-  & Pick<Settlements, 'id' | 'parentId' | 'name' | 'isMunicipality'>
+export type GetMunicipalitiesIdsQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type GetMunicipalitiesIdsQuery = (
+  { __typename?: 'query_root' }
+  & { settlements: Array<(
+    { __typename?: 'settlements' }
+    & Pick<Settlements, 'id'>
+  )>, settlements_aggregate: (
+    { __typename?: 'settlements_aggregate' }
+    & { aggregate?: Maybe<(
+      { __typename?: 'settlements_aggregate_fields' }
+      & Pick<Settlements_Aggregate_Fields, 'count'>
+    )> }
+  ) }
 );
 
 export type GetUsersQueryVariables = Exact<{
@@ -7144,9 +7876,22 @@ export type UpdateUserMutation = (
   )> }
 );
 
+export type BulkInsertUsersMutationVariables = Exact<{
+  objects: Array<Users_Insert_Input> | Users_Insert_Input;
+}>;
+
+
+export type BulkInsertUsersMutation = (
+  { __typename?: 'mutation_root' }
+  & { insert_users?: Maybe<(
+    { __typename?: 'users_mutation_response' }
+    & Pick<Users_Mutation_Response, 'affected_rows'>
+  )> }
+);
+
 export type UserFieldsFragment = (
   { __typename?: 'users' }
-  & Pick<Users, 'id' | 'createdAt' | 'updatedAt' | 'name' | 'surname' | 'family' | 'egn' | 'email' | 'addressId' | 'voted' | 'eVoted' | 'votingSectionId'>
+  & Pick<Users, 'id' | 'createdAt' | 'updatedAt' | 'name' | 'surname' | 'family' | 'egn' | 'email' | 'pin' | 'addressId' | 'voted' | 'eVoted' | 'votingSectionId'>
   & { roleType: (
     { __typename?: 'role_types' }
     & Pick<Role_Types, 'value' | 'description'>
@@ -7163,18 +7908,57 @@ export type UserFieldsFragment = (
   ) }
 );
 
-export type SettlementFiledsFragment = (
-  { __typename?: 'settlements' }
-  & Pick<Settlements, 'id' | 'name' | 'isMunicipality' | 'parentId'>
-  & { parentSettlement?: Maybe<(
-    { __typename?: 'settlements' }
-    & Pick<Settlements, 'id' | 'isMunicipality' | 'name'>
+export type CountUndistributedToVotingSectionsQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type CountUndistributedToVotingSectionsQuery = (
+  { __typename?: 'query_root' }
+  & { users_aggregate: (
+    { __typename?: 'users_aggregate' }
+    & { aggregate?: Maybe<(
+      { __typename?: 'users_aggregate_fields' }
+      & Pick<Users_Aggregate_Fields, 'count'>
+    )> }
+  ) }
+);
+
+export type DistributeUsersMutationVariables = Exact<{
+  arg: Distribute_The_Undistributed_Users_New_Args;
+}>;
+
+
+export type DistributeUsersMutation = (
+  { __typename?: 'mutation_root' }
+  & { distribute_the_undistributed_users_new: Array<(
+    { __typename?: 'counters' }
+    & Pick<Counters, 'id' | 'counter'>
   )> }
 );
 
-export type AddressShortFragment = (
-  { __typename?: 'addresses' }
-  & Pick<Addresses, 'id' | 'number' | 'street' | 'description' | 'settlementId'>
+export type GetVotingSectionsQueryVariables = Exact<{
+  limit?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  condition?: Voting_Section_Bool_Exp;
+  orderBy?: Maybe<Array<Voting_Section_Order_By> | Voting_Section_Order_By>;
+}>;
+
+
+export type GetVotingSectionsQuery = (
+  { __typename?: 'query_root' }
+  & { voting_section: Array<(
+    { __typename?: 'voting_section' }
+    & Pick<Voting_Section, 'id' | 'createdAt' | 'updatedAt' | 'openedAt' | 'closedAt' | 'addressId'>
+    & { address?: Maybe<(
+      { __typename?: 'addresses' }
+      & AddressFullFragment
+    )> }
+  )>, voting_section_aggregate: (
+    { __typename?: 'voting_section_aggregate' }
+    & { aggregate?: Maybe<(
+      { __typename?: 'voting_section_aggregate_fields' }
+      & Pick<Voting_Section_Aggregate_Fields, 'count'>
+    )> }
+  ) }
 );
 
 export type CreateReferendumMutationVariables = Exact<{
@@ -7336,6 +8120,31 @@ export type VotingVieldsFragment = (
   ) }
 );
 
+export const SettlementFiledsFragmentDoc = gql`
+    fragment SettlementFileds on settlements {
+  id
+  name
+  isMunicipality
+  parentId
+  parentSettlement {
+    id
+    isMunicipality
+    name
+  }
+}
+    `;
+export const AddressFullFragmentDoc = gql`
+    fragment AddressFull on addresses {
+  id
+  street
+  number
+  description
+  settlementId
+  settlement {
+    ...SettlementFileds
+  }
+}
+    ${SettlementFiledsFragmentDoc}`;
 export const SettlementsBaseFieldsFragmentDoc = gql`
     fragment SettlementsBaseFields on settlements {
   id
@@ -7353,19 +8162,6 @@ export const AddressShortFragmentDoc = gql`
   settlementId
 }
     `;
-export const SettlementFiledsFragmentDoc = gql`
-    fragment SettlementFileds on settlements {
-  id
-  name
-  isMunicipality
-  parentId
-  parentSettlement {
-    id
-    isMunicipality
-    name
-  }
-}
-    `;
 export const UserFieldsFragmentDoc = gql`
     fragment UserFields on users {
   id
@@ -7376,6 +8172,7 @@ export const UserFieldsFragmentDoc = gql`
   family
   egn
   email
+  pin
   addressId
   voted
   eVoted
@@ -7499,6 +8296,54 @@ export const RefreshDocument = gql`
       super(apollo);
     }
   }
+export const GetFinishedReferendumsDocument = gql`
+    query GetFinishedReferendums($where: referendums_bool_exp) {
+  referendums(where: $where) {
+    ...ReferendumFields
+  }
+  referendums_aggregate(where: $where) {
+    aggregate {
+      count
+    }
+  }
+}
+    ${ReferendumFieldsFragmentDoc}`;
+
+  @Injectable({
+    providedIn: 'root'
+  })
+  export class GetFinishedReferendumsGQL extends Apollo.Query<GetFinishedReferendumsQuery, GetFinishedReferendumsQueryVariables> {
+    document = GetFinishedReferendumsDocument;
+    
+    constructor(apollo: Apollo.Apollo) {
+      super(apollo);
+    }
+  }
+export const GetReferendumCountingsDocument = gql`
+    query getReferendumCountings($where: referendum_countings_bool_exp) {
+  referendum_countings(where: $where) {
+    question {
+      referendumId
+      id
+      question
+    }
+    votesCount
+    votesTrue
+    votesFalse
+  }
+}
+    `;
+
+  @Injectable({
+    providedIn: 'root'
+  })
+  export class GetReferendumCountingsGQL extends Apollo.Query<GetReferendumCountingsQuery, GetReferendumCountingsQueryVariables> {
+    document = GetReferendumCountingsDocument;
+    
+    constructor(apollo: Apollo.Apollo) {
+      super(apollo);
+    }
+  }
 export const ReferendumVotesBySectionIdDocument = gql`
     query ReferendumVotesBySectionId($sectionId: Int!) {
   referendum_votes(
@@ -7528,13 +8373,10 @@ export const ReferendumVotesBySectionIdDocument = gql`
 export const AutoSuggestSettlementsDocument = gql`
     query AutoSuggestSettlements($condition: settlements_bool_exp!) {
   settlements(where: $condition) {
-    id
-    name
-    isMunicipality
-    parentId
+    ...SettlementsBaseFields
   }
 }
-    `;
+    ${SettlementsBaseFieldsFragmentDoc}`;
 
   @Injectable({
     providedIn: 'root'
@@ -7564,6 +8406,29 @@ export const GetDistrictsDocument = gql`
   })
   export class GetDistrictsGQL extends Apollo.Query<GetDistrictsQuery, GetDistrictsQueryVariables> {
     document = GetDistrictsDocument;
+    
+    constructor(apollo: Apollo.Apollo) {
+      super(apollo);
+    }
+  }
+export const GetMunicipalitiesIdsDocument = gql`
+    query GetMunicipalitiesIds {
+  settlements(where: {isMunicipality: {_eq: true}}) {
+    id
+  }
+  settlements_aggregate(where: {isMunicipality: {_eq: true}}) {
+    aggregate {
+      count
+    }
+  }
+}
+    `;
+
+  @Injectable({
+    providedIn: 'root'
+  })
+  export class GetMunicipalitiesIdsGQL extends Apollo.Query<GetMunicipalitiesIdsQuery, GetMunicipalitiesIdsQueryVariables> {
+    document = GetMunicipalitiesIdsDocument;
     
     constructor(apollo: Apollo.Apollo) {
       super(apollo);
@@ -7627,6 +8492,102 @@ ${UserFieldsFragmentDoc}`;
   })
   export class UpdateUserGQL extends Apollo.Mutation<UpdateUserMutation, UpdateUserMutationVariables> {
     document = UpdateUserDocument;
+    
+    constructor(apollo: Apollo.Apollo) {
+      super(apollo);
+    }
+  }
+export const BulkInsertUsersDocument = gql`
+    mutation BulkInsertUsers($objects: [users_insert_input!]!) {
+  insert_users(
+    objects: $objects
+    on_conflict: {constraint: users_egn_key, update_columns: []}
+  ) {
+    affected_rows
+  }
+}
+    `;
+
+  @Injectable({
+    providedIn: 'root'
+  })
+  export class BulkInsertUsersGQL extends Apollo.Mutation<BulkInsertUsersMutation, BulkInsertUsersMutationVariables> {
+    document = BulkInsertUsersDocument;
+    
+    constructor(apollo: Apollo.Apollo) {
+      super(apollo);
+    }
+  }
+export const CountUndistributedToVotingSectionsDocument = gql`
+    query countUndistributedToVotingSections {
+  users_aggregate(where: {votingSectionId: {_is_null: true}}) {
+    aggregate {
+      count
+    }
+  }
+}
+    `;
+
+  @Injectable({
+    providedIn: 'root'
+  })
+  export class CountUndistributedToVotingSectionsGQL extends Apollo.Query<CountUndistributedToVotingSectionsQuery, CountUndistributedToVotingSectionsQueryVariables> {
+    document = CountUndistributedToVotingSectionsDocument;
+    
+    constructor(apollo: Apollo.Apollo) {
+      super(apollo);
+    }
+  }
+export const DistributeUsersDocument = gql`
+    mutation distributeUsers($arg: distribute_the_undistributed_users_new_args!) {
+  distribute_the_undistributed_users_new(args: $arg) {
+    id
+    counter
+  }
+}
+    `;
+
+  @Injectable({
+    providedIn: 'root'
+  })
+  export class DistributeUsersGQL extends Apollo.Mutation<DistributeUsersMutation, DistributeUsersMutationVariables> {
+    document = DistributeUsersDocument;
+    
+    constructor(apollo: Apollo.Apollo) {
+      super(apollo);
+    }
+  }
+export const GetVotingSectionsDocument = gql`
+    query GetVotingSections($limit: Int, $offset: Int, $condition: voting_section_bool_exp! = {}, $orderBy: [voting_section_order_by!] = {createdAt: desc}) {
+  voting_section(
+    limit: $limit
+    offset: $offset
+    where: $condition
+    order_by: $orderBy
+  ) {
+    id
+    createdAt
+    updatedAt
+    openedAt
+    closedAt
+    addressId
+    address {
+      ...AddressFull
+    }
+  }
+  voting_section_aggregate(where: $condition) {
+    aggregate {
+      count
+    }
+  }
+}
+    ${AddressFullFragmentDoc}`;
+
+  @Injectable({
+    providedIn: 'root'
+  })
+  export class GetVotingSectionsGQL extends Apollo.Query<GetVotingSectionsQuery, GetVotingSectionsQueryVariables> {
+    document = GetVotingSectionsDocument;
     
     constructor(apollo: Apollo.Apollo) {
       super(apollo);

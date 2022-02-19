@@ -61,7 +61,16 @@
 
           <div class="col">
             <mat-form-field class="full-width">
-              <input matInput placeholder="ПИН" formControlName="pin" />
+              <div style="display: flex">
+                <input
+                  readonly
+                  matInput
+                  placeholder="ПИН"
+                  formControlName="pin"
+                />
+
+                <mat-icon (click)="refreshPin()">refresh</mat-icon>
+              </div>
               <mat-error *ngIf="form.controls['pin'].errors">
                 {{ valido.getErrorMessageFromControl(form.controls["pin"]) }}
               </mat-error>
@@ -240,5 +249,5 @@ street: "Borisova" -->
     </mat-card-actions>
   </mat-card>
 </form>
-
-<pre>{{ form.getRawValue() | json }}</pre>
+<!-- 
+<pre>{{ form.getRawValue() | json }}</pre> -->

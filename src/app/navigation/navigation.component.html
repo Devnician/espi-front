@@ -52,7 +52,8 @@
           <div style="display: flex; align-items: center">
             <div style="display: block; align-items: center">
               <div style="font-size: 16px; height: 20px; text-align: end">
-                {{ user?.name }} {{ user?.surname }} {{ user?.family }}
+                {{ (user$ | async)?.name }} {{ (user$ | async)?.surname }}
+                {{ (user$ | async)?.family }}
               </div>
               <div style="font-size: 12px; text-align: end">
                 <!-- roleType: Role_Types;
@@ -66,14 +67,18 @@
                     #fOpt
                     value="0"
                     [checked]="fOpt.value === (userObservables[1] | async) + ''"
-                    >{{ user?.roleType.description }}</mat-radio-button
+                    >{{
+                      (user$ | async)?.roleType.description
+                    }}</mat-radio-button
                   >
                   <mat-radio-button
                     #sOpt
                     style="padding-left: 5px"
                     value="1"
                     [checked]="sOpt.value === (userObservables[1] | async) + ''"
-                    >{{ user?.secondRoleType.description }}</mat-radio-button
+                    >{{
+                      (user$ | async)?.secondRoleType.description
+                    }}</mat-radio-button
                   >
                 </mat-radio-group>
               </div>

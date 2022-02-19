@@ -55,6 +55,16 @@ const routes: Routes = [
           breadcrumb: 'избори',
         },
       },
+      {
+        path: 'countings',
+        loadChildren: () =>
+          import('src/app/countings/countings.module').then((m) => m.CountingsModule),
+        canActivate: [BaseGuard],
+        data: {
+          title: 'Преброяване',
+          breadcrumb: 'преброяване',
+        },
+      },
     ],
   },
   { path: '**', component: NotFoundComponent },

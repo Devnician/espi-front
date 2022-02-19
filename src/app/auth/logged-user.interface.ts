@@ -9,4 +9,5 @@ export interface LoggedUser {
   secondRoleType: Role_Types;
   eVoted: boolean;
   voted: boolean;
+  votingSectionId: number;
 }

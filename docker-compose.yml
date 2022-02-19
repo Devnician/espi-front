@@ -38,6 +38,7 @@ services:
       HASURA_GRAPHQL_JWT_SECRET: '{"type":"HS256","key": "alabala125kilooasdalabala125kilooasdalabala125kilooasd"}'
       ## uncomment next line to set an admin secret
       HASURA_GRAPHQL_ADMIN_SECRET: myadminsecretkey
+      HASURA_GRAPHQL_INFER_FUNCTION_PERMISSIONS: "false"
       TZ: Europe/Sofia
       # BACKEND_URL: http://backend:9000
       HASURA_GRAPHQL_UNAUTHORIZED_ROLE: anonymous

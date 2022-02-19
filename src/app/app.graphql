@@ -1,5 +1,0 @@
-# mutation ActionCall($arg: SampleInput!) {
-#   testAction(arg1: $arg) {
-#     accessToken
-#   }
-# }

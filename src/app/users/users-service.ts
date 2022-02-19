@@ -4,14 +4,17 @@ import { QueryRef } from 'apollo-angular';
 import { Observable } from 'rxjs';
 import {
   Addresses_Set_Input,
+  BulkInsertUsersGQL,
+  BulkInsertUsersMutation,
+  CountUndistributedToVotingSectionsGQL,
   CreateUserGQL,
   CreateUserMutation,
+  DistributeUsersGQL,
   GetUsersGQL,
   GetUsersQuery,
-  // LoginGQL,
-  // LoginQuery,
   UpdateUserGQL,
   Users_Bool_Exp,
+  Users_Insert_Input,
   Users_Order_By,
   Users_Set_Input,
 } from 'src/generated/graphql';
@@ -22,7 +25,10 @@ export class UsersService {
   constructor(
     private createUserGQL: CreateUserGQL,
     private updateUserGQL: UpdateUserGQL,
-    private getUsersGQL: GetUsersGQL // private loginGQL: LoginGQL
+    private getUsersGQL: GetUsersGQL,
+    private bulkInsertUsersGQL: BulkInsertUsersGQL,
+    private countUndistributedToVotingSectionsGQL: CountUndistributedToVotingSectionsGQL,
+    private distributeUsersGQL: DistributeUsersGQL
   ) {}
 
   createUser(
@@ -67,7 +73,7 @@ export class UsersService {
         fetchPolicy: 'network-only',
         partialRefetch: true,
         errorPolicy: 'all',
-        pollInterval: 5 * 1000,
+        pollInterval: 60 * 1000,
       }
     );
   }
@@ -81,6 +87,28 @@ export class UsersService {
     });
   }
 
+  bulkInsertUsers(
+    users: Users_Insert_Input[]
+  ): Observable<
+    FetchResult<
+      BulkInsertUsersMutation,
+      Record<string, any>,
+      Record<string, any>
+    >
+  > {
+    console.log(users.length);
+    return this.bulkInsertUsersGQL.mutate({ objects: users });
+  }
+  countUndistributedToVotingSections() {
+    return this.countUndistributedToVotingSectionsGQL.fetch(
+      {},
+      { fetchPolicy: 'network-only' }
+    );
+  }
+
+  distributeUsers(max: number) {
+    return this.distributeUsersGQL.mutate({ arg: { lim: max } });
+  }
   //SELECT (password = crypt('pepe', password)) AS pswmatch FROM users WHERE id = 2 ;
   /**
    * Calls express throught action

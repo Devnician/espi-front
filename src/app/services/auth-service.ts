@@ -23,13 +23,11 @@ import { TokenTypes } from '../auth/token-types.enum';
 export class AuthService {
   private accessToken: BehaviorSubject<string> = new BehaviorSubject(null);
   public readonly accessToken$ = this.accessToken.asObservable();
-
   private fetchToken: BehaviorSubject<string> = new BehaviorSubject(null);
   public readonly fetchToken$ = this.fetchToken.asObservable();
 
   private user: BehaviorSubject<LoggedUser> = new BehaviorSubject(null);
   public readonly user$ = this.user.asObservable();
-
   private userRoleIndex: BehaviorSubject<number> = new BehaviorSubject(0);
   public readonly userRoleIndex$ = this.userRoleIndex.asObservable();
 
@@ -72,9 +70,11 @@ export class AuthService {
   }
 
   refreshToken(
-    userId: number,
+    // userId: number,
     roleIndex: number
   ): Observable<ApolloQueryResult<RefreshQuery>> {
+    console.log('REFRESH WORKS');
+    const userId = this.user.value.id;
     return this.refreshGQL.fetch(
       { args: { userId, roleIndex } },
       { fetchPolicy: 'network-only', errorPolicy: 'all' }

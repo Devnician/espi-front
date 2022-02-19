@@ -1,16 +1,46 @@
-import { AfterViewInit, Component, ViewChild } from '@angular/core';
+import {
+  AfterViewInit,
+  Component,
+  Injector,
+  OnInit,
+  ViewChild,
+} from '@angular/core';
+import { FormBuilder } from '@angular/forms';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatSort } from '@angular/material/sort';
 import { MatTable } from '@angular/material/table';
-import { BehaviorSubject } from 'rxjs';
+import { FetchResult } from 'apollo-link';
+import {
+  BehaviorSubject,
+  combineLatest,
+  debounceTime,
+  forkJoin,
+  map,
+  Observable,
+  Subscription,
+  take,
+} from 'rxjs';
 import { rowsAnimation } from 'src/app/animations/template.animations';
+import { VixenComponent } from 'src/app/core/vixen/vixen.component';
 import { SettlementsService } from 'src/app/settlements/settlements-service.service';
-import { GetDistrictsQuery, GetUsersQuery, Users } from 'src/generated/graphql';
+import { UsersGenerator } from 'src/app/utils/users-generator.class';
+import {
+  Addresses_Insert_Input,
+  BulkInsertUsersMutation,
+  GetDistrictsQuery,
+  GetMunicipalitiesIdsQuery,
+  GetUsersQuery,
+  Role_Types_Enum,
+  Users,
+  Users_Bool_Exp,
+  Users_Insert_Input,
+} from 'src/generated/graphql';
 import { EditUserComponent } from '../edit-user/edit-user.component';
 import { UsersService } from '../users-service';
-import { OrdersTableDataSource } from './users-table-datasource';
+import { UserFilters } from './user-filters.interface';
+import { UsersTableDataSource } from './users-table-datasource';
 
 @Component({
   selector: 'app-orders-table',
@@ -18,11 +48,14 @@ import { OrdersTableDataSource } from './users-table-datasource';
   styleUrls: ['./users-table.component.scss'],
   animations: [rowsAnimation],
 })
-export class UsersTableComponent implements AfterViewInit {
+export class UsersTableComponent
+  extends VixenComponent
+  implements OnInit, AfterViewInit
+{
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
   @ViewChild(MatTable) table!: MatTable<GetUsersQuery['users']>;
-  dataSource: OrdersTableDataSource;
+  dataSource: UsersTableDataSource;
   districts: BehaviorSubject<GetDistrictsQuery['settlements']> =
     new BehaviorSubject(undefined);
 
@@ -42,15 +75,85 @@ export class UsersTableComponent implements AfterViewInit {
     'actions',
   ];
 
-  value = '';
+  searchForm = this.fb.group({ egnFormControl: [null] });
+  generator: UsersGenerator = new UsersGenerator();
+  municipalitiesIds: GetMunicipalitiesIdsQuery['settlements'];
+  municipalitiesLength: number;
+  importWorks: BehaviorSubject<boolean> = new BehaviorSubject(false);
+  undistributedUsers: BehaviorSubject<number> = new BehaviorSubject(0);
+  distirbutorWorks: BehaviorSubject<boolean> = new BehaviorSubject(false);
+
+  limit: BehaviorSubject<number> = new BehaviorSubject(50000);
+  filters: UserFilters = { egn: undefined, votingSectionId: undefined };
+
+  /**
+   *
+   * @param usersService
+   * @param settlementsService
+   * @param snackBar
+   * @param dialog
+   * @param injector
+   */
   constructor(
     private usersService: UsersService,
     private settlementsService: SettlementsService,
     private snackBar: MatSnackBar,
-    private dialog: MatDialog
+    private dialog: MatDialog,
+    private fb: FormBuilder,
+
+    injector: Injector
   ) {
-    this.dataSource = new OrdersTableDataSource(usersService, snackBar);
+    super(injector);
+    this.dataSource = new UsersTableDataSource(usersService, snackBar);
     this.dataSource.loading.next(true);
+  }
+  ngOnInit(): void {
+    combineLatest(this.userObservables).subscribe((data) => {
+      const user = data[0];
+      const index = data[1];
+      const role: Role_Types_Enum = this.getUSerRole(user as Users, index);
+      if (
+        role === Role_Types_Enum.Section ||
+        role === Role_Types_Enum.SectionLeader
+      ) {
+        this.filters.votingSectionId = user.votingSectionId;
+        this.buildConditionAndNotifyDatasource();
+      }
+    });
+
+    this.settlementsService.getMunicipalitiesIds().subscribe((response) => {
+      if (response.data) {
+        this.municipalitiesIds = response.data.settlements;
+        this.municipalitiesLength =
+          response.data.settlements_aggregate.aggregate.count;
+      }
+    });
+    this.checkUndistributed();
+    this.searchForm
+      .get('egnFormControl')
+      .valueChanges.pipe(debounceTime(800))
+      .subscribe((data) => {
+        this.searchChanged(data);
+      });
+  }
+
+  checkUndistributed() {
+    this.dataSource.loading.next(true);
+    this.subscriptions.push(
+      this.usersService
+        .countUndistributedToVotingSections()
+        .pipe(take(1))
+        .subscribe(({ data, loading }) => {
+          const counter = data.users_aggregate.aggregate.count;
+          this.dataSource.loading.next(loading);
+          if (counter > 0) {
+            this.undistributedUsers.next(counter);
+            if (counter < this.limit.value) {
+              this.limit.next(counter);
+            }
+          }
+        })
+    );
   }
 
   ngAfterViewInit(): void {
@@ -58,40 +161,6 @@ export class UsersTableComponent implements AfterViewInit {
     this.dataSource.paginator = this.paginator;
     this.table.dataSource = this.dataSource;
   }
-  // addUser() {
-  //   console.log('Add one user');
-  //   this.dataSource.loading.next(true);
-
-  //   const user: any = {
-  //     name: 'Кирил',
-  //     surname: 'Иванов',
-  //     family: 'Иванов',
-  //     egn: '8080808083',
-  //     email: 'alabala@bala.ala',
-  //     role: Role_Types_Enum.User,
-  //     address: {
-  //       data: {
-  //         number: 10,
-  //         street: 'Borisova',
-  //         settlementId: 3382, // TODO
-  //       },
-  //     },
-  //   };
-
-  //   this.usersService.createUser(user).subscribe((response) => {
-  //     if (response && response.data) {
-  //       const createdUser: Users = response.data.insert_users_one as Users;
-  //       console.log(createdUser);
-  //       this.dataSource.queryRef.refetch({});
-  //     } else {
-  //       console.log(response);
-  //       this.dataSource.loading.next(false);
-  //       if (response.errors[0].message.toString().includes('Uniqueness')) {
-  //         this.snackBar.open('Вече съществува потребител с това ЕГН', 'OK', {});
-  //       }
-  //     }
-  //   });
-  // }
 
   editUser(user: Users) {
     this.openDialog(user);
@@ -109,11 +178,8 @@ export class UsersTableComponent implements AfterViewInit {
     const dialogRef = this.dialog.open(EditUserComponent, config);
     dialogRef.afterClosed().subscribe((dialogResponse) => {
       console.log(dialogResponse);
+      // dialogRef.close();
     });
-  }
-  testCall(user: Users) {
-    console.log(user);
-    alert(JSON.stringify(user));
   }
 
   /**
@@ -129,24 +195,138 @@ export class UsersTableComponent implements AfterViewInit {
     });
   }
 
-  searchChanged(value:string){
-    this.dataSource.queryRef.refetch({
-      limit: this.paginator.pageSize,
-      offset: this.paginator.pageIndex * this.paginator.pageSize,
-      condition: {egn: {_like: `%${value}%`}},
-      orderBy: {},
-    })
-    console.log(value)
+  searchChanged(value: string) {
+    this.filters.egn = value ?? undefined;
+    this.buildConditionAndNotifyDatasource();
   }
 
-  onSearchClear(){
-    this.value="";
-    this.dataSource.queryRef.refetch({
-      limit: this.paginator.pageSize,
-      offset: this.paginator.pageIndex * this.paginator.pageSize,
-      condition: {},
-      orderBy: {},
+  buildConditionAndNotifyDatasource() {
+    const whereClause: Users_Bool_Exp = { _and: [] };
+    if (this.filters.egn) {
+      whereClause._and.push({ egn: { _like: `%${this.filters.egn}%` } });
+    }
+    if (this.filters.votingSectionId) {
+      whereClause._and.push({
+        votingSectionId: { _eq: this.filters.votingSectionId },
+      });
+    }
+
+    this.dataSource.condition.next(whereClause);
+  }
+
+  canUserSeeThis(): Observable<boolean> {
+    return this.user$.pipe(
+      map((user) => {
+        const result =
+          user.roleType.value === Role_Types_Enum.CentralLeader ||
+          user?.secondRoleType?.value === Role_Types_Enum.Central;
+        return result;
+      })
+    );
+  }
+
+  generateUsers() {
+    this.dataSource.loading.next(true);
+    this.importWorks.next(true);
+    // console.log('use generator..');
+    // const email = 'email@email.com';
+    // console.log('start: ' + moment().toDate());
+    let users: Users_Insert_Input[] = [];
+    const max = 100000;
+    const batchSize = 500;
+    let partitionCounter = 0;
+    let affectedRowsCounter = 0;
+
+    const observables: Observable<
+      FetchResult<
+        BulkInsertUsersMutation,
+        Record<string, any>,
+        Record<string, any>
+      >
+    >[] = [];
+    for (let index = 0; index < max; index++) {
+      partitionCounter++;
+
+      const isMale = index % 2 === 0;
+      const rand = this.generator.getRandomInteger(
+        0,
+        this.municipalitiesLength - 1
+      );
+      //console.log(rand);
+      const randomMuniId = this.municipalitiesIds[rand].id;
+      const address: Addresses_Insert_Input = {
+        settlementId: randomMuniId,
+        street: this.generator.getRandomStreetName(),
+        number: this.generator.getRandomInteger(1, 120).toString(),
+        description: 'Описание...',
+      };
+
+      const egn = this.generator.generateEgn(isMale);
+      const name = this.generator.generateFirstName(isMale);
+      const surname = this.generator.getSurnameOrFamily(isMale);
+      const family = this.generator.getSurnameOrFamily(isMale);
+      const pin = this.generator.generatePin();
+      const user: Users_Insert_Input = {
+        egn,
+        name,
+        surname,
+        family,
+        role: Role_Types_Enum.User,
+        address: { data: address },
+        pin,
+      };
+      users.push(user);
+      if (partitionCounter === batchSize || index === max - 1) {
+        partitionCounter = 0;
+        // flush users
+        observables.push(this.usersService.bulkInsertUsers(users));
+        users = [];
+      }
+    }
+
+    const obsMerge = forkJoin(observables);
+
+    const subs: Subscription = obsMerge.subscribe((values) => {
+      values.forEach((response) => {
+        const aff = response.data.insert_users.affected_rows;
+
+        affectedRowsCounter += aff;
+      });
+
+      subs.unsubscribe();
+
+      this.snackBar.open(
+        'Бяха създадeни ' +
+          affectedRowsCounter +
+          ' записа за данни за потребител и адрес',
+        'OK',
+        {}
+      );
+      this.importWorks.next(false);
+      this.dataSource.loading.next(false);
     });
-    console.log("onSearchClear");
+  }
+
+  distributeTheUndistributedUsers() {
+    this.dataSource.loading.next(true);
+    this.distirbutorWorks.next(true);
+    this.usersService
+      .distributeUsers(this.limit.value)
+      .subscribe(({ data, errors }) => {
+        if (errors) {
+          console.log(errors);
+        }
+        if (data.distribute_the_undistributed_users_new.length > 0) {
+          const count = data.distribute_the_undistributed_users_new[0].counter;
+          this.snackBar.open(
+            'По секции бяха разпределени ' + count + ' потребители.',
+            'ОК',
+            { duration: 10000 }
+          );
+          this.distirbutorWorks.next(false);
+          this.dataSource.loading.next(true);
+          this.checkUndistributed();
+        }
+      });
   }
 }

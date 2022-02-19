@@ -11,7 +11,8 @@
     "watch-types": "graphql-codegen --config codegen.js --watch",
     "hasura": "hasura --project hasura --skip-update-check",
     "hasura:console": "npm run hasura console",
-    "hasura:apply": "npm run hasura migrate apply"
+    "hasura:apply": "npm run hasura migrate apply",
+    "hasura:metadata": "npm run hasura metadata apply"
   },
   "private": true,
   "dependencies": {

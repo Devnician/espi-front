@@ -15,13 +15,16 @@ import {
 import { RoleLabels } from 'src/app/core/role-labels';
 import { Valido } from 'src/app/core/valido';
 import { SettlementsService } from 'src/app/settlements/settlements-service.service';
+import { UsersGenerator } from 'src/app/utils/users-generator.class';
 import {
   Addresses_Insert_Input,
+  Addresses_Set_Input,
   AutoSuggestSettlementsQuery,
   Role_Types_Enum,
   Settlements,
   Users,
   Users_Insert_Input,
+  Users_Set_Input,
 } from 'src/generated/graphql';
 import { UsersService } from '../users-service';
 
@@ -51,7 +54,7 @@ export class EditUserComponent implements OnInit {
     this.data ? false : true
   );
   loading$ = this.loading.asObservable();
-
+  private userGenerator = new UsersGenerator();
   constructor(
     private fb: FormBuilder,
     @Inject(MAT_DIALOG_DATA) public data: any,
@@ -62,7 +65,6 @@ export class EditUserComponent implements OnInit {
     private snackBar: MatSnackBar
   ) {
     this.user = this.data.user;
-    console.log(data);
   }
   ngOnInit(): void {
     this.buildForm();
@@ -77,7 +79,7 @@ export class EditUserComponent implements OnInit {
       family: [this.user?.family, Validators.required],
       egn: [this.user?.egn, Validators.required],
       email: [this.user?.email, Validators.required],
-      pin: [this.user?.pin], //, Validators.required],
+      pin: [this.user ? this.user.pin : this.userGenerator.generatePin()], //, Validators.required],
       roleType: [
         this.user ? this.user?.roleType?.value : 'user',
         Validators.required,
@@ -85,9 +87,9 @@ export class EditUserComponent implements OnInit {
       secondRoleType: [this.user?.secondRoleType?.value],
       // address
       districtName: [this.user?.address.settlement.parentSettlement.name],
-      districtId: [this.user?.address.settlement.parentId],
+      districtId: [this.user?.address.settlement.parentId, Validators.required],
       settlementName: [this.user?.address.settlement.name],
-      settlementId: [this.user?.address.settlementId],
+      settlementId: [this.user?.address.settlementId, Validators.required],
       addressId: [this.user?.addressId],
       description: [this.user?.address.description],
       number: [this.user?.address.number],
@@ -99,7 +101,7 @@ export class EditUserComponent implements OnInit {
       this.settlements.next([this.user.address.settlement]);
     }
 
-    this.form.get('roleType').disable(); // .controls.roleType.disable();
+    this.form.get('roleType').disable();
   }
   attachAutocompleteListeners() {
     this.districts$ = this.searchTextDist.pipe(
@@ -170,8 +172,7 @@ export class EditUserComponent implements OnInit {
         (dist) => dist.name === this.form.value.districtName
       )
     );
-    console.log(this.form.value.districtName);
-    console.log(district);
+
     this.form.get('districtId').setValue(district.id);
     // clear and address ...
     this.form.get('settlementName').setValue(null);
@@ -195,6 +196,10 @@ export class EditUserComponent implements OnInit {
     this.form.get('settlementId').setValue(settlement.id);
   }
 
+  refreshPin() {
+    this.form.get('pin').setValue(this.userGenerator.generatePin());
+  }
+
   close() {
     this.dialogRef.close({ resuls: undefined });
   }
@@ -204,20 +209,43 @@ export class EditUserComponent implements OnInit {
       return;
     }
     let formData = this.form.getRawValue();
-    console.log(formData);
+
     if (this.user) {
+      const address: Addresses_Set_Input = {
+        id: this.user.addressId,
+        settlementId: formData.settlementId,
+        street: formData.street,
+        number: formData.number,
+        description: formData.description,
+      };
+
+      const user: Users_Set_Input = {
+        id: this.user.id,
+        name: formData.name,
+        surname: formData.surname,
+        family: formData.family,
+        egn: formData.egn,
+        email: formData.email,
+        role: formData.roleType,
+        secondRole: formData.secondRoleType,
+        addressId: this.user.addressId,
+        pin: formData.pin,
+      };
+      this.usersService.updateUser(address, user).subscribe((response) => {
+        this.snackBar.open('Данните бяха обновени успешно', '', {
+          duration: 5000,
+        });
+        this.dialogRef.close({ resuls: 'success' });
+      });
+      // update
     } else {
-      const districtId = formData.districtId;
-      // const settlementId = formData.settlementId;
+      //const districtId = formData.districtId;
       const address: Addresses_Insert_Input = {
         settlementId: formData.settlementId,
         street: formData.street,
         number: formData.number,
         description: formData.description,
       };
-      // addressId: null
-      //     id: null
-      // pin: "asd"
 
       this.clearUseless(formData);
       formData as Users;
@@ -230,11 +258,14 @@ export class EditUserComponent implements OnInit {
         role: formData.roleType,
         secondRole: formData.secondRoleType,
         address: { data: address },
+        pin: formData.pin,
       };
 
-      console.log(user);
       this.usersService.createUser(user).subscribe((response) => {
-        console.log(response);
+        this.snackBar.open('Данните бяха добавени успешно', '', {
+          duration: 5000,
+        });
+        this.dialogRef.close({ resuls: 'success' });
       });
     }
   }
@@ -244,33 +275,4 @@ export class EditUserComponent implements OnInit {
     delete formData.districtName;
     delete formData.settlementName;
   }
-
-  //   /**
-  //  * Delete this...
-  //  */
-  //    updateFirst() {
-  //     this.dataSource.loading.next(true);
-  //     // console.log(this.dataSource.currentPageData.value);
-  //     const firstFromPage: Users = _.cloneDeep(
-  //       _.first(this.dataSource.currentPageData.value)
-  //     );
-  //     if (firstFromPage) {
-  //       console.log(firstFromPage);
-  //       // HERE must clean useless data
-  //       delete firstFromPage.address;
-  //       delete firstFromPage.createdAt;
-  //       delete firstFromPage.updatedAt;
-  //       delete firstFromPage.roleType;
-  //       delete firstFromPage.secondRoleType;
-  //       delete firstFromPage.__typename;
-
-  //       this.usersService
-  //         .updateUser(firstFromPage)
-  //         .subscribe(({ errors, data }) => {
-  //           console.log(errors);
-  //           console.log(data);
-  //         });
-  //       console.log('Update', firstFromPage);
-  //     }
-  //   }
 }
