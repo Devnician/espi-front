@@ -130,59 +130,73 @@ export class NavigationComponent
     this.menus = [];
     switch (role) {
       case Role_Types_Enum.Admin:
+        this.addMenu('users');
+        this.addMenu('settlements');
+        this.addMenu('voting-sections');
+        this.addMenu('votings-list');
+        this.addMenu('referendums-list');
+        break;
+
       case Role_Types_Enum.CentralLeader:
       case Role_Types_Enum.Central:
+        this.addMenu('users');
+        this.addMenu('settlements');
+        this.addMenu('voting-sections');
+        this.addMenu('votings-list');
+        this.addMenu('referendums-list');
+
+        // if (environment.production === false) {
+        //   // in prod this menu should not be visible. Vote only with the role "USER"
+        //   this.addMenu('votings');
+        // }
+        this.addMenu('counting');
+        break;
       case Role_Types_Enum.SectionLeader:
+        this.addMenu('users');
+        // this.addMenu('settlements');
+        //  this.addMenu('voting-sections');
+        this.addMenu('votings-list');
+        this.addMenu('referendums-list');
+        break;
       case Role_Types_Enum.Section:
+        this.addMenu('users');
+        //  this.addMenu('settlements');
+        this.addMenu('votings-list');
+        this.addMenu('referendums-list');
+        break;
+      case Role_Types_Enum.User:
+        this.addMenu('votings');
+        break;
+      default:
+        // ?? Who is here
+        this.authService.clearAll();
+        break;
+    }
+
+    if (environment.production === false) {
+      // in prod this menu should not be visible. Vote only with the role "USER"
+      this.addMenu('votings');
+    }
+  }
+  addMenu(key: string) {
+    switch (key) {
+      case 'users':
         this.menus.push({
           route: 'users',
           label: 'Гласоподаватели',
           matIcon: 'groups',
           badgeSubject: undefined,
         });
+        break;
+      case 'settlements':
         this.menus.push({
           route: 'settlements',
           label: 'Населени места',
           matIcon: 'location_city',
           badgeSubject: undefined,
         });
-        this.menus.push({
-          route: 'voting-sections',
-          label: 'Секции',
-          matIcon: 'how_to_vote',
-          badgeSubject: undefined,
-        });
-
-        this.menus.push({
-          route: 'votings/votings-list',
-          label: 'Избори',
-          matIcon: 'list',
-          badgeSubject: undefined,
-        });
-        this.menus.push({
-          route: 'votings/referendums-list',
-          label: 'Референдуми',
-          matIcon: 'list',
-          badgeSubject: undefined,
-        });
-        if (environment.production === false) {
-          // in prod this menu should not be visible. Vote only with the role "USER"
-          this.menus.push({
-            route: 'votings/dashboard',
-            label: 'Гласуване',
-            matIcon: 'front_hand',
-            badgeSubject: undefined,
-          });
-        }
-
-        this.menus.push({
-          route: 'countings/dashboard',
-          label: 'Преброяване',
-          matIcon: 'functions',
-          badgeSubject: undefined,
-        });
         break;
-      case Role_Types_Enum.User:
+      case 'votings':
         this.menus.push({
           route: 'votings/dashboard',
           label: 'Гласуване',
@@ -190,9 +204,42 @@ export class NavigationComponent
           badgeSubject: undefined,
         });
         break;
+
+      case 'voting-sections':
+        this.menus.push({
+          route: 'voting-sections',
+          label: 'Секции',
+          matIcon: 'how_to_vote',
+          badgeSubject: undefined,
+        });
+        break;
+      case 'votings-list':
+        this.menus.push({
+          route: 'votings/votings-list',
+          label: 'Избори',
+          matIcon: 'list',
+          badgeSubject: undefined,
+        });
+        break;
+      case 'referendums-list':
+        this.menus.push({
+          route: 'votings/referendums-list',
+          label: 'Референдуми',
+          matIcon: 'list',
+          badgeSubject: undefined,
+        });
+        break;
+
+      case 'counting':
+        this.menus.push({
+          route: 'countings/dashboard',
+          label: 'Преброяване',
+          matIcon: 'functions',
+          badgeSubject: undefined,
+        });
+        break;
+
       default:
-        // ?? Who is here
-        this.authService.clearAll();
         break;
     }
   }

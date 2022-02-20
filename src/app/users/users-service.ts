@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { FetchResult } from '@apollo/client';
+import { ApolloQueryResult, FetchResult } from '@apollo/client';
 import { QueryRef } from 'apollo-angular';
 import { Observable } from 'rxjs';
 import {
@@ -10,6 +10,8 @@ import {
   CreateUserGQL,
   CreateUserMutation,
   DistributeUsersGQL,
+  GetUserByIdGQL,
+  GetUserByIdQuery,
   GetUsersGQL,
   GetUsersQuery,
   UpdateUserGQL,
@@ -28,7 +30,8 @@ export class UsersService {
     private getUsersGQL: GetUsersGQL,
     private bulkInsertUsersGQL: BulkInsertUsersGQL,
     private countUndistributedToVotingSectionsGQL: CountUndistributedToVotingSectionsGQL,
-    private distributeUsersGQL: DistributeUsersGQL
+    private distributeUsersGQL: DistributeUsersGQL,
+    private getUserByIdGQL: GetUserByIdGQL
   ) {}
 
   createUser(
@@ -76,6 +79,10 @@ export class UsersService {
         pollInterval: 60 * 1000,
       }
     );
+  }
+
+  getUserById(id: number): Observable<ApolloQueryResult<GetUserByIdQuery>> {
+    return this.getUserByIdGQL.fetch({ id });
   }
 
   updateUser(addressSet: Addresses_Set_Input, userSet: Users_Set_Input) {

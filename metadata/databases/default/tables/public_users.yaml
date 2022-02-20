@@ -35,7 +35,6 @@ insert_permissions:
     check: {}
     columns:
     - addressId
-    - eVoted
     - egn
     - email
     - family
@@ -45,7 +44,6 @@ insert_permissions:
     - role
     - secondRole
     - surname
-    - voted
     - votingSectionId
   role: central
 - permission:
@@ -53,7 +51,6 @@ insert_permissions:
     check: {}
     columns:
     - addressId
-    - eVoted
     - egn
     - email
     - family
@@ -63,7 +60,6 @@ insert_permissions:
     - role
     - secondRole
     - surname
-    - voted
     - votingSectionId
   role: centralLeader
 select_permissions:
@@ -72,7 +68,6 @@ select_permissions:
     columns:
     - addressId
     - createdAt
-    - eVoted
     - egn
     - email
     - family
@@ -83,7 +78,6 @@ select_permissions:
     - secondRole
     - surname
     - updatedAt
-    - voted
     - votingSectionId
     filter: {}
   role: central
@@ -92,7 +86,6 @@ select_permissions:
     columns:
     - addressId
     - createdAt
-    - eVoted
     - egn
     - email
     - family
@@ -103,7 +96,6 @@ select_permissions:
     - secondRole
     - surname
     - updatedAt
-    - voted
     - votingSectionId
     filter: {}
   role: centralLeader
@@ -112,7 +104,6 @@ select_permissions:
     columns:
     - addressId
     - createdAt
-    - eVoted
     - egn
     - email
     - family
@@ -123,7 +114,6 @@ select_permissions:
     - secondRole
     - surname
     - updatedAt
-    - voted
     - votingSectionId
     filter: {}
   role: section
@@ -132,7 +122,6 @@ select_permissions:
     columns:
     - addressId
     - createdAt
-    - eVoted
     - egn
     - email
     - family
@@ -143,7 +132,6 @@ select_permissions:
     - secondRole
     - surname
     - updatedAt
-    - voted
     - votingSectionId
     filter: {}
   role: sectionLeader
@@ -152,7 +140,6 @@ select_permissions:
     columns:
     - addressId
     - createdAt
-    - eVoted
     - egn
     - email
     - family
@@ -163,7 +150,6 @@ select_permissions:
     - secondRole
     - surname
     - updatedAt
-    - voted
     - votingSectionId
     filter:
       id:
@@ -174,7 +160,6 @@ update_permissions:
     check: {}
     columns:
     - addressId
-    - eVoted
     - egn
     - email
     - family
@@ -185,7 +170,6 @@ update_permissions:
     - role
     - secondRole
     - surname
-    - voted
     - votingSectionId
     filter: {}
   role: central
@@ -193,7 +177,6 @@ update_permissions:
     check: {}
     columns:
     - addressId
-    - eVoted
     - egn
     - email
     - family
@@ -204,7 +187,6 @@ update_permissions:
     - role
     - secondRole
     - surname
-    - voted
     - votingSectionId
     filter: {}
   role: centralLeader

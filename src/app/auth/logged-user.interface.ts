@@ -7,7 +7,5 @@ export interface LoggedUser {
   family: string;
   roleType: Role_Types;
   secondRoleType: Role_Types;
-  eVoted: boolean;
-  voted: boolean;
   votingSectionId: number;
 }

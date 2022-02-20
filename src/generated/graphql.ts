@@ -6141,7 +6141,6 @@ export type Users = {
   address: Addresses;
   addressId: Scalars['Int'];
   createdAt: Scalars['timestamptz'];
-  eVoted: Scalars['Boolean'];
   egn: Scalars['String'];
   email?: Maybe<Scalars['String']>;
   family: Scalars['String'];
@@ -6161,7 +6160,6 @@ export type Users = {
   secondRoleType?: Maybe<Role_Types>;
   surname: Scalars['String'];
   updatedAt: Scalars['timestamptz'];
-  voted: Scalars['Boolean'];
   /** fetch data from the table: "votes" */
   votes: Array<Votes>;
   /** fetch aggregated fields from the table: "votes" */
@@ -6257,7 +6255,6 @@ export type Users_Bool_Exp = {
   address?: Maybe<Addresses_Bool_Exp>;
   addressId?: Maybe<Int_Comparison_Exp>;
   createdAt?: Maybe<Timestamptz_Comparison_Exp>;
-  eVoted?: Maybe<Boolean_Comparison_Exp>;
   egn?: Maybe<String_Comparison_Exp>;
   email?: Maybe<String_Comparison_Exp>;
   family?: Maybe<String_Comparison_Exp>;
@@ -6272,7 +6269,6 @@ export type Users_Bool_Exp = {
   secondRoleType?: Maybe<Role_Types_Bool_Exp>;
   surname?: Maybe<String_Comparison_Exp>;
   updatedAt?: Maybe<Timestamptz_Comparison_Exp>;
-  voted?: Maybe<Boolean_Comparison_Exp>;
   votes?: Maybe<Votes_Bool_Exp>;
   votingSectionId?: Maybe<Int_Comparison_Exp>;
   voting_section?: Maybe<Voting_Section_Bool_Exp>;
@@ -6298,7 +6294,6 @@ export type Users_Insert_Input = {
   address?: Maybe<Addresses_Obj_Rel_Insert_Input>;
   addressId?: Maybe<Scalars['Int']>;
   createdAt?: Maybe<Scalars['timestamptz']>;
-  eVoted?: Maybe<Scalars['Boolean']>;
   egn?: Maybe<Scalars['String']>;
   email?: Maybe<Scalars['String']>;
   family?: Maybe<Scalars['String']>;
@@ -6313,7 +6308,6 @@ export type Users_Insert_Input = {
   secondRoleType?: Maybe<Role_Types_Obj_Rel_Insert_Input>;
   surname?: Maybe<Scalars['String']>;
   updatedAt?: Maybe<Scalars['timestamptz']>;
-  voted?: Maybe<Scalars['Boolean']>;
   votes?: Maybe<Votes_Arr_Rel_Insert_Input>;
   votingSectionId?: Maybe<Scalars['Int']>;
   voting_section?: Maybe<Voting_Section_Obj_Rel_Insert_Input>;
@@ -6374,7 +6368,6 @@ export type Users_Order_By = {
   address?: Maybe<Addresses_Order_By>;
   addressId?: Maybe<Order_By>;
   createdAt?: Maybe<Order_By>;
-  eVoted?: Maybe<Order_By>;
   egn?: Maybe<Order_By>;
   email?: Maybe<Order_By>;
   family?: Maybe<Order_By>;
@@ -6389,7 +6382,6 @@ export type Users_Order_By = {
   secondRoleType?: Maybe<Role_Types_Order_By>;
   surname?: Maybe<Order_By>;
   updatedAt?: Maybe<Order_By>;
-  voted?: Maybe<Order_By>;
   votes_aggregate?: Maybe<Votes_Aggregate_Order_By>;
   votingSectionId?: Maybe<Order_By>;
   voting_section?: Maybe<Voting_Section_Order_By>;
@@ -6406,8 +6398,6 @@ export enum Users_Select_Column {
   AddressId = 'addressId',
   /** column name */
   CreatedAt = 'createdAt',
-  /** column name */
-  EVoted = 'eVoted',
   /** column name */
   Egn = 'egn',
   /** column name */
@@ -6431,8 +6421,6 @@ export enum Users_Select_Column {
   /** column name */
   UpdatedAt = 'updatedAt',
   /** column name */
-  Voted = 'voted',
-  /** column name */
   VotingSectionId = 'votingSectionId'
 }
 
@@ -6440,7 +6428,6 @@ export enum Users_Select_Column {
 export type Users_Set_Input = {
   addressId?: Maybe<Scalars['Int']>;
   createdAt?: Maybe<Scalars['timestamptz']>;
-  eVoted?: Maybe<Scalars['Boolean']>;
   egn?: Maybe<Scalars['String']>;
   email?: Maybe<Scalars['String']>;
   family?: Maybe<Scalars['String']>;
@@ -6452,7 +6439,6 @@ export type Users_Set_Input = {
   secondRole?: Maybe<Role_Types_Enum>;
   surname?: Maybe<Scalars['String']>;
   updatedAt?: Maybe<Scalars['timestamptz']>;
-  voted?: Maybe<Scalars['Boolean']>;
   votingSectionId?: Maybe<Scalars['Int']>;
 };
 
@@ -6495,8 +6481,6 @@ export enum Users_Update_Column {
   /** column name */
   CreatedAt = 'createdAt',
   /** column name */
-  EVoted = 'eVoted',
-  /** column name */
   Egn = 'egn',
   /** column name */
   Email = 'email',
@@ -6518,8 +6502,6 @@ export enum Users_Update_Column {
   Surname = 'surname',
   /** column name */
   UpdatedAt = 'updatedAt',
-  /** column name */
-  Voted = 'voted',
   /** column name */
   VotingSectionId = 'votingSectionId'
 }
@@ -8055,6 +8037,19 @@ export type CreateUserMutation = (
   )> }
 );
 
+export type GetUserByIdQueryVariables = Exact<{
+  id: Scalars['Int'];
+}>;
+
+
+export type GetUserByIdQuery = (
+  { __typename?: 'query_root' }
+  & { users_by_pk?: Maybe<(
+    { __typename?: 'users' }
+    & UserFieldsFragment
+  )> }
+);
+
 export type UpdateUserMutationVariables = Exact<{
   addrId: Scalars['Int'];
   addressSet: Addresses_Set_Input;
@@ -8089,7 +8084,7 @@ export type BulkInsertUsersMutation = (
 
 export type UserFieldsFragment = (
   { __typename?: 'users' }
-  & Pick<Users, 'id' | 'createdAt' | 'updatedAt' | 'name' | 'surname' | 'family' | 'egn' | 'email' | 'pin' | 'addressId' | 'voted' | 'eVoted' | 'votingSectionId'>
+  & Pick<Users, 'id' | 'createdAt' | 'updatedAt' | 'name' | 'surname' | 'family' | 'egn' | 'email' | 'pin' | 'addressId' | 'votingSectionId'>
   & { roleType: (
     { __typename?: 'role_types' }
     & Pick<Role_Types, 'value' | 'description'>
@@ -8382,8 +8377,6 @@ export const UserFieldsFragmentDoc = gql`
   email
   pin
   addressId
-  voted
-  eVoted
   votingSectionId
   roleType {
     value
@@ -8687,6 +8680,24 @@ export const CreateUserDocument = gql`
   })
   export class CreateUserGQL extends Apollo.Mutation<CreateUserMutation, CreateUserMutationVariables> {
     document = CreateUserDocument;
+    
+    constructor(apollo: Apollo.Apollo) {
+      super(apollo);
+    }
+  }
+export const GetUserByIdDocument = gql`
+    query GetUserById($id: Int!) {
+  users_by_pk(id: $id) {
+    ...UserFields
+  }
+}
+    ${UserFieldsFragmentDoc}`;
+
+  @Injectable({
+    providedIn: 'root'
+  })
+  export class GetUserByIdGQL extends Apollo.Query<GetUserByIdQuery, GetUserByIdQueryVariables> {
+    document = GetUserByIdDocument;
     
     constructor(apollo: Apollo.Apollo) {
       super(apollo);
