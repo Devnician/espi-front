@@ -14,13 +14,27 @@ object_relationships:
 - name: voting_section
   using:
     foreign_key_constraint_on: votingSectionId
+array_relationships:
+- name: referendum_votes
+  using:
+    foreign_key_constraint_on:
+      column: userId
+      table:
+        name: referendum_votes
+        schema: public
+- name: votes
+  using:
+    foreign_key_constraint_on:
+      column: userId
+      table:
+        name: votes
+        schema: public
 insert_permissions:
 - permission:
     backend_only: false
     check: {}
     columns:
     - addressId
-    - eVoted
     - egn
     - email
     - family
@@ -30,7 +44,6 @@ insert_permissions:
     - role
     - secondRole
     - surname
-    - voted
     - votingSectionId
   role: central
 - permission:
@@ -38,7 +51,6 @@ insert_permissions:
     check: {}
     columns:
     - addressId
-    - eVoted
     - egn
     - email
     - family
@@ -48,7 +60,6 @@ insert_permissions:
     - role
     - secondRole
     - surname
-    - voted
     - votingSectionId
   role: centralLeader
 select_permissions:
@@ -57,7 +68,6 @@ select_permissions:
     columns:
     - addressId
     - createdAt
-    - eVoted
     - egn
     - email
     - family
@@ -68,7 +78,6 @@ select_permissions:
     - secondRole
     - surname
     - updatedAt
-    - voted
     - votingSectionId
     filter: {}
   role: central
@@ -77,7 +86,6 @@ select_permissions:
     columns:
     - addressId
     - createdAt
-    - eVoted
     - egn
     - email
     - family
@@ -88,7 +96,6 @@ select_permissions:
     - secondRole
     - surname
     - updatedAt
-    - voted
     - votingSectionId
     filter: {}
   role: centralLeader
@@ -97,7 +104,6 @@ select_permissions:
     columns:
     - addressId
     - createdAt
-    - eVoted
     - egn
     - email
     - family
@@ -108,7 +114,6 @@ select_permissions:
     - secondRole
     - surname
     - updatedAt
-    - voted
     - votingSectionId
     filter: {}
   role: section
@@ -117,7 +122,6 @@ select_permissions:
     columns:
     - addressId
     - createdAt
-    - eVoted
     - egn
     - email
     - family
@@ -128,7 +132,6 @@ select_permissions:
     - secondRole
     - surname
     - updatedAt
-    - voted
     - votingSectionId
     filter: {}
   role: sectionLeader
@@ -137,7 +140,6 @@ select_permissions:
     columns:
     - addressId
     - createdAt
-    - eVoted
     - egn
     - email
     - family
@@ -148,7 +150,6 @@ select_permissions:
     - secondRole
     - surname
     - updatedAt
-    - voted
     - votingSectionId
     filter:
       id:
@@ -159,7 +160,6 @@ update_permissions:
     check: {}
     columns:
     - addressId
-    - eVoted
     - egn
     - email
     - family
@@ -170,7 +170,6 @@ update_permissions:
     - role
     - secondRole
     - surname
-    - voted
     - votingSectionId
     filter: {}
   role: central
@@ -178,7 +177,6 @@ update_permissions:
     check: {}
     columns:
     - addressId
-    - eVoted
     - egn
     - email
     - family
@@ -189,7 +187,6 @@ update_permissions:
     - role
     - secondRole
     - surname
-    - voted
     - votingSectionId
     filter: {}
   role: centralLeader

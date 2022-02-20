@@ -9,18 +9,19 @@ import { UsersService } from 'src/app/users/users-service';
 import {
   GetUsersQuery,
   Order_By,
-  Users,
   Users_Bool_Exp,
   Users_Order_By,
 } from 'src/generated/graphql';
+import { Election } from '../election.class';
+import { CustomUser } from './custom-user.class';
 
 /**
  * Data source for the OrdersTable view. This class should
  * encapsulate all logic for fetching and manipulating the displayed data
  * (including sorting, pagination, and filtering).
  */
-export class UsersTableDataSource extends DataSource<Users> {
-  data$: Observable<GetUsersQuery['users']>;
+export class UsersTableDataSource extends DataSource<CustomUser> {
+  // data$: Observable<GetUsersQuery['users']>;
   paginator: MatPaginator;
   counter: BehaviorSubject<number> = new BehaviorSubject(0);
   sort: MatSort;
@@ -28,15 +29,21 @@ export class UsersTableDataSource extends DataSource<Users> {
 
   loading: BehaviorSubject<any> = new BehaviorSubject(true);
   loading$ = this.loading.asObservable();
-  currentPageData: BehaviorSubject<Users[]> = new BehaviorSubject([]);
+  currentPageData: CustomUser[] = [];
 
   condition: BehaviorSubject<Users_Bool_Exp> = new BehaviorSubject({});
 
+  selectedElection: BehaviorSubject<Election> = new BehaviorSubject(undefined);
   constructor(
     private usersService: UsersService,
     private snackBar: MatSnackBar
   ) {
     super();
+    this.selectedElection.subscribe((selection) => {
+      if (selection) {
+        this.decorateUsers(this.currentPageData);
+      }
+    });
   }
 
   /**
@@ -44,10 +51,10 @@ export class UsersTableDataSource extends DataSource<Users> {
    * the returned stream emits new items.
    * @returns A stream of the items to be rendered.
    */
-  connect(): Observable<Users[] | any> {
+  connect(): Observable<CustomUser[] | any> {
     const limit: number = this.paginator.pageSize;
     const offset: number = this.paginator.pageIndex * this.paginator.pageSize;
-    const order_by: Users_Order_By = { createdAt: Order_By.Desc };
+    const order_by: Users_Order_By = { name: Order_By.Asc };
 
     // Combine everything that affects the rendered data into one update
     // stream for the data-table to consume.
@@ -69,9 +76,11 @@ export class UsersTableDataSource extends DataSource<Users> {
       startWith({}),
       tap(() => this.loading.next(true)),
       switchMap((fromWhere) => {
-        let order: any = new Object({});
+        let order: any; //= new Object({});
         if (this.sort.active && this.sort.active.length > 0) {
+          order = new Object({});
           const field = this.sort.active;
+
           this.sort.direction.indexOf('sc') !== -1
             ? (order[this.sort.active] = this.sort.direction)
             : (order = {});
@@ -82,7 +91,7 @@ export class UsersTableDataSource extends DataSource<Users> {
             limit: this.paginator.pageSize,
             offset: this.paginator.pageIndex * this.paginator.pageSize,
             condition: this.condition.value,
-            orderBy: order,
+            orderBy: order ? order : order_by,
           });
         } else {
           return this.queryRef.valueChanges;
@@ -106,10 +115,42 @@ export class UsersTableDataSource extends DataSource<Users> {
           throw Error(errorMessage);
         }
         this.counter.next(data.users_aggregate.aggregate.count);
-        this.currentPageData.next(data.users as Users[]);
-        return data.users;
+        const collection = this.decorateUsers(data.users as CustomUser[]);
+        this.currentPageData = collection;
+        return collection;
       })
     );
+  }
+  private decorateUsers(users: CustomUser[]) {
+    const collection = users;
+    collection.forEach((user) => {
+      user.tempVoted = this.votedForTheCurrentElection(user);
+    });
+    return collection;
+  }
+
+  private votedForTheCurrentElection(user: CustomUser): boolean {
+    if (this.selectedElection.value) {
+      const type = this.selectedElection.value.type;
+
+      if (type === 'referendum') {
+        if (
+          user.referendum_votes.findIndex(
+            (vote) =>
+              vote.referendum_question.referendum.id ===
+              this.selectedElection.value.id
+          ) > -1
+        ) {
+          // user is allready voted for this referendum
+          return true;
+        }
+      } else {
+        // TODO
+        console.log('add some logic here...');
+        return false;
+      }
+    }
+    return false;
   }
 
   /**

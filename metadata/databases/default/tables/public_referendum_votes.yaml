@@ -1,6 +1,10 @@
 table:
   name: referendum_votes
   schema: public
+object_relationships:
+- name: referendum_question
+  using:
+    foreign_key_constraint_on: questionId
 insert_permissions:
 - permission:
     backend_only: false
@@ -11,3 +15,32 @@ insert_permissions:
     - userId
     - vote
   role: user
+select_permissions:
+- permission:
+    columns:
+    - eVote
+    - questionId
+    - vote
+    filter: {}
+  role: central
+- permission:
+    columns:
+    - eVote
+    - questionId
+    - vote
+    filter: {}
+  role: centralLeader
+- permission:
+    columns:
+    - eVote
+    - questionId
+    - vote
+    filter: {}
+  role: section
+- permission:
+    columns:
+    - eVote
+    - questionId
+    - vote
+    filter: {}
+  role: sectionLeader

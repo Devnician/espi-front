@@ -43,13 +43,10 @@ export class VixenComponent implements OnDestroy {
   }
 
   getUSerRole(user: Users, index: number): Role_Types_Enum {
-    console.log(index);
     if (index === 0) {
-      console.log('q');
       return user.roleType.value as Role_Types_Enum;
     } else if (index === 1) {
-      console.log('l');
-      return user.secondRoleType.value as Role_Types_Enum;
+      return user?.secondRoleType.value as Role_Types_Enum;
     }
     return null;
   }

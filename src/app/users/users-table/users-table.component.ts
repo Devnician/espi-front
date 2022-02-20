@@ -12,6 +12,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatSort } from '@angular/material/sort';
 import { MatTable } from '@angular/material/table';
 import { FetchResult } from 'apollo-link';
+import { isNullOrUndefined } from 'is-what';
 import {
   BehaviorSubject,
   combineLatest,
@@ -26,6 +27,7 @@ import { rowsAnimation } from 'src/app/animations/template.animations';
 import { VixenComponent } from 'src/app/core/vixen/vixen.component';
 import { SettlementsService } from 'src/app/settlements/settlements-service.service';
 import { UsersGenerator } from 'src/app/utils/users-generator.class';
+import { VotingsService } from 'src/app/votings/voting-service.service';
 import {
   Addresses_Insert_Input,
   BulkInsertUsersMutation,
@@ -38,6 +40,7 @@ import {
   Users_Insert_Input,
 } from 'src/generated/graphql';
 import { EditUserComponent } from '../edit-user/edit-user.component';
+import { Election } from '../election.class';
 import { UsersService } from '../users-service';
 import { UserFilters } from './user-filters.interface';
 import { UsersTableDataSource } from './users-table-datasource';
@@ -70,12 +73,13 @@ export class UsersTableComponent
     'family',
     'roles',
     'email',
-    'voted',
-    'eVoted',
+    // 'voted',
+    // 'eVoted',
+    'tempVoted',
     'actions',
   ];
 
-  searchForm = this.fb.group({ egnFormControl: [null] });
+  searchForm = this.fb.group({ egnFormControl: [null], voting: [null] });
   generator: UsersGenerator = new UsersGenerator();
   municipalitiesIds: GetMunicipalitiesIdsQuery['settlements'];
   municipalitiesLength: number;
@@ -86,6 +90,8 @@ export class UsersTableComponent
   limit: BehaviorSubject<number> = new BehaviorSubject(50000);
   filters: UserFilters = { egn: undefined, votingSectionId: undefined };
 
+  elections: Election[] = [];
+  // selectedElection: Election;
   /**
    *
    * @param usersService
@@ -96,7 +102,9 @@ export class UsersTableComponent
    */
   constructor(
     private usersService: UsersService,
+    private votingsService: VotingsService,
     private settlementsService: SettlementsService,
+
     private snackBar: MatSnackBar,
     private dialog: MatDialog,
     private fb: FormBuilder,
@@ -106,7 +114,10 @@ export class UsersTableComponent
     super(injector);
     this.dataSource = new UsersTableDataSource(usersService, snackBar);
     this.dataSource.loading.next(true);
+    this.loadReferendumsInFilterIfAny();
+    this.loadVotingsInFilterIfAny();
   }
+
   ngOnInit(): void {
     combineLatest(this.userObservables).subscribe((data) => {
       const user = data[0];
@@ -129,13 +140,67 @@ export class UsersTableComponent
       }
     });
     this.checkUndistributed();
-    this.searchForm
-      .get('egnFormControl')
-      .valueChanges.pipe(debounceTime(800))
-      .subscribe((data) => {
-        this.searchChanged(data);
-      });
+    this.attachLiteners();
   }
+  attachLiteners() {
+    this.subscriptions.push(
+      this.searchForm
+        .get('egnFormControl')
+        .valueChanges.pipe(debounceTime(800))
+        .subscribe((data) => {
+          this.searchChanged(data);
+        }),
+      this.searchForm
+        .get('voting')
+        .valueChanges.pipe(debounceTime(100))
+        .subscribe((data) => {
+          console.log(data);
+          //  let election: Election = { type: 'voting' } as Election;
+
+          this.dataSource.selectedElection.next(
+            this.elections.find((e) => e.id === data.id)
+          );
+        })
+    );
+  }
+
+  private loadReferendumsInFilterIfAny() {
+    this.votingsService.getStartedReferendums().subscribe((response) => {
+      response.data.referendums.forEach((element) => {
+        let election: Election = { type: 'referendum' } as Election;
+        election = Object.assign(election, element);
+        this.elections.push(election);
+      });
+      this.showFirstVotingAsSelected();
+    });
+  }
+
+  loadVotingsInFilterIfAny() {
+    this.votingsService.getStartedVotings().subscribe((response) => {
+      console.log(response);
+      if (response.data.votings) {
+        response.data.votings.forEach((element) => {
+          let election: Election = { type: 'voting' } as Election;
+          election = Object.assign(election, element);
+          this.elections.push(election);
+        });
+        this.showFirstVotingAsSelected();
+      }
+    });
+  }
+
+  showFirstVotingAsSelected() {
+    if (isNullOrUndefined(this.searchForm.get('voting').value)) {
+      console.log('SET FIRST ....');
+      this.searchForm.get('voting').setValue(this.elections[0]);
+      // this.selectedElection = this.elections[0];
+      this.dataSource.selectedElection.next(this.elections[0]);
+    }
+  }
+
+  // decorateUsers() {
+  //   console.log(this.selectedElection);
+  // }
 
   checkUndistributed() {
     this.dataSource.loading.next(true);
