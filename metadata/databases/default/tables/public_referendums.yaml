@@ -69,6 +69,7 @@ select_permissions:
     filter: {}
   role: centralLeader
 - permission:
+    allow_aggregations: true
     columns:
     - createdAt
     - description
@@ -83,6 +84,7 @@ select_permissions:
     filter: {}
   role: section
 - permission:
+    allow_aggregations: true
     columns:
     - createdAt
     - description

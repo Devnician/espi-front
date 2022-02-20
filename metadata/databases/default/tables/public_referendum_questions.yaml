@@ -1,6 +1,10 @@
 table:
   name: referendum_questions
   schema: public
+object_relationships:
+- name: referendum
+  using:
+    foreign_key_constraint_on: referendumId
 array_relationships:
 - name: referendum_votes
   using:

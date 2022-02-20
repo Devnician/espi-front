@@ -14,6 +14,21 @@ object_relationships:
 - name: voting_section
   using:
     foreign_key_constraint_on: votingSectionId
+array_relationships:
+- name: referendum_votes
+  using:
+    foreign_key_constraint_on:
+      column: userId
+      table:
+        name: referendum_votes
+        schema: public
+- name: votes
+  using:
+    foreign_key_constraint_on:
+      column: userId
+      table:
+        name: votes
+        schema: public
 insert_permissions:
 - permission:
     backend_only: false

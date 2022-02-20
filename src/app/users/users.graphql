@@ -74,6 +74,15 @@ fragment UserFields on users {
       ...SettlementFileds
     }
   }
+  referendum_votes {
+    vote
+    eVote
+    referendum_question {
+      referendum {
+        id
+      }
+    }
+  }
 }
 # distributor
 

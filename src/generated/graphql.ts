@@ -3255,7 +3255,7 @@ export type Query_Root = {
   referendum_questions_by_pk?: Maybe<Referendum_Questions>;
   /** fetch data from the table: "referendum_votes" */
   referendum_votes: Array<Referendum_Votes>;
-  /** fetch aggregated fields from the table: "referendum_votes" */
+  /** An aggregate relationship */
   referendum_votes_aggregate: Referendum_Votes_Aggregate;
   /** fetch data from the table: "referendum_votes" using primary key columns */
   referendum_votes_by_pk?: Maybe<Referendum_Votes>;
@@ -3271,7 +3271,7 @@ export type Query_Root = {
   role_types_aggregate: Role_Types_Aggregate;
   /** fetch data from the table: "role_types" using primary key columns */
   role_types_by_pk?: Maybe<Role_Types>;
-  /** fetch data from the table: "settlements" */
+  /** An array relationship */
   settlements: Array<Settlements>;
   /** An aggregate relationship */
   settlements_aggregate: Settlements_Aggregate;
@@ -3998,10 +3998,12 @@ export type Referendum_Questions = {
   createdAt: Scalars['timestamptz'];
   id: Scalars['Int'];
   question: Scalars['String'];
+  /** An object relationship */
+  referendum: Referendums;
   referendumId: Scalars['Int'];
   /** fetch data from the table: "referendum_votes" */
   referendum_votes: Array<Referendum_Votes>;
-  /** fetch aggregated fields from the table: "referendum_votes" */
+  /** An aggregate relationship */
   referendum_votes_aggregate: Referendum_Votes_Aggregate;
   updatedAt: Scalars['timestamptz'];
 };
@@ -4099,6 +4101,7 @@ export type Referendum_Questions_Bool_Exp = {
   createdAt?: Maybe<Timestamptz_Comparison_Exp>;
   id?: Maybe<Int_Comparison_Exp>;
   question?: Maybe<String_Comparison_Exp>;
+  referendum?: Maybe<Referendums_Bool_Exp>;
   referendumId?: Maybe<Int_Comparison_Exp>;
   referendum_votes?: Maybe<Referendum_Votes_Bool_Exp>;
   updatedAt?: Maybe<Timestamptz_Comparison_Exp>;
@@ -4121,6 +4124,7 @@ export type Referendum_Questions_Insert_Input = {
   createdAt?: Maybe<Scalars['timestamptz']>;
   id?: Maybe<Scalars['Int']>;
   question?: Maybe<Scalars['String']>;
+  referendum?: Maybe<Referendums_Obj_Rel_Insert_Input>;
   referendumId?: Maybe<Scalars['Int']>;
   referendum_votes?: Maybe<Referendum_Votes_Arr_Rel_Insert_Input>;
   updatedAt?: Maybe<Scalars['timestamptz']>;
@@ -4173,6 +4177,13 @@ export type Referendum_Questions_Mutation_Response = {
   returning: Array<Referendum_Questions>;
 };
 
+/** input type for inserting object relation for remote table "referendum_questions" */
+export type Referendum_Questions_Obj_Rel_Insert_Input = {
+  data: Referendum_Questions_Insert_Input;
+  /** on conflict condition */
+  on_conflict?: Maybe<Referendum_Questions_On_Conflict>;
+};
+
 /** on conflict condition type for table "referendum_questions" */
 export type Referendum_Questions_On_Conflict = {
   constraint: Referendum_Questions_Constraint;
@@ -4185,6 +4196,7 @@ export type Referendum_Questions_Order_By = {
   createdAt?: Maybe<Order_By>;
   id?: Maybe<Order_By>;
   question?: Maybe<Order_By>;
+  referendum?: Maybe<Referendums_Order_By>;
   referendumId?: Maybe<Order_By>;
   referendum_votes_aggregate?: Maybe<Referendum_Votes_Aggregate_Order_By>;
   updatedAt?: Maybe<Order_By>;
@@ -4330,6 +4342,8 @@ export type Referendum_Votes = {
   eVote?: Maybe<Scalars['Boolean']>;
   id: Scalars['Int'];
   questionId: Scalars['Int'];
+  /** An object relationship */
+  referendum_question: Referendum_Questions;
   sectionId?: Maybe<Scalars['Int']>;
   userId: Scalars['Int'];
   vote?: Maybe<Scalars['Boolean']>;
@@ -4413,6 +4427,7 @@ export type Referendum_Votes_Bool_Exp = {
   eVote?: Maybe<Boolean_Comparison_Exp>;
   id?: Maybe<Int_Comparison_Exp>;
   questionId?: Maybe<Int_Comparison_Exp>;
+  referendum_question?: Maybe<Referendum_Questions_Bool_Exp>;
   sectionId?: Maybe<Int_Comparison_Exp>;
   userId?: Maybe<Int_Comparison_Exp>;
   vote?: Maybe<Boolean_Comparison_Exp>;
@@ -4438,6 +4453,7 @@ export type Referendum_Votes_Insert_Input = {
   eVote?: Maybe<Scalars['Boolean']>;
   id?: Maybe<Scalars['Int']>;
   questionId?: Maybe<Scalars['Int']>;
+  referendum_question?: Maybe<Referendum_Questions_Obj_Rel_Insert_Input>;
   sectionId?: Maybe<Scalars['Int']>;
   userId?: Maybe<Scalars['Int']>;
   vote?: Maybe<Scalars['Boolean']>;
@@ -4503,6 +4519,7 @@ export type Referendum_Votes_Order_By = {
   eVote?: Maybe<Order_By>;
   id?: Maybe<Order_By>;
   questionId?: Maybe<Order_By>;
+  referendum_question?: Maybe<Referendum_Questions_Order_By>;
   sectionId?: Maybe<Order_By>;
   userId?: Maybe<Order_By>;
   vote?: Maybe<Order_By>;
@@ -4843,6 +4860,13 @@ export type Referendums_Mutation_Response = {
   returning: Array<Referendums>;
 };
 
+/** input type for inserting object relation for remote table "referendums" */
+export type Referendums_Obj_Rel_Insert_Input = {
+  data: Referendums_Insert_Input;
+  /** on conflict condition */
+  on_conflict?: Maybe<Referendums_On_Conflict>;
+};
+
 /** on conflict condition type for table "referendums" */
 export type Referendums_On_Conflict = {
   constraint: Referendums_Constraint;
@@ -5135,7 +5159,7 @@ export type Settlements = {
   parentId?: Maybe<Scalars['Int']>;
   /** An object relationship */
   parentSettlement?: Maybe<Settlements>;
-  /** fetch data from the table: "settlements" */
+  /** An array relationship */
   settlements: Array<Settlements>;
   /** An aggregate relationship */
   settlements_aggregate: Settlements_Aggregate;
@@ -5524,7 +5548,7 @@ export type Subscription_Root = {
   referendum_questions_by_pk?: Maybe<Referendum_Questions>;
   /** fetch data from the table: "referendum_votes" */
   referendum_votes: Array<Referendum_Votes>;
-  /** fetch aggregated fields from the table: "referendum_votes" */
+  /** An aggregate relationship */
   referendum_votes_aggregate: Referendum_Votes_Aggregate;
   /** fetch data from the table: "referendum_votes" using primary key columns */
   referendum_votes_by_pk?: Maybe<Referendum_Votes>;
@@ -5540,7 +5564,7 @@ export type Subscription_Root = {
   role_types_aggregate: Role_Types_Aggregate;
   /** fetch data from the table: "role_types" using primary key columns */
   role_types_by_pk?: Maybe<Role_Types>;
-  /** fetch data from the table: "settlements" */
+  /** An array relationship */
   settlements: Array<Settlements>;
   /** An aggregate relationship */
   settlements_aggregate: Settlements_Aggregate;
@@ -6125,6 +6149,10 @@ export type Users = {
   name: Scalars['String'];
   password?: Maybe<Scalars['String']>;
   pin?: Maybe<Scalars['String']>;
+  /** fetch data from the table: "referendum_votes" */
+  referendum_votes: Array<Referendum_Votes>;
+  /** An aggregate relationship */
+  referendum_votes_aggregate: Referendum_Votes_Aggregate;
   role: Role_Types_Enum;
   /** An object relationship */
   roleType: Role_Types;
@@ -6134,7 +6162,53 @@ export type Users = {
   surname: Scalars['String'];
   updatedAt: Scalars['timestamptz'];
   voted: Scalars['Boolean'];
+  /** fetch data from the table: "votes" */
+  votes: Array<Votes>;
+  /** fetch aggregated fields from the table: "votes" */
+  votes_aggregate: Votes_Aggregate;
   votingSectionId?: Maybe<Scalars['Int']>;
+  /** An object relationship */
+  voting_section?: Maybe<Voting_Section>;
+};
+
+
+/** columns and relationships of "users" */
+export type UsersReferendum_VotesArgs = {
+  distinct_on?: Maybe<Array<Referendum_Votes_Select_Column>>;
+  limit?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  order_by?: Maybe<Array<Referendum_Votes_Order_By>>;
+  where?: Maybe<Referendum_Votes_Bool_Exp>;
+};
+
+
+/** columns and relationships of "users" */
+export type UsersReferendum_Votes_AggregateArgs = {
+  distinct_on?: Maybe<Array<Referendum_Votes_Select_Column>>;
+  limit?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  order_by?: Maybe<Array<Referendum_Votes_Order_By>>;
+  where?: Maybe<Referendum_Votes_Bool_Exp>;
+};
+
+
+/** columns and relationships of "users" */
+export type UsersVotesArgs = {
+  distinct_on?: Maybe<Array<Votes_Select_Column>>;
+  limit?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  order_by?: Maybe<Array<Votes_Order_By>>;
+  where?: Maybe<Votes_Bool_Exp>;
+};
+
+
+/** columns and relationships of "users" */
+export type UsersVotes_AggregateArgs = {
+  distinct_on?: Maybe<Array<Votes_Select_Column>>;
+  limit?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  order_by?: Maybe<Array<Votes_Order_By>>;
+  where?: Maybe<Votes_Bool_Exp>;
 };
 
 /** aggregated selection of "users" */
@@ -6191,6 +6265,7 @@ export type Users_Bool_Exp = {
   name?: Maybe<String_Comparison_Exp>;
   password?: Maybe<String_Comparison_Exp>;
   pin?: Maybe<String_Comparison_Exp>;
+  referendum_votes?: Maybe<Referendum_Votes_Bool_Exp>;
   role?: Maybe<Role_Types_Enum_Comparison_Exp>;
   roleType?: Maybe<Role_Types_Bool_Exp>;
   secondRole?: Maybe<Role_Types_Enum_Comparison_Exp>;
@@ -6198,7 +6273,9 @@ export type Users_Bool_Exp = {
   surname?: Maybe<String_Comparison_Exp>;
   updatedAt?: Maybe<Timestamptz_Comparison_Exp>;
   voted?: Maybe<Boolean_Comparison_Exp>;
+  votes?: Maybe<Votes_Bool_Exp>;
   votingSectionId?: Maybe<Int_Comparison_Exp>;
+  voting_section?: Maybe<Voting_Section_Bool_Exp>;
 };
 
 /** unique or primary key constraints on table "users" */
@@ -6229,6 +6306,7 @@ export type Users_Insert_Input = {
   name?: Maybe<Scalars['String']>;
   password?: Maybe<Scalars['String']>;
   pin?: Maybe<Scalars['String']>;
+  referendum_votes?: Maybe<Referendum_Votes_Arr_Rel_Insert_Input>;
   role?: Maybe<Role_Types_Enum>;
   roleType?: Maybe<Role_Types_Obj_Rel_Insert_Input>;
   secondRole?: Maybe<Role_Types_Enum>;
@@ -6236,7 +6314,9 @@ export type Users_Insert_Input = {
   surname?: Maybe<Scalars['String']>;
   updatedAt?: Maybe<Scalars['timestamptz']>;
   voted?: Maybe<Scalars['Boolean']>;
+  votes?: Maybe<Votes_Arr_Rel_Insert_Input>;
   votingSectionId?: Maybe<Scalars['Int']>;
+  voting_section?: Maybe<Voting_Section_Obj_Rel_Insert_Input>;
 };
 
 /** aggregate max on columns */
@@ -6302,6 +6382,7 @@ export type Users_Order_By = {
   name?: Maybe<Order_By>;
   password?: Maybe<Order_By>;
   pin?: Maybe<Order_By>;
+  referendum_votes_aggregate?: Maybe<Referendum_Votes_Aggregate_Order_By>;
   role?: Maybe<Order_By>;
   roleType?: Maybe<Role_Types_Order_By>;
   secondRole?: Maybe<Order_By>;
@@ -6309,7 +6390,9 @@ export type Users_Order_By = {
   surname?: Maybe<Order_By>;
   updatedAt?: Maybe<Order_By>;
   voted?: Maybe<Order_By>;
+  votes_aggregate?: Maybe<Votes_Aggregate_Order_By>;
   votingSectionId?: Maybe<Order_By>;
+  voting_section?: Maybe<Voting_Section_Order_By>;
 };
 
 /** primary key columns input for table: users */
@@ -6507,6 +6590,28 @@ export type Votes_Aggregate_FieldsCountArgs = {
   distinct?: Maybe<Scalars['Boolean']>;
 };
 
+/** order by aggregate values of table "votes" */
+export type Votes_Aggregate_Order_By = {
+  avg?: Maybe<Votes_Avg_Order_By>;
+  count?: Maybe<Order_By>;
+  max?: Maybe<Votes_Max_Order_By>;
+  min?: Maybe<Votes_Min_Order_By>;
+  stddev?: Maybe<Votes_Stddev_Order_By>;
+  stddev_pop?: Maybe<Votes_Stddev_Pop_Order_By>;
+  stddev_samp?: Maybe<Votes_Stddev_Samp_Order_By>;
+  sum?: Maybe<Votes_Sum_Order_By>;
+  var_pop?: Maybe<Votes_Var_Pop_Order_By>;
+  var_samp?: Maybe<Votes_Var_Samp_Order_By>;
+  variance?: Maybe<Votes_Variance_Order_By>;
+};
+
+/** input type for inserting array relation for remote table "votes" */
+export type Votes_Arr_Rel_Insert_Input = {
+  data: Array<Votes_Insert_Input>;
+  /** on conflict condition */
+  on_conflict?: Maybe<Votes_On_Conflict>;
+};
+
 /** aggregate avg on columns */
 export type Votes_Avg_Fields = {
   __typename?: 'votes_avg_fields';
@@ -6514,6 +6619,14 @@ export type Votes_Avg_Fields = {
   sectionId?: Maybe<Scalars['Float']>;
   userId?: Maybe<Scalars['Float']>;
   votingId?: Maybe<Scalars['Float']>;
+};
+
+/** order by avg() on columns of table "votes" */
+export type Votes_Avg_Order_By = {
+  id?: Maybe<Order_By>;
+  sectionId?: Maybe<Order_By>;
+  userId?: Maybe<Order_By>;
+  votingId?: Maybe<Order_By>;
 };
 
 /** Boolean expression to filter rows from the table "votes". All fields are combined with a logical 'AND'. */
@@ -6567,6 +6680,17 @@ export type Votes_Max_Fields = {
   votingId?: Maybe<Scalars['Int']>;
 };
 
+/** order by max() on columns of table "votes" */
+export type Votes_Max_Order_By = {
+  createdAt?: Maybe<Order_By>;
+  eVote?: Maybe<Order_By>;
+  id?: Maybe<Order_By>;
+  sectionId?: Maybe<Order_By>;
+  userId?: Maybe<Order_By>;
+  vote?: Maybe<Order_By>;
+  votingId?: Maybe<Order_By>;
+};
+
 /** aggregate min on columns */
 export type Votes_Min_Fields = {
   __typename?: 'votes_min_fields';
@@ -6577,6 +6701,17 @@ export type Votes_Min_Fields = {
   userId?: Maybe<Scalars['Int']>;
   vote?: Maybe<Scalars['String']>;
   votingId?: Maybe<Scalars['Int']>;
+};
+
+/** order by min() on columns of table "votes" */
+export type Votes_Min_Order_By = {
+  createdAt?: Maybe<Order_By>;
+  eVote?: Maybe<Order_By>;
+  id?: Maybe<Order_By>;
+  sectionId?: Maybe<Order_By>;
+  userId?: Maybe<Order_By>;
+  vote?: Maybe<Order_By>;
+  votingId?: Maybe<Order_By>;
 };
 
 /** response of any mutation on the table "votes" */
@@ -6649,6 +6784,14 @@ export type Votes_Stddev_Fields = {
   votingId?: Maybe<Scalars['Float']>;
 };
 
+/** order by stddev() on columns of table "votes" */
+export type Votes_Stddev_Order_By = {
+  id?: Maybe<Order_By>;
+  sectionId?: Maybe<Order_By>;
+  userId?: Maybe<Order_By>;
+  votingId?: Maybe<Order_By>;
+};
+
 /** aggregate stddev_pop on columns */
 export type Votes_Stddev_Pop_Fields = {
   __typename?: 'votes_stddev_pop_fields';
@@ -6656,6 +6799,14 @@ export type Votes_Stddev_Pop_Fields = {
   sectionId?: Maybe<Scalars['Float']>;
   userId?: Maybe<Scalars['Float']>;
   votingId?: Maybe<Scalars['Float']>;
+};
+
+/** order by stddev_pop() on columns of table "votes" */
+export type Votes_Stddev_Pop_Order_By = {
+  id?: Maybe<Order_By>;
+  sectionId?: Maybe<Order_By>;
+  userId?: Maybe<Order_By>;
+  votingId?: Maybe<Order_By>;
 };
 
 /** aggregate stddev_samp on columns */
@@ -6667,6 +6818,14 @@ export type Votes_Stddev_Samp_Fields = {
   votingId?: Maybe<Scalars['Float']>;
 };
 
+/** order by stddev_samp() on columns of table "votes" */
+export type Votes_Stddev_Samp_Order_By = {
+  id?: Maybe<Order_By>;
+  sectionId?: Maybe<Order_By>;
+  userId?: Maybe<Order_By>;
+  votingId?: Maybe<Order_By>;
+};
+
 /** aggregate sum on columns */
 export type Votes_Sum_Fields = {
   __typename?: 'votes_sum_fields';
@@ -6674,6 +6833,14 @@ export type Votes_Sum_Fields = {
   sectionId?: Maybe<Scalars['Int']>;
   userId?: Maybe<Scalars['Int']>;
   votingId?: Maybe<Scalars['Int']>;
+};
+
+/** order by sum() on columns of table "votes" */
+export type Votes_Sum_Order_By = {
+  id?: Maybe<Order_By>;
+  sectionId?: Maybe<Order_By>;
+  userId?: Maybe<Order_By>;
+  votingId?: Maybe<Order_By>;
 };
 
 /** update columns of table "votes" */
@@ -6703,6 +6870,14 @@ export type Votes_Var_Pop_Fields = {
   votingId?: Maybe<Scalars['Float']>;
 };
 
+/** order by var_pop() on columns of table "votes" */
+export type Votes_Var_Pop_Order_By = {
+  id?: Maybe<Order_By>;
+  sectionId?: Maybe<Order_By>;
+  userId?: Maybe<Order_By>;
+  votingId?: Maybe<Order_By>;
+};
+
 /** aggregate var_samp on columns */
 export type Votes_Var_Samp_Fields = {
   __typename?: 'votes_var_samp_fields';
@@ -6712,6 +6887,14 @@ export type Votes_Var_Samp_Fields = {
   votingId?: Maybe<Scalars['Float']>;
 };
 
+/** order by var_samp() on columns of table "votes" */
+export type Votes_Var_Samp_Order_By = {
+  id?: Maybe<Order_By>;
+  sectionId?: Maybe<Order_By>;
+  userId?: Maybe<Order_By>;
+  votingId?: Maybe<Order_By>;
+};
+
 /** aggregate variance on columns */
 export type Votes_Variance_Fields = {
   __typename?: 'votes_variance_fields';
@@ -6719,6 +6902,14 @@ export type Votes_Variance_Fields = {
   sectionId?: Maybe<Scalars['Float']>;
   userId?: Maybe<Scalars['Float']>;
   votingId?: Maybe<Scalars['Float']>;
+};
+
+/** order by variance() on columns of table "votes" */
+export type Votes_Variance_Order_By = {
+  id?: Maybe<Order_By>;
+  sectionId?: Maybe<Order_By>;
+  userId?: Maybe<Order_By>;
+  votingId?: Maybe<Order_By>;
 };
 
 /** columns and relationships of "voting_section" */
@@ -6837,6 +7028,13 @@ export type Voting_Section_Mutation_Response = {
   affected_rows: Scalars['Int'];
   /** data from the rows affected by the mutation */
   returning: Array<Voting_Section>;
+};
+
+/** input type for inserting object relation for remote table "voting_section" */
+export type Voting_Section_Obj_Rel_Insert_Input = {
+  data: Voting_Section_Insert_Input;
+  /** on conflict condition */
+  on_conflict?: Maybe<Voting_Section_On_Conflict>;
 };
 
 /** on conflict condition type for table "voting_section" */
@@ -7905,7 +8103,17 @@ export type UserFieldsFragment = (
       & SettlementFiledsFragment
     ) }
     & AddressShortFragment
-  ) }
+  ), referendum_votes: Array<(
+    { __typename?: 'referendum_votes' }
+    & Pick<Referendum_Votes, 'vote' | 'eVote'>
+    & { referendum_question: (
+      { __typename?: 'referendum_questions' }
+      & { referendum: (
+        { __typename?: 'referendums' }
+        & Pick<Referendums, 'id'>
+      ) }
+    ) }
+  )> }
 );
 
 export type CountUndistributedToVotingSectionsQueryVariables = Exact<{ [key: string]: never; }>;
@@ -8189,6 +8397,15 @@ export const UserFieldsFragmentDoc = gql`
     ...AddressShort
     settlement {
       ...SettlementFileds
+    }
+  }
+  referendum_votes {
+    vote
+    eVote
+    referendum_question {
+      referendum {
+        id
+      }
     }
   }
 }
