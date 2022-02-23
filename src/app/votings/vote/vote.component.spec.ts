@@ -1,5 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-
+import { RouterTestingModule } from '@angular/router/testing';
+import { Valido } from 'src/app/core/valido';
+import { Donkey } from 'src/app/services/donkey.service';
 import { VoteComponent } from './vote.component';
 
 describe('VoteComponent', () => {
@@ -8,9 +10,10 @@ describe('VoteComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ VoteComponent ]
-    })
-    .compileComponents();
+      declarations: [VoteComponent],
+      imports: [RouterTestingModule],
+      providers: [Valido, Donkey],
+    }).compileComponents();
   });
 
   beforeEach(() => {

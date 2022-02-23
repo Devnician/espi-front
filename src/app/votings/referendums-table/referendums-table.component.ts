@@ -57,7 +57,7 @@ export class ReferendumsTableComponent implements AfterViewInit {
   }
   canUnlock(): boolean {
     if (
-      this.loggedUSer.roleType.value === Role_Types_Enum.CentralLeader ||
+      this.loggedUSer?.roleType.value === Role_Types_Enum.CentralLeader ||
       this.loggedUSer?.secondRoleType.value === Role_Types_Enum.CentralLeader
     ) {
       return true;

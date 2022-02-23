@@ -16,7 +16,7 @@
   <mat-form-field appearance="fill" class="espi-egn-search">
     <mat-label>Тип избор</mat-label>
     <!--   [(value)]="selectedElection" -->
-    <mat-select #actionTypesSelect formControlName="voting">
+    <mat-select #actionTypesSelect formControlName="voting" ngDefaultControl>
       <div (mouseleave)="actionTypesSelect.close()">
         <mat-option *ngFor="let referendum of elections" [value]="referendum">{{
           referendum.name
@@ -25,7 +25,6 @@
     </mat-select>
     <mat-hint align="end">Филтриране по действия ^</mat-hint>
   </mat-form-field>
-
   <div
     *ngIf="canUserSeeThis() | async"
     style="display: flex; justify-content: flex-end"

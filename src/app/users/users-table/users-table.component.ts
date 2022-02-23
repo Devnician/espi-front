@@ -3,7 +3,7 @@ import {
   Component,
   Injector,
   OnInit,
-  ViewChild,
+  ViewChild
 } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
@@ -21,7 +21,7 @@ import {
   map,
   Observable,
   Subscription,
-  take,
+  take
 } from 'rxjs';
 import { rowsAnimation } from 'src/app/animations/template.animations';
 import { VixenComponent } from 'src/app/core/vixen/vixen.component';
@@ -37,7 +37,7 @@ import {
   Role_Types_Enum,
   Users,
   Users_Bool_Exp,
-  Users_Insert_Input,
+  Users_Insert_Input
 } from 'src/generated/graphql';
 import { EditUserComponent } from '../edit-user/edit-user.component';
 import { Election } from '../election.class';
@@ -79,7 +79,7 @@ export class UsersTableComponent
     'actions',
   ];
 
-  searchForm = this.fb.group({ egnFormControl: [null], voting: [null] });
+  searchForm = this.fb.group({ egnFormControl: [null], voting : [null] });
   generator: UsersGenerator = new UsersGenerator();
   municipalitiesIds: GetMunicipalitiesIdsQuery['settlements'];
   municipalitiesLength: number;
