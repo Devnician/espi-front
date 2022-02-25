@@ -164,7 +164,9 @@
             <mat-icon>edit</mat-icon>
             <span>Редактирай</span>
           </button>
-          <button mat-menu-item (click)="openSetVoteConfirmation(row)">
+          <button 
+          *ngIf="(userObservables[0] | async).roleType.value === 'sectionLeader' || (userObservables[0] | async).roleType.value === 'section'"
+          mat-menu-item (click)="openSetVoteConfirmation(row)">
             <mat-icon>how_to_vote</mat-icon>
             <span>Гласувал</span>
           </button>
