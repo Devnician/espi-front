@@ -104,3 +104,11 @@ mutation distributeUsers($arg: distribute_the_undistributed_users_new_args!) {
     counter
   }
 }
+
+mutation SetVoted($userId: Int) {
+  update_users(where: {id: {_eq: $userId}}, _set: {voted: true}) {
+    returning {
+      id
+    }
+  }
+}

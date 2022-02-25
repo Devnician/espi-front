@@ -6152,14 +6152,15 @@ export type Users = {
   referendum_votes: Array<Referendum_Votes>;
   /** An aggregate relationship */
   referendum_votes_aggregate: Referendum_Votes_Aggregate;
-  role: Role_Types_Enum;
+  role?: Maybe<Role_Types_Enum>;
   /** An object relationship */
-  roleType: Role_Types;
+  roleType?: Maybe<Role_Types>;
   secondRole?: Maybe<Role_Types_Enum>;
   /** An object relationship */
   secondRoleType?: Maybe<Role_Types>;
   surname: Scalars['String'];
   updatedAt: Scalars['timestamptz'];
+  voted: Scalars['Boolean'];
   /** fetch data from the table: "votes" */
   votes: Array<Votes>;
   /** fetch aggregated fields from the table: "votes" */
@@ -6269,6 +6270,7 @@ export type Users_Bool_Exp = {
   secondRoleType?: Maybe<Role_Types_Bool_Exp>;
   surname?: Maybe<String_Comparison_Exp>;
   updatedAt?: Maybe<Timestamptz_Comparison_Exp>;
+  voted?: Maybe<Boolean_Comparison_Exp>;
   votes?: Maybe<Votes_Bool_Exp>;
   votingSectionId?: Maybe<Int_Comparison_Exp>;
   voting_section?: Maybe<Voting_Section_Bool_Exp>;
@@ -6308,6 +6310,7 @@ export type Users_Insert_Input = {
   secondRoleType?: Maybe<Role_Types_Obj_Rel_Insert_Input>;
   surname?: Maybe<Scalars['String']>;
   updatedAt?: Maybe<Scalars['timestamptz']>;
+  voted?: Maybe<Scalars['Boolean']>;
   votes?: Maybe<Votes_Arr_Rel_Insert_Input>;
   votingSectionId?: Maybe<Scalars['Int']>;
   voting_section?: Maybe<Voting_Section_Obj_Rel_Insert_Input>;
@@ -6382,6 +6385,7 @@ export type Users_Order_By = {
   secondRoleType?: Maybe<Role_Types_Order_By>;
   surname?: Maybe<Order_By>;
   updatedAt?: Maybe<Order_By>;
+  voted?: Maybe<Order_By>;
   votes_aggregate?: Maybe<Votes_Aggregate_Order_By>;
   votingSectionId?: Maybe<Order_By>;
   voting_section?: Maybe<Voting_Section_Order_By>;
@@ -6421,6 +6425,8 @@ export enum Users_Select_Column {
   /** column name */
   UpdatedAt = 'updatedAt',
   /** column name */
+  Voted = 'voted',
+  /** column name */
   VotingSectionId = 'votingSectionId'
 }
 
@@ -6439,6 +6445,7 @@ export type Users_Set_Input = {
   secondRole?: Maybe<Role_Types_Enum>;
   surname?: Maybe<Scalars['String']>;
   updatedAt?: Maybe<Scalars['timestamptz']>;
+  voted?: Maybe<Scalars['Boolean']>;
   votingSectionId?: Maybe<Scalars['Int']>;
 };
 
@@ -6502,6 +6509,8 @@ export enum Users_Update_Column {
   Surname = 'surname',
   /** column name */
   UpdatedAt = 'updatedAt',
+  /** column name */
+  Voted = 'voted',
   /** column name */
   VotingSectionId = 'votingSectionId'
 }
@@ -8085,10 +8094,10 @@ export type BulkInsertUsersMutation = (
 export type UserFieldsFragment = (
   { __typename?: 'users' }
   & Pick<Users, 'id' | 'createdAt' | 'updatedAt' | 'name' | 'surname' | 'family' | 'egn' | 'email' | 'pin' | 'addressId' | 'votingSectionId'>
-  & { roleType: (
+  & { roleType?: Maybe<(
     { __typename?: 'role_types' }
     & Pick<Role_Types, 'value' | 'description'>
-  ), secondRoleType?: Maybe<(
+  )>, secondRoleType?: Maybe<(
     { __typename?: 'role_types' }
     & Pick<Role_Types, 'value' | 'description'>
   )>, address: (
@@ -8135,6 +8144,22 @@ export type DistributeUsersMutation = (
   & { distribute_the_undistributed_users_new: Array<(
     { __typename?: 'counters' }
     & Pick<Counters, 'id' | 'counter'>
+  )> }
+);
+
+export type SetVotedMutationVariables = Exact<{
+  userId?: Maybe<Scalars['Int']>;
+}>;
+
+
+export type SetVotedMutation = (
+  { __typename?: 'mutation_root' }
+  & { update_users?: Maybe<(
+    { __typename?: 'users_mutation_response' }
+    & { returning: Array<(
+      { __typename?: 'users' }
+      & Pick<Users, 'id'>
+    )> }
   )> }
 );
 
@@ -8780,6 +8805,26 @@ export const DistributeUsersDocument = gql`
   })
   export class DistributeUsersGQL extends Apollo.Mutation<DistributeUsersMutation, DistributeUsersMutationVariables> {
     document = DistributeUsersDocument;
+    
+    constructor(apollo: Apollo.Apollo) {
+      super(apollo);
+    }
+  }
+export const SetVotedDocument = gql`
+    mutation SetVoted($userId: Int) {
+  update_users(where: {id: {_eq: $userId}}, _set: {voted: true}) {
+    returning {
+      id
+    }
+  }
+}
+    `;
+
+  @Injectable({
+    providedIn: 'root'
+  })
+  export class SetVotedGQL extends Apollo.Mutation<SetVotedMutation, SetVotedMutationVariables> {
+    document = SetVotedDocument;
     
     constructor(apollo: Apollo.Apollo) {
       super(apollo);

@@ -190,3 +190,15 @@ update_permissions:
     - votingSectionId
     filter: {}
   role: centralLeader
+- permission:
+    check: null
+    columns:
+    - voted
+    filter: {}
+  role: section
+- permission:
+    check: null
+    columns:
+    - voted
+    filter: {}
+  role: sectionLeader
