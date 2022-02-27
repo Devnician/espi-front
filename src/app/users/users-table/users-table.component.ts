@@ -3,7 +3,7 @@ import {
   Component,
   Injector,
   OnInit,
-  ViewChild
+  ViewChild,
 } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
@@ -18,12 +18,12 @@ import {
   combineLatest,
   debounceTime,
   forkJoin,
-  map,
   Observable,
   Subscription,
-  take
+  take,
 } from 'rxjs';
 import { rowsAnimation } from 'src/app/animations/template.animations';
+import { LoggedUser } from 'src/app/auth/logged-user.interface';
 import { VixenComponent } from 'src/app/core/vixen/vixen.component';
 import { SettlementsService } from 'src/app/settlements/settlements-service.service';
 import { UsersGenerator } from 'src/app/utils/users-generator.class';
@@ -35,15 +35,15 @@ import {
   GetMunicipalitiesIdsQuery,
   GetUsersQuery,
   Role_Types_Enum,
-  SetVotedGQL,
   Users,
   Users_Bool_Exp,
-  Users_Insert_Input
+  Users_Insert_Input,
 } from 'src/generated/graphql';
 import { EditUserComponent } from '../edit-user/edit-user.component';
 import { Election } from '../election.class';
 import { ModalConfirmationComponent } from '../modal-confirmation/modal-confirmation.component';
 import { UsersService } from '../users-service';
+import { CustomUser } from './custom-user.class';
 import { UserFilters } from './user-filters.interface';
 import { UsersTableDataSource } from './users-table-datasource';
 
@@ -55,28 +55,25 @@ import { UsersTableDataSource } from './users-table-datasource';
 })
 export class UsersTableComponent
   extends VixenComponent
-  implements OnInit, AfterViewInit {
+  implements OnInit, AfterViewInit
+{
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
   @ViewChild(MatTable) table!: MatTable<GetUsersQuery['users']>;
   dataSource: UsersTableDataSource;
   districts: BehaviorSubject<GetDistrictsQuery['settlements']> =
     new BehaviorSubject(undefined);
-
   /** Columns displayed in the table. Columns IDs can be added, removed, or reordered. */
   displayedColumns = [
     'id',
-    // 'createdAt',
-    // 'updatedAt',
     'egn',
     'name',
     'surname',
     'family',
     'roles',
     'email',
-    // 'voted',
-    // 'eVoted',
-    'tempVoted',
+    'eVoted',
+    'voted',
     'actions',
   ];
 
@@ -92,6 +89,10 @@ export class UsersTableComponent
   filters: UserFilters = { egn: undefined, votingSectionId: undefined };
 
   elections: Election[] = [];
+  private canSeeSectionProps = false;
+  private canSeeCentralProps = false;
+  private votingSectionId;
+
   // selectedElection: Election;
   /**
    *
@@ -110,8 +111,7 @@ export class UsersTableComponent
     private dialog: MatDialog,
     private fb: FormBuilder,
 
-    injector: Injector,
-    private setVotedGQL: SetVotedGQL
+    injector: Injector
   ) {
     super(injector);
     this.dataSource = new UsersTableDataSource(usersService, snackBar);
@@ -122,7 +122,9 @@ export class UsersTableComponent
 
   ngOnInit(): void {
     combineLatest(this.userObservables).subscribe((data) => {
-      const user = data[0];
+      const user: LoggedUser = data[0];
+      this.votingSectionId = user.votingSectionId;
+      // console.log(user);
       const index = data[1];
       const role: Role_Types_Enum = this.getUSerRole(user as Users, index);
       if (
@@ -131,7 +133,14 @@ export class UsersTableComponent
       ) {
         this.filters.votingSectionId = user.votingSectionId;
         this.buildConditionAndNotifyDatasource();
+        this.canSeeSectionProps = true;
+      } else {
+        this.canSeeSectionProps = false;
       }
+
+      this.canSeeCentralProps =
+        role === Role_Types_Enum.Central ||
+        role === Role_Types_Enum.CentralLeader;
     });
 
     this.settlementsService.getMunicipalitiesIds().subscribe((response) => {
@@ -158,7 +167,6 @@ export class UsersTableComponent
         .subscribe((data) => {
           console.log(data);
           //  let election: Election = { type: 'voting' } as Election;
-
           this.dataSource.selectedElection.next(
             this.elections.find((e) => e.id === data.id)
           );
@@ -179,7 +187,7 @@ export class UsersTableComponent
 
   loadVotingsInFilterIfAny() {
     this.votingsService.getStartedVotings().subscribe((response) => {
-      console.log(response);
+      //  console.log(response);
       if (response.data.votings) {
         response.data.votings.forEach((element) => {
           let election: Election = { type: 'voting' } as Election;
@@ -193,16 +201,10 @@ export class UsersTableComponent
 
   showFirstVotingAsSelected() {
     if (isNullOrUndefined(this.searchForm.get('voting').value)) {
-      console.log('SET FIRST ....');
       this.searchForm.get('voting').setValue(this.elections[0]);
-      // this.selectedElection = this.elections[0];
       this.dataSource.selectedElection.next(this.elections[0]);
     }
   }
-
-  // decorateUsers() {
-  //   console.log(this.selectedElection);
-  // }
 
   checkUndistributed() {
     this.dataSource.loading.next(true);
@@ -233,18 +235,57 @@ export class UsersTableComponent
     this.openDialog(user);
   }
 
-  openSetVoteConfirmation(user: Users) {
-    const dialogRef = this.dialog.open(ModalConfirmationComponent, { data: { user } });
-    dialogRef.afterClosed().subscribe(result => {
-      if (result.resutls === "confirm") {
-        this.setUserVoted(result.userId);
+  openSetVoteConfirmation(user: CustomUser) {
+    console.log(user);
+    const dialogRef = this.dialog.open(ModalConfirmationComponent, {
+      data: { user },
+    });
+    dialogRef.afterClosed().subscribe((result) => {
+      if (result.resutls === 'confirm') {
+        this.setUserVoted(result.user);
       }
-    })
+    });
   }
 
-  setUserVoted(userId: number) {
-    console.log("setUserVote " + userId)
-    return this.setVotedGQL.mutate({ userId }).subscribe(r => console.log(r));
+  setUserVoted(user: CustomUser) {
+    if (
+      user.filteredReferendumVotes &&
+      user.filteredReferendumVotes.length > 0
+    ) {
+      user.filteredReferendumVotes.forEach((element) => {
+        element.vote = element.eVote;
+        element.sectionId = this.votingSectionId;
+        element.userId = user.id;
+        delete element.eVote;
+        delete element.__typename;
+        delete element.referendum_question;
+      });
+      this.usersService
+        .markReferendumEvoteAsVote(
+          user.filteredReferendumVotes as Users_Insert_Input[]
+        )
+        .subscribe(({ data, errors }) => {
+          if (errors) {
+            console.log(errors);
+            return;
+          }
+          if (data) {
+            const rows = data.insert_referendum_votes.affected_rows;
+            this.dataSource.queryRef.refetch();
+            this.snackBar.open(
+              `Гласоподавателят е записан като гласувал в секция ${this.votingSectionId}.`,
+              'ОК',
+              { duration: 5000 }
+            );
+          }
+        });
+    } else {
+      this.snackBar.open(
+        'Няма отчетено гласуване за този потребител.',
+        'ОК',
+        {}
+      );
+    }
   }
 
   private openDialog(user: Users) {
@@ -296,15 +337,33 @@ export class UsersTableComponent
     this.dataSource.condition.next(whereClause);
   }
 
-  canUserSeeThis(): Observable<boolean> {
-    return this.user$.pipe(
-      map((user) => {
-        const result =
-          user.roleType.value === Role_Types_Enum.CentralLeader ||
-          user?.secondRoleType?.value === Role_Types_Enum.Central;
-        return result;
-      })
-    );
+  isCentralOrCentralLeader(): boolean {
+    return this.canSeeCentralProps;
+    // return this.user$.pipe(
+    //   map((user) => {
+    //     if (user) {
+    //       const result =
+    //         user?.roleType.value === Role_Types_Enum.CentralLeader ||
+    //         user?.secondRoleType?.value === Role_Types_Enum.Central;
+    //       return result;
+    //     }
+    //     return false;
+    //   })
+    // );
+  }
+  isSectionOrSectionLeader(): boolean {
+    return this.canSeeSectionProps;
+    // return this.user$.pipe(
+    //   map((user) => {
+    //     if (user) {
+    //       const result =
+    //         user?.roleType.value === Role_Types_Enum.SectionLeader ||
+    //         user?.secondRoleType?.value === Role_Types_Enum.Section;
+    //       return result;
+    //     }
+    //     return false;
+    //   })
+    // );
   }
 
   generateUsers() {
@@ -379,8 +438,8 @@ export class UsersTableComponent
 
       this.snackBar.open(
         'Бяха създадeни ' +
-        affectedRowsCounter +
-        ' записа за данни за потребител и адрес',
+          affectedRowsCounter +
+          ' записа за данни за потребител и адрес',
         'OK',
         {}
       );

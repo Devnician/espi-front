@@ -9,6 +9,7 @@ import { UsersService } from 'src/app/users/users-service';
 import {
   GetUsersQuery,
   Order_By,
+  Referendum_Votes,
   Users_Bool_Exp,
   Users_Order_By,
 } from 'src/generated/graphql';
@@ -123,34 +124,39 @@ export class UsersTableDataSource extends DataSource<CustomUser> {
   }
   private decorateUsers(users: CustomUser[]) {
     const collection = users;
-    collection.forEach((user) => {
-      user.tempVoted = this.votedForTheCurrentElection(user);
+    users.forEach((user) => {
+      // user.tempVoted =
+      this.votedForTheCurrentElection(user);
     });
     return collection;
   }
 
-  private votedForTheCurrentElection(user: CustomUser): boolean {
+  private votedForTheCurrentElection(user: CustomUser): void {
+    user.voted = false;
+    user.eVoted = false;
     if (this.selectedElection.value) {
       const type = this.selectedElection.value.type;
 
       if (type === 'referendum') {
-        if (
-          user.referendum_votes.findIndex(
+        // get all for this referendum.
+        const referendumVotes: Referendum_Votes[] =
+          user.referendum_votes.filter(
             (vote) =>
               vote.referendum_question.referendum.id ===
               this.selectedElection.value.id
-          ) > -1
-        ) {
-          // user is allready voted for this referendum
-          return true;
+          );
+        if (referendumVotes.length > 0) {
+          const voted = referendumVotes.findIndex((v) => v.vote === true) > -1;
+          const eVoted =
+            referendumVotes.findIndex((v) => v.eVote === true) > -1;
+          user.voted = voted;
+          user.eVoted = eVoted;
+          user.filteredReferendumVotes = referendumVotes;
+
+          ////
         }
-      } else {
-        // TODO
-        console.log('add some logic here...');
-        return false;
       }
     }
-    return false;
   }
 
   /**

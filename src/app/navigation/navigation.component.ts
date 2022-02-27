@@ -173,10 +173,10 @@ export class NavigationComponent
         break;
     }
 
-    if (environment.production === false) {
-      // in prod this menu should not be visible. Vote only with the role "USER"
-      this.addMenu('votings');
-    }
+    // if (environment.production === false) {
+    //   // in prod this menu should not be visible. Vote only with the role "USER"
+    //   this.addMenu('votings');
+    // }
   }
   addMenu(key: string) {
     switch (key) {

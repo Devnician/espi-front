@@ -11,7 +11,19 @@ insert_permissions:
     check: {}
     columns:
     - eVote
+    - id
     - questionId
+    - sectionId
+    - userId
+    - vote
+  role: section
+- permission:
+    backend_only: false
+    check: {}
+    columns:
+    - eVote
+    - questionId
+    - sectionId
     - userId
     - vote
   role: user
@@ -32,15 +44,41 @@ select_permissions:
   role: centralLeader
 - permission:
     columns:
+    - createdAt
     - eVote
+    - id
     - questionId
     - vote
     filter: {}
   role: section
 - permission:
     columns:
+    - createdAt
     - eVote
+    - id
     - questionId
     - vote
     filter: {}
   role: sectionLeader
+- permission:
+    columns:
+    - id
+    - createdAt
+    - questionId
+    - sectionId
+    - userId
+    - vote
+    - eVote
+    filter:
+      userId:
+        _eq: X-Hasura-User-Id
+  role: user
+update_permissions:
+- permission:
+    check: null
+    columns:
+    - eVote
+    - sectionId
+    - vote
+    filter: {}
+  role: section

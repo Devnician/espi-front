@@ -1,11 +1,11 @@
-import { Component, Inject } from "@angular/core";
-import { MatDialogRef, MAT_DIALOG_DATA } from "@angular/material/dialog";
-import { Users } from "src/generated/graphql";
+import { Component, Inject } from '@angular/core';
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { Users } from 'src/generated/graphql';
 
 @Component({
   selector: 'app-modal-confirmation',
   templateUrl: './modal-confirmation.component.html',
-  styleUrls: ['./modal-confirmation.component.scss']
+  styleUrls: ['./modal-confirmation.component.scss'],
 })
 export class ModalConfirmationComponent {
   user: Users;
@@ -18,7 +18,7 @@ export class ModalConfirmationComponent {
   }
 
   save() {
-    this.dialogRef.close({ resutls: "confirm", userId: this.user.id });
+    this.dialogRef.close({ resutls: 'confirm', user: this.user });
   }
 
   close() {

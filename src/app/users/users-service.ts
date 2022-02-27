@@ -14,6 +14,8 @@ import {
   GetUserByIdQuery,
   GetUsersGQL,
   GetUsersQuery,
+  MarkReferendumEvoteAsVoteGQL,
+  Referendum_Votes_Insert_Input,
   UpdateUserGQL,
   Users_Bool_Exp,
   Users_Insert_Input,
@@ -31,7 +33,8 @@ export class UsersService {
     private bulkInsertUsersGQL: BulkInsertUsersGQL,
     private countUndistributedToVotingSectionsGQL: CountUndistributedToVotingSectionsGQL,
     private distributeUsersGQL: DistributeUsersGQL,
-    private getUserByIdGQL: GetUserByIdGQL
+    private getUserByIdGQL: GetUserByIdGQL,
+    private markReferendumEvoteAsVoteGQL: MarkReferendumEvoteAsVoteGQL
   ) {}
 
   createUser(
@@ -76,7 +79,7 @@ export class UsersService {
         fetchPolicy: 'network-only',
         partialRefetch: true,
         errorPolicy: 'all',
-        pollInterval: 60 * 1000,
+        pollInterval: 30 * 1000,
       }
     );
   }
@@ -103,7 +106,6 @@ export class UsersService {
       Record<string, any>
     >
   > {
-    console.log(users.length);
     return this.bulkInsertUsersGQL.mutate({ objects: users });
   }
   countUndistributedToVotingSections() {
@@ -116,6 +118,13 @@ export class UsersService {
   distributeUsers(max: number) {
     return this.distributeUsersGQL.mutate({ arg: { lim: max } });
   }
+
+  markReferendumEvoteAsVote(referendumVotes: Referendum_Votes_Insert_Input[]) {
+    return this.markReferendumEvoteAsVoteGQL.mutate({
+      objects: referendumVotes,
+    });
+  }
+
   //SELECT (password = crypt('pepe', password)) AS pswmatch FROM users WHERE id = 2 ;
   /**
    * Calls express throught action

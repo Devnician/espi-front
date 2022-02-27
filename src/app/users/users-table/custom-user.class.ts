@@ -11,12 +11,15 @@ import {
 } from 'src/generated/graphql';
 
 export class CustomUser implements Users {
-  tempVoted: boolean;
+  voted: boolean;
+  eVoted: boolean;
+  filteredReferendumVotes: Referendum_Votes[];
+  //
+
   __typename?: 'users';
   address: Addresses;
   addressId: number;
   createdAt: any;
-  eVoted: boolean;
   egn: string;
   email?: string;
   family: string;
@@ -32,7 +35,6 @@ export class CustomUser implements Users {
   secondRoleType?: Role_Types;
   surname: string;
   updatedAt: any;
-  voted: boolean;
   votes: Votes[];
   votes_aggregate: Votes_Aggregate;
   votingSectionId?: number;

@@ -79,6 +79,8 @@ fragment UserFields on users {
     }
   }
   referendum_votes {
+    id
+    questionId
     vote
     eVote
     referendum_question {
@@ -104,11 +106,31 @@ mutation distributeUsers($arg: distribute_the_undistributed_users_new_args!) {
     counter
   }
 }
-
-mutation SetVoted($userId: Int) {
-  update_users(where: {id: {_eq: $userId}}, _set: {voted: true}) {
-    returning {
-      id
+mutation MarkReferendumEvoteAsVote(
+  $objects: [referendum_votes_insert_input!]!
+) {
+  insert_referendum_votes(
+    objects: $objects
+    on_conflict: {
+      constraint: referendum_votes_pkey
+      update_columns: [sectionId, vote, eVote]
     }
+  ) {
+    affected_rows
   }
 }
+# mutation MarkReferendumEvoteAsVote($ids: [Int!]!) {
+#   update_referendum_votes(
+#     where: { id: { _in: $ids } }
+#     _set: { vote: true, eVote: false }
+#   ) {
+#     affected_rows
+#   }
+# }
+# mutation SetVoted($userId: Int) {
+#   update_users(where: { id: { _eq: $userId } }, _set: { voted: true }) {
+#     returning {
+#       id
+#     }
+#   }
+# }
