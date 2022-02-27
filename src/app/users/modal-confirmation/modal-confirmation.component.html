@@ -1,0 +1,15 @@
+<mat-card>
+	<mat-card-content>
+		<h2>Моля, потвърдете гласуването на:</h2>
+		<h3>Гласоподавател {{user.name}} {{user.surname}} {{user.family}}</h3>
+		<h3>ЕГН {{user.egn}}</h3>
+	</mat-card-content>
+	<mat-card-actions align="end">
+		<button mat-raised-button (click)="close()" type="button">
+			Затвори
+		</button>
+		<button mat-raised-button color="primary" (click)="save()" type="submit">
+			Потвърди
+		</button>
+	</mat-card-actions>
+</mat-card>

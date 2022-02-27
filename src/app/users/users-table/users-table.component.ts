@@ -35,12 +35,14 @@ import {
   GetMunicipalitiesIdsQuery,
   GetUsersQuery,
   Role_Types_Enum,
+  SetVotedGQL,
   Users,
   Users_Bool_Exp,
   Users_Insert_Input
 } from 'src/generated/graphql';
 import { EditUserComponent } from '../edit-user/edit-user.component';
 import { Election } from '../election.class';
+import { ModalConfirmationComponent } from '../modal-confirmation/modal-confirmation.component';
 import { UsersService } from '../users-service';
 import { UserFilters } from './user-filters.interface';
 import { UsersTableDataSource } from './users-table-datasource';
@@ -53,8 +55,7 @@ import { UsersTableDataSource } from './users-table-datasource';
 })
 export class UsersTableComponent
   extends VixenComponent
-  implements OnInit, AfterViewInit
-{
+  implements OnInit, AfterViewInit {
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
   @ViewChild(MatTable) table!: MatTable<GetUsersQuery['users']>;
@@ -79,7 +80,7 @@ export class UsersTableComponent
     'actions',
   ];
 
-  searchForm = this.fb.group({ egnFormControl: [null], voting : [null] });
+  searchForm = this.fb.group({ egnFormControl: [null], voting: [null] });
   generator: UsersGenerator = new UsersGenerator();
   municipalitiesIds: GetMunicipalitiesIdsQuery['settlements'];
   municipalitiesLength: number;
@@ -109,7 +110,8 @@ export class UsersTableComponent
     private dialog: MatDialog,
     private fb: FormBuilder,
 
-    injector: Injector
+    injector: Injector,
+    private setVotedGQL: SetVotedGQL
   ) {
     super(injector);
     this.dataSource = new UsersTableDataSource(usersService, snackBar);
@@ -230,6 +232,21 @@ export class UsersTableComponent
   editUser(user: Users) {
     this.openDialog(user);
   }
+
+  openSetVoteConfirmation(user: Users) {
+    const dialogRef = this.dialog.open(ModalConfirmationComponent, { data: { user } });
+    dialogRef.afterClosed().subscribe(result => {
+      if (result.resutls === "confirm") {
+        this.setUserVoted(result.userId);
+      }
+    })
+  }
+
+  setUserVoted(userId: number) {
+    console.log("setUserVote " + userId)
+    return this.setVotedGQL.mutate({ userId }).subscribe(r => console.log(r));
+  }
+
   private openDialog(user: Users) {
     const config = new MatDialogConfig<any>();
     // config.closeOnNavigation = true;
@@ -362,8 +379,8 @@ export class UsersTableComponent
 
       this.snackBar.open(
         'Бяха създадeни ' +
-          affectedRowsCounter +
-          ' записа за данни за потребител и адрес',
+        affectedRowsCounter +
+        ' записа за данни за потребител и адрес',
         'OK',
         {}
       );
