@@ -1,0 +1,29 @@
+query GetPoliticalGroups(
+  $limit: Int
+  $offset: Int
+  $condition: political_groups_bool_exp! = {}
+  $orderBy: [political_groups_order_by!] = { createdAt: desc }
+) {
+  political_groups(
+    where: $condition
+    limit: $limit
+    offset: $offset
+    order_by: $orderBy
+  ) {
+    id
+    createdAt
+    updatedAt
+    type
+    political_group_type {
+      value
+      description
+    }
+    name
+    description
+  }
+  political_groups_aggregate(where: $condition) {
+    aggregate {
+      count
+    }
+  }
+}

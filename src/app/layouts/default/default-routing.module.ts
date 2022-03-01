@@ -21,6 +21,20 @@ const routes: Routes = [
           breadcrumb: 'потребители',
         },
       },
+
+      {
+        path: 'political-groups',
+        loadChildren: () =>
+          import('src/app/political-groups/political-groups.module').then(
+            (m) => m.PoliticalGroupsModule
+          ),
+        canActivate: [BaseGuard],
+        data: {
+          title: 'Политически групи',
+          breadcrumb: 'Политически групи',
+        },
+      },
+
       {
         path: 'settlements',
         loadChildren: () =>
@@ -58,7 +72,9 @@ const routes: Routes = [
       {
         path: 'countings',
         loadChildren: () =>
-          import('src/app/countings/countings.module').then((m) => m.CountingsModule),
+          import('src/app/countings/countings.module').then(
+            (m) => m.CountingsModule
+          ),
         canActivate: [BaseGuard],
         data: {
           title: 'Преброяване',
