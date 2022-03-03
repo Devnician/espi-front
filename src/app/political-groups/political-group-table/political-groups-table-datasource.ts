@@ -111,7 +111,8 @@ export class PoliticalGroupTableDataSource extends DataSource<Political_Groups> 
           throw Error(errorMessage);
         }
         this.counter.next(data.political_groups_aggregate.aggregate.count);
-        this.currentPageData = data.political_groups as Political_Groups[];
+        this.currentPageData =
+          data.political_groups as any as Political_Groups[];
         return data.political_groups;
       })
     );

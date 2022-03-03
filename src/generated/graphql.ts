@@ -8113,6 +8113,13 @@ export type GetPoliticalGroupsQuery = (
   { __typename?: 'query_root' }
   & { political_groups: Array<(
     { __typename?: 'political_groups' }
+    & { membersCount: (
+      { __typename?: 'political_group_members_aggregate' }
+      & { aggregate?: Maybe<(
+        { __typename?: 'political_group_members_aggregate_fields' }
+        & Pick<Political_Group_Members_Aggregate_Fields, 'count'>
+      )> }
+    ) }
     & PoliticalGroupFieldsFragment
   )>, political_groups_aggregate: (
     { __typename?: 'political_groups_aggregate' }
@@ -8849,6 +8856,11 @@ export const GetPoliticalGroupsDocument = gql`
     order_by: $orderBy
   ) {
     ...PoliticalGroupFields
+    membersCount: political_group_members_aggregate {
+      aggregate {
+        count
+      }
+    }
   }
   political_groups_aggregate(where: $condition) {
     aggregate {

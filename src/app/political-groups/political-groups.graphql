@@ -12,6 +12,11 @@ query GetPoliticalGroups(
     order_by: $orderBy
   ) {
     ...PoliticalGroupFields
+    membersCount: political_group_members_aggregate {
+      aggregate {
+        count
+      }
+    }
   }
   political_groups_aggregate(where: $condition) {
     aggregate {

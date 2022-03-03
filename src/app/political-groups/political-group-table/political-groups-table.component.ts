@@ -6,18 +6,19 @@ import { MatSort } from '@angular/material/sort';
 import { MatTable } from '@angular/material/table';
 import { Router } from '@angular/router';
 import { rowsAnimation } from 'src/app/animations/template.animations';
+import { Donkey } from 'src/app/services/donkey.service';
 import { Political_Groups } from 'src/generated/graphql';
 import { EditPoliticalGroupComponent } from '../edit-political-group/edit-political-group.component';
 import { PoliticalGroupsService } from '../political-groups-service';
-import { PoliticalGroupTableDataSource } from './political-group-table-datasource';
+import { PoliticalGroupTableDataSource } from './political-groups-table-datasource';
 
 @Component({
-  selector: 'app-political-group-table',
-  templateUrl: './political-group-table.component.html',
-  styleUrls: ['./political-group-table.component.scss'],
+  selector: 'app-political-groups-table',
+  templateUrl: './political-groups-table.component.html',
+  styleUrls: ['./political-groups-table.component.scss'],
   animations: [rowsAnimation],
 })
-export class PoliticalGroupTableComponent implements AfterViewInit {
+export class PoliticalGroupsTableComponent implements AfterViewInit {
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
   @ViewChild(MatTable) table!: MatTable<Political_Groups>;
@@ -31,6 +32,7 @@ export class PoliticalGroupTableComponent implements AfterViewInit {
     'type',
     'name',
     'description',
+    'members',
     'actions',
   ];
 
@@ -38,7 +40,8 @@ export class PoliticalGroupTableComponent implements AfterViewInit {
     private politicalGroupsService: PoliticalGroupsService,
     private snackBar: MatSnackBar,
     private dialog: MatDialog,
-    private router: Router //private route: ActivatedRoute
+    private router: Router,
+    private donkey: Donkey
   ) {
     this.dataSource = new PoliticalGroupTableDataSource(
       politicalGroupsService,
@@ -53,7 +56,7 @@ export class PoliticalGroupTableComponent implements AfterViewInit {
   }
   showMembers(politicalGroup: Political_Groups) {
     console.log(politicalGroup);
-    // this.router.navigateByUrl('/political-groups/members');
+    this.donkey.load({ pGroup: politicalGroup });
     this.router.navigate(['political-groups', 'members']);
   }
 

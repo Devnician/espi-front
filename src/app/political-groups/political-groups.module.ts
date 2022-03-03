@@ -15,12 +15,12 @@ import { MatTableModule } from '@angular/material/table';
 import { AddPoliticalGroupMemberComponent } from './add-political-group-member/add-political-group-member.component';
 import { EditPoliticalGroupComponent } from './edit-political-group/edit-political-group.component';
 import { PoliticalGroupMembersTableComponent } from './political-group-members-table/political-group-members-table.component';
-import { PoliticalGroupTableComponent } from './political-group-table/political-group-table.component';
+import { PoliticalGroupsTableComponent } from './political-group-table/political-groups-table.component';
 import { PoliticalGroupsRoutingModule } from './political-groups-routing.module';
 
 @NgModule({
   declarations: [
-    PoliticalGroupTableComponent,
+    PoliticalGroupsTableComponent,
     PoliticalGroupMembersTableComponent,
     EditPoliticalGroupComponent,
     AddPoliticalGroupMemberComponent,

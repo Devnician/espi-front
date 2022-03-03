@@ -4,10 +4,13 @@ import { Observable } from 'rxjs';
 import {
   CreatePoliticalGroupGQL,
   CreatePoliticalGroupMutation,
+  GetPoliticalGroupMembersGQL,
   GetPoliticalGroupsGQL,
   Political_Groups_Bool_Exp,
   Political_Groups_Order_By,
   Political_Groups_Set_Input,
+  Political_Group_Members_Bool_Exp,
+  Political_Group_Members_Order_By,
   UpdatePoliticalGroupGQL,
   UpdatePoliticalGroupMutation,
 } from 'src/generated/graphql';
@@ -18,8 +21,10 @@ import {
 export class PoliticalGroupsService {
   constructor(
     private getGroups: GetPoliticalGroupsGQL,
+
     private createPoliticalGroupGQL: CreatePoliticalGroupGQL,
-    private updatePoliticalGroupGQL: UpdatePoliticalGroupGQL
+    private updatePoliticalGroupGQL: UpdatePoliticalGroupGQL,
+    private getMembers: GetPoliticalGroupMembersGQL
   ) {
     // *
   }
@@ -31,6 +36,23 @@ export class PoliticalGroupsService {
     orderBy: Political_Groups_Order_By
   ) {
     return this.getGroups.watch(
+      { limit, offset, condition, orderBy },
+      {
+        fetchPolicy: 'network-only',
+        partialRefetch: true,
+        errorPolicy: 'all',
+        pollInterval: 60 * 1000,
+      }
+    );
+  }
+
+  getPoliticalGroupMembers(
+    limit = 10,
+    offset = 0,
+    condition: Political_Group_Members_Bool_Exp = {},
+    orderBy: Political_Group_Members_Order_By
+  ) {
+    return this.getMembers.watch(
       { limit, offset, condition, orderBy },
       {
         fetchPolicy: 'network-only',
