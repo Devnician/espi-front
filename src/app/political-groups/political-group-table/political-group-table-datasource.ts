@@ -24,11 +24,9 @@ export class PoliticalGroupTableDataSource extends DataSource<Political_Groups> 
   counter: BehaviorSubject<number> = new BehaviorSubject(0);
   sort: MatSort;
   queryRef: QueryRef<GetPoliticalGroupsQuery>;
-
   loading: BehaviorSubject<any> = new BehaviorSubject(true);
   loading$ = this.loading.asObservable();
   currentPageData: Political_Groups[] = [];
-
   condition: BehaviorSubject<Political_Groups_Bool_Exp> = new BehaviorSubject(
     {}
   );

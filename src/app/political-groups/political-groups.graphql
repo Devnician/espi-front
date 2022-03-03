@@ -1,3 +1,4 @@
+# Groups
 query GetPoliticalGroups(
   $limit: Int
   $offset: Int
@@ -10,20 +11,68 @@ query GetPoliticalGroups(
     offset: $offset
     order_by: $orderBy
   ) {
-    id
-    createdAt
-    updatedAt
-    type
-    political_group_type {
-      value
-      description
-    }
-    name
-    description
+    ...PoliticalGroupFields
   }
   political_groups_aggregate(where: $condition) {
     aggregate {
       count
     }
   }
+}
+
+mutation CreatePoliticalGroup($object: political_groups_insert_input!) {
+  insert_political_groups_one(object: $object) {
+    ...PoliticalGroupFields
+  }
+}
+mutation UpdatePoliticalGroup($id: Int!, $set: political_groups_set_input!) {
+  update_political_groups_by_pk(pk_columns: { id: $id }, _set: $set) {
+    ...PoliticalGroupFields
+  }
+}
+
+# Members
+query getPoliticalGroupMembers(
+  $limit: Int
+  $offset: Int
+  $condition: political_group_members_bool_exp! = {}
+  $orderBy: [political_group_members_order_by!] = { createdAt: desc }
+) {
+  political_group_members(
+    where: $condition
+    limit: $limit
+    offset: $offset
+    order_by: $orderBy
+  ) {
+    id
+    createdAt
+    updatedAt
+    active
+    politicalGroupId
+    user {
+      name
+      surname
+      family
+      egn
+    }
+  }
+  political_group_members_aggregate(where: $condition) {
+    aggregate {
+      count
+    }
+  }
+}
+
+# Fragments
+fragment PoliticalGroupFields on political_groups {
+  id
+  createdAt
+  updatedAt
+  type
+  political_group_type {
+    value
+    description
+  }
+  name
+  description
 }

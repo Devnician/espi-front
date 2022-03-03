@@ -1,3 +1,7 @@
 .full-width-table {
   width: 100%;
 }
+.mat-column-createdAt,
+.mat-column-updatedAt {
+  width: 200px !important;
+}

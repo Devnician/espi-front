@@ -1,10 +1,13 @@
 import { AfterViewInit, Component, ViewChild } from '@angular/core';
+import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatSort } from '@angular/material/sort';
 import { MatTable } from '@angular/material/table';
+import { Router } from '@angular/router';
 import { rowsAnimation } from 'src/app/animations/template.animations';
 import { Political_Groups } from 'src/generated/graphql';
+import { EditPoliticalGroupComponent } from '../edit-political-group/edit-political-group.component';
 import { PoliticalGroupsService } from '../political-groups-service';
 import { PoliticalGroupTableDataSource } from './political-group-table-datasource';
 
@@ -28,11 +31,14 @@ export class PoliticalGroupTableComponent implements AfterViewInit {
     'type',
     'name',
     'description',
+    'actions',
   ];
 
   constructor(
     private politicalGroupsService: PoliticalGroupsService,
-    private snackBar: MatSnackBar
+    private snackBar: MatSnackBar,
+    private dialog: MatDialog,
+    private router: Router //private route: ActivatedRoute
   ) {
     this.dataSource = new PoliticalGroupTableDataSource(
       politicalGroupsService,
@@ -45,9 +51,30 @@ export class PoliticalGroupTableComponent implements AfterViewInit {
     this.dataSource.paginator = this.paginator;
     this.table.dataSource = this.dataSource;
   }
+  showMembers(politicalGroup: Political_Groups) {
+    console.log(politicalGroup);
+    // this.router.navigateByUrl('/political-groups/members');
+    this.router.navigate(['political-groups', 'members']);
+  }
 
-  editPoliticalGroup(group: Political_Groups) {
-    console.log(group);
-    alert('NIY');
+  editPoliticalGroup(politicalGroup: Political_Groups) {
+    console.log(politicalGroup);
+
+    const config = new MatDialogConfig<any>();
+    // config.closeOnNavigation = true;
+    config.disableClose = true;
+    config.data = {
+      politicalGroup,
+      // user: this.loggedUSer,
+    };
+    (config.width = '80vw'), (config.height = 'fit-content');
+
+    const dialogRef = this.dialog.open(EditPoliticalGroupComponent, config);
+    dialogRef.afterClosed().subscribe((dialogResponse) => {
+      console.log(dialogResponse);
+      if (dialogResponse && dialogResponse.result === 'success') {
+        this.dataSource.queryRef.refetch();
+      }
+    });
   }
 }
