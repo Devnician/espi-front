@@ -1,3 +1,72 @@
 table:
   name: political_groups
   schema: public
+object_relationships:
+- name: political_group_type
+  using:
+    foreign_key_constraint_on: type
+array_relationships:
+- name: political_group_members
+  using:
+    foreign_key_constraint_on:
+      column: politicalGroupId
+      table:
+        name: political_group_members
+        schema: public
+insert_permissions:
+- permission:
+    backend_only: false
+    check: {}
+    columns:
+    - description
+    - name
+    - type
+  role: central
+- permission:
+    backend_only: false
+    check: {}
+    columns:
+    - description
+    - name
+    - type
+  role: centralLeader
+select_permissions:
+- permission:
+    allow_aggregations: true
+    columns:
+    - id
+    - createdAt
+    - updatedAt
+    - name
+    - description
+    - type
+    filter: {}
+  role: central
+- permission:
+    allow_aggregations: true
+    columns:
+    - id
+    - description
+    - name
+    - type
+    - createdAt
+    - updatedAt
+    filter: {}
+  role: centralLeader
+update_permissions:
+- permission:
+    check: {}
+    columns:
+    - description
+    - name
+    - type
+    filter: {}
+  role: central
+- permission:
+    check: {}
+    columns:
+    - description
+    - name
+    - type
+    filter: {}
+  role: centralLeader

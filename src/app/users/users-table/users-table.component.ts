@@ -12,20 +12,22 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatSort } from '@angular/material/sort';
 import { MatTable } from '@angular/material/table';
 import { FetchResult } from 'apollo-link';
+import { isNullOrUndefined } from 'is-what';
 import {
   BehaviorSubject,
   combineLatest,
   debounceTime,
   forkJoin,
-  map,
   Observable,
   Subscription,
   take,
 } from 'rxjs';
 import { rowsAnimation } from 'src/app/animations/template.animations';
+import { LoggedUser } from 'src/app/auth/logged-user.interface';
 import { VixenComponent } from 'src/app/core/vixen/vixen.component';
 import { SettlementsService } from 'src/app/settlements/settlements-service.service';
 import { UsersGenerator } from 'src/app/utils/users-generator.class';
+import { VotingsService } from 'src/app/votings/voting-service.service';
 import {
   Addresses_Insert_Input,
   BulkInsertUsersMutation,
@@ -38,7 +40,10 @@ import {
   Users_Insert_Input,
 } from 'src/generated/graphql';
 import { EditUserComponent } from '../edit-user/edit-user.component';
+import { Election } from '../election.class';
+import { ModalConfirmationComponent } from '../modal-confirmation/modal-confirmation.component';
 import { UsersService } from '../users-service';
+import { CustomUser } from './custom-user.class';
 import { UserFilters } from './user-filters.interface';
 import { UsersTableDataSource } from './users-table-datasource';
 
@@ -58,24 +63,21 @@ export class UsersTableComponent
   dataSource: UsersTableDataSource;
   districts: BehaviorSubject<GetDistrictsQuery['settlements']> =
     new BehaviorSubject(undefined);
-
   /** Columns displayed in the table. Columns IDs can be added, removed, or reordered. */
   displayedColumns = [
     'id',
-    // 'createdAt',
-    // 'updatedAt',
     'egn',
     'name',
     'surname',
     'family',
     'roles',
     'email',
-    'voted',
     'eVoted',
+    'voted',
     'actions',
   ];
 
-  searchForm = this.fb.group({ egnFormControl: [null] });
+  searchForm = this.fb.group({ egnFormControl: [null], voting: [null] });
   generator: UsersGenerator = new UsersGenerator();
   municipalitiesIds: GetMunicipalitiesIdsQuery['settlements'];
   municipalitiesLength: number;
@@ -86,6 +88,12 @@ export class UsersTableComponent
   limit: BehaviorSubject<number> = new BehaviorSubject(50000);
   filters: UserFilters = { egn: undefined, votingSectionId: undefined };
 
+  elections: Election[] = [];
+  private canSeeSectionProps = false;
+  private canSeeCentralProps = false;
+  private votingSectionId;
+
+  // selectedElection: Election;
   /**
    *
    * @param usersService
@@ -96,7 +104,9 @@ export class UsersTableComponent
    */
   constructor(
     private usersService: UsersService,
+    private votingsService: VotingsService,
     private settlementsService: SettlementsService,
+
     private snackBar: MatSnackBar,
     private dialog: MatDialog,
     private fb: FormBuilder,
@@ -106,10 +116,15 @@ export class UsersTableComponent
     super(injector);
     this.dataSource = new UsersTableDataSource(usersService, snackBar);
     this.dataSource.loading.next(true);
+    this.loadReferendumsInFilterIfAny();
+    this.loadVotingsInFilterIfAny();
   }
+
   ngOnInit(): void {
     combineLatest(this.userObservables).subscribe((data) => {
-      const user = data[0];
+      const user: LoggedUser = data[0];
+      this.votingSectionId = user.votingSectionId;
+      // console.log(user);
       const index = data[1];
       const role: Role_Types_Enum = this.getUSerRole(user as Users, index);
       if (
@@ -118,7 +133,14 @@ export class UsersTableComponent
       ) {
         this.filters.votingSectionId = user.votingSectionId;
         this.buildConditionAndNotifyDatasource();
+        this.canSeeSectionProps = true;
+      } else {
+        this.canSeeSectionProps = false;
       }
+
+      this.canSeeCentralProps =
+        role === Role_Types_Enum.Central ||
+        role === Role_Types_Enum.CentralLeader;
     });
 
     this.settlementsService.getMunicipalitiesIds().subscribe((response) => {
@@ -129,12 +151,59 @@ export class UsersTableComponent
       }
     });
     this.checkUndistributed();
-    this.searchForm
-      .get('egnFormControl')
-      .valueChanges.pipe(debounceTime(800))
-      .subscribe((data) => {
-        this.searchChanged(data);
+    this.attachLiteners();
+  }
+  attachLiteners() {
+    this.subscriptions.push(
+      this.searchForm
+        .get('egnFormControl')
+        .valueChanges.pipe(debounceTime(800))
+        .subscribe((data) => {
+          this.searchChanged(data);
+        }),
+      this.searchForm
+        .get('voting')
+        .valueChanges.pipe(debounceTime(100))
+        .subscribe((data) => {
+          console.log(data);
+          //  let election: Election = { type: 'voting' } as Election;
+          this.dataSource.selectedElection.next(
+            this.elections.find((e) => e.id === data.id)
+          );
+        })
+    );
+  }
+
+  private loadReferendumsInFilterIfAny() {
+    this.votingsService.getStartedReferendums().subscribe((response) => {
+      response.data.referendums.forEach((element) => {
+        let election: Election = { type: 'referendum' } as Election;
+        election = Object.assign(election, element);
+        this.elections.push(election);
       });
+      this.showFirstVotingAsSelected();
+    });
+  }
+
+  loadVotingsInFilterIfAny() {
+    this.votingsService.getStartedVotings().subscribe((response) => {
+      //  console.log(response);
+      if (response.data.votings) {
+        response.data.votings.forEach((element) => {
+          let election: Election = { type: 'voting' } as Election;
+          election = Object.assign(election, element);
+          this.elections.push(election);
+        });
+        this.showFirstVotingAsSelected();
+      }
+    });
+  }
+
+  showFirstVotingAsSelected() {
+    if (isNullOrUndefined(this.searchForm.get('voting').value)) {
+      this.searchForm.get('voting').setValue(this.elections[0]);
+      this.dataSource.selectedElection.next(this.elections[0]);
+    }
   }
 
   checkUndistributed() {
@@ -165,6 +234,60 @@ export class UsersTableComponent
   editUser(user: Users) {
     this.openDialog(user);
   }
+
+  openSetVoteConfirmation(user: CustomUser) {
+    console.log(user);
+    const dialogRef = this.dialog.open(ModalConfirmationComponent, {
+      data: { user },
+    });
+    dialogRef.afterClosed().subscribe((result) => {
+      if (result.resutls === 'confirm') {
+        this.setUserVoted(result.user);
+      }
+    });
+  }
+
+  setUserVoted(user: CustomUser) {
+    if (
+      user.filteredReferendumVotes &&
+      user.filteredReferendumVotes.length > 0
+    ) {
+      user.filteredReferendumVotes.forEach((element) => {
+        element.vote = element.eVote;
+        element.sectionId = this.votingSectionId;
+        element.userId = user.id;
+        delete element.eVote;
+        delete element.__typename;
+        delete element.referendum_question;
+      });
+      this.usersService
+        .markReferendumEvoteAsVote(
+          user.filteredReferendumVotes as Users_Insert_Input[]
+        )
+        .subscribe(({ data, errors }) => {
+          if (errors) {
+            console.log(errors);
+            return;
+          }
+          if (data) {
+            const rows = data.insert_referendum_votes.affected_rows;
+            this.dataSource.queryRef.refetch();
+            this.snackBar.open(
+              `Гласоподавателят е записан като гласувал в секция ${this.votingSectionId}.`,
+              'ОК',
+              { duration: 5000 }
+            );
+          }
+        });
+    } else {
+      this.snackBar.open(
+        'Няма отчетено гласуване за този потребител.',
+        'ОК',
+        {}
+      );
+    }
+  }
+
   private openDialog(user: Users) {
     const config = new MatDialogConfig<any>();
     // config.closeOnNavigation = true;
@@ -214,15 +337,33 @@ export class UsersTableComponent
     this.dataSource.condition.next(whereClause);
   }
 
-  canUserSeeThis(): Observable<boolean> {
-    return this.user$.pipe(
-      map((user) => {
-        const result =
-          user.roleType.value === Role_Types_Enum.CentralLeader ||
-          user?.secondRoleType?.value === Role_Types_Enum.Central;
-        return result;
-      })
-    );
+  isCentralOrCentralLeader(): boolean {
+    return this.canSeeCentralProps;
+    // return this.user$.pipe(
+    //   map((user) => {
+    //     if (user) {
+    //       const result =
+    //         user?.roleType.value === Role_Types_Enum.CentralLeader ||
+    //         user?.secondRoleType?.value === Role_Types_Enum.Central;
+    //       return result;
+    //     }
+    //     return false;
+    //   })
+    // );
+  }
+  isSectionOrSectionLeader(): boolean {
+    return this.canSeeSectionProps;
+    // return this.user$.pipe(
+    //   map((user) => {
+    //     if (user) {
+    //       const result =
+    //         user?.roleType.value === Role_Types_Enum.SectionLeader ||
+    //         user?.secondRoleType?.value === Role_Types_Enum.Section;
+    //       return result;
+    //     }
+    //     return false;
+    //   })
+    // );
   }
 
   generateUsers() {

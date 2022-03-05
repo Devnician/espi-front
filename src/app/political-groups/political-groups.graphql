@@ -1,0 +1,103 @@
+# Groups
+query GetPoliticalGroups(
+  $limit: Int
+  $offset: Int
+  $condition: political_groups_bool_exp! = {}
+  $orderBy: [political_groups_order_by!] = { createdAt: desc }
+) {
+  political_groups(
+    where: $condition
+    limit: $limit
+    offset: $offset
+    order_by: $orderBy
+  ) {
+    ...PoliticalGroupFields
+    membersCount: political_group_members_aggregate {
+      aggregate {
+        count
+      }
+    }
+  }
+  political_groups_aggregate(where: $condition) {
+    aggregate {
+      count
+    }
+  }
+}
+
+mutation CreatePoliticalGroup($object: political_groups_insert_input!) {
+  insert_political_groups_one(object: $object) {
+    ...PoliticalGroupFields
+  }
+}
+mutation UpdatePoliticalGroup($id: Int!, $set: political_groups_set_input!) {
+  update_political_groups_by_pk(pk_columns: { id: $id }, _set: $set) {
+    ...PoliticalGroupFields
+  }
+}
+
+# Members
+
+mutation RemoveMemberFromGroup($memberId: Int!) {
+  delete_political_group_members_by_pk(id: $memberId) {
+    id
+  }
+}
+mutation AddPoliticalMember($object: political_group_members_insert_input!) {
+  insert_political_group_members_one(object: $object) {
+    id
+  }
+}
+
+mutation UpdateStateOfPoliticalMember($id: Int!, $state: Boolean!) {
+  update_political_group_members_by_pk(
+    pk_columns: { id: $id }
+    _set: { active: $state }
+  ) {
+    id
+  }
+}
+query getPoliticalGroupMembers(
+  $limit: Int
+  $offset: Int
+  $condition: political_group_members_bool_exp! = {}
+  $orderBy: [political_group_members_order_by!] = { createdAt: desc }
+) {
+  political_group_members(
+    where: $condition
+    limit: $limit
+    offset: $offset
+    order_by: $orderBy
+  ) {
+    id
+    createdAt
+    updatedAt
+    active
+    politicalGroupId
+    user {
+      name
+      surname
+      family
+      egn
+    }
+  }
+  political_group_members_aggregate(where: $condition) {
+    aggregate {
+      count
+    }
+  }
+}
+
+# Fragments
+fragment PoliticalGroupFields on political_groups {
+  id
+  createdAt
+  updatedAt
+  type
+  political_group_type {
+    value
+    description
+  }
+  name
+  description
+}

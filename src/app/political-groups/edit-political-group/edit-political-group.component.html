@@ -1,0 +1,75 @@
+<form [formGroup]="form" novalidate (ngSubmit)="onSubmit()">
+  <mat-progress-bar
+    *ngIf="loading$ | async"
+    color="warn"
+    mode="indeterminate"
+  ></mat-progress-bar>
+  <mat-card class="shipping-card">
+    <mat-card-header>
+      <mat-card-title>Данни на политическата организация</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      <div class="row">
+        <div class="col">
+          <mat-form-field class="full-width">
+            <mat-select
+              formControlName="type"
+              placeholder="Тип на организацията"
+            >
+              <mat-option
+                *ngFor="let unit of politicalGroupTypesEnum | keyvalue"
+                [value]="unit.value"
+                >{{ labels[unit.value] }}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col full-width">
+          <mat-form-field class="full-width">
+            <input matInput placeholder="Наименование" formControlName="name" />
+            <mat-error *ngIf="form.controls['name'].errors">
+              {{ valido.getErrorMessageFromControl(form.controls["name"]) }}
+            </mat-error>
+          </mat-form-field>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col full-width">
+          <mat-form-field class="full-width">
+            <textarea
+              rows="5"
+              matInput
+              placeholder="Описание на организацията"
+              formControlName="description"
+            ></textarea>
+            <mat-error *ngIf="form.controls['description'].errors">
+              {{
+                valido.getErrorMessageFromControl(form.controls["description"])
+              }}
+            </mat-error>
+          </mat-form-field>
+        </div>
+      </div>
+    </mat-card-content>
+    <mat-card-actions align="end">
+      <button
+        mat-raised-button
+        type="button"
+        (click)="close()"
+        [disabled]="(loading$ | async) === true"
+      >
+        Затвори
+      </button>
+      <button
+        mat-raised-button
+        color="primary"
+        type="submit"
+        [disabled]="form.invalid || (loading$ | async) === true"
+      >
+        Запази
+      </button>
+    </mat-card-actions>
+  </mat-card>
+</form>

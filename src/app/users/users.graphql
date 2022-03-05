@@ -15,8 +15,23 @@ query GetUsers(
   }
 }
 
+query AutocompleteUsers(
+  $condition: users_bool_exp! = {}
+  $orderBy: [users_order_by!]!
+) {
+  users(where: $condition, order_by: $orderBy) {
+    ...UserFields
+  }
+}
+
 mutation CreateUser($input: users_insert_input!) {
   insert_users_one(object: $input) {
+    ...UserFields
+  }
+}
+
+query GetUserById($id: Int!) {
+  users_by_pk(id: $id) {
     ...UserFields
   }
 }
@@ -56,8 +71,6 @@ fragment UserFields on users {
   pin
   # password
   addressId
-  voted
-  eVoted
   votingSectionId
   roleType {
     value
@@ -72,6 +85,17 @@ fragment UserFields on users {
     ...AddressShort
     settlement {
       ...SettlementFileds
+    }
+  }
+  referendum_votes {
+    id
+    questionId
+    vote
+    eVote
+    referendum_question {
+      referendum {
+        id
+      }
     }
   }
 }
@@ -91,3 +115,31 @@ mutation distributeUsers($arg: distribute_the_undistributed_users_new_args!) {
     counter
   }
 }
+mutation MarkReferendumEvoteAsVote(
+  $objects: [referendum_votes_insert_input!]!
+) {
+  insert_referendum_votes(
+    objects: $objects
+    on_conflict: {
+      constraint: referendum_votes_pkey
+      update_columns: [sectionId, vote, eVote]
+    }
+  ) {
+    affected_rows
+  }
+}
+# mutation MarkReferendumEvoteAsVote($ids: [Int!]!) {
+#   update_referendum_votes(
+#     where: { id: { _in: $ids } }
+#     _set: { vote: true, eVote: false }
+#   ) {
+#     affected_rows
+#   }
+# }
+# mutation SetVoted($userId: Int) {
+#   update_users(where: { id: { _eq: $userId } }, _set: { voted: true }) {
+#     returning {
+#       id
+#     }
+#   }
+# }

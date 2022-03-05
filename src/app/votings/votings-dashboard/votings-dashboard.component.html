@@ -3,44 +3,45 @@
     mode="indeterminate"
     *ngIf="loading$ | async"
   ></mat-progress-bar>
-  <div *ngIf="isVoted" >
+  <!-- <div>
     <mat-card>
       <div class="header">
         <mat-card-title>Вашият глас вече е отчетен!</mat-card-title>
       </div>
-    
-      <mat-card-content>
-        <div class="image">
-          
-        </div>
-        <h3>Вие успешно сте гласувал на място и вашият глас е отчетен.</h3>
 
+      <mat-card-content>
+        <div class="image"></div>
+        <h3>Вие успешно сте гласувал на място и вашият глас е отчетен.</h3>
       </mat-card-content>
       <mat-card-footer
         >Проверете имейл адреса си за верификационно съобщение!</mat-card-footer
       >
     </mat-card>
-  </div>
+  </div> -->
   <div *ngIf="(loading$ | async) === false">
-    <h1 *ngIf="!isVoted && (cards | async)?.length > 0" class="mat-h1">Избори</h1>
+    <h1 *ngIf="(cards | async)?.length > 0" class="mat-h1">Избори</h1>
     <h1
-      *ngIf="!isVoted && (cards | async)?.length === 0 && (loading$ | async) === false"
+      *ngIf="(cards | async)?.length === 0 && (loading$ | async) === false"
       class="mat-h1"
     >
       В момента не се провеждат избори.
     </h1>
   </div>
-  <mat-grid-list *ngIf="!isVoted" cols="2" rowHeight="350px">
+  <mat-grid-list cols="2" rowHeight="350px">
     <mat-grid-tile
       *ngFor="let card of cards | async"
       [colspan]="card.cols"
       [rowspan]="card.rows"
     >
-      <mat-card class="dashboard-card">
+      <mat-card
+        class="dashboard-card"
+        [ngClass]="card.alreadyVoted ? 'voted' : 'non-voted'"
+      >
         <mat-card-header>
           <mat-card-title>
             {{ card.title }}
             <button
+              *ngIf="card.alreadyVoted === false"
               mat-icon-button
               class="more-button"
               [matMenuTriggerFor]="menu"

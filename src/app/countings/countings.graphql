@@ -19,5 +19,7 @@ query getReferendumCountings($where: referendum_countings_bool_exp) {
     votesCount
     votesTrue
     votesFalse
+    voted
+    evoted
   }
 }

@@ -20,10 +20,15 @@ import { MatSortModule } from '@angular/material/sort';
 import { MatTableModule } from '@angular/material/table';
 import { NgxJsonViewerModule } from 'ngx-json-viewer';
 import { EditUserComponent } from './edit-user/edit-user.component';
+import { ModalConfirmationComponent } from './modal-confirmation/modal-confirmation.component';
 import { UsersRoutingModule } from './users-routing.module';
 import { UsersTableComponent } from './users-table/users-table.component';
 @NgModule({
-  declarations: [UsersTableComponent, EditUserComponent],
+  declarations: [
+    UsersTableComponent,
+    EditUserComponent,
+    ModalConfirmationComponent
+  ],
   imports: [
     CommonModule,
     UsersRoutingModule,
@@ -75,4 +80,4 @@ import { UsersTableComponent } from './users-table/users-table.component';
     MatDialogModule,
   ],
 })
-export class UsersModule {}
+export class UsersModule { }

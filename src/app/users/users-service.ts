@@ -1,17 +1,23 @@
 import { Injectable } from '@angular/core';
-import { FetchResult } from '@apollo/client';
+import { ApolloQueryResult, FetchResult } from '@apollo/client';
 import { QueryRef } from 'apollo-angular';
 import { Observable } from 'rxjs';
 import {
   Addresses_Set_Input,
+  AutocompleteUsersGQL,
+  AutocompleteUsersQuery,
   BulkInsertUsersGQL,
   BulkInsertUsersMutation,
   CountUndistributedToVotingSectionsGQL,
   CreateUserGQL,
   CreateUserMutation,
   DistributeUsersGQL,
+  GetUserByIdGQL,
+  GetUserByIdQuery,
   GetUsersGQL,
   GetUsersQuery,
+  MarkReferendumEvoteAsVoteGQL,
+  Referendum_Votes_Insert_Input,
   UpdateUserGQL,
   Users_Bool_Exp,
   Users_Insert_Input,
@@ -26,9 +32,12 @@ export class UsersService {
     private createUserGQL: CreateUserGQL,
     private updateUserGQL: UpdateUserGQL,
     private getUsersGQL: GetUsersGQL,
+    private autocompleteUsersGQL: AutocompleteUsersGQL,
     private bulkInsertUsersGQL: BulkInsertUsersGQL,
     private countUndistributedToVotingSectionsGQL: CountUndistributedToVotingSectionsGQL,
-    private distributeUsersGQL: DistributeUsersGQL
+    private distributeUsersGQL: DistributeUsersGQL,
+    private getUserByIdGQL: GetUserByIdGQL,
+    private markReferendumEvoteAsVoteGQL: MarkReferendumEvoteAsVoteGQL
   ) {}
 
   createUser(
@@ -73,9 +82,22 @@ export class UsersService {
         fetchPolicy: 'network-only',
         partialRefetch: true,
         errorPolicy: 'all',
-        pollInterval: 60 * 1000,
+        pollInterval: 30 * 1000,
       }
     );
+  }
+  autocompleteUsers(
+    condition: Users_Bool_Exp = {},
+    orderBy: Users_Order_By
+  ): Observable<ApolloQueryResult<AutocompleteUsersQuery>> {
+    return this.autocompleteUsersGQL.fetch(
+      { condition, orderBy },
+      { fetchPolicy: 'network-only', errorPolicy: 'all' }
+    );
+  }
+
+  getUserById(id: number): Observable<ApolloQueryResult<GetUserByIdQuery>> {
+    return this.getUserByIdGQL.fetch({ id });
   }
 
   updateUser(addressSet: Addresses_Set_Input, userSet: Users_Set_Input) {
@@ -96,7 +118,6 @@ export class UsersService {
       Record<string, any>
     >
   > {
-    console.log(users.length);
     return this.bulkInsertUsersGQL.mutate({ objects: users });
   }
   countUndistributedToVotingSections() {
@@ -109,6 +130,13 @@ export class UsersService {
   distributeUsers(max: number) {
     return this.distributeUsersGQL.mutate({ arg: { lim: max } });
   }
+
+  markReferendumEvoteAsVote(referendumVotes: Referendum_Votes_Insert_Input[]) {
+    return this.markReferendumEvoteAsVoteGQL.mutate({
+      objects: referendumVotes,
+    });
+  }
+
   //SELECT (password = crypt('pepe', password)) AS pswmatch FROM users WHERE id = 2 ;
   /**
    * Calls express throught action
