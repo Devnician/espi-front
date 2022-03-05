@@ -3,7 +3,7 @@ import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { BehaviorSubject, combineLatest, Observable, switchMap } from 'rxjs';
 import { Donkey } from 'src/app/services/donkey.service';
-import { Referendums, Referendum_Countings, Votings } from 'src/generated/graphql';
+import { Referendums, Votings } from 'src/generated/graphql';
 import { VotingsService } from '../../votings/voting-service.service';
 import { CountingService } from '../counting-service.service';
 import { Custom_Referendum_Countings } from '../types';
@@ -24,7 +24,8 @@ interface VotingParams {
 export class CountingsDashboardComponent {
   referendums: BehaviorSubject<Referendums[]> = new BehaviorSubject([]);
   votings: BehaviorSubject<Votings[]> = new BehaviorSubject([]);
-  countings: BehaviorSubject<Custom_Referendum_Countings[]> = new BehaviorSubject([]);
+  countings: BehaviorSubject<Custom_Referendum_Countings[]> =
+    new BehaviorSubject([]);
   /** Based on the screen size, switch from standard to one column per row */
   cards: BehaviorSubject<VotingParams[]> = new BehaviorSubject([]);
   // cards$: Observable<VotingParams[]>;
@@ -37,7 +38,7 @@ export class CountingsDashboardComponent {
   observables: Observable<boolean>[] = [
     this.loadedReferendums,
     this.loadedVotings,
-    this.loadedCountings
+    this.loadedCountings,
   ];
 
   constructor(
@@ -115,29 +116,33 @@ export class CountingsDashboardComponent {
       });
   }
 
-
   getReferendumCountings() {
-    this.countingService.getReferendumCountings()
+    this.countingService
+      .getReferendumCountings()
       .pipe(
         switchMap((response) => {
-          const countings = response.data.referendum_countings.map(q => {
-            return {
-              referendumId: q.question.referendumId,
-              question: q.question.question,
-              votesCount: q.votesCount,
-              votesTrue: q.votesTrue,
-              votesFalse: q.votesFalse
-            }
-          }
-          );
+          console.log(response);
+          const countings: Custom_Referendum_Countings[] =
+            response.data.referendum_countings.map((q) => {
+              return {
+                referendumId: q.question.referendumId,
+                question: q.question.question,
+                votesCount: q.votesCount,
+                votesTrue: q.votesTrue,
+                votesFalse: q.votesFalse,
+                voted: q.voted,
+                evoted: q.evoted,
+              };
+            });
+          console.log(countings);
           this.countings.next(countings as Custom_Referendum_Countings[]);
           return this.countings;
         })
       )
       .subscribe((countings) => {
-        console.log("countings" + JSON.stringify(countings))
-        this.loadedCountings.next(true)
-      })
+        console.log('countings' + JSON.stringify(countings));
+        this.loadedCountings.next(true);
+      });
   }
 
   goToVotingComponent(vote: VotingParams) {

@@ -6,6 +6,8 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatSortModule } from '@angular/material/sort';
 import { MatTableModule } from '@angular/material/table';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
+import { JwtHelperService, JwtModule, JWT_OPTIONS } from '@auth0/angular-jwt';
+import { AuthService } from 'src/app/services/auth-service';
 import { ReferendumsTableComponent } from './referendums-table.component';
 
 describe('ReferendumsTableComponent', () => {
@@ -24,7 +26,20 @@ describe('ReferendumsTableComponent', () => {
           MatSnackBarModule,
           HttpClientTestingModule,
           MatDialogModule,
+          JwtModule.forRoot({
+            jwtOptionsProvider: {
+              provide: JWT_OPTIONS,
+              useFactory: () => {
+                return {
+                  tokenGetter: (token: string) => {
+                    return token;
+                  },
+                };
+              },
+            },
+          }),
         ],
+        providers: [AuthService, JwtHelperService],
       }).compileComponents();
     })
   );

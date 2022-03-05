@@ -8,6 +8,7 @@ import { MatRadioModule } from '@angular/material/radio';
 import { MatSelectModule } from '@angular/material/select';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { RouterTestingModule } from '@angular/router/testing';
+import { JwtHelperService } from '@auth0/angular-jwt';
 import { Valido } from 'src/app/core/valido';
 import { RegisterComponent } from './register.component';
 
@@ -30,7 +31,7 @@ describe('RegisterComponent', () => {
           RouterTestingModule,
           HttpClientTestingModule,
         ],
-        providers: [Valido],
+        providers: [Valido, JwtHelperService],
       }).compileComponents();
     })
   );

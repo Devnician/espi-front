@@ -14,17 +14,21 @@ object_relationships:
 select_permissions:
 - permission:
     columns:
+    - evoted
+    - questionId
+    - voted
     - votesCount
     - votesFalse
     - votesTrue
-    - questionId
     filter: {}
   role: central
 - permission:
     columns:
+    - evoted
     - questionId
+    - voted
     - votesCount
-    - votesTrue
     - votesFalse
+    - votesTrue
     filter: {}
   role: centralLeader

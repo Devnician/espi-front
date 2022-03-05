@@ -3971,9 +3971,11 @@ export type Query_RootVotings_By_PkArgs = {
 /** columns and relationships of "referendum_countings" */
 export type Referendum_Countings = {
   __typename?: 'referendum_countings';
+  evoted?: Maybe<Scalars['bigint']>;
   /** An object relationship */
   question?: Maybe<Referendum_Questions>;
   questionId?: Maybe<Scalars['Int']>;
+  voted?: Maybe<Scalars['bigint']>;
   votesCount?: Maybe<Scalars['bigint']>;
   votesFalse?: Maybe<Scalars['bigint']>;
   votesTrue?: Maybe<Scalars['bigint']>;
@@ -4012,7 +4014,9 @@ export type Referendum_Countings_Aggregate_FieldsCountArgs = {
 /** aggregate avg on columns */
 export type Referendum_Countings_Avg_Fields = {
   __typename?: 'referendum_countings_avg_fields';
+  evoted?: Maybe<Scalars['Float']>;
   questionId?: Maybe<Scalars['Float']>;
+  voted?: Maybe<Scalars['Float']>;
   votesCount?: Maybe<Scalars['Float']>;
   votesFalse?: Maybe<Scalars['Float']>;
   votesTrue?: Maybe<Scalars['Float']>;
@@ -4023,8 +4027,10 @@ export type Referendum_Countings_Bool_Exp = {
   _and?: Maybe<Array<Referendum_Countings_Bool_Exp>>;
   _not?: Maybe<Referendum_Countings_Bool_Exp>;
   _or?: Maybe<Array<Referendum_Countings_Bool_Exp>>;
+  evoted?: Maybe<Bigint_Comparison_Exp>;
   question?: Maybe<Referendum_Questions_Bool_Exp>;
   questionId?: Maybe<Int_Comparison_Exp>;
+  voted?: Maybe<Bigint_Comparison_Exp>;
   votesCount?: Maybe<Bigint_Comparison_Exp>;
   votesFalse?: Maybe<Bigint_Comparison_Exp>;
   votesTrue?: Maybe<Bigint_Comparison_Exp>;
@@ -4033,7 +4039,9 @@ export type Referendum_Countings_Bool_Exp = {
 /** aggregate max on columns */
 export type Referendum_Countings_Max_Fields = {
   __typename?: 'referendum_countings_max_fields';
+  evoted?: Maybe<Scalars['bigint']>;
   questionId?: Maybe<Scalars['Int']>;
+  voted?: Maybe<Scalars['bigint']>;
   votesCount?: Maybe<Scalars['bigint']>;
   votesFalse?: Maybe<Scalars['bigint']>;
   votesTrue?: Maybe<Scalars['bigint']>;
@@ -4042,7 +4050,9 @@ export type Referendum_Countings_Max_Fields = {
 /** aggregate min on columns */
 export type Referendum_Countings_Min_Fields = {
   __typename?: 'referendum_countings_min_fields';
+  evoted?: Maybe<Scalars['bigint']>;
   questionId?: Maybe<Scalars['Int']>;
+  voted?: Maybe<Scalars['bigint']>;
   votesCount?: Maybe<Scalars['bigint']>;
   votesFalse?: Maybe<Scalars['bigint']>;
   votesTrue?: Maybe<Scalars['bigint']>;
@@ -4050,8 +4060,10 @@ export type Referendum_Countings_Min_Fields = {
 
 /** Ordering options when selecting data from "referendum_countings". */
 export type Referendum_Countings_Order_By = {
+  evoted?: Maybe<Order_By>;
   question?: Maybe<Referendum_Questions_Order_By>;
   questionId?: Maybe<Order_By>;
+  voted?: Maybe<Order_By>;
   votesCount?: Maybe<Order_By>;
   votesFalse?: Maybe<Order_By>;
   votesTrue?: Maybe<Order_By>;
@@ -4060,7 +4072,11 @@ export type Referendum_Countings_Order_By = {
 /** select columns of table "referendum_countings" */
 export enum Referendum_Countings_Select_Column {
   /** column name */
+  Evoted = 'evoted',
+  /** column name */
   QuestionId = 'questionId',
+  /** column name */
+  Voted = 'voted',
   /** column name */
   VotesCount = 'votesCount',
   /** column name */
@@ -4072,7 +4088,9 @@ export enum Referendum_Countings_Select_Column {
 /** aggregate stddev on columns */
 export type Referendum_Countings_Stddev_Fields = {
   __typename?: 'referendum_countings_stddev_fields';
+  evoted?: Maybe<Scalars['Float']>;
   questionId?: Maybe<Scalars['Float']>;
+  voted?: Maybe<Scalars['Float']>;
   votesCount?: Maybe<Scalars['Float']>;
   votesFalse?: Maybe<Scalars['Float']>;
   votesTrue?: Maybe<Scalars['Float']>;
@@ -4081,7 +4099,9 @@ export type Referendum_Countings_Stddev_Fields = {
 /** aggregate stddev_pop on columns */
 export type Referendum_Countings_Stddev_Pop_Fields = {
   __typename?: 'referendum_countings_stddev_pop_fields';
+  evoted?: Maybe<Scalars['Float']>;
   questionId?: Maybe<Scalars['Float']>;
+  voted?: Maybe<Scalars['Float']>;
   votesCount?: Maybe<Scalars['Float']>;
   votesFalse?: Maybe<Scalars['Float']>;
   votesTrue?: Maybe<Scalars['Float']>;
@@ -4090,7 +4110,9 @@ export type Referendum_Countings_Stddev_Pop_Fields = {
 /** aggregate stddev_samp on columns */
 export type Referendum_Countings_Stddev_Samp_Fields = {
   __typename?: 'referendum_countings_stddev_samp_fields';
+  evoted?: Maybe<Scalars['Float']>;
   questionId?: Maybe<Scalars['Float']>;
+  voted?: Maybe<Scalars['Float']>;
   votesCount?: Maybe<Scalars['Float']>;
   votesFalse?: Maybe<Scalars['Float']>;
   votesTrue?: Maybe<Scalars['Float']>;
@@ -4099,7 +4121,9 @@ export type Referendum_Countings_Stddev_Samp_Fields = {
 /** aggregate sum on columns */
 export type Referendum_Countings_Sum_Fields = {
   __typename?: 'referendum_countings_sum_fields';
+  evoted?: Maybe<Scalars['bigint']>;
   questionId?: Maybe<Scalars['Int']>;
+  voted?: Maybe<Scalars['bigint']>;
   votesCount?: Maybe<Scalars['bigint']>;
   votesFalse?: Maybe<Scalars['bigint']>;
   votesTrue?: Maybe<Scalars['bigint']>;
@@ -4108,7 +4132,9 @@ export type Referendum_Countings_Sum_Fields = {
 /** aggregate var_pop on columns */
 export type Referendum_Countings_Var_Pop_Fields = {
   __typename?: 'referendum_countings_var_pop_fields';
+  evoted?: Maybe<Scalars['Float']>;
   questionId?: Maybe<Scalars['Float']>;
+  voted?: Maybe<Scalars['Float']>;
   votesCount?: Maybe<Scalars['Float']>;
   votesFalse?: Maybe<Scalars['Float']>;
   votesTrue?: Maybe<Scalars['Float']>;
@@ -4117,7 +4143,9 @@ export type Referendum_Countings_Var_Pop_Fields = {
 /** aggregate var_samp on columns */
 export type Referendum_Countings_Var_Samp_Fields = {
   __typename?: 'referendum_countings_var_samp_fields';
+  evoted?: Maybe<Scalars['Float']>;
   questionId?: Maybe<Scalars['Float']>;
+  voted?: Maybe<Scalars['Float']>;
   votesCount?: Maybe<Scalars['Float']>;
   votesFalse?: Maybe<Scalars['Float']>;
   votesTrue?: Maybe<Scalars['Float']>;
@@ -4126,7 +4154,9 @@ export type Referendum_Countings_Var_Samp_Fields = {
 /** aggregate variance on columns */
 export type Referendum_Countings_Variance_Fields = {
   __typename?: 'referendum_countings_variance_fields';
+  evoted?: Maybe<Scalars['Float']>;
   questionId?: Maybe<Scalars['Float']>;
+  voted?: Maybe<Scalars['Float']>;
   votesCount?: Maybe<Scalars['Float']>;
   votesFalse?: Maybe<Scalars['Float']>;
   votesTrue?: Maybe<Scalars['Float']>;
@@ -8107,7 +8137,7 @@ export type GetReferendumCountingsQuery = (
   { __typename?: 'query_root' }
   & { referendum_countings: Array<(
     { __typename?: 'referendum_countings' }
-    & Pick<Referendum_Countings, 'votesCount' | 'votesTrue' | 'votesFalse'>
+    & Pick<Referendum_Countings, 'votesCount' | 'votesTrue' | 'votesFalse' | 'voted' | 'evoted'>
     & { question?: Maybe<(
       { __typename?: 'referendum_questions' }
       & Pick<Referendum_Questions, 'referendumId' | 'id' | 'question'>
@@ -8888,6 +8918,8 @@ export const GetReferendumCountingsDocument = gql`
     votesCount
     votesTrue
     votesFalse
+    voted
+    evoted
   }
 }
     `;

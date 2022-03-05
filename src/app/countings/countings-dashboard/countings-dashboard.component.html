@@ -39,10 +39,40 @@
         </mat-card-header>
         <mat-card-content class="dashboard-card-content">
           <div>{{ card.text }}</div>
-          <section *ngFor="let question of countings | async | countingsfilter: card.id">
-            <h4>Въпрос: <strong>{{question.question}}</strong></h4>
-            <p>За: {{question.votesTrue}}</p>
-            <p>Против: {{question.votesFalse}}</p>
+          <section
+            *ngFor="
+              let question of countings | async | countingsfilter: card.id
+            "
+          >
+            <h4>
+              Въпрос: <strong>{{ question.question }}</strong>
+            </h4>
+            <div style="display: flex">
+              <table style="width: 100%">
+                <tr>
+                  <th>Отговор</th>
+                  <th>Общо</th>
+                </tr>
+                <tr>
+                  <td>За</td>
+                  <td>{{ question.votesTrue }}</td>
+                </tr>
+                <tr>
+                  <td>Против</td>
+                  <td>{{ question.votesFalse }}</td>
+                </tr>
+              </table>
+              <table style="width: 100%">
+                <tr>
+                  <th>В избирателна секция</th>
+                  <th>Електронно</th>
+                </tr>
+                <tr>
+                  <td>{{ question.voted }}</td>
+                  <td>{{ question.evoted }}</td>
+                </tr>
+              </table>
+            </div>
           </section>
         </mat-card-content>
       </mat-card>
