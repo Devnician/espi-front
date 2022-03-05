@@ -55,14 +55,11 @@ export class PoliticalGroupsTableComponent implements AfterViewInit {
     this.table.dataSource = this.dataSource;
   }
   showMembers(politicalGroup: Political_Groups) {
-    console.log(politicalGroup);
     this.donkey.load({ pGroup: politicalGroup });
     this.router.navigate(['political-groups', 'members']);
   }
 
   editPoliticalGroup(politicalGroup: Political_Groups) {
-    console.log(politicalGroup);
-
     const config = new MatDialogConfig<any>();
     // config.closeOnNavigation = true;
     config.disableClose = true;
@@ -74,7 +71,6 @@ export class PoliticalGroupsTableComponent implements AfterViewInit {
 
     const dialogRef = this.dialog.open(EditPoliticalGroupComponent, config);
     dialogRef.afterClosed().subscribe((dialogResponse) => {
-      console.log(dialogResponse);
       if (dialogResponse && dialogResponse.result === 'success') {
         this.dataSource.queryRef.refetch();
       }

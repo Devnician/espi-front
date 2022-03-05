@@ -4,6 +4,8 @@ import { QueryRef } from 'apollo-angular';
 import { Observable } from 'rxjs';
 import {
   Addresses_Set_Input,
+  AutocompleteUsersGQL,
+  AutocompleteUsersQuery,
   BulkInsertUsersGQL,
   BulkInsertUsersMutation,
   CountUndistributedToVotingSectionsGQL,
@@ -30,6 +32,7 @@ export class UsersService {
     private createUserGQL: CreateUserGQL,
     private updateUserGQL: UpdateUserGQL,
     private getUsersGQL: GetUsersGQL,
+    private autocompleteUsersGQL: AutocompleteUsersGQL,
     private bulkInsertUsersGQL: BulkInsertUsersGQL,
     private countUndistributedToVotingSectionsGQL: CountUndistributedToVotingSectionsGQL,
     private distributeUsersGQL: DistributeUsersGQL,
@@ -81,6 +84,15 @@ export class UsersService {
         errorPolicy: 'all',
         pollInterval: 30 * 1000,
       }
+    );
+  }
+  autocompleteUsers(
+    condition: Users_Bool_Exp = {},
+    orderBy: Users_Order_By
+  ): Observable<ApolloQueryResult<AutocompleteUsersQuery>> {
+    return this.autocompleteUsersGQL.fetch(
+      { condition, orderBy },
+      { fetchPolicy: 'network-only', errorPolicy: 'all' }
     );
   }
 

@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { FetchResult } from 'apollo-link';
 import { Observable } from 'rxjs';
 import {
+  AddPoliticalMemberGQL,
   CreatePoliticalGroupGQL,
   CreatePoliticalGroupMutation,
   GetPoliticalGroupMembersGQL,
@@ -10,7 +11,9 @@ import {
   Political_Groups_Order_By,
   Political_Groups_Set_Input,
   Political_Group_Members_Bool_Exp,
+  Political_Group_Members_Insert_Input,
   Political_Group_Members_Order_By,
+  RemoveMemberFromGroupGQL,
   UpdatePoliticalGroupGQL,
   UpdatePoliticalGroupMutation,
 } from 'src/generated/graphql';
@@ -24,7 +27,9 @@ export class PoliticalGroupsService {
 
     private createPoliticalGroupGQL: CreatePoliticalGroupGQL,
     private updatePoliticalGroupGQL: UpdatePoliticalGroupGQL,
-    private getMembers: GetPoliticalGroupMembersGQL
+    private getMembers: GetPoliticalGroupMembersGQL,
+    private removeMemberFromGroupGQL: RemoveMemberFromGroupGQL,
+    private addPoliticalMemberGQL: AddPoliticalMemberGQL
   ) {
     // *
   }
@@ -45,7 +50,19 @@ export class PoliticalGroupsService {
       }
     );
   }
+  removeMemberFromGroup(memberId: number) {
+    return this.removeMemberFromGroupGQL.mutate(
+      { memberId },
+      { errorPolicy: 'all' }
+    );
+  }
 
+  addPoliticalMember(insertInput: Political_Group_Members_Insert_Input) {
+    return this.addPoliticalMemberGQL.mutate(
+      { object: insertInput },
+      { errorPolicy: 'all' }
+    );
+  }
   getPoliticalGroupMembers(
     limit = 10,
     offset = 0,

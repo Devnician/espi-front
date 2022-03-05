@@ -37,6 +37,17 @@ mutation UpdatePoliticalGroup($id: Int!, $set: political_groups_set_input!) {
 }
 
 # Members
+
+mutation RemoveMemberFromGroup($memberId: Int!) {
+  delete_political_group_members_by_pk(id: $memberId) {
+    id
+  }
+}
+mutation AddPoliticalMember($object: political_group_members_insert_input!) {
+  insert_political_group_members_one(object: $object) {
+    id
+  }
+}
 query getPoliticalGroupMembers(
   $limit: Int
   $offset: Int

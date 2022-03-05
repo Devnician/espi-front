@@ -6288,6 +6288,10 @@ export type Users = {
   name: Scalars['String'];
   password?: Maybe<Scalars['String']>;
   pin?: Maybe<Scalars['String']>;
+  /** An array relationship */
+  political_group_members: Array<Political_Group_Members>;
+  /** An aggregate relationship */
+  political_group_members_aggregate: Political_Group_Members_Aggregate;
   /** fetch data from the table: "referendum_votes" */
   referendum_votes: Array<Referendum_Votes>;
   /** An aggregate relationship */
@@ -6307,6 +6311,26 @@ export type Users = {
   votingSectionId?: Maybe<Scalars['Int']>;
   /** An object relationship */
   voting_section?: Maybe<Voting_Section>;
+};
+
+
+/** columns and relationships of "users" */
+export type UsersPolitical_Group_MembersArgs = {
+  distinct_on?: Maybe<Array<Political_Group_Members_Select_Column>>;
+  limit?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  order_by?: Maybe<Array<Political_Group_Members_Order_By>>;
+  where?: Maybe<Political_Group_Members_Bool_Exp>;
+};
+
+
+/** columns and relationships of "users" */
+export type UsersPolitical_Group_Members_AggregateArgs = {
+  distinct_on?: Maybe<Array<Political_Group_Members_Select_Column>>;
+  limit?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  order_by?: Maybe<Array<Political_Group_Members_Order_By>>;
+  where?: Maybe<Political_Group_Members_Bool_Exp>;
 };
 
 
@@ -6402,6 +6426,7 @@ export type Users_Bool_Exp = {
   name?: Maybe<String_Comparison_Exp>;
   password?: Maybe<String_Comparison_Exp>;
   pin?: Maybe<String_Comparison_Exp>;
+  political_group_members?: Maybe<Political_Group_Members_Bool_Exp>;
   referendum_votes?: Maybe<Referendum_Votes_Bool_Exp>;
   role?: Maybe<Role_Types_Enum_Comparison_Exp>;
   roleType?: Maybe<Role_Types_Bool_Exp>;
@@ -6441,6 +6466,7 @@ export type Users_Insert_Input = {
   name?: Maybe<Scalars['String']>;
   password?: Maybe<Scalars['String']>;
   pin?: Maybe<Scalars['String']>;
+  political_group_members?: Maybe<Political_Group_Members_Arr_Rel_Insert_Input>;
   referendum_votes?: Maybe<Referendum_Votes_Arr_Rel_Insert_Input>;
   role?: Maybe<Role_Types_Enum>;
   roleType?: Maybe<Role_Types_Obj_Rel_Insert_Input>;
@@ -6522,6 +6548,7 @@ export type Users_Order_By = {
   name?: Maybe<Order_By>;
   password?: Maybe<Order_By>;
   pin?: Maybe<Order_By>;
+  political_group_members_aggregate?: Maybe<Political_Group_Members_Aggregate_Order_By>;
   referendum_votes_aggregate?: Maybe<Referendum_Votes_Aggregate_Order_By>;
   role?: Maybe<Order_By>;
   roleType?: Maybe<Role_Types_Order_By>;
@@ -8157,6 +8184,32 @@ export type UpdatePoliticalGroupMutation = (
   )> }
 );
 
+export type RemoveMemberFromGroupMutationVariables = Exact<{
+  memberId: Scalars['Int'];
+}>;
+
+
+export type RemoveMemberFromGroupMutation = (
+  { __typename?: 'mutation_root' }
+  & { delete_political_group_members_by_pk?: Maybe<(
+    { __typename?: 'political_group_members' }
+    & Pick<Political_Group_Members, 'id'>
+  )> }
+);
+
+export type AddPoliticalMemberMutationVariables = Exact<{
+  object: Political_Group_Members_Insert_Input;
+}>;
+
+
+export type AddPoliticalMemberMutation = (
+  { __typename?: 'mutation_root' }
+  & { insert_political_group_members_one?: Maybe<(
+    { __typename?: 'political_group_members' }
+    & Pick<Political_Group_Members, 'id'>
+  )> }
+);
+
 export type GetPoliticalGroupMembersQueryVariables = Exact<{
   limit?: Maybe<Scalars['Int']>;
   offset?: Maybe<Scalars['Int']>;
@@ -8260,6 +8313,20 @@ export type GetUsersQuery = (
       & Pick<Users_Aggregate_Fields, 'count'>
     )> }
   ) }
+);
+
+export type AutocompleteUsersQueryVariables = Exact<{
+  condition?: Users_Bool_Exp;
+  orderBy: Array<Users_Order_By> | Users_Order_By;
+}>;
+
+
+export type AutocompleteUsersQuery = (
+  { __typename?: 'query_root' }
+  & { users: Array<(
+    { __typename?: 'users' }
+    & UserFieldsFragment
+  )> }
 );
 
 export type CreateUserMutationVariables = Exact<{
@@ -8916,6 +8983,42 @@ export const UpdatePoliticalGroupDocument = gql`
       super(apollo);
     }
   }
+export const RemoveMemberFromGroupDocument = gql`
+    mutation RemoveMemberFromGroup($memberId: Int!) {
+  delete_political_group_members_by_pk(id: $memberId) {
+    id
+  }
+}
+    `;
+
+  @Injectable({
+    providedIn: 'root'
+  })
+  export class RemoveMemberFromGroupGQL extends Apollo.Mutation<RemoveMemberFromGroupMutation, RemoveMemberFromGroupMutationVariables> {
+    document = RemoveMemberFromGroupDocument;
+    
+    constructor(apollo: Apollo.Apollo) {
+      super(apollo);
+    }
+  }
+export const AddPoliticalMemberDocument = gql`
+    mutation AddPoliticalMember($object: political_group_members_insert_input!) {
+  insert_political_group_members_one(object: $object) {
+    id
+  }
+}
+    `;
+
+  @Injectable({
+    providedIn: 'root'
+  })
+  export class AddPoliticalMemberGQL extends Apollo.Mutation<AddPoliticalMemberMutation, AddPoliticalMemberMutationVariables> {
+    document = AddPoliticalMemberDocument;
+    
+    constructor(apollo: Apollo.Apollo) {
+      super(apollo);
+    }
+  }
 export const GetPoliticalGroupMembersDocument = gql`
     query getPoliticalGroupMembers($limit: Int, $offset: Int, $condition: political_group_members_bool_exp! = {}, $orderBy: [political_group_members_order_by!] = {createdAt: desc}) {
   political_group_members(
@@ -9036,6 +9139,24 @@ export const GetUsersDocument = gql`
   })
   export class GetUsersGQL extends Apollo.Query<GetUsersQuery, GetUsersQueryVariables> {
     document = GetUsersDocument;
+    
+    constructor(apollo: Apollo.Apollo) {
+      super(apollo);
+    }
+  }
+export const AutocompleteUsersDocument = gql`
+    query AutocompleteUsers($condition: users_bool_exp! = {}, $orderBy: [users_order_by!]!) {
+  users(where: $condition, order_by: $orderBy) {
+    ...UserFields
+  }
+}
+    ${UserFieldsFragmentDoc}`;
+
+  @Injectable({
+    providedIn: 'root'
+  })
+  export class AutocompleteUsersGQL extends Apollo.Query<AutocompleteUsersQuery, AutocompleteUsersQueryVariables> {
+    document = AutocompleteUsersDocument;
     
     constructor(apollo: Apollo.Apollo) {
       super(apollo);

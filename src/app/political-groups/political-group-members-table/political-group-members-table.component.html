@@ -6,6 +6,7 @@
     mat-raised-button
     color="accent"
     class="espi-big-button"
+    style="width: 150px"
     (click)="addMember()"
   >
     Добави член
@@ -47,8 +48,10 @@
 
     <!-- active Column -->
     <ng-container matColumnDef="active">
-      <th mat-header-cell *matHeaderCellDef mat-sort-header>Активен</th>
-      <td mat-cell *matCellDef="let row">{{ row.active }}</td>
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>
+        Кандидат в листа
+      </th>
+      <td mat-cell *matCellDef="let row">{{ row.active ? "ДА" : "НЕ" }}</td>
     </ng-container>
 
     <!-- actions Column -->

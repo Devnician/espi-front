@@ -15,6 +15,15 @@ query GetUsers(
   }
 }
 
+query AutocompleteUsers(
+  $condition: users_bool_exp! = {}
+  $orderBy: [users_order_by!]!
+) {
+  users(where: $condition, order_by: $orderBy) {
+    ...UserFields
+  }
+}
+
 mutation CreateUser($input: users_insert_input!) {
   insert_users_one(object: $input) {
     ...UserFields
