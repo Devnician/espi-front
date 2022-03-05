@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { ApolloQueryResult, FetchResult } from '@apollo/client';
+import { JwtHelperService } from '@auth0/angular-jwt';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import {
@@ -37,13 +38,16 @@ export class AuthService {
     private http: HttpClient,
     private registerGQL: RegisterGQL,
     private loginActionGQL: LoginActionGQL,
-    private refreshGQL: RefreshGQL
+    private refreshGQL: RefreshGQL,
+    private jwtHelper: JwtHelperService
   ) {
     if (environment.production === false) {
       const accessT = localStorage.getItem(TokenTypes.ACCESS_TOKEN);
       const fetchT = localStorage.getItem(TokenTypes.FETCH_TOKEN);
       console.log('tokens from local storage..');
       this.accessToken.next(accessT);
+      const res = this.jwtHelper.decodeToken(accessT);
+      this.setLoggedUser(res.user);
     }
   }
 

@@ -1,5 +1,7 @@
 import {
   Addresses,
+  Political_Group_Members,
+  Political_Group_Members_Aggregate,
   Referendum_Votes,
   Referendum_Votes_Aggregate,
   Role_Types,
@@ -11,6 +13,7 @@ import {
 } from 'src/generated/graphql';
 
 export class CustomUser implements Users {
+  political_group_members_aggregate: Political_Group_Members_Aggregate;
   voted: boolean;
   eVoted: boolean;
   filteredReferendumVotes: Referendum_Votes[];
@@ -39,4 +42,5 @@ export class CustomUser implements Users {
   votes_aggregate: Votes_Aggregate;
   votingSectionId?: number;
   voting_section?: Voting_Section;
+  political_group_members: Political_Group_Members[];
 }

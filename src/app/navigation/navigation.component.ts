@@ -140,6 +140,7 @@ export class NavigationComponent
       case Role_Types_Enum.CentralLeader:
       case Role_Types_Enum.Central:
         this.addMenu('users');
+        this.addMenu('political-groups');
         this.addMenu('settlements');
         this.addMenu('voting-sections');
         this.addMenu('votings-list');
@@ -157,6 +158,7 @@ export class NavigationComponent
         //  this.addMenu('voting-sections');
         this.addMenu('votings-list');
         this.addMenu('referendums-list');
+
         break;
       case Role_Types_Enum.Section:
         this.addMenu('users');
@@ -184,7 +186,7 @@ export class NavigationComponent
         this.menus.push({
           route: 'users',
           label: 'Гласоподаватели',
-          matIcon: 'groups',
+          matIcon: 'people',
           badgeSubject: undefined,
         });
         break;
@@ -235,6 +237,15 @@ export class NavigationComponent
           route: 'countings/dashboard',
           label: 'Преброяване',
           matIcon: 'functions',
+          badgeSubject: undefined,
+        });
+        break;
+
+      case 'political-groups':
+        this.menus.push({
+          route: 'political-groups',
+          label: 'Политически групи',
+          matIcon: 'groups',
           badgeSubject: undefined,
         });
         break;

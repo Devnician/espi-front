@@ -2,3 +2,18 @@ table:
   name: political_group_types
   schema: public
 is_enum: true
+select_permissions:
+- permission:
+    allow_aggregations: true
+    columns:
+    - value
+    - description
+    filter: {}
+  role: central
+- permission:
+    allow_aggregations: true
+    columns:
+    - description
+    - value
+    filter: {}
+  role: centralLeader
