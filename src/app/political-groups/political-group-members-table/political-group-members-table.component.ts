@@ -119,4 +119,18 @@ export class PoliticalGroupMembersTableComponent
         this.dataSource.loading.next(false);
       });
   }
+  toggleUserState(member: Political_Group_Members) {
+    this.politicalGroupsService
+      .updateStateOfPoliticalMember(member.id, !member.active)
+      .subscribe(({ data, errors }) => {
+        if (errors) {
+          console.log(errors);
+        } else {
+          this.snackBar.open('Стътуса е променен успешно', '', {
+            duration: 3500,
+          });
+          this.dataSource.queryRef.refetch({});
+        }
+      });
+  }
 }

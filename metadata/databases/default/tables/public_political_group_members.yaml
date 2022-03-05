@@ -45,6 +45,19 @@ select_permissions:
     - active
     filter: {}
   role: centralLeader
+update_permissions:
+- permission:
+    check: null
+    columns:
+    - active
+    filter: {}
+  role: central
+- permission:
+    check: {}
+    columns:
+    - active
+    filter: {}
+  role: centralLeader
 delete_permissions:
 - permission:
     filter: {}

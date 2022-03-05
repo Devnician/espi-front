@@ -66,6 +66,23 @@
           <mat-icon>more_vert</mat-icon>
         </button>
         <mat-menu #menu="matMenu">
+          <button
+            *ngIf="!row.active"
+            mat-menu-item
+            (click)="toggleUserState(row)"
+          >
+            <mat-icon>thumb_up</mat-icon>
+            <span>Добави в изборната листа</span>
+          </button>
+          <button
+            *ngIf="row.active"
+            mat-menu-item
+            (click)="toggleUserState(row)"
+          >
+            <mat-icon>thumb_down</mat-icon>
+            <span>Извади от листата</span>
+          </button>
+
           <button mat-menu-item (click)="removeMember(row)">
             <mat-icon>delete</mat-icon>
             <span>Премахни</span>

@@ -16,6 +16,8 @@ import {
   RemoveMemberFromGroupGQL,
   UpdatePoliticalGroupGQL,
   UpdatePoliticalGroupMutation,
+  UpdateStateOfPoliticalMemberGQL,
+  UpdateStateOfPoliticalMemberMutation,
 } from 'src/generated/graphql';
 
 @Injectable({
@@ -29,7 +31,8 @@ export class PoliticalGroupsService {
     private updatePoliticalGroupGQL: UpdatePoliticalGroupGQL,
     private getMembers: GetPoliticalGroupMembersGQL,
     private removeMemberFromGroupGQL: RemoveMemberFromGroupGQL,
-    private addPoliticalMemberGQL: AddPoliticalMemberGQL
+    private addPoliticalMemberGQL: AddPoliticalMemberGQL,
+    private updateStateOfPoliticalMemberGQL: UpdateStateOfPoliticalMemberGQL
   ) {
     // *
   }
@@ -63,6 +66,19 @@ export class PoliticalGroupsService {
       { errorPolicy: 'all' }
     );
   }
+  updateStateOfPoliticalMember(
+    id: number,
+    state: boolean
+  ): Observable<
+    FetchResult<
+      UpdateStateOfPoliticalMemberMutation,
+      Record<string, any>,
+      Record<string, any>
+    >
+  > {
+    return this.updateStateOfPoliticalMemberGQL.mutate({ id, state });
+  }
+
   getPoliticalGroupMembers(
     limit = 10,
     offset = 0,

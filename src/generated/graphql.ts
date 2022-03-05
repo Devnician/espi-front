@@ -8210,6 +8210,20 @@ export type AddPoliticalMemberMutation = (
   )> }
 );
 
+export type UpdateStateOfPoliticalMemberMutationVariables = Exact<{
+  id: Scalars['Int'];
+  state: Scalars['Boolean'];
+}>;
+
+
+export type UpdateStateOfPoliticalMemberMutation = (
+  { __typename?: 'mutation_root' }
+  & { update_political_group_members_by_pk?: Maybe<(
+    { __typename?: 'political_group_members' }
+    & Pick<Political_Group_Members, 'id'>
+  )> }
+);
+
 export type GetPoliticalGroupMembersQueryVariables = Exact<{
   limit?: Maybe<Scalars['Int']>;
   offset?: Maybe<Scalars['Int']>;
@@ -9014,6 +9028,27 @@ export const AddPoliticalMemberDocument = gql`
   })
   export class AddPoliticalMemberGQL extends Apollo.Mutation<AddPoliticalMemberMutation, AddPoliticalMemberMutationVariables> {
     document = AddPoliticalMemberDocument;
+    
+    constructor(apollo: Apollo.Apollo) {
+      super(apollo);
+    }
+  }
+export const UpdateStateOfPoliticalMemberDocument = gql`
+    mutation UpdateStateOfPoliticalMember($id: Int!, $state: Boolean!) {
+  update_political_group_members_by_pk(
+    pk_columns: {id: $id}
+    _set: {active: $state}
+  ) {
+    id
+  }
+}
+    `;
+
+  @Injectable({
+    providedIn: 'root'
+  })
+  export class UpdateStateOfPoliticalMemberGQL extends Apollo.Mutation<UpdateStateOfPoliticalMemberMutation, UpdateStateOfPoliticalMemberMutationVariables> {
+    document = UpdateStateOfPoliticalMemberDocument;
     
     constructor(apollo: Apollo.Apollo) {
       super(apollo);

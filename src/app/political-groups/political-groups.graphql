@@ -48,6 +48,15 @@ mutation AddPoliticalMember($object: political_group_members_insert_input!) {
     id
   }
 }
+
+mutation UpdateStateOfPoliticalMember($id: Int!, $state: Boolean!) {
+  update_political_group_members_by_pk(
+    pk_columns: { id: $id }
+    _set: { active: $state }
+  ) {
+    id
+  }
+}
 query getPoliticalGroupMembers(
   $limit: Int
   $offset: Int
