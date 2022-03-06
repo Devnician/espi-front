@@ -22,6 +22,17 @@ insert_permissions:
     check: {}
     columns:
     - eVote
+    - id
+    - questionId
+    - sectionId
+    - userId
+    - vote
+  role: sectionLeader
+- permission:
+    backend_only: false
+    check: {}
+    columns:
+    - eVote
     - questionId
     - sectionId
     - userId
@@ -84,3 +95,11 @@ update_permissions:
     - vote
     filter: {}
   role: section
+- permission:
+    check: null
+    columns:
+    - eVote
+    - sectionId
+    - vote
+    filter: {}
+  role: sectionLeader
