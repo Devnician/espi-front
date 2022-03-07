@@ -1,0 +1,154 @@
+<form [formGroup]="form" novalidate (ngSubmit)="onSubmit()">
+  <mat-progress-bar
+    *ngIf="loading$ | async"
+    color="warn"
+    mode="indeterminate"
+  ></mat-progress-bar>
+  <!--  -->
+  <mat-card class="shipping-card">
+    <mat-card-header>
+      <div style="display: flex; width: 100%">
+        <div style="width: 100%">
+          <mat-card-title>
+            <div style="display: flex">
+              <div style="width: 100%">
+                {{
+                  (isUpdate | async)
+                    ? "Редактиране на данни за избора"
+                    : "Създаване на избор"
+                }}
+              </div>
+              <!-- <mat-slide-toggle
+                #slide
+                [checked]="isChecked()"
+                (change)="onTypeChanged($event)"
+                style="width: 200px"
+              >
+                <span>{{
+                  slide.checked === true ? "местен" : "национален"
+                }}</span>
+              </mat-slide-toggle> -->
+            </div>
+          </mat-card-title>
+        </div>
+
+        <mat-checkbox
+          *ngIf="isUpdate$ | async"
+          style="height: 40px"
+          #chekBox
+          color="warn"
+          formControlName="locked"
+          (change)="lockStateChanged($event)"
+          >{{ chekBox.checked ? "Заключен" : "Отключен" }}
+        </mat-checkbox>
+      </div>
+    </mat-card-header>
+    <mat-card-content>
+      <div class="mat-elevation-z4 form-sector">
+        <div class="row">
+          <div class="col">
+            <mat-form-field class="full-width">
+              <mat-select
+                formControlName="type"
+                placeholder="Тип на организацията"
+              >
+                <mat-option
+                  *ngFor="let t of types | keyvalue"
+                  [value]="t.value"
+                  [disabled]="
+                    t.value === 'mayoral' || t.value === 'local_government'
+                  "
+                >
+                  <div
+                    *ngIf="
+                      t.value !== 'local_referendum' &&
+                      t.value !== 'national_referendum'
+                    "
+                  >
+                    {{ labels[t.value.toString()] }}
+                  </div>
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+
+          <div class="col">
+            <!-- single selection -->
+            <mat-form-field class="full-width">
+              <mat-label>Дата</mat-label>
+              <input
+                #singleDate
+                [min]="minDate"
+                matInput
+                formControlName="startDate"
+                [matDatepicker]="picker"
+                placeholder="От дата"
+                (dateInput)="onDateSelected(picker, $event)"
+              />
+              <mat-datepicker-toggle matSuffix [for]="picker">
+              </mat-datepicker-toggle>
+              <mat-datepicker #picker></mat-datepicker>
+              <mat-hint align="end">Избор на дата ^</mat-hint>
+              <mat-error *ngIf="form.controls['startDate'].errors">
+                {{
+                  valido.getErrorMessageFromControl(form.controls["startDate"])
+                }}
+              </mat-error>
+            </mat-form-field>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col">
+            <mat-form-field class="full-width">
+              <input
+                matInput
+                placeholder="Наименование"
+                formControlName="name"
+                type="search"
+              />
+              <mat-error *ngIf="form.controls['name'].errors">
+                {{ valido.getErrorMessageFromControl(form.controls["name"]) }}
+              </mat-error>
+            </mat-form-field>
+          </div>
+        </div>
+
+        <div class="row">
+          <mat-form-field class="full-width">
+            <textarea
+              rows="5"
+              matInput
+              placeholder="Описание"
+              formControlName="description"
+              type="search"
+            ></textarea>
+            <mat-error *ngIf="form.controls['description'].errors">
+              {{
+                valido.getErrorMessageFromControl(form.controls["description"])
+              }}
+            </mat-error>
+          </mat-form-field>
+        </div>
+      </div>
+    </mat-card-content>
+    <mat-card-actions align="end">
+      <button
+        mat-raised-button
+        type="button"
+        (click)="close()"
+        [disabled]="(loading$ | async) === true"
+      >
+        Затвори
+      </button>
+      <button
+        mat-raised-button
+        color="primary"
+        type="submit"
+        [disabled]="form.invalid || (loading$ | async) === true"
+      >
+        {{ (isUpdate | async) ? "Промени" : "Създай" }}
+      </button>
+    </mat-card-actions>
+    <!-- <pre>{{ form.getRawValue() | json }}</pre> -->
+  </mat-card>
+</form>

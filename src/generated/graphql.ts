@@ -7799,6 +7799,7 @@ export type Votings = {
   id: Scalars['Int'];
   locked: Scalars['Boolean'];
   name: Scalars['String'];
+  startDate?: Maybe<Scalars['date']>;
   startedAt?: Maybe<Scalars['timestamptz']>;
   type: Voting_Types_Enum;
   updatedAt: Scalars['timestamptz'];
@@ -7853,6 +7854,7 @@ export type Votings_Bool_Exp = {
   id?: Maybe<Int_Comparison_Exp>;
   locked?: Maybe<Boolean_Comparison_Exp>;
   name?: Maybe<String_Comparison_Exp>;
+  startDate?: Maybe<Date_Comparison_Exp>;
   startedAt?: Maybe<Timestamptz_Comparison_Exp>;
   type?: Maybe<Voting_Types_Enum_Comparison_Exp>;
   updatedAt?: Maybe<Timestamptz_Comparison_Exp>;
@@ -7878,6 +7880,7 @@ export type Votings_Insert_Input = {
   id?: Maybe<Scalars['Int']>;
   locked?: Maybe<Scalars['Boolean']>;
   name?: Maybe<Scalars['String']>;
+  startDate?: Maybe<Scalars['date']>;
   startedAt?: Maybe<Scalars['timestamptz']>;
   type?: Maybe<Voting_Types_Enum>;
   updatedAt?: Maybe<Scalars['timestamptz']>;
@@ -7892,6 +7895,7 @@ export type Votings_Max_Fields = {
   finishedAt?: Maybe<Scalars['timestamptz']>;
   id?: Maybe<Scalars['Int']>;
   name?: Maybe<Scalars['String']>;
+  startDate?: Maybe<Scalars['date']>;
   startedAt?: Maybe<Scalars['timestamptz']>;
   updatedAt?: Maybe<Scalars['timestamptz']>;
 };
@@ -7904,6 +7908,7 @@ export type Votings_Min_Fields = {
   finishedAt?: Maybe<Scalars['timestamptz']>;
   id?: Maybe<Scalars['Int']>;
   name?: Maybe<Scalars['String']>;
+  startDate?: Maybe<Scalars['date']>;
   startedAt?: Maybe<Scalars['timestamptz']>;
   updatedAt?: Maybe<Scalars['timestamptz']>;
 };
@@ -7932,6 +7937,7 @@ export type Votings_Order_By = {
   id?: Maybe<Order_By>;
   locked?: Maybe<Order_By>;
   name?: Maybe<Order_By>;
+  startDate?: Maybe<Order_By>;
   startedAt?: Maybe<Order_By>;
   type?: Maybe<Order_By>;
   updatedAt?: Maybe<Order_By>;
@@ -7958,6 +7964,8 @@ export enum Votings_Select_Column {
   /** column name */
   Name = 'name',
   /** column name */
+  StartDate = 'startDate',
+  /** column name */
   StartedAt = 'startedAt',
   /** column name */
   Type = 'type',
@@ -7973,6 +7981,7 @@ export type Votings_Set_Input = {
   id?: Maybe<Scalars['Int']>;
   locked?: Maybe<Scalars['Boolean']>;
   name?: Maybe<Scalars['String']>;
+  startDate?: Maybe<Scalars['date']>;
   startedAt?: Maybe<Scalars['timestamptz']>;
   type?: Maybe<Voting_Types_Enum>;
   updatedAt?: Maybe<Scalars['timestamptz']>;
@@ -8016,6 +8025,8 @@ export enum Votings_Update_Column {
   Locked = 'locked',
   /** column name */
   Name = 'name',
+  /** column name */
+  StartDate = 'startDate',
   /** column name */
   StartedAt = 'startedAt',
   /** column name */
@@ -8678,7 +8689,7 @@ export type GetStartedVotingsQuery = (
 
 export type VotingVieldsFragment = (
   { __typename?: 'votings' }
-  & Pick<Votings, 'id' | 'createdAt' | 'updatedAt' | 'name' | 'description' | 'type' | 'locked' | 'startedAt' | 'finishedAt'>
+  & Pick<Votings, 'id' | 'createdAt' | 'updatedAt' | 'name' | 'description' | 'type' | 'locked' | 'startDate' | 'startedAt' | 'finishedAt'>
   & { voting_type: (
     { __typename?: 'voting_types' }
     & Pick<Voting_Types, 'value' | 'description'>
@@ -8821,6 +8832,7 @@ export const VotingVieldsFragmentDoc = gql`
   description
   type
   locked
+  startDate
   voting_type {
     value
     description

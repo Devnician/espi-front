@@ -137,6 +137,7 @@ fragment VotingVields on votings {
   description
   type
   locked
+  startDate
   voting_type {
     value
     description

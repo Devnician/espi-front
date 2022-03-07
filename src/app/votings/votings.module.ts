@@ -37,6 +37,7 @@ import { VoteComponent } from './vote/vote.component';
 import { VotingsDashboardComponent } from './votings-dashboard/votings-dashboard.component';
 import { VotingsRoutingModule } from './votings-routing.module';
 import { VotingsTableComponent } from './votings-table/votings-table.component';
+import { EditVotingComponent } from './edit-voting/edit-voting.component';
 @NgModule({
   declarations: [
     VotingsDashboardComponent,
@@ -50,6 +51,7 @@ import { VotingsTableComponent } from './votings-table/votings-table.component';
     ReferendumsTableComponent,
     EditReferendumComponent,
     EditReferendumTableComponent,
+    EditVotingComponent,
   ],
   imports: [
     CommonModule,

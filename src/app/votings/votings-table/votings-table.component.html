@@ -1,3 +1,15 @@
+<div style="display: flex; justify-content: flex-end">
+  <button
+    *ngIf="canCreateVote()"
+    mat-raised-button
+    style="margin: 10px"
+    color="accent"
+    (click)="openDialog(undefined)"
+  >
+    Създай гласуване
+  </button>
+</div>
+
 <div class="mat-elevation-z8">
   <mat-progress-bar
     *ngIf="dataSource.loading$ | async"
