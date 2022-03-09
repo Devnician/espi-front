@@ -7799,6 +7799,7 @@ export type Votings = {
   id: Scalars['Int'];
   locked: Scalars['Boolean'];
   name: Scalars['String'];
+  startDate?: Maybe<Scalars['date']>;
   startedAt?: Maybe<Scalars['timestamptz']>;
   type: Voting_Types_Enum;
   updatedAt: Scalars['timestamptz'];
@@ -7853,6 +7854,7 @@ export type Votings_Bool_Exp = {
   id?: Maybe<Int_Comparison_Exp>;
   locked?: Maybe<Boolean_Comparison_Exp>;
   name?: Maybe<String_Comparison_Exp>;
+  startDate?: Maybe<Date_Comparison_Exp>;
   startedAt?: Maybe<Timestamptz_Comparison_Exp>;
   type?: Maybe<Voting_Types_Enum_Comparison_Exp>;
   updatedAt?: Maybe<Timestamptz_Comparison_Exp>;
@@ -7878,6 +7880,7 @@ export type Votings_Insert_Input = {
   id?: Maybe<Scalars['Int']>;
   locked?: Maybe<Scalars['Boolean']>;
   name?: Maybe<Scalars['String']>;
+  startDate?: Maybe<Scalars['date']>;
   startedAt?: Maybe<Scalars['timestamptz']>;
   type?: Maybe<Voting_Types_Enum>;
   updatedAt?: Maybe<Scalars['timestamptz']>;
@@ -7892,6 +7895,7 @@ export type Votings_Max_Fields = {
   finishedAt?: Maybe<Scalars['timestamptz']>;
   id?: Maybe<Scalars['Int']>;
   name?: Maybe<Scalars['String']>;
+  startDate?: Maybe<Scalars['date']>;
   startedAt?: Maybe<Scalars['timestamptz']>;
   updatedAt?: Maybe<Scalars['timestamptz']>;
 };
@@ -7904,6 +7908,7 @@ export type Votings_Min_Fields = {
   finishedAt?: Maybe<Scalars['timestamptz']>;
   id?: Maybe<Scalars['Int']>;
   name?: Maybe<Scalars['String']>;
+  startDate?: Maybe<Scalars['date']>;
   startedAt?: Maybe<Scalars['timestamptz']>;
   updatedAt?: Maybe<Scalars['timestamptz']>;
 };
@@ -7932,6 +7937,7 @@ export type Votings_Order_By = {
   id?: Maybe<Order_By>;
   locked?: Maybe<Order_By>;
   name?: Maybe<Order_By>;
+  startDate?: Maybe<Order_By>;
   startedAt?: Maybe<Order_By>;
   type?: Maybe<Order_By>;
   updatedAt?: Maybe<Order_By>;
@@ -7958,6 +7964,8 @@ export enum Votings_Select_Column {
   /** column name */
   Name = 'name',
   /** column name */
+  StartDate = 'startDate',
+  /** column name */
   StartedAt = 'startedAt',
   /** column name */
   Type = 'type',
@@ -7973,6 +7981,7 @@ export type Votings_Set_Input = {
   id?: Maybe<Scalars['Int']>;
   locked?: Maybe<Scalars['Boolean']>;
   name?: Maybe<Scalars['String']>;
+  startDate?: Maybe<Scalars['date']>;
   startedAt?: Maybe<Scalars['timestamptz']>;
   type?: Maybe<Voting_Types_Enum>;
   updatedAt?: Maybe<Scalars['timestamptz']>;
@@ -8016,6 +8025,8 @@ export enum Votings_Update_Column {
   Locked = 'locked',
   /** column name */
   Name = 'name',
+  /** column name */
+  StartDate = 'startDate',
   /** column name */
   StartedAt = 'startedAt',
   /** column name */
@@ -8142,19 +8153,6 @@ export type GetReferendumCountingsQuery = (
       { __typename?: 'referendum_questions' }
       & Pick<Referendum_Questions, 'referendumId' | 'id' | 'question'>
     )> }
-  )> }
-);
-
-export type ReferendumVotesBySectionIdQueryVariables = Exact<{
-  sectionId: Scalars['Int'];
-}>;
-
-
-export type ReferendumVotesBySectionIdQuery = (
-  { __typename?: 'query_root' }
-  & { referendum_votes: Array<(
-    { __typename?: 'referendum_votes' }
-    & Pick<Referendum_Votes, 'id' | 'createdAt' | 'sectionId' | 'questionId' | 'vote' | 'eVote'>
   )> }
 );
 
@@ -8635,6 +8633,33 @@ export type AddVoteForTheReferendumMutation = (
   )> }
 );
 
+export type CreateVotingMutationVariables = Exact<{
+  input: Votings_Insert_Input;
+}>;
+
+
+export type CreateVotingMutation = (
+  { __typename?: 'mutation_root' }
+  & { insert_votings_one?: Maybe<(
+    { __typename?: 'votings' }
+    & VotingVieldsFragment
+  )> }
+);
+
+export type UpdateVotingMutationVariables = Exact<{
+  id: Scalars['Int'];
+  input: Votings_Set_Input;
+}>;
+
+
+export type UpdateVotingMutation = (
+  { __typename?: 'mutation_root' }
+  & { update_votings_by_pk?: Maybe<(
+    { __typename?: 'votings' }
+    & VotingVieldsFragment
+  )> }
+);
+
 export type GetVotingsQueryVariables = Exact<{
   limit?: Maybe<Scalars['Int']>;
   offset?: Maybe<Scalars['Int']>;
@@ -8678,7 +8703,7 @@ export type GetStartedVotingsQuery = (
 
 export type VotingVieldsFragment = (
   { __typename?: 'votings' }
-  & Pick<Votings, 'id' | 'createdAt' | 'updatedAt' | 'name' | 'description' | 'type' | 'locked' | 'startedAt' | 'finishedAt'>
+  & Pick<Votings, 'id' | 'createdAt' | 'updatedAt' | 'name' | 'description' | 'type' | 'locked' | 'startDate' | 'startedAt' | 'finishedAt'>
   & { voting_type: (
     { __typename?: 'voting_types' }
     & Pick<Voting_Types, 'value' | 'description'>
@@ -8821,6 +8846,7 @@ export const VotingVieldsFragmentDoc = gql`
   description
   type
   locked
+  startDate
   voting_type {
     value
     description
@@ -8929,32 +8955,6 @@ export const GetReferendumCountingsDocument = gql`
   })
   export class GetReferendumCountingsGQL extends Apollo.Query<GetReferendumCountingsQuery, GetReferendumCountingsQueryVariables> {
     document = GetReferendumCountingsDocument;
-    
-    constructor(apollo: Apollo.Apollo) {
-      super(apollo);
-    }
-  }
-export const ReferendumVotesBySectionIdDocument = gql`
-    query ReferendumVotesBySectionId($sectionId: Int!) {
-  referendum_votes(
-    where: {sectionId: {_eq: $sectionId}}
-    order_by: {questionId: asc}
-  ) {
-    id
-    createdAt
-    sectionId
-    questionId
-    vote
-    eVote
-  }
-}
-    `;
-
-  @Injectable({
-    providedIn: 'root'
-  })
-  export class ReferendumVotesBySectionIdGQL extends Apollo.Query<ReferendumVotesBySectionIdQuery, ReferendumVotesBySectionIdQueryVariables> {
-    document = ReferendumVotesBySectionIdDocument;
     
     constructor(apollo: Apollo.Apollo) {
       super(apollo);
@@ -9516,6 +9516,42 @@ export const AddVoteForTheReferendumDocument = gql`
   })
   export class AddVoteForTheReferendumGQL extends Apollo.Mutation<AddVoteForTheReferendumMutation, AddVoteForTheReferendumMutationVariables> {
     document = AddVoteForTheReferendumDocument;
+    
+    constructor(apollo: Apollo.Apollo) {
+      super(apollo);
+    }
+  }
+export const CreateVotingDocument = gql`
+    mutation CreateVoting($input: votings_insert_input!) {
+  insert_votings_one(object: $input) {
+    ...VotingVields
+  }
+}
+    ${VotingVieldsFragmentDoc}`;
+
+  @Injectable({
+    providedIn: 'root'
+  })
+  export class CreateVotingGQL extends Apollo.Mutation<CreateVotingMutation, CreateVotingMutationVariables> {
+    document = CreateVotingDocument;
+    
+    constructor(apollo: Apollo.Apollo) {
+      super(apollo);
+    }
+  }
+export const UpdateVotingDocument = gql`
+    mutation UpdateVoting($id: Int!, $input: votings_set_input!) {
+  update_votings_by_pk(pk_columns: {id: $id}, _set: $input) {
+    ...VotingVields
+  }
+}
+    ${VotingVieldsFragmentDoc}`;
+
+  @Injectable({
+    providedIn: 'root'
+  })
+  export class UpdateVotingGQL extends Apollo.Mutation<UpdateVotingMutation, UpdateVotingMutationVariables> {
+    document = UpdateVotingDocument;
     
     constructor(apollo: Apollo.Apollo) {
       super(apollo);
