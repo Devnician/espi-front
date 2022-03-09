@@ -8156,19 +8156,6 @@ export type GetReferendumCountingsQuery = (
   )> }
 );
 
-export type ReferendumVotesBySectionIdQueryVariables = Exact<{
-  sectionId: Scalars['Int'];
-}>;
-
-
-export type ReferendumVotesBySectionIdQuery = (
-  { __typename?: 'query_root' }
-  & { referendum_votes: Array<(
-    { __typename?: 'referendum_votes' }
-    & Pick<Referendum_Votes, 'id' | 'createdAt' | 'sectionId' | 'questionId' | 'vote' | 'eVote'>
-  )> }
-);
-
 export type GetPoliticalGroupsQueryVariables = Exact<{
   limit?: Maybe<Scalars['Int']>;
   offset?: Maybe<Scalars['Int']>;
@@ -8646,6 +8633,33 @@ export type AddVoteForTheReferendumMutation = (
   )> }
 );
 
+export type CreateVotingMutationVariables = Exact<{
+  input: Votings_Insert_Input;
+}>;
+
+
+export type CreateVotingMutation = (
+  { __typename?: 'mutation_root' }
+  & { insert_votings_one?: Maybe<(
+    { __typename?: 'votings' }
+    & VotingVieldsFragment
+  )> }
+);
+
+export type UpdateVotingMutationVariables = Exact<{
+  id: Scalars['Int'];
+  input: Votings_Set_Input;
+}>;
+
+
+export type UpdateVotingMutation = (
+  { __typename?: 'mutation_root' }
+  & { update_votings_by_pk?: Maybe<(
+    { __typename?: 'votings' }
+    & VotingVieldsFragment
+  )> }
+);
+
 export type GetVotingsQueryVariables = Exact<{
   limit?: Maybe<Scalars['Int']>;
   offset?: Maybe<Scalars['Int']>;
@@ -8941,32 +8955,6 @@ export const GetReferendumCountingsDocument = gql`
   })
   export class GetReferendumCountingsGQL extends Apollo.Query<GetReferendumCountingsQuery, GetReferendumCountingsQueryVariables> {
     document = GetReferendumCountingsDocument;
-    
-    constructor(apollo: Apollo.Apollo) {
-      super(apollo);
-    }
-  }
-export const ReferendumVotesBySectionIdDocument = gql`
-    query ReferendumVotesBySectionId($sectionId: Int!) {
-  referendum_votes(
-    where: {sectionId: {_eq: $sectionId}}
-    order_by: {questionId: asc}
-  ) {
-    id
-    createdAt
-    sectionId
-    questionId
-    vote
-    eVote
-  }
-}
-    `;
-
-  @Injectable({
-    providedIn: 'root'
-  })
-  export class ReferendumVotesBySectionIdGQL extends Apollo.Query<ReferendumVotesBySectionIdQuery, ReferendumVotesBySectionIdQueryVariables> {
-    document = ReferendumVotesBySectionIdDocument;
     
     constructor(apollo: Apollo.Apollo) {
       super(apollo);
@@ -9528,6 +9516,42 @@ export const AddVoteForTheReferendumDocument = gql`
   })
   export class AddVoteForTheReferendumGQL extends Apollo.Mutation<AddVoteForTheReferendumMutation, AddVoteForTheReferendumMutationVariables> {
     document = AddVoteForTheReferendumDocument;
+    
+    constructor(apollo: Apollo.Apollo) {
+      super(apollo);
+    }
+  }
+export const CreateVotingDocument = gql`
+    mutation CreateVoting($input: votings_insert_input!) {
+  insert_votings_one(object: $input) {
+    ...VotingVields
+  }
+}
+    ${VotingVieldsFragmentDoc}`;
+
+  @Injectable({
+    providedIn: 'root'
+  })
+  export class CreateVotingGQL extends Apollo.Mutation<CreateVotingMutation, CreateVotingMutationVariables> {
+    document = CreateVotingDocument;
+    
+    constructor(apollo: Apollo.Apollo) {
+      super(apollo);
+    }
+  }
+export const UpdateVotingDocument = gql`
+    mutation UpdateVoting($id: Int!, $input: votings_set_input!) {
+  update_votings_by_pk(pk_columns: {id: $id}, _set: $input) {
+    ...VotingVields
+  }
+}
+    ${VotingVieldsFragmentDoc}`;
+
+  @Injectable({
+    providedIn: 'root'
+  })
+  export class UpdateVotingGQL extends Apollo.Mutation<UpdateVotingMutation, UpdateVotingMutationVariables> {
+    document = UpdateVotingDocument;
     
     constructor(apollo: Apollo.Apollo) {
       super(apollo);

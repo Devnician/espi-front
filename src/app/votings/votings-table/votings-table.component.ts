@@ -4,6 +4,7 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatSort } from '@angular/material/sort';
 import { MatTable } from '@angular/material/table';
+import * as moment from 'moment';
 import { LoggedUser } from 'src/app/auth/logged-user.interface';
 import { VixenComponent } from 'src/app/core/vixen/vixen.component';
 import { AuthService } from 'src/app/services/auth-service';
@@ -25,9 +26,23 @@ export class VotingsTableComponent
   @ViewChild(MatSort) sort!: MatSort;
   @ViewChild(MatTable) table!: MatTable<Votings>;
   dataSource: VotingsTableDataSource;
+  startOfDay = moment().startOf('day');
   private loggedUSer: LoggedUser;
   /** Columns displayed in the table. Columns IDs can be added, removed, or reordered. */
-  displayedColumns = ['id', 'name'];
+
+  // locked
+  // startedAt
+  // finishedAt
+  displayedColumns = [
+    'id',
+    'createdAt',
+    'updatedAt',
+    'name',
+    'description',
+    'startDate',
+    'type',
+    'actions',
+  ];
 
   constructor(
     private auth: AuthService,
@@ -60,8 +75,31 @@ export class VotingsTableComponent
     return false;
   }
 
+  canStartStopVoting(): boolean {
+    return (
+      this.loggedUSer.roleType.value === Role_Types_Enum.CentralLeader ||
+      this.loggedUSer?.secondRoleType.value === Role_Types_Enum.CentralLeader
+    );
+  }
+  isTodayTheDate(voting: Votings) {
+    return moment(voting.startDate).startOf('day').isSame(this.startOfDay);
+  }
+  start(voting: Votings) {
+    this.votingService
+      .updateVoting(voting.id, { startedAt: moment(), finishedAt: null })
+      .subscribe((response) => {
+        console.log(response);
+      });
+  }
+  stop(voting: Votings) {
+    this.votingService
+      .updateVoting(voting.id, { finishedAt: moment() })
+      .subscribe((response) => {
+        console.log(response);
+      });
+  }
+
   openDialog(voting: Votings) {
-    console.log('OPEN DIALOG');
     const config = new MatDialogConfig<any>();
     // config.closeOnNavigation = true;
     config.disableClose = true;
@@ -73,7 +111,10 @@ export class VotingsTableComponent
 
     const dialogRef = this.dialog.open(EditVotingComponent, config);
     dialogRef.afterClosed().subscribe((dialogResponse) => {
-      console.log(dialogResponse);
+      if (dialogResponse?.success) {
+        this.dataSource.loading.next(true);
+        this.dataSource.queryRef.refetch();
+      }
     });
   }
 }

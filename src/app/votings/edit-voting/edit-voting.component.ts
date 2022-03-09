@@ -6,9 +6,17 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { isNullOrUndefined } from 'is-what';
 import * as moment from 'moment';
 import { BehaviorSubject } from 'rxjs';
+import { LoggedUser } from 'src/app/auth/logged-user.interface';
 import { Valido } from 'src/app/core/valido';
 import { VotingsTypesLabels } from 'src/app/core/votings-types-labels';
-import { Votings, Voting_Types_Enum } from 'src/generated/graphql';
+import {
+  Role_Types_Enum,
+  Votings,
+  Votings_Insert_Input,
+  Votings_Set_Input,
+  Voting_Types_Enum,
+} from 'src/generated/graphql';
+import { VotingsService } from '../voting-service.service';
 @Component({
   selector: 'app-edit-voting',
   templateUrl: './edit-voting.component.html',
@@ -28,32 +36,35 @@ export class EditVotingComponent {
     Voting_Types_Enum.Mayoral,
   ];
   labels = VotingsTypesLabels;
-
-  canLock: BehaviorSubject<any> = new BehaviorSubject(false);
+  private user: LoggedUser;
   minDate = moment().endOf('day');
   isUpdate: BehaviorSubject<boolean> = new BehaviorSubject(false);
   isUpdate$ = this.isUpdate.asObservable();
+
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: any,
     private dialogRef: MatDialogRef<EditVotingComponent>,
     private fb: FormBuilder,
     public valido: Valido,
-    private snackBar: MatSnackBar
+    private snackBar: MatSnackBar,
+    private votingService: VotingsService
   ) {
-    console.log(data);
     this.voting = data.voting;
+    this.user = this.data.user;
     this.isUpdate.next(!isNullOrUndefined(this.voting));
     this.buildForm();
+    if (this.isUpdate) {
+      if (
+        !(
+          this.user.roleType.value === Role_Types_Enum.CentralLeader ||
+          this.user?.secondRoleType.value === Role_Types_Enum.CentralLeader
+        )
+      ) {
+        this.form.get('locked').disable();
+      }
+    }
   }
   buildForm() {
-    //     id - integer, primary key, unique, default: nextval('votings_id_seq'::regclass)
-    // createdAt - timestamp with time zone, default: now()
-    // updatedAt - timestamp with time zone, default: now()
-    // startedAt - timestamp with time zone, nullable
-    // finishedAt - timestamp with time zone, nullable
-    // type - text
-    // name - text
-    // description - text
     // locked - boolean, default: false
 
     this.form = this.fb.group({
@@ -74,14 +85,68 @@ export class EditVotingComponent {
     );
   }
   onDateSelected(type: any, event: MatDatepickerInputEvent<Date>): void {
-    // const day = moment(event.value);
-    // const selectedStartDate = day.startOf('day').toDate();
     this.minDate = moment().endOf('day');
   }
   close() {
     this.dialogRef.close();
   }
   onSubmit(): void {
-    alert('Thanks!');
+    if (this.form.invalid) {
+      this.valido.validateAllFormFields(this.form);
+      return;
+    }
+    this.loading.next(true);
+
+    const formData = this.form.getRawValue();
+    const day = moment(formData.startDate);
+    formData.startDate = day.startOf('day').toDate();
+
+    if (this.isUpdate.value) {
+      //  const id = formData.id;
+      delete formData.id;
+      const set: Votings_Set_Input = formData;
+      this.votingService
+        .updateVoting(this.voting.id, set)
+        .subscribe((response) => {
+          this.loading.next(false);
+          if (response.errors) {
+            return;
+          }
+
+          if (response.data) {
+            this.snackBar.open('Данните бяха променени успешно', 'OK', {
+              duration: 3500,
+            });
+            this.dialogRef.close({
+              success: true,
+              result: response.data.update_votings_by_pk,
+            });
+          } else {
+            this.dialogRef.close({ success: false });
+          }
+        });
+    } else {
+      const insert: Votings_Insert_Input = formData;
+
+      this.votingService.createVoting(insert).subscribe((response) => {
+        this.loading.next(false);
+        if (response.errors) {
+          console.log(response.errors);
+          return;
+        }
+
+        if (response.data) {
+          this.snackBar.open('Данните Ви бяха добавени успешно', 'OK', {
+            duration: 3500,
+          });
+          this.dialogRef.close({
+            success: true,
+            result: response.data.insert_votings_one,
+          });
+        } else {
+          this.dialogRef.close({ success: false });
+        }
+      });
+    }
   }
 }

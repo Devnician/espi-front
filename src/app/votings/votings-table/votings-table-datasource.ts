@@ -44,9 +44,9 @@ export class VotingsTableDataSource extends DataSource<Votings> {
   connect(): Observable<Votings[]> {
     const limit: number = this.paginator.pageSize;
     const offset: number = this.paginator.pageIndex * this.paginator.pageSize;
-    const order_by: Votings_Order_By = { createdAt: Order_By.Asc };
+    let orderBy: Votings_Order_By = { createdAt: Order_By.Asc };
 
-    this.queryRef = this.votingsService.getVotings(limit, offset, {}, order_by);
+    this.queryRef = this.votingsService.getVotings(limit, offset, {}, orderBy);
     // Combine everything that affects the rendered data into one update
     // stream for the data-table to consume.
     const dataMutations = [
@@ -69,6 +69,7 @@ export class VotingsTableDataSource extends DataSource<Votings> {
           this.sort.direction.indexOf('sc') !== -1
             ? (order[this.sort.active] = this.sort.direction)
             : (order = {});
+          orderBy = order;
         }
 
         if (Object.keys(fromWhere).indexOf('data') < 0) {
@@ -76,7 +77,7 @@ export class VotingsTableDataSource extends DataSource<Votings> {
             limit: this.paginator.pageSize,
             offset: this.paginator.pageIndex * this.paginator.pageSize,
             condition: {},
-            orderBy: order,
+            orderBy: orderBy,
           });
         } else {
           return this.queryRef.valueChanges;

@@ -97,6 +97,17 @@ mutation AddVoteForTheReferendum($votes: [referendum_votes_insert_input!]!) {
 }
 
 #  VOTINGS
+mutation CreateVoting($input: votings_insert_input!) {
+  insert_votings_one(object: $input) {
+    ...VotingVields
+  }
+}
+
+mutation UpdateVoting($id: Int!, $input: votings_set_input!) {
+  update_votings_by_pk(pk_columns: { id: $id }, _set: $input) {
+    ...VotingVields
+  }
+}
 query GetVotings(
   $limit: Int
   $offset: Int
