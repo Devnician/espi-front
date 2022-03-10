@@ -8,6 +8,7 @@ import { MatSortModule } from '@angular/material/sort';
 import { MatTableModule } from '@angular/material/table';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { Valido } from 'src/app/core/valido';
+import { AuthService } from 'src/app/services/auth-service';
 import { UsersTableComponent } from './users-table.component';
 
 describe('UsersTableComponent', () => {
@@ -28,7 +29,7 @@ describe('UsersTableComponent', () => {
           ReactiveFormsModule,
           HttpClientTestingModule,
         ],
-        providers: [Valido],
+        providers: [Valido, AuthService],
       }).compileComponents();
     })
   );

@@ -49,6 +49,21 @@ mutation AddPoliticalMember($object: political_group_members_insert_input!) {
   }
 }
 
+query GetUpcomingVotings($startDate: timestamptz!) {
+  votings(
+    where: {
+      _and: [
+        { locked: { _eq: true } }
+        { startDate: { _gte: $startDate } }
+        { startedAt: { _is_null: true } }
+        { finishedAt: { _is_null: true } }
+      ]
+    }
+  ) {
+    ...VotingVields
+  }
+}
+
 mutation UpdateStateOfPoliticalMember($id: Int!, $state: Boolean!) {
   update_political_group_members_by_pk(
     pk_columns: { id: $id }

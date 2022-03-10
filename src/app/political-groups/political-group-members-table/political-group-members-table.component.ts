@@ -8,9 +8,11 @@ import { Router } from '@angular/router';
 import { rowsAnimation } from 'src/app/animations/template.animations';
 import { VixenComponent } from 'src/app/core/vixen/vixen.component';
 import { Donkey } from 'src/app/services/donkey.service';
+import { VotingsService } from 'src/app/votings/voting-service.service';
 import {
   Political_Groups,
   Political_Group_Members,
+  Votings,
 } from 'src/generated/graphql';
 import { AddPoliticalGroupMemberComponent } from '../add-political-group-member/add-political-group-member.component';
 import { PoliticalGroupsService } from '../political-groups-service';
@@ -43,9 +45,12 @@ export class PoliticalGroupMembersTableComponent
   ];
   politicalGroup: Political_Groups;
 
+  upcomingVotings: Votings[] = [];
+
   constructor(
     private dialog: MatDialog,
     private politicalGroupsService: PoliticalGroupsService,
+    private votingsService: VotingsService,
     private snackBar: MatSnackBar,
     private donkey: Donkey,
     private router: Router,
@@ -70,6 +75,28 @@ export class PoliticalGroupMembersTableComponent
     if (!this.politicalGroup) {
       this.router.navigate(['political-groups']);
     }
+
+    this.loadUpcomingVotings();
+  }
+  loadUpcomingVotings() {
+    const endOfToday = new Date();
+    endOfToday.setHours(23, 59, 59, 999);
+    console.log(endOfToday);
+    this.votingsService
+      .getUpcomingVotings(endOfToday)
+      .subscribe(({ data, errors }) => {
+        if (errors) {
+          console.log(errors);
+          return;
+        }
+
+        this.upcomingVotings = data.votings;
+        this.snackBar.open(
+          'Предстоящи избори: ' + this.upcomingVotings.length,
+          'OK',
+          {}
+        );
+      });
   }
 
   ngAfterViewInit(): void {

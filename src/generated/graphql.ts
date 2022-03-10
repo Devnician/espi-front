@@ -7799,7 +7799,7 @@ export type Votings = {
   id: Scalars['Int'];
   locked: Scalars['Boolean'];
   name: Scalars['String'];
-  startDate?: Maybe<Scalars['date']>;
+  startDate?: Maybe<Scalars['timestamptz']>;
   startedAt?: Maybe<Scalars['timestamptz']>;
   type: Voting_Types_Enum;
   updatedAt: Scalars['timestamptz'];
@@ -7854,7 +7854,7 @@ export type Votings_Bool_Exp = {
   id?: Maybe<Int_Comparison_Exp>;
   locked?: Maybe<Boolean_Comparison_Exp>;
   name?: Maybe<String_Comparison_Exp>;
-  startDate?: Maybe<Date_Comparison_Exp>;
+  startDate?: Maybe<Timestamptz_Comparison_Exp>;
   startedAt?: Maybe<Timestamptz_Comparison_Exp>;
   type?: Maybe<Voting_Types_Enum_Comparison_Exp>;
   updatedAt?: Maybe<Timestamptz_Comparison_Exp>;
@@ -7880,7 +7880,7 @@ export type Votings_Insert_Input = {
   id?: Maybe<Scalars['Int']>;
   locked?: Maybe<Scalars['Boolean']>;
   name?: Maybe<Scalars['String']>;
-  startDate?: Maybe<Scalars['date']>;
+  startDate?: Maybe<Scalars['timestamptz']>;
   startedAt?: Maybe<Scalars['timestamptz']>;
   type?: Maybe<Voting_Types_Enum>;
   updatedAt?: Maybe<Scalars['timestamptz']>;
@@ -7895,7 +7895,7 @@ export type Votings_Max_Fields = {
   finishedAt?: Maybe<Scalars['timestamptz']>;
   id?: Maybe<Scalars['Int']>;
   name?: Maybe<Scalars['String']>;
-  startDate?: Maybe<Scalars['date']>;
+  startDate?: Maybe<Scalars['timestamptz']>;
   startedAt?: Maybe<Scalars['timestamptz']>;
   updatedAt?: Maybe<Scalars['timestamptz']>;
 };
@@ -7908,7 +7908,7 @@ export type Votings_Min_Fields = {
   finishedAt?: Maybe<Scalars['timestamptz']>;
   id?: Maybe<Scalars['Int']>;
   name?: Maybe<Scalars['String']>;
-  startDate?: Maybe<Scalars['date']>;
+  startDate?: Maybe<Scalars['timestamptz']>;
   startedAt?: Maybe<Scalars['timestamptz']>;
   updatedAt?: Maybe<Scalars['timestamptz']>;
 };
@@ -7981,7 +7981,7 @@ export type Votings_Set_Input = {
   id?: Maybe<Scalars['Int']>;
   locked?: Maybe<Scalars['Boolean']>;
   name?: Maybe<Scalars['String']>;
-  startDate?: Maybe<Scalars['date']>;
+  startDate?: Maybe<Scalars['timestamptz']>;
   startedAt?: Maybe<Scalars['timestamptz']>;
   type?: Maybe<Voting_Types_Enum>;
   updatedAt?: Maybe<Scalars['timestamptz']>;
@@ -8235,6 +8235,19 @@ export type AddPoliticalMemberMutation = (
   & { insert_political_group_members_one?: Maybe<(
     { __typename?: 'political_group_members' }
     & Pick<Political_Group_Members, 'id'>
+  )> }
+);
+
+export type GetUpcomingVotingsQueryVariables = Exact<{
+  startDate: Scalars['timestamptz'];
+}>;
+
+
+export type GetUpcomingVotingsQuery = (
+  { __typename?: 'query_root' }
+  & { votings: Array<(
+    { __typename?: 'votings' }
+    & VotingVieldsFragment
   )> }
 );
 
@@ -9060,6 +9073,26 @@ export const AddPoliticalMemberDocument = gql`
   })
   export class AddPoliticalMemberGQL extends Apollo.Mutation<AddPoliticalMemberMutation, AddPoliticalMemberMutationVariables> {
     document = AddPoliticalMemberDocument;
+    
+    constructor(apollo: Apollo.Apollo) {
+      super(apollo);
+    }
+  }
+export const GetUpcomingVotingsDocument = gql`
+    query GetUpcomingVotings($startDate: timestamptz!) {
+  votings(
+    where: {_and: [{locked: {_eq: true}}, {startDate: {_gte: $startDate}}, {startedAt: {_is_null: true}}, {finishedAt: {_is_null: true}}]}
+  ) {
+    ...VotingVields
+  }
+}
+    ${VotingVieldsFragmentDoc}`;
+
+  @Injectable({
+    providedIn: 'root'
+  })
+  export class GetUpcomingVotingsGQL extends Apollo.Query<GetUpcomingVotingsQuery, GetUpcomingVotingsQueryVariables> {
+    document = GetUpcomingVotingsDocument;
     
     constructor(apollo: Apollo.Apollo) {
       super(apollo);
