@@ -20,6 +20,7 @@ import { EditPoliticalGroupComponent } from './edit-political-group/edit-politic
 import { PoliticalGroupMembersTableComponent } from './political-group-members-table/political-group-members-table.component';
 import { PoliticalGroupsTableComponent } from './political-group-table/political-groups-table.component';
 import { PoliticalGroupsRoutingModule } from './political-groups-routing.module';
+import { SelectVotingComponent } from './select-voting/select-voting.component';
 
 @NgModule({
   declarations: [
@@ -27,6 +28,7 @@ import { PoliticalGroupsRoutingModule } from './political-groups-routing.module'
     PoliticalGroupMembersTableComponent,
     EditPoliticalGroupComponent,
     AddPoliticalGroupMemberComponent,
+    SelectVotingComponent,
   ],
   imports: [
     CommonModule,

@@ -1,0 +1,39 @@
+<form [formGroup]="form" novalidate (ngSubmit)="onSubmit()">
+  <mat-card class="shipping-card">
+    <mat-card-header>
+      <mat-card-title>Изберете гласуване</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      <div class="row">
+        <div class="col full-width">
+          <mat-form-field class="full-width">
+            <mat-select placeholder="избор" formControlName="votingId">
+              <mat-option *ngFor="let voting of votings" [value]="voting.id">
+                <div>
+                  {{ voting.name }}
+                  -
+                  {{ voting.description }}
+                </div>
+              </mat-option>
+            </mat-select>
+            <mat-error *ngIf="form.controls['votingId'].errors">
+              {{ valido.getErrorMessageFromControl(form.controls["votingId"]) }}
+            </mat-error>
+          </mat-form-field>
+        </div>
+      </div>
+    </mat-card-content>
+
+    <mat-card-actions align="end">
+      <button mat-raised-button (click)="close()" type="button">Затвори</button>
+      <button
+        [disabled]="form.invalid"
+        mat-raised-button
+        color="primary"
+        type="submit"
+      >
+        Избери
+      </button>
+    </mat-card-actions>
+  </mat-card>
+</form>

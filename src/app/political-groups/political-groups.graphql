@@ -54,7 +54,7 @@ query GetUpcomingVotings($startDate: timestamptz!) {
     where: {
       _and: [
         { locked: { _eq: true } }
-        { startDate: { _gte: $startDate } }
+        { startDate: { _gt: $startDate } }
         { startedAt: { _is_null: true } }
         { finishedAt: { _is_null: true } }
       ]
@@ -64,14 +64,15 @@ query GetUpcomingVotings($startDate: timestamptz!) {
   }
 }
 
-mutation UpdateStateOfPoliticalMember($id: Int!, $state: Boolean!) {
+mutation UpdatePoliticalMemberVotingId($id: Int!, $votingId: Int!) {
   update_political_group_members_by_pk(
     pk_columns: { id: $id }
-    _set: { active: $state }
+    _set: { votingId: $votingId }
   ) {
     id
   }
 }
+
 query getPoliticalGroupMembers(
   $limit: Int
   $offset: Int
@@ -87,7 +88,10 @@ query getPoliticalGroupMembers(
     id
     createdAt
     updatedAt
-    active
+    votingId
+    voting {
+      name
+    }
     politicalGroupId
     user {
       name
@@ -96,6 +100,7 @@ query getPoliticalGroupMembers(
       egn
     }
   }
+
   political_group_members_aggregate(where: $condition) {
     aggregate {
       count

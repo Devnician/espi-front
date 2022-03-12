@@ -16,6 +16,7 @@ import {
 } from 'src/generated/graphql';
 import { AddPoliticalGroupMemberComponent } from '../add-political-group-member/add-political-group-member.component';
 import { PoliticalGroupsService } from '../political-groups-service';
+import { SelectVotingComponent } from '../select-voting/select-voting.component';
 import { PoliticalGroupMembersTableDataSource } from './political-group-members-table-datasource';
 
 @Component({
@@ -40,7 +41,7 @@ export class PoliticalGroupMembersTableComponent
     'name',
     'surname',
     'family',
-    'active',
+    'votingId',
     'actions',
   ];
   politicalGroup: Political_Groups;
@@ -81,7 +82,6 @@ export class PoliticalGroupMembersTableComponent
   loadUpcomingVotings() {
     const endOfToday = new Date();
     endOfToday.setHours(23, 59, 59, 999);
-    console.log(endOfToday);
     this.votingsService
       .getUpcomingVotings(endOfToday)
       .subscribe(({ data, errors }) => {
@@ -94,7 +94,7 @@ export class PoliticalGroupMembersTableComponent
         this.snackBar.open(
           'Предстоящи избори: ' + this.upcomingVotings.length,
           'OK',
-          {}
+          { duration: 10000 }
         );
       });
   }
@@ -147,15 +147,44 @@ export class PoliticalGroupMembersTableComponent
       });
   }
   toggleUserState(member: Political_Group_Members) {
+    if (this.upcomingVotings.length === 0) {
+      this.snackBar.open('Към момента не предстоят избори.');
+      return;
+    } else {
+      const config = new MatDialogConfig<any>();
+      // config.closeOnNavigation = true;
+      config.disableClose = true;
+      config.data = {
+        votings: this.upcomingVotings,
+      };
+      (config.width = '80vw'), (config.height = 'fit-content');
+
+      const dialogRef = this.dialog.open(SelectVotingComponent, config);
+      dialogRef.afterClosed().subscribe((dialogResponse) => {
+        if (dialogResponse.success) {
+          this.updateMemberVotingId(member, Number(dialogResponse.votingId));
+        }
+      });
+    }
+  }
+
+  updateMemberVotingId(member: Political_Group_Members, votingId = null) {
+    this.dataSource.loading.next(true);
     this.politicalGroupsService
-      .updateStateOfPoliticalMember(member.id, !member.active)
+      .updateStateOfPoliticalMember(member.id, votingId)
       .subscribe(({ data, errors }) => {
         if (errors) {
           console.log(errors);
         } else {
-          this.snackBar.open('Стътуса е променен успешно', '', {
-            duration: 3500,
-          });
+          this.snackBar.open(
+            `Потребителят беше  ${
+              votingId ? 'добавен в' : 'премахнат от'
+            } изборния списък успешно`,
+            '',
+            {
+              duration: 3500,
+            }
+          );
           this.dataSource.queryRef.refetch({});
         }
       });
