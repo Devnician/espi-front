@@ -37,7 +37,37 @@
             </mat-menu> -->
           </mat-card-title>
         </mat-card-header>
-        <mat-card-content class="dashboard-card-content">
+        <!-- If referendum -->
+          <mat-card-content class="dashboard-card-content" *ngIf="card.type=='presidential' || card.type=='mayoral'">
+          <div>{{ card.text }}</div>
+          <section>
+            <div style="display: flex">
+              <table style="width: 100%">
+                <tr>
+                  <th>Кандидат</th>
+                  <th>Резултат</th>
+                </tr>
+                <tr *ngFor="let i of [0,1]">
+                  <td>Иван</td>
+                  <td>26%</td>
+                </tr>
+              </table>
+              <table style="width: 100%">
+                <tr>
+                  <th>В избирателна секция</th>
+                  <th>Електронно</th>
+                </tr>
+                <tr>
+                  <td>00</td>
+                  <td>00</td>
+                </tr>
+              </table>
+            </div>
+          </section>
+        </mat-card-content>
+
+        <!-- If president or mayor -->
+        <mat-card-content class="dashboard-card-content" *ngIf="card.type=='referendum'">
           <div>{{ card.text }}</div>
           <section
             *ngFor="
@@ -75,6 +105,7 @@
             </div>
           </section>
         </mat-card-content>
+
       </mat-card>
     </mat-grid-tile>
   </mat-grid-list>

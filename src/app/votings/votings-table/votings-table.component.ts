@@ -20,8 +20,7 @@ import { VotingsTableDataSource } from './votings-table-datasource';
 })
 export class VotingsTableComponent
   extends VixenComponent
-  implements AfterViewInit
-{
+  implements AfterViewInit {
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
   @ViewChild(MatTable) table!: MatTable<Votings>;

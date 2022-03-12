@@ -56,13 +56,8 @@ export class ReferendumsTableComponent implements AfterViewInit {
     this.table.dataSource = this.dataSource;
   }
   canUnlock(): boolean {
-    if (
-      this.loggedUSer?.roleType.value === Role_Types_Enum.CentralLeader ||
+    return this.loggedUSer?.roleType.value === Role_Types_Enum.CentralLeader ||
       this.loggedUSer?.secondRoleType.value === Role_Types_Enum.CentralLeader
-    ) {
-      return true;
-    }
-    return false;
   }
 
   openDialog(referendum: Referendums) {

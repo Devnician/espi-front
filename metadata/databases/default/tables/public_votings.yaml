@@ -96,6 +96,7 @@ select_permissions:
     - id
     - locked
     - name
+    - startDate
     - startedAt
     - type
     - updatedAt
