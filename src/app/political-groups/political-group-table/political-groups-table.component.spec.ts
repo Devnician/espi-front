@@ -1,6 +1,7 @@
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatPaginatorModule } from '@angular/material/paginator';
+import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatSortModule } from '@angular/material/sort';
 import { MatTableModule } from '@angular/material/table';
@@ -25,6 +26,7 @@ describe('PoliticalGroupsTableComponent', () => {
           MatSnackBarModule,
           MatDialogModule,
           RouterTestingModule,
+          MatProgressBarModule,
         ],
         providers: [Donkey],
       }).compileComponents();

@@ -1,6 +1,7 @@
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { ReactiveFormsModule } from '@angular/forms';
 import { MatPaginatorModule } from '@angular/material/paginator';
+import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatSortModule } from '@angular/material/sort';
 import { MatTableModule } from '@angular/material/table';
@@ -23,6 +24,7 @@ describe('VotingSectionsTableComponent', () => {
           MatTableModule,
           ReactiveFormsModule,
           MatSnackBarModule,
+          MatProgressBarModule,
         ],
         providers: [Valido],
       }).compileComponents();

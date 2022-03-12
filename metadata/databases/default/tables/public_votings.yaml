@@ -5,6 +5,27 @@ object_relationships:
 - name: voting_type
   using:
     foreign_key_constraint_on: type
+insert_permissions:
+- permission:
+    backend_only: false
+    check: {}
+    columns:
+    - description
+    - locked
+    - name
+    - startDate
+    - type
+  role: central
+- permission:
+    backend_only: false
+    check: {}
+    columns:
+    - description
+    - locked
+    - name
+    - startDate
+    - type
+  role: centralLeader
 select_permissions:
 - permission:
     allow_aggregations: true
@@ -15,6 +36,7 @@ select_permissions:
     - id
     - locked
     - name
+    - startDate
     - startedAt
     - type
     - updatedAt
@@ -29,6 +51,7 @@ select_permissions:
     - id
     - locked
     - name
+    - startDate
     - startedAt
     - type
     - updatedAt
@@ -43,6 +66,7 @@ select_permissions:
     - id
     - locked
     - name
+    - startDate
     - startedAt
     - type
     - updatedAt
@@ -57,6 +81,7 @@ select_permissions:
     - id
     - locked
     - name
+    - startDate
     - startedAt
     - type
     - updatedAt
@@ -76,3 +101,26 @@ select_permissions:
     - updatedAt
     filter: {}
   role: user
+update_permissions:
+- permission:
+    check: {}
+    columns:
+    - description
+    - locked
+    - name
+    - startDate
+    - type
+    filter: {}
+  role: central
+- permission:
+    check: {}
+    columns:
+    - description
+    - finishedAt
+    - locked
+    - name
+    - startDate
+    - startedAt
+    - type
+    filter: {}
+  role: centralLeader

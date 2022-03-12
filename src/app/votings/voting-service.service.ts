@@ -6,11 +6,15 @@ import {
   AddVoteForTheReferendumMutation,
   CreateReferendumGQL,
   CreateReferendumMutation,
+  CreateVotingGQL,
+  CreateVotingMutation,
   GetReferendumsGQL,
   GetStartedReferendumsGQL,
   GetStartedReferendumsQuery,
   GetStartedVotingsGQL,
   GetStartedVotingsQuery,
+  GetUpcomingVotingsGQL,
+  GetUpcomingVotingsQuery,
   GetVotingsGQL,
   Referendums_Bool_Exp,
   Referendums_Insert_Input,
@@ -20,8 +24,12 @@ import {
   Referendum_Votes_Insert_Input,
   UpdateReferendumAndQuestionGQL,
   UpdateReferendumAndQuestionMutation,
+  UpdateVotingGQL,
+  UpdateVotingMutation,
   Votings_Bool_Exp,
+  Votings_Insert_Input,
   Votings_Order_By,
+  Votings_Set_Input,
 } from 'src/generated/graphql';
 @Injectable({
   providedIn: 'root', // VotingsModule,
@@ -32,7 +40,10 @@ export class VotingsService {
     private updateReferendumAndQuestionGQL: UpdateReferendumAndQuestionGQL,
     private getReferendumsGQL: GetReferendumsGQL,
     private getStartedReferendumsGQL: GetStartedReferendumsGQL,
+    private createVotingGQL: CreateVotingGQL,
+    private updateVotingGQL: UpdateVotingGQL,
     private getVotingsGQL: GetVotingsGQL,
+    private getUpcomingVotingsGQL: GetUpcomingVotingsGQL,
     private getStartedVotingsGQL: GetStartedVotingsGQL,
     private addVoteForTheReferendumGQL: AddVoteForTheReferendumGQL
   ) {}
@@ -91,13 +102,26 @@ export class VotingsService {
     );
   }
 
-  DELETE_THIS_METHOD_getReferendums() {
-    return this.getReferendumsGQL.fetch(
-      {},
-      {
-        fetchPolicy: 'network-only',
-        errorPolicy: 'all',
-      }
+  createVoting(
+    object: Votings_Insert_Input
+  ): Observable<
+    FetchResult<CreateVotingMutation, Record<string, any>, Record<string, any>>
+  > {
+    return this.createVotingGQL.mutate(
+      { input: object },
+      { errorPolicy: 'all' }
+    );
+  }
+
+  updateVoting(
+    id: number,
+    set: Votings_Set_Input
+  ): Observable<
+    FetchResult<UpdateVotingMutation, Record<string, any>, Record<string, any>>
+  > {
+    return this.updateVotingGQL.mutate(
+      { id, input: set },
+      { errorPolicy: 'all' }
     );
   }
 
@@ -132,6 +156,11 @@ export class VotingsService {
     );
   }
 
+  public getUpcomingVotings(
+    startDate: Date
+  ): Observable<ApolloQueryResult<GetUpcomingVotingsQuery>> {
+    return this.getUpcomingVotingsGQL.fetch({ startDate });
+  }
   getStartedReferendums(): Observable<
     ApolloQueryResult<GetStartedReferendumsQuery>
   > {

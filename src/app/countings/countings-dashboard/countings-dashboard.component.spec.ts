@@ -5,6 +5,7 @@ import { MatCardModule } from '@angular/material/card';
 import { MatGridListModule } from '@angular/material/grid-list';
 import { MatIconModule } from '@angular/material/icon';
 import { MatMenuModule } from '@angular/material/menu';
+import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { RouterTestingModule } from '@angular/router/testing';
 import { Donkey } from 'src/app/services/donkey.service';
@@ -27,6 +28,7 @@ describe('CountingsDashboardComponent', () => {
           MatIconModule,
           MatMenuModule,
           RouterTestingModule,
+          MatProgressBarModule,
         ],
         providers: [Donkey],
       }).compileComponents();

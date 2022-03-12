@@ -58,7 +58,6 @@ export class PoliticalGroupsTableComponent implements AfterViewInit {
     this.donkey.load({ pGroup: politicalGroup });
     this.router.navigate(['political-groups', 'members']);
   }
-
   editPoliticalGroup(politicalGroup: Political_Groups) {
     const config = new MatDialogConfig<any>();
     // config.closeOnNavigation = true;

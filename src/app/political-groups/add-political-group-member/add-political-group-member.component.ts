@@ -107,7 +107,6 @@ export class AddPoliticalGroupMemberComponent implements OnInit {
     const formData = this.form.value;
 
     const insertInput: Political_Group_Members_Insert_Input = {
-      active: true,
       politicalGroupId: this.group.id,
       userId: formData.user.id,
     };

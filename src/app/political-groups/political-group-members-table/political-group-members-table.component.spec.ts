@@ -5,10 +5,16 @@ import {
   MAT_DIALOG_DATA,
 } from '@angular/material/dialog';
 import { MatPaginatorModule } from '@angular/material/paginator';
+import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatSortModule } from '@angular/material/sort';
 import { MatTableModule } from '@angular/material/table';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
+import { RouterTestingModule } from '@angular/router/testing';
+import { MockProvider } from 'ng-mocks';
+import { Observable, of } from 'rxjs';
+import { Valido } from 'src/app/core/valido';
+import { AuthService } from 'src/app/services/auth-service';
 import { Donkey } from 'src/app/services/donkey.service';
 import { PoliticalGroupMembersTableComponent } from './political-group-members-table.component';
 
@@ -27,11 +33,18 @@ describe('PoliticalGroupMembersTableComponent', () => {
           MatTableModule,
           MatDialogModule,
           MatSnackBarModule,
+          RouterTestingModule,
+          MatProgressBarModule,
         ],
         providers: [
           { provide: MatDialogRef, useValue: {} },
           { provide: MAT_DIALOG_DATA, useValue: {} },
           Donkey,
+          Valido,
+          MockProvider(AuthService, {
+            user$: new Observable(),
+            userRoleIndex$: of(0),
+          }),
         ],
       }).compileComponents();
     })
