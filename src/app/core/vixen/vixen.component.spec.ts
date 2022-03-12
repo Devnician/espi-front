@@ -1,6 +1,9 @@
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { JwtHelperService, JwtModule, JWT_OPTIONS } from '@auth0/angular-jwt';
+import { MockProvider } from 'ng-mocks';
+import { Observable, of } from 'rxjs';
+import { AuthService } from 'src/app/services/auth-service';
 import { Valido } from '../valido';
 import { VixenComponent } from './vixen.component';
 describe('VixenComponent', () => {
@@ -25,7 +28,18 @@ describe('VixenComponent', () => {
           },
         }),
       ],
-      providers: [Valido, JwtHelperService],
+      providers: [
+        Valido,
+        // AuthService,
+        MockProvider(AuthService, {
+          loginAction: () => {
+            return of();
+          },
+          user$: new Observable(),
+          userRoleIndex$: of(0),
+        }),
+        JwtHelperService,
+      ],
     }).compileComponents();
   });
 

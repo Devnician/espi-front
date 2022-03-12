@@ -9,6 +9,7 @@ import {
   MAT_DIALOG_DATA,
 } from '@angular/material/dialog';
 import { MatInputModule } from '@angular/material/input';
+import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { MatRadioModule } from '@angular/material/radio';
 import { MatSelectModule } from '@angular/material/select';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
@@ -35,6 +36,8 @@ describe('EditUserComponent', () => {
           MatDialogModule,
           MatSnackBarModule,
           MatAutocompleteModule,
+          MatProgressBarModule,
+          MatCardModule,
         ],
         providers: [
           {
