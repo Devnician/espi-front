@@ -2598,7 +2598,6 @@ export enum Order_By {
 /** columns and relationships of "political_group_members" */
 export type Political_Group_Members = {
   __typename?: 'political_group_members';
-  active: Scalars['Boolean'];
   createdAt: Scalars['timestamptz'];
   id: Scalars['Int'];
   politicalGroupId: Scalars['Int'];
@@ -2606,6 +2605,9 @@ export type Political_Group_Members = {
   /** An object relationship */
   user: Users;
   userId: Scalars['Int'];
+  /** An object relationship */
+  voting?: Maybe<Votings>;
+  votingId?: Maybe<Scalars['Int']>;
 };
 
 /** aggregated selection of "political_group_members" */
@@ -2666,6 +2668,7 @@ export type Political_Group_Members_Avg_Fields = {
   id?: Maybe<Scalars['Float']>;
   politicalGroupId?: Maybe<Scalars['Float']>;
   userId?: Maybe<Scalars['Float']>;
+  votingId?: Maybe<Scalars['Float']>;
 };
 
 /** order by avg() on columns of table "political_group_members" */
@@ -2673,6 +2676,7 @@ export type Political_Group_Members_Avg_Order_By = {
   id?: Maybe<Order_By>;
   politicalGroupId?: Maybe<Order_By>;
   userId?: Maybe<Order_By>;
+  votingId?: Maybe<Order_By>;
 };
 
 /** Boolean expression to filter rows from the table "political_group_members". All fields are combined with a logical 'AND'. */
@@ -2680,13 +2684,14 @@ export type Political_Group_Members_Bool_Exp = {
   _and?: Maybe<Array<Political_Group_Members_Bool_Exp>>;
   _not?: Maybe<Political_Group_Members_Bool_Exp>;
   _or?: Maybe<Array<Political_Group_Members_Bool_Exp>>;
-  active?: Maybe<Boolean_Comparison_Exp>;
   createdAt?: Maybe<Timestamptz_Comparison_Exp>;
   id?: Maybe<Int_Comparison_Exp>;
   politicalGroupId?: Maybe<Int_Comparison_Exp>;
   updatedAt?: Maybe<Timestamptz_Comparison_Exp>;
   user?: Maybe<Users_Bool_Exp>;
   userId?: Maybe<Int_Comparison_Exp>;
+  voting?: Maybe<Votings_Bool_Exp>;
+  votingId?: Maybe<Int_Comparison_Exp>;
 };
 
 /** unique or primary key constraints on table "political_group_members" */
@@ -2702,17 +2707,19 @@ export type Political_Group_Members_Inc_Input = {
   id?: Maybe<Scalars['Int']>;
   politicalGroupId?: Maybe<Scalars['Int']>;
   userId?: Maybe<Scalars['Int']>;
+  votingId?: Maybe<Scalars['Int']>;
 };
 
 /** input type for inserting data into table "political_group_members" */
 export type Political_Group_Members_Insert_Input = {
-  active?: Maybe<Scalars['Boolean']>;
   createdAt?: Maybe<Scalars['timestamptz']>;
   id?: Maybe<Scalars['Int']>;
   politicalGroupId?: Maybe<Scalars['Int']>;
   updatedAt?: Maybe<Scalars['timestamptz']>;
   user?: Maybe<Users_Obj_Rel_Insert_Input>;
   userId?: Maybe<Scalars['Int']>;
+  voting?: Maybe<Votings_Obj_Rel_Insert_Input>;
+  votingId?: Maybe<Scalars['Int']>;
 };
 
 /** aggregate max on columns */
@@ -2723,6 +2730,7 @@ export type Political_Group_Members_Max_Fields = {
   politicalGroupId?: Maybe<Scalars['Int']>;
   updatedAt?: Maybe<Scalars['timestamptz']>;
   userId?: Maybe<Scalars['Int']>;
+  votingId?: Maybe<Scalars['Int']>;
 };
 
 /** order by max() on columns of table "political_group_members" */
@@ -2732,6 +2740,7 @@ export type Political_Group_Members_Max_Order_By = {
   politicalGroupId?: Maybe<Order_By>;
   updatedAt?: Maybe<Order_By>;
   userId?: Maybe<Order_By>;
+  votingId?: Maybe<Order_By>;
 };
 
 /** aggregate min on columns */
@@ -2742,6 +2751,7 @@ export type Political_Group_Members_Min_Fields = {
   politicalGroupId?: Maybe<Scalars['Int']>;
   updatedAt?: Maybe<Scalars['timestamptz']>;
   userId?: Maybe<Scalars['Int']>;
+  votingId?: Maybe<Scalars['Int']>;
 };
 
 /** order by min() on columns of table "political_group_members" */
@@ -2751,6 +2761,7 @@ export type Political_Group_Members_Min_Order_By = {
   politicalGroupId?: Maybe<Order_By>;
   updatedAt?: Maybe<Order_By>;
   userId?: Maybe<Order_By>;
+  votingId?: Maybe<Order_By>;
 };
 
 /** response of any mutation on the table "political_group_members" */
@@ -2771,13 +2782,14 @@ export type Political_Group_Members_On_Conflict = {
 
 /** Ordering options when selecting data from "political_group_members". */
 export type Political_Group_Members_Order_By = {
-  active?: Maybe<Order_By>;
   createdAt?: Maybe<Order_By>;
   id?: Maybe<Order_By>;
   politicalGroupId?: Maybe<Order_By>;
   updatedAt?: Maybe<Order_By>;
   user?: Maybe<Users_Order_By>;
   userId?: Maybe<Order_By>;
+  voting?: Maybe<Votings_Order_By>;
+  votingId?: Maybe<Order_By>;
 };
 
 /** primary key columns input for table: political_group_members */
@@ -2788,8 +2800,6 @@ export type Political_Group_Members_Pk_Columns_Input = {
 /** select columns of table "political_group_members" */
 export enum Political_Group_Members_Select_Column {
   /** column name */
-  Active = 'active',
-  /** column name */
   CreatedAt = 'createdAt',
   /** column name */
   Id = 'id',
@@ -2798,17 +2808,19 @@ export enum Political_Group_Members_Select_Column {
   /** column name */
   UpdatedAt = 'updatedAt',
   /** column name */
-  UserId = 'userId'
+  UserId = 'userId',
+  /** column name */
+  VotingId = 'votingId'
 }
 
 /** input type for updating data in table "political_group_members" */
 export type Political_Group_Members_Set_Input = {
-  active?: Maybe<Scalars['Boolean']>;
   createdAt?: Maybe<Scalars['timestamptz']>;
   id?: Maybe<Scalars['Int']>;
   politicalGroupId?: Maybe<Scalars['Int']>;
   updatedAt?: Maybe<Scalars['timestamptz']>;
   userId?: Maybe<Scalars['Int']>;
+  votingId?: Maybe<Scalars['Int']>;
 };
 
 /** aggregate stddev on columns */
@@ -2817,6 +2829,7 @@ export type Political_Group_Members_Stddev_Fields = {
   id?: Maybe<Scalars['Float']>;
   politicalGroupId?: Maybe<Scalars['Float']>;
   userId?: Maybe<Scalars['Float']>;
+  votingId?: Maybe<Scalars['Float']>;
 };
 
 /** order by stddev() on columns of table "political_group_members" */
@@ -2824,6 +2837,7 @@ export type Political_Group_Members_Stddev_Order_By = {
   id?: Maybe<Order_By>;
   politicalGroupId?: Maybe<Order_By>;
   userId?: Maybe<Order_By>;
+  votingId?: Maybe<Order_By>;
 };
 
 /** aggregate stddev_pop on columns */
@@ -2832,6 +2846,7 @@ export type Political_Group_Members_Stddev_Pop_Fields = {
   id?: Maybe<Scalars['Float']>;
   politicalGroupId?: Maybe<Scalars['Float']>;
   userId?: Maybe<Scalars['Float']>;
+  votingId?: Maybe<Scalars['Float']>;
 };
 
 /** order by stddev_pop() on columns of table "political_group_members" */
@@ -2839,6 +2854,7 @@ export type Political_Group_Members_Stddev_Pop_Order_By = {
   id?: Maybe<Order_By>;
   politicalGroupId?: Maybe<Order_By>;
   userId?: Maybe<Order_By>;
+  votingId?: Maybe<Order_By>;
 };
 
 /** aggregate stddev_samp on columns */
@@ -2847,6 +2863,7 @@ export type Political_Group_Members_Stddev_Samp_Fields = {
   id?: Maybe<Scalars['Float']>;
   politicalGroupId?: Maybe<Scalars['Float']>;
   userId?: Maybe<Scalars['Float']>;
+  votingId?: Maybe<Scalars['Float']>;
 };
 
 /** order by stddev_samp() on columns of table "political_group_members" */
@@ -2854,6 +2871,7 @@ export type Political_Group_Members_Stddev_Samp_Order_By = {
   id?: Maybe<Order_By>;
   politicalGroupId?: Maybe<Order_By>;
   userId?: Maybe<Order_By>;
+  votingId?: Maybe<Order_By>;
 };
 
 /** aggregate sum on columns */
@@ -2862,6 +2880,7 @@ export type Political_Group_Members_Sum_Fields = {
   id?: Maybe<Scalars['Int']>;
   politicalGroupId?: Maybe<Scalars['Int']>;
   userId?: Maybe<Scalars['Int']>;
+  votingId?: Maybe<Scalars['Int']>;
 };
 
 /** order by sum() on columns of table "political_group_members" */
@@ -2869,12 +2888,11 @@ export type Political_Group_Members_Sum_Order_By = {
   id?: Maybe<Order_By>;
   politicalGroupId?: Maybe<Order_By>;
   userId?: Maybe<Order_By>;
+  votingId?: Maybe<Order_By>;
 };
 
 /** update columns of table "political_group_members" */
 export enum Political_Group_Members_Update_Column {
-  /** column name */
-  Active = 'active',
   /** column name */
   CreatedAt = 'createdAt',
   /** column name */
@@ -2884,7 +2902,9 @@ export enum Political_Group_Members_Update_Column {
   /** column name */
   UpdatedAt = 'updatedAt',
   /** column name */
-  UserId = 'userId'
+  UserId = 'userId',
+  /** column name */
+  VotingId = 'votingId'
 }
 
 /** aggregate var_pop on columns */
@@ -2893,6 +2913,7 @@ export type Political_Group_Members_Var_Pop_Fields = {
   id?: Maybe<Scalars['Float']>;
   politicalGroupId?: Maybe<Scalars['Float']>;
   userId?: Maybe<Scalars['Float']>;
+  votingId?: Maybe<Scalars['Float']>;
 };
 
 /** order by var_pop() on columns of table "political_group_members" */
@@ -2900,6 +2921,7 @@ export type Political_Group_Members_Var_Pop_Order_By = {
   id?: Maybe<Order_By>;
   politicalGroupId?: Maybe<Order_By>;
   userId?: Maybe<Order_By>;
+  votingId?: Maybe<Order_By>;
 };
 
 /** aggregate var_samp on columns */
@@ -2908,6 +2930,7 @@ export type Political_Group_Members_Var_Samp_Fields = {
   id?: Maybe<Scalars['Float']>;
   politicalGroupId?: Maybe<Scalars['Float']>;
   userId?: Maybe<Scalars['Float']>;
+  votingId?: Maybe<Scalars['Float']>;
 };
 
 /** order by var_samp() on columns of table "political_group_members" */
@@ -2915,6 +2938,7 @@ export type Political_Group_Members_Var_Samp_Order_By = {
   id?: Maybe<Order_By>;
   politicalGroupId?: Maybe<Order_By>;
   userId?: Maybe<Order_By>;
+  votingId?: Maybe<Order_By>;
 };
 
 /** aggregate variance on columns */
@@ -2923,6 +2947,7 @@ export type Political_Group_Members_Variance_Fields = {
   id?: Maybe<Scalars['Float']>;
   politicalGroupId?: Maybe<Scalars['Float']>;
   userId?: Maybe<Scalars['Float']>;
+  votingId?: Maybe<Scalars['Float']>;
 };
 
 /** order by variance() on columns of table "political_group_members" */
@@ -2930,6 +2955,7 @@ export type Political_Group_Members_Variance_Order_By = {
   id?: Maybe<Order_By>;
   politicalGroupId?: Maybe<Order_By>;
   userId?: Maybe<Order_By>;
+  votingId?: Maybe<Order_By>;
 };
 
 /** columns and relationships of "political_group_types" */
@@ -7799,7 +7825,7 @@ export type Votings = {
   id: Scalars['Int'];
   locked: Scalars['Boolean'];
   name: Scalars['String'];
-  startDate?: Maybe<Scalars['date']>;
+  startDate?: Maybe<Scalars['timestamptz']>;
   startedAt?: Maybe<Scalars['timestamptz']>;
   type: Voting_Types_Enum;
   updatedAt: Scalars['timestamptz'];
@@ -7854,7 +7880,7 @@ export type Votings_Bool_Exp = {
   id?: Maybe<Int_Comparison_Exp>;
   locked?: Maybe<Boolean_Comparison_Exp>;
   name?: Maybe<String_Comparison_Exp>;
-  startDate?: Maybe<Date_Comparison_Exp>;
+  startDate?: Maybe<Timestamptz_Comparison_Exp>;
   startedAt?: Maybe<Timestamptz_Comparison_Exp>;
   type?: Maybe<Voting_Types_Enum_Comparison_Exp>;
   updatedAt?: Maybe<Timestamptz_Comparison_Exp>;
@@ -7880,7 +7906,7 @@ export type Votings_Insert_Input = {
   id?: Maybe<Scalars['Int']>;
   locked?: Maybe<Scalars['Boolean']>;
   name?: Maybe<Scalars['String']>;
-  startDate?: Maybe<Scalars['date']>;
+  startDate?: Maybe<Scalars['timestamptz']>;
   startedAt?: Maybe<Scalars['timestamptz']>;
   type?: Maybe<Voting_Types_Enum>;
   updatedAt?: Maybe<Scalars['timestamptz']>;
@@ -7895,7 +7921,7 @@ export type Votings_Max_Fields = {
   finishedAt?: Maybe<Scalars['timestamptz']>;
   id?: Maybe<Scalars['Int']>;
   name?: Maybe<Scalars['String']>;
-  startDate?: Maybe<Scalars['date']>;
+  startDate?: Maybe<Scalars['timestamptz']>;
   startedAt?: Maybe<Scalars['timestamptz']>;
   updatedAt?: Maybe<Scalars['timestamptz']>;
 };
@@ -7908,7 +7934,7 @@ export type Votings_Min_Fields = {
   finishedAt?: Maybe<Scalars['timestamptz']>;
   id?: Maybe<Scalars['Int']>;
   name?: Maybe<Scalars['String']>;
-  startDate?: Maybe<Scalars['date']>;
+  startDate?: Maybe<Scalars['timestamptz']>;
   startedAt?: Maybe<Scalars['timestamptz']>;
   updatedAt?: Maybe<Scalars['timestamptz']>;
 };
@@ -7920,6 +7946,13 @@ export type Votings_Mutation_Response = {
   affected_rows: Scalars['Int'];
   /** data from the rows affected by the mutation */
   returning: Array<Votings>;
+};
+
+/** input type for inserting object relation for remote table "votings" */
+export type Votings_Obj_Rel_Insert_Input = {
+  data: Votings_Insert_Input;
+  /** on conflict condition */
+  on_conflict?: Maybe<Votings_On_Conflict>;
 };
 
 /** on conflict condition type for table "votings" */
@@ -7981,7 +8014,7 @@ export type Votings_Set_Input = {
   id?: Maybe<Scalars['Int']>;
   locked?: Maybe<Scalars['Boolean']>;
   name?: Maybe<Scalars['String']>;
-  startDate?: Maybe<Scalars['date']>;
+  startDate?: Maybe<Scalars['timestamptz']>;
   startedAt?: Maybe<Scalars['timestamptz']>;
   type?: Maybe<Voting_Types_Enum>;
   updatedAt?: Maybe<Scalars['timestamptz']>;
@@ -8238,13 +8271,26 @@ export type AddPoliticalMemberMutation = (
   )> }
 );
 
-export type UpdateStateOfPoliticalMemberMutationVariables = Exact<{
-  id: Scalars['Int'];
-  state: Scalars['Boolean'];
+export type GetUpcomingVotingsQueryVariables = Exact<{
+  startDate: Scalars['timestamptz'];
 }>;
 
 
-export type UpdateStateOfPoliticalMemberMutation = (
+export type GetUpcomingVotingsQuery = (
+  { __typename?: 'query_root' }
+  & { votings: Array<(
+    { __typename?: 'votings' }
+    & VotingVieldsFragment
+  )> }
+);
+
+export type UpdatePoliticalMemberVotingIdMutationVariables = Exact<{
+  id: Scalars['Int'];
+  votingId: Scalars['Int'];
+}>;
+
+
+export type UpdatePoliticalMemberVotingIdMutation = (
   { __typename?: 'mutation_root' }
   & { update_political_group_members_by_pk?: Maybe<(
     { __typename?: 'political_group_members' }
@@ -8264,8 +8310,11 @@ export type GetPoliticalGroupMembersQuery = (
   { __typename?: 'query_root' }
   & { political_group_members: Array<(
     { __typename?: 'political_group_members' }
-    & Pick<Political_Group_Members, 'id' | 'createdAt' | 'updatedAt' | 'active' | 'politicalGroupId'>
-    & { user: (
+    & Pick<Political_Group_Members, 'id' | 'createdAt' | 'updatedAt' | 'votingId' | 'politicalGroupId'>
+    & { voting?: Maybe<(
+      { __typename?: 'votings' }
+      & Pick<Votings, 'name'>
+    )>, user: (
       { __typename?: 'users' }
       & Pick<Users, 'name' | 'surname' | 'family' | 'egn'>
     ) }
@@ -9065,11 +9114,31 @@ export const AddPoliticalMemberDocument = gql`
       super(apollo);
     }
   }
-export const UpdateStateOfPoliticalMemberDocument = gql`
-    mutation UpdateStateOfPoliticalMember($id: Int!, $state: Boolean!) {
+export const GetUpcomingVotingsDocument = gql`
+    query GetUpcomingVotings($startDate: timestamptz!) {
+  votings(
+    where: {_and: [{locked: {_eq: true}}, {startDate: {_gt: $startDate}}, {startedAt: {_is_null: true}}, {finishedAt: {_is_null: true}}]}
+  ) {
+    ...VotingVields
+  }
+}
+    ${VotingVieldsFragmentDoc}`;
+
+  @Injectable({
+    providedIn: 'root'
+  })
+  export class GetUpcomingVotingsGQL extends Apollo.Query<GetUpcomingVotingsQuery, GetUpcomingVotingsQueryVariables> {
+    document = GetUpcomingVotingsDocument;
+    
+    constructor(apollo: Apollo.Apollo) {
+      super(apollo);
+    }
+  }
+export const UpdatePoliticalMemberVotingIdDocument = gql`
+    mutation UpdatePoliticalMemberVotingId($id: Int!, $votingId: Int!) {
   update_political_group_members_by_pk(
     pk_columns: {id: $id}
-    _set: {active: $state}
+    _set: {votingId: $votingId}
   ) {
     id
   }
@@ -9079,8 +9148,8 @@ export const UpdateStateOfPoliticalMemberDocument = gql`
   @Injectable({
     providedIn: 'root'
   })
-  export class UpdateStateOfPoliticalMemberGQL extends Apollo.Mutation<UpdateStateOfPoliticalMemberMutation, UpdateStateOfPoliticalMemberMutationVariables> {
-    document = UpdateStateOfPoliticalMemberDocument;
+  export class UpdatePoliticalMemberVotingIdGQL extends Apollo.Mutation<UpdatePoliticalMemberVotingIdMutation, UpdatePoliticalMemberVotingIdMutationVariables> {
+    document = UpdatePoliticalMemberVotingIdDocument;
     
     constructor(apollo: Apollo.Apollo) {
       super(apollo);
@@ -9097,7 +9166,10 @@ export const GetPoliticalGroupMembersDocument = gql`
     id
     createdAt
     updatedAt
-    active
+    votingId
+    voting {
+      name
+    }
     politicalGroupId
     user {
       name

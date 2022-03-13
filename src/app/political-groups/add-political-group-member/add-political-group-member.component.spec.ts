@@ -1,9 +1,11 @@
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { ReactiveFormsModule } from '@angular/forms';
+import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { MatInputModule } from '@angular/material/input';
+import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { MatRadioModule } from '@angular/material/radio';
 import { MatSelectModule } from '@angular/material/select';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
@@ -28,6 +30,9 @@ describe('AddPoliticalGroupMemberComponent', () => {
           MatRadioModule,
           MatSelectModule,
           MatSnackBarModule,
+          MatAutocompleteModule,
+          MatProgressBarModule,
+          MatCardModule,
         ],
         providers: [
           { provide: MatDialogRef, useValue: {} },

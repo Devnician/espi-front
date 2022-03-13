@@ -1,5 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-
+import { MatCardModule } from '@angular/material/card';
 import { RegisterSuccessComponent } from './register-success.component';
 
 describe('RegisterSuccessComponent', () => {
@@ -8,9 +8,9 @@ describe('RegisterSuccessComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ RegisterSuccessComponent ]
-    })
-    .compileComponents();
+      declarations: [RegisterSuccessComponent],
+      providers: [MatCardModule],
+    }).compileComponents();
   });
 
   beforeEach(() => {

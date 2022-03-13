@@ -45,9 +45,13 @@ export class AuthService {
       const accessT = localStorage.getItem(TokenTypes.ACCESS_TOKEN);
       const fetchT = localStorage.getItem(TokenTypes.FETCH_TOKEN);
       console.log('tokens from local storage..');
-      this.accessToken.next(accessT);
-      const res = this.jwtHelper.decodeToken(accessT);
-      this.setLoggedUser(res.user);
+      if (accessT) {
+        this.accessToken.next(accessT);
+        const res = this.jwtHelper.decodeToken(accessT);
+        this.setLoggedUser(res.user);
+      } else {
+        return;
+      }
     }
   }
 

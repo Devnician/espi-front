@@ -13,6 +13,8 @@ import {
   GetStartedReferendumsQuery,
   GetStartedVotingsGQL,
   GetStartedVotingsQuery,
+  GetUpcomingVotingsGQL,
+  GetUpcomingVotingsQuery,
   GetVotingsGQL,
   Referendums_Bool_Exp,
   Referendums_Insert_Input,
@@ -41,6 +43,7 @@ export class VotingsService {
     private createVotingGQL: CreateVotingGQL,
     private updateVotingGQL: UpdateVotingGQL,
     private getVotingsGQL: GetVotingsGQL,
+    private getUpcomingVotingsGQL: GetUpcomingVotingsGQL,
     private getStartedVotingsGQL: GetStartedVotingsGQL,
     private addVoteForTheReferendumGQL: AddVoteForTheReferendumGQL
   ) {}
@@ -153,6 +156,11 @@ export class VotingsService {
     );
   }
 
+  public getUpcomingVotings(
+    startDate: Date
+  ): Observable<ApolloQueryResult<GetUpcomingVotingsQuery>> {
+    return this.getUpcomingVotingsGQL.fetch({ startDate });
+  }
   getStartedReferendums(): Observable<
     ApolloQueryResult<GetStartedReferendumsQuery>
   > {
