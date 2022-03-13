@@ -163,8 +163,8 @@ export class NavigationComponent
       case Role_Types_Enum.Section:
         this.addMenu('users');
         //  this.addMenu('settlements');
-        this.addMenu('votings-list');
-        this.addMenu('referendums-list');
+        // this.addMenu('votings-list');
+        // this.addMenu('referendums-list');
         break;
       case Role_Types_Enum.User:
         this.addMenu('votings');
