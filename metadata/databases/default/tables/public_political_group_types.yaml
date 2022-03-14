@@ -17,3 +17,9 @@ select_permissions:
     - value
     filter: {}
   role: centralLeader
+- permission:
+    columns:
+    - description
+    - value
+    filter: {}
+  role: user

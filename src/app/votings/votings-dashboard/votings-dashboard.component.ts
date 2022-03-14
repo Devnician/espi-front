@@ -66,6 +66,7 @@ export class VotingsDashboardComponent {
         const user: Users = observableResults[2] as Users;
         const votedReferendumIds: number[] = [];
         user.referendum_votes.forEach((vote) => {
+          console.log(vote);
           votedReferendumIds.push(vote.referendum_question.referendum.id);
         });
         this.cards.value.forEach((card) => {
@@ -76,6 +77,7 @@ export class VotingsDashboardComponent {
             }
           } else {
             // TODO - check and votings ..
+            // chec is user voted ....
           }
         });
       }
@@ -105,6 +107,7 @@ export class VotingsDashboardComponent {
         switchMap((response) => {
           const votings = response.data.votings;
           this.votings.next(votings as Votings[]);
+          console.log(votings);
           return this.votings;
         })
       )
@@ -165,9 +168,8 @@ export class VotingsDashboardComponent {
       this.router.navigate(['/votings/referendum']);
     } else {
       const voting = this.votings.value.find((v) => v.id === vote.id);
-      console.log('Open vote screen');
+      this.donkey.load(voting);
       this.router.navigate(['/votings/vote']);
-      // console.log(voting);
     }
   }
 }

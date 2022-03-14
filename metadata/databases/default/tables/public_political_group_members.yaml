@@ -2,6 +2,9 @@ table:
   name: political_group_members
   schema: public
 object_relationships:
+- name: political_group
+  using:
+    foreign_key_constraint_on: politicalGroupId
 - name: user
   using:
     foreign_key_constraint_on: userId
@@ -46,6 +49,14 @@ select_permissions:
     - votingId
     filter: {}
   role: centralLeader
+- permission:
+    columns:
+    - id
+    - politicalGroupId
+    - userId
+    - votingId
+    filter: {}
+  role: user
 update_permissions:
 - permission:
     check: null

@@ -5,13 +5,16 @@
     {{ selectedPolitGroup | async | json }}
   </div>
 
-  Candidate
+  Данни на кандидата
   <div>
     {{ selectedCandidate | async | json }}
   </div>
   <!-- add form, butons ... -->
 
   <div mat-card-actions align="end">
+    <button mat-raised-button type="button" (click)="goBack()">
+      <mat-icon>arrow_back</mat-icon> Започни отначало
+    </button>
     <button
       mat-raised-button
       type="button"

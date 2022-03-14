@@ -1,4 +1,5 @@
-<h2>{{ label }}</h2>
+<h2>{{ (voting | async).name }}</h2>
+<h3>{{ (voting | async).description }}</h3>
 <div id="main-content" style="background-color: primary">
   <mat-tab-group
     [selectedIndex]="selected.value"
@@ -7,10 +8,21 @@
     "
   >
     <mat-tab *ngFor="let pg of politicalGroups | async">
-      <ng-template mat-tab-label> {{ pg.buletineNumber }} </ng-template>
-      <div style="display: flex; width: 100%">
-        <app-parent style="width: 100%" [group]="pg"></app-parent>
-        <app-child style="width: 100%" [candidates]="pg.childs"></app-child>
+      <div *ngIf="pg.id < 0">
+        <ng-template mat-tab-label>празен глас </ng-template>
+        <div style="display: flex; width: 100%">
+          <h2>Не гласувам за никого</h2>
+        </div>
+      </div>
+      <div *ngIf="pg.id > -1">
+        <ng-template mat-tab-label> {{ pg.id }} </ng-template>
+        <div style="display: flex; width: 100%">
+          <app-parent style="width: 60%" [group]="pg"></app-parent>
+          <app-child
+            style="width: 100%"
+            [candidates]="pg.candidates"
+          ></app-child>
+        </div>
       </div>
     </mat-tab>
   </mat-tab-group>

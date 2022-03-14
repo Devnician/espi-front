@@ -35,6 +35,9 @@ export class VotePreviewComponent implements OnInit {
   canVote(): boolean {
     return isNullOrUndefined(this.selectedPolitGroup.value);
   }
+  goBack() {
+    history.back();
+  }
   vote() {
     console.log(this.selectedPolitGroup.value);
     console.log(this.selectedCandidate.value);
