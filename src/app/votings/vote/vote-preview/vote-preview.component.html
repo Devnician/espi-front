@@ -1,18 +1,61 @@
-<p>vote-preview works!</p>
 <div>
-  All data
-  <div>
-    {{ selectedPolitGroup | async | json }}
+  <div *ngIf="selectedPolitGroup?.num === 0" class="form-sector">
+    <div
+      class="names"
+      style="
+        height: 300px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      "
+    >
+      Не подкрепям никого
+    </div>
   </div>
+  <div *ngIf="selectedPolitGroup?.num > 0">
+    <h2>Предстои да направите избор за</h2>
+    <div class="form-sector">
+      <div style="display: flex">
+        <div class="form-sector" style="font-weight: 900; font-size: 48px">
+          {{ selectedPolitGroup.num }}
+        </div>
+        <div class="names">
+          {{ selectedPolitGroup.groupType }} {{ selectedPolitGroup.name }}
+        </div>
+      </div>
+    </div>
 
-  Candidate
-  <div>
-    {{ selectedCandidate | async | json }}
+    <div *ngIf="selectedCandidate">
+      <h2>Преференциален избор</h2>
+      <div class="form-sector">
+        <div style="display: flex">
+          <div class="form-sector" style="font-weight: 900; font-size: 48px">
+            {{ selectedCandidate?.num }}
+          </div>
+          <div class="names">
+            {{ selectedCandidate?.name }}
+            {{ selectedCandidate?.surname }}
+            {{ selectedCandidate?.family }}
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
-  <!-- add form, butons ... -->
-
-  <div mat-card-actions align="end">
+  <div
+    mat-card-actions
+    align="end"
+    style="justify-content: space-between; display: flex"
+  >
     <button
+      class="espi-big-button"
+      mat-raised-button
+      type="button"
+      (click)="goBack()"
+    >
+      <mat-icon>arrow_back</mat-icon> Започни отначало
+    </button>
+    <button
+      class="espi-big-button"
       mat-raised-button
       type="button"
       (click)="vote()"

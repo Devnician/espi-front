@@ -8,6 +8,8 @@ import {
   CreateReferendumMutation,
   CreateVotingGQL,
   CreateVotingMutation,
+  GetParticipantsInVotingGQL,
+  GetParticipantsInVotingQuery,
   GetReferendumsGQL,
   GetStartedReferendumsGQL,
   GetStartedReferendumsQuery,
@@ -45,7 +47,8 @@ export class VotingsService {
     private getVotingsGQL: GetVotingsGQL,
     private getUpcomingVotingsGQL: GetUpcomingVotingsGQL,
     private getStartedVotingsGQL: GetStartedVotingsGQL,
-    private addVoteForTheReferendumGQL: AddVoteForTheReferendumGQL
+    private addVoteForTheReferendumGQL: AddVoteForTheReferendumGQL,
+    private getParticipantsInVotingGQL: GetParticipantsInVotingGQL
   ) {}
 
   createReferendum(
@@ -193,5 +196,11 @@ export class VotingsService {
       { votes: answers },
       { errorPolicy: 'all' }
     );
+  }
+
+  getParticipantsInVoting(
+    votingId: number
+  ): Observable<ApolloQueryResult<GetParticipantsInVotingQuery>> {
+    return this.getParticipantsInVotingGQL.fetch({ votingId });
   }
 }
