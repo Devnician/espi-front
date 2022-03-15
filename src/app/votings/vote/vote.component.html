@@ -1,26 +1,33 @@
 <h2>{{ (voting | async).name }}</h2>
 <h3>{{ (voting | async).description }}</h3>
-<div id="main-content" style="background-color: primary">
+<div id="main-content" style="height: 400px">
+  <mat-progress-bar
+    *ngIf="loading$ | async"
+    color="warn"
+    mode="indeterminate"
+  ></mat-progress-bar>
   <mat-tab-group
     [selectedIndex]="selected.value"
     (selectedIndexChange)="
       selected.setValue($event); onSelectPoliticalGroup($event)
     "
   >
-    <mat-tab *ngFor="let pg of politicalGroups | async">
-      <div *ngIf="pg.id < 0">
+    <mat-tab *ngFor="let politicalGroup of politicalGroups | async">
+      <div *ngIf="politicalGroup.num === 0" style="height: 100%">
         <ng-template mat-tab-label>празен глас </ng-template>
-        <div style="display: flex; width: 100%">
-          <h2>Не гласувам за никого</h2>
+        <div class="tile">
+          <p style="font-size: 24px; font-weight: 500">Не подкрепям никого</p>
         </div>
       </div>
-      <div *ngIf="pg.id > -1">
-        <ng-template mat-tab-label> {{ pg.id }} </ng-template>
+      <div *ngIf="politicalGroup.politGroupId > 0" class="tile-2">
+        <ng-template mat-tab-label>
+          {{ politicalGroup.politGroupId }}
+        </ng-template>
         <div style="display: flex; width: 100%">
-          <app-parent style="width: 60%" [group]="pg"></app-parent>
+          <app-parent style="width: 60%" [group]="politicalGroup"></app-parent>
           <app-child
             style="width: 100%"
-            [candidates]="pg.candidates"
+            [candidates]="politicalGroup.candidates"
           ></app-child>
         </div>
       </div>
@@ -30,6 +37,7 @@
   <div mat-card-actions align="end">
     <button
       mat-raised-button
+      class="espi-big-button"
       type="button"
       (click)="goToPreviewPage()"
       color="accent"

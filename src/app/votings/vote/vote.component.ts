@@ -8,20 +8,22 @@ import { Political_Group_Members, Votings } from 'src/generated/graphql';
 import { VotingsService } from '../voting-service.service';
 // fake interfaces
 
-export interface Candidate {
-  id: number;
-  selected: boolean;
-  num: number;
-  name: string;
-  surname: string;
-  family: string;
-}
 export interface PolitGroup {
-  id: number;
+  politGroupId: number;
+  num: number;
   groupType: string;
   name: string;
   description: string;
   candidates: Candidate[];
+}
+export interface Candidate {
+  politGroupMemberId: number;
+  userId: number;
+  num: number;
+  selected: boolean;
+  name: string;
+  surname: string;
+  family: string;
 }
 @Component({
   selector: 'app-vote',
@@ -29,8 +31,10 @@ export interface PolitGroup {
   styleUrls: ['./vote.component.scss'],
 })
 export class VoteComponent implements OnInit {
+  private loading: BehaviorSubject<boolean> = new BehaviorSubject(true);
+  loading$ = this.loading.asObservable();
   politicalGroups: BehaviorSubject<PolitGroup[]> = new BehaviorSubject([]);
-  selected = new FormControl(-1);
+  selected = new FormControl(null);
   selectedPoliticalGroup: BehaviorSubject<PolitGroup> = new BehaviorSubject(
     undefined
   );
@@ -58,37 +62,43 @@ export class VoteComponent implements OnInit {
       .subscribe((response) => {
         console.log(response);
 
-        const groups: PolitGroup[] = [{ id: -1 } as PolitGroup];
+        const groups: PolitGroup[] = [{ num: 0 } as PolitGroup];
 
         const politicalMembers: Political_Group_Members[] = response.data
           .votings_by_pk
           .political_group_members as any as Political_Group_Members[];
         console.log(politicalMembers);
 
-        politicalMembers.forEach((m) => {
-          const politGroup = groups.find((g) => g.id === m.political_group.id);
+        politicalMembers.forEach((politMember) => {
+          const politGroup = groups.find(
+            (g) => g.politGroupId === politMember.political_group.id
+          );
           if (politGroup) {
             politGroup.candidates.push({
-              id: m.userId,
+              politGroupMemberId: politMember.id,
+              userId: politMember.userId,
               num: politGroup.candidates.length + 1,
-              name: m.user.name,
-              surname: m.user.surname,
-              family: m.user.family,
+              name: politMember.user.name,
+              surname: politMember.user.surname,
+              family: politMember.user.family,
               selected: false,
             });
           } else {
             const politGroup: PolitGroup = {
-              id: m.political_group.id,
-              description: m.political_group.description,
-              name: m.political_group.name,
-              groupType: m.political_group.political_group_type.description,
+              politGroupId: politMember.political_group.id,
+              num: groups.length + 1,
+              description: politMember.political_group.description,
+              name: politMember.political_group.name,
+              groupType:
+                politMember.political_group.political_group_type.description,
               candidates: [
                 {
-                  id: m.userId,
+                  politGroupMemberId: politMember.id,
+                  userId: politMember.userId,
                   num: 1,
-                  name: m.user.name,
-                  surname: m.user.surname,
-                  family: m.user.family,
+                  name: politMember.user.name,
+                  surname: politMember.user.surname,
+                  family: politMember.user.family,
                   selected: false,
                 },
               ],
@@ -98,38 +108,13 @@ export class VoteComponent implements OnInit {
           // m.politicalGroupId;
         });
         this.politicalGroups.next(groups);
+        this.loading.next(false);
       });
-    // //TODO -  create service call
-    // const groups: PolitGroup[] = [];
-    // for (let i = 0; i < 10; i++) {
-    //   const childs: Candidate[] = [];
-    //   for (let j = 0; j <= i + 1; j++) {
-    //     childs.push({
-    //       selected: false,
-    //       num: j + 1,
-    //       firstName: 'Dragan',
-    //       lastName: 'Petkov',
-    //     });
-    //   }
-    //   groups.push({
-    //     id: i,
-    //     buletineNumber: i + childs.length,
-    //     name: 'Политическа група ' + i + 1,
-    //     childs,
-    //   });
-    // }
   }
 
   onSelectPoliticalGroup(index: number) {
-    console.log(index);
-    const selectedPoliticalGroup = this.politicalGroups.value[index];
-    this.selected.setValue(-1);
-    console.log(selectedPoliticalGroup);
-    this.selectedPoliticalGroup.next(selectedPoliticalGroup);
-  }
-
-  focusChange(a: any) {
-    console.log(a);
+    this.selected.setValue(index);
+    this.selectedPoliticalGroup.next(this.politicalGroups.value[index]);
   }
 
   canGoToPreview() {

@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { isNullOrUndefined } from 'is-what';
-import { BehaviorSubject } from 'rxjs';
 import { Donkey } from 'src/app/services/donkey.service';
 import { Candidate, PolitGroup } from '../vote.component';
 
@@ -11,35 +10,32 @@ import { Candidate, PolitGroup } from '../vote.component';
   styleUrls: ['./vote-preview.component.scss'],
 })
 export class VotePreviewComponent implements OnInit {
-  selectedPolitGroup: BehaviorSubject<PolitGroup> = new BehaviorSubject(
-    undefined
-  );
-  selectedCandidate: BehaviorSubject<Candidate> = new BehaviorSubject(
-    undefined
-  );
-
+  selectedPolitGroup: PolitGroup;
+  selectedCandidate: Candidate;
   constructor(private donkey: Donkey, private router: Router) {}
 
   ngOnInit(): void {
     if (this.donkey.isLoaded()) {
       const cargo = this.donkey.unload();
-      this.selectedPolitGroup.next(cargo.selectedPolitGroup);
-      const selectedPerson: Candidate = cargo.selectedPolitGroup.childs.filter(
-        (p) => p.selected
-      )[0];
-      this.selectedCandidate.next(selectedPerson); // Candidate - if any
+      this.selectedPolitGroup = cargo.selectedPolitGroup;
+      console.log(this.selectedPolitGroup);
+      const selectedPerson: Candidate =
+        cargo.selectedPolitGroup?.candidates.filter(
+          (p) => p.selected === true
+        )[0];
+      this.selectedCandidate = selectedPerson; // Candidate - if any
     } else {
       this.router.navigateByUrl('/votings');
     }
   }
   canVote(): boolean {
-    return isNullOrUndefined(this.selectedPolitGroup.value);
+    return isNullOrUndefined(this.selectedPolitGroup);
   }
   goBack() {
     history.back();
   }
   vote() {
-    console.log(this.selectedPolitGroup.value);
-    console.log(this.selectedCandidate.value);
+    console.log(this.selectedPolitGroup);
+    console.log(this.selectedCandidate);
   }
 }
