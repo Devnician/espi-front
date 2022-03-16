@@ -6776,11 +6776,12 @@ export type Users_Variance_Fields = {
 export type Votes = {
   __typename?: 'votes';
   createdAt: Scalars['timestamptz'];
-  eVote: Scalars['String'];
   id: Scalars['Int'];
+  inSection: Scalars['Boolean'];
   sectionId?: Maybe<Scalars['Int']>;
   userId: Scalars['Int'];
-  vote?: Maybe<Scalars['String']>;
+  voteGroupId?: Maybe<Scalars['Int']>;
+  voteUserId?: Maybe<Scalars['Int']>;
   votingId: Scalars['Int'];
 };
 
@@ -6842,6 +6843,8 @@ export type Votes_Avg_Fields = {
   id?: Maybe<Scalars['Float']>;
   sectionId?: Maybe<Scalars['Float']>;
   userId?: Maybe<Scalars['Float']>;
+  voteGroupId?: Maybe<Scalars['Float']>;
+  voteUserId?: Maybe<Scalars['Float']>;
   votingId?: Maybe<Scalars['Float']>;
 };
 
@@ -6850,6 +6853,8 @@ export type Votes_Avg_Order_By = {
   id?: Maybe<Order_By>;
   sectionId?: Maybe<Order_By>;
   userId?: Maybe<Order_By>;
+  voteGroupId?: Maybe<Order_By>;
+  voteUserId?: Maybe<Order_By>;
   votingId?: Maybe<Order_By>;
 };
 
@@ -6859,11 +6864,12 @@ export type Votes_Bool_Exp = {
   _not?: Maybe<Votes_Bool_Exp>;
   _or?: Maybe<Array<Votes_Bool_Exp>>;
   createdAt?: Maybe<Timestamptz_Comparison_Exp>;
-  eVote?: Maybe<String_Comparison_Exp>;
   id?: Maybe<Int_Comparison_Exp>;
+  inSection?: Maybe<Boolean_Comparison_Exp>;
   sectionId?: Maybe<Int_Comparison_Exp>;
   userId?: Maybe<Int_Comparison_Exp>;
-  vote?: Maybe<String_Comparison_Exp>;
+  voteGroupId?: Maybe<Int_Comparison_Exp>;
+  voteUserId?: Maybe<Int_Comparison_Exp>;
   votingId?: Maybe<Int_Comparison_Exp>;
 };
 
@@ -6878,17 +6884,20 @@ export type Votes_Inc_Input = {
   id?: Maybe<Scalars['Int']>;
   sectionId?: Maybe<Scalars['Int']>;
   userId?: Maybe<Scalars['Int']>;
+  voteGroupId?: Maybe<Scalars['Int']>;
+  voteUserId?: Maybe<Scalars['Int']>;
   votingId?: Maybe<Scalars['Int']>;
 };
 
 /** input type for inserting data into table "votes" */
 export type Votes_Insert_Input = {
   createdAt?: Maybe<Scalars['timestamptz']>;
-  eVote?: Maybe<Scalars['String']>;
   id?: Maybe<Scalars['Int']>;
+  inSection?: Maybe<Scalars['Boolean']>;
   sectionId?: Maybe<Scalars['Int']>;
   userId?: Maybe<Scalars['Int']>;
-  vote?: Maybe<Scalars['String']>;
+  voteGroupId?: Maybe<Scalars['Int']>;
+  voteUserId?: Maybe<Scalars['Int']>;
   votingId?: Maybe<Scalars['Int']>;
 };
 
@@ -6896,22 +6905,22 @@ export type Votes_Insert_Input = {
 export type Votes_Max_Fields = {
   __typename?: 'votes_max_fields';
   createdAt?: Maybe<Scalars['timestamptz']>;
-  eVote?: Maybe<Scalars['String']>;
   id?: Maybe<Scalars['Int']>;
   sectionId?: Maybe<Scalars['Int']>;
   userId?: Maybe<Scalars['Int']>;
-  vote?: Maybe<Scalars['String']>;
+  voteGroupId?: Maybe<Scalars['Int']>;
+  voteUserId?: Maybe<Scalars['Int']>;
   votingId?: Maybe<Scalars['Int']>;
 };
 
 /** order by max() on columns of table "votes" */
 export type Votes_Max_Order_By = {
   createdAt?: Maybe<Order_By>;
-  eVote?: Maybe<Order_By>;
   id?: Maybe<Order_By>;
   sectionId?: Maybe<Order_By>;
   userId?: Maybe<Order_By>;
-  vote?: Maybe<Order_By>;
+  voteGroupId?: Maybe<Order_By>;
+  voteUserId?: Maybe<Order_By>;
   votingId?: Maybe<Order_By>;
 };
 
@@ -6919,22 +6928,22 @@ export type Votes_Max_Order_By = {
 export type Votes_Min_Fields = {
   __typename?: 'votes_min_fields';
   createdAt?: Maybe<Scalars['timestamptz']>;
-  eVote?: Maybe<Scalars['String']>;
   id?: Maybe<Scalars['Int']>;
   sectionId?: Maybe<Scalars['Int']>;
   userId?: Maybe<Scalars['Int']>;
-  vote?: Maybe<Scalars['String']>;
+  voteGroupId?: Maybe<Scalars['Int']>;
+  voteUserId?: Maybe<Scalars['Int']>;
   votingId?: Maybe<Scalars['Int']>;
 };
 
 /** order by min() on columns of table "votes" */
 export type Votes_Min_Order_By = {
   createdAt?: Maybe<Order_By>;
-  eVote?: Maybe<Order_By>;
   id?: Maybe<Order_By>;
   sectionId?: Maybe<Order_By>;
   userId?: Maybe<Order_By>;
-  vote?: Maybe<Order_By>;
+  voteGroupId?: Maybe<Order_By>;
+  voteUserId?: Maybe<Order_By>;
   votingId?: Maybe<Order_By>;
 };
 
@@ -6957,11 +6966,12 @@ export type Votes_On_Conflict = {
 /** Ordering options when selecting data from "votes". */
 export type Votes_Order_By = {
   createdAt?: Maybe<Order_By>;
-  eVote?: Maybe<Order_By>;
   id?: Maybe<Order_By>;
+  inSection?: Maybe<Order_By>;
   sectionId?: Maybe<Order_By>;
   userId?: Maybe<Order_By>;
-  vote?: Maybe<Order_By>;
+  voteGroupId?: Maybe<Order_By>;
+  voteUserId?: Maybe<Order_By>;
   votingId?: Maybe<Order_By>;
 };
 
@@ -6975,15 +6985,17 @@ export enum Votes_Select_Column {
   /** column name */
   CreatedAt = 'createdAt',
   /** column name */
-  EVote = 'eVote',
-  /** column name */
   Id = 'id',
+  /** column name */
+  InSection = 'inSection',
   /** column name */
   SectionId = 'sectionId',
   /** column name */
   UserId = 'userId',
   /** column name */
-  Vote = 'vote',
+  VoteGroupId = 'voteGroupId',
+  /** column name */
+  VoteUserId = 'voteUserId',
   /** column name */
   VotingId = 'votingId'
 }
@@ -6991,11 +7003,12 @@ export enum Votes_Select_Column {
 /** input type for updating data in table "votes" */
 export type Votes_Set_Input = {
   createdAt?: Maybe<Scalars['timestamptz']>;
-  eVote?: Maybe<Scalars['String']>;
   id?: Maybe<Scalars['Int']>;
+  inSection?: Maybe<Scalars['Boolean']>;
   sectionId?: Maybe<Scalars['Int']>;
   userId?: Maybe<Scalars['Int']>;
-  vote?: Maybe<Scalars['String']>;
+  voteGroupId?: Maybe<Scalars['Int']>;
+  voteUserId?: Maybe<Scalars['Int']>;
   votingId?: Maybe<Scalars['Int']>;
 };
 
@@ -7005,6 +7018,8 @@ export type Votes_Stddev_Fields = {
   id?: Maybe<Scalars['Float']>;
   sectionId?: Maybe<Scalars['Float']>;
   userId?: Maybe<Scalars['Float']>;
+  voteGroupId?: Maybe<Scalars['Float']>;
+  voteUserId?: Maybe<Scalars['Float']>;
   votingId?: Maybe<Scalars['Float']>;
 };
 
@@ -7013,6 +7028,8 @@ export type Votes_Stddev_Order_By = {
   id?: Maybe<Order_By>;
   sectionId?: Maybe<Order_By>;
   userId?: Maybe<Order_By>;
+  voteGroupId?: Maybe<Order_By>;
+  voteUserId?: Maybe<Order_By>;
   votingId?: Maybe<Order_By>;
 };
 
@@ -7022,6 +7039,8 @@ export type Votes_Stddev_Pop_Fields = {
   id?: Maybe<Scalars['Float']>;
   sectionId?: Maybe<Scalars['Float']>;
   userId?: Maybe<Scalars['Float']>;
+  voteGroupId?: Maybe<Scalars['Float']>;
+  voteUserId?: Maybe<Scalars['Float']>;
   votingId?: Maybe<Scalars['Float']>;
 };
 
@@ -7030,6 +7049,8 @@ export type Votes_Stddev_Pop_Order_By = {
   id?: Maybe<Order_By>;
   sectionId?: Maybe<Order_By>;
   userId?: Maybe<Order_By>;
+  voteGroupId?: Maybe<Order_By>;
+  voteUserId?: Maybe<Order_By>;
   votingId?: Maybe<Order_By>;
 };
 
@@ -7039,6 +7060,8 @@ export type Votes_Stddev_Samp_Fields = {
   id?: Maybe<Scalars['Float']>;
   sectionId?: Maybe<Scalars['Float']>;
   userId?: Maybe<Scalars['Float']>;
+  voteGroupId?: Maybe<Scalars['Float']>;
+  voteUserId?: Maybe<Scalars['Float']>;
   votingId?: Maybe<Scalars['Float']>;
 };
 
@@ -7047,6 +7070,8 @@ export type Votes_Stddev_Samp_Order_By = {
   id?: Maybe<Order_By>;
   sectionId?: Maybe<Order_By>;
   userId?: Maybe<Order_By>;
+  voteGroupId?: Maybe<Order_By>;
+  voteUserId?: Maybe<Order_By>;
   votingId?: Maybe<Order_By>;
 };
 
@@ -7056,6 +7081,8 @@ export type Votes_Sum_Fields = {
   id?: Maybe<Scalars['Int']>;
   sectionId?: Maybe<Scalars['Int']>;
   userId?: Maybe<Scalars['Int']>;
+  voteGroupId?: Maybe<Scalars['Int']>;
+  voteUserId?: Maybe<Scalars['Int']>;
   votingId?: Maybe<Scalars['Int']>;
 };
 
@@ -7064,6 +7091,8 @@ export type Votes_Sum_Order_By = {
   id?: Maybe<Order_By>;
   sectionId?: Maybe<Order_By>;
   userId?: Maybe<Order_By>;
+  voteGroupId?: Maybe<Order_By>;
+  voteUserId?: Maybe<Order_By>;
   votingId?: Maybe<Order_By>;
 };
 
@@ -7072,15 +7101,17 @@ export enum Votes_Update_Column {
   /** column name */
   CreatedAt = 'createdAt',
   /** column name */
-  EVote = 'eVote',
-  /** column name */
   Id = 'id',
+  /** column name */
+  InSection = 'inSection',
   /** column name */
   SectionId = 'sectionId',
   /** column name */
   UserId = 'userId',
   /** column name */
-  Vote = 'vote',
+  VoteGroupId = 'voteGroupId',
+  /** column name */
+  VoteUserId = 'voteUserId',
   /** column name */
   VotingId = 'votingId'
 }
@@ -7091,6 +7122,8 @@ export type Votes_Var_Pop_Fields = {
   id?: Maybe<Scalars['Float']>;
   sectionId?: Maybe<Scalars['Float']>;
   userId?: Maybe<Scalars['Float']>;
+  voteGroupId?: Maybe<Scalars['Float']>;
+  voteUserId?: Maybe<Scalars['Float']>;
   votingId?: Maybe<Scalars['Float']>;
 };
 
@@ -7099,6 +7132,8 @@ export type Votes_Var_Pop_Order_By = {
   id?: Maybe<Order_By>;
   sectionId?: Maybe<Order_By>;
   userId?: Maybe<Order_By>;
+  voteGroupId?: Maybe<Order_By>;
+  voteUserId?: Maybe<Order_By>;
   votingId?: Maybe<Order_By>;
 };
 
@@ -7108,6 +7143,8 @@ export type Votes_Var_Samp_Fields = {
   id?: Maybe<Scalars['Float']>;
   sectionId?: Maybe<Scalars['Float']>;
   userId?: Maybe<Scalars['Float']>;
+  voteGroupId?: Maybe<Scalars['Float']>;
+  voteUserId?: Maybe<Scalars['Float']>;
   votingId?: Maybe<Scalars['Float']>;
 };
 
@@ -7116,6 +7153,8 @@ export type Votes_Var_Samp_Order_By = {
   id?: Maybe<Order_By>;
   sectionId?: Maybe<Order_By>;
   userId?: Maybe<Order_By>;
+  voteGroupId?: Maybe<Order_By>;
+  voteUserId?: Maybe<Order_By>;
   votingId?: Maybe<Order_By>;
 };
 
@@ -7125,6 +7164,8 @@ export type Votes_Variance_Fields = {
   id?: Maybe<Scalars['Float']>;
   sectionId?: Maybe<Scalars['Float']>;
   userId?: Maybe<Scalars['Float']>;
+  voteGroupId?: Maybe<Scalars['Float']>;
+  voteUserId?: Maybe<Scalars['Float']>;
   votingId?: Maybe<Scalars['Float']>;
 };
 
@@ -7133,6 +7174,8 @@ export type Votes_Variance_Order_By = {
   id?: Maybe<Order_By>;
   sectionId?: Maybe<Order_By>;
   userId?: Maybe<Order_By>;
+  voteGroupId?: Maybe<Order_By>;
+  voteUserId?: Maybe<Order_By>;
   votingId?: Maybe<Order_By>;
 };
 
@@ -8826,6 +8869,19 @@ export type VotingVieldsFragment = (
   ) }
 );
 
+export type VoteMutationVariables = Exact<{
+  input: Votes_Insert_Input;
+}>;
+
+
+export type VoteMutation = (
+  { __typename?: 'mutation_root' }
+  & { insert_votes_one?: Maybe<(
+    { __typename?: 'votes' }
+    & Pick<Votes, 'id'>
+  )> }
+);
+
 export const SettlementFiledsFragmentDoc = gql`
     fragment SettlementFileds on settlements {
   id
@@ -9774,6 +9830,24 @@ export const GetParticipantsInVotingDocument = gql`
   })
   export class GetParticipantsInVotingGQL extends Apollo.Query<GetParticipantsInVotingQuery, GetParticipantsInVotingQueryVariables> {
     document = GetParticipantsInVotingDocument;
+    
+    constructor(apollo: Apollo.Apollo) {
+      super(apollo);
+    }
+  }
+export const VoteDocument = gql`
+    mutation Vote($input: votes_insert_input!) {
+  insert_votes_one(object: $input) {
+    id
+  }
+}
+    `;
+
+  @Injectable({
+    providedIn: 'root'
+  })
+  export class VoteGQL extends Apollo.Mutation<VoteMutation, VoteMutationVariables> {
+    document = VoteDocument;
     
     constructor(apollo: Apollo.Apollo) {
       super(apollo);

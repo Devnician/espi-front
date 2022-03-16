@@ -123,7 +123,10 @@ export class VoteComponent implements OnInit {
 
   goToPreviewPage() {
     const selectedPolitGroup: PolitGroup = this.selectedPoliticalGroup.value;
-    this.donkey.load({ selectedPolitGroup });
+    this.donkey.load({
+      selectedPolitGroup,
+      votingId: this.voting.getValue().id,
+    });
     this.router.navigateByUrl('/votings/preview');
   }
 }

@@ -181,3 +181,10 @@ fragment VotingVields on votings {
   startedAt
   finishedAt
 }
+
+# Votes
+mutation Vote($input: votes_insert_input!) {
+  insert_votes_one(object: $input) {
+    id
+  }
+}
