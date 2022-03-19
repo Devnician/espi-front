@@ -5,6 +5,14 @@ object_relationships:
 - name: voting_type
   using:
     foreign_key_constraint_on: type
+array_relationships:
+- name: political_group_members
+  using:
+    foreign_key_constraint_on:
+      column: votingId
+      table:
+        name: political_group_members
+        schema: public
 insert_permissions:
 - permission:
     backend_only: false

@@ -65,3 +65,16 @@ mat-tab-body {
 .mat-ink-bar {
     display: none;
 }
+.tile {
+    width: calc(100% - 2px);
+    height: calc(100% - 2px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: solid 0.5px #ced1d4;
+}
+.tile-2 {
+    width: calc(100% - 2px);
+    height: calc(100% - 2px);
+    display: flex;
+}

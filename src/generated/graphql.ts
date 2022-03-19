@@ -2754,6 +2754,8 @@ export type Political_Group_Members = {
   createdAt: Scalars['timestamptz'];
   id: Scalars['Int'];
   politicalGroupId: Scalars['Int'];
+  /** An object relationship */
+  political_group: Political_Groups;
   updatedAt: Scalars['timestamptz'];
   /** An object relationship */
   user: Users;
@@ -2840,6 +2842,7 @@ export type Political_Group_Members_Bool_Exp = {
   createdAt?: Maybe<Timestamptz_Comparison_Exp>;
   id?: Maybe<Int_Comparison_Exp>;
   politicalGroupId?: Maybe<Int_Comparison_Exp>;
+  political_group?: Maybe<Political_Groups_Bool_Exp>;
   updatedAt?: Maybe<Timestamptz_Comparison_Exp>;
   user?: Maybe<Users_Bool_Exp>;
   userId?: Maybe<Int_Comparison_Exp>;
@@ -2868,6 +2871,7 @@ export type Political_Group_Members_Insert_Input = {
   createdAt?: Maybe<Scalars['timestamptz']>;
   id?: Maybe<Scalars['Int']>;
   politicalGroupId?: Maybe<Scalars['Int']>;
+  political_group?: Maybe<Political_Groups_Obj_Rel_Insert_Input>;
   updatedAt?: Maybe<Scalars['timestamptz']>;
   user?: Maybe<Users_Obj_Rel_Insert_Input>;
   userId?: Maybe<Scalars['Int']>;
@@ -2938,6 +2942,7 @@ export type Political_Group_Members_Order_By = {
   createdAt?: Maybe<Order_By>;
   id?: Maybe<Order_By>;
   politicalGroupId?: Maybe<Order_By>;
+  political_group?: Maybe<Political_Groups_Order_By>;
   updatedAt?: Maybe<Order_By>;
   user?: Maybe<Users_Order_By>;
   userId?: Maybe<Order_By>;
@@ -3391,6 +3396,13 @@ export type Political_Groups_Mutation_Response = {
   returning: Array<Political_Groups>;
 };
 
+/** input type for inserting object relation for remote table "political_groups" */
+export type Political_Groups_Obj_Rel_Insert_Input = {
+  data: Political_Groups_Insert_Input;
+  /** on conflict condition */
+  on_conflict?: Maybe<Political_Groups_On_Conflict>;
+};
+
 /** on conflict condition type for table "political_groups" */
 export type Political_Groups_On_Conflict = {
   constraint: Political_Groups_Constraint;
@@ -3606,9 +3618,9 @@ export type Query_Root = {
   users_aggregate: Users_Aggregate;
   /** fetch data from the table: "users" using primary key columns */
   users_by_pk?: Maybe<Users>;
-  /** fetch data from the table: "votes" */
+  /** An array relationship */
   votes: Array<Votes>;
-  /** fetch aggregated fields from the table: "votes" */
+  /** An aggregate relationship */
   votes_aggregate: Votes_Aggregate;
   /** fetch data from the table: "votes" using primary key columns */
   votes_by_pk?: Maybe<Votes>;
@@ -5951,9 +5963,9 @@ export type Subscription_Root = {
   users_aggregate: Users_Aggregate;
   /** fetch data from the table: "users" using primary key columns */
   users_by_pk?: Maybe<Users>;
-  /** fetch data from the table: "votes" */
+  /** An array relationship */
   votes: Array<Votes>;
-  /** fetch aggregated fields from the table: "votes" */
+  /** An aggregate relationship */
   votes_aggregate: Votes_Aggregate;
   /** fetch data from the table: "votes" using primary key columns */
   votes_by_pk?: Maybe<Votes>;
@@ -6557,9 +6569,9 @@ export type Users = {
   secondRoleType?: Maybe<Role_Types>;
   surname: Scalars['String'];
   updatedAt: Scalars['timestamptz'];
-  /** fetch data from the table: "votes" */
+  /** An array relationship */
   votes: Array<Votes>;
-  /** fetch aggregated fields from the table: "votes" */
+  /** An aggregate relationship */
   votes_aggregate: Votes_Aggregate;
   votingSectionId?: Maybe<Scalars['Int']>;
   /** An object relationship */
@@ -8086,12 +8098,36 @@ export type Votings = {
   id: Scalars['Int'];
   locked: Scalars['Boolean'];
   name: Scalars['String'];
+  /** An array relationship */
+  political_group_members: Array<Political_Group_Members>;
+  /** An aggregate relationship */
+  political_group_members_aggregate: Political_Group_Members_Aggregate;
   startDate?: Maybe<Scalars['timestamptz']>;
   startedAt?: Maybe<Scalars['timestamptz']>;
   type: Voting_Types_Enum;
   updatedAt: Scalars['timestamptz'];
   /** An object relationship */
   voting_type: Voting_Types;
+};
+
+
+/** columns and relationships of "votings" */
+export type VotingsPolitical_Group_MembersArgs = {
+  distinct_on?: Maybe<Array<Political_Group_Members_Select_Column>>;
+  limit?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  order_by?: Maybe<Array<Political_Group_Members_Order_By>>;
+  where?: Maybe<Political_Group_Members_Bool_Exp>;
+};
+
+
+/** columns and relationships of "votings" */
+export type VotingsPolitical_Group_Members_AggregateArgs = {
+  distinct_on?: Maybe<Array<Political_Group_Members_Select_Column>>;
+  limit?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  order_by?: Maybe<Array<Political_Group_Members_Order_By>>;
+  where?: Maybe<Political_Group_Members_Bool_Exp>;
 };
 
 /** aggregated selection of "votings" */
@@ -8141,6 +8177,7 @@ export type Votings_Bool_Exp = {
   id?: Maybe<Int_Comparison_Exp>;
   locked?: Maybe<Boolean_Comparison_Exp>;
   name?: Maybe<String_Comparison_Exp>;
+  political_group_members?: Maybe<Political_Group_Members_Bool_Exp>;
   startDate?: Maybe<Timestamptz_Comparison_Exp>;
   startedAt?: Maybe<Timestamptz_Comparison_Exp>;
   type?: Maybe<Voting_Types_Enum_Comparison_Exp>;
@@ -8167,6 +8204,7 @@ export type Votings_Insert_Input = {
   id?: Maybe<Scalars['Int']>;
   locked?: Maybe<Scalars['Boolean']>;
   name?: Maybe<Scalars['String']>;
+  political_group_members?: Maybe<Political_Group_Members_Arr_Rel_Insert_Input>;
   startDate?: Maybe<Scalars['timestamptz']>;
   startedAt?: Maybe<Scalars['timestamptz']>;
   type?: Maybe<Voting_Types_Enum>;
@@ -8231,6 +8269,7 @@ export type Votings_Order_By = {
   id?: Maybe<Order_By>;
   locked?: Maybe<Order_By>;
   name?: Maybe<Order_By>;
+  political_group_members_aggregate?: Maybe<Political_Group_Members_Aggregate_Order_By>;
   startDate?: Maybe<Order_By>;
   startedAt?: Maybe<Order_By>;
   type?: Maybe<Order_By>;
@@ -9041,6 +9080,34 @@ export type GetStartedVotingsQuery = (
       & Pick<Votings_Aggregate_Fields, 'count'>
     )> }
   ) }
+);
+
+export type GetParticipantsInVotingQueryVariables = Exact<{
+  votingId: Scalars['Int'];
+}>;
+
+
+export type GetParticipantsInVotingQuery = (
+  { __typename?: 'query_root' }
+  & { votings_by_pk?: Maybe<(
+    { __typename?: 'votings' }
+    & Pick<Votings, 'id'>
+    & { political_group_members: Array<(
+      { __typename?: 'political_group_members' }
+      & Pick<Political_Group_Members, 'id' | 'userId' | 'votingId'>
+      & { user: (
+        { __typename?: 'users' }
+        & Pick<Users, 'name' | 'surname' | 'family'>
+      ), political_group: (
+        { __typename?: 'political_groups' }
+        & Pick<Political_Groups, 'id' | 'name' | 'description'>
+        & { political_group_type: (
+          { __typename?: 'political_group_types' }
+          & Pick<Political_Group_Types, 'value' | 'description'>
+        ) }
+      ) }
+    )> }
+  )> }
 );
 
 export type VotingVieldsFragment = (
@@ -10000,6 +10067,43 @@ export const GetStartedVotingsDocument = gql`
   })
   export class GetStartedVotingsGQL extends Apollo.Query<GetStartedVotingsQuery, GetStartedVotingsQueryVariables> {
     document = GetStartedVotingsDocument;
+    
+    constructor(apollo: Apollo.Apollo) {
+      super(apollo);
+    }
+  }
+export const GetParticipantsInVotingDocument = gql`
+    query GetParticipantsInVoting($votingId: Int!) {
+  votings_by_pk(id: $votingId) {
+    id
+    political_group_members {
+      id
+      userId
+      user {
+        name
+        surname
+        family
+      }
+      votingId
+      political_group {
+        id
+        name
+        description
+        political_group_type {
+          value
+          description
+        }
+      }
+    }
+  }
+}
+    `;
+
+  @Injectable({
+    providedIn: 'root'
+  })
+  export class GetParticipantsInVotingGQL extends Apollo.Query<GetParticipantsInVotingQuery, GetParticipantsInVotingQueryVariables> {
+    document = GetParticipantsInVotingDocument;
     
     constructor(apollo: Apollo.Apollo) {
       super(apollo);

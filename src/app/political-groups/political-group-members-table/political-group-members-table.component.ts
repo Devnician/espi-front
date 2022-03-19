@@ -90,7 +90,7 @@ export class PoliticalGroupMembersTableComponent
           return;
         }
 
-        this.upcomingVotings = data.votings;
+        this.upcomingVotings = data.votings as Votings[];
         this.snackBar.open(
           'Предстоящи избори: ' + this.upcomingVotings.length,
           'OK',

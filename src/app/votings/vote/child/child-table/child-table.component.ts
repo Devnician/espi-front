@@ -10,9 +10,7 @@ import { Candidate } from '../../vote.component';
 export class ChildTableComponent implements AfterViewInit {
   @ViewChild(MatTable) table!: MatTable<Candidate>;
   @Input() dataSource: Candidate[];
-
-  displayedColumns = ['num', 'firstName', 'lastName', 'selected'];
-
+  displayedColumns = ['num', 'name', 'surname', 'family', 'selected'];
   constructor() {}
 
   ngAfterViewInit(): void {

@@ -105,7 +105,7 @@ export class VotingsTableDataSource extends DataSource<Votings> {
           return [];
         }
         this.counter.next(data.votings_aggregate.aggregate.count);
-        this.currentPageData.next(data.votings);
+        this.currentPageData.next(data.votings as Votings[]);
         return this.currentPageData.value;
       })
     );

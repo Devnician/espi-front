@@ -139,6 +139,31 @@ query GetStartedVotings($where: votings_bool_exp) {
     }
   }
 }
+# list with preferences
+query GetParticipantsInVoting($votingId: Int!) {
+  votings_by_pk(id: $votingId) {
+    id
+    political_group_members {
+      id
+      userId
+      user {
+        name
+        surname
+        family
+      }
+      votingId
+      political_group {
+        id
+        name
+        description
+        political_group_type {
+          value
+          description
+        }
+      }
+    }
+  }
+}
 
 fragment VotingVields on votings {
   id
