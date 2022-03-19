@@ -1,23 +1,13 @@
 <div class="grid-container">
-  <mat-progress-bar
-    mode="indeterminate"
-    *ngIf="loading$ | async"
-  ></mat-progress-bar>
+  <mat-progress-bar mode="indeterminate" *ngIf="loading$ | async"></mat-progress-bar>
   <div *ngIf="(loading$ | async) === false">
     <h1 *ngIf="(cards | async)?.length > 0" class="mat-h1">Избори</h1>
-    <h1
-      *ngIf="(cards | async)?.length === 0 && (loading$ | async) === false"
-      class="mat-h1"
-    >
+    <h1 *ngIf="(cards | async)?.length === 0 && (loading$ | async) === false" class="mat-h1">
       В момента не се провеждат избори.
     </h1>
   </div>
   <mat-grid-list cols="1" rowHeight="350px">
-    <mat-grid-tile
-      *ngFor="let card of cards | async"
-      [colspan]="card.cols"
-      [rowspan]="card.rows"
-    >
+    <mat-grid-tile *ngFor="let card of cards | async" [colspan]="card.cols" [rowspan]="card.rows">
       <mat-card class="dashboard-card">
         <mat-card-header>
           <mat-card-title>
@@ -38,7 +28,7 @@
           </mat-card-title>
         </mat-card-header>
         <!-- If referendum -->
-          <mat-card-content class="dashboard-card-content" *ngIf="card.type=='presidential' || card.type=='mayoral'">
+        <mat-card-content class="dashboard-card-content" *ngIf="card.type=='presidential' || card.type=='mayoral'">
           <div>{{ card.text }}</div>
           <section>
             <div style="display: flex">
@@ -47,12 +37,12 @@
                   <th>Кандидат</th>
                   <th>Резултат</th>
                 </tr>
-                <tr *ngFor="let i of [0,1]">
-                  <td>Иван</td>
-                  <td>26%</td>
+                <tr *ngFor="let member of card.members">
+                  <td>{{ member.fullName }}</td>
+                  <td>{{ getResult(member.votes, card.totalVotes) }}%</td>
                 </tr>
               </table>
-              <table style="width: 100%">
+              <!-- <table style="width: 100%">
                 <tr>
                   <th>В избирателна секция</th>
                   <th>Електронно</th>
@@ -61,7 +51,7 @@
                   <td>00</td>
                   <td>00</td>
                 </tr>
-              </table>
+              </table> -->
             </div>
           </section>
         </mat-card-content>
@@ -69,11 +59,9 @@
         <!-- If president or mayor -->
         <mat-card-content class="dashboard-card-content" *ngIf="card.type=='referendum'">
           <div>{{ card.text }}</div>
-          <section
-            *ngFor="
+          <section *ngFor="
               let question of countings | async | countingsfilter: card.id
-            "
-          >
+            ">
             <h4>
               Въпрос: <strong>{{ question.question }}</strong>
             </h4>

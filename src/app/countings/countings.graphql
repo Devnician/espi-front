@@ -23,3 +23,28 @@ query getReferendumCountings($where: referendum_countings_bool_exp) {
     evoted
   }
 }
+
+query GetMayorCountings($where: mayor_countings_bool_exp ) {
+  mayor_countings(where: $where) {
+    member {
+      user {
+        name
+        family
+      }
+    }
+    voting {
+      id
+      type
+      name
+      description
+    }
+    votes
+  }
+  mayor_countings_aggregate {
+    aggregate {
+      sum {
+        votes
+      }
+    }
+  }
+}

@@ -1,0 +1,39 @@
+table:
+  name: mayor_countings
+  schema: public
+object_relationships:
+- name: member
+  using:
+    manual_configuration:
+      column_mapping:
+        preference: id
+      insertion_order: null
+      remote_table:
+        name: political_group_members
+        schema: public
+- name: voting
+  using:
+    manual_configuration:
+      column_mapping:
+        votingId: id
+      insertion_order: null
+      remote_table:
+        name: votings
+        schema: public
+select_permissions:
+- permission:
+    allow_aggregations: true
+    columns:
+    - votingId
+    - preference
+    - votes
+    filter: {}
+  role: central
+- permission:
+    allow_aggregations: true
+    columns:
+    - votes
+    - preference
+    - votingId
+    filter: {}
+  role: centralLeader
