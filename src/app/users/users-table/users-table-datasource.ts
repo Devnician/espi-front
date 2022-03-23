@@ -12,6 +12,7 @@ import {
   Referendum_Votes,
   Users_Bool_Exp,
   Users_Order_By,
+  Votes,
 } from 'src/generated/graphql';
 import { Election } from '../election.class';
 import { CustomUser } from './custom-user.class';
@@ -22,19 +23,18 @@ import { CustomUser } from './custom-user.class';
  * (including sorting, pagination, and filtering).
  */
 export class UsersTableDataSource extends DataSource<CustomUser> {
-  // data$: Observable<GetUsersQuery['users']>;
   paginator: MatPaginator;
   counter: BehaviorSubject<number> = new BehaviorSubject(0);
   sort: MatSort;
   queryRef: QueryRef<GetUsersQuery>;
-
   loading: BehaviorSubject<any> = new BehaviorSubject(true);
   loading$ = this.loading.asObservable();
   currentPageData: CustomUser[] = [];
-
   condition: BehaviorSubject<Users_Bool_Exp> = new BehaviorSubject({});
-
   selectedElection: BehaviorSubject<Election> = new BehaviorSubject(undefined);
+  /**
+   *
+   */
   constructor(
     private usersService: UsersService,
     private snackBar: MatSnackBar
@@ -125,7 +125,6 @@ export class UsersTableDataSource extends DataSource<CustomUser> {
   private decorateUsers(users: CustomUser[]) {
     const collection = users;
     users.forEach((user) => {
-      // user.tempVoted =
       this.votedForTheCurrentElection(user);
     });
     return collection;
@@ -135,16 +134,17 @@ export class UsersTableDataSource extends DataSource<CustomUser> {
     user.voted = false;
     user.eVoted = false;
     if (this.selectedElection.value) {
-      const type = this.selectedElection.value.type;
+      const election = this.selectedElection.value;
+      const type = election.type;
 
       if (type === 'referendum') {
         // get all for this referendum.
         const referendumVotes: Referendum_Votes[] =
           user.referendum_votes.filter(
-            (vote) =>
-              vote.referendum_question.referendum.id ===
-              this.selectedElection.value.id
+            (vote) => vote.referendum_question.referendum.id === election.id
           );
+
+        user.filteredReferendumVotes = referendumVotes;
         if (referendumVotes.length > 0) {
           const voted = referendumVotes.findIndex((v) => v.vote === true) > -1;
           const eVoted =
@@ -152,8 +152,17 @@ export class UsersTableDataSource extends DataSource<CustomUser> {
           user.voted = voted;
           user.eVoted = eVoted;
           user.filteredReferendumVotes = referendumVotes;
-
-          ////
+        }
+      } else {
+        if (user.votes.length > 0) {
+          const vote: Votes = user.votes.find(
+            (e) => (e.votingId = election.id)
+          );
+          if (vote) {
+            user.eVoted = vote.inSection === false;
+            user.voted = vote.inSection === true;
+            user.vote = vote;
+          }
         }
       }
     }

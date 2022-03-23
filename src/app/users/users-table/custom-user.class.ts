@@ -17,6 +17,7 @@ export class CustomUser implements Users {
   voted: boolean;
   eVoted: boolean;
   filteredReferendumVotes: Referendum_Votes[];
+  vote: Votes;
   //
 
   __typename?: 'users';

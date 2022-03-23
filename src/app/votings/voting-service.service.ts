@@ -18,6 +18,8 @@ import {
   GetUpcomingVotingsGQL,
   GetUpcomingVotingsQuery,
   GetVotingsGQL,
+  MarkVoteAsInSectionGQL,
+  MarkVoteAsInSectionMutation,
   Referendums_Bool_Exp,
   Referendums_Insert_Input,
   Referendums_Order_By,
@@ -52,7 +54,8 @@ export class VotingsService {
     private getStartedVotingsGQL: GetStartedVotingsGQL,
     private addVoteForTheReferendumGQL: AddVoteForTheReferendumGQL,
     private getParticipantsInVotingGQL: GetParticipantsInVotingGQL,
-    private voteGQL: VoteGQL
+    private voteGQL: VoteGQL,
+    private markVoteAsInSectionGQL: MarkVoteAsInSectionGQL
   ) {}
 
   //#region  VOTINGS
@@ -135,6 +138,18 @@ export class VotingsService {
   > {
     return this.voteGQL.mutate({ input }, { errorPolicy: 'all' });
   }
+  markVoteAsInSection(
+    id: number
+  ): Observable<
+    FetchResult<
+      MarkVoteAsInSectionMutation,
+      Record<string, any>,
+      Record<string, any>
+    >
+  > {
+    return this.markVoteAsInSectionGQL.mutate({ id });
+  }
+
   //#region VOTINGS
 
   //#region REFERENDUMS

@@ -38,6 +38,7 @@ import {
   Users,
   Users_Bool_Exp,
   Users_Insert_Input,
+  Voting_Types_Enum,
 } from 'src/generated/graphql';
 import { EditUserComponent } from '../edit-user/edit-user.component';
 import { Election } from '../election.class';
@@ -248,29 +249,34 @@ export class UsersTableComponent
   }
 
   setUserVoted(user: CustomUser) {
-    if (
-      user.filteredReferendumVotes &&
-      user.filteredReferendumVotes.length > 0
-    ) {
-      user.filteredReferendumVotes.forEach((element) => {
-        element.vote = element.eVote;
-        element.sectionId = this.votingSectionId;
-        element.userId = user.id;
-        delete element.eVote;
-        delete element.__typename;
-        delete element.referendum_question;
-      });
-      this.usersService
-        .markReferendumEvoteAsVote(
-          user.filteredReferendumVotes as Users_Insert_Input[]
-        )
+    const election: Election = this.dataSource.selectedElection.getValue();
+    switch (election.type) {
+      case Voting_Types_Enum.Parliamentary:
+      case Voting_Types_Enum.Presidential:
+      case Voting_Types_Enum.LocalGovernment:
+      case Voting_Types_Enum.Mayoral:
+        this.processVotingAndNotify(user);
+        break;
+      case 'referendum':
+        this.processReferendumVoteAndNotify(user);
+        break;
+      default:
+        break;
+    }
+  }
+  processVotingAndNotify(user: CustomUser) {
+    if (user.vote) {
+      this.dataSource.loading.next(true);
+      this.votingsService
+        .markVoteAsInSection(user.vote.id)
         .subscribe(({ data, errors }) => {
+          this.dataSource.loading.next(false);
           if (errors) {
             console.log(errors);
             return;
           }
           if (data) {
-            const rows = data.insert_referendum_votes.affected_rows;
+            const id = data.update_votes_by_pk.id;
             this.dataSource.queryRef.refetch();
             this.snackBar.open(
               `Гласоподавателят е записан като гласувал в секция ${this.votingSectionId}.`,
@@ -285,6 +291,47 @@ export class UsersTableComponent
         'ОК',
         {}
       );
+    }
+  }
+  private processReferendumVoteAndNotify(user: CustomUser) {
+    if (user.filteredReferendumVotes) {
+      if (user.filteredReferendumVotes.length === 0) {
+        this.snackBar.open(
+          'Няма отчетено гласуване за този потребител.',
+          'ОК',
+          {}
+        );
+      } else {
+        this.dataSource.loading.next(true);
+        user.filteredReferendumVotes.forEach((element) => {
+          element.vote = element.eVote;
+          element.sectionId = this.votingSectionId;
+          element.userId = user.id;
+          delete element.eVote;
+          delete element.__typename;
+          delete element.referendum_question;
+        });
+        this.usersService
+          .markReferendumEvoteAsVote(
+            user.filteredReferendumVotes as Users_Insert_Input[]
+          )
+          .subscribe(({ data, errors }) => {
+            this.dataSource.loading.next(false);
+            if (errors) {
+              console.log(errors);
+              return;
+            }
+            if (data) {
+              const rows = data.insert_referendum_votes.affected_rows;
+              this.dataSource.queryRef.refetch();
+              this.snackBar.open(
+                `Гласоподавателят е записан като гласувал в секция ${this.votingSectionId}.`,
+                'ОК',
+                { duration: 5000 }
+              );
+            }
+          });
+      }
     }
   }
 

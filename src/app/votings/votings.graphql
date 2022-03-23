@@ -194,3 +194,9 @@ mutation Vote($input: [votes_insert_input!]!) {
     affected_rows
   }
 }
+
+mutation MarkVoteAsInSection($id: Int!) {
+  update_votes_by_pk(pk_columns: { id: $id }, _set: { inSection: true }) {
+    id
+  }
+}
