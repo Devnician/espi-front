@@ -28,8 +28,44 @@ select_permissions:
     - voteUserId
     - votingId
     filter: {}
+  role: section
+- permission:
+    columns:
+    - inSection
+    - id
+    - sectionId
+    - userId
+    - voteGroupId
+    - voteUserId
+    - votingId
+    - createdAt
+    filter: {}
+  role: sectionLeader
+- permission:
+    columns:
+    - createdAt
+    - id
+    - inSection
+    - sectionId
+    - userId
+    - voteGroupId
+    - voteUserId
+    - votingId
+    filter: {}
   role: user
 update_permissions:
+- permission:
+    check: null
+    columns:
+    - inSection
+    filter: {}
+  role: section
+- permission:
+    check: null
+    columns:
+    - inSection
+    filter: {}
+  role: sectionLeader
 - permission:
     check:
       userId:

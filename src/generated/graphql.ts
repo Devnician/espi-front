@@ -8887,6 +8887,19 @@ export type VoteMutation = (
   )> }
 );
 
+export type MarkVoteAsInSectionMutationVariables = Exact<{
+  id: Scalars['Int'];
+}>;
+
+
+export type MarkVoteAsInSectionMutation = (
+  { __typename?: 'mutation_root' }
+  & { update_votes_by_pk?: Maybe<(
+    { __typename?: 'votes' }
+    & Pick<Votes, 'id'>
+  )> }
+);
+
 export const SettlementFiledsFragmentDoc = gql`
     fragment SettlementFileds on settlements {
   id
@@ -9865,6 +9878,24 @@ export const VoteDocument = gql`
   })
   export class VoteGQL extends Apollo.Mutation<VoteMutation, VoteMutationVariables> {
     document = VoteDocument;
+    
+    constructor(apollo: Apollo.Apollo) {
+      super(apollo);
+    }
+  }
+export const MarkVoteAsInSectionDocument = gql`
+    mutation MarkVoteAsInSection($id: Int!) {
+  update_votes_by_pk(pk_columns: {id: $id}, _set: {inSection: true}) {
+    id
+  }
+}
+    `;
+
+  @Injectable({
+    providedIn: 'root'
+  })
+  export class MarkVoteAsInSectionGQL extends Apollo.Mutation<MarkVoteAsInSectionMutation, MarkVoteAsInSectionMutationVariables> {
+    document = MarkVoteAsInSectionDocument;
     
     constructor(apollo: Apollo.Apollo) {
       super(apollo);
