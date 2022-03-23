@@ -8,6 +8,7 @@ insert_permissions:
       userId:
         _eq: X-Hasura-User-Id
     columns:
+    - id
     - inSection
     - voteGroupId
     - voteUserId
@@ -20,8 +21,23 @@ select_permissions:
     columns:
     - createdAt
     - id
+    - inSection
     - sectionId
     - userId
+    - voteGroupId
+    - voteUserId
     - votingId
     filter: {}
+  role: user
+update_permissions:
+- permission:
+    check:
+      userId:
+        _eq: X-Hasura-User-Id
+    columns:
+    - voteGroupId
+    - voteUserId
+    filter:
+      userId:
+        _eq: X-Hasura-User-Id
   role: user

@@ -183,8 +183,14 @@ fragment VotingVields on votings {
 }
 
 # Votes
-mutation Vote($input: votes_insert_input!) {
-  insert_votes_one(object: $input) {
-    id
+mutation Vote($input: [votes_insert_input!]!) {
+  insert_votes(
+    objects: $input
+    on_conflict: {
+      constraint: votes_pkey
+      update_columns: [voteGroupId, voteUserId]
+    }
+  ) {
+    affected_rows
   }
 }

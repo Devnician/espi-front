@@ -113,17 +113,23 @@ export class VotingsService {
   public getUpcomingVotings(
     startDate: Date
   ): Observable<ApolloQueryResult<GetUpcomingVotingsQuery>> {
-    return this.getUpcomingVotingsGQL.fetch({ startDate });
+    return this.getUpcomingVotingsGQL.fetch(
+      { startDate },
+      { fetchPolicy: 'network-only' }
+    );
   }
 
   getParticipantsInVoting(
     votingId: number
   ): Observable<ApolloQueryResult<GetParticipantsInVotingQuery>> {
-    return this.getParticipantsInVotingGQL.fetch({ votingId });
+    return this.getParticipantsInVotingGQL.fetch(
+      { votingId },
+      { fetchPolicy: 'network-only' }
+    );
   }
 
   vote(
-    input: Votes_Insert_Input
+    input: Votes_Insert_Input[]
   ): Observable<
     FetchResult<VoteMutation, Record<string, any>, Record<string, any>>
   > {

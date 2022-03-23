@@ -4,7 +4,7 @@ import { Router } from '@angular/router';
 import { isNullOrUndefined } from 'is-what';
 import { BehaviorSubject } from 'rxjs';
 import { Donkey } from 'src/app/services/donkey.service';
-import { Votes_Insert_Input } from 'src/generated/graphql';
+import { Votes, Votes_Insert_Input } from 'src/generated/graphql';
 import { VotingsService } from '../../voting-service.service';
 import { Candidate, PolitGroup } from '../vote.component';
 
@@ -18,7 +18,16 @@ export class VotePreviewComponent implements OnInit {
   loading$ = this.loading.asObservable();
   selectedPolitGroup: PolitGroup;
   selectedCandidate: Candidate;
-  private votingId;
+  private votingId: number;
+
+  private oldVote: Votes;
+  /**
+   *
+   * @param donkey
+   * @param router
+   * @param votingService
+   * @param snackBar
+   */
   constructor(
     private donkey: Donkey,
     private router: Router,
@@ -28,13 +37,14 @@ export class VotePreviewComponent implements OnInit {
 
   ngOnInit(): void {
     if (this.donkey.isLoaded()) {
-      const cargo = this.donkey.unload();
-      this.selectedPolitGroup = cargo.selectedPolitGroup;
-      this.votingId = cargo.votingId;
+      const payload = this.donkey.unload();
+
+      this.selectedPolitGroup = payload.selectedPolitGroup;
+      this.votingId = payload.votingId;
+      this.oldVote = payload.oldVote;
       if (this.selectedPolitGroup.num > 0) {
-        console.log(this.selectedPolitGroup);
         const selectedPerson: Candidate =
-          cargo.selectedPolitGroup?.candidates.filter(
+          payload.selectedPolitGroup?.candidates.filter(
             (p) => p.selected === true
           )[0];
         this.selectedCandidate = selectedPerson; // Candidate - if any
@@ -57,16 +67,16 @@ export class VotePreviewComponent implements OnInit {
         : this.selectedPolitGroup.politGroupId;
     const voteUserId = this.selectedCandidate?.userId; // !!!
 
-    console.log(this.selectedPolitGroup);
-    console.log(this.selectedCandidate);
-
     const voteInput: Votes_Insert_Input = {
       inSection: false,
       voteGroupId,
       voteUserId,
       votingId: this.votingId,
     };
-    this.votingService.vote(voteInput).subscribe((response) => {
+    if (this.oldVote) {
+      voteInput.id = this.oldVote.id;
+    }
+    this.votingService.vote([voteInput]).subscribe((response) => {
       let snackRef;
       if (response.errors) {
         console.log(response.errors);
@@ -84,17 +94,18 @@ export class VotePreviewComponent implements OnInit {
           );
         }
       } else {
-        snackRef = this.snackBar.open('Вие гласувахте успешно!', 'Разбрах', {});
+        snackRef = this.snackBar.open(
+          'Вие ' +
+            (this.oldVote ? 'променихте гласа си' : 'гласувахте') +
+            '  успешно!',
+          'Разбрах',
+          {}
+        );
       }
       snackRef.afterDismissed().subscribe((data) => {
         this.loading.next(false);
-        console.log(data);
-        // if (data && data.dismissedByAction === true) {
-        // redirect  redi
         this.router.navigate(['votings', 'dashboard']);
-        // }
       });
     });
-    console.log(voteInput);
   }
 }

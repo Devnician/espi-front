@@ -6876,7 +6876,9 @@ export type Votes_Bool_Exp = {
 /** unique or primary key constraints on table "votes" */
 export enum Votes_Constraint {
   /** unique or primary key constraint */
-  VotesPkey = 'votes_pkey'
+  VotesPkey = 'votes_pkey',
+  /** unique or primary key constraint */
+  VotesVotingIdUserIdKey = 'votes_votingId_userId_key'
 }
 
 /** input type for incrementing numeric columns in table "votes" */
@@ -8586,6 +8588,9 @@ export type UserFieldsFragment = (
         & Pick<Referendums, 'id'>
       ) }
     ) }
+  )>, votes: Array<(
+    { __typename?: 'votes' }
+    & Pick<Votes, 'id' | 'createdAt' | 'votingId' | 'inSection' | 'sectionId' | 'voteGroupId' | 'voteUserId'>
   )> }
 );
 
@@ -8870,15 +8875,15 @@ export type VotingVieldsFragment = (
 );
 
 export type VoteMutationVariables = Exact<{
-  input: Votes_Insert_Input;
+  input: Array<Votes_Insert_Input> | Votes_Insert_Input;
 }>;
 
 
 export type VoteMutation = (
   { __typename?: 'mutation_root' }
-  & { insert_votes_one?: Maybe<(
-    { __typename?: 'votes' }
-    & Pick<Votes, 'id'>
+  & { insert_votes?: Maybe<(
+    { __typename?: 'votes_mutation_response' }
+    & Pick<Votes_Mutation_Response, 'affected_rows'>
   )> }
 );
 
@@ -8975,6 +8980,15 @@ export const UserFieldsFragmentDoc = gql`
         id
       }
     }
+  }
+  votes {
+    id
+    createdAt
+    votingId
+    inSection
+    sectionId
+    voteGroupId
+    voteUserId
   }
 }
     ${AddressShortFragmentDoc}
@@ -9836,9 +9850,12 @@ export const GetParticipantsInVotingDocument = gql`
     }
   }
 export const VoteDocument = gql`
-    mutation Vote($input: votes_insert_input!) {
-  insert_votes_one(object: $input) {
-    id
+    mutation Vote($input: [votes_insert_input!]!) {
+  insert_votes(
+    objects: $input
+    on_conflict: {constraint: votes_pkey, update_columns: [voteGroupId, voteUserId]}
+  ) {
+    affected_rows
   }
 }
     `;

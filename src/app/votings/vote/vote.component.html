@@ -8,11 +8,12 @@
   ></mat-progress-bar>
   <mat-tab-group
     [selectedIndex]="selected.value"
-    (selectedIndexChange)="
-      selected.setValue($event); onSelectPoliticalGroup($event)
-    "
+    (selectedIndexChange)="onSelectPoliticalGroup($event)"
   >
-    <mat-tab *ngFor="let politicalGroup of politicalGroups | async">
+    <mat-tab
+      [disabled]="preview"
+      *ngFor="let politicalGroup of politicalGroups | async"
+    >
       <div *ngIf="politicalGroup.num === 0" style="height: 100%">
         <ng-template mat-tab-label>празен глас </ng-template>
         <div class="tile">
@@ -28,6 +29,7 @@
           <app-child
             style="width: 100%"
             [candidates]="politicalGroup.candidates"
+            [preview]="preview"
           ></app-child>
         </div>
       </div>
@@ -36,6 +38,7 @@
 
   <div mat-card-actions align="end">
     <button
+      *ngIf="preview === false"
       mat-raised-button
       class="espi-big-button"
       type="button"
