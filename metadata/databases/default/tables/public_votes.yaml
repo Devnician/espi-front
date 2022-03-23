@@ -1,15 +1,43 @@
 table:
   name: votes
   schema: public
+insert_permissions:
+- permission:
+    backend_only: false
+    check:
+      userId:
+        _eq: X-Hasura-User-Id
+    columns:
+    - id
+    - inSection
+    - voteGroupId
+    - voteUserId
+    - votingId
+    set:
+      userId: x-hasura-User-Id
+  role: user
 select_permissions:
 - permission:
     columns:
-    - id
     - createdAt
-    - votingId
+    - id
+    - inSection
     - sectionId
     - userId
-    - vote
-    - eVote
+    - voteGroupId
+    - voteUserId
+    - votingId
     filter: {}
+  role: user
+update_permissions:
+- permission:
+    check:
+      userId:
+        _eq: X-Hasura-User-Id
+    columns:
+    - voteGroupId
+    - voteUserId
+    filter:
+      userId:
+        _eq: X-Hasura-User-Id
   role: user

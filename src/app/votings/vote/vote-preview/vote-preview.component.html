@@ -1,4 +1,9 @@
 <div>
+  <mat-progress-bar
+    *ngIf="loading$ | async"
+    color="warn"
+    mode="indeterminate"
+  ></mat-progress-bar>
   <div *ngIf="selectedPolitGroup?.num === 0" class="form-sector">
     <div
       class="names"
@@ -51,6 +56,7 @@
       mat-raised-button
       type="button"
       (click)="goBack()"
+      [disabled]="loading$ | async"
     >
       <mat-icon>arrow_back</mat-icon> Започни отначало
     </button>
@@ -61,6 +67,7 @@
       (click)="vote()"
       color="accent"
       [disabled]="canVote()"
+      [disabled]="loading$ | async"
     >
       Гласувам <mat-icon>front_hand</mat-icon>
     </button>

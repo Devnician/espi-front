@@ -4,9 +4,8 @@ import { Router } from '@angular/router';
 import { isNullOrUndefined } from 'is-what';
 import { BehaviorSubject } from 'rxjs';
 import { Donkey } from 'src/app/services/donkey.service';
-import { Political_Group_Members, Votings } from 'src/generated/graphql';
+import { Political_Group_Members, Votes, Votings } from 'src/generated/graphql';
 import { VotingsService } from '../voting-service.service';
-// fake interfaces
 
 export interface PolitGroup {
   politGroupId: number;
@@ -25,6 +24,7 @@ export interface Candidate {
   surname: string;
   family: string;
 }
+
 @Component({
   selector: 'app-vote',
   templateUrl: './vote.component.html',
@@ -38,8 +38,10 @@ export class VoteComponent implements OnInit {
   selectedPoliticalGroup: BehaviorSubject<PolitGroup> = new BehaviorSubject(
     undefined
   );
-
+  private vote: Votes;
   voting: BehaviorSubject<Votings> = new BehaviorSubject(undefined);
+
+  preview = false;
 
   constructor(
     private donkey: Donkey,
@@ -47,7 +49,13 @@ export class VoteComponent implements OnInit {
     private votingsService: VotingsService
   ) {
     if (donkey.isLoaded()) {
-      const voting: Votings = this.donkey.unload();
+      const payload = this.donkey.unload();
+      if (payload.vote) {
+        this.vote = payload.vote;
+      }
+      const voting: Votings = payload.voting;
+      this.preview = payload.preview;
+      console.log('PREVIEW: ' + this.preview);
       this.voting.next(voting);
       this.fetchGroups(voting.id);
     } else {
@@ -56,18 +64,15 @@ export class VoteComponent implements OnInit {
   }
 
   ngOnInit(): void {}
+
   private fetchGroups(votingId: number) {
     this.votingsService
       .getParticipantsInVoting(votingId)
       .subscribe((response) => {
-        console.log(response);
-
         const groups: PolitGroup[] = [{ num: 0 } as PolitGroup];
-
         const politicalMembers: Political_Group_Members[] = response.data
           .votings_by_pk
           .political_group_members as any as Political_Group_Members[];
-        console.log(politicalMembers);
 
         politicalMembers.forEach((politMember) => {
           const politGroup = groups.find(
@@ -84,30 +89,46 @@ export class VoteComponent implements OnInit {
               selected: false,
             });
           } else {
-            const politGroup: PolitGroup = {
+            const pg: PolitGroup = {
               politGroupId: politMember.political_group.id,
               num: groups.length + 1,
               description: politMember.political_group.description,
               name: politMember.political_group.name,
               groupType:
                 politMember.political_group.political_group_type.description,
-              candidates: [
-                {
-                  politGroupMemberId: politMember.id,
-                  userId: politMember.userId,
-                  num: 1,
-                  name: politMember.user.name,
-                  surname: politMember.user.surname,
-                  family: politMember.user.family,
-                  selected: false,
-                },
-              ],
+              candidates: [],
             };
-            groups.push(politGroup);
+            pg.candidates.push({
+              politGroupMemberId: politMember.id,
+              userId: politMember.userId,
+              num: 1,
+              name: politMember.user.name,
+              surname: politMember.user.surname,
+              family: politMember.user.family,
+              selected: false,
+            });
+            groups.push(pg);
           }
-          // m.politicalGroupId;
         });
+
         this.politicalGroups.next(groups);
+
+        // set index and pref from previous vote, if any
+        if (this.vote) {
+          const politGroup = this.vote.voteGroupId;
+          const preferenceUserId = this.vote.voteUserId;
+          const indexOfGroup = groups.findIndex(
+            (e) => e.politGroupId === politGroup
+          );
+          const gr = groups[indexOfGroup];
+          const prefCandidate: Candidate = gr.candidates.find(
+            (p) => p.userId === preferenceUserId
+          );
+          if (prefCandidate) {
+            prefCandidate.selected = true;
+          }
+          this.selected.setValue(indexOfGroup);
+        }
         this.loading.next(false);
       });
   }
@@ -123,7 +144,11 @@ export class VoteComponent implements OnInit {
 
   goToPreviewPage() {
     const selectedPolitGroup: PolitGroup = this.selectedPoliticalGroup.value;
-    this.donkey.load({ selectedPolitGroup });
+    this.donkey.load({
+      selectedPolitGroup,
+      votingId: this.voting.getValue().id,
+      oldVote: this.vote,
+    });
     this.router.navigateByUrl('/votings/preview');
   }
 }

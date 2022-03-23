@@ -8,6 +8,7 @@ import { Candidate } from '../vote.component';
 })
 export class ChildComponent implements OnInit {
   @Input() candidates: Candidate[];
+  @Input() preview: boolean;
   constructor() {}
 
   ngOnInit(): void {}

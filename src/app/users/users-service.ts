@@ -97,7 +97,7 @@ export class UsersService {
   }
 
   getUserById(id: number): Observable<ApolloQueryResult<GetUserByIdQuery>> {
-    return this.getUserByIdGQL.fetch({ id });
+    return this.getUserByIdGQL.fetch({ id }, { fetchPolicy: 'network-only' });
   }
 
   updateUser(addressSet: Addresses_Set_Input, userSet: Users_Set_Input) {

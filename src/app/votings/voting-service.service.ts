@@ -28,6 +28,9 @@ import {
   UpdateReferendumAndQuestionMutation,
   UpdateVotingGQL,
   UpdateVotingMutation,
+  VoteGQL,
+  VoteMutation,
+  Votes_Insert_Input,
   Votings_Bool_Exp,
   Votings_Insert_Input,
   Votings_Order_By,
@@ -48,63 +51,11 @@ export class VotingsService {
     private getUpcomingVotingsGQL: GetUpcomingVotingsGQL,
     private getStartedVotingsGQL: GetStartedVotingsGQL,
     private addVoteForTheReferendumGQL: AddVoteForTheReferendumGQL,
-    private getParticipantsInVotingGQL: GetParticipantsInVotingGQL
+    private getParticipantsInVotingGQL: GetParticipantsInVotingGQL,
+    private voteGQL: VoteGQL
   ) {}
 
-  createReferendum(
-    referendumInput: Referendums_Insert_Input
-  ): Observable<
-    FetchResult<
-      CreateReferendumMutation,
-      Record<string, any>,
-      Record<string, any>
-    >
-  > {
-    return this.createReferendumGQL.mutate(
-      { referendum: referendumInput },
-      { errorPolicy: 'all' }
-    );
-  }
-  updateReferendum(
-    referendumId: number,
-    set: Referendums_Set_Input,
-    questions: Referendum_Questions_Insert_Input[],
-    removed: number[]
-  ): Observable<
-    FetchResult<
-      UpdateReferendumAndQuestionMutation,
-      Record<string, any>,
-      Record<string, any>
-    >
-  > {
-    return this.updateReferendumAndQuestionGQL.mutate(
-      {
-        referendumId,
-        set,
-        questions,
-        removed,
-      },
-      { errorPolicy: 'all' }
-    );
-  }
-
-  getReferendums(
-    limit = 10,
-    offset = 0,
-    condition: Referendums_Bool_Exp = {},
-    orderBy: Referendums_Order_By
-  ) {
-    return this.getReferendumsGQL.watch(
-      { limit, offset, condition, orderBy },
-      {
-        fetchPolicy: 'network-only',
-        partialRefetch: true,
-        errorPolicy: 'all',
-        pollInterval: 5 * 1000,
-      }
-    );
-  }
-
+  //#region  VOTINGS
   createVoting(
     object: Votings_Insert_Input
   ): Observable<
@@ -162,8 +113,86 @@ export class VotingsService {
   public getUpcomingVotings(
     startDate: Date
   ): Observable<ApolloQueryResult<GetUpcomingVotingsQuery>> {
-    return this.getUpcomingVotingsGQL.fetch({ startDate });
+    return this.getUpcomingVotingsGQL.fetch(
+      { startDate },
+      { fetchPolicy: 'network-only' }
+    );
   }
+
+  getParticipantsInVoting(
+    votingId: number
+  ): Observable<ApolloQueryResult<GetParticipantsInVotingQuery>> {
+    return this.getParticipantsInVotingGQL.fetch(
+      { votingId },
+      { fetchPolicy: 'network-only' }
+    );
+  }
+
+  vote(
+    input: Votes_Insert_Input[]
+  ): Observable<
+    FetchResult<VoteMutation, Record<string, any>, Record<string, any>>
+  > {
+    return this.voteGQL.mutate({ input }, { errorPolicy: 'all' });
+  }
+  //#region VOTINGS
+
+  //#region REFERENDUMS
+
+  createReferendum(
+    referendumInput: Referendums_Insert_Input
+  ): Observable<
+    FetchResult<
+      CreateReferendumMutation,
+      Record<string, any>,
+      Record<string, any>
+    >
+  > {
+    return this.createReferendumGQL.mutate(
+      { referendum: referendumInput },
+      { errorPolicy: 'all' }
+    );
+  }
+  updateReferendum(
+    referendumId: number,
+    set: Referendums_Set_Input,
+    questions: Referendum_Questions_Insert_Input[],
+    removed: number[]
+  ): Observable<
+    FetchResult<
+      UpdateReferendumAndQuestionMutation,
+      Record<string, any>,
+      Record<string, any>
+    >
+  > {
+    return this.updateReferendumAndQuestionGQL.mutate(
+      {
+        referendumId,
+        set,
+        questions,
+        removed,
+      },
+      { errorPolicy: 'all' }
+    );
+  }
+
+  getReferendums(
+    limit = 10,
+    offset = 0,
+    condition: Referendums_Bool_Exp = {},
+    orderBy: Referendums_Order_By
+  ) {
+    return this.getReferendumsGQL.watch(
+      { limit, offset, condition, orderBy },
+      {
+        fetchPolicy: 'network-only',
+        partialRefetch: true,
+        errorPolicy: 'all',
+        pollInterval: 5 * 1000,
+      }
+    );
+  }
+
   getStartedReferendums(): Observable<
     ApolloQueryResult<GetStartedReferendumsQuery>
   > {
@@ -180,8 +209,6 @@ export class VotingsService {
       { fetchPolicy: 'network-only' }
     );
   }
-
-  //#region VOTES
   addVoteForReferendum(
     answers: Referendum_Votes_Insert_Input[]
   ): Observable<
@@ -198,9 +225,5 @@ export class VotingsService {
     );
   }
 
-  getParticipantsInVoting(
-    votingId: number
-  ): Observable<ApolloQueryResult<GetParticipantsInVotingQuery>> {
-    return this.getParticipantsInVotingGQL.fetch({ votingId });
-  }
+  //#region  REFERENDUMS
 }

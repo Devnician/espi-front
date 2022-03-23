@@ -41,7 +41,11 @@
           <mat-card-title>
             {{ card.title }}
             <button
-              *ngIf="card.alreadyVoted === false"
+              *ngIf="
+                card.alreadyVoted === false ||
+                card.canChangeVote === true ||
+                card.canPreview === true
+              "
               mat-icon-button
               class="more-button"
               [matMenuTriggerFor]="menu"
@@ -50,8 +54,27 @@
               <mat-icon>more_vert</mat-icon>
             </button>
             <mat-menu #menu="matMenu" xPosition="before">
-              <button mat-menu-item (click)="goToVotingComponent(card)">
+              <button
+                *ngIf="card.alreadyVoted === false"
+                mat-menu-item
+                (click)="goToVotingComponent(card)"
+              >
                 Гласуване
+              </button>
+
+              <button
+                *ngIf="card.canChangeVote === true"
+                mat-menu-item
+                (click)="goToVotingComponent(card)"
+              >
+                Промяна на вота
+              </button>
+              <button
+                *ngIf="card.canPreview === true"
+                mat-menu-item
+                (click)="goToVotingComponent(card, true)"
+              >
+                Преглед на вота
               </button>
             </mat-menu>
           </mat-card-title>

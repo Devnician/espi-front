@@ -80,13 +80,13 @@ fragment UserFields on users {
     value
     description
   }
-
   address {
     ...AddressShort
     settlement {
       ...SettlementFileds
     }
   }
+
   referendum_votes {
     id
     questionId
@@ -97,6 +97,15 @@ fragment UserFields on users {
         id
       }
     }
+  }
+  votes {
+    id
+    createdAt
+    votingId
+    inSection
+    sectionId
+    voteGroupId
+    voteUserId
   }
 }
 # distributor

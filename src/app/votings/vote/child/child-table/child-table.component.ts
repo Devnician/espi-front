@@ -10,6 +10,7 @@ import { Candidate } from '../../vote.component';
 export class ChildTableComponent implements AfterViewInit {
   @ViewChild(MatTable) table!: MatTable<Candidate>;
   @Input() dataSource: Candidate[];
+  @Input() preview: boolean;
   displayedColumns = ['num', 'name', 'surname', 'family', 'selected'];
   constructor() {}
 
