@@ -41,8 +41,13 @@ npm run hasura migrate apply --type up --database-name="default"
 ## apply one
 npm run hasura migrate apply --type up --database-name="default" --version 1624619288822
 ## after all
-npm run hasura metadata apply
-
+npm run hasura metadata apply 
 ## Types generator
 npm run watch-types
+
+## Test with Carma
+# all:
+ng test --code-coverage
+# single:
+ng test --include src/app/auth/login/login.component.spec.ts --code-coverage
 
