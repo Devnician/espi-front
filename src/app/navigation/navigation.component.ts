@@ -43,6 +43,54 @@ export class NavigationComponent
   implements OnInit, OnDestroy
 {
   @ViewChild('drawer') drawer: MatDrawer;
+  static readonly roleToSegments: Map<Role_Types_Enum, readonly string[]> =
+    Object.freeze(
+      new Map([
+        [
+          Role_Types_Enum.Admin,
+          Object.freeze([
+            'users',
+            'political-groups',
+            'settlements',
+            'voting-sections',
+            'votings-list',
+            'referendums-list',
+            'dashboard',
+          ]),
+        ],
+        [
+          Role_Types_Enum.CentralLeader,
+          Object.freeze([
+            'users',
+            'political-groups',
+            'settlements',
+            'voting-sections',
+            'votings-list',
+            'referendums-list',
+            'dashboard',
+          ]),
+        ],
+        [
+          Role_Types_Enum.Central,
+          Object.freeze([
+            'users',
+            'political-groups',
+            'settlements',
+            'voting-sections',
+            'votings-list',
+            'referendums-list',
+            'dashboard',
+          ]),
+        ],
+        [
+          Role_Types_Enum.SectionLeader,
+          Object.freeze(['users', 'votings-list', 'referendums-list']),
+        ],
+        [Role_Types_Enum.Section, Object.freeze(['users'])],
+        [Role_Types_Enum.User, Object.freeze(['votings'])],
+      ])
+    );
+
   public readonly isHandset$: Observable<boolean> = this.breakpointObserver
     .observe(Breakpoints.Handset)
     .pipe(
@@ -127,132 +175,89 @@ export class NavigationComponent
 
   private buildMenuForThisRole(role: Role_Types_Enum) {
     console.log('Rebuild menu for role: ' + role);
-    this.menus = [];
-    switch (role) {
-      case Role_Types_Enum.Admin:
-        this.addMenu('users');
-        this.addMenu('settlements');
-        this.addMenu('voting-sections');
-        this.addMenu('votings-list');
-        this.addMenu('referendums-list');
-        break;
-
-      case Role_Types_Enum.CentralLeader:
-      case Role_Types_Enum.Central:
-        this.addMenu('users');
-        this.addMenu('political-groups');
-        this.addMenu('settlements');
-        this.addMenu('voting-sections');
-        this.addMenu('votings-list');
-        this.addMenu('referendums-list');
-
-        // if (environment.production === false) {
-        //   // in prod this menu should not be visible. Vote only with the role "USER"
-        //   this.addMenu('votings');
-        // }
-        this.addMenu('counting');
-        break;
-      case Role_Types_Enum.SectionLeader:
-        this.addMenu('users');
-        // this.addMenu('settlements');
-        //  this.addMenu('voting-sections');
-        this.addMenu('votings-list');
-        this.addMenu('referendums-list');
-
-        break;
-      case Role_Types_Enum.Section:
-        this.addMenu('users');
-        //  this.addMenu('settlements');
-        // this.addMenu('votings-list');
-        // this.addMenu('referendums-list');
-        break;
-      case Role_Types_Enum.User:
-        this.addMenu('votings');
-        break;
-      default:
-        // ?? Who is here
-        this.authService.clearAll();
-        break;
+    try {
+      this.menus = [];
+      this.addMenu(...NavigationComponent.roleToSegments.get(role));
+    } catch (error) {
+      console.log(error);
+      this.onLogout();
     }
-
-    // if (environment.production === false) {
-    //   // in prod this menu should not be visible. Vote only with the role "USER"
-    //   this.addMenu('votings');
-    // }
   }
-  addMenu(key: string) {
-    switch (key) {
-      case 'users':
-        this.menus.push({
-          route: 'users',
-          label: 'Гласоподаватели',
-          matIcon: 'people',
-          badgeSubject: undefined,
-        });
-        break;
-      case 'settlements':
-        this.menus.push({
-          route: 'settlements',
-          label: 'Населени места',
-          matIcon: 'location_city',
-          badgeSubject: undefined,
-        });
-        break;
-      case 'votings':
-        this.menus.push({
-          route: 'votings/dashboard',
-          label: 'Гласуване',
-          matIcon: 'front_hand',
-          badgeSubject: undefined,
-        });
-        break;
+  addMenu(...keys: string[]) {
+    keys.forEach((key) => {
+      switch (key) {
+        case 'users':
+          this.menus.push({
+            route: 'users',
+            label: 'Гласоподаватели',
+            matIcon: 'people',
+            badgeSubject: undefined,
+          });
+          break;
+        case 'settlements':
+          this.menus.push({
+            route: 'settlements',
+            label: 'Населени места',
+            matIcon: 'location_city',
+            badgeSubject: undefined,
+          });
+          break;
+        case 'votings':
+          this.menus.push({
+            route: 'votings/dashboard',
+            label: 'Гласуване',
+            matIcon: 'front_hand',
+            badgeSubject: undefined,
+          });
+          break;
 
-      case 'voting-sections':
-        this.menus.push({
-          route: 'voting-sections',
-          label: 'Секции',
-          matIcon: 'how_to_vote',
-          badgeSubject: undefined,
-        });
-        break;
-      case 'votings-list':
-        this.menus.push({
-          route: 'votings/votings-list',
-          label: 'Избори',
-          matIcon: 'list',
-          badgeSubject: undefined,
-        });
-        break;
-      case 'referendums-list':
-        this.menus.push({
-          route: 'votings/referendums-list',
-          label: 'Референдуми',
-          matIcon: 'list',
-          badgeSubject: undefined,
-        });
-        break;
+        case 'voting-sections':
+          this.menus.push({
+            route: 'voting-sections',
+            label: 'Секции',
+            matIcon: 'how_to_vote',
+            badgeSubject: undefined,
+          });
+          break;
+        case 'votings-list':
+          this.menus.push({
+            route: 'votings/votings-list',
+            label: 'Избори',
+            matIcon: 'list',
+            badgeSubject: undefined,
+          });
+          break;
+        case 'referendums-list':
+          this.menus.push({
+            route: 'votings/referendums-list',
+            label: 'Референдуми',
+            matIcon: 'list',
+            badgeSubject: undefined,
+          });
+          break;
 
-      case 'counting':
-        this.menus.push({
-          route: 'countings/dashboard',
-          label: 'Преброяване',
-          matIcon: 'functions',
-          badgeSubject: undefined,
-        });
-        break;
+        case 'dashboard':
+          this.menus.push({
+            route: 'countings/dashboard',
+            label: 'Преброяване',
+            matIcon: 'functions',
+            badgeSubject: undefined,
+          });
+          break;
 
-      case 'political-groups':
-        this.menus.push({
-          route: 'political-groups',
-          label: 'Политически групи',
-          matIcon: 'groups',
-          badgeSubject: undefined,
-        });
-        break;
+        case 'political-groups':
+          this.menus.push({
+            route: 'political-groups',
+            label: 'Политически групи',
+            matIcon: 'groups',
+            badgeSubject: undefined,
+          });
+          break;
 
-      default:
-        break;
-    }
+        default:
+          break;
+      }
+    });
   }
 
   @HostListener('window:beforeunload', ['$event'])
@@ -261,7 +266,7 @@ export class NavigationComponent
     if (environment.production === true) {
       this.clearUserData();
     } else {
-      // console.log('Developer just reloads page..');
+      //  console.log('Developer just reloads page..');
     }
   }
 
@@ -321,7 +326,6 @@ export class NavigationComponent
 
   authUser() {
     this.authService.userRoleIndex$.subscribe((roleIndex) => {
-      // console.log('check');
       this.authService.fetchToken$.subscribe((fetchToken) => {
         const expirationDate: Date =
           this.jwtHelper.getTokenExpirationDate(fetchToken);
@@ -331,7 +335,7 @@ export class NavigationComponent
         const minutes = expireMoment.diff(now, 'minutes');
         // console.log(minutes);
         if (minutes <= 2) {
-          console.log('call backend');
+          // console.log('call backend');
           this.refreshToken(/*this.user.id,*/ roleIndex);
         } else {
           console.log('OK');
