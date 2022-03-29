@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import {
   ActivatedRouteSnapshot,
   CanActivate,
@@ -10,6 +11,7 @@ import { isNullOrUndefined } from 'is-what';
 import { combineLatest, map, Observable } from 'rxjs';
 import { Role_Types_Enum } from 'src/generated/graphql';
 import { LoggedUser } from '../auth/logged-user.interface';
+import { NavigationComponent } from '../navigation/navigation.component';
 import { AuthService } from '../services/auth-service';
 
 @Injectable({
@@ -18,12 +20,14 @@ import { AuthService } from '../services/auth-service';
 export class BaseGuard implements CanActivate {
   private obs: Observable<LoggedUser | number>[] = [];
   private currentRole: Role_Types_Enum;
-  constructor(private authService: AuthService, private router: Router) {
+  constructor(
+    private authService: AuthService,
+    private router: Router,
+    private snackBar: MatSnackBar
+  ) {
     this.obs.push(this.authService.user$);
     this.obs.push(this.authService.userRoleIndex$);
     combineLatest(this.obs).subscribe((observableResults) => {
-      console.log('--------');
-      console.log(observableResults);
       const user: LoggedUser = observableResults[0] as LoggedUser;
       const index = observableResults[1];
 
@@ -33,13 +37,6 @@ export class BaseGuard implements CanActivate {
         } else if (index === 1) {
           this.currentRole = user.secondRoleType.value as Role_Types_Enum;
         }
-        // this. currentRole = (
-        //   index === 0 ? user.roleType.value : user.secondRoleType.value
-        // ) as Role_Types_Enum;
-        // currentRole
-        console.log(this.currentRole);
-      } else {
-        console.log('...................');
       }
     });
   }
@@ -54,48 +51,40 @@ export class BaseGuard implements CanActivate {
     | UrlTree {
     return this.authService.user$.pipe(
       map((user) => {
-        // console.log(user);
-        // TODO -  add path checks for user
-        // console.log(state.url);
         if (user && state.url.indexOf('auth/login') > -1) {
           console.log('Create url tree from login Guard...');
           return this.router.createUrlTree(['/']);
         }
-        console.log('BASE GUARD: ');
         console.log(
-          'Can the user visit this..',
-          this.currentRole,
-          childRoute.url,
-          state.url
+          'BASE GUARD: role: ' + this.currentRole + ', url: ' + state.url
         );
-        if (this.check(state.url)) {
+        const segments: string[] = state.url.replace(/^\/+/, '').split('/');
+
+        if (this.check(segments.pop())) {
           return true;
         } else {
-          // TODO ADD TOAST....
+          this.snackBar.open(
+            'Нямате необходимите права за да посетите този адрес.',
+            'OK',
+            {}
+          );
           return this.router.createUrlTree(['/']);
         }
-        return false;
-        // return this.check(state.url);
       })
     );
   }
 
   private check(path: string): boolean {
     if (this.currentRole) {
-      switch (this.currentRole) {
-        case Role_Types_Enum.CentralLeader:
-          if (path.indexOf('votings/dashboard') > -1) {
-            console.log('BOOOOM');
-            return false;
-          } else {
-            return true;
-          }
-          break;
-        default:
-          return false;
+      try {
+        const segments = NavigationComponent.roleToSegments.get(
+          this.currentRole
+        );
+        return segments.findIndex((s) => s === path) > -1;
+      } catch (error) {
+        return false;
       }
     }
     return false;
-    // return false;
   }
 }
