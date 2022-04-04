@@ -7,6 +7,15 @@ query AutoSuggestSettlements($condition: settlements_bool_exp!) {
   #   }){aggregate{count}}
 }
 
+# query GetMunicipalities {
+#   settlements(
+#     where: { isMunicipality: { _eq: true } }
+#     order_by: { name: asc }
+#   ) {
+#     ...SettlementsBaseFields
+#   }
+# }
+
 query GetDistricts {
   settlements(where: { parentId: { _is_null: true } }) {
     ...SettlementsBaseFields

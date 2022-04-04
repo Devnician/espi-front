@@ -7886,6 +7886,9 @@ export type Votings = {
   political_group_members: Array<Political_Group_Members>;
   /** An aggregate relationship */
   political_group_members_aggregate: Political_Group_Members_Aggregate;
+  /** An object relationship */
+  settlement?: Maybe<Settlements>;
+  settlementId?: Maybe<Scalars['Int']>;
   startDate?: Maybe<Scalars['timestamptz']>;
   startedAt?: Maybe<Scalars['timestamptz']>;
   type: Voting_Types_Enum;
@@ -7948,6 +7951,7 @@ export type Votings_Aggregate_FieldsCountArgs = {
 export type Votings_Avg_Fields = {
   __typename?: 'votings_avg_fields';
   id?: Maybe<Scalars['Float']>;
+  settlementId?: Maybe<Scalars['Float']>;
 };
 
 /** Boolean expression to filter rows from the table "votings". All fields are combined with a logical 'AND'. */
@@ -7962,6 +7966,8 @@ export type Votings_Bool_Exp = {
   locked?: Maybe<Boolean_Comparison_Exp>;
   name?: Maybe<String_Comparison_Exp>;
   political_group_members?: Maybe<Political_Group_Members_Bool_Exp>;
+  settlement?: Maybe<Settlements_Bool_Exp>;
+  settlementId?: Maybe<Int_Comparison_Exp>;
   startDate?: Maybe<Timestamptz_Comparison_Exp>;
   startedAt?: Maybe<Timestamptz_Comparison_Exp>;
   type?: Maybe<Voting_Types_Enum_Comparison_Exp>;
@@ -7978,6 +7984,7 @@ export enum Votings_Constraint {
 /** input type for incrementing numeric columns in table "votings" */
 export type Votings_Inc_Input = {
   id?: Maybe<Scalars['Int']>;
+  settlementId?: Maybe<Scalars['Int']>;
 };
 
 /** input type for inserting data into table "votings" */
@@ -7989,6 +7996,8 @@ export type Votings_Insert_Input = {
   locked?: Maybe<Scalars['Boolean']>;
   name?: Maybe<Scalars['String']>;
   political_group_members?: Maybe<Political_Group_Members_Arr_Rel_Insert_Input>;
+  settlement?: Maybe<Settlements_Obj_Rel_Insert_Input>;
+  settlementId?: Maybe<Scalars['Int']>;
   startDate?: Maybe<Scalars['timestamptz']>;
   startedAt?: Maybe<Scalars['timestamptz']>;
   type?: Maybe<Voting_Types_Enum>;
@@ -8004,6 +8013,7 @@ export type Votings_Max_Fields = {
   finishedAt?: Maybe<Scalars['timestamptz']>;
   id?: Maybe<Scalars['Int']>;
   name?: Maybe<Scalars['String']>;
+  settlementId?: Maybe<Scalars['Int']>;
   startDate?: Maybe<Scalars['timestamptz']>;
   startedAt?: Maybe<Scalars['timestamptz']>;
   updatedAt?: Maybe<Scalars['timestamptz']>;
@@ -8017,6 +8027,7 @@ export type Votings_Min_Fields = {
   finishedAt?: Maybe<Scalars['timestamptz']>;
   id?: Maybe<Scalars['Int']>;
   name?: Maybe<Scalars['String']>;
+  settlementId?: Maybe<Scalars['Int']>;
   startDate?: Maybe<Scalars['timestamptz']>;
   startedAt?: Maybe<Scalars['timestamptz']>;
   updatedAt?: Maybe<Scalars['timestamptz']>;
@@ -8054,6 +8065,8 @@ export type Votings_Order_By = {
   locked?: Maybe<Order_By>;
   name?: Maybe<Order_By>;
   political_group_members_aggregate?: Maybe<Political_Group_Members_Aggregate_Order_By>;
+  settlement?: Maybe<Settlements_Order_By>;
+  settlementId?: Maybe<Order_By>;
   startDate?: Maybe<Order_By>;
   startedAt?: Maybe<Order_By>;
   type?: Maybe<Order_By>;
@@ -8081,6 +8094,8 @@ export enum Votings_Select_Column {
   /** column name */
   Name = 'name',
   /** column name */
+  SettlementId = 'settlementId',
+  /** column name */
   StartDate = 'startDate',
   /** column name */
   StartedAt = 'startedAt',
@@ -8098,6 +8113,7 @@ export type Votings_Set_Input = {
   id?: Maybe<Scalars['Int']>;
   locked?: Maybe<Scalars['Boolean']>;
   name?: Maybe<Scalars['String']>;
+  settlementId?: Maybe<Scalars['Int']>;
   startDate?: Maybe<Scalars['timestamptz']>;
   startedAt?: Maybe<Scalars['timestamptz']>;
   type?: Maybe<Voting_Types_Enum>;
@@ -8108,24 +8124,28 @@ export type Votings_Set_Input = {
 export type Votings_Stddev_Fields = {
   __typename?: 'votings_stddev_fields';
   id?: Maybe<Scalars['Float']>;
+  settlementId?: Maybe<Scalars['Float']>;
 };
 
 /** aggregate stddev_pop on columns */
 export type Votings_Stddev_Pop_Fields = {
   __typename?: 'votings_stddev_pop_fields';
   id?: Maybe<Scalars['Float']>;
+  settlementId?: Maybe<Scalars['Float']>;
 };
 
 /** aggregate stddev_samp on columns */
 export type Votings_Stddev_Samp_Fields = {
   __typename?: 'votings_stddev_samp_fields';
   id?: Maybe<Scalars['Float']>;
+  settlementId?: Maybe<Scalars['Float']>;
 };
 
 /** aggregate sum on columns */
 export type Votings_Sum_Fields = {
   __typename?: 'votings_sum_fields';
   id?: Maybe<Scalars['Int']>;
+  settlementId?: Maybe<Scalars['Int']>;
 };
 
 /** update columns of table "votings" */
@@ -8143,6 +8163,8 @@ export enum Votings_Update_Column {
   /** column name */
   Name = 'name',
   /** column name */
+  SettlementId = 'settlementId',
+  /** column name */
   StartDate = 'startDate',
   /** column name */
   StartedAt = 'startedAt',
@@ -8156,18 +8178,21 @@ export enum Votings_Update_Column {
 export type Votings_Var_Pop_Fields = {
   __typename?: 'votings_var_pop_fields';
   id?: Maybe<Scalars['Float']>;
+  settlementId?: Maybe<Scalars['Float']>;
 };
 
 /** aggregate var_samp on columns */
 export type Votings_Var_Samp_Fields = {
   __typename?: 'votings_var_samp_fields';
   id?: Maybe<Scalars['Float']>;
+  settlementId?: Maybe<Scalars['Float']>;
 };
 
 /** aggregate variance on columns */
 export type Votings_Variance_Fields = {
   __typename?: 'votings_variance_fields';
   id?: Maybe<Scalars['Float']>;
+  settlementId?: Maybe<Scalars['Float']>;
 };
 
 export type RegisterQueryVariables = Exact<{
@@ -8867,8 +8892,11 @@ export type GetParticipantsInVotingQuery = (
 
 export type VotingVieldsFragment = (
   { __typename?: 'votings' }
-  & Pick<Votings, 'id' | 'createdAt' | 'updatedAt' | 'name' | 'description' | 'type' | 'locked' | 'startDate' | 'startedAt' | 'finishedAt'>
-  & { voting_type: (
+  & Pick<Votings, 'id' | 'createdAt' | 'updatedAt' | 'name' | 'description' | 'type' | 'locked' | 'startDate' | 'settlementId' | 'startedAt' | 'finishedAt'>
+  & { settlement?: Maybe<(
+    { __typename?: 'settlements' }
+    & SettlementFiledsFragment
+  )>, voting_type: (
     { __typename?: 'voting_types' }
     & Pick<Voting_Types, 'value' | 'description'>
   ) }
@@ -9046,6 +9074,10 @@ export const VotingVieldsFragmentDoc = gql`
   type
   locked
   startDate
+  settlementId
+  settlement {
+    ...SettlementFileds
+  }
   voting_type {
     value
     description
@@ -9053,7 +9085,7 @@ export const VotingVieldsFragmentDoc = gql`
   startedAt
   finishedAt
 }
-    `;
+    ${SettlementFiledsFragmentDoc}`;
 export const RegisterDocument = gql`
     query Register($args: RegisterUserInsertInput!) {
   RegisterAction(arg1: $args) {
@@ -9267,7 +9299,7 @@ export const AddPoliticalMemberDocument = gql`
 export const GetUpcomingVotingsDocument = gql`
     query GetUpcomingVotings($startDate: timestamptz!) {
   votings(
-    where: {_and: [{locked: {_eq: true}}, {startDate: {_gt: $startDate}}, {startedAt: {_is_null: true}}, {finishedAt: {_is_null: true}}]}
+    where: {_and: [{locked: {_eq: true}}, {startDate: {_gt: $startDate}}, {finishedAt: {_is_null: true}}]}
   ) {
     ...VotingVields
   }

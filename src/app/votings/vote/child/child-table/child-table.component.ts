@@ -1,4 +1,5 @@
 import { AfterViewInit, Component, Input, ViewChild } from '@angular/core';
+import { MatCheckboxChange } from '@angular/material/checkbox';
 import { MatTable } from '@angular/material/table';
 import { Candidate } from '../../vote.component';
 
@@ -18,9 +19,10 @@ export class ChildTableComponent implements AfterViewInit {
     this.table.dataSource = this.dataSource;
   }
 
-  onPersonSelected(row: Candidate) {
+  onPersonSelected(event: MatCheckboxChange, row: Candidate) {
+    const checked = event.checked;
     this.dataSource.map((person) => {
-      person.selected = person.num === row.num;
+      person.selected = person.num === row.num && checked;
     });
     this.table.renderRows();
   }

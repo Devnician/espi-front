@@ -1,5 +1,7 @@
 <h2>{{ (voting | async).name }}</h2>
+<mat-divider></mat-divider>
 <h3>{{ (voting | async).description }}</h3>
+<mat-divider></mat-divider>
 <div id="main-content" style="height: 400px">
   <mat-progress-bar
     *ngIf="loading$ | async"

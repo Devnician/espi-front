@@ -4,7 +4,7 @@ import { Router } from '@angular/router';
 import { isNullOrUndefined } from 'is-what';
 import { BehaviorSubject } from 'rxjs';
 import { Donkey } from 'src/app/services/donkey.service';
-import { Votes, Votes_Insert_Input } from 'src/generated/graphql';
+import { Votes, Votes_Insert_Input, Votings } from 'src/generated/graphql';
 import { VotingsService } from '../../voting-service.service';
 import { Candidate, PolitGroup } from '../vote.component';
 
@@ -18,7 +18,7 @@ export class VotePreviewComponent implements OnInit {
   loading$ = this.loading.asObservable();
   selectedPolitGroup: PolitGroup;
   selectedCandidate: Candidate;
-  private votingId: number;
+  voting: Votings;
 
   private oldVote: Votes;
   /**
@@ -38,9 +38,9 @@ export class VotePreviewComponent implements OnInit {
   ngOnInit(): void {
     if (this.donkey.isLoaded()) {
       const payload = this.donkey.unload();
-
+      console.log(payload);
       this.selectedPolitGroup = payload.selectedPolitGroup;
-      this.votingId = payload.votingId;
+      this.voting = payload.voting;
       this.oldVote = payload.oldVote;
       if (this.selectedPolitGroup.num > 0) {
         const selectedPerson: Candidate =
@@ -71,7 +71,7 @@ export class VotePreviewComponent implements OnInit {
       inSection: false,
       voteGroupId,
       voteUserId,
-      votingId: this.votingId,
+      votingId: this.voting.id,
     };
     if (this.oldVote) {
       voteInput.id = this.oldVote.id;
@@ -104,7 +104,7 @@ export class VotePreviewComponent implements OnInit {
       }
       snackRef.afterDismissed().subscribe((data) => {
         this.loading.next(false);
-        this.router.navigate(['votings', 'dashboard']);
+        this.router.navigate(['votings']);
       });
     });
   }

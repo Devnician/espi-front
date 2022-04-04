@@ -67,8 +67,9 @@ export class VotingsTableComponent
     if (
       this.loggedUSer?.roleType.value === Role_Types_Enum.CentralLeader ||
       this.loggedUSer?.roleType.value === Role_Types_Enum.Central ||
-      this.loggedUSer?.secondRoleType.value === Role_Types_Enum.CentralLeader ||
-      this.loggedUSer?.secondRoleType.value === Role_Types_Enum.Central
+      this.loggedUSer?.secondRoleType?.value ===
+        Role_Types_Enum.CentralLeader ||
+      this.loggedUSer?.secondRoleType?.value === Role_Types_Enum.Central
     ) {
       return true;
     }
@@ -78,7 +79,7 @@ export class VotingsTableComponent
   canStartStopVoting(): boolean {
     return (
       this.loggedUSer.roleType.value === Role_Types_Enum.CentralLeader ||
-      this.loggedUSer?.secondRoleType.value === Role_Types_Enum.CentralLeader
+      this.loggedUSer?.secondRoleType?.value === Role_Types_Enum.CentralLeader
     );
   }
   isTodayTheDate(voting: Votings) {

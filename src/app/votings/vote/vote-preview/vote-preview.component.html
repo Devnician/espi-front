@@ -18,7 +18,10 @@
     </div>
   </div>
   <div *ngIf="selectedPolitGroup?.num > 0">
-    <h2>Предстои да направите избор за</h2>
+    <h1>{{ voting.name }}</h1>
+    <mat-divider></mat-divider>
+    <h2>Вашият избор :</h2>
+    <mat-divider></mat-divider>
     <div class="form-sector">
       <div style="display: flex">
         <div class="form-sector" style="font-weight: 900; font-size: 48px">

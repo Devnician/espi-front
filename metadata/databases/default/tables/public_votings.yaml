@@ -2,6 +2,9 @@ table:
   name: votings
   schema: public
 object_relationships:
+- name: settlement
+  using:
+    foreign_key_constraint_on: settlementId
 - name: voting_type
   using:
     foreign_key_constraint_on: type
@@ -21,6 +24,7 @@ insert_permissions:
     - description
     - locked
     - name
+    - settlementId
     - startDate
     - type
   role: central
@@ -31,6 +35,7 @@ insert_permissions:
     - description
     - locked
     - name
+    - settlementId
     - startDate
     - type
   role: centralLeader
@@ -44,6 +49,7 @@ select_permissions:
     - id
     - locked
     - name
+    - settlementId
     - startDate
     - startedAt
     - type
@@ -59,6 +65,7 @@ select_permissions:
     - id
     - locked
     - name
+    - settlementId
     - startDate
     - startedAt
     - type
@@ -117,6 +124,7 @@ update_permissions:
     - description
     - locked
     - name
+    - settlementId
     - startDate
     - type
     filter: {}
@@ -128,6 +136,7 @@ update_permissions:
     - finishedAt
     - locked
     - name
+    - settlementId
     - startDate
     - startedAt
     - type

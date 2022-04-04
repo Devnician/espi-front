@@ -59,7 +59,7 @@ export class VoteComponent implements OnInit {
       this.voting.next(voting);
       this.fetchGroups(voting.id);
     } else {
-      this.router.navigate(['votings', 'dashboard']);
+      this.router.navigate(['votings']);
     }
   }
 
@@ -146,7 +146,7 @@ export class VoteComponent implements OnInit {
     const selectedPolitGroup: PolitGroup = this.selectedPoliticalGroup.value;
     this.donkey.load({
       selectedPolitGroup,
-      votingId: this.voting.getValue().id,
+      voting: this.voting.getValue(),
       oldVote: this.vote,
     });
     this.router.navigateByUrl('/votings/preview');

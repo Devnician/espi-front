@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
+import { isNullOrUndefined } from 'is-what';
 import {
   BehaviorSubject,
   combineLatest,
@@ -66,10 +67,11 @@ export class VotingsDashboardComponent {
         const user: Users = observableResults[2] as Users;
 
         const votedReferendumIds: number[] = [];
-
-        user.referendum_votes.forEach((vote) => {
-          votedReferendumIds.push(vote.referendum_question.referendum.id);
-        });
+        if (isNullOrUndefined(user.referendum_votes) === false) {
+          user.referendum_votes.forEach((vote) => {
+            votedReferendumIds.push(vote.referendum_question.referendum.id);
+          });
+        }
 
         this.cards.value.forEach((card) => {
           if (card.type === 'referendum') {

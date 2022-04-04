@@ -8,7 +8,6 @@ import { map, startWith, switchMap, tap } from 'rxjs/operators';
 import { UsersService } from 'src/app/users/users-service';
 import {
   GetUsersQuery,
-  Order_By,
   Referendum_Votes,
   Users_Bool_Exp,
   Users_Order_By,
@@ -55,18 +54,19 @@ export class UsersTableDataSource extends DataSource<CustomUser> {
   connect(): Observable<CustomUser[] | any> {
     const limit: number = this.paginator.pageSize;
     const offset: number = this.paginator.pageIndex * this.paginator.pageSize;
-    const order_by: Users_Order_By = { name: Order_By.Asc };
+    const order_by: Users_Order_By = {}; // { name: Order_By.Asc };
 
     // Combine everything that affects the rendered data into one update
     // stream for the data-table to consume.
     this.queryRef = this.usersService.getUsers(limit, offset, {}, order_by);
+    // console.log(this.condition.getValue());
     // Combine everything that affects the rendered data into one update
     // stream for the data-table to consume.
     const dataMutations = [
       this.queryRef.valueChanges,
       this.condition,
-      // this.paginator.page,
-      // this.sort.sortChange,
+      this.paginator.page,
+      this.sort.sortChange,
     ];
 
     return merge(
@@ -115,6 +115,7 @@ export class UsersTableDataSource extends DataSource<CustomUser> {
           // this.snackBar.open(error, 'OK', { duration: 2000 });
           throw Error(errorMessage);
         }
+
         this.counter.next(data.users_aggregate.aggregate.count);
         const collection = this.decorateUsers(data.users as CustomUser[]);
         this.currentPageData = collection;
@@ -136,7 +137,7 @@ export class UsersTableDataSource extends DataSource<CustomUser> {
     if (this.selectedElection.value) {
       const election = this.selectedElection.value;
       const type = election.type;
-
+      console.log(type);
       if (type === 'referendum') {
         // get all for this referendum.
         const referendumVotes: Referendum_Votes[] =

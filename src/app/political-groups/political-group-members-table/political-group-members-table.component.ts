@@ -82,6 +82,7 @@ export class PoliticalGroupMembersTableComponent
   loadUpcomingVotings() {
     const endOfToday = new Date();
     endOfToday.setHours(23, 59, 59, 999);
+    //  console.log(endOfToday);
     this.votingsService
       .getUpcomingVotings(endOfToday)
       .subscribe(({ data, errors }) => {
@@ -91,6 +92,7 @@ export class PoliticalGroupMembersTableComponent
         }
 
         this.upcomingVotings = data.votings as Votings[];
+        // console.log(this.upcomingVotings);
         this.snackBar.open(
           'Предстоящи избори: ' + this.upcomingVotings.length,
           'OK',

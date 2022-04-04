@@ -19,6 +19,30 @@ insert_permissions:
 select_permissions:
 - permission:
     columns:
+    - inSection
+    - id
+    - sectionId
+    - userId
+    - voteGroupId
+    - voteUserId
+    - votingId
+    - createdAt
+    filter: {}
+  role: central
+- permission:
+    columns:
+    - inSection
+    - id
+    - sectionId
+    - userId
+    - voteGroupId
+    - voteUserId
+    - votingId
+    - createdAt
+    filter: {}
+  role: centralLeader
+- permission:
+    columns:
     - createdAt
     - id
     - inSection

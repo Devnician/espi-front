@@ -165,7 +165,7 @@ export class EditReferendumComponent implements OnInit {
   }
 
   /**
-   * On search by clientName
+   * On search by districtName
    */
   onSearch(what: string): any {
     if (what === 'district') {
@@ -278,12 +278,14 @@ export class EditReferendumComponent implements OnInit {
       delete formData.id;
 
       const set: Referendums_Set_Input = formData;
-      const currentStateOfQuestions = this.datasource.data.value.map((question) => {
-        return{
-          referendumId: question.referendumId ? "": referendumId,
-          question: question.question
-        } as Referendum_Questions_Insert_Input
-      });
+      const currentStateOfQuestions = this.datasource.data.value.map(
+        (question) => {
+          return {
+            referendumId: question.referendumId ? '' : referendumId,
+            question: question.question,
+          } as Referendum_Questions_Insert_Input;
+        }
+      );
 
       const removedIds = this.datasource.identifiersOfRemovedQuestions;
 
@@ -295,10 +297,10 @@ export class EditReferendumComponent implements OnInit {
       );
     } else {
       const input: Referendums_Insert_Input = formData;
-      const questions = this.datasource.data.value.map((question)=>{
+      const questions = this.datasource.data.value.map((question) => {
         return {
-          question: question.question
-        }
+          question: question.question,
+        };
       });
       input.referendumQuestions = { data: questions };
       this.createReferendum(formData);
