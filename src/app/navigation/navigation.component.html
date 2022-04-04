@@ -56,31 +56,42 @@
                 {{ (user$ | async)?.family }}
               </div>
               <div style="font-size: 12px; text-align: end">
-                <!-- roleType: Role_Types;
-                secondRoleType: Role_Types; -->
-                <mat-radio-group
-                  aria-label="Select an option"
-                  style="padding-top: 5px"
-                  (change)="onRoleChanged($event)"
+                <div
+                  *ngIf="hasSecondRole; then thenBlock; else elseBlock"
+                ></div>
+                <ng-template #thenBlock>
+                  <mat-radio-group
+                    *ngIf="hasSecondRole"
+                    aria-label="Select an option"
+                    style="padding-top: 5px"
+                    (change)="onRoleChanged($event)"
+                  >
+                    <mat-radio-button
+                      #fOpt
+                      value="0"
+                      [checked]="
+                        fOpt.value === (userObservables[1] | async) + ''
+                      "
+                      >{{
+                        (user$ | async)?.roleType.description
+                      }}</mat-radio-button
+                    >
+                    <mat-radio-button
+                      #sOpt
+                      style="padding-left: 5px"
+                      value="1"
+                      [checked]="
+                        sOpt.value === (userObservables[1] | async) + ''
+                      "
+                      >{{
+                        (user$ | async)?.secondRoleType?.description
+                      }}</mat-radio-button
+                    >
+                  </mat-radio-group></ng-template
                 >
-                  <mat-radio-button
-                    #fOpt
-                    value="0"
-                    [checked]="fOpt.value === (userObservables[1] | async) + ''"
-                    >{{
-                      (user$ | async)?.roleType.description
-                    }}</mat-radio-button
-                  >
-                  <mat-radio-button
-                    #sOpt
-                    style="padding-left: 5px"
-                    value="1"
-                    [checked]="sOpt.value === (userObservables[1] | async) + ''"
-                    >{{
-                      (user$ | async)?.secondRoleType.description
-                    }}</mat-radio-button
-                  >
-                </mat-radio-group>
+                <ng-template #elseBlock>{{
+                  (user$ | async)?.roleType.description
+                }}</ng-template>
               </div>
             </div>
             <button

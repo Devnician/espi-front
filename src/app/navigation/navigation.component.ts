@@ -51,7 +51,7 @@ export class NavigationComponent
           Object.freeze([
             'users',
             'political-groups',
-            'settlements',
+            // 'settlements',
             'voting-sections',
             'votings-list',
             'referendums-list',
@@ -63,7 +63,7 @@ export class NavigationComponent
           Object.freeze([
             'users',
             'political-groups',
-            'settlements',
+            // 'settlements',
             'voting-sections',
             'votings-list',
             'referendums-list',
@@ -75,7 +75,7 @@ export class NavigationComponent
           Object.freeze([
             'users',
             'political-groups',
-            'settlements',
+            // 'settlements',
             'voting-sections',
             'votings-list',
             'referendums-list',
@@ -103,6 +103,7 @@ export class NavigationComponent
     this.authService.user$,
     this.authService.userRoleIndex$,
   ];
+  hasSecondRole = false;
 
   constructor(
     private router: Router,
@@ -161,10 +162,15 @@ export class NavigationComponent
       const user = observableResults[0];
       if (user) {
         const roleIndex = observableResults[1];
-        const currentRole = (
-          roleIndex === 0 ? user.roleType.value : user.secondRoleType.value
-        ) as Role_Types_Enum;
-        this.buildMenuForThisRole(currentRole);
+        this.hasSecondRole = isNullOrUndefined(user.secondRoleType) === false;
+        if (this.hasSecondRole) {
+          const currentRole = (
+            roleIndex === 0 ? user.roleType.value : user.secondRoleType?.value
+          ) as Role_Types_Enum;
+          this.buildMenuForThisRole(currentRole);
+        } else {
+          this.buildMenuForThisRole(user.roleType.value);
+        }
       } else {
         console.log('the user is gone..');
       }
@@ -174,7 +180,7 @@ export class NavigationComponent
   }
 
   private buildMenuForThisRole(role: Role_Types_Enum) {
-    console.log('Rebuild menu for role: ' + role);
+    // console.log('Rebuild menu for role: ' + role);
     try {
       this.menus = [];
       this.addMenu(...NavigationComponent.roleToSegments.get(role));
@@ -202,9 +208,9 @@ export class NavigationComponent
             badgeSubject: undefined,
           });
           break;
-        case 'votings':
+        case 'votings': // dashboard
           this.menus.push({
-            route: 'votings/dashboard',
+            route: 'votings',
             label: 'Гласуване',
             matIcon: 'front_hand',
             badgeSubject: undefined,
