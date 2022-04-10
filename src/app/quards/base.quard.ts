@@ -55,9 +55,9 @@ export class BaseGuard implements CanActivate {
           console.log('Create url tree from login Guard...');
           return this.router.createUrlTree(['/']);
         }
-        console.log(
-          'BASE GUARD: role: ' + this.currentRole + ', url: ' + state.url
-        );
+        // console.log(
+        //   'BASE GUARD: role: ' + this.currentRole + ', url: ' + state.url
+        // );
         const segments: string[] = state.url.replace(/^\/+/, '').split('/');
 
         if (this.check(segments.pop())) {

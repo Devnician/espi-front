@@ -4,6 +4,7 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatSort } from '@angular/material/sort';
 import { MatTable } from '@angular/material/table';
+import { isNullOrUndefined } from 'is-what';
 import * as moment from 'moment';
 import { LoggedUser } from 'src/app/auth/logged-user.interface';
 import { VixenComponent } from 'src/app/core/vixen/vixen.component';
@@ -76,10 +77,22 @@ export class VotingsTableComponent
     return false;
   }
 
-  canStartStopVoting(): boolean {
+  canStartVoting(voting: Votings): boolean {
     return (
-      this.loggedUSer.roleType.value === Role_Types_Enum.CentralLeader ||
-      this.loggedUSer?.secondRoleType?.value === Role_Types_Enum.CentralLeader
+      (this.loggedUSer.roleType.value === Role_Types_Enum.CentralLeader ||
+        this.loggedUSer?.secondRoleType?.value ===
+          Role_Types_Enum.CentralLeader) &&
+      isNullOrUndefined(voting.startedAt) &&
+      voting.locked === true
+    );
+  }
+  canStopVoting(voting: Votings): boolean {
+    return (
+      (this.loggedUSer.roleType.value === Role_Types_Enum.CentralLeader ||
+        this.loggedUSer?.secondRoleType?.value ===
+          Role_Types_Enum.CentralLeader) &&
+      isNullOrUndefined(voting.finishedAt) &&
+      isNullOrUndefined(voting.startedAt) === false
     );
   }
   isTodayTheDate(voting: Votings) {
@@ -89,6 +102,11 @@ export class VotingsTableComponent
     this.votingService
       .updateVoting(voting.id, { startedAt: moment(), finishedAt: null })
       .subscribe((response) => {
+        this.matSnackBar.open('Беше зададен старт на избора.', 'OK', {
+          duration: 3500,
+        });
+        this.dataSource.refresh.next(true);
+
         console.log(response);
       });
   }
@@ -96,7 +114,11 @@ export class VotingsTableComponent
     this.votingService
       .updateVoting(voting.id, { finishedAt: moment() })
       .subscribe((response) => {
-        console.log(response);
+        // console.log(response);
+        this.matSnackBar.open('Гласуването беше прекратено.', 'OK', {
+          duration: 3500,
+        });
+        this.dataSource.refresh.next(true);
       });
   }
 

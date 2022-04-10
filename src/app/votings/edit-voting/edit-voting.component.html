@@ -208,7 +208,9 @@
         mat-raised-button
         color="primary"
         type="submit"
-        [disabled]="form.invalid || (loading$ | async) === true"
+        [disabled]="
+          form.invalid || (loading$ | async) === true || form.disabled
+        "
       >
         {{ (isUpdate | async) ? "Промени" : "Създай" }}
       </button>

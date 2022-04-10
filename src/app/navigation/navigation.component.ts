@@ -254,7 +254,7 @@ export class NavigationComponent
         case 'political-groups':
           this.menus.push({
             route: 'political-groups',
-            label: 'Политически групи',
+            label: 'Политически организации',
             matIcon: 'groups',
             badgeSubject: undefined,
           });
@@ -322,7 +322,7 @@ export class NavigationComponent
    *
    */
   startRefreshToken() {
-    console.log(' start refresh');
+    // console.log(' start refresh');
     // get current role
     this.authUser();
     this.interval = setInterval(() => {
@@ -344,7 +344,7 @@ export class NavigationComponent
           // console.log('call backend');
           this.refreshToken(/*this.user.id,*/ roleIndex);
         } else {
-          console.log('OK');
+          //  console.log('the token still has time');
         }
       });
     });

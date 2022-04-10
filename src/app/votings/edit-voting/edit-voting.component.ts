@@ -106,7 +106,6 @@ export class EditVotingComponent implements OnInit {
   ngOnInit(): void {}
   buildForm() {
     // locked - boolean, default: false
-
     this.form = this.fb.group({
       type: [this.voting?.type, Validators.required],
       name: [this.voting?.name, Validators.required],
@@ -119,6 +118,9 @@ export class EditVotingComponent implements OnInit {
       settlementName: [this.voting?.settlement?.name],
       settlementId: [this.voting?.settlement?.id],
     });
+    if (this.voting.locked) {
+      this.form.disable();
+    }
   }
   attachAutocompleteListeners() {
     this.districts$ = this.searchTextDist.pipe(
@@ -273,6 +275,7 @@ export class EditVotingComponent implements OnInit {
         startDate: formData.startDate,
         settlementId: formData.settlementId,
         type: formData.type,
+        locked: formData.locked,
       };
       this.votingService
         .updateVoting(this.voting.id, set)

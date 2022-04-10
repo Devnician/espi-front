@@ -58,14 +58,13 @@ export class VotingsDashboardComponent {
     this.getUserObject();
     this.getStartedReferendums();
     this.getStartedVotings();
-    combineLatest(this.observables).subscribe((observableResults) => {
-      // TODO fetch id diff query !!!!!!!!!
 
-      if (observableResults.indexOf(false) < 0) {
+    combineLatest(this.observables).subscribe((observableResults) => {
+      if (observableResults.indexOf(false) < 0 && observableResults[2]) {
         this.loading.next(false);
         //  adjust card &
         const user: Users = observableResults[2] as Users;
-
+        console.log(user);
         const votedReferendumIds: number[] = [];
         if (isNullOrUndefined(user.referendum_votes) === false) {
           user.referendum_votes.forEach((vote) => {

@@ -17,7 +17,7 @@ const uri = environment.hasuraUrl; // <-- add the URL of the GraphQL server here
 export function createApollo(httpLink: HttpLink): any {
   console.log('Start build apolo link');
   sub?.unsubscribe();
-  console.log(localStorage.getItem(TokenTypes.FETCH_TOKEN));
+  // console.log(localStorage.getItem(TokenTypes.FETCH_TOKEN));
   const basic = setContext((_operation, _context) => ({
     headers: {
       Accept: 'charset=utf-8',
@@ -47,7 +47,7 @@ export function createApollo(httpLink: HttpLink): any {
   });
 
   const link = ApolloLink.from([basic, auth, httpLink.create({ uri })]);
-  console.log('Apollo link was configured');
+  // console.log('Apollo link was configured');
   const cache = new InMemoryCache({
     typePolicies: {
       users: {

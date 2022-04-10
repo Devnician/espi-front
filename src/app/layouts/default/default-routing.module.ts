@@ -30,8 +30,8 @@ const routes: Routes = [
           ),
         canActivate: [BaseGuard],
         data: {
-          title: 'Политически групи',
-          breadcrumb: 'Политически групи',
+          title: 'Политически организации',
+          breadcrumb: 'Политически организации',
         },
       },
 
