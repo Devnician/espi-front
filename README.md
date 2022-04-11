@@ -33,16 +33,21 @@ docker-compose up --build -d
 ## For DevMode:
 
 ## run hasura console
-npm run hasura console
+hasura console
 ## check migration status 
-npm run hasura migrate status --database-name="default"
+hasura migrate status --database-name="default"
 ## apply all new
-npm run hasura migrate apply --type up --database-name="default"
+hasura migrate apply --type up --database-name="default"
 ## apply one
-npm run hasura migrate apply --type up --database-name="default" --version 1624619288822
+hasura migrate apply --type up --database-name="default" --version 1624619288822
 ## after all
-npm run hasura metadata apply
-
+hasura metadata apply 
 ## Types generator
 npm run watch-types
+
+## Test with Carma
+# all:
+ng test --code-coverage
+# single:
+ng test --include src/app/auth/login/login.component.spec.ts --code-coverage
 

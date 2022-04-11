@@ -139,6 +139,31 @@ query GetStartedVotings($where: votings_bool_exp) {
     }
   }
 }
+# list with preferences
+query GetParticipantsInVoting($votingId: Int!) {
+  votings_by_pk(id: $votingId) {
+    id
+    political_group_members {
+      id
+      userId
+      user {
+        name
+        surname
+        family
+      }
+      votingId
+      political_group {
+        id
+        name
+        description
+        political_group_type {
+          value
+          description
+        }
+      }
+    }
+  }
+}
 
 fragment VotingVields on votings {
   id
@@ -149,10 +174,33 @@ fragment VotingVields on votings {
   type
   locked
   startDate
+  settlementId
+  settlement {
+    ...SettlementFileds
+  }
   voting_type {
     value
     description
   }
   startedAt
   finishedAt
+}
+
+# Votes
+mutation Vote($input: [votes_insert_input!]!) {
+  insert_votes(
+    objects: $input
+    on_conflict: {
+      constraint: votes_pkey
+      update_columns: [voteGroupId, voteUserId]
+    }
+  ) {
+    affected_rows
+  }
+}
+
+mutation MarkVoteAsInSection($id: Int!) {
+  update_votes_by_pk(pk_columns: { id: $id }, _set: { inSection: true }) {
+    id
+  }
 }

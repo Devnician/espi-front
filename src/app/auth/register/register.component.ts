@@ -28,21 +28,21 @@ export class RegisterComponent extends VixenComponent implements OnInit {
   ngOnInit(): void {
     this.form = this.fb.group({
       egn: [
-        8080808080, // null,
+        8003033333, // null,
         Validators.compose([
           Validators.required,
           Validators.pattern('[0-9]{10}'),
         ]),
       ],
       pin: [
-        8080808080, // null,
+        'HPFUBC6Z', // null,
         Validators.compose([
           Validators.required,
-          Validators.pattern('[0-9]{10}'),
+          Validators.pattern('[A-Z0-9]{8}'),
         ]),
       ],
       email: [
-        'alabala@bala.ala', // null,
+        'mail@mail.bg', // null,
         Validators.compose([Validators.required, Validators.email]),
       ],
       password: [

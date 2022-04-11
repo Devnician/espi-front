@@ -55,7 +55,7 @@ query GetUpcomingVotings($startDate: timestamptz!) {
       _and: [
         { locked: { _eq: true } }
         { startDate: { _gt: $startDate } }
-        { startedAt: { _is_null: true } }
+        # { startedAt: { _is_null: true } }
         { finishedAt: { _is_null: true } }
       ]
     }

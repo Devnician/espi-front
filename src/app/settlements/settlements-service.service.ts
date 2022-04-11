@@ -4,6 +4,7 @@ import { Observable, of } from 'rxjs';
 import {
   AutoSuggestSettlementsGQL,
   GetDistrictsGQL,
+  GetDistrictsQuery,
   GetMunicipalitiesIdsGQL,
   GetMunicipalitiesIdsQuery,
   Settlements_Bool_Exp,
@@ -16,12 +17,19 @@ export class SettlementsService {
   constructor(
     private GetDistrictsGQL: GetDistrictsGQL,
     private autoSuggestSettlementsGQL: AutoSuggestSettlementsGQL,
-    private getMunicipalitiesIdsGQL: GetMunicipalitiesIdsGQL // private g:GetMun
-  ) {}
+    private getMunicipalitiesIdsGQL: GetMunicipalitiesIdsGQL
+  ) //private getMunicipalitiesGQL: GetMunicipalitiesGQL
+  {}
 
-  public getDistricts() {
+  public getDistricts(): Observable<ApolloQueryResult<GetDistrictsQuery>> {
     return this.GetDistrictsGQL.fetch();
   }
+
+  // public getMunicipalities(): Observable<
+  //   ApolloQueryResult<GetMunicipalitiesQuery>
+  // > {
+  //   return this.getMunicipalitiesGQL.fetch();
+  // }
 
   public autoSuggestDistricts(nameIlike: string): Observable<any> {
     if (nameIlike === null) {

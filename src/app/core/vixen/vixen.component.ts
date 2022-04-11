@@ -20,6 +20,7 @@ export class VixenComponent implements OnDestroy {
   private user: BehaviorSubject<LoggedUser> = new BehaviorSubject(null);
   public readonly user$: Observable<LoggedUser> = this.user.asObservable();
   private currentRoleIndex: BehaviorSubject<number> = new BehaviorSubject(-1);
+
   protected readonly currentRoleIndex$: Observable<number> =
     this.currentRoleIndex.asObservable();
   public readonly userObservables: Observable<any>[] = [

@@ -24,10 +24,10 @@ export class VotingsTableDataSource extends DataSource<Votings> {
   counter: BehaviorSubject<number> = new BehaviorSubject(0);
   sort: MatSort;
   queryRef: QueryRef<GetVotingsQuery>;
-
   loading: BehaviorSubject<any> = new BehaviorSubject(true);
   loading$ = this.loading.asObservable();
   currentPageData: BehaviorSubject<Votings[]> = new BehaviorSubject([]);
+  refresh: BehaviorSubject<boolean> = new BehaviorSubject(false);
 
   constructor(
     private votingsService: VotingsService,
@@ -58,7 +58,8 @@ export class VotingsTableDataSource extends DataSource<Votings> {
     return merge(
       this.paginator.page,
       this.sort.sortChange,
-      ...dataMutations
+      ...dataMutations,
+      this.refresh
     ).pipe(
       startWith({}),
       tap(() => this.loading.next(true)),
@@ -105,7 +106,7 @@ export class VotingsTableDataSource extends DataSource<Votings> {
           return [];
         }
         this.counter.next(data.votings_aggregate.aggregate.count);
-        this.currentPageData.next(data.votings);
+        this.currentPageData.next(data.votings as Votings[]);
         return this.currentPageData.value;
       })
     );

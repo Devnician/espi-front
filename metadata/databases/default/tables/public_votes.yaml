@@ -1,15 +1,105 @@
 table:
   name: votes
   schema: public
+insert_permissions:
+- permission:
+    backend_only: false
+    check:
+      userId:
+        _eq: X-Hasura-User-Id
+    columns:
+    - id
+    - inSection
+    - voteGroupId
+    - voteUserId
+    - votingId
+    set:
+      userId: x-hasura-User-Id
+  role: user
 select_permissions:
 - permission:
     columns:
+    - inSection
     - id
-    - createdAt
-    - votingId
     - sectionId
     - userId
-    - vote
-    - eVote
+    - voteGroupId
+    - voteUserId
+    - votingId
+    - createdAt
     filter: {}
+  role: central
+- permission:
+    columns:
+    - inSection
+    - id
+    - sectionId
+    - userId
+    - voteGroupId
+    - voteUserId
+    - votingId
+    - createdAt
+    filter: {}
+  role: centralLeader
+- permission:
+    columns:
+    - createdAt
+    - id
+    - inSection
+    - sectionId
+    - userId
+    - voteGroupId
+    - voteUserId
+    - votingId
+    filter: {}
+  role: section
+- permission:
+    columns:
+    - inSection
+    - id
+    - sectionId
+    - userId
+    - voteGroupId
+    - voteUserId
+    - votingId
+    - createdAt
+    filter: {}
+  role: sectionLeader
+- permission:
+    columns:
+    - createdAt
+    - id
+    - inSection
+    - sectionId
+    - userId
+    - voteGroupId
+    - voteUserId
+    - votingId
+    filter:
+      userId:
+        _eq: X-Hasura-User-Id
+  role: user
+update_permissions:
+- permission:
+    check: null
+    columns:
+    - inSection
+    filter: {}
+  role: section
+- permission:
+    check: null
+    columns:
+    - inSection
+    filter: {}
+  role: sectionLeader
+- permission:
+    check:
+      userId:
+        _eq: X-Hasura-User-Id
+    columns:
+    - voteGroupId
+    - voteUserId
+    filter:
+      userId:
+        _eq: X-Hasura-User-Id
   role: user

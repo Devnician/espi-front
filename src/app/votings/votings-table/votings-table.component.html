@@ -6,7 +6,7 @@
     color="accent"
     (click)="openDialog(undefined)"
   >
-    Създай гласуване
+    Създай избор
   </button>
 </div>
 
@@ -90,16 +90,16 @@
             <span>Редактиране</span>
           </button>
           <button
-            *ngIf="canStartStopVoting()"
+            *ngIf="canStartVoting(row)"
             mat-menu-item
             [disabled]="isTodayTheDate(row) === false"
             (click)="start(row)"
           >
             <mat-icon>start</mat-icon>
-            <span>Стратирай</span>
+            <span>Стартирай</span>
           </button>
           <button
-            *ngIf="canStartStopVoting()"
+            *ngIf="canStopVoting(row)"
             mat-menu-item
             [disabled]="isTodayTheDate(row) === false"
             (click)="stop(row)"

@@ -8,6 +8,8 @@ import {
   CreateReferendumMutation,
   CreateVotingGQL,
   CreateVotingMutation,
+  GetParticipantsInVotingGQL,
+  GetParticipantsInVotingQuery,
   GetReferendumsGQL,
   GetStartedReferendumsGQL,
   GetStartedReferendumsQuery,
@@ -16,6 +18,8 @@ import {
   GetUpcomingVotingsGQL,
   GetUpcomingVotingsQuery,
   GetVotingsGQL,
+  MarkVoteAsInSectionGQL,
+  MarkVoteAsInSectionMutation,
   Referendums_Bool_Exp,
   Referendums_Insert_Input,
   Referendums_Order_By,
@@ -26,10 +30,14 @@ import {
   UpdateReferendumAndQuestionMutation,
   UpdateVotingGQL,
   UpdateVotingMutation,
+  VoteGQL,
+  VoteMutation,
+  Votes_Insert_Input,
   Votings_Bool_Exp,
   Votings_Insert_Input,
   Votings_Order_By,
   Votings_Set_Input,
+  Voting_Types_Enum,
 } from 'src/generated/graphql';
 @Injectable({
   providedIn: 'root', // VotingsModule,
@@ -45,8 +53,156 @@ export class VotingsService {
     private getVotingsGQL: GetVotingsGQL,
     private getUpcomingVotingsGQL: GetUpcomingVotingsGQL,
     private getStartedVotingsGQL: GetStartedVotingsGQL,
-    private addVoteForTheReferendumGQL: AddVoteForTheReferendumGQL
+    private addVoteForTheReferendumGQL: AddVoteForTheReferendumGQL,
+    private getParticipantsInVotingGQL: GetParticipantsInVotingGQL,
+    private voteGQL: VoteGQL,
+    private markVoteAsInSectionGQL: MarkVoteAsInSectionGQL
   ) {}
+
+  //#region  VOTINGS
+  createVoting(
+    object: Votings_Insert_Input
+  ): Observable<
+    FetchResult<CreateVotingMutation, Record<string, any>, Record<string, any>>
+  > {
+    return this.createVotingGQL.mutate(
+      { input: object },
+      { errorPolicy: 'all' }
+    );
+  }
+
+  updateVoting(
+    id: number,
+    set: Votings_Set_Input
+  ): Observable<
+    FetchResult<UpdateVotingMutation, Record<string, any>, Record<string, any>>
+  > {
+    return this.updateVotingGQL.mutate(
+      { id, input: set },
+      { errorPolicy: 'all' }
+    );
+  }
+
+  getVotings(
+    limit = 10,
+    offset = 0,
+    condition: Votings_Bool_Exp = {},
+    orderBy: Votings_Order_By
+  ) {
+    return this.getVotingsGQL.watch(
+      { limit, offset, condition, orderBy },
+      {
+        fetchPolicy: 'network-only',
+        partialRefetch: true,
+        errorPolicy: 'all',
+        pollInterval: 5 * 1000,
+      }
+    );
+  }
+
+  getStartedVotings(
+    votingSectionSettlementId: number
+  ): Observable<ApolloQueryResult<GetStartedVotingsQuery>> {
+    let where: Votings_Bool_Exp;
+    if (votingSectionSettlementId) {
+      where = {
+        _and: [
+          { locked: { _eq: true } },
+          { startedAt: { _is_null: false } },
+          { finishedAt: { _is_null: true } },
+          {
+            _or: [
+              // global or local
+              {
+                _and: [
+                  {
+                    voting_type: {
+                      value: {
+                        _in: [
+                          Voting_Types_Enum.Parliamentary,
+                          Voting_Types_Enum.Presidential,
+                        ],
+                      },
+                    },
+                  },
+                  { settlementId: { _is_null: true } },
+                ],
+              },
+              {
+                _and: [
+                  { settlementId: { _eq: votingSectionSettlementId } },
+                  {
+                    voting_type: {
+                      value: {
+                        _in: [
+                          Voting_Types_Enum.LocalGovernment,
+                          Voting_Types_Enum.Mayoral,
+                        ],
+                      },
+                    },
+                  },
+                ],
+              },
+            ],
+          },
+        ],
+      };
+    } else {
+      where = {
+        _and: [
+          { locked: { _eq: true } },
+          { startedAt: { _is_null: false } },
+          { finishedAt: { _is_null: true } },
+        ],
+      };
+    }
+
+    return this.getStartedVotingsGQL.fetch(
+      { where },
+      { fetchPolicy: 'network-only' }
+    );
+  }
+
+  public getUpcomingVotings(
+    startDate: Date
+  ): Observable<ApolloQueryResult<GetUpcomingVotingsQuery>> {
+    return this.getUpcomingVotingsGQL.fetch(
+      { startDate },
+      { fetchPolicy: 'network-only' }
+    );
+  }
+
+  getParticipantsInVoting(
+    votingId: number
+  ): Observable<ApolloQueryResult<GetParticipantsInVotingQuery>> {
+    return this.getParticipantsInVotingGQL.fetch(
+      { votingId },
+      { fetchPolicy: 'network-only' }
+    );
+  }
+
+  vote(
+    input: Votes_Insert_Input[]
+  ): Observable<
+    FetchResult<VoteMutation, Record<string, any>, Record<string, any>>
+  > {
+    return this.voteGQL.mutate({ input }, { errorPolicy: 'all' });
+  }
+  markVoteAsInSection(
+    id: number
+  ): Observable<
+    FetchResult<
+      MarkVoteAsInSectionMutation,
+      Record<string, any>,
+      Record<string, any>
+    >
+  > {
+    return this.markVoteAsInSectionGQL.mutate({ id });
+  }
+
+  //#region VOTINGS
+
+  //#region REFERENDUMS
 
   createReferendum(
     referendumInput: Referendums_Insert_Input
@@ -102,83 +258,41 @@ export class VotingsService {
     );
   }
 
-  createVoting(
-    object: Votings_Insert_Input
-  ): Observable<
-    FetchResult<CreateVotingMutation, Record<string, any>, Record<string, any>>
-  > {
-    return this.createVotingGQL.mutate(
-      { input: object },
-      { errorPolicy: 'all' }
-    );
-  }
-
-  updateVoting(
-    id: number,
-    set: Votings_Set_Input
-  ): Observable<
-    FetchResult<UpdateVotingMutation, Record<string, any>, Record<string, any>>
-  > {
-    return this.updateVotingGQL.mutate(
-      { id, input: set },
-      { errorPolicy: 'all' }
-    );
-  }
-
-  getVotings(
-    limit = 10,
-    offset = 0,
-    condition: Votings_Bool_Exp = {},
-    orderBy: Votings_Order_By
-  ) {
-    return this.getVotingsGQL.watch(
-      { limit, offset, condition, orderBy },
-      {
-        fetchPolicy: 'network-only',
-        partialRefetch: true,
-        errorPolicy: 'all',
-        pollInterval: 5 * 1000,
-      }
-    );
-  }
-
-  getStartedVotings(): Observable<ApolloQueryResult<GetStartedVotingsQuery>> {
-    const where: Votings_Bool_Exp = {
-      _and: [
-        { locked: { _eq: true } },
-        { startedAt: { _is_null: false } },
-        { finishedAt: { _is_null: true } },
-      ],
-    };
-    return this.getStartedVotingsGQL.fetch(
-      { where },
-      { fetchPolicy: 'network-only' }
-    );
-  }
-
-  public getUpcomingVotings(
-    startDate: Date
-  ): Observable<ApolloQueryResult<GetUpcomingVotingsQuery>> {
-    return this.getUpcomingVotingsGQL.fetch({ startDate });
-  }
-  getStartedReferendums(): Observable<
-    ApolloQueryResult<GetStartedReferendumsQuery>
-  > {
-    const where: Referendums_Bool_Exp = {
-      _and: [
-        { locked: { _eq: true } },
-        { startedAt: { _is_null: false } },
-        { finishedAt: { _is_null: true } },
-      ],
-    };
+  getStartedReferendums(
+    votingSectionSettlementId: number
+  ): Observable<ApolloQueryResult<GetStartedReferendumsQuery>> {
+    let where: Referendums_Bool_Exp;
+    if (votingSectionSettlementId) {
+      where = {
+        _and: [
+          { locked: { _eq: true } },
+          { startedAt: { _is_null: false } },
+          { finishedAt: { _is_null: true } },
+          {
+            _or: [
+              // global or local
+              { settlementId: { _is_null: true } },
+              { settlementId: { _eq: votingSectionSettlementId } },
+            ],
+          },
+        ],
+      };
+    } else {
+      where = {
+        _and: [
+          // all
+          { locked: { _eq: true } },
+          { startedAt: { _is_null: false } },
+          { finishedAt: { _is_null: true } },
+        ],
+      };
+    }
 
     return this.getStartedReferendumsGQL.fetch(
       { where },
       { fetchPolicy: 'network-only' }
     );
   }
-
-  //#region VOTES
   addVoteForReferendum(
     answers: Referendum_Votes_Insert_Input[]
   ): Observable<
@@ -194,4 +308,6 @@ export class VotingsService {
       { errorPolicy: 'all' }
     );
   }
+
+  //#region  REFERENDUMS
 }

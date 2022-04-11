@@ -49,24 +49,16 @@
           <div class="col">
             <mat-form-field class="full-width">
               <mat-select
+                #typeSelect
                 formControlName="type"
-                placeholder="Тип на организацията"
+                placeholder="Тип избор"
+                (selectionChange)="onTypeChanged(typeSelect.value)"
               >
                 <mat-option
                   *ngFor="let t of types | keyvalue"
                   [value]="t.value"
-                  [disabled]="
-                    t.value === 'mayoral' || t.value === 'local_government'
-                  "
                 >
-                  <div
-                    *ngIf="
-                      t.value !== 'local_referendum' &&
-                      t.value !== 'national_referendum'
-                    "
-                  >
-                    {{ labels[t.value.toString()] }}
-                  </div>
+                  {{ labels[t.value.toString()] }}
                 </mat-option>
               </mat-select>
             </mat-form-field>
@@ -97,6 +89,78 @@
             </mat-form-field>
           </div>
         </div>
+      </div>
+
+      <div
+        *ngIf="isLocal | async"
+        class="mat-elevation-z4 form-sector"
+        style="display: flow-root"
+      >
+        <!--  *ngIf="slide.checked" -->
+
+        Изберете област и населено място
+        <div class="row">
+          <div class="col">
+            <mat-form-field class="full-width">
+              <div style="display: flex">
+                <input
+                  matInput
+                  placeholder="Област*"
+                  formControlName="districtName"
+                  [matAutocomplete]="filterDistricts"
+                  (keyup)="onSearch('district')"
+                />
+
+                <mat-icon>search</mat-icon>
+              </div>
+              <mat-autocomplete
+                #filterDistricts="matAutocomplete"
+                (optionSelected)="onDistrictSelected()"
+              >
+                <ng-container>
+                  <mat-option
+                    *ngFor="let district of districts$ | async"
+                    [value]="district.name"
+                  >
+                    {{ district.name }}
+                  </mat-option>
+                </ng-container>
+              </mat-autocomplete>
+            </mat-form-field>
+          </div>
+
+          <div class="col">
+            <mat-form-field class="full-width">
+              <div style="display: flex">
+                <input
+                  matInput
+                  placeholder="Населено място"
+                  formControlName="settlementName"
+                  [matAutocomplete]="filterSettlements"
+                  (keyup)="onSearch('settlement')"
+                  [readonly]="isSettlementAutoDisabled()"
+                />
+                <mat-icon>search</mat-icon>
+              </div>
+              <mat-autocomplete
+                #filterSettlements="matAutocomplete"
+                (optionSelected)="onSettlementSelected()"
+              >
+                <ng-container>
+                  <mat-option
+                    *ngFor="let settlement of settlements$ | async"
+                    [value]="settlement.name"
+                  >
+                    {{ settlement.name }}
+                  </mat-option>
+                </ng-container>
+              </mat-autocomplete>
+            </mat-form-field>
+          </div>
+        </div>
+      </div>
+
+      <div class="mat-elevation-z4 form-sector">
         <div class="row">
           <div class="col">
             <mat-form-field class="full-width">
@@ -144,7 +208,9 @@
         mat-raised-button
         color="primary"
         type="submit"
-        [disabled]="form.invalid || (loading$ | async) === true"
+        [disabled]="
+          form.invalid || (loading$ | async) === true || form.disabled
+        "
       >
         {{ (isUpdate | async) ? "Промени" : "Създай" }}
       </button>

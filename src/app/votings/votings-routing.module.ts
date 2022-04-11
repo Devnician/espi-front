@@ -8,12 +8,11 @@ import { VotingsDashboardComponent } from './votings-dashboard/votings-dashboard
 import { VotingsTableComponent } from './votings-table/votings-table.component';
 
 const routes: Routes = [
-  // { path: '', component: VotingsDashboardComponent },
   {
     path: '',
     children: [
       {
-        path: 'dashboard',
+        path: '',
         component: VotingsDashboardComponent,
       },
       {

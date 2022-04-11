@@ -9,6 +9,7 @@ import { MatCardModule } from '@angular/material/card';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatDialogModule } from '@angular/material/dialog';
+import { MatDividerModule } from '@angular/material/divider';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatGridListModule } from '@angular/material/grid-list';
 import { MatIconModule } from '@angular/material/icon';
@@ -27,6 +28,7 @@ import { MatTabsModule } from '@angular/material/tabs';
 import { Donkey } from '../services/donkey.service';
 import { EditReferendumTableComponent } from './edit-referendum-table/edit-referendum-table.component';
 import { EditReferendumComponent } from './edit-referendum/edit-referendum.component';
+import { EditVotingComponent } from './edit-voting/edit-voting.component';
 import { ReferendumComponent } from './referendum/referendum.component';
 import { ReferendumsTableComponent } from './referendums-table/referendums-table.component';
 import { ChildTableComponent } from './vote/child/child-table/child-table.component';
@@ -37,7 +39,6 @@ import { VoteComponent } from './vote/vote.component';
 import { VotingsDashboardComponent } from './votings-dashboard/votings-dashboard.component';
 import { VotingsRoutingModule } from './votings-routing.module';
 import { VotingsTableComponent } from './votings-table/votings-table.component';
-import { EditVotingComponent } from './edit-voting/edit-voting.component';
 @NgModule({
   declarations: [
     VotingsDashboardComponent,
@@ -78,7 +79,7 @@ import { EditVotingComponent } from './edit-voting/edit-voting.component';
     MatSelectModule,
     MatSlideToggleModule,
     MatAutocompleteModule,
-
+    MatDividerModule,
     // MatProgressSpinnerModule,
 
     MatDialogModule,

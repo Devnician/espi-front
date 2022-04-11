@@ -72,9 +72,7 @@ select_permissions:
     - settlementId
     - description
     - street
-    filter:
-      id:
-        _eq: X-Hasura-User-Id
+    filter: {}
   role: user
 update_permissions:
 - permission:
