@@ -28,10 +28,12 @@ export class BaseGuard implements CanActivate {
     this.obs.push(this.authService.user$);
     this.obs.push(this.authService.userRoleIndex$);
     combineLatest(this.obs).subscribe((observableResults) => {
+      //  console.log(observableResults);
       const user: LoggedUser = observableResults[0] as LoggedUser;
       const index = observableResults[1];
 
       if (isNullOrUndefined(user) === false && (index === 0 || index === 1)) {
+        //  console.log(index);
         if (index === 0) {
           this.currentRole = user.roleType.value as Role_Types_Enum;
         } else if (index === 1) {

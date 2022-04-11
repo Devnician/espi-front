@@ -61,7 +61,7 @@ export class CountingsDashboardComponent {
   }
   getStartedVotings() {
     this.voitngsService
-      .getStartedVotings()
+      .getStartedVotings(null)
       .pipe(
         switchMap((response) => {
           const votings = response.data.votings;

@@ -13,7 +13,6 @@ export type Scalars = {
   Int: number;
   Float: number;
   bigint: any;
-  date: any;
   timestamp: any;
   timestamptz: any;
 };
@@ -352,478 +351,6 @@ export type Bigint_Comparison_Exp = {
   _lte?: Maybe<Scalars['bigint']>;
   _neq?: Maybe<Scalars['bigint']>;
   _nin?: Maybe<Array<Scalars['bigint']>>;
-};
-
-/** columns and relationships of "candidate_lists" */
-export type Candidate_Lists = {
-  __typename?: 'candidate_lists';
-  createdAt: Scalars['timestamptz'];
-  description: Scalars['String'];
-  id: Scalars['Int'];
-  name: Scalars['String'];
-  settlementId?: Maybe<Scalars['Int']>;
-  updatedAt: Scalars['timestamptz'];
-  votingId: Scalars['Int'];
-};
-
-/** aggregated selection of "candidate_lists" */
-export type Candidate_Lists_Aggregate = {
-  __typename?: 'candidate_lists_aggregate';
-  aggregate?: Maybe<Candidate_Lists_Aggregate_Fields>;
-  nodes: Array<Candidate_Lists>;
-};
-
-/** aggregate fields of "candidate_lists" */
-export type Candidate_Lists_Aggregate_Fields = {
-  __typename?: 'candidate_lists_aggregate_fields';
-  avg?: Maybe<Candidate_Lists_Avg_Fields>;
-  count: Scalars['Int'];
-  max?: Maybe<Candidate_Lists_Max_Fields>;
-  min?: Maybe<Candidate_Lists_Min_Fields>;
-  stddev?: Maybe<Candidate_Lists_Stddev_Fields>;
-  stddev_pop?: Maybe<Candidate_Lists_Stddev_Pop_Fields>;
-  stddev_samp?: Maybe<Candidate_Lists_Stddev_Samp_Fields>;
-  sum?: Maybe<Candidate_Lists_Sum_Fields>;
-  var_pop?: Maybe<Candidate_Lists_Var_Pop_Fields>;
-  var_samp?: Maybe<Candidate_Lists_Var_Samp_Fields>;
-  variance?: Maybe<Candidate_Lists_Variance_Fields>;
-};
-
-
-/** aggregate fields of "candidate_lists" */
-export type Candidate_Lists_Aggregate_FieldsCountArgs = {
-  columns?: Maybe<Array<Candidate_Lists_Select_Column>>;
-  distinct?: Maybe<Scalars['Boolean']>;
-};
-
-/** aggregate avg on columns */
-export type Candidate_Lists_Avg_Fields = {
-  __typename?: 'candidate_lists_avg_fields';
-  id?: Maybe<Scalars['Float']>;
-  settlementId?: Maybe<Scalars['Float']>;
-  votingId?: Maybe<Scalars['Float']>;
-};
-
-/** Boolean expression to filter rows from the table "candidate_lists". All fields are combined with a logical 'AND'. */
-export type Candidate_Lists_Bool_Exp = {
-  _and?: Maybe<Array<Candidate_Lists_Bool_Exp>>;
-  _not?: Maybe<Candidate_Lists_Bool_Exp>;
-  _or?: Maybe<Array<Candidate_Lists_Bool_Exp>>;
-  createdAt?: Maybe<Timestamptz_Comparison_Exp>;
-  description?: Maybe<String_Comparison_Exp>;
-  id?: Maybe<Int_Comparison_Exp>;
-  name?: Maybe<String_Comparison_Exp>;
-  settlementId?: Maybe<Int_Comparison_Exp>;
-  updatedAt?: Maybe<Timestamptz_Comparison_Exp>;
-  votingId?: Maybe<Int_Comparison_Exp>;
-};
-
-/** unique or primary key constraints on table "candidate_lists" */
-export enum Candidate_Lists_Constraint {
-  /** unique or primary key constraint */
-  CandidateListsPkey = 'candidate_lists_pkey'
-}
-
-/** input type for incrementing numeric columns in table "candidate_lists" */
-export type Candidate_Lists_Inc_Input = {
-  id?: Maybe<Scalars['Int']>;
-  settlementId?: Maybe<Scalars['Int']>;
-  votingId?: Maybe<Scalars['Int']>;
-};
-
-/** input type for inserting data into table "candidate_lists" */
-export type Candidate_Lists_Insert_Input = {
-  createdAt?: Maybe<Scalars['timestamptz']>;
-  description?: Maybe<Scalars['String']>;
-  id?: Maybe<Scalars['Int']>;
-  name?: Maybe<Scalars['String']>;
-  settlementId?: Maybe<Scalars['Int']>;
-  updatedAt?: Maybe<Scalars['timestamptz']>;
-  votingId?: Maybe<Scalars['Int']>;
-};
-
-/** aggregate max on columns */
-export type Candidate_Lists_Max_Fields = {
-  __typename?: 'candidate_lists_max_fields';
-  createdAt?: Maybe<Scalars['timestamptz']>;
-  description?: Maybe<Scalars['String']>;
-  id?: Maybe<Scalars['Int']>;
-  name?: Maybe<Scalars['String']>;
-  settlementId?: Maybe<Scalars['Int']>;
-  updatedAt?: Maybe<Scalars['timestamptz']>;
-  votingId?: Maybe<Scalars['Int']>;
-};
-
-/** aggregate min on columns */
-export type Candidate_Lists_Min_Fields = {
-  __typename?: 'candidate_lists_min_fields';
-  createdAt?: Maybe<Scalars['timestamptz']>;
-  description?: Maybe<Scalars['String']>;
-  id?: Maybe<Scalars['Int']>;
-  name?: Maybe<Scalars['String']>;
-  settlementId?: Maybe<Scalars['Int']>;
-  updatedAt?: Maybe<Scalars['timestamptz']>;
-  votingId?: Maybe<Scalars['Int']>;
-};
-
-/** response of any mutation on the table "candidate_lists" */
-export type Candidate_Lists_Mutation_Response = {
-  __typename?: 'candidate_lists_mutation_response';
-  /** number of rows affected by the mutation */
-  affected_rows: Scalars['Int'];
-  /** data from the rows affected by the mutation */
-  returning: Array<Candidate_Lists>;
-};
-
-/** on conflict condition type for table "candidate_lists" */
-export type Candidate_Lists_On_Conflict = {
-  constraint: Candidate_Lists_Constraint;
-  update_columns: Array<Candidate_Lists_Update_Column>;
-  where?: Maybe<Candidate_Lists_Bool_Exp>;
-};
-
-/** Ordering options when selecting data from "candidate_lists". */
-export type Candidate_Lists_Order_By = {
-  createdAt?: Maybe<Order_By>;
-  description?: Maybe<Order_By>;
-  id?: Maybe<Order_By>;
-  name?: Maybe<Order_By>;
-  settlementId?: Maybe<Order_By>;
-  updatedAt?: Maybe<Order_By>;
-  votingId?: Maybe<Order_By>;
-};
-
-/** primary key columns input for table: candidate_lists */
-export type Candidate_Lists_Pk_Columns_Input = {
-  id: Scalars['Int'];
-};
-
-/** select columns of table "candidate_lists" */
-export enum Candidate_Lists_Select_Column {
-  /** column name */
-  CreatedAt = 'createdAt',
-  /** column name */
-  Description = 'description',
-  /** column name */
-  Id = 'id',
-  /** column name */
-  Name = 'name',
-  /** column name */
-  SettlementId = 'settlementId',
-  /** column name */
-  UpdatedAt = 'updatedAt',
-  /** column name */
-  VotingId = 'votingId'
-}
-
-/** input type for updating data in table "candidate_lists" */
-export type Candidate_Lists_Set_Input = {
-  createdAt?: Maybe<Scalars['timestamptz']>;
-  description?: Maybe<Scalars['String']>;
-  id?: Maybe<Scalars['Int']>;
-  name?: Maybe<Scalars['String']>;
-  settlementId?: Maybe<Scalars['Int']>;
-  updatedAt?: Maybe<Scalars['timestamptz']>;
-  votingId?: Maybe<Scalars['Int']>;
-};
-
-/** aggregate stddev on columns */
-export type Candidate_Lists_Stddev_Fields = {
-  __typename?: 'candidate_lists_stddev_fields';
-  id?: Maybe<Scalars['Float']>;
-  settlementId?: Maybe<Scalars['Float']>;
-  votingId?: Maybe<Scalars['Float']>;
-};
-
-/** aggregate stddev_pop on columns */
-export type Candidate_Lists_Stddev_Pop_Fields = {
-  __typename?: 'candidate_lists_stddev_pop_fields';
-  id?: Maybe<Scalars['Float']>;
-  settlementId?: Maybe<Scalars['Float']>;
-  votingId?: Maybe<Scalars['Float']>;
-};
-
-/** aggregate stddev_samp on columns */
-export type Candidate_Lists_Stddev_Samp_Fields = {
-  __typename?: 'candidate_lists_stddev_samp_fields';
-  id?: Maybe<Scalars['Float']>;
-  settlementId?: Maybe<Scalars['Float']>;
-  votingId?: Maybe<Scalars['Float']>;
-};
-
-/** aggregate sum on columns */
-export type Candidate_Lists_Sum_Fields = {
-  __typename?: 'candidate_lists_sum_fields';
-  id?: Maybe<Scalars['Int']>;
-  settlementId?: Maybe<Scalars['Int']>;
-  votingId?: Maybe<Scalars['Int']>;
-};
-
-/** update columns of table "candidate_lists" */
-export enum Candidate_Lists_Update_Column {
-  /** column name */
-  CreatedAt = 'createdAt',
-  /** column name */
-  Description = 'description',
-  /** column name */
-  Id = 'id',
-  /** column name */
-  Name = 'name',
-  /** column name */
-  SettlementId = 'settlementId',
-  /** column name */
-  UpdatedAt = 'updatedAt',
-  /** column name */
-  VotingId = 'votingId'
-}
-
-/** aggregate var_pop on columns */
-export type Candidate_Lists_Var_Pop_Fields = {
-  __typename?: 'candidate_lists_var_pop_fields';
-  id?: Maybe<Scalars['Float']>;
-  settlementId?: Maybe<Scalars['Float']>;
-  votingId?: Maybe<Scalars['Float']>;
-};
-
-/** aggregate var_samp on columns */
-export type Candidate_Lists_Var_Samp_Fields = {
-  __typename?: 'candidate_lists_var_samp_fields';
-  id?: Maybe<Scalars['Float']>;
-  settlementId?: Maybe<Scalars['Float']>;
-  votingId?: Maybe<Scalars['Float']>;
-};
-
-/** aggregate variance on columns */
-export type Candidate_Lists_Variance_Fields = {
-  __typename?: 'candidate_lists_variance_fields';
-  id?: Maybe<Scalars['Float']>;
-  settlementId?: Maybe<Scalars['Float']>;
-  votingId?: Maybe<Scalars['Float']>;
-};
-
-/** columns and relationships of "candidates" */
-export type Candidates = {
-  __typename?: 'candidates';
-  candidateListId: Scalars['Int'];
-  createdAt: Scalars['timestamptz'];
-  id: Scalars['Int'];
-  politicalGroupMemberId: Scalars['Int'];
-  updatedAt: Scalars['timestamptz'];
-};
-
-/** aggregated selection of "candidates" */
-export type Candidates_Aggregate = {
-  __typename?: 'candidates_aggregate';
-  aggregate?: Maybe<Candidates_Aggregate_Fields>;
-  nodes: Array<Candidates>;
-};
-
-/** aggregate fields of "candidates" */
-export type Candidates_Aggregate_Fields = {
-  __typename?: 'candidates_aggregate_fields';
-  avg?: Maybe<Candidates_Avg_Fields>;
-  count: Scalars['Int'];
-  max?: Maybe<Candidates_Max_Fields>;
-  min?: Maybe<Candidates_Min_Fields>;
-  stddev?: Maybe<Candidates_Stddev_Fields>;
-  stddev_pop?: Maybe<Candidates_Stddev_Pop_Fields>;
-  stddev_samp?: Maybe<Candidates_Stddev_Samp_Fields>;
-  sum?: Maybe<Candidates_Sum_Fields>;
-  var_pop?: Maybe<Candidates_Var_Pop_Fields>;
-  var_samp?: Maybe<Candidates_Var_Samp_Fields>;
-  variance?: Maybe<Candidates_Variance_Fields>;
-};
-
-
-/** aggregate fields of "candidates" */
-export type Candidates_Aggregate_FieldsCountArgs = {
-  columns?: Maybe<Array<Candidates_Select_Column>>;
-  distinct?: Maybe<Scalars['Boolean']>;
-};
-
-/** aggregate avg on columns */
-export type Candidates_Avg_Fields = {
-  __typename?: 'candidates_avg_fields';
-  candidateListId?: Maybe<Scalars['Float']>;
-  id?: Maybe<Scalars['Float']>;
-  politicalGroupMemberId?: Maybe<Scalars['Float']>;
-};
-
-/** Boolean expression to filter rows from the table "candidates". All fields are combined with a logical 'AND'. */
-export type Candidates_Bool_Exp = {
-  _and?: Maybe<Array<Candidates_Bool_Exp>>;
-  _not?: Maybe<Candidates_Bool_Exp>;
-  _or?: Maybe<Array<Candidates_Bool_Exp>>;
-  candidateListId?: Maybe<Int_Comparison_Exp>;
-  createdAt?: Maybe<Timestamptz_Comparison_Exp>;
-  id?: Maybe<Int_Comparison_Exp>;
-  politicalGroupMemberId?: Maybe<Int_Comparison_Exp>;
-  updatedAt?: Maybe<Timestamptz_Comparison_Exp>;
-};
-
-/** unique or primary key constraints on table "candidates" */
-export enum Candidates_Constraint {
-  /** unique or primary key constraint */
-  CandidatesPkey = 'candidates_pkey'
-}
-
-/** input type for incrementing numeric columns in table "candidates" */
-export type Candidates_Inc_Input = {
-  candidateListId?: Maybe<Scalars['Int']>;
-  id?: Maybe<Scalars['Int']>;
-  politicalGroupMemberId?: Maybe<Scalars['Int']>;
-};
-
-/** input type for inserting data into table "candidates" */
-export type Candidates_Insert_Input = {
-  candidateListId?: Maybe<Scalars['Int']>;
-  createdAt?: Maybe<Scalars['timestamptz']>;
-  id?: Maybe<Scalars['Int']>;
-  politicalGroupMemberId?: Maybe<Scalars['Int']>;
-  updatedAt?: Maybe<Scalars['timestamptz']>;
-};
-
-/** aggregate max on columns */
-export type Candidates_Max_Fields = {
-  __typename?: 'candidates_max_fields';
-  candidateListId?: Maybe<Scalars['Int']>;
-  createdAt?: Maybe<Scalars['timestamptz']>;
-  id?: Maybe<Scalars['Int']>;
-  politicalGroupMemberId?: Maybe<Scalars['Int']>;
-  updatedAt?: Maybe<Scalars['timestamptz']>;
-};
-
-/** aggregate min on columns */
-export type Candidates_Min_Fields = {
-  __typename?: 'candidates_min_fields';
-  candidateListId?: Maybe<Scalars['Int']>;
-  createdAt?: Maybe<Scalars['timestamptz']>;
-  id?: Maybe<Scalars['Int']>;
-  politicalGroupMemberId?: Maybe<Scalars['Int']>;
-  updatedAt?: Maybe<Scalars['timestamptz']>;
-};
-
-/** response of any mutation on the table "candidates" */
-export type Candidates_Mutation_Response = {
-  __typename?: 'candidates_mutation_response';
-  /** number of rows affected by the mutation */
-  affected_rows: Scalars['Int'];
-  /** data from the rows affected by the mutation */
-  returning: Array<Candidates>;
-};
-
-/** on conflict condition type for table "candidates" */
-export type Candidates_On_Conflict = {
-  constraint: Candidates_Constraint;
-  update_columns: Array<Candidates_Update_Column>;
-  where?: Maybe<Candidates_Bool_Exp>;
-};
-
-/** Ordering options when selecting data from "candidates". */
-export type Candidates_Order_By = {
-  candidateListId?: Maybe<Order_By>;
-  createdAt?: Maybe<Order_By>;
-  id?: Maybe<Order_By>;
-  politicalGroupMemberId?: Maybe<Order_By>;
-  updatedAt?: Maybe<Order_By>;
-};
-
-/** primary key columns input for table: candidates */
-export type Candidates_Pk_Columns_Input = {
-  id: Scalars['Int'];
-};
-
-/** select columns of table "candidates" */
-export enum Candidates_Select_Column {
-  /** column name */
-  CandidateListId = 'candidateListId',
-  /** column name */
-  CreatedAt = 'createdAt',
-  /** column name */
-  Id = 'id',
-  /** column name */
-  PoliticalGroupMemberId = 'politicalGroupMemberId',
-  /** column name */
-  UpdatedAt = 'updatedAt'
-}
-
-/** input type for updating data in table "candidates" */
-export type Candidates_Set_Input = {
-  candidateListId?: Maybe<Scalars['Int']>;
-  createdAt?: Maybe<Scalars['timestamptz']>;
-  id?: Maybe<Scalars['Int']>;
-  politicalGroupMemberId?: Maybe<Scalars['Int']>;
-  updatedAt?: Maybe<Scalars['timestamptz']>;
-};
-
-/** aggregate stddev on columns */
-export type Candidates_Stddev_Fields = {
-  __typename?: 'candidates_stddev_fields';
-  candidateListId?: Maybe<Scalars['Float']>;
-  id?: Maybe<Scalars['Float']>;
-  politicalGroupMemberId?: Maybe<Scalars['Float']>;
-};
-
-/** aggregate stddev_pop on columns */
-export type Candidates_Stddev_Pop_Fields = {
-  __typename?: 'candidates_stddev_pop_fields';
-  candidateListId?: Maybe<Scalars['Float']>;
-  id?: Maybe<Scalars['Float']>;
-  politicalGroupMemberId?: Maybe<Scalars['Float']>;
-};
-
-/** aggregate stddev_samp on columns */
-export type Candidates_Stddev_Samp_Fields = {
-  __typename?: 'candidates_stddev_samp_fields';
-  candidateListId?: Maybe<Scalars['Float']>;
-  id?: Maybe<Scalars['Float']>;
-  politicalGroupMemberId?: Maybe<Scalars['Float']>;
-};
-
-/** aggregate sum on columns */
-export type Candidates_Sum_Fields = {
-  __typename?: 'candidates_sum_fields';
-  candidateListId?: Maybe<Scalars['Int']>;
-  id?: Maybe<Scalars['Int']>;
-  politicalGroupMemberId?: Maybe<Scalars['Int']>;
-};
-
-/** update columns of table "candidates" */
-export enum Candidates_Update_Column {
-  /** column name */
-  CandidateListId = 'candidateListId',
-  /** column name */
-  CreatedAt = 'createdAt',
-  /** column name */
-  Id = 'id',
-  /** column name */
-  PoliticalGroupMemberId = 'politicalGroupMemberId',
-  /** column name */
-  UpdatedAt = 'updatedAt'
-}
-
-/** aggregate var_pop on columns */
-export type Candidates_Var_Pop_Fields = {
-  __typename?: 'candidates_var_pop_fields';
-  candidateListId?: Maybe<Scalars['Float']>;
-  id?: Maybe<Scalars['Float']>;
-  politicalGroupMemberId?: Maybe<Scalars['Float']>;
-};
-
-/** aggregate var_samp on columns */
-export type Candidates_Var_Samp_Fields = {
-  __typename?: 'candidates_var_samp_fields';
-  candidateListId?: Maybe<Scalars['Float']>;
-  id?: Maybe<Scalars['Float']>;
-  politicalGroupMemberId?: Maybe<Scalars['Float']>;
-};
-
-/** aggregate variance on columns */
-export type Candidates_Variance_Fields = {
-  __typename?: 'candidates_variance_fields';
-  candidateListId?: Maybe<Scalars['Float']>;
-  id?: Maybe<Scalars['Float']>;
-  politicalGroupMemberId?: Maybe<Scalars['Float']>;
 };
 
 /** columns and relationships of "commision_members" */
@@ -1464,20 +991,6 @@ export type Counters_Variance_Fields = {
   id?: Maybe<Scalars['Float']>;
 };
 
-
-/** Boolean expression to compare columns of type "date". All fields are combined with logical 'AND'. */
-export type Date_Comparison_Exp = {
-  _eq?: Maybe<Scalars['date']>;
-  _gt?: Maybe<Scalars['date']>;
-  _gte?: Maybe<Scalars['date']>;
-  _in?: Maybe<Array<Scalars['date']>>;
-  _is_null?: Maybe<Scalars['Boolean']>;
-  _lt?: Maybe<Scalars['date']>;
-  _lte?: Maybe<Scalars['date']>;
-  _neq?: Maybe<Scalars['date']>;
-  _nin?: Maybe<Array<Scalars['date']>>;
-};
-
 export type Distribute_The_Undistributed_Users_New_Args = {
   lim?: Maybe<Scalars['Int']>;
 };
@@ -1494,14 +1007,6 @@ export type Mutation_Root = {
   delete_addresses?: Maybe<Addresses_Mutation_Response>;
   /** delete single row from the table: "addresses" */
   delete_addresses_by_pk?: Maybe<Addresses>;
-  /** delete data from the table: "candidate_lists" */
-  delete_candidate_lists?: Maybe<Candidate_Lists_Mutation_Response>;
-  /** delete single row from the table: "candidate_lists" */
-  delete_candidate_lists_by_pk?: Maybe<Candidate_Lists>;
-  /** delete data from the table: "candidates" */
-  delete_candidates?: Maybe<Candidates_Mutation_Response>;
-  /** delete single row from the table: "candidates" */
-  delete_candidates_by_pk?: Maybe<Candidates>;
   /** delete data from the table: "commision_members" */
   delete_commision_members?: Maybe<Commision_Members_Mutation_Response>;
   /** delete single row from the table: "commision_members" */
@@ -1558,10 +1063,6 @@ export type Mutation_Root = {
   delete_voting_section?: Maybe<Voting_Section_Mutation_Response>;
   /** delete single row from the table: "voting_section" */
   delete_voting_section_by_pk?: Maybe<Voting_Section>;
-  /** delete data from the table: "voting_section_sessions" */
-  delete_voting_section_sessions?: Maybe<Voting_Section_Sessions_Mutation_Response>;
-  /** delete single row from the table: "voting_section_sessions" */
-  delete_voting_section_sessions_by_pk?: Maybe<Voting_Section_Sessions>;
   /** delete data from the table: "voting_types" */
   delete_voting_types?: Maybe<Voting_Types_Mutation_Response>;
   /** delete single row from the table: "voting_types" */
@@ -1576,14 +1077,6 @@ export type Mutation_Root = {
   insert_addresses?: Maybe<Addresses_Mutation_Response>;
   /** insert a single row into the table: "addresses" */
   insert_addresses_one?: Maybe<Addresses>;
-  /** insert data into the table: "candidate_lists" */
-  insert_candidate_lists?: Maybe<Candidate_Lists_Mutation_Response>;
-  /** insert a single row into the table: "candidate_lists" */
-  insert_candidate_lists_one?: Maybe<Candidate_Lists>;
-  /** insert data into the table: "candidates" */
-  insert_candidates?: Maybe<Candidates_Mutation_Response>;
-  /** insert a single row into the table: "candidates" */
-  insert_candidates_one?: Maybe<Candidates>;
   /** insert data into the table: "commision_members" */
   insert_commision_members?: Maybe<Commision_Members_Mutation_Response>;
   /** insert a single row into the table: "commision_members" */
@@ -1640,10 +1133,6 @@ export type Mutation_Root = {
   insert_voting_section?: Maybe<Voting_Section_Mutation_Response>;
   /** insert a single row into the table: "voting_section" */
   insert_voting_section_one?: Maybe<Voting_Section>;
-  /** insert data into the table: "voting_section_sessions" */
-  insert_voting_section_sessions?: Maybe<Voting_Section_Sessions_Mutation_Response>;
-  /** insert a single row into the table: "voting_section_sessions" */
-  insert_voting_section_sessions_one?: Maybe<Voting_Section_Sessions>;
   /** insert data into the table: "voting_types" */
   insert_voting_types?: Maybe<Voting_Types_Mutation_Response>;
   /** insert a single row into the table: "voting_types" */
@@ -1656,14 +1145,6 @@ export type Mutation_Root = {
   update_addresses?: Maybe<Addresses_Mutation_Response>;
   /** update single row of the table: "addresses" */
   update_addresses_by_pk?: Maybe<Addresses>;
-  /** update data of the table: "candidate_lists" */
-  update_candidate_lists?: Maybe<Candidate_Lists_Mutation_Response>;
-  /** update single row of the table: "candidate_lists" */
-  update_candidate_lists_by_pk?: Maybe<Candidate_Lists>;
-  /** update data of the table: "candidates" */
-  update_candidates?: Maybe<Candidates_Mutation_Response>;
-  /** update single row of the table: "candidates" */
-  update_candidates_by_pk?: Maybe<Candidates>;
   /** update data of the table: "commision_members" */
   update_commision_members?: Maybe<Commision_Members_Mutation_Response>;
   /** update single row of the table: "commision_members" */
@@ -1720,10 +1201,6 @@ export type Mutation_Root = {
   update_voting_section?: Maybe<Voting_Section_Mutation_Response>;
   /** update single row of the table: "voting_section" */
   update_voting_section_by_pk?: Maybe<Voting_Section>;
-  /** update data of the table: "voting_section_sessions" */
-  update_voting_section_sessions?: Maybe<Voting_Section_Sessions_Mutation_Response>;
-  /** update single row of the table: "voting_section_sessions" */
-  update_voting_section_sessions_by_pk?: Maybe<Voting_Section_Sessions>;
   /** update data of the table: "voting_types" */
   update_voting_types?: Maybe<Voting_Types_Mutation_Response>;
   /** update single row of the table: "voting_types" */
@@ -1743,30 +1220,6 @@ export type Mutation_RootDelete_AddressesArgs = {
 
 /** mutation root */
 export type Mutation_RootDelete_Addresses_By_PkArgs = {
-  id: Scalars['Int'];
-};
-
-
-/** mutation root */
-export type Mutation_RootDelete_Candidate_ListsArgs = {
-  where: Candidate_Lists_Bool_Exp;
-};
-
-
-/** mutation root */
-export type Mutation_RootDelete_Candidate_Lists_By_PkArgs = {
-  id: Scalars['Int'];
-};
-
-
-/** mutation root */
-export type Mutation_RootDelete_CandidatesArgs = {
-  where: Candidates_Bool_Exp;
-};
-
-
-/** mutation root */
-export type Mutation_RootDelete_Candidates_By_PkArgs = {
   id: Scalars['Int'];
 };
 
@@ -1940,18 +1393,6 @@ export type Mutation_RootDelete_Voting_Section_By_PkArgs = {
 
 
 /** mutation root */
-export type Mutation_RootDelete_Voting_Section_SessionsArgs = {
-  where: Voting_Section_Sessions_Bool_Exp;
-};
-
-
-/** mutation root */
-export type Mutation_RootDelete_Voting_Section_Sessions_By_PkArgs = {
-  id: Scalars['Int'];
-};
-
-
-/** mutation root */
 export type Mutation_RootDelete_Voting_TypesArgs = {
   where: Voting_Types_Bool_Exp;
 };
@@ -1997,34 +1438,6 @@ export type Mutation_RootInsert_AddressesArgs = {
 export type Mutation_RootInsert_Addresses_OneArgs = {
   object: Addresses_Insert_Input;
   on_conflict?: Maybe<Addresses_On_Conflict>;
-};
-
-
-/** mutation root */
-export type Mutation_RootInsert_Candidate_ListsArgs = {
-  objects: Array<Candidate_Lists_Insert_Input>;
-  on_conflict?: Maybe<Candidate_Lists_On_Conflict>;
-};
-
-
-/** mutation root */
-export type Mutation_RootInsert_Candidate_Lists_OneArgs = {
-  object: Candidate_Lists_Insert_Input;
-  on_conflict?: Maybe<Candidate_Lists_On_Conflict>;
-};
-
-
-/** mutation root */
-export type Mutation_RootInsert_CandidatesArgs = {
-  objects: Array<Candidates_Insert_Input>;
-  on_conflict?: Maybe<Candidates_On_Conflict>;
-};
-
-
-/** mutation root */
-export type Mutation_RootInsert_Candidates_OneArgs = {
-  object: Candidates_Insert_Input;
-  on_conflict?: Maybe<Candidates_On_Conflict>;
 };
 
 
@@ -2225,20 +1638,6 @@ export type Mutation_RootInsert_Voting_Section_OneArgs = {
 
 
 /** mutation root */
-export type Mutation_RootInsert_Voting_Section_SessionsArgs = {
-  objects: Array<Voting_Section_Sessions_Insert_Input>;
-  on_conflict?: Maybe<Voting_Section_Sessions_On_Conflict>;
-};
-
-
-/** mutation root */
-export type Mutation_RootInsert_Voting_Section_Sessions_OneArgs = {
-  object: Voting_Section_Sessions_Insert_Input;
-  on_conflict?: Maybe<Voting_Section_Sessions_On_Conflict>;
-};
-
-
-/** mutation root */
 export type Mutation_RootInsert_Voting_TypesArgs = {
   objects: Array<Voting_Types_Insert_Input>;
   on_conflict?: Maybe<Voting_Types_On_Conflict>;
@@ -2279,38 +1678,6 @@ export type Mutation_RootUpdate_Addresses_By_PkArgs = {
   _inc?: Maybe<Addresses_Inc_Input>;
   _set?: Maybe<Addresses_Set_Input>;
   pk_columns: Addresses_Pk_Columns_Input;
-};
-
-
-/** mutation root */
-export type Mutation_RootUpdate_Candidate_ListsArgs = {
-  _inc?: Maybe<Candidate_Lists_Inc_Input>;
-  _set?: Maybe<Candidate_Lists_Set_Input>;
-  where: Candidate_Lists_Bool_Exp;
-};
-
-
-/** mutation root */
-export type Mutation_RootUpdate_Candidate_Lists_By_PkArgs = {
-  _inc?: Maybe<Candidate_Lists_Inc_Input>;
-  _set?: Maybe<Candidate_Lists_Set_Input>;
-  pk_columns: Candidate_Lists_Pk_Columns_Input;
-};
-
-
-/** mutation root */
-export type Mutation_RootUpdate_CandidatesArgs = {
-  _inc?: Maybe<Candidates_Inc_Input>;
-  _set?: Maybe<Candidates_Set_Input>;
-  where: Candidates_Bool_Exp;
-};
-
-
-/** mutation root */
-export type Mutation_RootUpdate_Candidates_By_PkArgs = {
-  _inc?: Maybe<Candidates_Inc_Input>;
-  _set?: Maybe<Candidates_Set_Input>;
-  pk_columns: Candidates_Pk_Columns_Input;
 };
 
 
@@ -2531,22 +1898,6 @@ export type Mutation_RootUpdate_Voting_Section_By_PkArgs = {
   _inc?: Maybe<Voting_Section_Inc_Input>;
   _set?: Maybe<Voting_Section_Set_Input>;
   pk_columns: Voting_Section_Pk_Columns_Input;
-};
-
-
-/** mutation root */
-export type Mutation_RootUpdate_Voting_Section_SessionsArgs = {
-  _inc?: Maybe<Voting_Section_Sessions_Inc_Input>;
-  _set?: Maybe<Voting_Section_Sessions_Set_Input>;
-  where: Voting_Section_Sessions_Bool_Exp;
-};
-
-
-/** mutation root */
-export type Mutation_RootUpdate_Voting_Section_Sessions_By_PkArgs = {
-  _inc?: Maybe<Voting_Section_Sessions_Inc_Input>;
-  _set?: Maybe<Voting_Section_Sessions_Set_Input>;
-  pk_columns: Voting_Section_Sessions_Pk_Columns_Input;
 };
 
 
@@ -3369,18 +2720,6 @@ export type Query_Root = {
   addresses_aggregate: Addresses_Aggregate;
   /** fetch data from the table: "addresses" using primary key columns */
   addresses_by_pk?: Maybe<Addresses>;
-  /** fetch data from the table: "candidate_lists" */
-  candidate_lists: Array<Candidate_Lists>;
-  /** fetch aggregated fields from the table: "candidate_lists" */
-  candidate_lists_aggregate: Candidate_Lists_Aggregate;
-  /** fetch data from the table: "candidate_lists" using primary key columns */
-  candidate_lists_by_pk?: Maybe<Candidate_Lists>;
-  /** fetch data from the table: "candidates" */
-  candidates: Array<Candidates>;
-  /** fetch aggregated fields from the table: "candidates" */
-  candidates_aggregate: Candidates_Aggregate;
-  /** fetch data from the table: "candidates" using primary key columns */
-  candidates_by_pk?: Maybe<Candidates>;
   /** fetch data from the table: "commision_members" */
   commision_members: Array<Commision_Members>;
   /** fetch aggregated fields from the table: "commision_members" */
@@ -3473,12 +2812,6 @@ export type Query_Root = {
   voting_section_aggregate: Voting_Section_Aggregate;
   /** fetch data from the table: "voting_section" using primary key columns */
   voting_section_by_pk?: Maybe<Voting_Section>;
-  /** fetch data from the table: "voting_section_sessions" */
-  voting_section_sessions: Array<Voting_Section_Sessions>;
-  /** fetch aggregated fields from the table: "voting_section_sessions" */
-  voting_section_sessions_aggregate: Voting_Section_Sessions_Aggregate;
-  /** fetch data from the table: "voting_section_sessions" using primary key columns */
-  voting_section_sessions_by_pk?: Maybe<Voting_Section_Sessions>;
   /** fetch data from the table: "voting_types" */
   voting_types: Array<Voting_Types>;
   /** fetch aggregated fields from the table: "voting_types" */
@@ -3528,52 +2861,6 @@ export type Query_RootAddresses_AggregateArgs = {
 
 
 export type Query_RootAddresses_By_PkArgs = {
-  id: Scalars['Int'];
-};
-
-
-export type Query_RootCandidate_ListsArgs = {
-  distinct_on?: Maybe<Array<Candidate_Lists_Select_Column>>;
-  limit?: Maybe<Scalars['Int']>;
-  offset?: Maybe<Scalars['Int']>;
-  order_by?: Maybe<Array<Candidate_Lists_Order_By>>;
-  where?: Maybe<Candidate_Lists_Bool_Exp>;
-};
-
-
-export type Query_RootCandidate_Lists_AggregateArgs = {
-  distinct_on?: Maybe<Array<Candidate_Lists_Select_Column>>;
-  limit?: Maybe<Scalars['Int']>;
-  offset?: Maybe<Scalars['Int']>;
-  order_by?: Maybe<Array<Candidate_Lists_Order_By>>;
-  where?: Maybe<Candidate_Lists_Bool_Exp>;
-};
-
-
-export type Query_RootCandidate_Lists_By_PkArgs = {
-  id: Scalars['Int'];
-};
-
-
-export type Query_RootCandidatesArgs = {
-  distinct_on?: Maybe<Array<Candidates_Select_Column>>;
-  limit?: Maybe<Scalars['Int']>;
-  offset?: Maybe<Scalars['Int']>;
-  order_by?: Maybe<Array<Candidates_Order_By>>;
-  where?: Maybe<Candidates_Bool_Exp>;
-};
-
-
-export type Query_RootCandidates_AggregateArgs = {
-  distinct_on?: Maybe<Array<Candidates_Select_Column>>;
-  limit?: Maybe<Scalars['Int']>;
-  offset?: Maybe<Scalars['Int']>;
-  order_by?: Maybe<Array<Candidates_Order_By>>;
-  where?: Maybe<Candidates_Bool_Exp>;
-};
-
-
-export type Query_RootCandidates_By_PkArgs = {
   id: Scalars['Int'];
 };
 
@@ -3934,29 +3221,6 @@ export type Query_RootVoting_Section_AggregateArgs = {
 
 
 export type Query_RootVoting_Section_By_PkArgs = {
-  id: Scalars['Int'];
-};
-
-
-export type Query_RootVoting_Section_SessionsArgs = {
-  distinct_on?: Maybe<Array<Voting_Section_Sessions_Select_Column>>;
-  limit?: Maybe<Scalars['Int']>;
-  offset?: Maybe<Scalars['Int']>;
-  order_by?: Maybe<Array<Voting_Section_Sessions_Order_By>>;
-  where?: Maybe<Voting_Section_Sessions_Bool_Exp>;
-};
-
-
-export type Query_RootVoting_Section_Sessions_AggregateArgs = {
-  distinct_on?: Maybe<Array<Voting_Section_Sessions_Select_Column>>;
-  limit?: Maybe<Scalars['Int']>;
-  offset?: Maybe<Scalars['Int']>;
-  order_by?: Maybe<Array<Voting_Section_Sessions_Order_By>>;
-  where?: Maybe<Voting_Section_Sessions_Bool_Exp>;
-};
-
-
-export type Query_RootVoting_Section_Sessions_By_PkArgs = {
   id: Scalars['Int'];
 };
 
@@ -4920,7 +4184,7 @@ export type Referendums = {
   /** An object relationship */
   settlement?: Maybe<Settlements>;
   settlementId?: Maybe<Scalars['Int']>;
-  startDate?: Maybe<Scalars['date']>;
+  startDate?: Maybe<Scalars['timestamptz']>;
   startedAt?: Maybe<Scalars['timestamptz']>;
   updatedAt: Scalars['timestamptz'];
 };
@@ -4996,7 +4260,7 @@ export type Referendums_Bool_Exp = {
   referendumQuestions?: Maybe<Referendum_Questions_Bool_Exp>;
   settlement?: Maybe<Settlements_Bool_Exp>;
   settlementId?: Maybe<Int_Comparison_Exp>;
-  startDate?: Maybe<Date_Comparison_Exp>;
+  startDate?: Maybe<Timestamptz_Comparison_Exp>;
   startedAt?: Maybe<Timestamptz_Comparison_Exp>;
   updatedAt?: Maybe<Timestamptz_Comparison_Exp>;
 };
@@ -5026,7 +4290,7 @@ export type Referendums_Insert_Input = {
   referendumQuestions?: Maybe<Referendum_Questions_Arr_Rel_Insert_Input>;
   settlement?: Maybe<Settlements_Obj_Rel_Insert_Input>;
   settlementId?: Maybe<Scalars['Int']>;
-  startDate?: Maybe<Scalars['date']>;
+  startDate?: Maybe<Scalars['timestamptz']>;
   startedAt?: Maybe<Scalars['timestamptz']>;
   updatedAt?: Maybe<Scalars['timestamptz']>;
 };
@@ -5040,7 +4304,7 @@ export type Referendums_Max_Fields = {
   id?: Maybe<Scalars['Int']>;
   name?: Maybe<Scalars['String']>;
   settlementId?: Maybe<Scalars['Int']>;
-  startDate?: Maybe<Scalars['date']>;
+  startDate?: Maybe<Scalars['timestamptz']>;
   startedAt?: Maybe<Scalars['timestamptz']>;
   updatedAt?: Maybe<Scalars['timestamptz']>;
 };
@@ -5054,7 +4318,7 @@ export type Referendums_Min_Fields = {
   id?: Maybe<Scalars['Int']>;
   name?: Maybe<Scalars['String']>;
   settlementId?: Maybe<Scalars['Int']>;
-  startDate?: Maybe<Scalars['date']>;
+  startDate?: Maybe<Scalars['timestamptz']>;
   startedAt?: Maybe<Scalars['timestamptz']>;
   updatedAt?: Maybe<Scalars['timestamptz']>;
 };
@@ -5136,7 +4400,7 @@ export type Referendums_Set_Input = {
   locked?: Maybe<Scalars['Boolean']>;
   name?: Maybe<Scalars['String']>;
   settlementId?: Maybe<Scalars['Int']>;
-  startDate?: Maybe<Scalars['date']>;
+  startDate?: Maybe<Scalars['timestamptz']>;
   startedAt?: Maybe<Scalars['timestamptz']>;
   updatedAt?: Maybe<Scalars['timestamptz']>;
 };
@@ -5692,18 +4956,6 @@ export type Subscription_Root = {
   addresses_aggregate: Addresses_Aggregate;
   /** fetch data from the table: "addresses" using primary key columns */
   addresses_by_pk?: Maybe<Addresses>;
-  /** fetch data from the table: "candidate_lists" */
-  candidate_lists: Array<Candidate_Lists>;
-  /** fetch aggregated fields from the table: "candidate_lists" */
-  candidate_lists_aggregate: Candidate_Lists_Aggregate;
-  /** fetch data from the table: "candidate_lists" using primary key columns */
-  candidate_lists_by_pk?: Maybe<Candidate_Lists>;
-  /** fetch data from the table: "candidates" */
-  candidates: Array<Candidates>;
-  /** fetch aggregated fields from the table: "candidates" */
-  candidates_aggregate: Candidates_Aggregate;
-  /** fetch data from the table: "candidates" using primary key columns */
-  candidates_by_pk?: Maybe<Candidates>;
   /** fetch data from the table: "commision_members" */
   commision_members: Array<Commision_Members>;
   /** fetch aggregated fields from the table: "commision_members" */
@@ -5796,12 +5048,6 @@ export type Subscription_Root = {
   voting_section_aggregate: Voting_Section_Aggregate;
   /** fetch data from the table: "voting_section" using primary key columns */
   voting_section_by_pk?: Maybe<Voting_Section>;
-  /** fetch data from the table: "voting_section_sessions" */
-  voting_section_sessions: Array<Voting_Section_Sessions>;
-  /** fetch aggregated fields from the table: "voting_section_sessions" */
-  voting_section_sessions_aggregate: Voting_Section_Sessions_Aggregate;
-  /** fetch data from the table: "voting_section_sessions" using primary key columns */
-  voting_section_sessions_by_pk?: Maybe<Voting_Section_Sessions>;
   /** fetch data from the table: "voting_types" */
   voting_types: Array<Voting_Types>;
   /** fetch aggregated fields from the table: "voting_types" */
@@ -5836,52 +5082,6 @@ export type Subscription_RootAddresses_AggregateArgs = {
 
 
 export type Subscription_RootAddresses_By_PkArgs = {
-  id: Scalars['Int'];
-};
-
-
-export type Subscription_RootCandidate_ListsArgs = {
-  distinct_on?: Maybe<Array<Candidate_Lists_Select_Column>>;
-  limit?: Maybe<Scalars['Int']>;
-  offset?: Maybe<Scalars['Int']>;
-  order_by?: Maybe<Array<Candidate_Lists_Order_By>>;
-  where?: Maybe<Candidate_Lists_Bool_Exp>;
-};
-
-
-export type Subscription_RootCandidate_Lists_AggregateArgs = {
-  distinct_on?: Maybe<Array<Candidate_Lists_Select_Column>>;
-  limit?: Maybe<Scalars['Int']>;
-  offset?: Maybe<Scalars['Int']>;
-  order_by?: Maybe<Array<Candidate_Lists_Order_By>>;
-  where?: Maybe<Candidate_Lists_Bool_Exp>;
-};
-
-
-export type Subscription_RootCandidate_Lists_By_PkArgs = {
-  id: Scalars['Int'];
-};
-
-
-export type Subscription_RootCandidatesArgs = {
-  distinct_on?: Maybe<Array<Candidates_Select_Column>>;
-  limit?: Maybe<Scalars['Int']>;
-  offset?: Maybe<Scalars['Int']>;
-  order_by?: Maybe<Array<Candidates_Order_By>>;
-  where?: Maybe<Candidates_Bool_Exp>;
-};
-
-
-export type Subscription_RootCandidates_AggregateArgs = {
-  distinct_on?: Maybe<Array<Candidates_Select_Column>>;
-  limit?: Maybe<Scalars['Int']>;
-  offset?: Maybe<Scalars['Int']>;
-  order_by?: Maybe<Array<Candidates_Order_By>>;
-  where?: Maybe<Candidates_Bool_Exp>;
-};
-
-
-export type Subscription_RootCandidates_By_PkArgs = {
   id: Scalars['Int'];
 };
 
@@ -6242,29 +5442,6 @@ export type Subscription_RootVoting_Section_AggregateArgs = {
 
 
 export type Subscription_RootVoting_Section_By_PkArgs = {
-  id: Scalars['Int'];
-};
-
-
-export type Subscription_RootVoting_Section_SessionsArgs = {
-  distinct_on?: Maybe<Array<Voting_Section_Sessions_Select_Column>>;
-  limit?: Maybe<Scalars['Int']>;
-  offset?: Maybe<Scalars['Int']>;
-  order_by?: Maybe<Array<Voting_Section_Sessions_Order_By>>;
-  where?: Maybe<Voting_Section_Sessions_Bool_Exp>;
-};
-
-
-export type Subscription_RootVoting_Section_Sessions_AggregateArgs = {
-  distinct_on?: Maybe<Array<Voting_Section_Sessions_Select_Column>>;
-  limit?: Maybe<Scalars['Int']>;
-  offset?: Maybe<Scalars['Int']>;
-  order_by?: Maybe<Array<Voting_Section_Sessions_Order_By>>;
-  where?: Maybe<Voting_Section_Sessions_Bool_Exp>;
-};
-
-
-export type Subscription_RootVoting_Section_Sessions_By_PkArgs = {
   id: Scalars['Int'];
 };
 
@@ -7345,313 +6522,6 @@ export enum Voting_Section_Select_Column {
   UpdatedAt = 'updatedAt'
 }
 
-/** columns and relationships of "voting_section_sessions" */
-export type Voting_Section_Sessions = {
-  __typename?: 'voting_section_sessions';
-  candidatesListId?: Maybe<Scalars['Int']>;
-  createdAt: Scalars['timestamptz'];
-  finishedAt?: Maybe<Scalars['timestamptz']>;
-  id: Scalars['Int'];
-  referendumId?: Maybe<Scalars['Int']>;
-  sectionId: Scalars['Int'];
-  startedAt?: Maybe<Scalars['timestamptz']>;
-  tour?: Maybe<Scalars['Int']>;
-  updatedAt: Scalars['timestamptz'];
-  votingId: Scalars['Int'];
-};
-
-/** aggregated selection of "voting_section_sessions" */
-export type Voting_Section_Sessions_Aggregate = {
-  __typename?: 'voting_section_sessions_aggregate';
-  aggregate?: Maybe<Voting_Section_Sessions_Aggregate_Fields>;
-  nodes: Array<Voting_Section_Sessions>;
-};
-
-/** aggregate fields of "voting_section_sessions" */
-export type Voting_Section_Sessions_Aggregate_Fields = {
-  __typename?: 'voting_section_sessions_aggregate_fields';
-  avg?: Maybe<Voting_Section_Sessions_Avg_Fields>;
-  count: Scalars['Int'];
-  max?: Maybe<Voting_Section_Sessions_Max_Fields>;
-  min?: Maybe<Voting_Section_Sessions_Min_Fields>;
-  stddev?: Maybe<Voting_Section_Sessions_Stddev_Fields>;
-  stddev_pop?: Maybe<Voting_Section_Sessions_Stddev_Pop_Fields>;
-  stddev_samp?: Maybe<Voting_Section_Sessions_Stddev_Samp_Fields>;
-  sum?: Maybe<Voting_Section_Sessions_Sum_Fields>;
-  var_pop?: Maybe<Voting_Section_Sessions_Var_Pop_Fields>;
-  var_samp?: Maybe<Voting_Section_Sessions_Var_Samp_Fields>;
-  variance?: Maybe<Voting_Section_Sessions_Variance_Fields>;
-};
-
-
-/** aggregate fields of "voting_section_sessions" */
-export type Voting_Section_Sessions_Aggregate_FieldsCountArgs = {
-  columns?: Maybe<Array<Voting_Section_Sessions_Select_Column>>;
-  distinct?: Maybe<Scalars['Boolean']>;
-};
-
-/** aggregate avg on columns */
-export type Voting_Section_Sessions_Avg_Fields = {
-  __typename?: 'voting_section_sessions_avg_fields';
-  candidatesListId?: Maybe<Scalars['Float']>;
-  id?: Maybe<Scalars['Float']>;
-  referendumId?: Maybe<Scalars['Float']>;
-  sectionId?: Maybe<Scalars['Float']>;
-  tour?: Maybe<Scalars['Float']>;
-  votingId?: Maybe<Scalars['Float']>;
-};
-
-/** Boolean expression to filter rows from the table "voting_section_sessions". All fields are combined with a logical 'AND'. */
-export type Voting_Section_Sessions_Bool_Exp = {
-  _and?: Maybe<Array<Voting_Section_Sessions_Bool_Exp>>;
-  _not?: Maybe<Voting_Section_Sessions_Bool_Exp>;
-  _or?: Maybe<Array<Voting_Section_Sessions_Bool_Exp>>;
-  candidatesListId?: Maybe<Int_Comparison_Exp>;
-  createdAt?: Maybe<Timestamptz_Comparison_Exp>;
-  finishedAt?: Maybe<Timestamptz_Comparison_Exp>;
-  id?: Maybe<Int_Comparison_Exp>;
-  referendumId?: Maybe<Int_Comparison_Exp>;
-  sectionId?: Maybe<Int_Comparison_Exp>;
-  startedAt?: Maybe<Timestamptz_Comparison_Exp>;
-  tour?: Maybe<Int_Comparison_Exp>;
-  updatedAt?: Maybe<Timestamptz_Comparison_Exp>;
-  votingId?: Maybe<Int_Comparison_Exp>;
-};
-
-/** unique or primary key constraints on table "voting_section_sessions" */
-export enum Voting_Section_Sessions_Constraint {
-  /** unique or primary key constraint */
-  VotingSectionSessionsPkey = 'voting_section_sessions_pkey'
-}
-
-/** input type for incrementing numeric columns in table "voting_section_sessions" */
-export type Voting_Section_Sessions_Inc_Input = {
-  candidatesListId?: Maybe<Scalars['Int']>;
-  id?: Maybe<Scalars['Int']>;
-  referendumId?: Maybe<Scalars['Int']>;
-  sectionId?: Maybe<Scalars['Int']>;
-  tour?: Maybe<Scalars['Int']>;
-  votingId?: Maybe<Scalars['Int']>;
-};
-
-/** input type for inserting data into table "voting_section_sessions" */
-export type Voting_Section_Sessions_Insert_Input = {
-  candidatesListId?: Maybe<Scalars['Int']>;
-  createdAt?: Maybe<Scalars['timestamptz']>;
-  finishedAt?: Maybe<Scalars['timestamptz']>;
-  id?: Maybe<Scalars['Int']>;
-  referendumId?: Maybe<Scalars['Int']>;
-  sectionId?: Maybe<Scalars['Int']>;
-  startedAt?: Maybe<Scalars['timestamptz']>;
-  tour?: Maybe<Scalars['Int']>;
-  updatedAt?: Maybe<Scalars['timestamptz']>;
-  votingId?: Maybe<Scalars['Int']>;
-};
-
-/** aggregate max on columns */
-export type Voting_Section_Sessions_Max_Fields = {
-  __typename?: 'voting_section_sessions_max_fields';
-  candidatesListId?: Maybe<Scalars['Int']>;
-  createdAt?: Maybe<Scalars['timestamptz']>;
-  finishedAt?: Maybe<Scalars['timestamptz']>;
-  id?: Maybe<Scalars['Int']>;
-  referendumId?: Maybe<Scalars['Int']>;
-  sectionId?: Maybe<Scalars['Int']>;
-  startedAt?: Maybe<Scalars['timestamptz']>;
-  tour?: Maybe<Scalars['Int']>;
-  updatedAt?: Maybe<Scalars['timestamptz']>;
-  votingId?: Maybe<Scalars['Int']>;
-};
-
-/** aggregate min on columns */
-export type Voting_Section_Sessions_Min_Fields = {
-  __typename?: 'voting_section_sessions_min_fields';
-  candidatesListId?: Maybe<Scalars['Int']>;
-  createdAt?: Maybe<Scalars['timestamptz']>;
-  finishedAt?: Maybe<Scalars['timestamptz']>;
-  id?: Maybe<Scalars['Int']>;
-  referendumId?: Maybe<Scalars['Int']>;
-  sectionId?: Maybe<Scalars['Int']>;
-  startedAt?: Maybe<Scalars['timestamptz']>;
-  tour?: Maybe<Scalars['Int']>;
-  updatedAt?: Maybe<Scalars['timestamptz']>;
-  votingId?: Maybe<Scalars['Int']>;
-};
-
-/** response of any mutation on the table "voting_section_sessions" */
-export type Voting_Section_Sessions_Mutation_Response = {
-  __typename?: 'voting_section_sessions_mutation_response';
-  /** number of rows affected by the mutation */
-  affected_rows: Scalars['Int'];
-  /** data from the rows affected by the mutation */
-  returning: Array<Voting_Section_Sessions>;
-};
-
-/** on conflict condition type for table "voting_section_sessions" */
-export type Voting_Section_Sessions_On_Conflict = {
-  constraint: Voting_Section_Sessions_Constraint;
-  update_columns: Array<Voting_Section_Sessions_Update_Column>;
-  where?: Maybe<Voting_Section_Sessions_Bool_Exp>;
-};
-
-/** Ordering options when selecting data from "voting_section_sessions". */
-export type Voting_Section_Sessions_Order_By = {
-  candidatesListId?: Maybe<Order_By>;
-  createdAt?: Maybe<Order_By>;
-  finishedAt?: Maybe<Order_By>;
-  id?: Maybe<Order_By>;
-  referendumId?: Maybe<Order_By>;
-  sectionId?: Maybe<Order_By>;
-  startedAt?: Maybe<Order_By>;
-  tour?: Maybe<Order_By>;
-  updatedAt?: Maybe<Order_By>;
-  votingId?: Maybe<Order_By>;
-};
-
-/** primary key columns input for table: voting_section_sessions */
-export type Voting_Section_Sessions_Pk_Columns_Input = {
-  id: Scalars['Int'];
-};
-
-/** select columns of table "voting_section_sessions" */
-export enum Voting_Section_Sessions_Select_Column {
-  /** column name */
-  CandidatesListId = 'candidatesListId',
-  /** column name */
-  CreatedAt = 'createdAt',
-  /** column name */
-  FinishedAt = 'finishedAt',
-  /** column name */
-  Id = 'id',
-  /** column name */
-  ReferendumId = 'referendumId',
-  /** column name */
-  SectionId = 'sectionId',
-  /** column name */
-  StartedAt = 'startedAt',
-  /** column name */
-  Tour = 'tour',
-  /** column name */
-  UpdatedAt = 'updatedAt',
-  /** column name */
-  VotingId = 'votingId'
-}
-
-/** input type for updating data in table "voting_section_sessions" */
-export type Voting_Section_Sessions_Set_Input = {
-  candidatesListId?: Maybe<Scalars['Int']>;
-  createdAt?: Maybe<Scalars['timestamptz']>;
-  finishedAt?: Maybe<Scalars['timestamptz']>;
-  id?: Maybe<Scalars['Int']>;
-  referendumId?: Maybe<Scalars['Int']>;
-  sectionId?: Maybe<Scalars['Int']>;
-  startedAt?: Maybe<Scalars['timestamptz']>;
-  tour?: Maybe<Scalars['Int']>;
-  updatedAt?: Maybe<Scalars['timestamptz']>;
-  votingId?: Maybe<Scalars['Int']>;
-};
-
-/** aggregate stddev on columns */
-export type Voting_Section_Sessions_Stddev_Fields = {
-  __typename?: 'voting_section_sessions_stddev_fields';
-  candidatesListId?: Maybe<Scalars['Float']>;
-  id?: Maybe<Scalars['Float']>;
-  referendumId?: Maybe<Scalars['Float']>;
-  sectionId?: Maybe<Scalars['Float']>;
-  tour?: Maybe<Scalars['Float']>;
-  votingId?: Maybe<Scalars['Float']>;
-};
-
-/** aggregate stddev_pop on columns */
-export type Voting_Section_Sessions_Stddev_Pop_Fields = {
-  __typename?: 'voting_section_sessions_stddev_pop_fields';
-  candidatesListId?: Maybe<Scalars['Float']>;
-  id?: Maybe<Scalars['Float']>;
-  referendumId?: Maybe<Scalars['Float']>;
-  sectionId?: Maybe<Scalars['Float']>;
-  tour?: Maybe<Scalars['Float']>;
-  votingId?: Maybe<Scalars['Float']>;
-};
-
-/** aggregate stddev_samp on columns */
-export type Voting_Section_Sessions_Stddev_Samp_Fields = {
-  __typename?: 'voting_section_sessions_stddev_samp_fields';
-  candidatesListId?: Maybe<Scalars['Float']>;
-  id?: Maybe<Scalars['Float']>;
-  referendumId?: Maybe<Scalars['Float']>;
-  sectionId?: Maybe<Scalars['Float']>;
-  tour?: Maybe<Scalars['Float']>;
-  votingId?: Maybe<Scalars['Float']>;
-};
-
-/** aggregate sum on columns */
-export type Voting_Section_Sessions_Sum_Fields = {
-  __typename?: 'voting_section_sessions_sum_fields';
-  candidatesListId?: Maybe<Scalars['Int']>;
-  id?: Maybe<Scalars['Int']>;
-  referendumId?: Maybe<Scalars['Int']>;
-  sectionId?: Maybe<Scalars['Int']>;
-  tour?: Maybe<Scalars['Int']>;
-  votingId?: Maybe<Scalars['Int']>;
-};
-
-/** update columns of table "voting_section_sessions" */
-export enum Voting_Section_Sessions_Update_Column {
-  /** column name */
-  CandidatesListId = 'candidatesListId',
-  /** column name */
-  CreatedAt = 'createdAt',
-  /** column name */
-  FinishedAt = 'finishedAt',
-  /** column name */
-  Id = 'id',
-  /** column name */
-  ReferendumId = 'referendumId',
-  /** column name */
-  SectionId = 'sectionId',
-  /** column name */
-  StartedAt = 'startedAt',
-  /** column name */
-  Tour = 'tour',
-  /** column name */
-  UpdatedAt = 'updatedAt',
-  /** column name */
-  VotingId = 'votingId'
-}
-
-/** aggregate var_pop on columns */
-export type Voting_Section_Sessions_Var_Pop_Fields = {
-  __typename?: 'voting_section_sessions_var_pop_fields';
-  candidatesListId?: Maybe<Scalars['Float']>;
-  id?: Maybe<Scalars['Float']>;
-  referendumId?: Maybe<Scalars['Float']>;
-  sectionId?: Maybe<Scalars['Float']>;
-  tour?: Maybe<Scalars['Float']>;
-  votingId?: Maybe<Scalars['Float']>;
-};
-
-/** aggregate var_samp on columns */
-export type Voting_Section_Sessions_Var_Samp_Fields = {
-  __typename?: 'voting_section_sessions_var_samp_fields';
-  candidatesListId?: Maybe<Scalars['Float']>;
-  id?: Maybe<Scalars['Float']>;
-  referendumId?: Maybe<Scalars['Float']>;
-  sectionId?: Maybe<Scalars['Float']>;
-  tour?: Maybe<Scalars['Float']>;
-  votingId?: Maybe<Scalars['Float']>;
-};
-
-/** aggregate variance on columns */
-export type Voting_Section_Sessions_Variance_Fields = {
-  __typename?: 'voting_section_sessions_variance_fields';
-  candidatesListId?: Maybe<Scalars['Float']>;
-  id?: Maybe<Scalars['Float']>;
-  referendumId?: Maybe<Scalars['Float']>;
-  sectionId?: Maybe<Scalars['Float']>;
-  tour?: Maybe<Scalars['Float']>;
-  votingId?: Maybe<Scalars['Float']>;
-};
-
 /** input type for updating data in table "voting_section" */
 export type Voting_Section_Set_Input = {
   addressId?: Maybe<Scalars['Int']>;
@@ -8605,7 +7475,7 @@ export type UserFieldsFragment = (
     & AddressShortFragment
   ), referendum_votes: Array<(
     { __typename?: 'referendum_votes' }
-    & Pick<Referendum_Votes, 'id' | 'questionId' | 'vote' | 'eVote'>
+    & Pick<Referendum_Votes, 'id' | 'createdAt' | 'questionId' | 'vote' | 'eVote'>
     & { referendum_question: (
       { __typename?: 'referendum_questions' }
       & { referendum: (
@@ -9011,8 +7881,9 @@ export const UserFieldsFragmentDoc = gql`
       ...SettlementFileds
     }
   }
-  referendum_votes {
+  referendum_votes(order_by: {createdAt: desc}) {
     id
+    createdAt
     questionId
     vote
     eVote

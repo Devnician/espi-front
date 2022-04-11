@@ -100,6 +100,10 @@ export class EditReferendumComponent implements OnInit {
       ) {
         this.canLock.next(true);
       }
+
+      if (this.referendum && this.referendum.locked) {
+        this.form.disable();
+      }
     }
   }
   buildForm() {
@@ -274,14 +278,15 @@ export class EditReferendumComponent implements OnInit {
     delete formData.settlementName;
 
     if (this.isUpdate.value === true) {
-      const referendumId = formData.id;
+      const referendumId: number = formData.id;
       delete formData.id;
 
       const set: Referendums_Set_Input = formData;
       const currentStateOfQuestions = this.datasource.data.value.map(
         (question) => {
           return {
-            referendumId: question.referendumId ? '' : referendumId,
+            id: question.id,
+            referendumId: referendumId,
             question: question.question,
           } as Referendum_Questions_Insert_Input;
         }

@@ -87,8 +87,9 @@ fragment UserFields on users {
     }
   }
 
-  referendum_votes {
+  referendum_votes(order_by: { createdAt: desc }) {
     id
+    createdAt
     questionId
     vote
     eVote

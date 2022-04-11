@@ -81,6 +81,7 @@ select_permissions:
     - id
     - locked
     - name
+    - settlementId
     - startDate
     - startedAt
     - type
@@ -96,6 +97,7 @@ select_permissions:
     - id
     - locked
     - name
+    - settlementId
     - startDate
     - startedAt
     - type

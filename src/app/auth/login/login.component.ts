@@ -32,7 +32,7 @@ export class LoginComponent extends VixenComponent implements OnInit {
   ngOnInit(): void {
     this.loginForm = this.fb.group({
       egn: [
-        '8080808080', // null,
+        '8003033333', // null,
         Validators.compose([
           Validators.required,
           Validators.pattern('[0-9]{10}'),

@@ -37,6 +37,7 @@ import {
   Votings_Insert_Input,
   Votings_Order_By,
   Votings_Set_Input,
+  Voting_Types_Enum,
 } from 'src/generated/graphql';
 @Injectable({
   providedIn: 'root', // VotingsModule,
@@ -99,14 +100,63 @@ export class VotingsService {
     );
   }
 
-  getStartedVotings(): Observable<ApolloQueryResult<GetStartedVotingsQuery>> {
-    const where: Votings_Bool_Exp = {
-      _and: [
-        { locked: { _eq: true } },
-        { startedAt: { _is_null: false } },
-        { finishedAt: { _is_null: true } },
-      ],
-    };
+  getStartedVotings(
+    votingSectionSettlementId: number
+  ): Observable<ApolloQueryResult<GetStartedVotingsQuery>> {
+    let where: Votings_Bool_Exp;
+    if (votingSectionSettlementId) {
+      where = {
+        _and: [
+          { locked: { _eq: true } },
+          { startedAt: { _is_null: false } },
+          { finishedAt: { _is_null: true } },
+          {
+            _or: [
+              // global or local
+              {
+                _and: [
+                  {
+                    voting_type: {
+                      value: {
+                        _in: [
+                          Voting_Types_Enum.Parliamentary,
+                          Voting_Types_Enum.Presidential,
+                        ],
+                      },
+                    },
+                  },
+                  { settlementId: { _is_null: true } },
+                ],
+              },
+              {
+                _and: [
+                  { settlementId: { _eq: votingSectionSettlementId } },
+                  {
+                    voting_type: {
+                      value: {
+                        _in: [
+                          Voting_Types_Enum.LocalGovernment,
+                          Voting_Types_Enum.Mayoral,
+                        ],
+                      },
+                    },
+                  },
+                ],
+              },
+            ],
+          },
+        ],
+      };
+    } else {
+      where = {
+        _and: [
+          { locked: { _eq: true } },
+          { startedAt: { _is_null: false } },
+          { finishedAt: { _is_null: true } },
+        ],
+      };
+    }
+
     return this.getStartedVotingsGQL.fetch(
       { where },
       { fetchPolicy: 'network-only' }
@@ -208,16 +258,35 @@ export class VotingsService {
     );
   }
 
-  getStartedReferendums(): Observable<
-    ApolloQueryResult<GetStartedReferendumsQuery>
-  > {
-    const where: Referendums_Bool_Exp = {
-      _and: [
-        { locked: { _eq: true } },
-        { startedAt: { _is_null: false } },
-        { finishedAt: { _is_null: true } },
-      ],
-    };
+  getStartedReferendums(
+    votingSectionSettlementId: number
+  ): Observable<ApolloQueryResult<GetStartedReferendumsQuery>> {
+    let where: Referendums_Bool_Exp;
+    if (votingSectionSettlementId) {
+      where = {
+        _and: [
+          { locked: { _eq: true } },
+          { startedAt: { _is_null: false } },
+          { finishedAt: { _is_null: true } },
+          {
+            _or: [
+              // global or local
+              { settlementId: { _is_null: true } },
+              { settlementId: { _eq: votingSectionSettlementId } },
+            ],
+          },
+        ],
+      };
+    } else {
+      where = {
+        _and: [
+          // all
+          { locked: { _eq: true } },
+          { startedAt: { _is_null: false } },
+          { finishedAt: { _is_null: true } },
+        ],
+      };
+    }
 
     return this.getStartedReferendumsGQL.fetch(
       { where },

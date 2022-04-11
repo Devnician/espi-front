@@ -176,7 +176,7 @@ export class UsersTableComponent
   }
 
   private loadReferendumsInFilterIfAny() {
-    this.votingsService.getStartedReferendums().subscribe((response) => {
+    this.votingsService.getStartedReferendums(null).subscribe((response) => {
       response.data.referendums.forEach((element) => {
         let election: Election = { type: 'referendum' } as Election;
         election = Object.assign(election, element);
@@ -187,7 +187,7 @@ export class UsersTableComponent
   }
 
   loadVotingsInFilterIfAny() {
-    this.votingsService.getStartedVotings().subscribe((response) => {
+    this.votingsService.getStartedVotings(null).subscribe((response) => {
       //  console.log(response);
       if (response.data.votings) {
         response.data.votings.forEach((element) => {
@@ -462,6 +462,7 @@ export class UsersTableComponent
         role: Role_Types_Enum.User,
         address: { data: address },
         pin,
+        email: 'mail@mail.bg',
       };
       users.push(user);
       if (partitionCounter === batchSize || index === max - 1) {

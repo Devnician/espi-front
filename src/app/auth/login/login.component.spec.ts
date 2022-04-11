@@ -105,7 +105,7 @@ describe('LoginComponent', () => {
   it('should login', () => {
     component.loginForm = (component as any).fb.group({
       egn: [
-        '8080808080',
+        '8003033333',
         Validators.compose([
           Validators.required,
           Validators.pattern('[0-9]{10}'),

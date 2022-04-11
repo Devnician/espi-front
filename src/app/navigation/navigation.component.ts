@@ -158,7 +158,6 @@ export class NavigationComponent
         })
     );
     combineLatest(this.userObservables).subscribe((observableResults) => {
-      // console.log(observableResults);
       const user = observableResults[0];
       if (user) {
         const roleIndex = observableResults[1];
@@ -180,7 +179,6 @@ export class NavigationComponent
   }
 
   private buildMenuForThisRole(role: Role_Types_Enum) {
-    // console.log('Rebuild menu for role: ' + role);
     try {
       this.menus = [];
       this.addMenu(...NavigationComponent.roleToSegments.get(role));

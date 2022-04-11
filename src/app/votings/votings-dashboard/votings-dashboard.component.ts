@@ -11,7 +11,13 @@ import {
 import { AuthService } from 'src/app/services/auth-service';
 import { Donkey } from 'src/app/services/donkey.service';
 import { UsersService } from 'src/app/users/users-service';
-import { Referendums, Users, Votes, Votings } from 'src/generated/graphql';
+import {
+  Referendums,
+  Referendum_Votes,
+  Users,
+  Votes,
+  Votings,
+} from 'src/generated/graphql';
 import { VotingsService } from '../voting-service.service';
 interface VotingParams {
   title: string;
@@ -38,10 +44,9 @@ export class VotingsDashboardComponent {
   loadedReferendums: BehaviorSubject<boolean> = new BehaviorSubject(false);
   loadedVotings: BehaviorSubject<boolean> = new BehaviorSubject(false);
   fullUserData: BehaviorSubject<Users> = new BehaviorSubject(null);
-  observables: Observable<boolean | Users>[] = [
+  observables: Observable<boolean>[] = [
     this.loadedReferendums,
     this.loadedVotings,
-    this.fullUserData,
   ];
   vote: Votes; // if already voted for this
 
@@ -56,43 +61,6 @@ export class VotingsDashboardComponent {
   ) {
     this.loading.next(true);
     this.getUserObject();
-    this.getStartedReferendums();
-    this.getStartedVotings();
-
-    combineLatest(this.observables).subscribe((observableResults) => {
-      if (observableResults.indexOf(false) < 0 && observableResults[2]) {
-        this.loading.next(false);
-        //  adjust card &
-        const user: Users = observableResults[2] as Users;
-        console.log(user);
-        const votedReferendumIds: number[] = [];
-        if (isNullOrUndefined(user.referendum_votes) === false) {
-          user.referendum_votes.forEach((vote) => {
-            votedReferendumIds.push(vote.referendum_question.referendum.id);
-          });
-        }
-
-        this.cards.value.forEach((card) => {
-          if (card.type === 'referendum') {
-            if (votedReferendumIds.findIndex((e) => e === card.id) > -1) {
-              // add additional check for voted or evoted ...
-              card.alreadyVoted = true;
-            }
-          } else {
-            this.vote = user.votes.find((e) => e.votingId === card.id);
-            if (this.vote) {
-              card.alreadyVoted = true;
-              if (this.vote.inSection === true) {
-                card.canChangeVote = false;
-                card.canPreview = true;
-              } else {
-                card.canChangeVote = true;
-              }
-            }
-          }
-        });
-      }
-    });
   }
   getUserObject() {
     // fetch user data with votes
@@ -108,12 +76,55 @@ export class VotingsDashboardComponent {
       .subscribe((response) => {
         const user: Users = response.data.users_by_pk as Users;
         this.fullUserData.next(user);
+        const userSettlementId = user.address.settlementId;
+
+        this.getStartedVotings(userSettlementId);
+        this.getStartedReferendums(userSettlementId);
+
+        combineLatest(this.observables).subscribe((observableResults) => {
+          if (observableResults.indexOf(false) < 0) {
+            this.loading.next(false);
+            //  adjust card
+            const votedReferendumIds: number[] = [];
+            if (isNullOrUndefined(user.referendum_votes) === false) {
+              user.referendum_votes.forEach((vote) => {
+                votedReferendumIds.push(vote.referendum_question.referendum.id);
+              });
+            }
+
+            this.cards.value.forEach((card) => {
+              if (card.type === 'referendum') {
+                if (votedReferendumIds.findIndex((e) => e === card.id) > -1) {
+                  // add additional check for voted or evoted ...
+                  card.alreadyVoted = true;
+                  const vote: Referendum_Votes = user.referendum_votes.find(
+                    (r) => r.referendum_question.referendum.id === card.id
+                  );
+                  if (vote) {
+                    card.canChangeVote = isNullOrUndefined(vote.vote);
+                  }
+                }
+              } else {
+                this.vote = user.votes.find((e) => e.votingId === card.id);
+                if (this.vote) {
+                  card.alreadyVoted = true;
+                  if (this.vote.inSection === true) {
+                    card.canChangeVote = false;
+                    card.canPreview = true;
+                  } else {
+                    card.canChangeVote = true;
+                  }
+                }
+              }
+            });
+          }
+        });
       });
   }
 
-  getStartedVotings() {
+  getStartedVotings(settlementId: number) {
     this.voitngsService
-      .getStartedVotings()
+      .getStartedVotings(settlementId)
       .pipe(
         switchMap((response) => {
           const votings = response.data.votings;
@@ -140,9 +151,9 @@ export class VotingsDashboardComponent {
         this.loadedVotings.next(true);
       });
   }
-  getStartedReferendums() {
+  getStartedReferendums(settlementId: number) {
     this.voitngsService
-      .getStartedReferendums()
+      .getStartedReferendums(settlementId)
       .pipe(
         switchMap((response) => {
           const referendums = response.data.referendums;
@@ -176,6 +187,7 @@ export class VotingsDashboardComponent {
     if (vote.type === 'referendum' || vote.type === 'national_referendum') {
       const referendum = this.referendums.value.find((r) => r.id === vote.id);
       this.donkey.load(referendum);
+      // TODO - send questions of this referendum for preview ....
       this.router.navigate(['/votings/referendum']);
     } else {
       const voting = this.votings.value.find((v) => v.id === vote.id);

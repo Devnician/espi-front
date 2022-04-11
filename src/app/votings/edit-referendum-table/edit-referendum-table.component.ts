@@ -13,6 +13,7 @@ export class EditReferendumTableComponent implements AfterViewInit {
   @ViewChild(MatTable) table!: MatTable<Referendum_Questions>;
   @Input() isUpdate: Observable<boolean>;
   @Input() dataSource: EditReferendumTableDataSource;
+  @Input() disabled: boolean;
 
   createDisplayedColumns = ['question'];
   editDisplayedColumns = ['createdAt', 'updatedAt', 'question', 'actions'];

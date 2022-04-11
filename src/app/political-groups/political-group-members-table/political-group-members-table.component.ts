@@ -82,7 +82,7 @@ export class PoliticalGroupMembersTableComponent
   loadUpcomingVotings() {
     const endOfToday = new Date();
     endOfToday.setHours(23, 59, 59, 999);
-    //  console.log(endOfToday);
+    // console.log('get upcoming votings : ' + endOfToday);
     this.votingsService
       .getUpcomingVotings(endOfToday)
       .subscribe(({ data, errors }) => {
@@ -150,7 +150,9 @@ export class PoliticalGroupMembersTableComponent
   }
   toggleUserState(member: Political_Group_Members) {
     if (this.upcomingVotings.length === 0) {
-      this.snackBar.open('Към момента не предстоят избори.');
+      this.snackBar.open('Към момента не предстоят избори.', 'OK', {
+        duration: 3500,
+      });
       return;
     } else {
       const config = new MatDialogConfig<any>();

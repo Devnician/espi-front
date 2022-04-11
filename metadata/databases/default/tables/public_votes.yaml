@@ -75,7 +75,9 @@ select_permissions:
     - voteGroupId
     - voteUserId
     - votingId
-    filter: {}
+    filter:
+      userId:
+        _eq: X-Hasura-User-Id
   role: user
 update_permissions:
 - permission:

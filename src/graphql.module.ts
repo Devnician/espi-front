@@ -15,7 +15,7 @@ let sub: Subscription;
 const uri = environment.hasuraUrl; // <-- add the URL of the GraphQL server here
 
 export function createApollo(httpLink: HttpLink): any {
-  console.log('Start build apolo link');
+  // console.log('Start build apolo link');
   sub?.unsubscribe();
   // console.log(localStorage.getItem(TokenTypes.FETCH_TOKEN));
   const basic = setContext((_operation, _context) => ({

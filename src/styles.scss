@@ -166,9 +166,10 @@ body {
     margin: 7px 0;
 }
 .espi-big-button {
-    width: 200px !important;
+    width: 180px !important;
     overflow-x: hidden !important;
     white-space: pre-wrap !important;
     min-height: 50px;
-    margin: 10px;
+    margin-right: 5px !important;
+    // margin: 10px;
 }

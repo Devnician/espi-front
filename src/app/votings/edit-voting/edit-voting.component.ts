@@ -118,7 +118,7 @@ export class EditVotingComponent implements OnInit {
       settlementName: [this.voting?.settlement?.name],
       settlementId: [this.voting?.settlement?.id],
     });
-    if (this.voting.locked) {
+    if (this.voting && this.voting.locked) {
       this.form.disable();
     }
   }
@@ -262,11 +262,7 @@ export class EditVotingComponent implements OnInit {
     }
 
     this.loading.next(true);
-
     const formData = this.form.getRawValue();
-
-    const day = moment(formData.startDate);
-    formData.startDate = day.startOf('day').toDate();
 
     if (this.isUpdate.value) {
       const set: Votings_Set_Input = {

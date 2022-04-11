@@ -1,6 +1,4 @@
 - "!include public_addresses.yaml"
-- "!include public_candidate_lists.yaml"
-- "!include public_candidates.yaml"
 - "!include public_commision_members.yaml"
 - "!include public_commissions.yaml"
 - "!include public_counters.yaml"
@@ -16,6 +14,5 @@
 - "!include public_users.yaml"
 - "!include public_votes.yaml"
 - "!include public_voting_section.yaml"
-- "!include public_voting_section_sessions.yaml"
 - "!include public_voting_types.yaml"
 - "!include public_votings.yaml"

@@ -70,65 +70,70 @@ export class VoteComponent implements OnInit {
       .getParticipantsInVoting(votingId)
       .subscribe((response) => {
         const groups: PolitGroup[] = [{ num: 0 } as PolitGroup];
+        // console.log(response.data);
         const politicalMembers: Political_Group_Members[] = response.data
           .votings_by_pk
           .political_group_members as any as Political_Group_Members[];
+        if (politicalMembers.length > 0) {
+          politicalMembers.forEach((politMember) => {
+            const politGroup = groups.find(
+              (g) => g.politGroupId === politMember.political_group.id
+            );
+            if (politGroup) {
+              politGroup.candidates.push({
+                politGroupMemberId: politMember.id,
+                userId: politMember.userId,
+                num: politGroup.candidates.length + 1,
+                name: politMember.user.name,
+                surname: politMember.user.surname,
+                family: politMember.user.family,
+                selected: false,
+              });
+            } else {
+              const pg: PolitGroup = {
+                politGroupId: politMember.political_group.id,
+                num: groups.length + 1,
+                description: politMember.political_group.description,
+                name: politMember.political_group.name,
+                groupType:
+                  politMember.political_group.political_group_type.description,
+                candidates: [],
+              };
+              pg.candidates.push({
+                politGroupMemberId: politMember.id,
+                userId: politMember.userId,
+                num: 1,
+                name: politMember.user.name,
+                surname: politMember.user.surname,
+                family: politMember.user.family,
+                selected: false,
+              });
+              groups.push(pg);
+            }
+          });
+          //  console.log(groups);
+          this.politicalGroups.next(groups);
 
-        politicalMembers.forEach((politMember) => {
-          const politGroup = groups.find(
-            (g) => g.politGroupId === politMember.political_group.id
-          );
-          if (politGroup) {
-            politGroup.candidates.push({
-              politGroupMemberId: politMember.id,
-              userId: politMember.userId,
-              num: politGroup.candidates.length + 1,
-              name: politMember.user.name,
-              surname: politMember.user.surname,
-              family: politMember.user.family,
-              selected: false,
-            });
-          } else {
-            const pg: PolitGroup = {
-              politGroupId: politMember.political_group.id,
-              num: groups.length + 1,
-              description: politMember.political_group.description,
-              name: politMember.political_group.name,
-              groupType:
-                politMember.political_group.political_group_type.description,
-              candidates: [],
-            };
-            pg.candidates.push({
-              politGroupMemberId: politMember.id,
-              userId: politMember.userId,
-              num: 1,
-              name: politMember.user.name,
-              surname: politMember.user.surname,
-              family: politMember.user.family,
-              selected: false,
-            });
-            groups.push(pg);
+          // set index and pref from previous vote, if any
+          if (this.vote) {
+            const politGroup = this.vote.voteGroupId;
+            const preferenceUserId = this.vote.voteUserId;
+            const indexOfGroup = groups.findIndex(
+              (e) => e.politGroupId === politGroup
+            );
+            const gr = groups[indexOfGroup];
+            const prefCandidate: Candidate = gr.candidates.find(
+              (p) => p.userId === preferenceUserId
+            );
+            if (prefCandidate) {
+              prefCandidate.selected = true;
+            }
+            this.selected.setValue(indexOfGroup);
           }
-        });
-
-        this.politicalGroups.next(groups);
-
-        // set index and pref from previous vote, if any
-        if (this.vote) {
-          const politGroup = this.vote.voteGroupId;
-          const preferenceUserId = this.vote.voteUserId;
-          const indexOfGroup = groups.findIndex(
-            (e) => e.politGroupId === politGroup
-          );
-          const gr = groups[indexOfGroup];
-          const prefCandidate: Candidate = gr.candidates.find(
-            (p) => p.userId === preferenceUserId
-          );
-          if (prefCandidate) {
-            prefCandidate.selected = true;
-          }
-          this.selected.setValue(indexOfGroup);
+        } else {
+          this.politicalGroups.next(groups);
         }
+
         this.loading.next(false);
       });
   }
