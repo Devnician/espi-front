@@ -26,3 +26,22 @@ query GetVotingSections(
     }
   }
 }
+mutation OpenVotingSection($sectionId: Int!, $when: timestamptz!) {
+  update_voting_section_by_pk(
+    pk_columns: { id: $sectionId }
+    _set: { openedAt: $when }
+  ) {
+    id
+    openedAt
+  }
+}
+
+mutation CloseVotingSection($sectionId: Int!, $when: timestamptz!) {
+  update_voting_section_by_pk(
+    pk_columns: { id: $sectionId }
+    _set: { closedAt: $when }
+  ) {
+    id
+    closedAt
+  }
+}
