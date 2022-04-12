@@ -26,10 +26,10 @@
         <ng-template mat-tab-label>
           {{ politicalGroup.politGroupId }}
         </ng-template>
-        <div style="display: flex; width: 100%">
-          <app-parent style="width: 60%" [group]="politicalGroup"></app-parent>
+        <div class="parent-child-container">
+          <app-parent class="parent" [group]="politicalGroup"></app-parent>
           <app-child
-            style="width: 100%"
+            class="child"
             [candidates]="politicalGroup.candidates"
             [preview]="preview"
           ></app-child>

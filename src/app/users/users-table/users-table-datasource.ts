@@ -137,7 +137,7 @@ export class UsersTableDataSource extends DataSource<CustomUser> {
     if (this.selectedElection.value) {
       const election = this.selectedElection.value;
       const type = election.type;
-      console.log(type);
+      // console.log(type);
       if (type === 'referendum') {
         // get all for this referendum.
         const referendumVotes: Referendum_Votes[] =

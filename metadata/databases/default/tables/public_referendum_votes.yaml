@@ -30,6 +30,7 @@ insert_permissions:
 select_permissions:
 - permission:
     columns:
+    - createdAt
     - eVote
     - id
     - questionId
@@ -38,6 +39,7 @@ select_permissions:
   role: central
 - permission:
     columns:
+    - createdAt
     - eVote
     - id
     - questionId

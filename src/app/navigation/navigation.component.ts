@@ -235,7 +235,7 @@ export class NavigationComponent
           this.menus.push({
             route: 'votings/referendums-list',
             label: 'Референдуми',
-            matIcon: 'list',
+            matIcon: 'question_answer',
             badgeSubject: undefined,
           });
           break;
