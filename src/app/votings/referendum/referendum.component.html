@@ -16,9 +16,18 @@
       </mat-card-header>
       <mat-card-content>
         <div>
-          <mat-card-title
-            style="height: 250px; text-align: center; font-size: xx-large"
-            >{{ q.question }}
+          <mat-card-title>
+            <div
+              style="
+                height: 250px;
+                text-align: center;
+                font-size: xx-large;
+                line-height: initial;
+                display: flex;
+              "
+            >
+              {{ q.question }}
+            </div>
           </mat-card-title>
         </div>
         <div>

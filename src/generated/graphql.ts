@@ -7555,6 +7555,34 @@ export type GetVotingSectionsQuery = (
   ) }
 );
 
+export type OpenVotingSectionMutationVariables = Exact<{
+  sectionId: Scalars['Int'];
+  when: Scalars['timestamptz'];
+}>;
+
+
+export type OpenVotingSectionMutation = (
+  { __typename?: 'mutation_root' }
+  & { update_voting_section_by_pk?: Maybe<(
+    { __typename?: 'voting_section' }
+    & Pick<Voting_Section, 'id' | 'openedAt'>
+  )> }
+);
+
+export type CloseVotingSectionMutationVariables = Exact<{
+  sectionId: Scalars['Int'];
+  when: Scalars['timestamptz'];
+}>;
+
+
+export type CloseVotingSectionMutation = (
+  { __typename?: 'mutation_root' }
+  & { update_voting_section_by_pk?: Maybe<(
+    { __typename?: 'voting_section' }
+    & Pick<Voting_Section, 'id' | 'closedAt'>
+  )> }
+);
+
 export type CreateReferendumMutationVariables = Exact<{
   referendum: Referendums_Insert_Input;
 }>;
@@ -8524,6 +8552,50 @@ export const GetVotingSectionsDocument = gql`
   })
   export class GetVotingSectionsGQL extends Apollo.Query<GetVotingSectionsQuery, GetVotingSectionsQueryVariables> {
     document = GetVotingSectionsDocument;
+    
+    constructor(apollo: Apollo.Apollo) {
+      super(apollo);
+    }
+  }
+export const OpenVotingSectionDocument = gql`
+    mutation OpenVotingSection($sectionId: Int!, $when: timestamptz!) {
+  update_voting_section_by_pk(
+    pk_columns: {id: $sectionId}
+    _set: {openedAt: $when}
+  ) {
+    id
+    openedAt
+  }
+}
+    `;
+
+  @Injectable({
+    providedIn: 'root'
+  })
+  export class OpenVotingSectionGQL extends Apollo.Mutation<OpenVotingSectionMutation, OpenVotingSectionMutationVariables> {
+    document = OpenVotingSectionDocument;
+    
+    constructor(apollo: Apollo.Apollo) {
+      super(apollo);
+    }
+  }
+export const CloseVotingSectionDocument = gql`
+    mutation CloseVotingSection($sectionId: Int!, $when: timestamptz!) {
+  update_voting_section_by_pk(
+    pk_columns: {id: $sectionId}
+    _set: {closedAt: $when}
+  ) {
+    id
+    closedAt
+  }
+}
+    `;
+
+  @Injectable({
+    providedIn: 'root'
+  })
+  export class CloseVotingSectionGQL extends Apollo.Mutation<CloseVotingSectionMutation, CloseVotingSectionMutationVariables> {
+    document = CloseVotingSectionDocument;
     
     constructor(apollo: Apollo.Apollo) {
       super(apollo);

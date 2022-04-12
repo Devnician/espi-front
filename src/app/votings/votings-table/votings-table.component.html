@@ -85,7 +85,11 @@
         </button>
         <mat-menu #menu="matMenu">
           <!--  disabled="{{ row.locked && canUnlock() === false }}" -->
-          <button mat-menu-item (click)="openDialog(row)">
+          <button
+            mat-menu-item
+            disabled="{{ row.locked && canUnlock() === false }}"
+            (click)="openDialog(row)"
+          >
             <mat-icon>edit</mat-icon>
             <span>Редактиране</span>
           </button>

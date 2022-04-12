@@ -86,6 +86,16 @@ export class VotingsTableComponent
       voting.locked === true
     );
   }
+
+  canUnlock(): boolean {
+    if (
+      this.loggedUSer?.roleType.value === Role_Types_Enum.CentralLeader ||
+      this.loggedUSer?.secondRoleType.value === Role_Types_Enum.CentralLeader
+    ) {
+      return true;
+    }
+    return false;
+  }
   canStopVoting(voting: Votings): boolean {
     return (
       (this.loggedUSer.roleType.value === Role_Types_Enum.CentralLeader ||
