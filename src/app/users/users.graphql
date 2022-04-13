@@ -24,6 +24,12 @@ query AutocompleteUsers(
   }
 }
 
+query FetchUserWitnCondition($condition: users_bool_exp! = {}, $limit: Int!) {
+  users(where: $condition, limit: $limit) {
+    ...UserFields
+  }
+}
+
 mutation CreateUser($input: users_insert_input!) {
   insert_users_one(object: $input) {
     ...UserFields

@@ -13,9 +13,10 @@ import { MatSortModule } from '@angular/material/sort';
 import { MatTableModule } from '@angular/material/table';
 import { VotingSectionsRoutingModule } from './voting-sections-routing.module';
 import { VotingSectionsTableComponent } from './voting-sections-table/voting-sections-table.component';
+import { SectionMembersTableComponent } from './section-members-table/section-members-table.component';
 
 @NgModule({
-  declarations: [VotingSectionsTableComponent],
+  declarations: [VotingSectionsTableComponent, SectionMembersTableComponent],
   imports: [
     CommonModule,
     VotingSectionsRoutingModule,

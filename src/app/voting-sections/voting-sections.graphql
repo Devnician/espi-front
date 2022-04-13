@@ -26,6 +26,7 @@ query GetVotingSections(
     }
   }
 }
+
 mutation OpenVotingSection($sectionId: Int!, $when: timestamptz!) {
   update_voting_section_by_pk(
     pk_columns: { id: $sectionId }
@@ -43,5 +44,44 @@ mutation CloseVotingSection($sectionId: Int!, $when: timestamptz!) {
   ) {
     id
     closedAt
+  }
+}
+
+query GetCommissionOfVotingSection($sectionId: Int!) {
+  commissions(where: { votingSectionId: { _eq: $sectionId } }) {
+    ...SectionCommissionFields
+  }
+}
+
+mutation CreateSectionCommission(
+  $set: [users_insert_input!]!
+  $commission: commissions_insert_input!
+) {
+  insert_users(
+    objects: $set
+    on_conflict: { constraint: users_pkey, update_columns: [role, secondRole] }
+  ) {
+    returning {
+      ...UserFields
+    }
+  }
+  insert_commissions_one(object: $commission) {
+    ...SectionCommissionFields
+  }
+}
+
+fragment SectionCommissionFields on commissions {
+  id
+  createdAt
+  updatedAt
+  votingSectionId
+  commision_members {
+    id
+    createdAt
+    updatedAt
+    isLeader
+    user {
+      ...UserFields
+    }
   }
 }

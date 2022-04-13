@@ -224,7 +224,7 @@ export class NavigationComponent
         case 'voting-sections':
           this.menus.push({
             route: 'voting-sections',
-            label: 'Секции',
+            label: 'Избирателни секции',
             matIcon: 'how_to_vote',
             badgeSubject: undefined,
           });

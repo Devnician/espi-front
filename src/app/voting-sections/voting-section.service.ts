@@ -1,11 +1,13 @@
 import { Injectable } from '@angular/core';
-import { FetchResult } from '@apollo/client';
+import { ApolloQueryResult, FetchResult } from '@apollo/client';
 import { QueryRef } from 'apollo-angular';
 import * as moment from 'moment';
 import { Observable } from 'rxjs';
 import {
   CloseVotingSectionGQL,
   CloseVotingSectionMutation,
+  GetCommissionOfVotingSectionGQL,
+  GetCommissionOfVotingSectionQuery,
   GetVotingSectionsGQL,
   GetVotingSectionsQuery,
   OpenVotingSectionGQL,
@@ -21,7 +23,8 @@ export class VotingSectionsService {
   constructor(
     private getVotingSectionsGQL: GetVotingSectionsGQL,
     private openVotingSectionGQL: OpenVotingSectionGQL,
-    private closeVotingSectionGQL: CloseVotingSectionGQL
+    private closeVotingSectionGQL: CloseVotingSectionGQL,
+    private getCommissionOfVotingSectionGQL: GetCommissionOfVotingSectionGQL
   ) {
     //*
   }
@@ -53,7 +56,6 @@ export class VotingSectionsService {
     >
   > {
     const when = moment().toDate();
-    console.log(when);
     return this.openVotingSectionGQL.mutate({ sectionId, when });
   }
   closeVotingSection(
@@ -66,7 +68,15 @@ export class VotingSectionsService {
     >
   > {
     const when = moment().toDate();
-    console.log(when);
     return this.closeVotingSectionGQL.mutate({ sectionId, when });
+  }
+
+  getCommissionOfVotingSection(
+    sectionId: number
+  ): Observable<ApolloQueryResult<GetCommissionOfVotingSectionQuery>> {
+    return this.getCommissionOfVotingSectionGQL.fetch(
+      { sectionId },
+      { fetchPolicy: 'network-only' }
+    );
   }
 }
