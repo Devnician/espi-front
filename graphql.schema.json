@@ -37607,13 +37607,9 @@
             "description": null,
             "args": [],
             "type": {
-              "kind": "NON_NULL",
-              "name": null,
-              "ofType": {
-                "kind": "ENUM",
-                "name": "role_types_enum",
-                "ofType": null
-              }
+              "kind": "ENUM",
+              "name": "role_types_enum",
+              "ofType": null
             },
             "isDeprecated": false,
             "deprecationReason": null
@@ -37623,13 +37619,9 @@
             "description": "An object relationship",
             "args": [],
             "type": {
-              "kind": "NON_NULL",
-              "name": null,
-              "ofType": {
-                "kind": "OBJECT",
-                "name": "role_types",
-                "ofType": null
-              }
+              "kind": "OBJECT",
+              "name": "role_types",
+              "ofType": null
             },
             "isDeprecated": false,
             "deprecationReason": null

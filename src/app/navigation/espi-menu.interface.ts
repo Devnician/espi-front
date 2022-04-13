@@ -5,4 +5,5 @@ export interface EspiMenu {
   route: string;
   matIcon: string;
   badgeSubject: BehaviorSubject<number>;
+  id: string;
 }

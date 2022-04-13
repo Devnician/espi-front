@@ -5672,9 +5672,9 @@ export type Users = {
   referendum_votes: Array<Referendum_Votes>;
   /** An aggregate relationship */
   referendum_votes_aggregate: Referendum_Votes_Aggregate;
-  role: Role_Types_Enum;
+  role?: Maybe<Role_Types_Enum>;
   /** An object relationship */
-  roleType: Role_Types;
+  roleType?: Maybe<Role_Types>;
   secondRole?: Maybe<Role_Types_Enum>;
   /** An object relationship */
   secondRoleType?: Maybe<Role_Types>;
@@ -7605,10 +7605,10 @@ export type BulkInsertUsersMutation = (
 export type UserFieldsFragment = (
   { __typename?: 'users' }
   & Pick<Users, 'id' | 'createdAt' | 'updatedAt' | 'name' | 'surname' | 'family' | 'egn' | 'email' | 'pin' | 'addressId' | 'votingSectionId'>
-  & { roleType: (
+  & { roleType?: Maybe<(
     { __typename?: 'role_types' }
     & Pick<Role_Types, 'value' | 'description'>
-  ), secondRoleType?: Maybe<(
+  )>, secondRoleType?: Maybe<(
     { __typename?: 'role_types' }
     & Pick<Role_Types, 'value' | 'description'>
   )>, address: (

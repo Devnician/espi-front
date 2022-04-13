@@ -202,6 +202,7 @@ export class NavigationComponent
             label: 'Гласоподаватели',
             matIcon: 'people',
             badgeSubject: undefined,
+            id: 'users-nav'
           });
           break;
         case 'settlements':
@@ -210,6 +211,7 @@ export class NavigationComponent
             label: 'Населени места',
             matIcon: 'location_city',
             badgeSubject: undefined,
+            id: 'settlements-nav'
           });
           break;
         case 'votings': // dashboard
@@ -218,6 +220,7 @@ export class NavigationComponent
             label: 'Гласуване',
             matIcon: 'front_hand',
             badgeSubject: undefined,
+            id: 'votings-nav'
           });
           break;
 
@@ -227,6 +230,7 @@ export class NavigationComponent
             label: 'Избирателни секции',
             matIcon: 'how_to_vote',
             badgeSubject: undefined,
+            id: 'voting-sections-nav'
           });
           break;
         case 'votings-list':
@@ -235,6 +239,7 @@ export class NavigationComponent
             label: 'Избори',
             matIcon: 'list',
             badgeSubject: undefined,
+            id: 'votings-list-nav'
           });
           break;
         case 'referendums-list':
@@ -243,6 +248,7 @@ export class NavigationComponent
             label: 'Референдуми',
             matIcon: 'question_answer',
             badgeSubject: undefined,
+            id: 'referendums-list-nav'
           });
           break;
 
@@ -252,6 +258,7 @@ export class NavigationComponent
             label: 'Преброяване',
             matIcon: 'functions',
             badgeSubject: undefined,
+            id: 'dashboard-nav'
           });
           break;
 
@@ -261,6 +268,7 @@ export class NavigationComponent
             label: 'Политически организации',
             matIcon: 'groups',
             badgeSubject: undefined,
+            id: 'political-groups-nav'
           });
           break;
 
