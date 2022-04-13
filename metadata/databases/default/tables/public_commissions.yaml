@@ -1,3 +1,48 @@
 table:
   name: commissions
   schema: public
+array_relationships:
+- name: commision_members
+  using:
+    foreign_key_constraint_on:
+      column: commisionId
+      table:
+        name: commision_members
+        schema: public
+insert_permissions:
+- permission:
+    backend_only: false
+    check: {}
+    columns:
+    - createdAt
+    - updatedAt
+    - votingSectionId
+  role: centralLeader
+select_permissions:
+- permission:
+    allow_aggregations: true
+    columns:
+    - createdAt
+    - id
+    - updatedAt
+    - votingSectionId
+    filter: {}
+  role: central
+- permission:
+    allow_aggregations: true
+    columns:
+    - createdAt
+    - id
+    - updatedAt
+    - votingSectionId
+    filter: {}
+  role: centralLeader
+- permission:
+    allow_aggregations: true
+    columns:
+    - id
+    - createdAt
+    - updatedAt
+    - votingSectionId
+    filter: {}
+  role: sectionLeader

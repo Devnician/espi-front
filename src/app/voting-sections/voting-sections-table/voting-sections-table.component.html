@@ -1,4 +1,4 @@
-Избирателни секции
+<h2>Избирателни секции</h2>
 <div class="mat-elevation-z8">
   <mat-progress-bar
     *ngIf="dataSource.loading$ | async"
@@ -87,14 +87,18 @@
           <mat-icon>more_vert</mat-icon>
         </button>
         <mat-menu #menu="matMenu">
-          <button
+          <button mat-menu-item (click)="showMembers(row)">
+            <mat-icon>groups</mat-icon>
+            <span>Покажи членовете</span>
+          </button>
+          <!-- <button
             *ngIf="canOpenCloseSection === false"
             mat-menu-item
             (click)="editVotingSection(row)"
           >
             <mat-icon>edit</mat-icon>
             <span>Редактирай</span>
-          </button>
+          </button> -->
           <button
             *ngIf="canOpenCloseSection && row.openedAt === null"
             mat-menu-item

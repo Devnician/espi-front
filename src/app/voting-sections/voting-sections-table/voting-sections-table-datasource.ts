@@ -111,8 +111,6 @@ export class VotingSectionsTableDataSource extends DataSource<Voting_Section> {
           throw Error(errorMessage);
         }
         this.counter.next(data.voting_section_aggregate.aggregate.count);
-        console.log('booo');
-        // this.currentPageData.next(data.users as Users[]);
         return data.voting_section;
       })
     );

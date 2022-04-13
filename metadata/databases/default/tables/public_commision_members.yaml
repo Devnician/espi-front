@@ -1,3 +1,57 @@
 table:
   name: commision_members
   schema: public
+object_relationships:
+- name: commission
+  using:
+    foreign_key_constraint_on: commisionId
+- name: user
+  using:
+    foreign_key_constraint_on: userId
+insert_permissions:
+- permission:
+    backend_only: false
+    check: {}
+    columns:
+    - commisionId
+    - isLeader
+    - userId
+  role: centralLeader
+- permission:
+    backend_only: false
+    check: {}
+    columns: []
+  role: sectionLeader
+select_permissions:
+- permission:
+    allow_aggregations: true
+    columns:
+    - id
+    - createdAt
+    - updatedAt
+    - commisionId
+    - userId
+    - isLeader
+    filter: {}
+  role: central
+- permission:
+    allow_aggregations: true
+    columns:
+    - isLeader
+    - commisionId
+    - id
+    - userId
+    - createdAt
+    - updatedAt
+    filter: {}
+  role: centralLeader
+- permission:
+    columns:
+    - isLeader
+    - commisionId
+    - id
+    - userId
+    - createdAt
+    - updatedAt
+    filter: {}
+  role: sectionLeader

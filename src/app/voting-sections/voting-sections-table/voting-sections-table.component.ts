@@ -9,10 +9,12 @@ import { FormBuilder, FormGroup } from '@angular/forms';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTable } from '@angular/material/table';
+import { Router } from '@angular/router';
 import { isNullOrUndefined } from 'is-what';
 import { combineLatest, debounce, interval, take } from 'rxjs';
 import { LoggedUser } from 'src/app/auth/logged-user.interface';
 import { VixenComponent } from 'src/app/core/vixen/vixen.component';
+import { Donkey } from 'src/app/services/donkey.service';
 import {
   Role_Types_Enum,
   Voting_Section,
@@ -49,7 +51,12 @@ export class VotingSectionsTableComponent
   });
   canOpenCloseSection = false;
 
-  constructor(protected injector: Injector, private fb: FormBuilder) {
+  constructor(
+    protected injector: Injector,
+    private fb: FormBuilder,
+    private router: Router,
+    private donkey: Donkey
+  ) {
     super(injector);
     this.dataSource = new VotingSectionsTableDataSource(injector);
     this.dataSource.loading.next(true);
@@ -70,10 +77,10 @@ export class VotingSectionsTableComponent
         if (currentRole === Role_Types_Enum.SectionLeader) {
           this.canOpenCloseSection = true;
           this.dataSource.condition.next({ id: { _eq: votingSectionId } });
-          console.log('current role: ' + currentRole);
+          // console.log('current role: ' + currentRole);
         }
       } else {
-        console.log('the user is gone..');
+        // console.log('the user is gone..');
       }
     });
   }
@@ -113,11 +120,15 @@ export class VotingSectionsTableComponent
   }
 
   editVotingSection(section: Voting_Section) {
-    console.log(section);
+    //console.log(section);
     alert('Not implemented yet..');
   }
+
+  showMembers(section: Voting_Section) {
+    this.donkey.load({ section });
+    this.router.navigate(['voting-sections', 'members']);
+  }
   openSection(section: Voting_Section) {
-    console.log('OPEN');
     this.dataSource.votingSectionsService
       .openVotingSection(section.id)
       .pipe(take(1))
@@ -126,7 +137,6 @@ export class VotingSectionsTableComponent
       });
   }
   closeSection(section: Voting_Section) {
-    console.log('CLOSE');
     this.dataSource.votingSectionsService
       .closeVotingSection(section.id)
       .pipe(take(1))

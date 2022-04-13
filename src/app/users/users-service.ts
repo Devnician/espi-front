@@ -8,10 +8,14 @@ import {
   AutocompleteUsersQuery,
   BulkInsertUsersGQL,
   BulkInsertUsersMutation,
+  Commissions_Insert_Input,
   CountUndistributedToVotingSectionsGQL,
+  CreateSectionCommissionGQL,
+  CreateSectionCommissionMutation,
   CreateUserGQL,
   CreateUserMutation,
   DistributeUsersGQL,
+  FetchUserWitnConditionGQL,
   GetUserByIdGQL,
   GetUserByIdQuery,
   GetUsersGQL,
@@ -37,7 +41,9 @@ export class UsersService {
     private countUndistributedToVotingSectionsGQL: CountUndistributedToVotingSectionsGQL,
     private distributeUsersGQL: DistributeUsersGQL,
     private getUserByIdGQL: GetUserByIdGQL,
-    private markReferendumEvoteAsVoteGQL: MarkReferendumEvoteAsVoteGQL
+    private markReferendumEvoteAsVoteGQL: MarkReferendumEvoteAsVoteGQL,
+    private fetchUserWitnConditionGQL: FetchUserWitnConditionGQL,
+    private createSectionCommissionGQL: CreateSectionCommissionGQL
   ) {}
 
   createUser(
@@ -45,30 +51,7 @@ export class UsersService {
   ): Observable<
     FetchResult<CreateUserMutation, Record<string, any>, Record<string, any>>
   > {
-    return this.createUserGQL.mutate(
-      { input },
-      { errorPolicy: 'all' }
-      // {
-      //   update: (cache, { data }) => {
-      //     const existingOrders: any = cache.readQuery({
-      //       query: GetOrdersDocument,
-      //       variables: {
-      //         limit: 1,
-      //       },
-      //     });
-      //     console.log(existingOrders);
-      //     const created = data.insert_orders_one;
-      //     console.log(created);
-      //     cache.writeQuery({
-      //       query: GetOrdersDocument,
-      //       data: {
-      //         orders: [...existingOrders.orders, created],
-      //         orders_aggregate: existingOrders.orders_aggregate,
-      //       },
-      //     });
-      //   },
-      // }
-    );
+    return this.createUserGQL.mutate({ input }, { errorPolicy: 'all' });
   }
   getUsers(
     limit = 10,
@@ -92,6 +75,15 @@ export class UsersService {
   ): Observable<ApolloQueryResult<AutocompleteUsersQuery>> {
     return this.autocompleteUsersGQL.fetch(
       { condition, orderBy },
+      { fetchPolicy: 'network-only', errorPolicy: 'all' }
+    );
+  }
+  fetchUsersWithCondition(
+    condition: Users_Bool_Exp = {},
+    limit: number
+  ): Observable<ApolloQueryResult<AutocompleteUsersQuery>> {
+    return this.fetchUserWitnConditionGQL.fetch(
+      { condition, limit },
       { fetchPolicy: 'network-only', errorPolicy: 'all' }
     );
   }
@@ -135,6 +127,19 @@ export class UsersService {
     return this.markReferendumEvoteAsVoteGQL.mutate({
       objects: referendumVotes,
     });
+  }
+
+  createSectionCommission(
+    set: Users_Insert_Input[],
+    commission: Commissions_Insert_Input
+  ): Observable<
+    FetchResult<
+      CreateSectionCommissionMutation,
+      Record<string, any>,
+      Record<string, any>
+    >
+  > {
+    return this.createSectionCommissionGQL.mutate({ set, commission });
   }
 
   //SELECT (password = crypt('pepe', password)) AS pswmatch FROM users WHERE id = 2 ;
