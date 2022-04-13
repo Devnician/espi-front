@@ -5,6 +5,13 @@ networks:
     ipam:
       driver: default
 services:
+  espi-front:
+    container_name: espi-frontend
+    image: pesho02/espi-front:latest
+    networks:
+      - "espi-app-net"
+    ports:
+      - "4200:80"
   backend:
     container_name: espi-backend
     image: pesho02/espi-backend:latest
@@ -62,3 +69,5 @@ services:
       HASURA_GRAPHQL_UNAUTHORIZED_ROLE: anonymous
 volumes:
   db_data:
+# docker-compose down
+# docker-compose up --build -d

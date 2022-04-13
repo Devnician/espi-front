@@ -177,6 +177,7 @@ export class NavigationComponent
         }
       } else {
         console.log('the user is gone..');
+        this.router.navigate(['auth/login']);
       }
     });
 
