@@ -73,6 +73,40 @@
       <th mat-header-cell *matHeaderCellDef mat-sort-header>тип</th>
       <td mat-cell *matCellDef="let row">{{ row.voting_type.description }}</td>
     </ng-container>
+
+    <!-- voted Column -->
+    <ng-container matColumnDef="voted">
+      <th mat-header-cell *matHeaderCellDef>гласували</th>
+      <td mat-cell *matCellDef="let row">
+        <div>
+          <div style="font-weight: 600; font-size: large">
+            {{
+              calculateActivityInPercents(row, row.voted.aggregate.count)
+                | percent: "1.2-6"
+            }}
+          </div>
+
+          <div
+            *ngIf="
+              row.type === 'parliamentary' || row.type === 'presidential';
+              then thenBlock;
+              else elseBlock
+            "
+          ></div>
+          <ng-template #thenBlock>
+            <div>
+              ( {{ row.voted.aggregate.count }} / {{ allUsersCount | async }})
+            </div>
+          </ng-template>
+          <ng-template #elseBlock>
+            <div>
+              ( {{ row.voted.aggregate.count }} /
+              {{ usersCounterMap.get(row.settlementId) | async }})
+            </div>
+          </ng-template>
+        </div>
+      </td>
+    </ng-container>
     <ng-container matColumnDef="actions">
       <th mat-header-cell *matHeaderCellDef>действия</th>
       <td mat-cell *matCellDef="let row">
@@ -85,7 +119,11 @@
         </button>
         <mat-menu #menu="matMenu">
           <!--  disabled="{{ row.locked && canUnlock() === false }}" -->
-          <button mat-menu-item (click)="openDialog(row)">
+          <button
+            mat-menu-item
+            disabled="{{ row.locked && canUnlock() === false }}"
+            (click)="openDialog(row)"
+          >
             <mat-icon>edit</mat-icon>
             <span>Редактиране</span>
           </button>
@@ -124,6 +162,6 @@
     [length]="dataSource.counter | async"
     [pageIndex]="0"
     [pageSize]="10"
-    [pageSizeOptions]="[5, 10, 15, 100]"
+    [pageSizeOptions]="[10, 15, 20, 100]"
   ></mat-paginator>
 </div>

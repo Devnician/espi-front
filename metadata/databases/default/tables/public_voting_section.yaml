@@ -28,3 +28,22 @@ select_permissions:
     - addressId
     filter: {}
   role: centralLeader
+- permission:
+    allow_aggregations: true
+    columns:
+    - id
+    - createdAt
+    - updatedAt
+    - openedAt
+    - closedAt
+    - addressId
+    filter: {}
+  role: sectionLeader
+update_permissions:
+- permission:
+    check: null
+    columns:
+    - closedAt
+    - openedAt
+    filter: {}
+  role: sectionLeader

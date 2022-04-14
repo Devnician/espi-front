@@ -1,4 +1,4 @@
-Избирателни секции
+<h2>Избирателни секции</h2>
 <div class="mat-elevation-z8">
   <mat-progress-bar
     *ngIf="dataSource.loading$ | async"
@@ -21,34 +21,57 @@
     </ng-container>
     <!-- Address Column -->
     <ng-container matColumnDef="address">
-      <th mat-header-cell *matHeaderCellDef>
-        <div class="table-header-search">
-          <mat-form-field
-            [formGroup]="searchFields"
-            style="width: 100%; padding: 0 10px"
-          >
-            <input
-              #in
-              autocomplete="off"
-              type="search"
-              matInput
-              #input
-              placeholder="Адрес"
-              formControlName="fullSearchAddress"
-            />
-            <mat-icon
-              matSuffix
-              (click)="doFilter(undefined); in.value = ''"
-              color="warn"
+      <div *ngIf="canOpenCloseSection; then thenBlock; else elseBlock"></div>
+      <ng-template #thenBlock>
+        <!-- THIS IS FOR THE SECTION LEADER -->
+        <th mat-header-cell *matHeaderCellDef>Адрес</th>
+      </ng-template>
+      <ng-template #elseBlock>
+        <th mat-header-cell *matHeaderCellDef>
+          <div class="table-header-search">
+            <mat-form-field
+              [formGroup]="searchFields"
+              style="width: 100%; padding: 0 10px"
             >
-              clear
-            </mat-icon>
-          </mat-form-field>
-        </div>
-      </th>
+              <input
+                #in
+                autocomplete="off"
+                type="search"
+                matInput
+                #input
+                placeholder="Адрес"
+                formControlName="fullSearchAddress"
+              />
+              <mat-icon
+                matSuffix
+                (click)="doFilter(undefined); in.value = ''"
+                color="warn"
+              >
+                clear
+              </mat-icon>
+            </mat-form-field>
+          </div>
+        </th>
+      </ng-template>
+
       <td mat-cell *matCellDef="let row">
         {{ row?.address?.settlement.name }} {{ row?.address?.street }}
         {{ row?.address?.number }} {{ row?.address?.description }}
+      </td>
+    </ng-container>
+
+    <!-- openedAt Column -->
+    <ng-container matColumnDef="openedAt">
+      <th mat-header-cell *matHeaderCellDef>Отворена в</th>
+      <td mat-cell *matCellDef="let row">
+        {{ row.openedAt | date: "d.MM.YYYY HH:mm:ss" }}
+      </td>
+    </ng-container>
+    <!-- closeddAt Column -->
+    <ng-container matColumnDef="closedAt">
+      <th mat-header-cell *matHeaderCellDef>Затворена в</th>
+      <td mat-cell *matCellDef="let row">
+        {{ row.closedAt | date: "d.MM.YYYY HH:mm:ss" }}
       </td>
     </ng-container>
 
@@ -64,9 +87,37 @@
           <mat-icon>more_vert</mat-icon>
         </button>
         <mat-menu #menu="matMenu">
-          <button mat-menu-item (click)="editVotingSection(row)">
+          <button mat-menu-item (click)="showMembers(row)">
+            <mat-icon>groups</mat-icon>
+            <span>Покажи членовете</span>
+          </button>
+          <!-- <button
+            *ngIf="canOpenCloseSection === false"
+            mat-menu-item
+            (click)="editVotingSection(row)"
+          >
             <mat-icon>edit</mat-icon>
             <span>Редактирай</span>
+          </button> -->
+          <button
+            *ngIf="canOpenCloseSection && row.openedAt === null"
+            mat-menu-item
+            (click)="openSection(row)"
+          >
+            <mat-icon>lock_open</mat-icon>
+            <span>Отваряне на секцията</span>
+          </button>
+          <button
+            *ngIf="
+              canOpenCloseSection &&
+              row.openedAt !== null &&
+              row.closedAt === null
+            "
+            mat-menu-item
+            (click)="closeSection(row)"
+          >
+            <mat-icon>lock</mat-icon>
+            <span>Затваряне на секцията</span>
           </button>
         </mat-menu>
       </td>

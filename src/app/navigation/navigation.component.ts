@@ -84,7 +84,12 @@ export class NavigationComponent
         ],
         [
           Role_Types_Enum.SectionLeader,
-          Object.freeze(['users', 'votings-list', 'referendums-list']),
+          Object.freeze([
+            'users',
+            'votings-list',
+            'referendums-list',
+            'voting-sections',
+          ]),
         ],
         [Role_Types_Enum.Section, Object.freeze(['users'])],
         [Role_Types_Enum.User, Object.freeze(['votings'])],
@@ -172,6 +177,7 @@ export class NavigationComponent
         }
       } else {
         console.log('the user is gone..');
+        this.router.navigate(['auth/login']);
       }
     });
 
@@ -218,7 +224,7 @@ export class NavigationComponent
         case 'voting-sections':
           this.menus.push({
             route: 'voting-sections',
-            label: 'Секции',
+            label: 'Избирателни секции',
             matIcon: 'how_to_vote',
             badgeSubject: undefined,
           });
@@ -235,7 +241,7 @@ export class NavigationComponent
           this.menus.push({
             route: 'votings/referendums-list',
             label: 'Референдуми',
-            matIcon: 'list',
+            matIcon: 'question_answer',
             badgeSubject: undefined,
           });
           break;
@@ -352,14 +358,14 @@ export class NavigationComponent
     this.authService
       .refreshToken(/*this.user.id,*/ roleIndex)
       .subscribe((response) => {
-        console.log(response);
+        //   console.log(response);
         if (response.error || response.errors) {
           this.onLogout();
         }
 
         if (response.data?.RefreshToken?.fetchToken) {
           const newFetchToken: string = response.data.RefreshToken.fetchToken;
-          console.log('NEW TOKEN...');
+          // console.log('NEW TOKEN...');
           this.authService.setFetchTokenAndOptionalRedirectToHome(
             newFetchToken,
             this.router,

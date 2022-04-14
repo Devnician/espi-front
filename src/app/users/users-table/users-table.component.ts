@@ -34,10 +34,15 @@ import {
   GetDistrictsQuery,
   GetMunicipalitiesIdsQuery,
   GetUsersQuery,
+  Referendums,
+  Referendum_Questions,
+  Referendum_Votes_Insert_Input,
   Role_Types_Enum,
   Users,
   Users_Bool_Exp,
   Users_Insert_Input,
+  Votes_Insert_Input,
+  Votings,
   Voting_Types_Enum,
 } from 'src/generated/graphql';
 import { EditUserComponent } from '../edit-user/edit-user.component';
@@ -83,6 +88,9 @@ export class UsersTableComponent
   municipalitiesIds: GetMunicipalitiesIdsQuery['settlements'];
   municipalitiesLength: number;
   importWorks: BehaviorSubject<boolean> = new BehaviorSubject(false);
+  userVotesTaskProcessing: BehaviorSubject<boolean> = new BehaviorSubject(
+    false
+  );
   undistributedUsers: BehaviorSubject<number> = new BehaviorSubject(0);
   distirbutorWorks: BehaviorSubject<boolean> = new BehaviorSubject(false);
 
@@ -93,6 +101,7 @@ export class UsersTableComponent
   private canSeeSectionProps = false;
   private canSeeCentralProps = false;
   private votingSectionId;
+  canSimulateVote: BehaviorSubject<boolean> = new BehaviorSubject(false);
 
   // selectedElection: Election;
   /**
@@ -125,7 +134,6 @@ export class UsersTableComponent
     combineLatest(this.userObservables).subscribe((data) => {
       const user: LoggedUser = data[0];
       this.votingSectionId = user.votingSectionId;
-      // console.log(user);
       const index = data[1];
       const role: Role_Types_Enum = this.getUSerRole(user as Users, index);
       if (
@@ -135,6 +143,9 @@ export class UsersTableComponent
         this.filters.votingSectionId = user.votingSectionId;
         this.buildConditionAndNotifyDatasource();
         this.canSeeSectionProps = true;
+        if (role === Role_Types_Enum.SectionLeader) {
+          this.canSimulateVote.next(true);
+        }
       } else {
         this.canSeeSectionProps = false;
       }
@@ -166,7 +177,7 @@ export class UsersTableComponent
         .get('voting')
         .valueChanges.pipe(debounceTime(100))
         .subscribe((data) => {
-          console.log(data);
+          // console.log(data);
           //  let election: Election = { type: 'voting' } as Election;
           this.dataSource.selectedElection.next(
             this.elections.find((e) => e.id === data.id)
@@ -517,5 +528,118 @@ export class UsersTableComponent
           this.checkUndistributed();
         }
       });
+  }
+
+  simulateVote() {
+    console.log('Start vote');
+    this.userVotesTaskProcessing.next(true);
+    const election = this.dataSource.selectedElection.getValue();
+
+    // const id = election.id;
+    if (election.type === 'referendum') {
+      const questions: Referendum_Questions[] = (election as any as Referendums)
+        .referendumQuestions;
+      const referendumVotes: Referendum_Votes_Insert_Input[] = [];
+      this.usersService
+        .getUsersIds(
+          { votingSectionId: { _eq: /*2344*/ this.votingSectionId } },
+          5000
+        )
+        .subscribe((response) => {
+          const arr = response.data.users;
+          this.snackBar.open(`В момента гласуват ${arr.length} човека`, 'OK');
+
+          arr.forEach((element) => {
+            questions.forEach((q) => {
+              const input: Referendum_Votes_Insert_Input = {
+                eVote: this.generator.getRandomInteger(0, 100) % 2 === 0,
+                questionId: q.id,
+                userId: element.id,
+              };
+              referendumVotes.push(input);
+            });
+          });
+
+          this.votingsService
+            .addVoteForReferendum(referendumVotes)
+            .subscribe((response) => {
+              // const affected =
+              //   response.data.insert_referendum_votes.affected_rows;
+              this.snackBar.open(
+                `за референдума гласуваха ${arr.length} човека.`,
+                'OK'
+                // { duration: 5000 }
+              );
+              this.userVotesTaskProcessing.next(false);
+              this.dataSource.queryRef.refetch({});
+            });
+        });
+    } else {
+      const votingId = election.id;
+      if (election.type === Voting_Types_Enum.Parliamentary) {
+        console.log('OOOOOOOOOOOOOOOO');
+        const observables = [
+          this.usersService.getUsersIds({ _not: { votes: {} } }, 50000),
+          this.votingsService.getVotingCandidates(votingId),
+        ];
+
+        combineLatest(observables).subscribe((result) => {
+          const userIds = result[0].data['users'] as Users[];
+          console.log('start.....');
+          this.snackBar.open(
+            `В момента гласуват ${userIds.length} човека`,
+            'OK'
+          );
+          const candidates = result[1].data['votings_by_pk'] as Votings;
+          const members = candidates.political_group_members;
+          const membersLen = members.length;
+          const votes: Votes_Insert_Input[] = [];
+          let reduceNullPreferences = 0;
+          userIds.forEach((element) => {
+            const politGroupIndex = this.generator.getRandomInteger(
+              0,
+              membersLen - 1
+            );
+
+            const vote: Votes_Insert_Input = {
+              votingId: election.id,
+              userId: element.id,
+              voteGroupId: members[politGroupIndex].politicalGroupId, //required
+              voteUserId:
+                reduceNullPreferences > 8 &&
+                this.generator.getRandomInteger(0, 1) % 2 === 0
+                  ? null
+                  : members[politGroupIndex].id,
+              //not required
+              inSection: false,
+            };
+            if (reduceNullPreferences > 8) {
+              reduceNullPreferences = 0;
+            } else {
+              reduceNullPreferences++;
+            }
+            votes.push(vote);
+          });
+
+          this.votingsService.createVotes(votes).subscribe((response) => {
+            const affected = response.data.insert_votes.affected_rows;
+            //  console.log(affected);
+            this.snackBar.open(
+              `за избора гласуваха ${affected} човека.`,
+              'OK'
+              // { duration: 5000 }
+            );
+            this.userVotesTaskProcessing.next(false);
+            this.dataSource.queryRef.refetch({});
+          });
+        });
+      } else {
+        this.snackBar.open(
+          `Не е разработено..`,
+          'OK'
+          // { duration: 5000 }
+        );
+      }
+    }
   }
 }

@@ -22,6 +22,16 @@ insert_permissions:
     check: {}
     columns:
     - eVote
+    - id
+    - questionId
+    - userId
+    - vote
+  role: sectionLeader
+- permission:
+    backend_only: false
+    check: {}
+    columns:
+    - eVote
     - questionId
     - sectionId
     - userId
@@ -30,6 +40,7 @@ insert_permissions:
 select_permissions:
 - permission:
     columns:
+    - createdAt
     - eVote
     - id
     - questionId
@@ -38,6 +49,7 @@ select_permissions:
   role: central
 - permission:
     columns:
+    - createdAt
     - eVote
     - id
     - questionId

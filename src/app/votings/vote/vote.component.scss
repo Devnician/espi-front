@@ -78,3 +78,20 @@ mat-tab-body {
     height: calc(100% - 2px);
     display: flex;
 }
+
+.parent-child-container {
+    display: flex;
+    width: 100%;
+    .parent {
+        width: 60%;
+    }
+    .child {
+        width: 100%;
+    }
+}
+
+@media screen and (max-width: 575px) {
+    .parent-child-container {
+        display: block;
+    }
+}

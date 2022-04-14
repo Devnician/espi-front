@@ -31,7 +31,7 @@ export class VotingSectionsTableDataSource extends DataSource<Voting_Section> {
 
   loading: BehaviorSubject<any> = new BehaviorSubject(true);
   loading$ = this.loading.asObservable();
-  private votingSectionsService: VotingSectionsService;
+  votingSectionsService: VotingSectionsService;
   private snackBar: MatSnackBar;
   constructor(private injector: Injector) {
     super();
@@ -111,7 +111,6 @@ export class VotingSectionsTableDataSource extends DataSource<Voting_Section> {
           throw Error(errorMessage);
         }
         this.counter.next(data.voting_section_aggregate.aggregate.count);
-        // this.currentPageData.next(data.users as Users[]);
         return data.voting_section;
       })
     );

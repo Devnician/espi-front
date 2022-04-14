@@ -24,6 +24,12 @@ query AutocompleteUsers(
   }
 }
 
+query FetchUserWitnCondition($condition: users_bool_exp! = {}, $limit: Int!) {
+  users(where: $condition, limit: $limit) {
+    ...UserFields
+  }
+}
+
 mutation CreateUser($input: users_insert_input!) {
   insert_users_one(object: $input) {
     ...UserFields
@@ -136,6 +142,31 @@ mutation MarkReferendumEvoteAsVote(
     }
   ) {
     affected_rows
+  }
+}
+
+query CountUsers {
+  users_aggregate {
+    aggregate {
+      count
+    }
+  }
+}
+query CountUsersForSettlement($settlementId: Int!) {
+  users_aggregate(
+    where: {
+      voting_section: { address: { settlementId: { _eq: $settlementId } } }
+    }
+  ) {
+    aggregate {
+      count
+    }
+  }
+}
+
+query GetUsersIds($condition: users_bool_exp!, $limit: Int!) {
+  users(where: $condition, limit: $limit) {
+    id
   }
 }
 # mutation MarkReferendumEvoteAsVote($ids: [Int!]!) {

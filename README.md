@@ -43,7 +43,7 @@ hasura migrate apply --type up --database-name="default" --version 1624619288822
 ## after all
 hasura metadata apply 
 ## Types generator
-npm run watch-types
+npm run watch-types / yarn watch-types
 
 ## Test with Carma
 # all:

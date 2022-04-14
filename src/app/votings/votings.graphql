@@ -121,6 +121,11 @@ query GetVotings(
     order_by: $orderBy
   ) {
     ...VotingVields
+    voted: votes_aggregate {
+      aggregate {
+        count
+      }
+    }
   }
   votings_aggregate {
     aggregate {
@@ -184,6 +189,11 @@ fragment VotingVields on votings {
   }
   startedAt
   finishedAt
+  # voted: votes_aggregate {
+  #   aggregate {
+  #     count
+  #   }
+  # }
 }
 
 # Votes
@@ -202,5 +212,23 @@ mutation Vote($input: [votes_insert_input!]!) {
 mutation MarkVoteAsInSection($id: Int!) {
   update_votes_by_pk(pk_columns: { id: $id }, _set: { inSection: true }) {
     id
+  }
+}
+#  FOR demo purposes
+mutation CreateVotes($input: [votes_insert_input!]!) {
+  insert_votes(
+    objects: $input
+    on_conflict: { constraint: votes_pkey, update_columns: [] }
+  ) {
+    affected_rows
+  }
+}
+#  FOR demo purposes
+query GetVotingCandidates($id: Int!) {
+  votings_by_pk(id: $id) {
+    political_group_members {
+      id
+      politicalGroupId
+    }
   }
 }
