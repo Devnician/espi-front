@@ -8,7 +8,17 @@ function makeid() {
     return text;
 }
 
+function padTo2Digits(num) {
+    return num.toString().padStart(2, '0');
+}
 
+function formatDate(date) {
+    return [
+        padTo2Digits(date.getMonth() + 1),
+        padTo2Digits(date.getDate()),
+        date.getFullYear(),
+    ].join('/');
+}
 
 it('register', () => {
     cy.visit('http://localhost:4200/auth/login');
@@ -38,9 +48,6 @@ it('login', () => {
 })
 
 it('political-group-create', () => {
-    cy.get('#mat-radio-3 > .mat-radio-label > .mat-radio-label-content').click();
-    cy.get('.mat-snack-bar-container').should('be.visible')
-    cy.get('.mat-simple-snackbar-action > .mat-focus-indicator').click();
     cy.get(':nth-child(2) > .mat-list-item > .mat-list-item-content').click();
     cy.get('.signin > .mat-focus-indicator').click();
     cy.get('#political-groups-nav > .mat-line').click();
@@ -60,6 +67,26 @@ it('political-group-create', () => {
         cy.get('#mat-dialog-0 > app-edit-political-group > form > mat-card > mat-card-actions > button.mat-focus-indicator.mat-raised-button.mat-button-base.mat-primary').click();
         cy.get('.mat-primary > .mat-button-wrapper').click();
         cy.wait(4000);
-        cy.get('#political-parties-table').find('tr').its('length').should('eq', trCount+1);
+        cy.get('#political-parties-table').find('tr').its('length').should('eq', trCount + 1);
     })
+});
+
+it('create-new-voting', () => {
+    var date = new Date()
+    date.setDate(date.getDate() + 1)
+    let trCount = 0;
+    cy.get('#votings-list-nav > .mat-line').click();
+    cy.wait(4000);
+    cy.get('#votings-table-id').find('tr').then(tr => {
+        trCount = Cypress.$(tr).length;
+        cy.get('[style="display: flex; justify-content: flex-end;"] > .mat-focus-indicator > .mat-button-wrapper').click();
+        cy.get('.mat-select-placeholder').click();
+        cy.get('#mat-option-11 > .mat-option-text').click();
+        cy.get('#mat-input-12').type(formatDate(date));
+        cy.get('#mat-input-13').type(makeid());
+        cy.get('#mat-input-14').type('test description');
+        cy.get('.mat-primary > .mat-button-wrapper').click();
+        cy.wait(4000);
+        cy.get('#votings-table-id').find('tr').its('length').should('eq', trCount + 1);
+    });
 });

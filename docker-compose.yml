@@ -40,7 +40,7 @@ services:
       - "5432:5432"
     restart: always
     volumes:
-      - 'D:\espi\db_data:/var/lib/postgresql/data'
+      - 'C:\espi\db_data:/var/lib/postgresql/data'
     environment:
       POSTGRES_PASSWORD: postgrespassword
   graphql-engine:
