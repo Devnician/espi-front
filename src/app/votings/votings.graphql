@@ -214,3 +214,21 @@ mutation MarkVoteAsInSection($id: Int!) {
     id
   }
 }
+#  FOR demo purposes
+mutation CreateVotes($input: [votes_insert_input!]!) {
+  insert_votes(
+    objects: $input
+    on_conflict: { constraint: votes_pkey, update_columns: [] }
+  ) {
+    affected_rows
+  }
+}
+#  FOR demo purposes
+query GetVotingCandidates($id: Int!) {
+  votings_by_pk(id: $id) {
+    political_group_members {
+      id
+      politicalGroupId
+    }
+  }
+}

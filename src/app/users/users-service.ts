@@ -21,6 +21,7 @@ import {
   GetUserByIdGQL,
   GetUserByIdQuery,
   GetUsersGQL,
+  GetUsersIdsGQL,
   GetUsersQuery,
   MarkReferendumEvoteAsVoteGQL,
   Referendum_Votes_Insert_Input,
@@ -47,7 +48,8 @@ export class UsersService {
     private fetchUserWitnConditionGQL: FetchUserWitnConditionGQL,
     private createSectionCommissionGQL: CreateSectionCommissionGQL,
     private countUsersGQL: CountUsersGQL,
-    private countUsersForSettlementGQL: CountUsersForSettlementGQL
+    private countUsersForSettlementGQL: CountUsersForSettlementGQL,
+    private getUsersIdsGQL: GetUsersIdsGQL
   ) {}
 
   createUser(
@@ -69,7 +71,16 @@ export class UsersService {
         fetchPolicy: 'network-only',
         partialRefetch: true,
         errorPolicy: 'all',
-        pollInterval: 30 * 1000,
+        pollInterval: 60 * 1000,
+      }
+    );
+  }
+  getUsersIds(condition: Users_Bool_Exp, limit: number) {
+    return this.getUsersIdsGQL.fetch(
+      { condition, limit },
+      {
+        fetchPolicy: 'network-only',
+        errorPolicy: 'all',
       }
     );
   }

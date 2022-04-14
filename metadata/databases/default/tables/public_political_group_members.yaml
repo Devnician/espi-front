@@ -53,6 +53,12 @@ select_permissions:
     columns:
     - id
     - politicalGroupId
+    filter: {}
+  role: sectionLeader
+- permission:
+    columns:
+    - id
+    - politicalGroupId
     - userId
     - votingId
     filter: {}

@@ -163,6 +163,12 @@ query CountUsersForSettlement($settlementId: Int!) {
     }
   }
 }
+
+query GetUsersIds($condition: users_bool_exp!, $limit: Int!) {
+  users(where: $condition, limit: $limit) {
+    id
+  }
+}
 # mutation MarkReferendumEvoteAsVote($ids: [Int!]!) {
 #   update_referendum_votes(
 #     where: { id: { _in: $ids } }

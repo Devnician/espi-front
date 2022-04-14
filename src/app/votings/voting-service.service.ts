@@ -6,6 +6,8 @@ import {
   AddVoteForTheReferendumMutation,
   CreateReferendumGQL,
   CreateReferendumMutation,
+  CreateVotesGQL,
+  CreateVotesMutation,
   CreateVotingGQL,
   CreateVotingMutation,
   GetParticipantsInVotingGQL,
@@ -17,6 +19,8 @@ import {
   GetStartedVotingsQuery,
   GetUpcomingVotingsGQL,
   GetUpcomingVotingsQuery,
+  GetVotingCandidatesGQL,
+  GetVotingCandidatesQuery,
   GetVotingsGQL,
   MarkVoteAsInSectionGQL,
   MarkVoteAsInSectionMutation,
@@ -56,7 +60,9 @@ export class VotingsService {
     private addVoteForTheReferendumGQL: AddVoteForTheReferendumGQL,
     private getParticipantsInVotingGQL: GetParticipantsInVotingGQL,
     private voteGQL: VoteGQL,
-    private markVoteAsInSectionGQL: MarkVoteAsInSectionGQL
+    private markVoteAsInSectionGQL: MarkVoteAsInSectionGQL,
+    private createVotesGQL: CreateVotesGQL,
+    private getVotingCandidatesGQL: GetVotingCandidatesGQL
   ) {}
 
   //#region  VOTINGS
@@ -67,6 +73,17 @@ export class VotingsService {
   > {
     return this.createVotingGQL.mutate(
       { input: object },
+      { errorPolicy: 'all' }
+    );
+  }
+  // FOR DEMO PURPOSES
+  createVotes(
+    objects: Votings_Insert_Input[]
+  ): Observable<
+    FetchResult<CreateVotesMutation, Record<string, any>, Record<string, any>>
+  > {
+    return this.createVotesGQL.mutate(
+      { input: objects },
       { errorPolicy: 'all' }
     );
   }
@@ -302,7 +319,7 @@ export class VotingsService {
       Record<string, any>
     >
   > {
-    console.log(answers);
+    // console.log(answers);
     return this.addVoteForTheReferendumGQL.mutate(
       { votes: answers },
       { errorPolicy: 'all' }
@@ -310,4 +327,13 @@ export class VotingsService {
   }
 
   //#region  REFERENDUMS
+
+  // FOR DEMO PURPOSES
+  getVotingCandidates(
+    votingsId: number
+  ): Observable<ApolloQueryResult<GetVotingCandidatesQuery>> {
+    return this.getVotingCandidatesGQL.fetch({
+      id: votingsId,
+    });
+  }
 }

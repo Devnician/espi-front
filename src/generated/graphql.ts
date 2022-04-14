@@ -7731,6 +7731,20 @@ export type CountUsersForSettlementQuery = (
   ) }
 );
 
+export type GetUsersIdsQueryVariables = Exact<{
+  condition: Users_Bool_Exp;
+  limit: Scalars['Int'];
+}>;
+
+
+export type GetUsersIdsQuery = (
+  { __typename?: 'query_root' }
+  & { users: Array<(
+    { __typename?: 'users' }
+    & Pick<Users, 'id'>
+  )> }
+);
+
 export type GetVotingSectionsQueryVariables = Exact<{
   limit?: Maybe<Scalars['Int']>;
   offset?: Maybe<Scalars['Int']>;
@@ -8078,6 +8092,35 @@ export type MarkVoteAsInSectionMutation = (
   & { update_votes_by_pk?: Maybe<(
     { __typename?: 'votes' }
     & Pick<Votes, 'id'>
+  )> }
+);
+
+export type CreateVotesMutationVariables = Exact<{
+  input: Array<Votes_Insert_Input> | Votes_Insert_Input;
+}>;
+
+
+export type CreateVotesMutation = (
+  { __typename?: 'mutation_root' }
+  & { insert_votes?: Maybe<(
+    { __typename?: 'votes_mutation_response' }
+    & Pick<Votes_Mutation_Response, 'affected_rows'>
+  )> }
+);
+
+export type GetVotingCandidatesQueryVariables = Exact<{
+  id: Scalars['Int'];
+}>;
+
+
+export type GetVotingCandidatesQuery = (
+  { __typename?: 'query_root' }
+  & { votings_by_pk?: Maybe<(
+    { __typename?: 'votings' }
+    & { political_group_members: Array<(
+      { __typename?: 'political_group_members' }
+      & Pick<Political_Group_Members, 'id' | 'politicalGroupId'>
+    )> }
   )> }
 );
 
@@ -8853,6 +8896,24 @@ export const CountUsersForSettlementDocument = gql`
       super(apollo);
     }
   }
+export const GetUsersIdsDocument = gql`
+    query GetUsersIds($condition: users_bool_exp!, $limit: Int!) {
+  users(where: $condition, limit: $limit) {
+    id
+  }
+}
+    `;
+
+  @Injectable({
+    providedIn: 'root'
+  })
+  export class GetUsersIdsGQL extends Apollo.Query<GetUsersIdsQuery, GetUsersIdsQueryVariables> {
+    document = GetUsersIdsDocument;
+    
+    constructor(apollo: Apollo.Apollo) {
+      super(apollo);
+    }
+  }
 export const GetVotingSectionsDocument = gql`
     query GetVotingSections($limit: Int, $offset: Int, $condition: voting_section_bool_exp! = {}, $orderBy: [voting_section_order_by!] = {createdAt: desc}) {
   voting_section(
@@ -9253,6 +9314,48 @@ export const MarkVoteAsInSectionDocument = gql`
   })
   export class MarkVoteAsInSectionGQL extends Apollo.Mutation<MarkVoteAsInSectionMutation, MarkVoteAsInSectionMutationVariables> {
     document = MarkVoteAsInSectionDocument;
+    
+    constructor(apollo: Apollo.Apollo) {
+      super(apollo);
+    }
+  }
+export const CreateVotesDocument = gql`
+    mutation CreateVotes($input: [votes_insert_input!]!) {
+  insert_votes(
+    objects: $input
+    on_conflict: {constraint: votes_pkey, update_columns: []}
+  ) {
+    affected_rows
+  }
+}
+    `;
+
+  @Injectable({
+    providedIn: 'root'
+  })
+  export class CreateVotesGQL extends Apollo.Mutation<CreateVotesMutation, CreateVotesMutationVariables> {
+    document = CreateVotesDocument;
+    
+    constructor(apollo: Apollo.Apollo) {
+      super(apollo);
+    }
+  }
+export const GetVotingCandidatesDocument = gql`
+    query GetVotingCandidates($id: Int!) {
+  votings_by_pk(id: $id) {
+    political_group_members {
+      id
+      politicalGroupId
+    }
+  }
+}
+    `;
+
+  @Injectable({
+    providedIn: 'root'
+  })
+  export class GetVotingCandidatesGQL extends Apollo.Query<GetVotingCandidatesQuery, GetVotingCandidatesQueryVariables> {
+    document = GetVotingCandidatesDocument;
     
     constructor(apollo: Apollo.Apollo) {
       super(apollo);

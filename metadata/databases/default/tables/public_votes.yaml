@@ -4,6 +4,17 @@ table:
 insert_permissions:
 - permission:
     backend_only: false
+    check: {}
+    columns:
+    - id
+    - inSection
+    - userId
+    - voteGroupId
+    - voteUserId
+    - votingId
+  role: sectionLeader
+- permission:
+    backend_only: false
     check:
       userId:
         _eq: X-Hasura-User-Id
