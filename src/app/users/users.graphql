@@ -144,6 +144,25 @@ mutation MarkReferendumEvoteAsVote(
     affected_rows
   }
 }
+
+query CountUsers {
+  users_aggregate {
+    aggregate {
+      count
+    }
+  }
+}
+query CountUsersForSettlement($settlementId: Int!) {
+  users_aggregate(
+    where: {
+      voting_section: { address: { settlementId: { _eq: $settlementId } } }
+    }
+  ) {
+    aggregate {
+      count
+    }
+  }
+}
 # mutation MarkReferendumEvoteAsVote($ids: [Int!]!) {
 #   update_referendum_votes(
 #     where: { id: { _in: $ids } }

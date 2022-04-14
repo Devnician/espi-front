@@ -18,6 +18,7 @@ insert_permissions:
   role: user
 select_permissions:
 - permission:
+    allow_aggregations: true
     columns:
     - inSection
     - id
@@ -30,6 +31,7 @@ select_permissions:
     filter: {}
   role: central
 - permission:
+    allow_aggregations: true
     columns:
     - inSection
     - id
@@ -42,6 +44,7 @@ select_permissions:
     filter: {}
   role: centralLeader
 - permission:
+    allow_aggregations: true
     columns:
     - createdAt
     - id
@@ -54,6 +57,7 @@ select_permissions:
     filter: {}
   role: section
 - permission:
+    allow_aggregations: true
     columns:
     - inSection
     - id
@@ -66,6 +70,7 @@ select_permissions:
     filter: {}
   role: sectionLeader
 - permission:
+    allow_aggregations: true
     columns:
     - createdAt
     - id

@@ -6,9 +6,11 @@ import { MatSort } from '@angular/material/sort';
 import { MatTable } from '@angular/material/table';
 import { isNullOrUndefined } from 'is-what';
 import * as moment from 'moment';
+import { BehaviorSubject, Observable, take } from 'rxjs';
 import { LoggedUser } from 'src/app/auth/logged-user.interface';
 import { VixenComponent } from 'src/app/core/vixen/vixen.component';
 import { AuthService } from 'src/app/services/auth-service';
+import { UsersService } from 'src/app/users/users-service';
 import { Role_Types_Enum, Votings } from 'src/generated/graphql';
 import { EditVotingComponent } from '../edit-voting/edit-voting.component';
 import { VotingsService } from '../voting-service.service';
@@ -42,14 +44,19 @@ export class VotingsTableComponent
     'description',
     'startDate',
     'type',
+    'voted',
     'actions',
   ];
+  allUsersCount: BehaviorSubject<number> = new BehaviorSubject(0);
+
+  usersCounterMap: Map<number, BehaviorSubject<number>> = new Map();
 
   constructor(
     private auth: AuthService,
     private votingService: VotingsService,
     private matSnackBar: MatSnackBar,
     protected injector: Injector,
+    private usersService: UsersService,
     private dialog: MatDialog
   ) {
     super(injector);
@@ -57,12 +64,32 @@ export class VotingsTableComponent
     this.auth.user$.subscribe((data) => {
       this.loggedUSer = data;
     });
+    this.usersService.countUsers().subscribe((count) => {
+      this.allUsersCount.next(count);
+    });
   }
 
   ngAfterViewInit(): void {
     this.dataSource.sort = this.sort;
     this.dataSource.paginator = this.paginator;
     this.table.dataSource = this.dataSource;
+    this.dataSource.currentPageData.subscribe((collection) => {
+      if (collection) {
+        collection.forEach((voting) => {
+          if (voting.settlementId) {
+            // put all new counters in Map on every refetch of table data
+            this.countUsersWithSectionInThisSettlement(voting.settlementId)
+              .pipe(take(1))
+              .subscribe((counter) => {
+                this.usersCounterMap.set(
+                  voting.settlementId,
+                  new BehaviorSubject(counter)
+                );
+              });
+          }
+        });
+      }
+    });
   }
   canCreateVote(): boolean {
     if (
@@ -130,6 +157,34 @@ export class VotingsTableComponent
         });
         this.dataSource.refresh.next(true);
       });
+  }
+
+  private countUsersWithSectionInThisSettlement(
+    settlementID: number
+  ): Observable<number> {
+    return this.usersService.countUsersForSettlement(settlementID);
+  }
+
+  calculateActivityInPercents(row: Votings, voted: number): number {
+    if (row.settlementId === null) {
+      const count = this.allUsersCount.getValue();
+      if (count === 0) {
+        return 0;
+      } else {
+        if (voted === 0) {
+          return 0;
+        } else {
+          return voted / count;
+        }
+      }
+    } else {
+      const obs = this.usersCounterMap.get(row.settlementId);
+      if (obs) {
+        return voted / this.usersCounterMap.get(row.settlementId).getValue();
+      } else {
+        return 0;
+      }
+    }
   }
 
   openDialog(voting: Votings) {

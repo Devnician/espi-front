@@ -6894,6 +6894,10 @@ export type Votings = {
   startedAt?: Maybe<Scalars['timestamptz']>;
   type: Voting_Types_Enum;
   updatedAt: Scalars['timestamptz'];
+  /** An array relationship */
+  votes: Array<Votes>;
+  /** An aggregate relationship */
+  votes_aggregate: Votes_Aggregate;
   /** An object relationship */
   voting_type: Voting_Types;
 };
@@ -6916,6 +6920,26 @@ export type VotingsPolitical_Group_Members_AggregateArgs = {
   offset?: Maybe<Scalars['Int']>;
   order_by?: Maybe<Array<Political_Group_Members_Order_By>>;
   where?: Maybe<Political_Group_Members_Bool_Exp>;
+};
+
+
+/** columns and relationships of "votings" */
+export type VotingsVotesArgs = {
+  distinct_on?: Maybe<Array<Votes_Select_Column>>;
+  limit?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  order_by?: Maybe<Array<Votes_Order_By>>;
+  where?: Maybe<Votes_Bool_Exp>;
+};
+
+
+/** columns and relationships of "votings" */
+export type VotingsVotes_AggregateArgs = {
+  distinct_on?: Maybe<Array<Votes_Select_Column>>;
+  limit?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  order_by?: Maybe<Array<Votes_Order_By>>;
+  where?: Maybe<Votes_Bool_Exp>;
 };
 
 /** aggregated selection of "votings" */
@@ -6973,6 +6997,7 @@ export type Votings_Bool_Exp = {
   startedAt?: Maybe<Timestamptz_Comparison_Exp>;
   type?: Maybe<Voting_Types_Enum_Comparison_Exp>;
   updatedAt?: Maybe<Timestamptz_Comparison_Exp>;
+  votes?: Maybe<Votes_Bool_Exp>;
   voting_type?: Maybe<Voting_Types_Bool_Exp>;
 };
 
@@ -7003,6 +7028,7 @@ export type Votings_Insert_Input = {
   startedAt?: Maybe<Scalars['timestamptz']>;
   type?: Maybe<Voting_Types_Enum>;
   updatedAt?: Maybe<Scalars['timestamptz']>;
+  votes?: Maybe<Votes_Arr_Rel_Insert_Input>;
   voting_type?: Maybe<Voting_Types_Obj_Rel_Insert_Input>;
 };
 
@@ -7072,6 +7098,7 @@ export type Votings_Order_By = {
   startedAt?: Maybe<Order_By>;
   type?: Maybe<Order_By>;
   updatedAt?: Maybe<Order_By>;
+  votes_aggregate?: Maybe<Votes_Aggregate_Order_By>;
   voting_type?: Maybe<Voting_Types_Order_By>;
 };
 
@@ -7674,6 +7701,36 @@ export type MarkReferendumEvoteAsVoteMutation = (
   )> }
 );
 
+export type CountUsersQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type CountUsersQuery = (
+  { __typename?: 'query_root' }
+  & { users_aggregate: (
+    { __typename?: 'users_aggregate' }
+    & { aggregate?: Maybe<(
+      { __typename?: 'users_aggregate_fields' }
+      & Pick<Users_Aggregate_Fields, 'count'>
+    )> }
+  ) }
+);
+
+export type CountUsersForSettlementQueryVariables = Exact<{
+  settlementId: Scalars['Int'];
+}>;
+
+
+export type CountUsersForSettlementQuery = (
+  { __typename?: 'query_root' }
+  & { users_aggregate: (
+    { __typename?: 'users_aggregate' }
+    & { aggregate?: Maybe<(
+      { __typename?: 'users_aggregate_fields' }
+      & Pick<Users_Aggregate_Fields, 'count'>
+    )> }
+  ) }
+);
+
 export type GetVotingSectionsQueryVariables = Exact<{
   limit?: Maybe<Scalars['Int']>;
   offset?: Maybe<Scalars['Int']>;
@@ -7922,6 +7979,13 @@ export type GetVotingsQuery = (
   { __typename?: 'query_root' }
   & { votings: Array<(
     { __typename?: 'votings' }
+    & { voted: (
+      { __typename?: 'votes_aggregate' }
+      & { aggregate?: Maybe<(
+        { __typename?: 'votes_aggregate_fields' }
+        & Pick<Votes_Aggregate_Fields, 'count'>
+      )> }
+    ) }
     & VotingVieldsFragment
   )>, votings_aggregate: (
     { __typename?: 'votings_aggregate' }
@@ -8747,6 +8811,48 @@ export const MarkReferendumEvoteAsVoteDocument = gql`
       super(apollo);
     }
   }
+export const CountUsersDocument = gql`
+    query CountUsers {
+  users_aggregate {
+    aggregate {
+      count
+    }
+  }
+}
+    `;
+
+  @Injectable({
+    providedIn: 'root'
+  })
+  export class CountUsersGQL extends Apollo.Query<CountUsersQuery, CountUsersQueryVariables> {
+    document = CountUsersDocument;
+    
+    constructor(apollo: Apollo.Apollo) {
+      super(apollo);
+    }
+  }
+export const CountUsersForSettlementDocument = gql`
+    query CountUsersForSettlement($settlementId: Int!) {
+  users_aggregate(
+    where: {voting_section: {address: {settlementId: {_eq: $settlementId}}}}
+  ) {
+    aggregate {
+      count
+    }
+  }
+}
+    `;
+
+  @Injectable({
+    providedIn: 'root'
+  })
+  export class CountUsersForSettlementGQL extends Apollo.Query<CountUsersForSettlementQuery, CountUsersForSettlementQueryVariables> {
+    document = CountUsersForSettlementDocument;
+    
+    constructor(apollo: Apollo.Apollo) {
+      super(apollo);
+    }
+  }
 export const GetVotingSectionsDocument = gql`
     query GetVotingSections($limit: Int, $offset: Int, $condition: voting_section_bool_exp! = {}, $orderBy: [voting_section_order_by!] = {createdAt: desc}) {
   voting_section(
@@ -9029,6 +9135,11 @@ export const GetVotingsDocument = gql`
     query GetVotings($limit: Int, $offset: Int, $condition: votings_bool_exp! = {}, $orderBy: [votings_order_by!] = {createdAt: desc}) {
   votings(where: $condition, limit: $limit, offset: $offset, order_by: $orderBy) {
     ...VotingVields
+    voted: votes_aggregate {
+      aggregate {
+        count
+      }
+    }
   }
   votings_aggregate {
     aggregate {

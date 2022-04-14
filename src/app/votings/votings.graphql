@@ -121,6 +121,11 @@ query GetVotings(
     order_by: $orderBy
   ) {
     ...VotingVields
+    voted: votes_aggregate {
+      aggregate {
+        count
+      }
+    }
   }
   votings_aggregate {
     aggregate {
@@ -184,6 +189,11 @@ fragment VotingVields on votings {
   }
   startedAt
   finishedAt
+  # voted: votes_aggregate {
+  #   aggregate {
+  #     count
+  #   }
+  # }
 }
 
 # Votes

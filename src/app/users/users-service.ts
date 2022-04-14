@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { ApolloQueryResult, FetchResult } from '@apollo/client';
 import { QueryRef } from 'apollo-angular';
-import { Observable } from 'rxjs';
+import { map, Observable, take } from 'rxjs';
 import {
   Addresses_Set_Input,
   AutocompleteUsersGQL,
@@ -10,6 +10,8 @@ import {
   BulkInsertUsersMutation,
   Commissions_Insert_Input,
   CountUndistributedToVotingSectionsGQL,
+  CountUsersForSettlementGQL,
+  CountUsersGQL,
   CreateSectionCommissionGQL,
   CreateSectionCommissionMutation,
   CreateUserGQL,
@@ -43,7 +45,9 @@ export class UsersService {
     private getUserByIdGQL: GetUserByIdGQL,
     private markReferendumEvoteAsVoteGQL: MarkReferendumEvoteAsVoteGQL,
     private fetchUserWitnConditionGQL: FetchUserWitnConditionGQL,
-    private createSectionCommissionGQL: CreateSectionCommissionGQL
+    private createSectionCommissionGQL: CreateSectionCommissionGQL,
+    private countUsersGQL: CountUsersGQL,
+    private countUsersForSettlementGQL: CountUsersForSettlementGQL
   ) {}
 
   createUser(
@@ -140,6 +144,23 @@ export class UsersService {
     >
   > {
     return this.createSectionCommissionGQL.mutate({ set, commission });
+  }
+
+  countUsers(): Observable<number> {
+    return this.countUsersGQL.fetch().pipe(
+      take(1),
+      map((response) => {
+        return response.data.users_aggregate.aggregate.count;
+      })
+    );
+  }
+  countUsersForSettlement(settlementId: number) {
+    return this.countUsersForSettlementGQL.fetch({ settlementId }).pipe(
+      take(1),
+      map((response) => {
+        return response.data.users_aggregate.aggregate.count;
+      })
+    );
   }
 
   //SELECT (password = crypt('pepe', password)) AS pswmatch FROM users WHERE id = 2 ;
