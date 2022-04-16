@@ -47,7 +47,7 @@ npm run watch-types / yarn watch-types
 
 ## Test with Carma
 # all:
-ng test --code-coverage
+ng test --code-coverage --watch=false --browsers=ChromeHeadless
 # single:
 ng test --include src/app/auth/login/login.component.spec.ts --code-coverage
 
