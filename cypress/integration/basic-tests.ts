@@ -181,11 +181,9 @@ it('vote', () => {
 });
 
 it('close-section', () => {
-    cy.get('.mat-menu-trigger > .mat-icon').click();
-    cy.get('.mat-menu-content > :nth-child(2)').click();
-    cy.wait(3000);
-    loginWithNationalIdentifier('7507022300', '#mat-input-23', '#mat-input-24');
-    cy.get('#mat-radio-33 > .mat-radio-label > .mat-radio-label-content').click();
+    cy.visit('http://localhost:4200/auth/login');
+    loginWithNationalIdentifier('7507022300', '#mat-input-0', '#mat-input-1');
+    cy.get('#mat-radio-3 > .mat-radio-label > .mat-radio-label-content').click();
     cy.wait(4000);
     cy.get('#voting-sections-nav > .mat-line').click();
     cy.wait(4000);

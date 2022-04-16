@@ -70,7 +70,7 @@ export class VotingsDashboardComponent {
           if(user != null){
             return user.id;
           } else {
-            return 1;
+            return null;
           }
         }),
         switchMap((id) => {
