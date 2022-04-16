@@ -23,3 +23,13 @@
 //
 // -- This will overwrite an existing command --
 // Cypress.Commands.overwrite('visit', (originalFn, url, options) => { ... })
+
+Cypress.Commands.add('postgresql', (query) => {
+    if(!query) {
+        throw new Error('Please set a Query');
+      }
+  
+      cy.task('postgreSQL:query', query ).then( response => {
+        return response.rows[0];
+      });
+})

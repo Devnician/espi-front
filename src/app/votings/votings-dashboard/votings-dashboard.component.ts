@@ -67,7 +67,11 @@ export class VotingsDashboardComponent {
     this.authService.user$
       .pipe(
         map((user) => {
-          return user.id;
+          if(user != null){
+            return user.id;
+          } else {
+            return 1;
+          }
         }),
         switchMap((id) => {
           return this.usersService.getUserById(id);

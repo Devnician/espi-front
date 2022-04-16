@@ -16,7 +16,12 @@
  * @type {Cypress.PluginConfig}
  */
 // eslint-disable-next-line no-unused-vars
+const postgreSQL = require('cypress-postgresql');
+const pg = require('pg');
+const dbConfig = require('../../cypress.json');
+
 module.exports = (on, config) => {
-  // `on` is used to hook into various events Cypress emits
-  // `config` is the resolved Cypress config
+  const pool = new pg.Pool(dbConfig.db);
+  tasks = postgreSQL.loadDBPlugin( pool );
+  on('task', tasks);
 }

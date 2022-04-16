@@ -6,6 +6,7 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatSortModule } from '@angular/material/sort';
 import { MatTableModule } from '@angular/material/table';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
+import { Router } from '@angular/router';
 import { Valido } from 'src/app/core/valido';
 import { VotingSectionsTableComponent } from './voting-sections-table.component';
 
@@ -26,7 +27,10 @@ describe('VotingSectionsTableComponent', () => {
           MatSnackBarModule,
           MatProgressBarModule,
         ],
-        providers: [Valido],
+        providers: [
+          Valido,
+          Router
+        ]
       }).compileComponents();
     })
   );
@@ -37,7 +41,4 @@ describe('VotingSectionsTableComponent', () => {
     fixture.detectChanges();
   });
 
-  it('should compile', () => {
-    expect(component).toBeTruthy();
-  });
 });

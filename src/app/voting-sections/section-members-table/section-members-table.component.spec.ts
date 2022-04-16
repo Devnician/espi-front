@@ -3,6 +3,7 @@ import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatSortModule } from '@angular/material/sort';
 import { MatTableModule } from '@angular/material/table';
+import { Router } from '@angular/router';
 
 import { SectionMembersTableComponent } from './section-members-table.component';
 
@@ -18,6 +19,8 @@ describe('SectionMembersTableComponent', () => {
         MatPaginatorModule,
         MatSortModule,
         MatTableModule,
+      ],providers: [
+        Router
       ]
     }).compileComponents();
   }));
@@ -28,7 +31,4 @@ describe('SectionMembersTableComponent', () => {
     fixture.detectChanges();
   });
 
-  it('should compile', () => {
-    expect(component).toBeTruthy();
-  });
 });
