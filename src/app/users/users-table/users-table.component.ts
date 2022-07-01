@@ -534,7 +534,6 @@ export class UsersTableComponent
     console.log('Start vote');
     this.userVotesTaskProcessing.next(true);
     const election = this.dataSource.selectedElection.getValue();
-
     // const id = election.id;
     if (election.type === 'referendum') {
       const questions: Referendum_Questions[] = (election as any as Referendums)
@@ -577,7 +576,6 @@ export class UsersTableComponent
     } else {
       const votingId = election.id;
       if (election.type === Voting_Types_Enum.Parliamentary) {
-        console.log('OOOOOOOOOOOOOOOO');
         const observables = [
           this.usersService.getUsersIds({ _not: { votes: {} } }, 50000),
           this.votingsService.getVotingCandidates(votingId),

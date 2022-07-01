@@ -147,9 +147,9 @@ export class UsersTableDataSource extends DataSource<CustomUser> {
 
         user.filteredReferendumVotes = referendumVotes;
         if (referendumVotes.length > 0) {
-          const voted = referendumVotes.findIndex((v) => v.vote === true) > -1;
+          const voted = referendumVotes.findIndex((v) => v.vote !== null) > -1;
           const eVoted =
-            referendumVotes.findIndex((v) => v.eVote === true) > -1;
+            referendumVotes.findIndex((v) => v.eVote !== null) > -1;
           user.voted = voted;
           user.eVoted = eVoted;
           user.filteredReferendumVotes = referendumVotes;

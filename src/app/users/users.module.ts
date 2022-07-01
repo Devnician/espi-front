@@ -18,6 +18,7 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatSortModule } from '@angular/material/sort';
 import { MatTableModule } from '@angular/material/table';
+import { MatTooltipModule } from '@angular/material/tooltip';
 import { NgxJsonViewerModule } from 'ngx-json-viewer';
 import { EditUserComponent } from './edit-user/edit-user.component';
 import { ModalConfirmationComponent } from './modal-confirmation/modal-confirmation.component';
@@ -27,7 +28,7 @@ import { UsersTableComponent } from './users-table/users-table.component';
   declarations: [
     UsersTableComponent,
     EditUserComponent,
-    ModalConfirmationComponent
+    ModalConfirmationComponent,
   ],
   imports: [
     CommonModule,
@@ -42,42 +43,19 @@ import { UsersTableComponent } from './users-table/users-table.component';
     MatCheckboxModule,
     NgxJsonViewerModule,
     FormsModule,
-    //  MatSnackBarModule,
-
-    // MatButtonModule,
     MatIconModule,
-    // MatInputModule,
-    // MatSelectModule,
-    // MatRadioModule,
-    // MatCardModule,
-
-    // ReactiveFormsModule,
-    // MatSlideToggleModule,
     MatMenuModule,
     MatInputModule,
     MatSelectModule,
     MatRadioModule,
     MatCardModule,
-
-    // MatSnackBarModule,
-    // MatProgressBarModule,
-    // MatProgressSpinnerModule,
-    // MatTooltipModule,
-    // MatDatepickerModule,
-    // MatNativeDateModule,
-
-    // MatCheckboxModule,
-    // MatDividerModule,
-    // MatGridListModule,
     MatFormFieldModule,
     MatInputModule,
     MatAutocompleteModule,
-    //ScrollingModule,
-
     MatButtonModule,
     MatProgressSpinnerModule,
-
     MatDialogModule,
+    MatTooltipModule,
   ],
 })
-export class UsersModule { }
+export class UsersModule {}
